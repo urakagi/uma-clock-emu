@@ -10,6 +10,7 @@ export default {
             surface: 'turf',
             distance: 3200,
             statusCheck: [],
+            corners: [[1800, 1600], [1600, 1400], [870, 620], [620, 400]],
             triggerUphill: [3000, 1100],
             triggerDownhill: [2700, 800],
             uphill: [
@@ -24,6 +25,9 @@ export default {
         }
       }
     }
+  },
+  methods: {
+
   }
 }
 </script>

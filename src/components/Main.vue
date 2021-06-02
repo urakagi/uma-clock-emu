@@ -94,6 +94,16 @@
         </el-select>
       </el-form-item>
       <br>
+      <el-collapse v-model="skillGroups">
+        <el-collapse-item title="回復スキル" name="heal">
+          <el-checkbox-group v-model="hasSkills.heal">
+            <el-checkbox-button v-for="(skill, index) in skills.heal" :label="index" :key="skill.name">
+              {{skill.name}}
+            </el-checkbox-button>
+          </el-checkbox-group>
+        </el-collapse-item>
+      </el-collapse>
+      <br>
       <el-form-item>
         <el-button @click="exec">エミューレート開始</el-button>
       </el-form-item>
@@ -131,14 +141,15 @@
 <script>
 import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
+import MixinSkills from "@/components/data/MixinSkills";
 
 export default {
   name: "Main",
-  mixins: [MixinCourseData, MixinConstants],
+  mixins: [MixinCourseData, MixinConstants, MixinSkills],
   data() {
     return {
       umaStatus: {
-        speed: 733,
+        speed: 1033,
         stamina: 1073,
         power: 980,
         guts: 1101,
@@ -166,7 +177,9 @@ export default {
       laps: [],
       marks: [],
       spTrace: [],
-      spurtParameters: null
+      spurtParameters: null,
+      // UI
+      skillGroups: 'heal'
     }
   },
   created() {
@@ -297,19 +310,21 @@ export default {
       this.laps = []
       this.marks = []
       this.spTrace = []
-      this.spurtParameter = {}
       this.start()
     },
     start: function () {
       const startDelay = Math.random() * 0.1
       this.log += `ゲートを出るまでの時間：${startDelay.toFixed(3)}s<br>`
+      this.startDelay = startDelay
       this.laps.push(0)
       this.marks.push(this.position)
       this.spTrace.push(this.spMax)
+      this.initializeSkills()
       this.progressRace()
     },
     progressRace() {
       while (this.position < this.trackDetail.distance) {
+        const startPosition = this.position
         this.frameElapsed++
         if (this.currentSpeed < this.v0) {
           this.moveStart()
@@ -320,6 +335,7 @@ export default {
         } else {
           this.movePhase23()
         }
+        this.checkSkillTrigger(startPosition)
       }
     },
     moveStart() {
@@ -390,7 +406,6 @@ export default {
       } else {
         this.cruise(this.vMin)
       }
-      console.log('ls', this.position)
       if (this.position >= this.trackDetail.distance) {
         const lap = this.updateLap(true)
         this.log += `ゴール！失速で${lap.time.toFixed(2)}s走行、移動距離${lap.distance.toFixed(1)}m<br>`
