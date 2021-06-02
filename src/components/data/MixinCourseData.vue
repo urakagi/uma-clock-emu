@@ -7,6 +7,7 @@ export default {
         'kyoto': {
           't3200o': {
             name: '芝3200m(外)',
+            surface: 'turf',
             distance: 3200,
             statusCheck: [],
             triggerUphill: [3000, 1100],
