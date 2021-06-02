@@ -19,10 +19,10 @@
       <br>
       <el-form-item label="脚質">
         <el-select v-model="umaStatus.style" style="width: 100px;">
-          <el-option label="逃げ" value="0"></el-option>
-          <el-option label="先行" value="1"></el-option>
-          <el-option label="差し" value="2"></el-option>
-          <el-option label="追込" value="3"></el-option>
+          <el-option label="逃げ" value="1"></el-option>
+          <el-option label="先行" value="2"></el-option>
+          <el-option label="差し" value="3"></el-option>
+          <el-option label="追込" value="4"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="距離適性">
@@ -98,7 +98,7 @@
         <el-collapse-item title="回復スキル" name="heal">
           <el-checkbox-group v-model="hasSkills.heal">
             <el-checkbox-button v-for="(skill, index) in skills.heal" :label="index" :key="skill.name">
-              {{skill.name}}
+              {{ skill.name }}
             </el-checkbox-button>
           </el-checkbox-group>
         </el-collapse-item>
@@ -149,13 +149,13 @@ export default {
   data() {
     return {
       umaStatus: {
-        speed: 1033,
-        stamina: 1073,
-        power: 980,
-        guts: 1101,
-        wisdom: 395,
+        speed: 1019,
+        stamina: 1046,
+        power: 609,
+        guts: 410,
+        wisdom: 411,
         condition: '2',
-        style: '0',
+        style: '4',
         distanceFit: 'A',
         surfaceFit: 'A',
         styleFit: 'A'
@@ -382,10 +382,10 @@ export default {
         this.accelerate(this.v3, this.a3, '終盤加速終了')
       } else {
         this.cruise(this.spurtParameters.speed)
-        if (this.position + this.spurtParameters.distance >= this.trackDetail.distance) {
-          const lap = this.updateLap()
-          this.log += `終盤巡航終了：速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}s走行／移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-        }
+      }
+      if (this.position + this.spurtParameters.distance >= this.trackDetail.distance) {
+        const lap = this.updateLap()
+        this.log += `終盤巡航終了：速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}s走行／移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
       }
     },
     moveSpurt() {
@@ -393,11 +393,11 @@ export default {
         this.accelerate(this.spurtParameters.speed, this.a3, 'スパート加速終了')
       } else {
         this.cruise(this.spurtParameters.speed)
-        if (this.position >= this.trackDetail.distance) {
-          const lap = this.updateLap(true)
-          this.log += `ゴール！速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}sスパート、移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-          this.goal()
-        }
+      }
+      if (this.position >= this.trackDetail.distance) {
+        const lap = this.updateLap(true)
+        this.log += `ゴール！速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}sスパート、移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
+        this.goal()
       }
     },
     moveMinSpeed() {
@@ -477,8 +477,8 @@ export default {
         const distanceLeft = this.sp / consumePerMeterV3
         this.log += `耐力枯渇、残り走行可能距離${distanceLeft.toFixed(1)}m／失速距離${(maxDistance - distanceLeft).toFixed(1)}m<br>`
         return {
-          distance: maxDistance,
-          speed: this.a3
+          distance: 0,
+          speed: this.v3
         }
       }
       this.log += `耐力不足、割当可能耐力${excessSp.toFixed(1)}`
@@ -539,9 +539,15 @@ export default {
     },
     secondToDisplayTime(time) {
       const min = Math.floor(time / 60)
-      const sec = Math.floor(time) % 60
-      const decimal = time - Math.floor(time)
-      return `${min}:${sec}.${Math.floor(decimal * 100)}`
+      let sec = Math.floor(time) % 60
+      if (sec < 10) {
+        sec = '0' + sec
+      }
+      let decimal = Math.floor((time - Math.floor(time)) * 100)
+      if (decimal < 10) {
+        decimal = '0' + decimal
+      }
+      return `${min}:${sec}.${decimal}`
     }
   }
 }
