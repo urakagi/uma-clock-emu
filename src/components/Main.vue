@@ -123,6 +123,34 @@
             </el-tooltip>
           </el-checkbox-group>
         </el-collapse-item>
+        <el-collapse-item title="回復スキル(固有)" name="healUnique">
+          <el-checkbox-group v-model="hasSkills.heal.unique">
+            <el-tooltip
+                v-for="skill in availableSkills.heal.unique"
+                :key="skill.name"
+                :content="skill.tooltip"
+                :disabled="!('tooltip' in skill)"
+            >
+              <el-checkbox-button :label="skill.index">
+                {{ skill.name }}
+              </el-checkbox-button>
+            </el-tooltip>
+          </el-checkbox-group>
+        </el-collapse-item>
+        <el-collapse-item title="喰らう疲労スキル" name="fatigue">
+          <el-checkbox-group v-model="hasSkills.fatigue.all">
+            <el-tooltip
+                v-for="skill in availableSkills.fatigue.all"
+                :key="skill.name"
+                :content="skill.tooltip"
+                :disabled="!('tooltip' in skill)"
+            >
+              <el-checkbox-button :label="skill.index">
+                {{ skill.name }}
+              </el-checkbox-button>
+            </el-tooltip>
+          </el-checkbox-group>
+        </el-collapse-item>
       </el-collapse>
       <br>
       <el-form-item>

@@ -9,7 +9,11 @@ export default {
       hasSkills: {
         heal: {
           rare: [0, 1, 3],
-          normal: [10, 12]
+          normal: [10, 12],
+          unique: []
+        },
+        fatigue: {
+          all: []
         }
       },
       skillTriggerCount: [0, 0, 0, 0],
@@ -262,6 +266,332 @@ export default {
               return thiz.isDistanceType(4) && thiz.sp <= 0
             }
           },
+          {
+            unique: {name: 'introduction: My body Lv5', value: 378},
+            tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
+            check: function () {
+              return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
+            }
+          },
+          {
+            unique: {name: 'U=ma2 Lv4', value: 583},
+            tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
+            check: function () {
+              return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
+            }
+          },
+          {
+            unique: {name: 'クリアハート Lv5', value: 378},
+            tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: 'ピュリティオブハート Lv4', value: 583},
+            tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: 'ワクワクよーいドン Lv5', value: 378},
+            tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.isInFinalCorner()
+            }
+          },
+          {
+            unique: {name: ' ワクワククライマックス Lv4', value: 583},
+            tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.isInFinalCorner()
+            }
+          },
+        ],
+        fatigue: [
+          {
+            all: {name: 'スタミナイーター', value: 50},
+            distanceLimit: [4],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: 'スタミナイーターx2', value: 100},
+            distanceLimit: [4],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '逃げけん制', value: 100},
+            styleLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '逃げけん制x2', value: 200},
+            styleLimit: [1],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '先行けん制', value: 100},
+            styleLimit: [2],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '先行けん制x2', value: 200},
+            styleLimit: [2],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '差しけん制', value: 100},
+            styleLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '差しけん制x2', value: 200},
+            styleLimit: [3],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '追込けん制', value: 100},
+            styleLimit: [4],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '追込けん制x2', value: 200},
+            styleLimit: [4],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '逃げ焦り', value: 100},
+            styleLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '逃げ焦りx2', value: 200},
+            styleLimit: [1],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '先行焦り', value: 100},
+            styleLimit: [2],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '先行焦りx2', value: 200},
+            styleLimit: [2],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '差し焦り', value: 100},
+            styleLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '差し焦りx2', value: 200},
+            styleLimit: [3],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '追込焦り', value: 100},
+            styleLimit: [4],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '追込焦りx2', value: 200},
+            styleLimit: [4],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '抜け駆け禁止', value: 100},
+            distanceLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
+                  && thiz.accTimePassed(5)
+            }
+          },
+          {
+            all: {name: 'ささやき', value: 100},
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: 'ささやきx2', value: 200},
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '魅惑のささやき', value: 300},
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '魅惑のささやきx2', value: 600},
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '鋭い眼光', value: 100},
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '鋭い眼光x2', value: 200},
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '八方にらみ', value: 300},
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '八方にらみx2', value: 600},
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
         ]
       }
     }
@@ -304,8 +634,14 @@ export default {
         for (const rarity of Object.keys(this.hasSkills[type])) {
           for (const index of this.hasSkills[type][rarity]) {
             const skill = this.skills[type][rarity][index]
+            let invokeRate
+            if (type === 'fatigue') {
+              invokeRate = 80
+            } else {
+              invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+            }
             // FIXME: for debug, always pass wisdom check
-            if (Math.random() * 100 < (100000 - 9000.0 / this.umaStatus.wisdom)) {
+            if (Math.random() * 100 < invokeRate) {
               // if (Math.random() * 100 < (100 - 9000.0 / this.umaStatus.wisdom)) {
               if (skill.init) {
                 skill.init()
@@ -378,6 +714,20 @@ export default {
       }
       return false
     },
+    isInFinalCorner(position) {
+      if (!position) {
+        position = this.position
+      }
+      const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      return position >= fc[0] && position <= fc[1]
+    },
+    isInFinalStraight(position) {
+      if (!position) {
+        position = this.position
+      }
+      const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      return position > fc[1]
+    },
     isTriggerUphill(startPosition) {
       for (const uphill of this.trackDetail.triggerUphill) {
         if (startPosition <= this.toPosition(uphill) &&
@@ -430,10 +780,12 @@ export default {
       for (const type in this.skillData) {
         this.skills[type] = {
           normal: [],
-          rare: []
+          rare: [],
+          unique: [],
+          all: []
         }
         for (const skill of this.skillData[type]) {
-          for (const rarity of ['normal', 'rare']) {
+          for (const rarity of ['normal', 'rare', 'unique', 'all']) {
             if (rarity in skill) {
               const copy = {...skill}
               copy.name = skill[rarity].name
@@ -453,6 +805,13 @@ export default {
           copy.duration = 0
           copy.trigger = function () {
             thiz.doHeal(this.value)
+          }
+          break
+        case 'fatigue':
+          copy.cd = 500
+          copy.duration = 0
+          copy.trigger = function () {
+            thiz.doHeal(-this.value)
           }
           break
       }
