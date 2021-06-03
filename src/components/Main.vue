@@ -95,11 +95,32 @@
       </el-form-item>
       <br>
       <el-collapse v-model="skillGroups">
-        <el-collapse-item title="回復スキル" name="heal">
-          <el-checkbox-group v-model="hasSkills.heal">
-            <el-checkbox-button v-for="(skill, index) in skills.heal" :label="index" :key="skill.name">
-              {{ skill.name }}
-            </el-checkbox-button>
+        <el-collapse-item title="回復スキル(金)" name="healRare">
+          <el-checkbox-group v-model="hasSkills.heal.rare">
+            <el-tooltip
+                v-for="skill in availableSkills.heal.rare"
+                :key="skill.name"
+                :content="skill.tooltip"
+                :disabled="!('tooltip' in skill)"
+            >
+              <el-checkbox-button :label="skill.index">
+                {{ skill.name }}
+              </el-checkbox-button>
+            </el-tooltip>
+          </el-checkbox-group>
+        </el-collapse-item>
+        <el-collapse-item title="回復スキル(白)" name="healNormal">
+          <el-checkbox-group v-model="hasSkills.heal.normal">
+            <el-tooltip
+                v-for="skill in availableSkills.heal.normal"
+                :key="skill.name"
+                :content="skill.tooltip"
+                :disabled="!('tooltip' in skill)"
+            >
+              <el-checkbox-button :label="skill.index">
+                {{ skill.name }}
+              </el-checkbox-button>
+            </el-tooltip>
           </el-checkbox-group>
         </el-collapse-item>
       </el-collapse>
@@ -149,15 +170,15 @@ export default {
   data() {
     return {
       umaStatus: {
-        speed: 1019,
-        stamina: 1046,
-        power: 609,
+        speed: 1168,
+        stamina: 1086,
+        power: 645,
         guts: 410,
-        wisdom: 411,
+        wisdom: 404,
         condition: '2',
         style: '4',
         distanceFit: 'A',
-        surfaceFit: 'A',
+        surfaceFit: 'S',
         styleFit: 'A'
       },
       track: {
@@ -179,7 +200,7 @@ export default {
       spTrace: [],
       spurtParameters: null,
       // UI
-      skillGroups: 'heal'
+      skillGroups: 'healRare'
     }
   },
   created() {
@@ -190,6 +211,9 @@ export default {
     this.exec()
   },
   computed: {
+    footStyle() {
+      return parseInt(this.umaStatus.style)
+    },
     trackDetail() {
       if (!this.track.location) {
         return {distance: 0, surface: 'turf'}
@@ -310,6 +334,7 @@ export default {
       this.laps = []
       this.marks = []
       this.spTrace = []
+      this.spurtParameters = null
       this.start()
     },
     start: function () {
@@ -481,7 +506,7 @@ export default {
           speed: this.v3
         }
       }
-      this.log += `耐力不足、割当可能耐力${excessSp.toFixed(1)}`
+      this.log += `耐力${(totalConsume - this.sp).toFixed(1)}不足、割当可能耐力${excessSp.toFixed(1)}`
       for (let v = this.v4 - 0.1; v >= this.v3; v -= 0.1) {
         const consumePerMeterV = this.consumePerSecond(v, 2) / v
         const distanceV = Math.min(excessSp / (consumePerMeterV - consumePerMeterV3), maxDistance)
@@ -548,6 +573,8 @@ export default {
         decimal = '0' + decimal
       }
       return `${min}:${sec}.${decimal}`
+    },
+    test() {
     }
   }
 }

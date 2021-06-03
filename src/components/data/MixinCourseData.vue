@@ -27,7 +27,16 @@ export default {
       }
     }
   },
-  methods: {}
+  computed: {
+    courseLength() {
+      return this.trackDetail.distance
+    }
+  },
+  methods: {
+    toPosition(distanceLeft) {
+      return this.trackDetail.distance - distanceLeft
+    }
+  }
 }
 </script>
 
