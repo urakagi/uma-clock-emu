@@ -6,16 +6,7 @@ export default {
     return {
       invokedSkills: [],
       coolDownMap: {},
-      hasSkills: {
-        heal: {
-          rare: [0, 1, 3],
-          normal: [10, 12],
-          unique: []
-        },
-        fatigue: {
-          all: []
-        }
-      },
+      hasSkills: {},
       skillTriggerCount: [0, 0, 0, 0],
       skills: {},
       skillData: {
@@ -79,7 +70,7 @@ export default {
             rare: {name: 'じゃじゃウマ娘', value: 550},
             styleLimit: [1],
             check: function (startPosition) {
-              return thiz.accTimePassed(10) && thiz.isStyle(4) && thiz.isTriggerUphill(startPosition)
+              return thiz.accTimePassed(10) && thiz.isStyle(1) && thiz.isTriggerUphill(startPosition)
             }
           },
           {
@@ -624,6 +615,7 @@ export default {
   },
   created() {
     this.fillSkillData()
+    this.resetHasSkills()
   },
   methods: {
     initializeSkills() {
@@ -638,11 +630,11 @@ export default {
             if (type === 'fatigue') {
               invokeRate = 80
             } else {
-              invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+              // FIXME: for debug, always pass wisdom check
+              // invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+              invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
             }
-            // FIXME: for debug, always pass wisdom check
             if (Math.random() * 100 < invokeRate) {
-              // if (Math.random() * 100 < (100 - 9000.0 / this.umaStatus.wisdom)) {
               if (skill.init) {
                 skill.init()
               }
@@ -729,18 +721,24 @@ export default {
       return position > fc[1]
     },
     isTriggerUphill(startPosition) {
-      for (const uphill of this.trackDetail.triggerUphill) {
-        if (startPosition <= this.toPosition(uphill) &&
-            this.toPosition(uphill) <= this.position) {
+      for (const uphill of this.trackDetail.uphill) {
+        if (!uphill.trigger) {
+          continue
+        }
+        if (startPosition <= this.toPosition(uphill.end) &&
+            this.toPosition(uphill.start) <= startPosition) {
           return true
         }
       }
       return false
     },
     isTriggerDownhill(startPosition) {
-      for (const downhill of this.trackDetail.triggerDownhill) {
-        if (startPosition <= this.toPosition(downhill) &&
-            this.toPosition(downhill) <= this.position) {
+      for (const hill of this.trackDetail.downhill) {
+        if (!hill.trigger) {
+          continue
+        }
+        if (startPosition <= this.toPosition(hill.end) &&
+            this.toPosition(hill.start) <= startPosition) {
           return true
         }
       }
@@ -814,6 +812,18 @@ export default {
             thiz.doHeal(-this.value)
           }
           break
+      }
+    },
+    resetHasSkills() {
+      this.hasSkills = {
+        heal: {
+          rare: [],
+              normal: [],
+              unique: []
+        },
+        fatigue: {
+          all: []
+        }
       }
     }
   }

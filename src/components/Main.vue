@@ -1,6 +1,40 @@
 <template>
   <div class="main-frame">
     <el-form class="input-form" :inline="true">
+      <el-form-item>
+        <el-button @click="saveUma">セーブ</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="umaToLoad" placeholder="保存済みウマ娘">
+          <el-option v-for="(data, key) in savedUmas" :label="key" :value="key" :key="key"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="loadUma">ロード</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-popconfirm
+            confirm-button-text="はい"
+            cancel-button-text="いいえ"
+            title="削除しますか？"
+            trigger="click"
+            @confirm="removeUma"
+        >
+          <el-button slot="reference">削除</el-button>
+        </el-popconfirm>
+      </el-form-item>
+      <el-form-item>
+        <el-popconfirm
+            confirm-button-text="はい"
+            cancel-button-text="いいえ"
+            title="リセットしますか？"
+            trigger="click"
+            @confirm="resetUma"
+        >
+          <el-button slot="reference">リセット</el-button>
+        </el-popconfirm>
+      </el-form-item>
+      <br>
       <el-form-item label="スピード">
         <el-input v-model="umaStatus.speed" class="input-status"></el-input>
       </el-form-item>
@@ -154,9 +188,59 @@
       </el-collapse>
       <br>
       <el-form-item>
-        <el-button @click="exec">エミューレート開始</el-button>
+        <el-button @click="exec" type="success" v-loading.fullscreen.lock="emulating">エミューレート開始(100回)</el-button>
       </el-form-item>
     </el-form>
+    <div>
+      <h3>時計統計</h3>
+      <table border="1" class="emulation-result">
+        <tr>
+          <th></th>
+          <th>ゲーム表記</th>
+          <th>実タイム</th>
+          <th>標準偏差</th>
+          <th>ベスト</th>
+          <th>ワースト</th>
+        </tr>
+        <tr>
+          <th>平均</th>
+          <td>{{ formatTime(avgDisplayTime, 1) }}</td>
+          <td>{{ formatTime(avgRaceTime, 2) }}</td>
+          <td>{{ timeStandardDeviation.toFixed(3) }}</td>
+          <td>{{ formatTime(bestTime, 2) }}</td>
+          <td>{{ formatTime(worstTime, 2) }}</td>
+        </tr>
+        <tr>
+          <th>最大ｽﾊﾟｰﾄ</th>
+          <td>{{ formatTime(avgDisplayTimeMaxSpurt, 1) }}</td>
+          <td>{{ formatTime(avgRaceTimeMaxSpurt, 2) }}</td>
+          <td>{{ timeStandardDeviationMaxSpurt.toFixed(3) }}</td>
+          <td>{{ formatTime(bestTimeMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(worstTimeMaxSpurt, 2) }}</td>
+        </tr>
+        <tr>
+          <th>非最大ｽﾊﾟｰﾄ</th>
+          <td>{{ formatTime(avgDisplayTimeNotMaxSpurt, 1) }}</td>
+          <td>{{ formatTime(avgRaceTimeNotMaxSpurt, 2) }}</td>
+          <td>{{ timeStandardDeviationNotMaxSpurt.toFixed(3) }}</td>
+          <td>{{ formatTime(bestTimeNotMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(worstTimeNotMaxSpurt, 2) }}</td>
+        </tr>
+      </table>
+      <h3>スパート平均</h3>
+      <table border="1" class="emulation-result">
+        <tr>
+          <th>最大スパート率</th>
+          <th>最大時耐力余剰</th>
+          <th>非最大時不足分</th>
+        </tr>
+        <tr>
+          <td>{{ maxSpurtRate }}%</td>
+          <td>{{ maxSpurtSPLeft }}</td>
+          <td>{{ nonMaxSpurtSPLack }}</td>
+        </tr>
+      </table>
+    </div>
     <el-divider/>
     <div v-html="log">
     </div>
@@ -192,21 +276,23 @@ import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 
+const EPOCH = 100
+
 export default {
   name: "Main",
   mixins: [MixinCourseData, MixinConstants, MixinSkills],
   data() {
     return {
       umaStatus: {
-        speed: 1168,
-        stamina: 1086,
-        power: 645,
-        guts: 410,
-        wisdom: 404,
+        speed: 1000,
+        stamina: 1100,
+        power: 1000,
+        guts: 1000,
+        wisdom: 1000,
         condition: '2',
-        style: '4',
+        style: '1',
         distanceFit: 'A',
-        surfaceFit: 'S',
+        surfaceFit: 'A',
         styleFit: 'A'
       },
       track: {
@@ -215,6 +301,8 @@ export default {
         surfaceCondition: '0'
       },
       courseList: [],
+      // Results
+      emulations: [],
       // Race variables
       log: '',
       frameElapsed: 0,  // 15 frames per second
@@ -228,7 +316,10 @@ export default {
       spTrace: [],
       spurtParameters: null,
       // UI
-      skillGroups: 'healRare'
+      skillGroups: 'healRare',
+      emulating: false,
+      savedUmas: {},
+      umaToLoad: null
     }
   },
   created() {
@@ -236,7 +327,8 @@ export default {
     this.locationChanged(this.track.location)
   },
   mounted() {
-    this.exec()
+    this.updateSavedUmas()
+    // this.exec()
   },
   computed: {
     footStyle() {
@@ -343,7 +435,96 @@ export default {
           * this.styleAccelerateCoef[this.umaStatus.style][2]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
-    }
+    },
+    avgDisplayTime() {
+      return this.calcAvg('all', 'displayTime')
+    },
+    avgRaceTime() {
+      return this.calcAvg('all', 'raceTime')
+    },
+    avgDisplayTimeMaxSpurt() {
+      return this.calcAvg('max', 'displayTime')
+    },
+    avgRaceTimeMaxSpurt() {
+      return this.calcAvg('max', 'raceTime')
+    },
+    avgDisplayTimeNotMaxSpurt() {
+      return this.calcAvg('notMax', 'displayTime')
+    },
+    avgRaceTimeNotMaxSpurt() {
+      return this.calcAvg('notMax', 'raceTime')
+    },
+    bestTime() {
+      return this.pickEdge('all', 'raceTime', 'best')
+    },
+    worstTime() {
+      return this.pickEdge('all', 'raceTime', 'worst')
+    },
+    bestTimeMaxSpurt() {
+      return this.pickEdge('max', 'raceTime', 'best')
+    },
+    worstTimeMaxSpurt() {
+      return this.pickEdge('max', 'raceTime', 'worst')
+    },
+    bestTimeNotMaxSpurt() {
+      return this.pickEdge('notMax', 'raceTime', 'best')
+    },
+    worstTimeNotMaxSpurt() {
+      return this.pickEdge('notMax', 'raceTime', 'worst')
+    },
+    timeStandardDeviation() {
+      return this.calcStdDev('all', 'raceTime')
+    },
+    timeStandardDeviationMaxSpurt() {
+      return this.calcStdDev('max', 'raceTime')
+    },
+    timeStandardDeviationNotMaxSpurt() {
+      return this.calcStdDev('notMax', 'raceTime')
+    },
+    maxSpurtRate() {
+      if (this.emulations.length === 0) {
+        return '-'
+      }
+      let maxSpurt = 0
+      for (const e of this.emulations) {
+        if (e.maxSpurt) maxSpurt++
+      }
+      return (100.0 * maxSpurt / this.emulations.length).toFixed(1)
+    },
+    maxSpurtSPLeft() {
+      if (this.emulations.length === 0) {
+        return '-'
+      }
+      let sum = 0.0
+      let count = 0
+      for (const e of this.emulations) {
+        if (e.maxSpurt) {
+          sum += e.spDiff
+          count++
+        }
+      }
+      if (count === 0) {
+        return '-'
+      }
+      return (sum / count).toFixed(1)
+    },
+    nonMaxSpurtSPLack() {
+      if (this.emulations.length === 0) {
+        return '-'
+      }
+      let sum = 0.0
+      let count = 0
+      for (const e of this.emulations) {
+        if (!e.maxSpurt) {
+          sum += e.spDiff
+          count++
+        }
+      }
+      if (count === 0) {
+        return '-'
+      }
+      return (-sum / count).toFixed(1)
+    },
   },
   methods: {
     locationChanged(location) {
@@ -354,6 +535,16 @@ export default {
       return Math.floor(this.spMax * value / 10000.0 / 0.8 / this.styleSpCoef[this.umaStatus.style])
     },
     exec: function () {
+      this.emulating = true
+      this.emulations = []
+      setTimeout(() => {
+        for (let epoch = 0; epoch < EPOCH; epoch++) {
+          this.start()
+        }
+        this.emulating = false
+      }, 100)
+    },
+    start: function () {
       this.log = ''
       this.frameElapsed = 0
       this.position = -5
@@ -363,9 +554,7 @@ export default {
       this.marks = []
       this.spTrace = []
       this.spurtParameters = null
-      this.start()
-    },
-    start: function () {
+
       const startDelay = Math.random() * 0.1
       this.log += `ゲートを出るまでの時間：${startDelay.toFixed(3)}s<br>`
       this.startDelay = startDelay
@@ -511,37 +700,39 @@ export default {
     calcSpurtParameter() {
       this.log += `残り耐力${this.sp.toFixed(1)}／`
       const maxDistance = this.trackDetail.distance / 3.0
-      const maxConsume = this.consumePerSecond(this.v4, 2)
+      const spurtDistance = this.calcSpurtDistance(this.v4)
+      const totalConsume = this.calcRequiredSp(this.v4)
       const time = maxDistance / this.v4
-      const totalConsume = time * maxConsume
-      if (this.sp >= totalConsume) {
+      if (spurtDistance >= maxDistance) {
         this.log += `最長最速スパート可能(${maxDistance.toFixed(1)}m)<br>`
         return {
           distance: maxDistance,
-          speed: this.v4
+          speed: this.v4,
+          spDiff: this.sp - totalConsume
         }
       }
       // SPが足りない場合の処理
       const candidates = []
       const consumePerMeterV3 = this.consumePerSecond(this.v3, 2) / this.v3
-      const totalConsumeV3 = maxDistance * consumePerMeterV3
+      const totalConsumeV3 = this.calcRequiredSp(this.v3)
       const excessSp = this.sp - totalConsumeV3
       if (excessSp < 0) {
         const distanceLeft = this.sp / consumePerMeterV3
         this.log += `耐力枯渇、残り走行可能距離${distanceLeft.toFixed(1)}m／失速距離${(maxDistance - distanceLeft).toFixed(1)}m<br>`
         return {
           distance: 0,
-          speed: this.v3
+          speed: this.v3,
+          spDiff: this.sp - totalConsume
         }
       }
       this.log += `耐力${(totalConsume - this.sp).toFixed(1)}不足、割当可能耐力${excessSp.toFixed(1)}`
       for (let v = this.v4 - 0.1; v >= this.v3; v -= 0.1) {
-        const consumePerMeterV = this.consumePerSecond(v, 2) / v
-        const distanceV = Math.min(excessSp / (consumePerMeterV - consumePerMeterV3), maxDistance)
+        const distanceV = this.calcSpurtDistance(v)
         candidates.push({
           distance: distanceV,
           speed: v,
-          time: distanceV / v + (maxDistance - distanceV) / this.v3
+          time: distanceV / v + (maxDistance - distanceV) / this.v3,
+          spDiff: this.sp - totalConsume
         })
       }
       candidates.sort((a, b) => {
@@ -556,6 +747,25 @@ export default {
       }
       this.log += `／最低順位採用<br>`
       return candidates[candidates.length - 1]
+    },
+    calcSpurtDistance(v) {
+      return (this.sp - (this.courseLength / 3.0 - 60) * 20 *
+          this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
+          this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3) / (
+          20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
+          this.spurtSpCoef * (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
+          Math.pow(this.v3 - this.baseSpeed + 12, 2) /
+          144 / this.v3)) + 60
+    },
+    calcRequiredSp(v) {
+      return (this.courseLength / 3.0 - 60) * 20 *
+          this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
+          this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12,2 ) / 144 / this.v3 + (
+              this.courseLength / 3.0 - 60) * (
+              20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
+              this.spurtSpCoef * (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
+              Math.pow(this.v3 - this.baseSpeed + 12, 2) /
+              144 / this.v3))
     },
     consumePerSecond(v, phase) {
       let ret = 20.0 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
@@ -585,22 +795,156 @@ export default {
       return {time, distance, spUsed}
     },
     goal() {
-      const raceTime = this.secondToDisplayTime(this.laps[this.laps.length - 1] + this.startDelay)
-      let displayTime = this.secondToDisplayTime((this.laps[this.laps.length - 1] + this.startDelay) * 1.18)
-      displayTime = displayTime.substring(0, displayTime.length - 1)
-      this.log += `レース時間${raceTime}／ゲーム表示時間${displayTime}／余剰耐力${this.sp.toFixed(1)}<br>`
+      const raceTime = this.laps[this.laps.length - 1] + this.startDelay
+      const raceTimeString = this.formatTime(raceTime, 2)
+      const displayTime = (this.laps[this.laps.length - 1] + this.startDelay) * 1.18
+      let displayTimeString = this.formatTime(displayTime, 1)
+      this.log += `レース時間${raceTimeString}／ゲーム表示時間${displayTimeString}／余剰耐力${this.sp.toFixed(1)}<br>`
+
+      const emu = {
+        raceTime, displayTime,
+        maxSpurt: this.spurtParameters.speed === this.v4,
+        spDiff: this.spurtParameters.spDiff
+      }
+      this.emulations.push(emu)
     },
-    secondToDisplayTime(time) {
+    formatTime(time, digit) {
+      if (time === 0) {
+        return '-'
+      }
       const min = Math.floor(time / 60)
       let sec = Math.floor(time) % 60
       if (sec < 10) {
         sec = '0' + sec
       }
-      let decimal = Math.floor((time - Math.floor(time)) * 100)
-      if (decimal < 10) {
-        decimal = '0' + decimal
+      let decimal = Math.floor((time - Math.floor(time)) * Math.pow(10, digit))
+      for (let d = 1; d < digit; d++) {
+        if (parseInt(decimal) < Math.pow(10, d)) {
+          decimal = '0' + decimal
+        }
       }
       return `${min}:${sec}.${decimal}`
+    },
+    calcAvg(scope, field) {
+      let sum = 0
+      let count = 0
+      for (const e of this.emulations) {
+        if (scope === 'max' && !e.maxSpurt) {
+          continue
+        } else if (scope === 'notMax' && e.maxSpurt) {
+          continue
+        }
+        sum += e[field]
+        count++
+      }
+      if (count === 0) {
+        return 0
+      }
+      return sum / count
+    },
+    calcStdDev(scope, field) {
+      const avg = this.calcAvg(scope, field)
+      let sum = 0
+      let count = 0
+      for (const e of this.emulations) {
+        if (scope === 'max' && !e.maxSpurt) {
+          continue
+        } else if (scope === 'notMax' && e.maxSpurt) {
+          continue
+        }
+        sum += Math.pow(e[field] - avg, 2)
+        count++
+      }
+      if (count === 0) {
+        return 0
+      }
+      return Math.sqrt(sum / count)
+    },
+    pickEdge(scope, field, dir) {
+      let ret = dir === 'best' ? 999999 : -1
+      for (const e of this.emulations) {
+        if (scope === 'max' && !e.maxSpurt) {
+          continue
+        } else if (scope === 'notMax' && e.maxSpurt) {
+          continue
+        }
+        if ((dir === 'best' && e[field] < ret) || (dir === 'worst' && e[field] > ret)) {
+          ret = e.raceTime
+        }
+      }
+      if (ret === 999999 || ret < 0) {
+        return 0
+      }
+      return ret
+    },
+    saveUma() {
+      this.$prompt('ウマ名を入力して下さい', '', {
+        inputPattern: /.+/,
+        inputErrorMessage: '名前を入力して下さい。'
+      }).then(({value}) => {
+        const umas = JSON.parse(localStorage.getItem('umas') || '{}')
+        umas[value] = {
+          status: this.umaStatus,
+          track: this.track,
+          hasSkills: this.hasSkills
+        }
+        localStorage.setItem('umas', JSON.stringify(umas))
+        this.$message({
+          type: 'success',
+          message: `${value}をセーブしました。`
+        })
+        this.updateSavedUmas()
+      })
+    },
+    loadUma() {
+      const u = this.savedUmas[this.umaToLoad]
+      this.umaStatus = u.status
+      this.track = u.track
+      this.hasSkills = u.hasSkills
+      this.$message({
+        type: 'success',
+        message: `${this.umaToLoad}をロードしました。`
+      })
+    },
+    removeUma() {
+      const umas = JSON.parse(localStorage.getItem('umas') || '{}')
+      delete umas[this.umaToLoad]
+      localStorage.setItem('umas', JSON.stringify(umas))
+      this.$message({
+        type: 'success',
+        message: `${this.umaToLoad}を削除しました。`
+      })
+      this.updateSavedUmas()
+    },
+    resetUma() {
+      this.resetStatus()
+      this.resetTrack()
+      this.resetHasSkills()
+    },
+    resetStatus() {
+      this.umaStatus = {
+        speed: null,
+        stamina: null,
+        power: null,
+        guts: null,
+        wisdom: null,
+        condition: '2',
+        style: '1',
+        distanceFit: 'A',
+        surfaceFit: 'A',
+        styleFit: 'A'
+      }
+    },
+    resetTrack() {
+      this.track = {
+        location: '',
+        course: '',
+        surfaceCondition: '0'
+      }
+    },
+    updateSavedUmas() {
+      this.umaToLoad = null
+      this.savedUmas = JSON.parse(localStorage.getItem('umas'))
     },
     test() {
     }
@@ -615,5 +959,28 @@ export default {
 
 .input-status {
   width: 90px;
+}
+
+.emulation-result {
+  text-align: center;
+}
+
+.emulation-result th {
+  padding: 2px;
+  min-width: 90px;
+}
+
+.emulation-result td {
+  padding: 2px;
+  min-width: 90px;
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+
+.el-icon-arrow-down {
+  font-size: 12px;
 }
 </style>
