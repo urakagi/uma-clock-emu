@@ -18,7 +18,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -28,7 +28,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -39,7 +39,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -48,7 +48,7 @@ export default {
               this.randoms = [thiz.courseLength - 777]
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -62,7 +62,8 @@ export default {
             rare: {name: '下校後のスペシャリスト', value: 550},
             styleLimit: [4],
             check: function (startPosition) {
-              return thiz.accTimePassed(10) && thiz.isStyle(4) && thiz.isTriggerDownhill(startPosition)
+              return thiz.accTimePassed(10) && thiz.isStyle(4)
+                  && thiz.isContainSlopeTrigger('down', startPosition)
             }
           },
           {
@@ -70,7 +71,8 @@ export default {
             rare: {name: 'じゃじゃウマ娘', value: 550},
             styleLimit: [1],
             check: function (startPosition) {
-              return thiz.accTimePassed(10) && thiz.isStyle(1) && thiz.isTriggerUphill(startPosition)
+              return thiz.accTimePassed(10) && thiz.isStyle(1)
+                  && thiz.isContainSlopeTrigger('up', startPosition)
             }
           },
           {
@@ -81,7 +83,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -93,7 +95,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -105,7 +107,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -117,7 +119,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -130,7 +132,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -142,7 +144,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -158,7 +160,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(4) && thiz.accTimePassed(5) &&
-                  thiz.isInRandom(this.randoms, startPosition)
+                  thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -180,7 +182,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isStyle(2) && thiz.accTimePassed(5)
-                  && thiz.isInRandom(this.randoms, startPosition)
+                  && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -194,7 +196,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(2) && thiz.accTimePassed(5)
-                  && thiz.isInRandom(this.randoms, startPosition)
+                  && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -204,7 +206,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -212,7 +214,7 @@ export default {
             rare: {name: '鋼の意志', value: 550},
             tooltip: '「上り坂で発動」として扱う（一番現実的な発動方法なため）。実戦でやろうとしたら自前の低パワー逃げ馬が必要で先行馬限定とか色々厳しそうだけど適当実装なので自己判断＆自己責任で。',
             check: function (startPosition) {
-              return thiz.accTimePassed(5) && thiz.isTriggerUphill(startPosition)
+              return thiz.accTimePassed(5) && thiz.isContainSlopeTrigger('up', startPosition)
             }
           },
           {
@@ -224,7 +226,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isStyle(4) && thiz.accTimePassed(10) &&
-                  thiz.isInRandom(this.randoms, startPosition)
+                  thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -235,7 +237,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -246,7 +248,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -278,7 +280,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -288,7 +290,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -306,6 +308,29 @@ export default {
             }
           },
         ],
+        speed: [
+          {
+            normal: {name: 'コーナー巧者○', value: 0.15},
+            rare: {name: '弧線のプロフェッサー', value: 0.35},
+            duration: 1.8,
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+        ],
+        accelerate: [
+          {
+            normal: {name: '直線一気', value: 0.2},
+            rare: {name: '迫る影', value: 0.4},
+            duration: 0.9,
+            check: function () {
+              return thiz.isStyle(4) && thiz.isInSpurt && thiz.isInStraight(this.position)
+            }
+          },
+        ],
         fatigue: [
           {
             all: {name: 'スタミナイーター', value: 50},
@@ -314,7 +339,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -325,7 +350,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -335,7 +360,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -346,7 +371,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -356,7 +381,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -367,7 +392,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -377,7 +402,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -388,7 +413,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -398,7 +423,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -409,7 +434,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -419,7 +444,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -430,7 +455,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(1) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -440,7 +465,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -451,7 +476,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -461,7 +486,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -472,7 +497,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -482,7 +507,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -493,7 +518,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -503,7 +528,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
                   && thiz.accTimePassed(5)
             }
           },
@@ -514,7 +539,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -524,7 +549,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -534,7 +559,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -544,7 +569,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -553,7 +578,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -562,7 +587,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -571,7 +596,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -580,7 +605,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
         ]
@@ -645,19 +670,19 @@ export default {
       }
     },
     checkSkillTrigger(startPosition) {
+      const skillTriggered = []
       for (const skill of this.invokedSkills) {
         if (this.isInCoolDown(skill)) {
           continue
         }
         if (skill.check(startPosition)) {
-          this.log += `${skill.name}発動！`
-          skill.trigger()
+          const skillDetail = skill.trigger()
           this.skillTriggerCount[this.currentPhase]++
           this.coolDownMap[skill.name] = this.frameElapsed
-          const pos = this.trackDetail.distance - this.position
-          this.log += `／残り${pos.toFixed(1)}m地点<br>`
+          skillTriggered.push({skill, detail: skillDetail})
         }
       }
+      return skillTriggered
     },
     initCornerRandom() {
       const ret = []
@@ -688,7 +713,7 @@ export default {
           return [this.courseLength * 5 / 6.0 + Math.random() * this.courseLength / 6.0]
       }
     },
-    isInRandom(randoms, startPosition) {
+    isContainRandom(randoms, startPosition) {
       for (const random of randoms) {
         if (startPosition <= random && this.position >= random) {
           return true
@@ -697,6 +722,9 @@ export default {
       return false
     },
     isInCorner(position) {
+      if (!position) {
+        position = this.position
+      }
       for (const corner of this.trackDetail.corners) {
         const start = this.toPosition(corner[0])
         const end = this.toPosition(corner[1])
@@ -705,6 +733,9 @@ export default {
         }
       }
       return false
+    },
+    isInStraight(position) {
+      return !this.isInCorner(position)
     },
     isInFinalCorner(position) {
       if (!position) {
@@ -720,25 +751,13 @@ export default {
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
       return position > fc[1]
     },
-    isTriggerUphill(startPosition) {
-      for (const uphill of this.trackDetail.uphill) {
-        if (!uphill.trigger) {
-          continue
-        }
-        if (startPosition <= this.toPosition(uphill.end) &&
-            this.toPosition(uphill.start) <= startPosition) {
-          return true
-        }
-      }
-      return false
+    isInSpurt() {
+      return !!this.spurtParameters
     },
-    isTriggerDownhill(startPosition) {
-      for (const hill of this.trackDetail.downhill) {
-        if (!hill.trigger) {
-          continue
-        }
-        if (startPosition <= this.toPosition(hill.end) &&
-            this.toPosition(hill.start) <= startPosition) {
+    isContainSlopeTrigger(direction, startPosition) {
+      for (const upSlope of this.trackDetail[`${direction}Slope`]) {
+        if (startPosition <= this.toPosition(upSlope.end) &&
+            this.position >= this.toPosition(upSlope.end)) {
           return true
         }
       }
@@ -752,6 +771,7 @@ export default {
           skill.cd * this.timeCoef
     },
     doHeal(value) {
+      let detail
       const heal = this.spMax * value / 10000.0
       this.sp += heal
       let waste = 0
@@ -760,10 +780,11 @@ export default {
         this.sp = this.spMax
       }
       if (waste > 0) {
-        this.log += `耐力が${waste.toFixed(1)}溢れ、${(heal - waste).toFixed(1)}回復した！`
+        detail = {heal, waste}
       } else {
-        this.log += `耐力が${heal.toFixed(1)}回復した！`
+        detail = {heal, waste: 0}
       }
+      return detail
     },
     isStyle(style) {
       return this.footStyle === style
@@ -797,19 +818,24 @@ export default {
     },
     fillCommonFields(copy, type) {
       const thiz = this // thiz = Vue component instance
+      if (!copy.cd) {
+        copy.cd = 500
+      }
       switch (type) {
         case 'heal':
-          copy.cd = 500
           copy.duration = 0
-          copy.trigger = function () {
-            thiz.doHeal(this.value)
+          if (!copy.trigger) {
+            copy.trigger = function () {
+              return thiz.doHeal(this.value)
+            }
           }
           break
         case 'fatigue':
-          copy.cd = 500
           copy.duration = 0
-          copy.trigger = function () {
-            thiz.doHeal(-this.value)
+          if (!copy.trigger) {
+            copy.trigger = function () {
+              return thiz.doHeal(-this.value)
+            }
           }
           break
       }
@@ -818,8 +844,8 @@ export default {
       this.hasSkills = {
         heal: {
           rare: [],
-              normal: [],
-              unique: []
+          normal: [],
+          unique: []
         },
         fatigue: {
           all: []

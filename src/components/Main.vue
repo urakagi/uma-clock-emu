@@ -242,9 +242,6 @@
       </table>
     </div>
     <el-divider/>
-    <div v-html="log">
-    </div>
-    <el-divider/>
     <div>
       補正後：スピード{{ modifiedSpeed }} ／スタミナ{{ modifiedStamina }} ／パワー{{ modifiedPower }} ／根性{{ modifiedGuts }}
       ／賢さ{{ modifiedWisdom }}
@@ -266,7 +263,7 @@
     </div>
     <div>
       終盤目標速度：{{ v3.toFixed(2) }}／終盤加速度：{{ a3.toFixed(3) }} ｜
-      最高スパート速度：{{ v4.toFixed(2) }}
+      最高スパート速度：{{ maxSpurtSpeed.toFixed(2) }}
     </div>
   </div>
 </template>
@@ -276,7 +273,7 @@ import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 
-const EPOCH = 100
+const EPOCH = 1
 
 export default {
   name: "Main",
@@ -304,12 +301,14 @@ export default {
       // Results
       emulations: [],
       // Race variables
-      log: '',
+      events: [],
+      sectionTargetSpeedRandoms: [],
       frameElapsed: 0,  // 15 frames per second
-      position: -5,
-      targetSpeed: 0,
+      position: 0,
       currentSpeed: 3,
       sp: 0,
+      operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
+      frames: [],
       startDelay: 0,
       laps: [],
       marks: [],
@@ -328,6 +327,9 @@ export default {
   },
   mounted() {
     this.updateSavedUmas()
+    // FIXME: For debug
+    this.umaToLoad = 'test'
+    this.loadUma()
     // this.exec()
   },
   computed: {
@@ -381,8 +383,80 @@ export default {
         return 3
       }
     },
+    currentSection() {
+      return Math.floor(this.position * 24.0 / this.courseLength)
+    },
     baseSpeed() {
       return 20 - (this.trackDetail.distance - 2000) / 1000.0
+    },
+    targetSpeed() {
+      // 耐力枯渇
+      if (this.sp <= 0) {
+        return this.vMin
+      }
+      // スタート時
+      // 他に0.85倍の基準速度を下回る可能性がない（耐力枯渇してもこれよりは高い）
+      if (this.currentSpeed < 0.85 * this.baseSpeed) {
+        return 0.85 * this.baseSpeed
+      }
+      // スパート中
+      if (this.spurtParameters
+          && (this.position + this.spurtParameters.distance >= this.courseLength)) {
+        return this.spurtParameters.speed
+      }
+      let baseTargetSpeed
+      switch (this.currentPhase) {
+        case 0:
+        case 1:
+          baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][this.currentPhase]
+          break
+        case 2:
+        case 3:
+        default:
+          baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][2] +
+              Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
+          break
+      }
+      let ret = baseTargetSpeed * (1 + this.sectionTargetSpeedRandoms[this.currentSection])
+      for (const skill of this.operatingSkills.targetSpeed) {
+        ret += skill.value
+      }
+      return ret
+    },
+    acceleration() {
+      const c = this.isInSlope('up') ? 0.0004 : 0.0006
+      let ret = c * Math.sqrt(500 * this.modifiedPower)
+          * this.styleAccelerateCoef[this.umaStatus.style][this.currentPhase]
+          * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
+          * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      // スタート時加算
+      if (this.currentSpeed < 0.85 * this.baseSpeed) {
+        ret += 24
+      }
+      for (const skill of this.operatingSkills.acceleration) {
+        ret += skill.value
+      }
+      return ret
+    },
+    deceleration() {
+      if (this.sp <= 0) {
+        return -1.2
+      }
+      switch (this.currentPhase) {
+        case 0:
+          return -1.2
+        case 1:
+          return -0.8
+        case 2:
+        default:
+          return -1.0
+      }
+    },
+    maxSpurtSpeed() {
+      return (this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][2] + 0.01) +
+          Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
+          1.05 + Math.sqrt(500 * this.modifiedSpeed) *
+          this.distanceFitSpeedCoef[this.umaStatus.distanceFit] * 0.002
     },
     v0() {
       return 0.85 * this.baseSpeed
@@ -399,12 +473,6 @@ export default {
       return this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][2] +
           (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325) +
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
-    },
-    v4() {
-      return (this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][2] + 0.01) +
-          Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
-          1.05 + Math.sqrt(500 * this.modifiedSpeed) *
-          this.distanceFitSpeedCoef[this.umaStatus.distanceFit] * 0.002
     },
     vMin() {
       return 0.85 * this.baseSpeed + 0.01 * Math.sqrt(this.modifiedGuts * 200)
@@ -530,8 +598,7 @@ export default {
     locationChanged(location) {
       this.courseList = this.trackData[location]
       this.track.course = Object.keys(this.courseList)[0]
-    },
-    getEqualStamina(value) {
+    }, getEqualStamina(value) {
       return Math.floor(this.spMax * value / 10000.0 / 0.8 / this.styleSpCoef[this.umaStatus.style])
     },
     exec: function () {
@@ -545,18 +612,9 @@ export default {
       }, 100)
     },
     start: function () {
-      this.log = ''
-      this.frameElapsed = 0
-      this.position = -5
-      this.currentSpeed = 3
-      this.sp = this.spMax
-      this.laps = []
-      this.marks = []
-      this.spTrace = []
-      this.spurtParameters = null
-
+      this.resetRace()
       const startDelay = Math.random() * 0.1
-      this.log += `ゲートを出るまでの時間：${startDelay.toFixed(3)}s<br>`
+      this.pushEvent('start', this.start)
       this.startDelay = startDelay
       this.laps.push(0)
       this.marks.push(this.position)
@@ -564,170 +622,114 @@ export default {
       this.initializeSkills()
       this.progressRace()
     },
+    resetRace() {
+      this.events = []
+      this.frameElapsed = 0
+      this.position = 0
+      this.currentSpeed = 3
+      this.operatingSkills = {
+        speed: [],
+        targetSpeed: [],
+        acceleration: []
+      }
+      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
+      this.sp = this.spMax
+      delete this.frames
+      this.frames = [{skills: []}]
+      this.laps = []
+      this.marks = []
+      this.spTrace = []
+      this.spurtParameters = null
+    },
+    pushEvent(name, value) {
+      this.events.push({
+        position: this.position,
+        name,
+        value
+      })
+    },
     progressRace() {
-      while (this.position < this.trackDetail.distance) {
+      while (this.position < this.courseLength) {
+      // while (this.frameElapsed < 20000) {
         const startPosition = this.position
+        const startSp = this.sp
+        const startPhase = this.currentPhase
+        this.move()
+        this.frames[this.frameElapsed].movement = this.position - startPosition
+        this.frames[this.frameElapsed].consume = this.sp - startSp
         this.frameElapsed++
-        if (this.currentSpeed < this.v0) {
-          this.moveStart()
-        } else if (this.currentPhase === 0) {
-          this.movePhase0()
-        } else if (this.currentPhase === 1) {
-          this.movePhase1()
-        } else {
-          this.movePhase23()
-        }
-        this.checkSkillTrigger(startPosition)
-      }
-    },
-    moveStart() {
-      this.accelerate(this.v0, this.a0, 'スタート加速終了')
-    },
-    movePhase0() {
-      if (this.currentSpeed < this.v1) {
-        this.accelerate(this.v1, this.a1, '序盤加速終了')
-      } else {
-        this.cruise(this.v1)
-      }
-      if (this.currentPhase === 1) {
-        const lap = this.updateLap()
-        this.log += `序盤巡航終了：速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}s走行／移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-      }
-    },
-    movePhase1() {
-      if ((this.currentSpeed < this.v2 && this.a2 > 0) || (this.currentSpeed > this.v2 && this.a2 < 0)) {
-        this.accelerate(this.v2, this.a2, '中盤加速終了')
-      } else {
-        this.cruise(this.v2)
-      }
-      if (this.currentPhase === 2) {
-        const lap = this.updateLap()
-        this.log += `中盤巡航終了：速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}s走行／移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-        this.spurtParameters = this.calcSpurtParameter()
-      }
-    },
-    movePhase23() {
-      if (this.sp <= 0) {
-        this.moveMinSpeed()
-      } else if (this.position + this.spurtParameters.distance < this.trackDetail.distance) {
-        this.moveNonSpurt()
-      } else {
-        this.moveSpurt()
-      }
-      if (this.sp <= 0 && this.spTrace[this.spTrace.length - 1] > 0) {
-        const lap = this.updateLap()
-        this.log += `スタミナ尽きるまで速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}s走行／移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-      }
-    },
-    moveNonSpurt() {
-      if (this.currentSpeed < this.v3) {
-        this.accelerate(this.v3, this.a3, '終盤加速終了')
-      } else {
-        this.cruise(this.spurtParameters.speed)
-      }
-      if (this.position + this.spurtParameters.distance >= this.trackDetail.distance) {
-        const lap = this.updateLap()
-        this.log += `終盤巡航終了：速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}s走行／移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-      }
-    },
-    moveSpurt() {
-      if (this.currentSpeed < this.spurtParameters.speed) {
-        this.accelerate(this.spurtParameters.speed, this.a3, 'スパート加速終了')
-      } else {
-        this.cruise(this.spurtParameters.speed)
-      }
-      if (this.position >= this.trackDetail.distance) {
-        const lap = this.updateLap(true)
-        this.log += `ゴール！速度${this.currentSpeed.toFixed(2)}で${lap.time.toFixed(2)}sスパート、移動距離${lap.distance.toFixed(1)}m／消耗耐力${lap.spUsed.toFixed(1)}<br>`
-        this.goal()
-      }
-    },
-    moveMinSpeed() {
-      if (this.currentSpeed > this.vMin) {
-        this.accelerate(this.vMin, -1.2, '失速減速終了')
-      } else {
-        this.cruise(this.vMin)
-      }
-      if (this.position >= this.trackDetail.distance) {
-        const lap = this.updateLap(true)
-        this.log += `ゴール！失速で${lap.time.toFixed(2)}s走行、移動距離${lap.distance.toFixed(1)}m<br>`
-        this.goal()
-      }
-    },
-    accelerate(v, a, lapLog) {
-      const startSpeed = this.currentSpeed
-      this.currentSpeed += a / 15.0
-      if ((this.currentSpeed >= v && a >= 0) || (this.currentSpeed <= v && a < 0)) {
-        const accTime = (v - startSpeed) / a
-        this.currentSpeed = v
-        this.position += (startSpeed + v) * accTime / 2.0
-        this.sp -= 20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-            Math.pow((this.currentSpeed + startSpeed) / 2 - this.baseSpeed + 12, 2) / 144 * accTime
 
-        const time = (this.frameElapsed - 1) / 15.0 + accTime
-        let distance
-        let lap
-        let spUsed
-        distance = this.position - this.marks[this.marks.length - 1]
-        lap = time - this.laps[this.laps.length - 1]
-        spUsed = this.spTrace[this.spTrace.length - 1] - this.sp
-        this.log += `${lapLog}：消費${lap.toFixed(2)}s／移動距離${distance.toFixed(1)}m／消耗耐力${spUsed.toFixed(1)}<br>`
-        this.laps.push(time)
-        this.marks.push(this.position)
-        this.spTrace.push(this.sp)
-        this.position += (1 / 15.0 - accTime) * v
-        this.sp -= 20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-            Math.pow(this.currentSpeed - this.baseSpeed + 12, 2) / 144 *
-            (0.66667 - accTime)
-      } else {
-        this.position += (startSpeed + this.currentSpeed) / 30.0
-        let consume = 20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-            (
-                (Math.pow(a / 15.0 + startSpeed - this.baseSpeed + 12, 3) -
-                    Math.pow(startSpeed - this.baseSpeed + 12, 3)
-                ) / (432 * a)
-            )
-        if (this.currentPhase >= 2) {
-          consume *= this.spurtSpCoef
+        // 終盤入り・ラストスパート計算
+        if (startPhase === 1 && this.currentPhase === 2) {
+          this.spurtParameters = this.calcSpurtParameter()
         }
-        this.sp -= consume
+
+        // Calculate target speed of next frame and do heal/fatigue
+        const skillTriggered = this.checkSkillTrigger(startPosition)
+        this.frames.push({skills: skillTriggered})
       }
+      this.goal()
     },
-    cruise(v) {
-      this.position += v / 15.0
-      this.sp -= this.consumePerSecond(this.currentSpeed, this.currentPhase) / 15.0
+    move() {
+      const diff = this.targetSpeed - this.currentSpeed
+      const startSpeed = this.currentSpeed
+      const changeRate = diff >= 0 ? this.acceleration : this.deceleration
+      let changeTime = diff / changeRate
+      if (changeTime > this.frameLength) {
+        changeTime = this.frameLength
+      }
+      const staticTime = this.frameLength - changeTime
+      const endSpeed = startSpeed + changeTime * changeRate
+
+      // 減速スキル分
+      let realStartSpeed = startSpeed
+      let realEndSpeed = endSpeed
+      for (const skill of this.operatingSkills.speed) {
+        realStartSpeed += skill.value
+        realEndSpeed += skill.value
+      }
+
+      // 移動距離及び耐力消耗を算出
+      // 速度変化中の分
+      const movementChanging = (realStartSpeed + realEndSpeed) * changeTime / 2.0
+      const consumeChanging = this.consumePerSecondChanging(realStartSpeed, realEndSpeed,
+          changeRate, this.currentPhase)
+      // 速度変化終了後の分
+      const movementStatic = realEndSpeed * staticTime
+      const consumeStatic = this.consumePerSecond(realEndSpeed, this.currentPhase) * staticTime
+
+      // 反映させる
+      this.currentSpeed = endSpeed
+      this.position += movementChanging + movementStatic
+      this.sp -= consumeChanging + consumeStatic
     },
     calcSpurtParameter() {
-      this.log += `残り耐力${this.sp.toFixed(1)}／`
       const maxDistance = this.trackDetail.distance / 3.0
-      const spurtDistance = this.calcSpurtDistance(this.v4)
-      const totalConsume = this.calcRequiredSp(this.v4)
-      const time = maxDistance / this.v4
+      const spurtDistance = this.calcSpurtDistance(this.maxSpurtSpeed)
+      const totalConsume = this.calcRequiredSp(this.maxSpurtSpeed)
       if (spurtDistance >= maxDistance) {
-        this.log += `最長最速スパート可能(${maxDistance.toFixed(1)}m)<br>`
         return {
           distance: maxDistance,
-          speed: this.v4,
+          speed: this.maxSpurtSpeed,
           spDiff: this.sp - totalConsume
         }
       }
       // SPが足りない場合の処理
       const candidates = []
-      const consumePerMeterV3 = this.consumePerSecond(this.v3, 2) / this.v3
       const totalConsumeV3 = this.calcRequiredSp(this.v3)
       const excessSp = this.sp - totalConsumeV3
       if (excessSp < 0) {
-        const distanceLeft = this.sp / consumePerMeterV3
-        this.log += `耐力枯渇、残り走行可能距離${distanceLeft.toFixed(1)}m／失速距離${(maxDistance - distanceLeft).toFixed(1)}m<br>`
         return {
           distance: 0,
           speed: this.v3,
           spDiff: this.sp - totalConsume
         }
       }
-      this.log += `耐力${(totalConsume - this.sp).toFixed(1)}不足、割当可能耐力${excessSp.toFixed(1)}`
-      for (let v = this.v4 - 0.1; v >= this.v3; v -= 0.1) {
-        const distanceV = this.calcSpurtDistance(v)
+      for (let v = this.maxSpurtSpeed - 0.1; v >= this.v3; v -= 0.1) {
+        let distanceV = this.calcSpurtDistance(v)
+        if (distanceV >= maxDistance) {
+          distanceV = maxDistance
+        }
         candidates.push({
           distance: distanceV,
           speed: v,
@@ -739,13 +741,12 @@ export default {
         return a.time - b.time
       })
       for (const i in candidates) {
+        candidates[i].order = parseInt(i) + 1
         const c = candidates[i]
         if (Math.random() * 100 < 15 + 0.05 * this.modifiedWisdom) {
-          this.log += `<br>第${parseInt(i) + 1}順位採用／スパート距離${c.distance.toFixed(1)}m／速度${c.speed.toFixed(2)}／${(c.time - time).toFixed(2)}s遅れ<br>`
           return c
         }
       }
-      this.log += `／最低順位採用<br>`
       return candidates[candidates.length - 1]
     },
     calcSpurtDistance(v) {
@@ -760,7 +761,7 @@ export default {
     calcRequiredSp(v) {
       return (this.courseLength / 3.0 - 60) * 20 *
           this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12,2 ) / 144 / this.v3 + (
+          this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3 + (
               this.courseLength / 3.0 - 60) * (
               20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
               this.spurtSpCoef * (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
@@ -775,35 +776,32 @@ export default {
       }
       return ret
     },
-    updateLap(isGoal) {
-      let time = this.frameElapsed / 15.0 - this.laps[this.laps.length - 1]
-      let distance = this.position - this.marks[this.marks.length - 1]
-      let spUsed = this.spTrace[this.spTrace.length - 1] - this.sp
-
-      // ゴールした瞬間に巻き戻す
-      if (isGoal) {
-        const over = this.position - this.trackDetail.distance
-        const overTime = over / this.currentSpeed
-        time -= overTime
-        distance -= over
-        spUsed += this.consumePerSecond(this.currentSpeed, this.currentPhase) * overTime
+    consumePerSecondChanging(startSpeed, endSpeed, changeRate, phase) {
+      let ret = 20.0 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
+          (Math.pow(endSpeed - this.baseSpeed + 12, 3) - Math.pow(startSpeed - this.baseSpeed + 12, 3)) /
+          (3 * changeRate) / 144
+      if (phase >= 2) {
+        ret *= this.spurtSpCoef
       }
-
-      this.laps.push(this.frameElapsed / 15.0)
-      this.marks.push(this.position)
-      this.spTrace.push(this.sp)
-      return {time, distance, spUsed}
+      return ret
+    },
+    isInSlope(direction) {
+      for (const slope of this.trackDetail[`${direction}Slope`]) {
+        if (this.position >= this.toPosition(slope.start)
+            && this.position <= this.toPosition(slope.end)
+            && this.slopePercentage(slope)) {
+          return true
+        }
+      }
+      return false
     },
     goal() {
-      const raceTime = this.laps[this.laps.length - 1] + this.startDelay
-      const raceTimeString = this.formatTime(raceTime, 2)
-      const displayTime = (this.laps[this.laps.length - 1] + this.startDelay) * 1.18
-      let displayTimeString = this.formatTime(displayTime, 1)
-      this.log += `レース時間${raceTimeString}／ゲーム表示時間${displayTimeString}／余剰耐力${this.sp.toFixed(1)}<br>`
+      const raceTime = this.frameElapsed * this.frameLength + this.startDelay
+      const displayTime = raceTime * 1.18
 
       const emu = {
         raceTime, displayTime,
-        maxSpurt: this.spurtParameters.speed === this.v4,
+        maxSpurt: this.spurtParameters.speed === this.maxSpurtSpeed,
         spDiff: this.spurtParameters.spDiff
       }
       this.emulations.push(emu)
@@ -941,6 +939,14 @@ export default {
         course: '',
         surfaceCondition: '0'
       }
+    },
+    initSectionTargetSpeedRandoms() {
+      const ret = []
+      for (let i = 0; i < 24; i++) {
+        const max = (this.modifiedWisdom / 5500.0) * Math.log10(this.modifiedWisdom * 0.1) * 0.01
+        ret.push(Math.random() * max - 0.0065)
+      }
+      return ret
     },
     updateSavedUmas() {
       this.umaToLoad = null
