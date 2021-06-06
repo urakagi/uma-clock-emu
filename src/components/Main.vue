@@ -129,61 +129,22 @@
       </el-form-item>
       <br>
       <el-collapse v-model="skillGroups">
-        <el-collapse-item title="回復スキル(金)" name="healRare">
-          <el-checkbox-group v-model="hasSkills.heal.rare">
-            <el-tooltip
-                v-for="skill in availableSkills.heal.rare"
-                :key="skill.name"
-                :content="skill.tooltip"
-                :disabled="!('tooltip' in skill)"
-            >
-              <el-checkbox-button :label="skill.index">
-                {{ skill.name }}
-              </el-checkbox-button>
-            </el-tooltip>
-          </el-checkbox-group>
-        </el-collapse-item>
-        <el-collapse-item title="回復スキル(白)" name="healNormal">
-          <el-checkbox-group v-model="hasSkills.heal.normal">
-            <el-tooltip
-                v-for="skill in availableSkills.heal.normal"
-                :key="skill.name"
-                :content="skill.tooltip"
-                :disabled="!('tooltip' in skill)"
-            >
-              <el-checkbox-button :label="skill.index">
-                {{ skill.name }}
-              </el-checkbox-button>
-            </el-tooltip>
-          </el-checkbox-group>
-        </el-collapse-item>
-        <el-collapse-item title="回復スキル(固有)" name="healUnique">
-          <el-checkbox-group v-model="hasSkills.heal.unique">
-            <el-tooltip
-                v-for="skill in availableSkills.heal.unique"
-                :key="skill.name"
-                :content="skill.tooltip"
-                :disabled="!('tooltip' in skill)"
-            >
-              <el-checkbox-button :label="skill.index">
-                {{ skill.name }}
-              </el-checkbox-button>
-            </el-tooltip>
-          </el-checkbox-group>
-        </el-collapse-item>
-        <el-collapse-item title="喰らう疲労スキル" name="fatigue">
-          <el-checkbox-group v-model="hasSkills.fatigue.all">
-            <el-tooltip
-                v-for="skill in availableSkills.fatigue.all"
-                :key="skill.name"
-                :content="skill.tooltip"
-                :disabled="!('tooltip' in skill)"
-            >
-              <el-checkbox-button :label="skill.index">
-                {{ skill.name }}
-              </el-checkbox-button>
-            </el-tooltip>
-          </el-checkbox-group>
+        <el-collapse-item v-for="menu in skillMenu" :title="menu.title" :name="menu.title" :key="menu.title">
+          <div v-for="rarity in rarities" :key="menu.type + rarity">
+            <h3>{{ rarityString[rarity] }}</h3>
+            <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
+              <el-tooltip
+                  v-for="skill in availableSkills[menu.type][rarity]"
+                  :key="skill.name"
+                  :content="skill.tooltip"
+                  :disabled="!('tooltip' in skill)"
+              >
+                <el-checkbox-button :label="skill.index">
+                  {{ skill.name }}
+                </el-checkbox-button>
+              </el-tooltip>
+            </el-checkbox-group>
+          </div>
         </el-collapse-item>
       </el-collapse>
       <br>
@@ -273,7 +234,7 @@ import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 
-const EPOCH = 1
+const EPOCH = 10
 
 export default {
   name: "Main",
@@ -419,7 +380,7 @@ export default {
       }
       let ret = baseTargetSpeed * (1 + this.sectionTargetSpeedRandoms[this.currentSection])
       for (const skill of this.operatingSkills.targetSpeed) {
-        ret += skill.value
+        ret += skill.data.value
       }
       return ret
     },
@@ -434,7 +395,7 @@ export default {
         ret += 24
       }
       for (const skill of this.operatingSkills.acceleration) {
-        ret += skill.value
+        ret += skill.data.value
       }
       return ret
     },
@@ -503,6 +464,23 @@ export default {
           * this.styleAccelerateCoef[this.umaStatus.style][2]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+    },
+    skillMenu() {
+      const TITLE_TYPE = {
+        heal: '回復スキル',
+        speed: '減速スキル',
+        targetSpeed: '速度スキル',
+        acceleration: '加速度スキル',
+        fatigue: '喰らう疲労スキル'
+      }
+      const ret = []
+      for (const type in this.skills) {
+        ret.push({
+          title: TITLE_TYPE[type],
+          type
+        })
+      }
+      return ret
     },
     avgDisplayTime() {
       return this.calcAvg('all', 'displayTime')
@@ -650,7 +628,7 @@ export default {
     },
     progressRace() {
       while (this.position < this.courseLength) {
-      // while (this.frameElapsed < 20000) {
+        // while (this.frameElapsed < 20000) {
         const startPosition = this.position
         const startSp = this.sp
         const startPhase = this.currentPhase
@@ -667,6 +645,15 @@ export default {
         // Calculate target speed of next frame and do heal/fatigue
         const skillTriggered = this.checkSkillTrigger(startPosition)
         this.frames.push({skills: skillTriggered})
+
+        // Remove overtime skills
+        for (let i = 0; i < this.operatingSkills.length; i++) {
+          if ((this.frameElapsed - this.operatingSkills[i].startFrame) * this.frameLength
+              > this.operatingSkills[i].skill.duration * this.timeCoef) {
+            this.operatingSkills.splice(i, 1)
+            i-- // Without this line, the original next element will be skipped
+          }
+        }
       }
       this.goal()
     },
@@ -685,8 +672,8 @@ export default {
       let realStartSpeed = startSpeed
       let realEndSpeed = endSpeed
       for (const skill of this.operatingSkills.speed) {
-        realStartSpeed += skill.value
-        realEndSpeed += skill.value
+        realStartSpeed += skill.data.value
+        realEndSpeed += skill.data.value
       }
 
       // 移動距離及び耐力消耗を算出

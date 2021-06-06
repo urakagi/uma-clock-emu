@@ -1,9 +1,17 @@
 <script>
+
 export default {
   name: "MixinSkills",
   data() {
     const thiz = this
     return {
+      rarities: ['rare', 'normal', 'unique', 'all'],
+      rarityString: {
+        rare: 'レア',
+        normal: 'ノーマル',
+        unique: '固有',
+        all: '',
+      },
       invokedSkills: [],
       coolDownMap: {},
       hasSkills: {},
@@ -308,7 +316,7 @@ export default {
             }
           },
         ],
-        speed: [
+        targetSpeed: [
           {
             normal: {name: 'コーナー巧者○', value: 0.15},
             rare: {name: '弧線のプロフェッサー', value: 0.35},
@@ -321,16 +329,18 @@ export default {
             }
           },
         ],
-        accelerate: [
+        acceleration: [
           {
             normal: {name: '直線一気', value: 0.2},
             rare: {name: '迫る影', value: 0.4},
             duration: 0.9,
+            styleLimit: [4],
             check: function () {
               return thiz.isStyle(4) && thiz.isInSpurt && thiz.isInStraight(this.position)
             }
           },
         ],
+        speed: [],
         fatigue: [
           {
             all: {name: 'スタミナイーター', value: 50},
@@ -656,8 +666,8 @@ export default {
               invokeRate = 80
             } else {
               // FIXME: for debug, always pass wisdom check
-              // invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
-              invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
+              invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+              // invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
             }
             if (Math.random() * 100 < invokeRate) {
               if (skill.init) {
@@ -676,10 +686,15 @@ export default {
           continue
         }
         if (skill.check(startPosition)) {
-          const skillDetail = skill.trigger()
+          if (skill.duration) {
+            this.operatingSkills[skill.type].push({data: skill, startFrame: this.frameElapsed})
+            skillTriggered.push({skill})
+          } else {
+            const skillDetail = skill.trigger()
+            skillTriggered.push({data: skill, detail: skillDetail})
+          }
           this.skillTriggerCount[this.currentPhase]++
           this.coolDownMap[skill.name] = this.frameElapsed
-          skillTriggered.push({skill, detail: skillDetail})
         }
       }
       return skillTriggered
@@ -804,11 +819,12 @@ export default {
           all: []
         }
         for (const skill of this.skillData[type]) {
-          for (const rarity of ['normal', 'rare', 'unique', 'all']) {
+          for (const rarity of this.rarities) {
             if (rarity in skill) {
               const copy = {...skill}
               copy.name = skill[rarity].name
               copy.value = skill[rarity].value
+              copy.type = type
               this.fillCommonFields(copy, type)
               this.skills[type][rarity].push(copy)
             }
@@ -830,6 +846,10 @@ export default {
             }
           }
           break
+        case 'speed':
+        case 'targetSpeed':
+        case 'acceleration':
+          break
         case 'fatigue':
           copy.duration = 0
           if (!copy.trigger) {
@@ -841,16 +861,20 @@ export default {
       }
     },
     resetHasSkills() {
-      this.hasSkills = {
-        heal: {
-          rare: [],
-          normal: [],
-          unique: []
-        },
+      const o = {
         fatigue: {
           all: []
         }
       }
+      const SELF_KEYS = ['heal', 'speed', 'targetSpeed', 'acceleration']
+      for (const key of SELF_KEYS) {
+        o[key] = {
+          rare: [],
+          normal: [],
+          unique: []
+        }
+      }
+      this.hasSkills = o
     }
   }
 }
