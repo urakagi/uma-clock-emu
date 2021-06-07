@@ -666,8 +666,8 @@ export default {
               invokeRate = 80
             } else {
               // FIXME: for debug, always pass wisdom check
-              // invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
-              invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
+              invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+              // invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
             }
             if (Math.random() * 100 < invokeRate) {
               if (skill.init) {
@@ -688,7 +688,7 @@ export default {
         if (skill.check(startPosition)) {
           if (skill.duration) {
             this.operatingSkills[skill.type].push({data: skill, startFrame: this.frameElapsed})
-            skillTriggered.push({skill})
+            skillTriggered.push({data: skill})
           } else {
             const skillDetail = skill.trigger()
             skillTriggered.push({data: skill, detail: skillDetail})

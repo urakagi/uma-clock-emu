@@ -264,19 +264,7 @@ export default {
       savedUmas: {},
       umaToLoad: null,
       chartData: {},
-      chartOptions: {
-        scales: {
-          yAxes: [{
-            id: 'speed',
-            type: 'linear',
-            position: 'left'
-          }, {
-            id: 'sp',
-            type: 'linear',
-            position: 'right',
-          }]
-        }
-      },
+      chartOptions: {},
       // Constants
       fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
     }
@@ -333,15 +321,7 @@ export default {
       return Math.pow(6.5 / (Math.log10(0.1 * this.modifiedWisdom + 1)), 2)
     },
     currentPhase() {
-      if (this.position < this.trackDetail.distance / 6.0) {
-        return 0
-      } else if (this.position < this.trackDetail.distance * 2.0 / 3) {
-        return 1
-      } else if (this.position < this.trackDetail.distance * 5.0 / 6) {
-        return 2
-      } else {
-        return 3
-      }
+      return this.getPhase(this.position)
     },
     currentSection() {
       return Math.floor(this.position * 24.0 / this.courseLength)
@@ -627,7 +607,6 @@ export default {
     },
     progressRace() {
       while (this.position < this.courseLength) {
-        // while (this.frameElapsed < 20000) {
         const startPosition = this.position
         const startSp = this.sp
         const startPhase = this.currentPhase
@@ -644,9 +623,17 @@ export default {
           this.spurtParameters = this.calcSpurtParameter()
         }
 
+        if (this.position >= this.courseLength) {
+          break
+        }
         // Calculate target speed of next frame and do heal/fatigue
         const skillTriggered = this.checkSkillTrigger(startPosition)
-        this.frames.push({skills: skillTriggered})
+        const spurting = this.spurtParameters != null &&
+            this.position + this.spurtParameters.distance >= this.courseLength
+        this.frames.push({
+          skills: skillTriggered,
+          spurting
+        })
 
         // Remove overtime skills
         for (let i = 0; i < this.operatingSkills.length; i++) {
@@ -950,34 +937,156 @@ export default {
       this.savedUmas = JSON.parse(localStorage.getItem('umas'))
     },
     updateChart() {
+      const thiz = this
       const labels = []
       const dataSpeed = []
       const dataSp = []
+      const annotations = []
+      let skillYAdjust = 0
+      let phase = 0
+      const PHASE_NAMES = ['←序盤|中盤→', '中盤←|終盤→', 'ﾗｽﾄｽﾊﾟｰﾄ→']
+      const SKILL_COLORS = {
+        heal: 'cyan',
+        speed: 'darkred',
+        targetSpeed: 'gold',
+        acceleration: 'orange',
+        fatigue: 'darkred'
+      }
       const step = Math.floor(this.frames.length / 100)
-      const mod = (this.frames.length - 1) % step
+      const mod = this.frames.length % step
       for (let index = mod + step - 1; index < this.frames.length; index += step) {
         const frame = this.frames[index]
-        labels.push(this.formatTime(index * this.frameLength, 1))
+        const label = this.formatTime(index * this.frameLength, 1)
+        labels.push(label)
         dataSpeed.push(frame.speed)
         dataSp.push(frame.sp)
+        // Phase annotations
+        if (index + step < this.frames.length) {
+          const framePhase = this.getPhase(this.frames[index + step].startPosition)
+          if (framePhase > phase) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: PHASE_NAMES[phase],
+                position: 'bottom',
+                enabled: true
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'black',
+              borderWidth: 2,
+              onClick: function () {
+              }
+            })
+            phase++
+          }
+          if (!frame.spurting && this.frames[index + step].spurting) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: 'スパート開始',
+                position: 'bottom',
+                enabled: true,
+                yAdjust: 30
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'red',
+              borderWidth: 2,
+              onClick: function () {
+              }
+            })
+          }
+        }
+        // Skill annotations
+        for (let mi = index; mi < index + step && mi < this.frames.length; mi++) {
+          for (const skill of this.frames[mi].skills) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: skill.data.name,
+                position: 'top',
+                enabled: true,
+                yAdjust: skillYAdjust
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: SKILL_COLORS[skill.data.type],
+              borderWidth: 2,
+              onClick: function () {
+                if (skill.detail && 'waste' in skill.detail) {
+                  if (skill.detail.waste > 0) {
+                    thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復(${(skill.detail.waste).toFixed(1)}が溢れた)`)
+                  } else {
+                    thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復`)
+                  }
+                }
+              }
+            })
+            skillYAdjust += 30
+            if (skillYAdjust > 60) {
+              skillYAdjust = 0
+            }
+          }
+        }
+      }
+
+      this.chartOptions = {
+        annotation: {
+          drawTime: 'afterDatasetsDraw',
+          events: ['click'],
+          annotations
+        },
+        elements: {
+          point:{
+            radius: 0
+          }
+        },
+        scales: {
+          yAxes: [{
+            id: 'speed',
+            type: 'linear',
+            position: 'left',
+            ticks: {
+              min: 15,
+              max: 25
+            }
+          }, {
+            id: 'sp',
+            type: 'linear',
+            position: 'right',
+          }]
+        }
       }
       this.chartData = {
         labels: labels,
         datasets: [{
           fill: false,
           label: '走行速度',
-          pointStyle: 'line',
           yAxisID: 'speed',
-          borderColor: 'rgb(99, 132, 255)',
+          borderColor: 'rgb(30, 21, 155)',
           data: dataSpeed
         }, {
           fill: false,
           label: '耐力',
-          pointStyle: 'line',
           yAxisID: 'sp',
           borderColor: 'rgb(255, 132, 99)',
           data: dataSp
         }]
+      }
+    },
+    getPhase(position) {
+      if (position < this.trackDetail.distance / 6.0) {
+        return 0
+      } else if (position < this.trackDetail.distance * 2.0 / 3) {
+        return 1
+      } else if (position < this.trackDetail.distance * 5.0 / 6) {
+        return 2
+      } else {
+        return 3
       }
     },
     test() {
