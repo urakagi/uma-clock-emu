@@ -1,5 +1,11 @@
 <template>
   <div class="main-frame">
+    <p>
+      <Adsense v-if="production"
+          data-ad-client="ca-pub-4611969396217909"
+          data-ad-slot="6969023753">
+      </Adsense>
+    </p>
     <el-form class="input-form" :inline="true">
       <el-form-item>
         <el-button @click="saveUma">セーブ</el-button>
@@ -108,7 +114,12 @@
       </el-form-item>
       <br>
       <el-collapse v-model="skillGroups">
-        <el-collapse-item v-for="menu in skillMenu" :title="menu.title" :name="menu.type" :key="menu.title">
+        <el-collapse-item
+            v-for="menu in skillMenu"
+            :title="menu.title"
+            :name="menu.type"
+            :key="menu.title"
+        >
           <div v-for="rarity in rarities" :key="menu.type + rarity">
             <h3 v-if="availableSkills[menu.type][rarity].length > 0">{{ rarityString[rarity] }}</h3>
             <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
@@ -128,43 +139,61 @@
       </el-collapse>
       <br>
       <el-form-item>
-        <el-button @click="exec" type="success" v-loading.fullscreen.lock="emulating">エミューレート開始(100回)</el-button>
+        <el-button @click="exec" type="success">
+          エミューレート開始
+        </el-button>
+      </el-form-item>
+      <el-form-item label="回数">
+        <el-input-number value="20" v-model="maxEpoch"></el-input-number>
       </el-form-item>
     </el-form>
+    <el-divider/>
+    <Adsense v-if="production"
+        data-ad-client="ca-pub-4611969396217909"
+        data-ad-slot="6969023753">
+    </Adsense>
     <div>
       <h3>時計統計</h3>
       <table border="1" class="emulation-result">
         <tr>
           <th></th>
-          <th>ゲーム表記</th>
           <th>実タイム</th>
           <th>標準偏差</th>
+          <th>ベスト</th>
+          <th>ワースト</th>
+          <th>ゲーム表記</th>
           <th>ベスト</th>
           <th>ワースト</th>
         </tr>
         <tr>
           <th>平均</th>
-          <td>{{ formatTime(avgDisplayTime, 1) }}</td>
           <td>{{ formatTime(avgRaceTime, 2) }}</td>
           <td>{{ timeStandardDeviation.toFixed(3) }}</td>
           <td>{{ formatTime(bestTime, 2) }}</td>
           <td>{{ formatTime(worstTime, 2) }}</td>
+          <td>{{ formatTime(toDisplayTime(avgRaceTime), 1) }}</td>
+          <td>{{ formatTime(toDisplayTime(bestTime), 1) }}</td>
+          <td>{{ formatTime(toDisplayTime(worstTime), 1) }}</td>
         </tr>
         <tr>
           <th>最大ｽﾊﾟｰﾄ</th>
-          <td>{{ formatTime(avgDisplayTimeMaxSpurt, 1) }}</td>
           <td>{{ formatTime(avgRaceTimeMaxSpurt, 2) }}</td>
           <td>{{ timeStandardDeviationMaxSpurt.toFixed(3) }}</td>
           <td>{{ formatTime(bestTimeMaxSpurt, 2) }}</td>
           <td>{{ formatTime(worstTimeMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(toDisplayTime(avgRaceTimeMaxSpurt), 1) }}</td>
+          <td>{{ formatTime(toDisplayTime(bestTimeMaxSpurt), 1) }}</td>
+          <td>{{ formatTime(toDisplayTime(worstTimeMaxSpurt), 1) }}</td>
         </tr>
         <tr>
           <th>非最大ｽﾊﾟｰﾄ</th>
-          <td>{{ formatTime(avgDisplayTimeNotMaxSpurt, 1) }}</td>
           <td>{{ formatTime(avgRaceTimeNotMaxSpurt, 2) }}</td>
           <td>{{ timeStandardDeviationNotMaxSpurt.toFixed(3) }}</td>
           <td>{{ formatTime(bestTimeNotMaxSpurt, 2) }}</td>
           <td>{{ formatTime(worstTimeNotMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(toDisplayTime(avgRaceTimeNotMaxSpurt), 1) }}</td>
+          <td>{{ formatTime(toDisplayTime(bestTimeNotMaxSpurt), 1) }}</td>
+          <td>{{ formatTime(toDisplayTime(worstTimeNotMaxSpurt), 1) }}</td>
         </tr>
       </table>
       <h3>スパート平均</h3>
@@ -182,14 +211,15 @@
       </table>
     </div>
     <el-divider/>
+    <h3>直近レース詳細</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
-      補正後：スピード{{ modifiedSpeed }} ／スタミナ{{ modifiedStamina }} ／パワー{{ modifiedPower }} ／根性{{ modifiedGuts }}
-      ／賢さ{{ modifiedWisdom }}
+      補正後：スピード{{ modifiedSpeed.toFixed(1) }} ／スタミナ{{ modifiedStamina.toFixed(1) }} ／パワー{{ modifiedPower.toFixed(1) }}
+      ／根性{{ modifiedGuts.toFixed(1) }} ／賢さ{{ modifiedWisdom.toFixed(1) }}
     </div>
     <div>
-      初期耐力：{{ spMax }}／金回復≒{{ getEqualStamina(550) }}スタミナ／白回復≒{{
+      初期耐力：{{ spMax.toFixed(1) }}／金回復≒{{ getEqualStamina(550) }}スタミナ／白回復≒{{
         getEqualStamina(150)
       }}スタミナ／終盤耐力消耗係数：{{ spurtSpCoef.toFixed(3) }}
     </div>
@@ -207,6 +237,16 @@
       終盤目標速度：{{ v3.toFixed(2) }}／終盤加速度：{{ a3.toFixed(3) }} ｜
       最高スパート速度：{{ maxSpurtSpeed.toFixed(2) }}
     </div>
+    <el-dialog :visible.sync='emulating' style="text-align: center;">
+      エミューレート中、少々お待ち下さい……
+      <el-progress :percentage="Math.floor(100 * epoch / maxEpoch)"></el-progress>
+      <p>
+        <Adsense
+            data-ad-client="ca-pub-4611969396217909"
+            data-ad-slot="6969023753">
+        </Adsense>
+      </p>
+    </el-dialog>
   </div>
 </template>
 
@@ -215,8 +255,6 @@ import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 import RaceGraph from "@/components/RaceGraph";
-
-const EPOCH = 1
 
 export default {
   name: "Main",
@@ -246,6 +284,7 @@ export default {
       emulations: [],
       // Race variables
       epoch: 0,
+      maxEpoch: 50,
       events: [],
       sectionTargetSpeedRandoms: [],
       frameElapsed: 0,  // 15 frames per second
@@ -261,26 +300,49 @@ export default {
       spurtParameters: null,
       downSlopeModeStart: null,
       // UI
-      skillGroups: 'targetSpeed',
+      skillGroups: 'acceleration',
       emulating: false,
       savedUmas: {},
       umaToLoad: null,
       chartData: {},
       chartOptions: {},
       // Constants
-      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
+      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      production: false
     }
+  },
+  head: {
+    title: function () {
+      return {
+        inner: 'ウマ娘レースエミューレーター'
+      }
+    },
+    meta: [
+      {name: 'language', content: 'ja'}
+    ]
   },
   created() {
     this.track.location = Object.keys(this.trackData)[0]
     this.locationChanged(this.track.location)
+    this.maxEpoch = localStorage.getItem('maxEpoch')
+    if (!this.maxEpoch) {
+      this.maxEpoch = 50
+    }
   },
   mounted() {
     this.updateSavedUmas()
+    this.updateChart()
     // FIXME: For debug
-    this.umaToLoad = 'test'
-    this.loadUma()
-    this.exec()
+    if (!this.production) {
+      this.umaToLoad = 'test'
+      this.loadUma()
+      // this.exec()
+    }
+  },
+  watch: {
+    maxEpoch(value) {
+      localStorage.setItem('maxEpoch', value)
+    }
   },
   computed: {
     footStyle() {
@@ -475,20 +537,11 @@ export default {
       }
       return ret
     },
-    avgDisplayTime() {
-      return this.calcAvg('all', 'displayTime')
-    },
     avgRaceTime() {
       return this.calcAvg('all', 'raceTime')
     },
-    avgDisplayTimeMaxSpurt() {
-      return this.calcAvg('max', 'displayTime')
-    },
     avgRaceTimeMaxSpurt() {
       return this.calcAvg('max', 'raceTime')
-    },
-    avgDisplayTimeNotMaxSpurt() {
-      return this.calcAvg('notMax', 'displayTime')
     },
     avgRaceTimeNotMaxSpurt() {
       return this.calcAvg('notMax', 'raceTime')
@@ -575,12 +628,19 @@ export default {
     exec: function () {
       this.emulating = true
       this.emulations = []
+      this.epoch = 0
+      this.progressEpoch()
+    },
+    progressEpoch() {
       setTimeout(() => {
-        for (this.epoch = 0; this.epoch < EPOCH; this.epoch++) {
-          this.start()
+        this.start()
+        this.epoch++
+        if (this.epoch < this.maxEpoch) {
+          this.progressEpoch()
+        } else {
+          this.emulating = false
         }
-        this.emulating = false
-      }, 100)
+      }, 70)
     },
     start: function () {
       this.resetRace()
@@ -813,19 +873,20 @@ export default {
     },
     goal() {
       const raceTime = this.frameElapsed * this.frameLength + this.startDelay
-      const displayTime = raceTime * 1.18
 
-      // FIXME: Change to pick some
-      if (this.epoch === EPOCH - 1) {
+      if (this.epoch === this.maxEpoch - 1) {
         this.updateChart()
       }
 
       const emu = {
-        raceTime, displayTime,
+        raceTime,
         maxSpurt: this.spurtParameters.speed === this.maxSpurtSpeed,
         spDiff: this.spurtParameters.spDiff
       }
       this.emulations.push(emu)
+    },
+    toDisplayTime(time) {
+      return time * 1.18
     },
     formatTime(time, digit) {
       if (time === 0) {
@@ -844,7 +905,7 @@ export default {
       }
       return `${min}:${sec}.${decimal}`
     },
-    calcAvg(scope, field) {
+    calcAvg(scope) {
       let sum = 0
       let count = 0
       for (const e of this.emulations) {
@@ -853,7 +914,7 @@ export default {
         } else if (scope === 'notMax' && e.maxSpurt) {
           continue
         }
-        sum += e[field]
+        sum += e.raceTime
         count++
       }
       if (count === 0) {
@@ -861,8 +922,8 @@ export default {
       }
       return sum / count
     },
-    calcStdDev(scope, field) {
-      const avg = this.calcAvg(scope, field)
+    calcStdDev(scope) {
+      const avg = this.calcAvg(scope)
       let sum = 0
       let count = 0
       for (const e of this.emulations) {
@@ -871,7 +932,7 @@ export default {
         } else if (scope === 'notMax' && e.maxSpurt) {
           continue
         }
-        sum += Math.pow(e[field] - avg, 2)
+        sum += Math.pow(e.raceTime - avg, 2)
         count++
       }
       if (count === 0) {
@@ -920,7 +981,8 @@ export default {
       })
     },
     loadUma() {
-      const u = this.savedUmas[this.umaToLoad]
+      const umas = JSON.parse(localStorage.getItem('umas') || '{}')
+      const u = umas[this.umaToLoad]
       this.umaStatus = u.status
       this.track = u.track
       this.hasSkills = u.hasSkills
@@ -985,6 +1047,12 @@ export default {
       const dataSp = []
       const annotations = []
       let skillYAdjust = 0
+      const nextSkillYAdjust = function() {
+        skillYAdjust += 30
+        if (skillYAdjust > 60) {
+          skillYAdjust = 0
+        }
+      }
       const PHASE_NAMES = ['←序盤|中盤→', '中盤←|終盤→', 'ﾗｽﾄｽﾊﾟｰﾄ→']
       const SKILL_COLORS = {
         heal: 'cyan',
@@ -1027,10 +1095,7 @@ export default {
                 }
               }
             })
-            skillYAdjust += 30
-            if (skillYAdjust > 60) {
-              skillYAdjust = 0
-            }
+            nextSkillYAdjust(skillYAdjust)
           }
         }
         // Phase annotations
@@ -1095,10 +1160,7 @@ export default {
                 thiz.$message(`勾配：${this.slopePercentage(upSlope).toFixed(1)}`)
               }
             })
-            skillYAdjust += 30
-            if (skillYAdjust > 60) {
-              skillYAdjust = 0
-            }
+            nextSkillYAdjust(skillYAdjust)
           }
           const downSlope = this.isInSlope('down', this.frames[index + step].startPosition)
           if (downSlope && !this.isInSlope('down', frame.startPosition)) {
@@ -1107,7 +1169,8 @@ export default {
               label: {
                 content: '下り坂',
                 position: 'top',
-                enabled: true
+                enabled: true,
+                yAdjust: skillYAdjust
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
@@ -1118,6 +1181,7 @@ export default {
                 thiz.$message(`勾配：${this.slopePercentage(upSlope).toFixed(1)}`)
               }
             })
+            nextSkillYAdjust(skillYAdjust)
           }
           if (!frame.spurting && this.frames[index + step].spurting) {
             annotations.push({
@@ -1156,6 +1220,9 @@ export default {
             id: 'sp',
             type: 'linear',
             position: 'left',
+            ticks: {
+              min: 0
+            }
           }, {
             id: 'speed',
             type: 'linear',

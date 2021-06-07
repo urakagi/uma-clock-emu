@@ -5,11 +5,12 @@ export default {
   data() {
     const thiz = this
     return {
-      rarities: ['rare', 'normal', 'unique', 'all'],
+      rarities: ['rare', 'normal', 'unique', 'inherit', 'all'],
       rarityString: {
         rare: 'レア・ノーマル上位',
         normal: 'ノーマル下位',
         unique: '固有',
+        inherit: '固有(継承)',
         all: '',
       },
       invokedSkills: [],
@@ -69,18 +70,18 @@ export default {
             normal: {name: '下校の楽しみ', value: 150},
             rare: {name: '下校後のスペシャリスト', value: 550},
             styleLimit: [4],
-            check: function (startPosition) {
+            check: function () {
               return thiz.accTimePassed(10) && thiz.isStyle(4)
-                  && thiz.isContainSlopeTrigger('down', startPosition)
+                  && thiz.isInSlope('down')
             }
           },
           {
             normal: {name: '勢い任せ', value: 150},
             rare: {name: 'じゃじゃウマ娘', value: 550},
             styleLimit: [1],
-            check: function (startPosition) {
+            check: function () {
               return thiz.accTimePassed(10) && thiz.isStyle(1)
-                  && thiz.isContainSlopeTrigger('up', startPosition)
+                  && thiz.isInSlope('up')
             }
           },
           {
@@ -175,7 +176,7 @@ export default {
             normal: {name: '軽やかなステップ', value: 150},
             rare: {name: '神業ステップ', value: 550},
             distanceLimit: [3],
-            tooltip: '「開始20秒で発動」として扱う。大体そこら辺で内コースを取り始めるため。多分（ガバ）',
+            tooltip: '「スタート後20秒で発動」として扱う。大体そこら辺で内コースを取り始めるため。多分（ガバ）',
             check: function () {
               return thiz.isDistanceType(3) && thiz.accTimePassed(20)
             }
@@ -221,8 +222,8 @@ export default {
             normal: {name: '隠れ蓑', value: 150},
             rare: {name: '鋼の意志', value: 550},
             tooltip: '「上り坂で発動」として扱う（一番現実的な発動方法なため）。実戦でやろうとしたら自前の低パワー逃げ馬が必要で先行馬限定とか色々厳しそうだけど適当実装なので自己判断＆自己責任で。',
-            check: function (startPosition) {
-              return thiz.accTimePassed(5) && thiz.isContainSlopeTrigger('up', startPosition)
+            check: function () {
+              return thiz.accTimePassed(5) && thiz.isInSlope('up')
             }
           },
           {
@@ -321,6 +322,7 @@ export default {
             normal: {name: 'コーナー巧者○', value: 0.15},
             rare: {name: '弧線のプロフェッサー', value: 0.35},
             duration: 1.8,
+            cd: 30,
             init: function () {
               this.randoms = thiz.initCornerRandom()
             },
@@ -425,6 +427,158 @@ export default {
             }
           },
           {
+            normal: {name: '直線巧者', value: 0.15},
+            rare: {name: 'ハヤテ一文字', value: 0.35},
+            duration: 0.9,
+            cd: 30,
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '短距離直線○', value: 0.15},
+            rare: {name: '短距離直線◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [1],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'マイル直線○', value: 0.15},
+            rare: {name: 'マイル直線◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [2],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '中距離直線○', value: 0.15},
+            rare: {name: '中距離直線◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '長距離直線○', value: 0.15},
+            rare: {name: '長距離直線◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [4],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '逃げ直線○', value: 0.15},
+            rare: {name: '逃げ直線◎', value: 0.25},
+            duration: 3,
+            styleLimit: [1],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '先行直線○', value: 0.15},
+            rare: {name: '先行直線◎', value: 0.25},
+            duration: 3,
+            styleLimit: [2],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '差し直線○', value: 0.15},
+            rare: {name: '差し直線◎', value: 0.25},
+            duration: 3,
+            styleLimit: [3],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '追込直線○', value: 0.15},
+            rare: {name: '追込直線◎', value: 0.25},
+            duration: 3,
+            styleLimit: [4],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '急ぎ足', value: 0.15},
+            rare: {name: '脱出術', value: 0.35},
+            duration: 3,
+            styleLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '先頭プライド', value: 0.15},
+            duration: 3,
+            styleLimit: [1],
+            tooltip: '「序盤のどこかで発動」として扱う',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.accTimePassed(5) && thiz.isStyle(1)
+                  && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '遊びはおしまいっ！', value: 0.15},
+            duration: 3,
+            tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.accTimePassed(10) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '不沈艦、抜錨ォッ！ Lv4', value: 0.2725},
+            duration: 6,
+            tooltip: '順位条件の<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
+            }
+          },
+          {
             normal: {name: '末脚', value: 0.15},
             rare: {name: '全身全霊', value: 0.35},
             duration: 1.8,
@@ -435,15 +589,181 @@ export default {
               return thiz.isInSpurt && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
+          {
+            unique: {name: '貴顕の使命を果たすべく', value: 0.35, duration: 5},
+            inherit: {name: '※貴顕の使命を果たすべく', value: 0.15, duration: 3},
+            tooltip: '位置<=30%は満たしていると見なす。',
+            check: function () {
+              return thiz.isInFinalCorner() || thiz.isInFinalStraight()
+            }
+          },
+          {
+            unique: {name: '汝、皇帝の神威を見よ', value: 0.45, duration: 5},
+            inherit: {name: '※汝、皇帝の神威を見よ', value: 0.25, duration: 3},
+            tooltip: '最終コーナーで3人追い抜きは満たしたと見なす',
+            check: function () {
+              return thiz.isInFinalStraight()
+            }
+          },
         ],
         acceleration: [
+          {
+            normal: {name: 'コーナー加速', value: 0.2},
+            rare: {name: '曲線のソムリエ', value: 0.4},
+            duration: 1.8,
+            cd: 30,
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '直線加速', value: 0.2},
+            rare: {name: '一陣の風', value: 0.4},
+            duration: 1.8,
+            cd: 30,
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '先駆け', value: 0.2},
+            rare: {name: '先手必勝', value: 0.4},
+            styleLimit: [1],
+            duration: 1.2,
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function () {
+              return thiz.isStyle(1) && thiz.currentPhase === 0 && thiz.accTimePassed(5)
+            }
+          },
+          {
+            normal: {name: '押し切り準備', value: 0.2},
+            rare: {name: '逃亡者', value: 0.4},
+            styleLimit: [1],
+            duration: 3,
+            tooltip: '1位は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '差し切り体制', value: 0.2},
+            rare: {name: '乗り換え上手', value: 0.4},
+            styleLimit: [3],
+            duration: 1.8,
+            tooltip: '順位>=50%は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
           {
             normal: {name: '直線一気', value: 0.2},
             rare: {name: '迫る影', value: 0.4},
             duration: 0.9,
             styleLimit: [4],
             check: function () {
-              return thiz.isStyle(4) && thiz.isInSpurt && thiz.isInStraight(this.position)
+              return thiz.isStyle(4) && thiz.isInSpurt && thiz.isInStraight()
+            }
+          },
+          {
+            normal: {name: 'スプリントギア', value: 0.2},
+            rare: {name: 'スプリントターボ', value: 0.4},
+            duration: 3,
+            distanceLimit: [1],
+            check: function () {
+              return thiz.isDistanceType(1) && thiz.isInStraight()
+            }
+          },
+          {
+            normal: {name: '上昇気流', value: 0.2},
+            rare: {name: '豪脚', value: 0.4},
+            duration: 3,
+            styleLimit: [3, 4],
+            distanceLimit: [2],
+            tooltip: '順位>50%は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '善後策', value: 0.2},
+            rare: {name: 'プランX', value: 0.4},
+            duration: 3,
+            styleLimit: [1, 2],
+            distanceLimit: [1],
+            tooltip: '順位>=2及び<=50%は満たしていると見なす。いや中盤どこか発動とか意味なさすぎね？',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'アクセラレーション', value: 0.2},
+            rare: {name: 'アクセル全開！', value: 0.4},
+            duration: 1.2,
+            distanceLimit: [2],
+            tooltip: '「中盤のどこかで発動」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '二の矢', value: 0.2},
+            duration: 3,
+            styleLimit: [1],
+            tooltip: '「中盤のどこかで発動」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '巧みなステップ', value: 0.2},
+            rare: {name: '技巧派', value: 0.3},
+            duration: 1.8,
+            styleLimit: [2],
+            tooltip: '「スタート後20秒で発動」として扱う。ガバガバ実装。',
+            check: function () {
+              return thiz.isStyle(2) && thiz.accTimePassed(20)
+            }
+          },
+          {
+            normal: {name: '直滑降', value: 0.2},
+            rare: {name: '決意の直滑降', value: 0.3},
+            duration: 3,
+            styleLimit: [2],
+            check: function () {
+              return thiz.isStyle(2) && thiz.isInSlope('down')
+            }
+          },
+          {
+            normal: {name: '登山家', value: 0.2},
+            duration: 3,
+            check: function () {
+              return thiz.isInSlope('up')
             }
           },
         ],
@@ -772,12 +1092,17 @@ export default {
           for (const index of this.hasSkills[type][rarity]) {
             const skill = this.skills[type][rarity][index]
             let invokeRate
-            if (type === 'fatigue') {
+            if (type === 'fatigue' || type === 'speed') {
               invokeRate = 80
+            } else if (rarity === 'unique') {
+              invokeRate = 100
             } else {
               // FIXME: for debug, always pass wisdom check
-              invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
-              // invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
+              if (this.production) {
+                invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
+              } else {
+                invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+              }
             }
             if (Math.random() * 100 < invokeRate) {
               if (skill.init) {
@@ -812,8 +1137,8 @@ export default {
     initCornerRandom() {
       const ret = []
       for (const corner of this.trackDetail.corners.slice(-4)) {
-        const start = this.trackDetail.distance - corner[0]
-        const end = this.trackDetail.distance - corner[1]
+        const start = this.toPosition(corner[0])
+        const end = this.toPosition(corner[1])
         ret.push(Math.random() * (end - start) + start)
       }
       return ret
@@ -837,6 +1162,14 @@ export default {
         default:
           return [this.courseLength * 5 / 6.0 + Math.random() * this.courseLength / 6.0]
       }
+    },
+    initFinalCornerRandom() {
+      const ret = []
+      const corner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      const start = this.toPosition(corner[0])
+      const end = this.toPosition(corner[1])
+      ret.push(Math.random() * (end - start) + start)
+      return ret
     },
     isContainRandom(randoms, startPosition) {
       for (const random of randoms) {
@@ -867,23 +1200,14 @@ export default {
         position = this.position
       }
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
-      return position >= fc[0] && position <= fc[1]
+      return position >= this.toPosition(fc[0]) && this.toPosition(position <= fc[1])
     },
     isInFinalStraight(position) {
       if (!position) {
         position = this.position
       }
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
-      return position > fc[1]
-    },
-    isContainSlopeTrigger(direction, startPosition) {
-      for (const upSlope of this.trackDetail[`${direction}Slope`]) {
-        if (startPosition <= this.toPosition(upSlope.end) &&
-            this.position >= this.toPosition(upSlope.end)) {
-          return true
-        }
-      }
-      return false
+      return position > this.toPosition(fc[1])
     },
     isInCoolDown(skill) {
       if (!(skill.name in this.coolDownMap)) {
@@ -919,18 +1243,20 @@ export default {
     },
     fillSkillData() {
       for (const type in this.skillData) {
-        this.skills[type] = {
-          normal: [],
-          rare: [],
-          unique: [],
-          all: []
+        const o = {}
+        for (const rarity of this.rarities) {
+          o[rarity] = []
         }
+        this.skills[type] = o
         for (const skill of this.skillData[type]) {
           for (const rarity of this.rarities) {
             if (rarity in skill) {
               const copy = {...skill}
               copy.name = skill[rarity].name
               copy.value = skill[rarity].value
+              if (skill[rarity].duration) {
+                copy.duration = skill[rarity].duration
+              }
               copy.type = type
               this.fillCommonFields(copy, type)
               this.skills[type][rarity].push(copy)
@@ -981,7 +1307,8 @@ export default {
         o[key] = {
           rare: [],
           normal: [],
-          unique: []
+          unique: [],
+          inherit: []
         }
       }
       this.hasSkills = o

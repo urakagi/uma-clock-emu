@@ -13,8 +13,8 @@ export default {
             statusCheck: [],
             corners: [[2670, 2420], [2420, 2200], [1800, 1600], [1600, 1400], [870, 620], [620, 400]],
             upSlope: [
-              {start: 3100, end: 3000, altitude: 2},
-              {start: 1200, end: 1100, altitude: 2},
+              {start: 3000, end: 2750, altitude: 2},
+              {start: 1100, end: 850, altitude: 2},
             ],
             downSlope: [
               {start: 2750, end: 2600, altitude: 4},

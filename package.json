@@ -13,7 +13,11 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.2",
     "vue": "^2.6.11",
-    "vue-chartjs": "^3.5.1"
+    "vue-chartjs": "^3.5.1",
+    "vue-google-adsense": "^1.9.3",
+    "vue-gtag": "^1.16.1",
+    "vue-head": "^2.2.0",
+    "vue-script2": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
