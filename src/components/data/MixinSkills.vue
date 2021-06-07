@@ -666,8 +666,8 @@ export default {
               invokeRate = 80
             } else {
               // FIXME: for debug, always pass wisdom check
-              invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
-              // invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
+              // invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+              invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
             }
             if (Math.random() * 100 < invokeRate) {
               if (skill.init) {
@@ -864,9 +864,12 @@ export default {
       const o = {
         fatigue: {
           all: []
+        },
+        speed: {
+          all: []
         }
       }
-      const SELF_KEYS = ['heal', 'speed', 'targetSpeed', 'acceleration']
+      const SELF_KEYS = ['heal', 'targetSpeed', 'acceleration']
       for (const key of SELF_KEYS) {
         o[key] = {
           rare: [],

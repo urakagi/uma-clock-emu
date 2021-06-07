@@ -61,38 +61,17 @@
       </el-form-item>
       <el-form-item label="距離適性">
         <el-select v-model="umaStatus.distanceFit" style="width: 70px;">
-          <el-option label="S" value="S"></el-option>
-          <el-option label="A" value="A"></el-option>
-          <el-option label="B" value="B"></el-option>
-          <el-option label="C" value="C"></el-option>
-          <el-option label="D" value="D"></el-option>
-          <el-option label="E" value="E"></el-option>
-          <el-option label="F" value="F"></el-option>
-          <el-option label="G" value="G"></el-option>
+          <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="バ場適性">
         <el-select v-model="umaStatus.surfaceFit" style="width: 70px;">
-          <el-option label="S" value="S"></el-option>
-          <el-option label="A" value="A"></el-option>
-          <el-option label="B" value="B"></el-option>
-          <el-option label="C" value="C"></el-option>
-          <el-option label="D" value="D"></el-option>
-          <el-option label="E" value="E"></el-option>
-          <el-option label="F" value="F"></el-option>
-          <el-option label="G" value="G"></el-option>
+          <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="脚質適性">
         <el-select v-model="umaStatus.styleFit" style="width: 70px;">
-          <el-option label="S" value="S"></el-option>
-          <el-option label="A" value="A"></el-option>
-          <el-option label="B" value="B"></el-option>
-          <el-option label="C" value="C"></el-option>
-          <el-option label="D" value="D"></el-option>
-          <el-option label="E" value="E"></el-option>
-          <el-option label="F" value="F"></el-option>
-          <el-option label="G" value="G"></el-option>
+          <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="調子">
@@ -129,9 +108,9 @@
       </el-form-item>
       <br>
       <el-collapse v-model="skillGroups">
-        <el-collapse-item v-for="menu in skillMenu" :title="menu.title" :name="menu.title" :key="menu.title">
+        <el-collapse-item v-for="menu in skillMenu" :title="menu.title" :name="menu.type" :key="menu.title">
           <div v-for="rarity in rarities" :key="menu.type + rarity">
-            <h3>{{ rarityString[rarity] }}</h3>
+            <h3 v-if="availableSkills[menu.type][rarity].length > 0">{{ rarityString[rarity] }}</h3>
             <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
               <el-tooltip
                   v-for="skill in availableSkills[menu.type][rarity]"
@@ -203,6 +182,8 @@
       </table>
     </div>
     <el-divider/>
+    <race-graph :chart-data="chartData" :options="chartOptions"/>
+    <el-divider/>
     <div>
       補正後：スピード{{ modifiedSpeed }} ／スタミナ{{ modifiedStamina }} ／パワー{{ modifiedPower }} ／根性{{ modifiedGuts }}
       ／賢さ{{ modifiedWisdom }}
@@ -233,11 +214,13 @@
 import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
+import RaceGraph from "@/components/RaceGraph";
 
-const EPOCH = 10
+const EPOCH = 1
 
 export default {
   name: "Main",
+  components: {RaceGraph},
   mixins: [MixinCourseData, MixinConstants, MixinSkills],
   data() {
     return {
@@ -276,10 +259,26 @@ export default {
       spTrace: [],
       spurtParameters: null,
       // UI
-      skillGroups: 'healRare',
+      skillGroups: '',
       emulating: false,
       savedUmas: {},
-      umaToLoad: null
+      umaToLoad: null,
+      chartData: {},
+      chartOptions: {
+        scales: {
+          yAxes: [{
+            id: 'speed',
+            type: 'linear',
+            position: 'left'
+          }, {
+            id: 'sp',
+            type: 'linear',
+            position: 'right',
+          }]
+        }
+      },
+      // Constants
+      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
     }
   },
   created() {
@@ -291,7 +290,7 @@ export default {
     // FIXME: For debug
     this.umaToLoad = 'test'
     this.loadUma()
-    // this.exec()
+    this.exec()
   },
   computed: {
     footStyle() {
@@ -468,9 +467,9 @@ export default {
     skillMenu() {
       const TITLE_TYPE = {
         heal: '回復スキル',
-        speed: '減速スキル',
         targetSpeed: '速度スキル',
         acceleration: '加速度スキル',
+        speed: '喰らう減速スキル',
         fatigue: '喰らう疲労スキル'
       }
       const ret = []
@@ -570,7 +569,7 @@ export default {
         return '-'
       }
       return (-sum / count).toFixed(1)
-    },
+    }
   },
   methods: {
     locationChanged(location) {
@@ -632,6 +631,9 @@ export default {
         const startPosition = this.position
         const startSp = this.sp
         const startPhase = this.currentPhase
+        this.frames[this.frameElapsed].speed = this.currentSpeed
+        this.frames[this.frameElapsed].sp = this.sp
+        this.frames[this.frameElapsed].startPosition = startPosition
         this.move()
         this.frames[this.frameElapsed].movement = this.position - startPosition
         this.frames[this.frameElapsed].consume = this.sp - startSp
@@ -786,6 +788,9 @@ export default {
       const raceTime = this.frameElapsed * this.frameLength + this.startDelay
       const displayTime = raceTime * 1.18
 
+      // FIXME: Change to pick some
+      this.updateChart()
+
       const emu = {
         raceTime, displayTime,
         maxSpurt: this.spurtParameters.speed === this.maxSpurtSpeed,
@@ -864,6 +869,9 @@ export default {
     },
     saveUma() {
       this.$prompt('ウマ名を入力して下さい', '', {
+        inputValue: this.umaToLoad,
+        confirmButtonText: 'セーブ',
+        cancelButtonText: 'キャンセル',
         inputPattern: /.+/,
         inputErrorMessage: '名前を入力して下さい。'
       }).then(({value}) => {
@@ -879,6 +887,7 @@ export default {
           message: `${value}をセーブしました。`
         })
         this.updateSavedUmas()
+        this.umaToLoad = value
       })
     },
     loadUma() {
@@ -905,6 +914,7 @@ export default {
       this.resetStatus()
       this.resetTrack()
       this.resetHasSkills()
+      this.umaToLoad = ''
     },
     resetStatus() {
       this.umaStatus = {
@@ -939,6 +949,37 @@ export default {
       this.umaToLoad = null
       this.savedUmas = JSON.parse(localStorage.getItem('umas'))
     },
+    updateChart() {
+      const labels = []
+      const dataSpeed = []
+      const dataSp = []
+      const step = Math.floor(this.frames.length / 100)
+      const mod = (this.frames.length - 1) % step
+      for (let index = mod + step - 1; index < this.frames.length; index += step) {
+        const frame = this.frames[index]
+        labels.push(this.formatTime(index * this.frameLength, 1))
+        dataSpeed.push(frame.speed)
+        dataSp.push(frame.sp)
+      }
+      this.chartData = {
+        labels: labels,
+        datasets: [{
+          fill: false,
+          label: '走行速度',
+          pointStyle: 'line',
+          yAxisID: 'speed',
+          borderColor: 'rgb(99, 132, 255)',
+          data: dataSpeed
+        }, {
+          fill: false,
+          label: '耐力',
+          pointStyle: 'line',
+          yAxisID: 'sp',
+          borderColor: 'rgb(255, 132, 99)',
+          data: dataSp
+        }]
+      }
+    },
     test() {
     }
   }
@@ -968,12 +1009,4 @@ export default {
   min-width: 90px;
 }
 
-.el-dropdown-link {
-  cursor: pointer;
-  color: #409EFF;
-}
-
-.el-icon-arrow-down {
-  font-size: 12px;
-}
 </style>
