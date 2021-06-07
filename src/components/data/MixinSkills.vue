@@ -579,6 +579,18 @@ export default {
             }
           },
           {
+            all: {name: 'スピードイーター', value: 0.15},
+            duration: 3,
+            distanceLimit: [2],
+            tooltip: '1位条件は満たしていると見なす。どこか発動で1位要求なので実戦は安定しない。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
             normal: {name: '末脚', value: 0.15},
             rare: {name: '全身全霊', value: 0.35},
             duration: 1.8,
@@ -766,8 +778,235 @@ export default {
               return thiz.isInSlope('up')
             }
           },
+          {
+            normal: {name: 'まき直し', value: 0.2},
+            duration: 3,
+            styleLimit: [2],
+            tooltip: '順位>50%は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'がんばり屋', value: 0.2},
+            rare: {name: '努力家', value: 0.3},
+            styleLimit: [3],
+            tooltip: '「中盤のどこか」として扱う。はいはいガバ実装ガバ実装。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '地固め', value: 0.2},
+            duration: 3,
+            tooltip: '「緑スキルや集中力系でスタートと同時に発動」として扱う',
+            check: function () {
+              return true
+            }
+          },
+          {
+            unique: {name: '紅焔ギア/LP1211-M', value: 0.4, duration: 4},
+            inherit: {name: '※紅焔ギア/LP1211-M', value: 0.2, duration: 2.4},
+            styleLimit: [1, 2],
+            tooltip: '順位<=5及び<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.isInFinalCorner() || thiz.isInFinalStraight()
+            }
+          },
+          {
+            unique: {name: 'ヴィクトリーショット！', value: 0.4, duration: 4},
+            inherit: {name: '※ヴィクトリーショット！', value: 0.2, duration: 2.4},
+            styleLimit: [1, 2],
+            tooltip: '順位>=3及び<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.isInFinalCorner()
+            }
+          },
+          {
+            unique: {name: '燃えろ筋肉！', value: 0.3, duration: 4},
+            styleLimit: [3, 4],
+            tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
+            check: function () {
+              return thiz.currentPhase >= 2 && thiz.isInCorner()
+            }
+          },
+          {
+            unique: {name: 'レッツ・アナボリック', value: 0.4, duration: 4},
+            inherit: {name: '※レッツ・アナボリック', value: 0.2, duration: 2.4},
+            styleLimit: [3, 4],
+            tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
+            check: function () {
+              return thiz.currentPhase >= 2 && thiz.isInCorner()
+            }
+          },
         ],
-        speed: [],
+        speed: [
+          {
+            all: {name: '逃げためらい', value: -0.15},
+            duration: 3,
+            styleLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '逃げためらいx2', value: -0.3},
+            duration: 3,
+            styleLimit: [1],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '先行ためらい', value: -0.15},
+            duration: 3,
+            styleLimit: [2],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '先行ためらいx2', value: -0.3},
+            duration: 3,
+            styleLimit: [2],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '差しためらい', value: -0.15},
+            duration: 3,
+            styleLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '差しためらいx2', value: -0.3},
+            duration: 3,
+            styleLimit: [3],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '追込ためらい', value: -0.15},
+            duration: 3,
+            styleLimit: [4],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '追込ためらいx2', value: -0.3},
+            duration: 3,
+            styleLimit: [4],
+            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '後方釘付', value: -0.2},
+            duration: 3,
+            distanceLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+                  && this.accTimePassed(5)
+            }
+          },
+          {
+            all: {name: '悩殺術', value: -0.25},
+            duration: 3,
+            distanceLimit: [1],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+                  && this.accTimePassed(5)
+            }
+          },
+          {
+            all: {name: 'スピードイーター', value: -0.15},
+            duration: 3,
+            distanceLimit: [2],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '束縛', value: -0.15},
+            duration: 3,
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: '独占力', value: -0.25},
+            duration: 3,
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            all: {name: 'まなざし', value: -0.15},
+            duration: 3,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+        ],
         fatigue: [
           {
             all: {name: 'スタミナイーター', value: 50},

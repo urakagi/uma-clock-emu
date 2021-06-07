@@ -1062,8 +1062,7 @@ export default {
         fatigue: 'darkred'
       }
       const step = Math.floor(this.frames.length / 100)
-      const mod = this.frames.length % step
-      for (let index = mod + step - 1; index < this.frames.length; index += step) {
+      for (let index = 0; index < this.frames.length; index += step) {
         const frame = this.frames[index]
         const label = this.formatTime(index * this.frameLength, 1)
         labels.push(label)
@@ -1229,7 +1228,7 @@ export default {
             position: 'right',
             ticks: {
               min: 16,
-              max: 26
+              max: 27
             }
           }]
         },
