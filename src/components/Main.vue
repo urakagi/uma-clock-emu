@@ -245,6 +245,7 @@ export default {
       // Results
       emulations: [],
       // Race variables
+      epoch: 0,
       events: [],
       sectionTargetSpeedRandoms: [],
       frameElapsed: 0,  // 15 frames per second
@@ -258,8 +259,9 @@ export default {
       marks: [],
       spTrace: [],
       spurtParameters: null,
+      downSlopeModeStart: null,
       // UI
-      skillGroups: '',
+      skillGroups: 'targetSpeed',
       emulating: false,
       savedUmas: {},
       umaToLoad: null,
@@ -339,25 +341,37 @@ export default {
       if (this.currentSpeed < 0.85 * this.baseSpeed) {
         return 0.85 * this.baseSpeed
       }
+      let baseTargetSpeed
       // スパート中
       if (this.spurtParameters
           && (this.position + this.spurtParameters.distance >= this.courseLength)) {
-        return this.spurtParameters.speed
+        baseTargetSpeed = this.spurtParameters.speed
+      } else {
+        switch (this.currentPhase) {
+          case 0:
+          case 1:
+            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][this.currentPhase]
+            break
+          case 2:
+          case 3:
+          default:
+            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][2] +
+                Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
+            break
+        }
+        baseTargetSpeed *= (1 + this.sectionTargetSpeedRandoms[this.currentSection])
       }
-      let baseTargetSpeed
-      switch (this.currentPhase) {
-        case 0:
-        case 1:
-          baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][this.currentPhase]
-          break
-        case 2:
-        case 3:
-        default:
-          baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][2] +
-              Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
-          break
+      let ret = baseTargetSpeed
+      const upSlope = this.isInSlope('up')
+      if (upSlope) {
+        ret -= Math.abs(this.slopePercentage(upSlope)) * 200.0 / this.modifiedPower
       }
-      let ret = baseTargetSpeed * (1 + this.sectionTargetSpeedRandoms[this.currentSection])
+      const downSlope = this.isInSlope('down')
+      if (downSlope) {
+        if (this.downSlopeModeStart != null) {
+          ret += Math.abs(this.slopePercentage(downSlope)) / 10.0 + 0.3
+        }
+      }
       for (const skill of this.operatingSkills.targetSpeed) {
         ret += skill.data.value
       }
@@ -562,7 +576,7 @@ export default {
       this.emulating = true
       this.emulations = []
       setTimeout(() => {
-        for (let epoch = 0; epoch < EPOCH; epoch++) {
+        for (this.epoch = 0; this.epoch < EPOCH; this.epoch++) {
           this.start()
         }
         this.emulating = false
@@ -597,6 +611,7 @@ export default {
       this.marks = []
       this.spTrace = []
       this.spurtParameters = null
+      this.downSlopeModeStart = null
     },
     pushEvent(name, value) {
       this.events.push({
@@ -613,6 +628,26 @@ export default {
         this.frames[this.frameElapsed].speed = this.currentSpeed
         this.frames[this.frameElapsed].sp = this.sp
         this.frames[this.frameElapsed].startPosition = startPosition
+
+        // 下り坂モードに入るか・終わるかどうかの判定
+        if (this.isInSlope('down')) {
+          // 1秒置きなので、このフレームは整数秒を含むかどうかのチェック
+          if (Math.floor(this.frameElapsed * this.frameLength) !==
+              Math.floor((this.frameElapsed + 1) * this.frameLength)) {
+            if (this.downSlopeModeStart == null) {
+              if (Math.random() < this.modifiedWisdom * 0.0004) {
+                this.downSlopeModeStart = this.frameElapsed
+              }
+            } else {
+              if (Math.random() < 0.2) {
+                this.downSlopeModeStart = null
+              }
+            }
+          }
+        } else {
+          this.downSlopeModeStart = null
+        }
+
         this.move()
         this.frames[this.frameElapsed].movement = this.position - startPosition
         this.frames[this.frameElapsed].consume = this.sp - startSp
@@ -680,7 +715,7 @@ export default {
       // 反映させる
       this.currentSpeed = endSpeed
       this.position += movementChanging + movementStatic
-      this.sp -= consumeChanging + consumeStatic
+      this.sp -= (consumeChanging + consumeStatic) * (this.downSlopeModeStart != null ? 0.4 : 1)
     },
     calcSpurtParameter() {
       const maxDistance = this.trackDetail.distance / 3.0
@@ -764,22 +799,26 @@ export default {
       }
       return ret
     },
-    isInSlope(direction) {
+    isInSlope(direction, position) {
+      if (!position) {
+        position = this.position
+      }
       for (const slope of this.trackDetail[`${direction}Slope`]) {
-        if (this.position >= this.toPosition(slope.start)
-            && this.position <= this.toPosition(slope.end)
-            && this.slopePercentage(slope)) {
-          return true
+        if (position >= this.toPosition(slope.start)
+            && position <= this.toPosition(slope.end)) {
+          return slope
         }
       }
-      return false
+      return null
     },
     goal() {
       const raceTime = this.frameElapsed * this.frameLength + this.startDelay
       const displayTime = raceTime * 1.18
 
       // FIXME: Change to pick some
-      this.updateChart()
+      if (this.epoch === EPOCH - 1) {
+        this.updateChart()
+      }
 
       const emu = {
         raceTime, displayTime,
@@ -1021,6 +1060,53 @@ export default {
               label: {
                 content: 'ポジキープ終了',
                 position: 'bottom',
+                enabled: true,
+                yAdjust: skillYAdjust
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'green',
+              borderWidth: 2,
+              onClick: function () {
+              }
+            })
+            skillYAdjust += 30
+            if (skillYAdjust > 60) {
+              skillYAdjust = 0
+            }
+          }
+          const upSlope = this.isInSlope('up', this.frames[index + step].startPosition)
+          if (upSlope && !this.isInSlope('up', frame.startPosition)) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: '上り坂',
+                position: 'top',
+                enabled: true,
+                yAdjust: skillYAdjust
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'pink',
+              borderWidth: 2,
+              onClick: function () {
+                thiz.$message(`勾配：${this.slopePercentage(upSlope).toFixed(1)}`)
+              }
+            })
+            skillYAdjust += 30
+            if (skillYAdjust > 60) {
+              skillYAdjust = 0
+            }
+          }
+          const downSlope = this.isInSlope('down', this.frames[index + step].startPosition)
+          if (downSlope && !this.isInSlope('down', frame.startPosition)) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: '下り坂',
+                position: 'top',
                 enabled: true
               },
               mode: 'vertical',
@@ -1029,6 +1115,7 @@ export default {
               borderColor: 'silver',
               borderWidth: 2,
               onClick: function () {
+                thiz.$message(`勾配：${this.slopePercentage(upSlope).toFixed(1)}`)
               }
             })
           }
@@ -1066,34 +1153,35 @@ export default {
         },
         scales: {
           yAxes: [{
-            id: 'speed',
-            type: 'linear',
-            position: 'left',
-            ticks: {
-              min: 15,
-              max: 25
-            }
-          }, {
             id: 'sp',
             type: 'linear',
+            position: 'left',
+          }, {
+            id: 'speed',
+            type: 'linear',
             position: 'right',
+            ticks: {
+              min: 16,
+              max: 26
+            }
           }]
-        }
+        },
+        maintainAspectRatio: false
       }
       this.chartData = {
         labels: labels,
         datasets: [{
           fill: false,
-          label: '走行速度',
-          yAxisID: 'speed',
-          borderColor: 'rgb(30, 21, 155)',
-          data: dataSpeed
-        }, {
-          fill: false,
           label: '耐力',
           yAxisID: 'sp',
           borderColor: 'rgb(255, 132, 99)',
           data: dataSp
+        }, {
+          fill: false,
+          label: '走行速度',
+          yAxisID: 'speed',
+          borderColor: 'rgb(30, 21, 155)',
+          data: dataSpeed
         }]
       }
     },

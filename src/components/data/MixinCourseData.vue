@@ -35,7 +35,7 @@ export default {
       return this.trackDetail.distance - distanceLeft
     },
     slopePercentage(slope) {
-      return slope.attitude * 100.0 / Math.abs(slope.end - slope.start)
+      return slope.altitude * 100.0 / Math.abs(slope.end - slope.start)
     }
   }
 }

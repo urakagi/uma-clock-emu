@@ -7,8 +7,8 @@ export default {
     return {
       rarities: ['rare', 'normal', 'unique', 'all'],
       rarityString: {
-        rare: 'レア',
-        normal: 'ノーマル',
+        rare: 'レア・ノーマル上位',
+        normal: 'ノーマル下位',
         unique: '固有',
         all: '',
       },
@@ -326,6 +326,113 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '短距離コーナー○', value: 0.15},
+            rare: {name: '短距離コーナー◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [1],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'マイルコーナー○', value: 0.15},
+            rare: {name: 'マイルコーナー◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [2],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '中距離コーナー○', value: 0.15},
+            rare: {name: '中距離コーナー◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '長距離コーナー○', value: 0.15},
+            rare: {name: '長距離コーナー◎', value: 0.25},
+            duration: 3,
+            distanceLimit: [4],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '逃げコーナー○', value: 0.15},
+            rare: {name: '逃げコーナー◎', value: 0.25},
+            duration: 3,
+            styleLimit: [1],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '先行コーナー○', value: 0.15},
+            rare: {name: '先行コーナー◎', value: 0.25},
+            duration: 3,
+            styleLimit: [2],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '差しコーナー○', value: 0.15},
+            rare: {name: '差しコーナー◎', value: 0.25},
+            duration: 3,
+            styleLimit: [3],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '追込コーナー○', value: 0.15},
+            rare: {name: '追込コーナー◎', value: 0.25},
+            duration: 3,
+            styleLimit: [4],
+            init: function () {
+              this.randoms = thiz.initCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '末脚', value: 0.15},
+            rare: {name: '全身全霊', value: 0.35},
+            duration: 1.8,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(3)
+            },
+            check: function (startPosition) {
+              return thiz.isInSpurt && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
         ],
