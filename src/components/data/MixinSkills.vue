@@ -646,7 +646,10 @@ export default {
     },
     timeCoef() {
       return this.trackDetail.distance / 1000.0
-    }
+    },
+    isInSpurt() {
+      return !!this.spurtParameters
+    },
   },
   created() {
     this.fillSkillData()
@@ -765,9 +768,6 @@ export default {
       }
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
       return position > fc[1]
-    },
-    isInSpurt() {
-      return !!this.spurtParameters
     },
     isContainSlopeTrigger(direction, startPosition) {
       for (const upSlope of this.trackDetail[`${direction}Slope`]) {

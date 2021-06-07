@@ -324,7 +324,7 @@ export default {
       return this.getPhase(this.position)
     },
     currentSection() {
-      return Math.floor(this.position * 24.0 / this.courseLength)
+      return this.getSection(this.position)
     },
     baseSpeed() {
       return 20 - (this.trackDetail.distance - 2000) / 1000.0
@@ -636,11 +636,14 @@ export default {
         })
 
         // Remove overtime skills
-        for (let i = 0; i < this.operatingSkills.length; i++) {
-          if ((this.frameElapsed - this.operatingSkills[i].startFrame) * this.frameLength
-              > this.operatingSkills[i].skill.duration * this.timeCoef) {
-            this.operatingSkills.splice(i, 1)
-            i-- // Without this line, the original next element will be skipped
+        for (const type in this.operatingSkills) {
+          for (let i = 0; i < this.operatingSkills[type].length; i++) {
+            if ((this.frameElapsed - this.operatingSkills[type][i].startFrame) * this.frameLength
+                > this.operatingSkills[type][i].data.duration * this.timeCoef) {
+              this.operatingSkills[type].splice(i, 1)
+              i-- // Without this line, the original next element will be skipped
+              break
+            }
           }
         }
       }
@@ -943,7 +946,6 @@ export default {
       const dataSp = []
       const annotations = []
       let skillYAdjust = 0
-      let phase = 0
       const PHASE_NAMES = ['←序盤|中盤→', '中盤←|終盤→', 'ﾗｽﾄｽﾊﾟｰﾄ→']
       const SKILL_COLORS = {
         heal: 'cyan',
@@ -960,46 +962,6 @@ export default {
         labels.push(label)
         dataSpeed.push(frame.speed)
         dataSp.push(frame.sp)
-        // Phase annotations
-        if (index + step < this.frames.length) {
-          const framePhase = this.getPhase(this.frames[index + step].startPosition)
-          if (framePhase > phase) {
-            annotations.push({
-              type: 'line',
-              label: {
-                content: PHASE_NAMES[phase],
-                position: 'bottom',
-                enabled: true
-              },
-              mode: 'vertical',
-              scaleID: 'x-axis-0',
-              value: label,
-              borderColor: 'black',
-              borderWidth: 2,
-              onClick: function () {
-              }
-            })
-            phase++
-          }
-          if (!frame.spurting && this.frames[index + step].spurting) {
-            annotations.push({
-              type: 'line',
-              label: {
-                content: 'スパート開始',
-                position: 'bottom',
-                enabled: true,
-                yAdjust: 30
-              },
-              mode: 'vertical',
-              scaleID: 'x-axis-0',
-              value: label,
-              borderColor: 'red',
-              borderWidth: 2,
-              onClick: function () {
-              }
-            })
-          }
-        }
         // Skill annotations
         for (let mi = index; mi < index + step && mi < this.frames.length; mi++) {
           for (const skill of this.frames[mi].skills) {
@@ -1032,6 +994,63 @@ export default {
             }
           }
         }
+        // Phase annotations
+        if (index + step < this.frames.length) {
+          const phase = this.getPhase(frame.startPosition)
+          if (this.getPhase(this.frames[index + step].startPosition) > phase) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: PHASE_NAMES[phase],
+                position: 'bottom',
+                enabled: true
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'black',
+              borderWidth: 2,
+              onClick: function () {
+              }
+            })
+          }
+          if (this.getSection(this.frames[index + step].startPosition) === 10 &&
+              this.getSection(frame.startPosition) === 9) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: 'ポジキープ終了',
+                position: 'bottom',
+                enabled: true
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'silver',
+              borderWidth: 2,
+              onClick: function () {
+              }
+            })
+          }
+          if (!frame.spurting && this.frames[index + step].spurting) {
+            annotations.push({
+              type: 'line',
+              label: {
+                content: 'スパート開始',
+                position: 'bottom',
+                enabled: true,
+                yAdjust: 30
+              },
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: label,
+              borderColor: 'red',
+              borderWidth: 2,
+              onClick: function () {
+              }
+            })
+          }
+        }
       }
 
       this.chartOptions = {
@@ -1041,7 +1060,7 @@ export default {
           annotations
         },
         elements: {
-          point:{
+          point: {
             radius: 0
           }
         },
@@ -1088,6 +1107,9 @@ export default {
       } else {
         return 3
       }
+    },
+    getSection(position) {
+      return Math.floor(position * 24.0 / this.courseLength)
     },
     test() {
     }
