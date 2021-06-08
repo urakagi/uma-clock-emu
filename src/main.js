@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueHead)
 Vue.use(VueGtag, {
-    config: {id: "G-LDBKBM6RWC"}
+    config: {id: "G-TQ83VX9F79"}
 });
 
 Vue.use(require('vue-script2'))

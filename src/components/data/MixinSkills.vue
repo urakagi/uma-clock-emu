@@ -547,6 +547,19 @@ export default {
             }
           },
           {
+            normal: {name: '位置取り押し上げ', value: 0.15},
+            rare: {name: '迅速果断', value: 0.35},
+            duration: 1.8,
+            styleLimit: [3],
+            tooltip: '順位>50%を満たしたと見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
             normal: {name: '先頭プライド', value: 0.15},
             duration: 3,
             styleLimit: [1],
@@ -557,6 +570,160 @@ export default {
             check: function (startPosition) {
               return thiz.accTimePassed(5) && thiz.isStyle(1)
                   && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '抜け出し準備', value: 0.15},
+            rare: {name: 'スピードスター', value: 0.35},
+            duration: 1.2,
+            styleLimit: [2],
+            tooltip: '順位条件の<=50%は満たしていると見なす',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '外差し準備', value: 0.15},
+            rare: {name: '昇り龍', value: 0.35},
+            duration: 3,
+            styleLimit: [3],
+            tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '十万バリキ', value: 0.15},
+            duration: 1.8,
+            styleLimit: [3],
+            check: function () {
+              return thiz.isStyle(3) && thiz.isInSlope('up')
+            }
+          },
+          {
+            normal: {name: '大きなリード', value: 0.15},
+            rare: {name: '圧倒的リード', value: 0.35},
+            duration: 1.2,
+            distanceLimit: [1],
+            styleLimit: [1],
+            tooltip: '中盤に入った瞬間に1位で5馬身リードしていると見なす。見なすな。',
+            check: function () {
+              return thiz.isDistanceType(1) && thiz.curretPhase === 1
+            }
+          },
+          {
+            normal: {name: '詰め寄り', value: 0.15},
+            rare: {name: '電撃の煌めき', value: 0.35},
+            duration: 3,
+            distanceLimit: [1],
+            styleLimit: [3, 4],
+            tooltip: '順位>50%を満たしたと見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '積極策', value: 0.15},
+            rare: {name: 'マイルの支配者', value: 0.35},
+            duration: 3,
+            distanceLimit: [2],
+            styleLimit: [1, 2],
+            tooltip: '順位1位を満たしたと見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+                  && thiz.accTimePassed(5)
+            }
+          },
+          {
+            normal: {name: 'ギアシフト', value: 0.15},
+            rare: {name: 'ギアチェンジ', value: 0.35},
+            duration: 1.2,
+            distanceLimit: [2],
+            styleLimit: [1, 2],
+            tooltip: '順位<=50%を満たしたと見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '負けん気', value: 0.15},
+            rare: {name: '姉御肌', value: 0.35},
+            duration: 1.8,
+            distanceLimit: [2],
+            tooltip: '「中盤のどこか」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+                  && thiz.accTimePassed(5)
+            }
+          },
+          {
+            normal: {name: 'テンポアップ', value: 0.15},
+            rare: {name: 'キラーチューン', value: 0.35},
+            duration: 0.9,
+            distanceLimit: [3],
+            styleLimit: [1, 2],
+            tooltip: '順位<=50%を満たしたと見なす',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '食い下がり', value: 0.15},
+            rare: {name: '勝利への執念', value: 0.35},
+            duration: 3,
+            distanceLimit: [3],
+            tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '内弁慶', value: 0.15},
+            duration: 3,
+            distanceLimit: [4],
+            tooltip: '内ラチ側にいると見なす。実質逃げ馬用かな？知らないけど。',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'リードキープ', value: 0.15},
+            rare: {name: '先陣の心得', value: 0.35},
+            duration: 3,
+            distanceLimit: [4],
+            tooltip: '「中盤のどこか」の時に3馬身リードしていると見なす。普通は単独逃げ馬以外では夢物語。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -571,16 +738,44 @@ export default {
             }
           },
           {
-            unique: {name: '不沈艦、抜錨ォッ！ Lv4', value: 0.2725},
-            duration: 6,
-            tooltip: '順位条件の<=50%は満たしていると見なす',
-            check: function () {
-              return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
+            normal: {name: 'スリップストリーム', value: 0.15},
+            duration: 3,
+            tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.accTimePassed(10) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
-            all: {name: 'スピードイーター', value: 0.15},
+            normal: {name: '仕掛け抜群', value: 0.15},
             duration: 3,
+            styleLimit: [4],
+            tooltip: '位置>75%を満たしたと見なす。実戦は条件を注意すべし。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '追い上げ', value: 0.15},
+            duration: 3,
+            styleLimit: [4],
+            tooltip: '「終盤のどこか」として扱う。実際は加速中に消化されるのが大半。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'スピードイーター', value: 0.15},
+            duration: 3,
+            styleLimit: [1],
             distanceLimit: [2],
             tooltip: '1位条件は満たしていると見なす。どこか発動で1位要求なので実戦は安定しない。',
             init: function () {
@@ -588,6 +783,31 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'ペースアップ', value: 0.15},
+            rare: {name: 'アガってきた！', value: 0.35},
+            duration: 1.8,
+            tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: 'レコメンド', value: 0.15},
+            rare: {name: 'チャート急上昇！', value: 0.35},
+            duration: 1.8,
+            surfaceLimit: [2],
+            tooltip: '「中盤のどこか」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isSurfaceType(2) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -602,19 +822,191 @@ export default {
             }
           },
           {
-            unique: {name: '貴顕の使命を果たすべく', value: 0.35, duration: 5},
-            inherit: {name: '※貴顕の使命を果たすべく', value: 0.15, duration: 3},
+            normal: {name: '尻尾上がり', value: 0.15},
+            duration: 3,
+            check: function () {
+              return thiz.skillTriggerCount[1] >= 3
+            }
+          },
+          {
+            unique: {name: '波乱注意報！Lv5', value: 0.168, duration: 6},
+            tooltip: '順位条件の<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
+            }
+          },
+          {
+            unique: {name: '不沈艦、抜錨ォッ！Lv4', value: 0.2725, duration: 6},
+            inherit: {name: '不沈艦、抜錨ォッ！', value: 0.05, duration: 3.6},
+            tooltip: '順位条件の<=50%は満たしていると見なす',
+            check: function () {
+              return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
+            }
+          },
+          {
+            unique: {name: '貴顕の使命を果たすべく Lv4', value: 0.3815, duration: 5},
+            inherit: {name: '貴顕の使命を果たすべく', value: 0.15, duration: 3},
             tooltip: '位置<=30%は満たしていると見なす。',
             check: function () {
               return thiz.isInFinalCorner() || thiz.isInFinalStraight()
             }
           },
           {
-            unique: {name: '汝、皇帝の神威を見よ', value: 0.45, duration: 5},
-            inherit: {name: '※汝、皇帝の神威を見よ', value: 0.25, duration: 3},
+            unique: {name: 'G00 1st.F∞; Lv4', value: 0.3815, duration: 5},
+            inherit: {name: 'G00 1st.F∞;', value: 0.15, duration: 3},
+            tooltip: '掛かり実装までは無条件で発動するとして扱う。',
+            check: function () {
+              return thiz.isInFinalStraight()
+            }
+          },
+          {
+            unique: {name: '最強の名を懸けて Lv4', value: 0.3815, duration: 5},
+            inherit: {name: '最強の名を懸けて', value: 0.15, duration: 3},
+            tooltip: '「最終直線のどこか」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: 'アクセルX Lv5', value: 0.28, duration: 5},
+            tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
+            check: function (startPosition) {
+              return startPosition <= thiz.toPosition(200)
+                  && thiz.position >= thiz.toPosition(200)
+            }
+          },
+          {
+            unique: {name: 'カッティング✕DRIVE！Lv4', value: 0.3815, duration: 5},
+            inherit: {name: 'カッティング✕DRIVE！', value: 0.15, duration: 3},
+            tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
+            check: function (startPosition) {
+              return startPosition <= thiz.toPosition(200)
+                  && thiz.position >= thiz.toPosition(200)
+            }
+          },
+          {
+            unique: {name: '勝利の鼓動 Lv4', value: 0.4905, duration: 5},
+            inherit: {name: '勝利の鼓動', value: 0.25, duration: 3},
+            tooltip: '順位条件は満たしてると見なす',
+            check: function (startPosition) {
+              return startPosition <= thiz.toPosition(200)
+                  && thiz.position >= thiz.toPosition(200)
+            }
+          },
+          {
+            unique: {name: '汝、皇帝の神威を見よ Lv4', value: 0.4905, duration: 5},
+            inherit: {name: '汝、皇帝の神威を見よ', value: 0.25, duration: 3},
             tooltip: '最終コーナーで3人追い抜きは満たしたと見なす',
             check: function () {
               return thiz.isInFinalStraight()
+            }
+          },
+          {
+            unique: {name: 'エンプレス・プライド Lv5', value: 0.28, duration: 5},
+            tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: 'ブレイズ・オブ・プライド Lv4', value: 0.3815, duration: 5},
+            inherit: {name: 'ブレイズ・オブ・プライド', value: 0.15, duration: 3},
+            tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '全力Vサインッ！Lv5', value: 0.28, duration: 5},
+            tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '勝利のチケットを、君にッ！Lv4', value: 0.3815, duration: 5},
+            inherit: {name: '勝利のチケットを、君にッ！', value: 0.15, duration: 3},
+            tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '学級委員長+速さ＝バクシン Lv5', value: 0.28, duration: 5},
+            tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '優等生×バクシン＝大勝利ッ Lv4', value: 0.3815, duration: 5},
+            inherit: {name: '優等生×バクシン＝大勝利ッ', value: 0.15, duration: 3},
+            tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '来てください来てください！Lv5', value: 0.28, duration: 5},
+            tooltip: '「終盤のどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: '来ます来てます来させます！Lv4', value: 0.3815, duration: 5},
+            inherit: {name: '来ます来てます来させます！', value: 0.15, duration: 3},
+            tooltip: '「終盤のどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: 'アタシもたまには、ね？Lv5', value: 0.28, duration: 5},
+            tooltip: '「ラストスパートのどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(3)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            unique: {name: 'きっとその先へ…！Lv4', value: 0.3815, duration: 5},
+            inherit: {name: 'きっとその先へ…！', value: 0.15, duration: 3},
+            tooltip: '「ラストスパートのどこかで発動する」として扱う。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(3)
+            },
+            check: function (startPosition) {
+              return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
         ],
@@ -793,13 +1185,14 @@ export default {
           {
             normal: {name: 'がんばり屋', value: 0.2},
             rare: {name: '努力家', value: 0.3},
+            duration: 3,
             styleLimit: [3],
             tooltip: '「中盤のどこか」として扱う。はいはいガバ実装ガバ実装。',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -811,8 +1204,8 @@ export default {
             }
           },
           {
-            unique: {name: '紅焔ギア/LP1211-M', value: 0.4, duration: 4},
-            inherit: {name: '※紅焔ギア/LP1211-M', value: 0.2, duration: 2.4},
+            unique: {name: '紅焔ギア/LP1211-M Lv4', value: 0.436, duration: 4},
+            inherit: {name: '紅焔ギア/LP1211-M', value: 0.2, duration: 2.4},
             styleLimit: [1, 2],
             tooltip: '順位<=5及び<=50%は満たしていると見なす',
             check: function () {
@@ -820,8 +1213,8 @@ export default {
             }
           },
           {
-            unique: {name: 'ヴィクトリーショット！', value: 0.4, duration: 4},
-            inherit: {name: '※ヴィクトリーショット！', value: 0.2, duration: 2.4},
+            unique: {name: 'ヴィクトリーショット！ Lv4', value: 0.436, duration: 4},
+            inherit: {name: 'ヴィクトリーショット！', value: 0.2, duration: 2.4},
             styleLimit: [1, 2],
             tooltip: '順位>=3及び<=50%は満たしていると見なす',
             check: function () {
@@ -829,7 +1222,7 @@ export default {
             }
           },
           {
-            unique: {name: '燃えろ筋肉！', value: 0.3, duration: 4},
+            unique: {name: '燃えろ筋肉！ Lv5', value: 0.336, duration: 4},
             styleLimit: [3, 4],
             tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
             check: function () {
@@ -837,8 +1230,8 @@ export default {
             }
           },
           {
-            unique: {name: 'レッツ・アナボリック', value: 0.4, duration: 4},
-            inherit: {name: '※レッツ・アナボリック', value: 0.2, duration: 2.4},
+            unique: {name: 'レッツ・アナボリック Lv4', value: 0.436, duration: 4},
+            inherit: {name: 'レッツ・アナボリック', value: 0.2, duration: 2.4},
             styleLimit: [3, 4],
             tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
             check: function () {
@@ -1303,6 +1696,9 @@ export default {
             if (skill.distanceLimit && skill.distanceLimit.indexOf(this.trackDetail.distanceType) < 0) {
               continue
             }
+            if (skill.surfaceLimit && skill.surfaceLimit.indexOf(this.surfaces.indexOf(this.trackDetail.surface)) < 0) {
+              continue
+            }
             skill.index = parseInt(i)
             ret[type][rarity].push(skill)
           }
@@ -1410,6 +1806,18 @@ export default {
       ret.push(Math.random() * (end - start) + start)
       return ret
     },
+    initFinalStraightRandom() {
+      const ret = []
+      const finalCorner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      const len = this.courseLength - this.toPosition(finalCorner[1])
+      ret.push(Math.random() * len + finalCorner[1] + 0.1)
+      return ret
+    },
+    initIntervalRandom(startRate, endRate) {
+      const start = this.courseLength * startRate
+      const end = this.courseLength * endRate
+      return [Math.random() * (end - start) + start]
+    },
     isContainRandom(randoms, startPosition) {
       for (const random of randoms) {
         if (startPosition <= random && this.position >= random) {
@@ -1476,6 +1884,9 @@ export default {
     },
     isDistanceType(distanceType) {
       return this.trackDetail.distanceType === distanceType
+    },
+    isSurfaceType(surfaceType) {
+      return this.trackDetail.surface === this.surfaces[surfaceType]
     },
     accTimePassed(second) {
       return this.frameElapsed >= 15 * second

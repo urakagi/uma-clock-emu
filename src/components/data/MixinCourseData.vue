@@ -22,7 +22,8 @@ export default {
             ]
           }
         }
-      }
+      },
+      surfaces: ['', 'turf', 'dirt']
     }
   },
   computed: {

@@ -237,6 +237,20 @@
       終盤目標速度：{{ v3.toFixed(2) }}／終盤加速度：{{ a3.toFixed(3) }} ｜
       最高スパート速度：{{ maxSpurtSpeed.toFixed(2) }}
     </div>
+    <h3>注意事項</h3>
+    <ol>
+      <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
+      <li>コースは気が向いたら追加していきます。調査しんどい。</li>
+      <li>ポジションキープを始めとした他ウマ娘が絡む要素は未実装。</li>
+      <li>それが条件になるスキルは適当にそれっぽく実装してます。</li>
+      <li>掛かりは未実装。</li>
+      <li>喰らう妨害スキルは一律発動率80％としています。</li>
+      <li>別情報に地形図がないので坂はJRAの断面図と実際のレース状況を観察して書いたもの。</li>
+      <li>固有スキルのLvは変えられません。まぁ6%とか2%しか変わらないのであまり気にしないで下さい。</li>
+      <li>固有が多すぎるし発動条件どれもこれも面倒臭すぎるしやってられない。足りてないのは気が向いたら追加していく予定。</li>
+      <li>作った人：砂井裏鍵。各種別情報は大いに参考させて頂きました。</li>
+      <li><a href="https://twitter.com/urakagi">ツイッターはこ↑こ↓</a></li>
+    </ol>
     <el-dialog :visible.sync='emulating' style="text-align: center;">
       エミューレート中、少々お待ち下さい……
       <el-progress :percentage="Math.floor(100 * epoch / maxEpoch)"></el-progress>
@@ -263,13 +277,13 @@ export default {
   data() {
     return {
       umaStatus: {
-        speed: 1000,
-        stamina: 1100,
-        power: 1000,
-        guts: 1000,
-        wisdom: 1000,
+        speed: 900,
+        stamina: 1000,
+        power: 700,
+        guts: 400,
+        wisdom: 400,
         condition: '2',
-        style: '1',
+        style: '4',
         distanceFit: 'A',
         surfaceFit: 'A',
         styleFit: 'A'
@@ -300,7 +314,7 @@ export default {
       spurtParameters: null,
       downSlopeModeStart: null,
       // UI
-      skillGroups: 'acceleration',
+      skillGroups: '',
       emulating: false,
       savedUmas: {},
       umaToLoad: null,
@@ -686,6 +700,9 @@ export default {
         const startSp = this.sp
         const startPhase = this.currentPhase
         this.frames[this.frameElapsed].speed = this.currentSpeed
+        for (const skill of this.operatingSkills.speed) {
+          this.frames[this.frameElapsed].speed += skill.data.value
+        }
         this.frames[this.frameElapsed].sp = this.sp
         this.frames[this.frameElapsed].startPosition = startPosition
 
