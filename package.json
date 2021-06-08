@@ -1,6 +1,6 @@
 {
   "name": "uma-clock-emu",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -16,7 +16,6 @@
     "vue-chartjs": "^3.5.1",
     "vue-google-adsense": "^1.9.3",
     "vue-gtag": "^1.16.1",
-    "vue-head": "^2.2.0",
     "vue-script2": "^2.1.0"
   },
   "devDependencies": {

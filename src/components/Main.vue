@@ -237,6 +237,20 @@
       終盤目標速度：{{ v3.toFixed(2) }}／終盤加速度：{{ a3.toFixed(3) }} ｜
       最高スパート速度：{{ maxSpurtSpeed.toFixed(2) }}
     </div>
+    <el-divider/>
+    <h3>最終更新：{{ releases[releases.length - 1].timestamp }}</h3>
+    <el-collapse v-model="releaseNote">
+      <el-collapse-item title="更新履歴">
+        <el-timeline :reverse="true">
+          <el-timeline-item
+              v-for="(release, index) in releases"
+              :key="index"
+              :timestamp="release.timestamp">
+            {{release.content}}
+          </el-timeline-item>
+        </el-timeline>
+      </el-collapse-item>
+    </el-collapse>
     <h3>注意事項</h3>
     <ol>
       <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
@@ -269,11 +283,12 @@ import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 import RaceGraph from "@/components/RaceGraph";
+import MixinReleaseNote from "@/components/data/MixinReleaseNote";
 
 export default {
   name: "Main",
   components: {RaceGraph},
-  mixins: [MixinCourseData, MixinConstants, MixinSkills],
+  mixins: [MixinCourseData, MixinConstants, MixinSkills, MixinReleaseNote],
   data() {
     return {
       umaStatus: {
@@ -320,20 +335,11 @@ export default {
       umaToLoad: null,
       chartData: {},
       chartOptions: {},
+      releaseNote: '',
       // Constants
       fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
-      production: false
+      production: true
     }
-  },
-  head: {
-    title: function () {
-      return {
-        inner: 'ウマ娘レースエミューレーター'
-      }
-    },
-    meta: [
-      {name: 'language', content: 'ja'}
-    ]
   },
   created() {
     this.track.location = Object.keys(this.trackData)[0]
@@ -1078,7 +1084,7 @@ export default {
         acceleration: 'orange',
         fatigue: 'darkred'
       }
-      const step = Math.floor(this.frames.length / 100)
+      const step = Math.floor(this.frames.length / 500)
       for (let index = 0; index < this.frames.length; index += step) {
         const frame = this.frames[index]
         const label = this.formatTime(index * this.frameLength, 1)
