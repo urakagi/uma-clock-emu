@@ -390,12 +390,22 @@ export default {
       const check = this.trackDetail.courseSetStatus
       if (check.length > 0) {
         const CHECK_KEYS = ['', 'speed', 'stamina', 'power', 'guts', 'wisdom']
-        const bonus = 0.5 / check.length
-        let level = Math.ceil(this.umaStatus[CHECK_KEYS] / 300.0) - 1
-        if (level > 4) {
-          level = 4
+        for (const c of check) {
+          let bonus
+          const status = this.umaStatus[CHECK_KEYS[c]]
+          if (status <= 300) {
+            bonus = 0.05
+          } else if (status <= 600) {
+            bonus = 0.1
+          } else if (status <= 900) {
+            bonus = 0.15
+          } else {
+            bonus = 0.2
+          }
+          bonus /= check.length
+          statusCheckModifier += bonus
+          console.log(statusCheckModifier)
         }
-        statusCheckModifier += bonus * level
       }
       return this.umaStatus.speed * statusCheckModifier * this.condCoef[this.modifiedCondition]
           + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]
