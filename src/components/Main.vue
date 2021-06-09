@@ -2,8 +2,8 @@
   <div class="main-frame">
     <p>
       <Adsense v-if="production"
-          data-ad-client="ca-pub-4611969396217909"
-          data-ad-slot="6969023753">
+               data-ad-client="ca-pub-4611969396217909"
+               data-ad-slot="6969023753">
       </Adsense>
     </p>
     <el-form class="input-form" :inline="true">
@@ -81,18 +81,25 @@
         </el-select>
       </el-form-item>
       <el-form-item label="調子">
-        <el-select v-model="umaStatus.condition" style="width: 110px;">
+        <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
           <el-option label="絶好調" value="0"></el-option>
           <el-option label="好調" value="1"></el-option>
           <el-option label="普通" value="2"></el-option>
           <el-option label="不調" value="3"></el-option>
           <el-option label="絶不調" value="4"></el-option>
+          <el-option label="ランダム" value="5"></el-option>
+          <el-option label="ランダム(3種)" value="6"></el-option>
         </el-select>
       </el-form-item>
       <br>
       <el-form-item label="コース">
         <el-select v-model="track.location" @change="locationChanged" style="width: 120px;">
-          <el-option label="京都" value="kyoto"></el-option>
+          <el-option
+              v-for="(raceTrack, trackId) in this.trackData"
+              :label="raceTrack.name"
+              :value="trackId"
+              :key="trackId"
+          ></el-option>
         </el-select>
         <el-select v-model="track.course" style="width: 170px;">
           <el-option
@@ -149,8 +156,8 @@
     </el-form>
     <el-divider/>
     <Adsense v-if="production"
-        data-ad-client="ca-pub-4611969396217909"
-        data-ad-slot="6969023753">
+             data-ad-client="ca-pub-4611969396217909"
+             data-ad-slot="6969023753">
     </Adsense>
     <div>
       <h3>時計統計</h3>
@@ -215,6 +222,9 @@
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
+      コースステータスチェック：{{ displayStatusCheck }}
+    </div>
+    <div>
       補正後：スピード{{ modifiedSpeed.toFixed(1) }} ／スタミナ{{ modifiedStamina.toFixed(1) }} ／パワー{{ modifiedPower.toFixed(1) }}
       ／根性{{ modifiedGuts.toFixed(1) }} ／賢さ{{ modifiedWisdom.toFixed(1) }}
     </div>
@@ -246,7 +256,7 @@
               v-for="(release, index) in releases"
               :key="index"
               :timestamp="release.timestamp">
-            {{release.content}}
+            {{ release.content }}
           </el-timeline-item>
         </el-timeline>
       </el-collapse-item>
@@ -254,7 +264,7 @@
     <h3>注意事項</h3>
     <ol>
       <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
-      <li>コースは気が向いたら追加していきます。調査しんどい。</li>
+      <li>データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。</li>
       <li>ポジションキープを始めとした他ウマ娘が絡む要素は未実装。</li>
       <li>それが条件になるスキルは適当にそれっぽく実装してます。</li>
       <li>掛かりは未実装。</li>
@@ -314,7 +324,8 @@ export default {
       // Race variables
       epoch: 0,
       maxEpoch: 50,
-      events: [],
+      modifiedCondition: -1,
+      temptationSection: -1,
       sectionTargetSpeedRandoms: [],
       frameElapsed: 0,  // 15 frames per second
       position: 0,
@@ -323,11 +334,11 @@ export default {
       operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
       frames: [],
       startDelay: 0,
-      laps: [],
-      marks: [],
-      spTrace: [],
       spurtParameters: null,
       downSlopeModeStart: null,
+      temptationModeStart: null,
+      temptationModeEnd: null,
+      temptationWaste: 0,
       // UI
       skillGroups: '',
       emulating: false,
@@ -338,7 +349,7 @@ export default {
       releaseNote: '',
       // Constants
       fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
-      production: true
+      production: false
     }
   },
   created() {
@@ -365,31 +376,42 @@ export default {
     }
   },
   computed: {
-    footStyle() {
+    runningStyle() {
       return parseInt(this.umaStatus.style)
     },
     trackDetail() {
       if (!this.track.location) {
-        return {distance: 0, surface: 'turf'}
+        return {distance: 0, surface: 1}
       }
-      return this.trackData[this.track.location][this.track.course]
+      return this.trackData[this.track.location].courses[this.track.course]
     },
     modifiedSpeed() {
-      return this.umaStatus.speed * this.condCoef[this.umaStatus.condition]
+      let statusCheckModifier = 1
+      const check = this.trackDetail.courseSetStatus
+      if (check.length > 0) {
+        const CHECK_KEYS = ['', 'speed', 'stamina', 'power', 'guts', 'wisdom']
+        const bonus = 0.5 / check.length
+        let level = Math.ceil(this.umaStatus[CHECK_KEYS] / 300.0) - 1
+        if (level > 4) {
+          level = 4
+        }
+        statusCheckModifier += bonus * level
+      }
+      return this.umaStatus.speed * statusCheckModifier * this.condCoef[this.modifiedCondition]
           + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]
     },
     modifiedStamina() {
-      return this.umaStatus.stamina * this.condCoef[this.umaStatus.condition]
+      return this.umaStatus.stamina * this.condCoef[this.modifiedCondition]
     },
     modifiedPower() {
-      return this.umaStatus.power * this.condCoef[this.umaStatus.condition]
+      return this.umaStatus.power * this.condCoef[this.modifiedCondition]
           + this.surfacePowerModify[this.trackDetail.surface][this.track.surfaceCondition]
     },
     modifiedGuts() {
-      return this.umaStatus.guts * this.condCoef[this.umaStatus.condition]
+      return this.umaStatus.guts * this.condCoef[this.modifiedCondition]
     },
     modifiedWisdom() {
-      return this.umaStatus.wisdom * this.condCoef[this.umaStatus.condition]
+      return this.umaStatus.wisdom * this.condCoef[this.modifiedCondition]
           * this.styleFitCoef[this.umaStatus.styleFit]
     },
     spMax() {
@@ -446,12 +468,12 @@ export default {
       let ret = baseTargetSpeed
       const upSlope = this.isInSlope('up')
       if (upSlope) {
-        ret -= Math.abs(this.slopePercentage(upSlope)) * 200.0 / this.modifiedPower
+        ret -= Math.abs(this.currentSlope) * 200.0 / this.modifiedPower
       }
       const downSlope = this.isInSlope('down')
       if (downSlope) {
         if (this.downSlopeModeStart != null) {
-          ret += Math.abs(this.slopePercentage(downSlope)) / 10.0 + 0.3
+          ret += Math.abs(this.currentSlope) / 10.0 + 0.3
         }
       }
       for (const skill of this.operatingSkills.targetSpeed) {
@@ -493,6 +515,15 @@ export default {
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
           1.05 + Math.sqrt(500 * this.modifiedSpeed) *
           this.distanceFitSpeedCoef[this.umaStatus.distanceFit] * 0.002
+    },
+    isInTemptation() {
+      if (this.temptationModeStart == null || this.frameElapsed < this.temptationModeStart) {
+        return false
+      }
+      if (this.temptationModeEnd == null) {
+        return true
+      }
+      return this.frameElapsed <= this.temptationModeEnd
     },
     v0() {
       return 0.85 * this.baseSpeed
@@ -636,13 +667,27 @@ export default {
         return '-'
       }
       return (-sum / count).toFixed(1)
-    }
+    },
+    displayStatusCheck() {
+      const STATUS = ['', 'スピード', 'スタミナ', 'パワー', '根性', '賢さ']
+      const check = this.trackDetail.courseSetStatus
+      switch (check.length) {
+        case 0:
+          return '無'
+        case 1:
+          return STATUS[check[0]]
+        case 2:
+        default:
+          return STATUS[check[0]] + '、' + STATUS[check[1]]
+      }
+    },
   },
   methods: {
     locationChanged(location) {
-      this.courseList = this.trackData[location]
+      this.courseList = this.trackData[location].courses
       this.track.course = Object.keys(this.courseList)[0]
-    }, getEqualStamina(value) {
+    },
+    getEqualStamina(value) {
       return Math.floor(this.spMax * value / 10000.0 / 0.8 / this.styleSpCoef[this.umaStatus.style])
     },
     exec: function () {
@@ -664,18 +709,17 @@ export default {
     },
     start: function () {
       this.resetRace()
-      const startDelay = Math.random() * 0.1
-      this.pushEvent('start', this.start)
-      this.startDelay = startDelay
-      this.laps.push(0)
-      this.marks.push(this.position)
-      this.spTrace.push(this.spMax)
+      this.initCondition()
+      this.initTemptation()
+      this.sp = this.spMax
+      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
+      this.startDelay = Math.random() * 0.1
       this.initializeSkills()
       this.progressRace()
     },
     resetRace() {
-      this.events = []
       this.frameElapsed = 0
+      this.sp = 0
       this.position = 0
       this.currentSpeed = 3
       this.operatingSkills = {
@@ -683,22 +727,33 @@ export default {
         targetSpeed: [],
         acceleration: []
       }
-      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
-      this.sp = this.spMax
       delete this.frames
       this.frames = [{skills: []}]
-      this.laps = []
-      this.marks = []
-      this.spTrace = []
       this.spurtParameters = null
       this.downSlopeModeStart = null
+      this.temptationModeStart = null
+      this.temptationModeEnd = null
+      this.temptationWaste = 0
+      this.modifiedCondition = -1
+      this.temptationSection = -1
     },
-    pushEvent(name, value) {
-      this.events.push({
-        position: this.position,
-        name,
-        value
-      })
+    initCondition() {
+      if (this.umaStatus.condition <= 4) {
+        this.modifiedCondition = this.umaStatus.condition
+      } else if (this.umaStatus.condition === 5) {
+        // 5種ランダム
+        this.modifiedCondition = Math.floor(Math.random() * 5)
+      } else {
+        // 3種ランダム
+        this.modifiedCondition = Math.floor(Math.random() * 3)
+      }
+    },
+    initTemptation() {
+      if (Math.random() * 100 < Math.pow(6.5 / Math.log10(0.1 * this.modifiedWisdom + 1), 2)) {
+        this.temptationSection = 1 + Math.floor(Math.random() * 8)
+      } else {
+        this.temptationSection = -1
+      }
     },
     progressRace() {
       while (this.position < this.courseLength) {
@@ -729,6 +784,28 @@ export default {
           }
         } else {
           this.downSlopeModeStart = null
+        }
+
+        // 掛かり処理
+        if (this.isInTemptation) {
+          // 掛かり終了判定
+          const temptationDuration = (this.frameElapsed - this.temptationModeStart) * this.frameLength
+          const prevTemptationDuration = (this.frameElapsed - 1 - this.temptationModeStart) * this.frameLength
+          for (let j = 3; j < 12; j += 3) {
+            if (prevTemptationDuration < j && temptationDuration >= j) {
+              if (Math.random() < 0.55) {
+                this.temptationModeEnd = this.frameElapsed
+              }
+            }
+          }
+          if (temptationDuration >= 12) {
+            this.temptationModeEnd = this.frameElapsed
+          }
+        }
+        // 掛かり開始
+        if (this.temptationSection > 0 && this.currentSection === this.temptationSection) {
+          this.temptationModeStart = this.frameElapsed
+          this.temptationSection = -1
         }
 
         this.move()
@@ -798,7 +875,12 @@ export default {
       // 反映させる
       this.currentSpeed = endSpeed
       this.position += movementChanging + movementStatic
-      this.sp -= (consumeChanging + consumeStatic) * (this.downSlopeModeStart != null ? 0.4 : 1)
+      let consume = (consumeChanging + consumeStatic) * (this.downSlopeModeStart != null ? 0.4 : 1)
+      if (this.isInTemptation) {
+        this.temptationWaste += consume * 0.6
+        consume *= 1.6
+      }
+      this.sp -= consume
     },
     calcSpurtParameter() {
       const maxDistance = this.trackDetail.distance / 3.0
@@ -886,13 +968,8 @@ export default {
       if (!position) {
         position = this.position
       }
-      for (const slope of this.trackDetail[`${direction}Slope`]) {
-        if (position >= this.toPosition(slope.start)
-            && position <= this.toPosition(slope.end)) {
-          return slope
-        }
-      }
-      return null
+      return (direction === 'up' && this.getSlope(position) > 1)
+          || (direction === 'down' && this.getSlope(position) < -1)
     },
     goal() {
       const raceTime = this.frameElapsed * this.frameLength + this.startDelay
@@ -909,7 +986,15 @@ export default {
       this.emulations.push(emu)
     },
     toDisplayTime(time) {
-      return time * 1.18
+      let ret = time * 1.18
+      const min = this.trackDetail.finishTimeMin
+      const max = this.trackDetail.finishTimeMax
+      if (ret < min) {
+        ret = min - 1 + 2 * Math.random()
+      } else if (ret > max) {
+        ret = max - 1 + 2 * Math.random()
+      }
+      return ret
     },
     formatTime(time, digit) {
       if (time === 0) {
@@ -1007,8 +1092,10 @@ export default {
       const umas = JSON.parse(localStorage.getItem('umas') || '{}')
       const u = umas[this.umaToLoad]
       this.umaStatus = u.status
+      this.locationChanged(u.track.location)
       this.track = u.track
       this.hasSkills = u.hasSkills
+      this.initCondition()
       this.$message({
         type: 'success',
         message: `${this.umaToLoad}をロードしました。`
@@ -1070,9 +1157,9 @@ export default {
       const dataSp = []
       const annotations = []
       let skillYAdjust = 0
-      const nextSkillYAdjust = function() {
-        skillYAdjust += 30
-        if (skillYAdjust > 60) {
+      const nextSkillYAdjust = function () {
+        skillYAdjust += 25
+        if (skillYAdjust > 50) {
           skillYAdjust = 0
         }
       }
@@ -1084,7 +1171,43 @@ export default {
         acceleration: 'orange',
         fatigue: 'darkred'
       }
-      const step = Math.floor(this.frames.length / 500)
+
+      // スタート
+      annotations.push({
+        type: 'line',
+        label: {
+          content: this.startDelay >= 0.08 ? ' 出遅れ ' : 'スタート',
+          position: 'bottom',
+          enabled: true,
+          xAdjust: -30
+        },
+        mode: 'vertical',
+        scaleID: 'x-axis-0',
+        value: 0,
+        borderColor: 'yellow',
+        borderWidth: 2,
+        onClick: function () {
+          thiz.$message(`スタートディレイ：${thiz.startDelay.toFixed(3)}秒`)
+        }
+      })
+
+      // 掛かり区間
+      if (this.temptationModeStart > 0) {
+        annotations.push({
+          type: 'box',
+          xMin: this.temptationModeStart,
+          xMax: this.temptationModeEnd,
+          yMin: 0,
+          yMax: 100,
+          xScaleID: 'x-axis-0',
+          onClick: function () {
+            thiz.$message(`掛かり：${((thiz.temptationModeEnd - thiz.temptationModeStart) * thiz.frameLength)}秒、余分耐力消耗：${thiz.temptationWaste.toFixed(1)}`)
+          }
+        })
+      }
+
+      // const step = Math.floor(this.frames.length / 500)
+      const step = 1
       for (let index = 0; index < this.frames.length; index += step) {
         const frame = this.frames[index]
         const label = this.formatTime(index * this.frameLength, 1)
@@ -1147,8 +1270,7 @@ export default {
               label: {
                 content: 'ポジキープ終了',
                 position: 'bottom',
-                enabled: true,
-                yAdjust: skillYAdjust
+                enabled: true
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
@@ -1158,10 +1280,6 @@ export default {
               onClick: function () {
               }
             })
-            skillYAdjust += 30
-            if (skillYAdjust > 60) {
-              skillYAdjust = 0
-            }
           }
           const upSlope = this.isInSlope('up', this.frames[index + step].startPosition)
           if (upSlope && !this.isInSlope('up', frame.startPosition)) {
@@ -1177,10 +1295,7 @@ export default {
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'pink',
-              borderWidth: 2,
-              onClick: function () {
-                thiz.$message(`勾配：${this.slopePercentage(upSlope).toFixed(1)}`)
-              }
+              borderWidth: 2
             })
             nextSkillYAdjust(skillYAdjust)
           }
@@ -1198,10 +1313,7 @@ export default {
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'silver',
-              borderWidth: 2,
-              onClick: function () {
-                thiz.$message(`勾配：${this.slopePercentage(upSlope).toFixed(1)}`)
-              }
+              borderWidth: 2
             })
             nextSkillYAdjust(skillYAdjust)
           }
@@ -1250,7 +1362,7 @@ export default {
             type: 'linear',
             position: 'right',
             ticks: {
-              min: 16,
+              min: 15,
               max: 27
             }
           }]

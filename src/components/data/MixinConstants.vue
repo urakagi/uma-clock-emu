@@ -12,13 +12,13 @@ export default {
         4: 0.96
       },
       surfaceSpeedModify: {
-        turf: {
+        1: {
           0: 0,
           1: 0,
           2: 0,
           3: -50
         },
-        dirt: {
+        2: {
           0: 0,
           1: 0,
           2: 0,
@@ -26,13 +26,13 @@ export default {
         }
       },
       surfacePowerModify: {
-        turf: {
+        1: {
           0: 0,
           1: -50,
           2: -50,
           3: -50
         },
-        dirt: {
+        2: {
           0: -100,
           1: -50,
           2: -100,
@@ -134,13 +134,13 @@ export default {
         }
       },
       spConsumptionCoef: {
-        turf: {
+        1: {
           0: 1,
           1: 1,
           2: 1.02,
           3: 1.02
         },
-        dirt: {
+        2: {
           0: 1,
           1: 1,
           2: 1.01,
