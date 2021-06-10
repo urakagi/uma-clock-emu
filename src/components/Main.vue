@@ -120,6 +120,20 @@
         </el-select>
       </el-form-item>
       <br>
+      <el-form-item label="固有スキル">
+        <el-select v-model="selectedUnique">
+          <el-option
+              v-for="skill in this.uniqueSkillData"
+              :label="skill.name"
+              :value="skill.name"
+              :key="skill.name"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="Lv">
+        <el-input-number :max="6" :min="1" v-model="uniqueLevel"></el-input-number>
+      </el-form-item>
+      <br>
       <el-collapse v-model="skillGroups">
         <el-collapse-item
             v-for="menu in skillMenu"
@@ -313,6 +327,7 @@ export default {
         surfaceFit: 'A',
         styleFit: 'A'
       },
+      passiveBonus: {},
       track: {
         location: '',
         course: '',
@@ -348,8 +363,7 @@ export default {
       chartOptions: {},
       releaseNote: '',
       // Constants
-      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
-      production: false
+      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
     }
   },
   created() {
@@ -363,11 +377,12 @@ export default {
   mounted() {
     this.updateSavedUmas()
     this.updateChart()
-    // FIXME: For debug
     if (!this.production) {
       this.umaToLoad = 'test'
       this.loadUma()
-      // this.exec()
+      if (this.maxEpoch === 1) {
+        this.exec()
+      }
     }
   },
   watch: {
@@ -381,7 +396,7 @@ export default {
     },
     trackDetail() {
       if (!this.track.location) {
-        return {distance: 0, surface: 1}
+        return {distance: 0, surface: 1, courseSetStatus: []}
       }
       return this.trackData[this.track.location].courses[this.track.course]
     },
@@ -404,25 +419,26 @@ export default {
           }
           bonus /= check.length
           statusCheckModifier += bonus
-          console.log(statusCheckModifier)
         }
       }
       return this.umaStatus.speed * statusCheckModifier * this.condCoef[this.modifiedCondition]
           + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]
+          + this.passiveBonus.speed
     },
     modifiedStamina() {
-      return this.umaStatus.stamina * this.condCoef[this.modifiedCondition]
+      return this.umaStatus.stamina * this.condCoef[this.modifiedCondition] + this.passiveBonus.stamina
     },
     modifiedPower() {
       return this.umaStatus.power * this.condCoef[this.modifiedCondition]
           + this.surfacePowerModify[this.trackDetail.surface][this.track.surfaceCondition]
+          + this.passiveBonus.power
     },
     modifiedGuts() {
-      return this.umaStatus.guts * this.condCoef[this.modifiedCondition]
+      return this.umaStatus.guts * this.condCoef[this.modifiedCondition] + this.passiveBonus.guts
     },
     modifiedWisdom() {
       return this.umaStatus.wisdom * this.condCoef[this.modifiedCondition]
-          * this.styleFitCoef[this.umaStatus.styleFit]
+          * this.styleFitCoef[this.umaStatus.styleFit] + this.passiveBonus.wisdom
     },
     spMax() {
       return this.trackDetail.distance + 0.8 * this.modifiedStamina * this.styleSpCoef[this.umaStatus.style]
@@ -489,6 +505,9 @@ export default {
       for (const skill of this.operatingSkills.targetSpeed) {
         ret += skill.data.value
       }
+      for (const skill of this.operatingSkills.boost) {
+        ret += skill.data.value.targetSpeed
+      }
       return ret
     },
     acceleration() {
@@ -503,6 +522,9 @@ export default {
       }
       for (const skill of this.operatingSkills.acceleration) {
         ret += skill.data.value
+      }
+      for (const skill of this.operatingSkills.boost) {
+        ret += skill.data.value.acceleration
       }
       return ret
     },
@@ -583,11 +605,14 @@ export default {
     },
     skillMenu() {
       const TITLE_TYPE = {
+        passive: 'パッシブスキル',
+        gate: 'ゲートスキル',
         heal: '回復スキル',
         targetSpeed: '速度スキル',
         acceleration: '加速度スキル',
+        boost: 'ブーストスキル(速度と加速度が両方上がる)',
         speed: '喰らう減速スキル',
-        fatigue: '喰らう疲労スキル'
+        fatigue: '喰らう疲労スキル',
       }
       const ret = []
       for (const type in this.skills) {
@@ -691,6 +716,9 @@ export default {
           return STATUS[check[0]] + '、' + STATUS[check[1]]
       }
     },
+    production() {
+      return process.env.NODE_ENV === 'production'
+    }
   },
   methods: {
     locationChanged(location) {
@@ -725,6 +753,7 @@ export default {
       this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
       this.startDelay = Math.random() * 0.1
       this.initializeSkills()
+      this.triggerStartSkills()
       this.progressRace()
     },
     resetRace() {
@@ -732,10 +761,18 @@ export default {
       this.sp = 0
       this.position = 0
       this.currentSpeed = 3
+      this.passiveBonus = {
+        speed: 0,
+        stamina: 0,
+        power: 0,
+        guts: 0,
+        wisdom: 0
+      }
       this.operatingSkills = {
         speed: [],
         targetSpeed: [],
-        acceleration: []
+        acceleration: [],
+        boost: []
       }
       delete this.frames
       this.frames = [{skills: []}]
@@ -1087,7 +1124,9 @@ export default {
         umas[value] = {
           status: this.umaStatus,
           track: this.track,
-          hasSkills: this.hasSkills
+          hasSkills: this.hasSkills,
+          selectedUnique: this.selectedUnique,
+          uniqueLevel: this.uniqueLevel
         }
         localStorage.setItem('umas', JSON.stringify(umas))
         this.$message({
@@ -1105,6 +1144,11 @@ export default {
       this.locationChanged(u.track.location)
       this.track = u.track
       this.hasSkills = u.hasSkills
+      if (u.selectedUnique) {
+        this.selectedUnique = u.selectedUnique
+        this.uniqueLevel = u.uniqueLevel
+      }
+      this.fixOldSavedUma()
       this.initCondition()
       this.$message({
         type: 'success',
@@ -1143,9 +1187,23 @@ export default {
     },
     resetTrack() {
       this.track = {
-        location: '',
-        course: '',
+        location: '10008',
+        course: '10811',
         surfaceCondition: '0'
+      }
+    },
+    fixOldSavedUma() {
+      const o = {...this.hasSkills}
+      let old = false
+      const NEW_TYPES = ['boost', 'gate', 'passive']
+      for (const nt of NEW_TYPES) {
+        if (!(nt in this.hasSkills)) {
+          o[nt] = {normal: [], rare: [], inherit: []}
+        }
+        old = true
+      }
+      if (old) {
+        this.hasSkills = o
       }
     },
     initSectionTargetSpeedRandoms() {
@@ -1179,7 +1237,10 @@ export default {
         speed: 'darkred',
         targetSpeed: 'gold',
         acceleration: 'orange',
-        fatigue: 'darkred'
+        boost: 'DarkOliveGreen',
+        fatigue: 'darkred',
+        gate: 'green',
+        passive: 'green',
       }
 
       // スタート
@@ -1285,7 +1346,7 @@ export default {
               mode: 'vertical',
               scaleID: 'x-axis-0',
               value: label,
-              borderColor: 'green',
+              borderColor: 'darkgreen',
               borderWidth: 2,
               onClick: function () {
               }
