@@ -174,7 +174,7 @@
              data-ad-slot="6969023753">
     </Adsense>
     <div>
-      <h3>時計統計</h3>
+      <h3>レースタイム統計</h3>
       <table border="1" class="emulation-result">
         <tr>
           <th></th>
@@ -279,10 +279,10 @@
     <ol>
       <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
       <li>灰色の背景は掛かり区間、淡紫色の背景はコーナー。</li>
-      <li>データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。多分安定しました。</li>
+      <li><s>データが安定するまではロードデータが突然使えなくなる可能性があります。データが使えなくなった場合は都度作り直して下さい。</s>多分安定しました。</li>
       <li>ポジションキープを始めとした他ウマ娘が絡む要素は未実装。</li>
-      <li>それが条件になるスキルは適当にそれっぽく実装してます。</li>
-      <li>喰らう妨害スキルは一律発動率80％としています。</li>
+      <li>上記が条件になるスキルは適当にそれっぽく実装しています。</li>
+      <li>デバフスキルは一律発動率80％としています。</li>
       <li>作った人：砂井裏鍵。各種別情報は大いに参考させて頂きました。</li>
       <li><a href="https://twitter.com/urakagi">ツイッターはこ↑こ↓</a></li>
     </ol>
@@ -610,8 +610,8 @@ export default {
         acceleration: '加速度スキル',
         boost: 'ブーストスキル(速度と加速度が両方上がる)',
         gate: 'ゲートスキル',
-        speed: '喰らう減速スキル',
-        fatigue: '喰らう疲労スキル',
+        speed: '減速デバフスキル',
+        fatigue: '疲労デバフスキル',
       }
       const ret = []
       for (const type in this.skills) {
@@ -1264,7 +1264,7 @@ export default {
         borderColor: 'yellow',
         borderWidth: 2,
         onClick: function () {
-          thiz.$message(`スタートディレイ：${thiz.startDelay.toFixed(3)}秒`)
+          thiz.$message(`スタート出遅れ：${thiz.startDelay.toFixed(3)}秒`)
         }
       })
 
