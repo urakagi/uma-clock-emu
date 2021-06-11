@@ -5,8 +5,7 @@ export default {
   name: "MixinTrackData",
   data: function () {
     return {
-      'trackData': TrackData,
-      surfaces: ['', 'turf', 'dirt']
+      'trackData': TrackData
     }
   },
   computed: {
@@ -32,6 +31,27 @@ export default {
       const t = 1000 * position / this.courseLength
       const i = Math.floor(t)
       return 100 * slopePoints[i] + (slopePoints[i + 1] - slopePoints[i]) * (t - i)
+    },
+    getStraights(track) {
+      if (!track) {
+        track = this.trackDetail
+      }
+      const ret = []
+      let mark = 0
+      for (const corner of track.corners) {
+        if (mark !== corner.start) {
+          ret.push({
+            start: mark,
+            end: corner.start
+          })
+        }
+        mark = this.cornerEnd(corner)
+      }
+      ret.push({
+        start: mark,
+        end: this.courseLength
+      })
+      return ret
     }
   }
 }

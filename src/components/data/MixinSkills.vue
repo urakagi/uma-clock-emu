@@ -289,12 +289,6 @@ export default {
             }
           },
         ],
-        gate: [
-          {
-            normal: {name: '集中力', value: 0.9},
-            rare: {name: 'コンセントレーション', value: 0.4}
-          }
-        ],
         heal: [
           {
             normal: {name: 'コーナー回復○', value: 150},
@@ -1016,7 +1010,7 @@ export default {
           {
             normal: {name: '追い上げ', value: 0.15},
             duration: 3,
-            styleLimit: [4],
+            distanceLimit: [4],
             tooltip: '「終盤のどこか」として扱う。実際は加速中に消化されるのが大半。',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -1387,9 +1381,6 @@ export default {
             rare: {name: '先手必勝', value: 0.4},
             styleLimit: [1],
             duration: 1.2,
-            init: function () {
-              this.randoms = thiz.initStraightRandom()
-            },
             check: function () {
               return thiz.isRunningStyle(1) && thiz.currentPhase === 0 && thiz.accTimePassed(5)
             }
@@ -1434,8 +1425,11 @@ export default {
             rare: {name: 'スプリントターボ', value: 0.4},
             duration: 3,
             distanceLimit: [1],
-            check: function () {
-              return thiz.isDistanceType(1) && thiz.isInStraight()
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1663,6 +1657,12 @@ export default {
               return thiz.isContainRandom(this.randoms, startPosition)
             }
           },
+        ],
+        gate: [
+          {
+            normal: {name: '集中力', value: 0.9},
+            rare: {name: 'コンセントレーション', value: 0.4}
+          }
         ],
         speed: [
           {
@@ -2896,50 +2896,57 @@ export default {
       }
       return skillTriggered
     },
+    chooseRandom(start, end) {
+      const realStart = Math.ceil(start / 10.0) * 10
+      const realEnd = Math.ceil(end / 10.0 - 1) * 10
+      const interval = (realEnd - realStart + 1) / 10
+      return Math.floor(Math.random() * interval) * 10 + realStart
+    },
     initCornerRandom() {
       const ret = []
       for (const corner of this.trackDetail.corners.slice(-4)) {
-        ret.push(Math.random() * (this.cornerEnd(corner) - corner.start) + corner.start)
+        ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
       }
       return ret
     },
     initStraightRandom(phaseLimit) {
-      let pos
+      let ret
       do {
-        pos = Math.random() * this.trackDetail.distance
-      } while (this.isInCorner(pos) || (phaseLimit && this.getPhase(pos) !== phaseLimit))
-      return [pos]
+        const straights = this.getStraights()
+        const chosen = Math.floor(Math.random() * straights.length)
+        ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
+      } while (phaseLimit && (this.getPhase(ret) !== phaseLimit))
+      return [ret]
     },
     initPhaseRandom(phase) {
       switch (phase) {
         case 0:
-          return [Math.random() * this.courseLength / 6.0]
+          return [this.chooseRandom(0,  this.courseLength / 6.0)]
         case 1:
-          return [this.courseLength / 6.0 + Math.random() * this.courseLength / 2]
+          return [this.chooseRandom(this.courseLength / 6.0, this.courseLength * 2.0 / 3)]
         case 2:
-          return [this.courseLength * 2 / 3.0 + Math.random() * this.courseLength / 6.0]
+          return [this.chooseRandom(this.courseLength * 2.0 / 3, this.courseLength * 5.0 / 6)]
         case 3:
         default:
-          return [this.courseLength * 5 / 6.0 + Math.random() * this.courseLength / 6.0]
+          return [this.chooseRandom(this.courseLength * 5.0 / 6, this.courseLength)]
       }
     },
     initFinalCornerRandom() {
       const ret = []
       const corner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
-      ret.push(Math.random() * (this.cornerEnd(corner) - corner.start) + corner.start)
+      ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
       return ret
     },
     initFinalStraightRandom() {
       const ret = []
       const finalCorner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
-      const len = this.courseLength - this.cornerEnd(finalCorner)
-      ret.push(Math.random() * len + this.cornerEnd(finalCorner) + 0.1)
+      ret.push(this.chooseRandom(this.cornerEnd(finalCorner), this.courseLength))
       return ret
     },
     initIntervalRandom(startRate, endRate) {
       const start = this.courseLength * startRate
       const end = this.courseLength * endRate
-      return [Math.random() * (end - start) + start]
+      return [this.chooseRandom(start, end)]
     },
     isContainRandom(randoms, startPosition) {
       for (const random of randoms) {
@@ -3095,7 +3102,7 @@ export default {
           all: []
         }
       }
-      const SELF_KEYS = ['passive', 'gate', 'heal', 'targetSpeed', 'acceleration', 'boost']
+      const SELF_KEYS = ['passive', 'heal', 'targetSpeed', 'acceleration', 'boost', 'gate']
       for (const key of SELF_KEYS) {
         o[key] = {
           rare: [],

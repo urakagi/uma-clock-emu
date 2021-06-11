@@ -161,7 +161,7 @@
       <br>
       <el-form-item>
         <el-button @click="exec" type="success">
-          エミューレート開始
+          エミュレート開始
         </el-button>
       </el-form-item>
       <el-form-item label="回数">
@@ -232,7 +232,7 @@
       </table>
     </div>
     <el-divider/>
-    <h3>直近レース詳細({{ formatTime(latestRaceTime) }})</h3>
+    <h3>直近レース詳細({{ formatTime(latestRaceTime, 2) }})</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
@@ -278,6 +278,7 @@
     <h3>注意事項</h3>
     <ol>
       <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
+      <li>灰色の背景は掛かり区間、淡紫色の背景はコーナー。</li>
       <li>データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。多分安定しました。</li>
       <li>ポジションキープを始めとした他ウマ娘が絡む要素は未実装。</li>
       <li>それが条件になるスキルは適当にそれっぽく実装してます。</li>
@@ -286,12 +287,12 @@
       <li><a href="https://twitter.com/urakagi">ツイッターはこ↑こ↓</a></li>
     </ol>
     <el-dialog :visible.sync='emulating' style="text-align: center;">
-      エミューレート中、少々お待ち下さい……
-      <el-progress :percentage="Math.floor(100 * epoch / maxEpoch)"></el-progress>
+      エミュレート中、少々お待ち下さい……
+      <el-progress :percentage="Math.min(100, Math.floor(100 * epoch / maxEpoch))"></el-progress>
       <p>
-        <Adsense
-            data-ad-client="ca-pub-4611969396217909"
-            data-ad-slot="6969023753">
+        <Adsense v-if="production"
+                 data-ad-client="ca-pub-4611969396217909"
+                 data-ad-slot="6969023753">
         </Adsense>
       </p>
     </el-dialog>
@@ -377,7 +378,7 @@ export default {
     this.updateChart()
     if (!this.production) {
       this.umaToLoad = 'test'
-      // this.loadUma()
+      this.loadUma()
       if (this.maxEpoch === 1) {
         this.exec()
       }
@@ -1282,6 +1283,8 @@ export default {
         })
       }
 
+      let cornerIndex = 0
+      let cornerStart = -1
       // const step = Math.floor(this.frames.length / 500)
       const step = 1
       for (let index = 0; index < this.frames.length; index += step) {
@@ -1290,8 +1293,8 @@ export default {
         labels.push(label)
         dataSpeed.push(frame.speed)
         dataSp.push(frame.sp)
-        // Skill annotations
         for (let mi = index; mi < index + step && mi < this.frames.length; mi++) {
+          // Skill annotations
           for (const skill of this.frames[mi].skills) {
             annotations.push({
               type: 'line',
@@ -1317,6 +1320,27 @@ export default {
               }
             })
             nextSkillYAdjust(skillYAdjust)
+          }
+          // コーナー
+          if (!this.isInCorner(this.frames[index].startPosition)
+              && this.isInCorner(this.frames[index].startPosition + this.frames[index].movement)) {
+            cornerStart = index
+          } else if (this.isInCorner(this.frames[index].startPosition)
+              && !this.isInCorner(this.frames[index].startPosition + this.frames[index].movement)) {
+            annotations.push({
+              type: 'box',
+              xMin: cornerStart,
+              xMax: index,
+              yMin: 0,
+              yMax: 100,
+              xScaleID: 'x-axis-0',
+              backgroundColor: 'rgba(225, 190, 255, 0.2)',
+              drawTime: 'beforeDatasetsDraw',
+            })
+            cornerIndex++
+            if (cornerIndex >= 3) {
+              cornerIndex = 0
+            }
           }
         }
         // Phase annotations
