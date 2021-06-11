@@ -3050,6 +3050,9 @@ export default {
           for (const rarity of this.rarities) {
             if (rarity in skill) {
               const copy = {...skill}
+              if (skill[rarity].id) {
+                copy.id = skill[rarity].id
+              }
               copy.name = skill[rarity].name
               copy.value = skill[rarity].value
               if (skill[rarity].duration) {

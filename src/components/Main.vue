@@ -40,6 +40,9 @@
           <el-button slot="reference">リセット</el-button>
         </el-popconfirm>
       </el-form-item>
+      <el-form-item>
+        <el-button @click="importUma">race_horse_data / trained_chara からインポート</el-button>
+      </el-form-item>
       <br>
       <el-form-item label="スピード">
         <el-input v-model="umaStatus.speed" class="input-status"></el-input>
@@ -1159,6 +1162,59 @@ export default {
       this.$message({
         type: 'success',
         message: `${this.umaToLoad}をロードしました。`
+      })
+    },
+    importUma() {
+      this.$prompt('race_horse_data もしくは trained_chara (の JSON) をここに貼り付けてください', '', {
+        confirmButtonText: 'インポート',
+        cancelButtonText: 'キャンセル',
+        inputPattern: /.+/,
+        inputErrorMessage: ''
+      }).then(({value}) => {
+        const raceHorseData = JSON.parse(value)
+
+        this.umaStatus.stamina = raceHorseData['stamina']
+        this.umaStatus.speed = raceHorseData['speed']
+        this.umaStatus.power =
+            raceHorseData['pow'] || raceHorseData['power'] // 'pow' in race_horse_data, 'power' in trained_chara
+        this.umaStatus.guts = raceHorseData['guts']
+        this.umaStatus.wisdom = raceHorseData['wiz']
+
+        const skills = raceHorseData['skill_array']
+
+        this.selectedUnique = 'なし／発動しない' // Reset it to unselected first
+        const uniqueSkills = skills.filter(s => s['skill_id'] < 200000)
+        if (uniqueSkills.length === 1) {
+          const uniqueSkill = uniqueSkills[0]
+          const matchedSkill = this.uniqueSkillData.filter(skill => skill.id === uniqueSkill['skill_id'])[0]
+          if (matchedSkill !== undefined) {
+            this.selectedUnique = matchedSkill.name
+            this.uniqueLevel = uniqueSkill['level']
+          }
+        }
+
+        const nonUniqueSkillIds = new Set(skills.filter(s => s['skill_id'] >= 200000).map(s => s['skill_id']))
+        this.resetHasSkills()
+
+        for (const type in this.skills) {
+          for (const rarity in this.skills[type]) {
+            for (let skillIdx = 0; skillIdx < this.skills[type][rarity].length; skillIdx++) {
+              const skill = this.skills[type][rarity][skillIdx]
+              if (skill.id !== undefined) {
+                if (nonUniqueSkillIds.has(skill.id)) {
+                  this.hasSkills[type][rarity].push(skillIdx)
+                  nonUniqueSkillIds.delete(skill.id) // So things like フラワリー☆マニューバ don't get added twice
+                }
+              }
+            }
+          }
+        }
+
+        this.initCondition()
+        this.$message({
+          type: 'success',
+          message: `インポートに成功しました。脚質と適性を調整してください。`
+        })
       })
     },
     removeUma() {
