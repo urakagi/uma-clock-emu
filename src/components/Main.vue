@@ -232,7 +232,7 @@
       </table>
     </div>
     <el-divider/>
-    <h3>直近レース詳細</h3>
+    <h3>直近レース詳細({{ formatTime(latestRaceTime) }})</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
@@ -278,14 +278,10 @@
     <h3>注意事項</h3>
     <ol>
       <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
-      <li>データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。</li>
+      <li>データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。多分安定しました。</li>
       <li>ポジションキープを始めとした他ウマ娘が絡む要素は未実装。</li>
       <li>それが条件になるスキルは適当にそれっぽく実装してます。</li>
-      <li>掛かりは未実装。</li>
       <li>喰らう妨害スキルは一律発動率80％としています。</li>
-      <li>別情報に地形図がないので坂はJRAの断面図と実際のレース状況を観察して書いたもの。</li>
-      <li>固有スキルのLvは変えられません。まぁ6%とか2%しか変わらないのであまり気にしないで下さい。</li>
-      <li>固有が多すぎるし発動条件どれもこれも面倒臭すぎるしやってられない。足りてないのは気が向いたら追加していく予定。</li>
       <li>作った人：砂井裏鍵。各種別情報は大いに参考させて頂きました。</li>
       <li><a href="https://twitter.com/urakagi">ツイッターはこ↑こ↓</a></li>
     </ol>
@@ -329,8 +325,8 @@ export default {
       },
       passiveBonus: {},
       track: {
-        location: '',
-        course: '',
+        location: '10008',
+        course: '10809',
         surfaceCondition: '0'
       },
       courseList: [],
@@ -367,8 +363,10 @@ export default {
     }
   },
   created() {
-    this.track.location = Object.keys(this.trackData)[0]
+    // FIXME: Change to the course in time
+    this.track.location = Object.keys(this.trackData)[7]
     this.locationChanged(this.track.location)
+    this.track.course = Object.keys(this.courseList)[10]
     this.maxEpoch = localStorage.getItem('maxEpoch')
     if (!this.maxEpoch) {
       this.maxEpoch = 50
@@ -379,7 +377,7 @@ export default {
     this.updateChart()
     if (!this.production) {
       this.umaToLoad = 'test'
-      this.loadUma()
+      // this.loadUma()
       if (this.maxEpoch === 1) {
         this.exec()
       }
@@ -606,11 +604,11 @@ export default {
     skillMenu() {
       const TITLE_TYPE = {
         passive: 'パッシブスキル',
-        gate: 'ゲートスキル',
         heal: '回復スキル',
         targetSpeed: '速度スキル',
         acceleration: '加速度スキル',
         boost: 'ブーストスキル(速度と加速度が両方上がる)',
+        gate: 'ゲートスキル',
         speed: '喰らう減速スキル',
         fatigue: '喰らう疲労スキル',
       }
@@ -622,6 +620,13 @@ export default {
         })
       }
       return ret
+    },
+    latestRaceTime() {
+      if (this.emulations.length === 0) {
+        return 0
+      } else {
+        return this.emulations[this.emulations.length - 1].raceTime
+      }
     },
     avgRaceTime() {
       return this.calcAvg('all', 'raceTime')

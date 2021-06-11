@@ -23,13 +23,7 @@ export default {
         passive: [
           {
             normal: {name: '左回り○', value: 40},
-            status: ['speed'],
-            courseLimit: {
-              'turn': [2]
-            },
-          },
-          {
-            normal: {name: '左回り◎', value: 60},
+            rare: {name: '左回り◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [2]
@@ -37,13 +31,7 @@ export default {
           },
           {
             normal: {name: '右回り○', value: 40},
-            status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
-          },
-          {
-            normal: {name: '右回り◎', value: 60},
+            rare: {name: '右回り◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
@@ -51,13 +39,7 @@ export default {
           },
           {
             normal: {name: '季節ウマ娘○', value: 40},
-            status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
-          },
-          {
-            normal: {name: '季節ウマ娘◎', value: 60},
+            rare: {name: '季節ウマ娘◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
@@ -65,13 +47,7 @@ export default {
           },
           {
             normal: {name: 'おひとり様○', value: 40},
-            status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
-          },
-          {
-            normal: {name: 'おひとり様◎', value: 60},
+            rare: {name: 'おひとり様◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
@@ -79,13 +55,7 @@ export default {
           },
           {
             normal: {name: '伏兵○', value: 40},
-            status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
-          },
-          {
-            normal: {name: '伏兵◎', value: 60},
+            rare: {name: '伏兵◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
@@ -93,15 +63,7 @@ export default {
           },
           {
             normal: {name: '外枠得意○', value: 40},
-            status: ['speed'],
-            tooltip: '発動率44%として扱う(チャンピオンズミーティング基準)',
-            triggerRate: 4.0 / 9,
-            check: function () {
-              return true
-            }
-          },
-          {
-            normal: {name: '外枠得意◎', value: 60},
+            rare: {name: '外枠得意◎', value: 60},
             status: ['speed'],
             tooltip: '発動率44%として扱う(チャンピオンズミーティング基準)',
             triggerRate: 4.0 / 9,
@@ -125,13 +87,7 @@ export default {
           },
           {
             normal: {name: '札幌レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10001]
-            },
-          },
-          {
-            normal: {name: '札幌レース場◎', value: 60},
+            rare: {name: '札幌レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10001]
@@ -139,13 +95,7 @@ export default {
           },
           {
             normal: {name: '函館レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10002]
-            },
-          },
-          {
-            normal: {name: '函館レース場◎', value: 60},
+            rare: {name: '函館レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10002]
@@ -153,13 +103,7 @@ export default {
           },
           {
             normal: {name: '新潟レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10003]
-            },
-          },
-          {
-            normal: {name: '新潟レース場◎', value: 60},
+            rare: {name: '新潟レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10003]
@@ -167,13 +111,7 @@ export default {
           },
           {
             normal: {name: '福島レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10004]
-            },
-          },
-          {
-            normal: {name: '福島レース場◎', value: 60},
+            rare: {name: '福島レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10004]
@@ -181,13 +119,7 @@ export default {
           },
           {
             normal: {name: '中山レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10005]
-            },
-          },
-          {
-            normal: {name: '中山レース場◎', value: 60},
+            rare: {name: '中山レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10005]
@@ -195,13 +127,7 @@ export default {
           },
           {
             normal: {name: '東京レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10006]
-            },
-          },
-          {
-            normal: {name: '東京レース場◎', value: 60},
+            rare: {name: '東京レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10006]
@@ -209,13 +135,7 @@ export default {
           },
           {
             normal: {name: '中京レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10007]
-            },
-          },
-          {
-            normal: {name: '中京レース場◎', value: 60},
+            rare: {name: '中京レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10007]
@@ -223,13 +143,7 @@ export default {
           },
           {
             normal: {name: '京都レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10008]
-            },
-          },
-          {
-            normal: {name: '京都レース場◎', value: 60},
+            rare: {name: '京都レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10008]
@@ -237,13 +151,7 @@ export default {
           },
           {
             normal: {name: '阪神レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10009]
-            },
-          },
-          {
-            normal: {name: '阪神レース場◎', value: 60},
+            rare: {name: '阪神レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10009]
@@ -251,13 +159,7 @@ export default {
           },
           {
             normal: {name: '小倉レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10010]
-            },
-          },
-          {
-            normal: {name: '小倉レース場◎', value: 60},
+            rare: {name: '小倉レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10010]
@@ -265,13 +167,7 @@ export default {
           },
           {
             normal: {name: '大井レース場○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'raceTrackId': [10101]
-            },
-          },
-          {
-            normal: {name: '大井レース場◎', value: 60},
+            rare: {name: '大井レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10101]
@@ -279,13 +175,7 @@ export default {
           },
           {
             normal: {name: '根幹距離○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'distance': [1200, 1600, 2000, 2400, 2800, 3200, 3600]
-            },
-          },
-          {
-            normal: {name: '根幹距離◎', value: 60},
+            rare: {name: '根幹距離◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'distance': [1200, 1600, 2000, 2400, 2800, 3200, 3600]
@@ -293,14 +183,7 @@ export default {
           },
           {
             normal: {name: '非根幹距離○', value: 40},
-            status: ['stamina'],
-            courseLimit: {
-              'distance': [1000, 1100, 1300, 1400, 1500, 1700, 1800, 1900, 2100, 2200
-                , 2300, 2500, 2600, 2700, 2900, 3000, 3100, 3300, 3400, 3500]
-            },
-          },
-          {
-            normal: {name: '非根幹距離◎', value: 60},
+            rare: {name: '非根幹距離◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'distance': [1000, 1100, 1300, 1400, 1500, 1700, 1800, 1900, 2100, 2200
@@ -309,14 +192,7 @@ export default {
           },
           {
             normal: {name: '良馬場○', value: 40},
-            surfaceConditionLimit: ['0'],
-            status: ['power'],
-            check: function () {
-              return thiz.track.surfaceCondition === '0'
-            }
-          },
-          {
-            normal: {name: '良馬場◎', value: 60},
+            rare: {name: '良馬場◎', value: 60},
             surfaceConditionLimit: ['0'],
             status: ['power'],
             check: function () {
@@ -325,14 +201,7 @@ export default {
           },
           {
             normal: {name: '道悪○', value: 40},
-            surfaceConditionLimit: ['1', '2', '3'],
-            status: ['power'],
-            check: function () {
-              return thiz.track.surfaceCondition !== '0'
-            }
-          },
-          {
-            normal: {name: '道悪◎', value: 60},
+            rare: {name: '道悪◎', value: 60},
             surfaceConditionLimit: ['1', '2', '3'],
             status: ['power'],
             check: function () {
@@ -341,13 +210,7 @@ export default {
           },
           {
             normal: {name: '対抗意識○', value: 40},
-            status: ['power'],
-            check: function () {
-              return true
-            }
-          },
-          {
-            normal: {name: '対抗意識◎', value: 60},
+            rare: {name: '対抗意識◎', value: 60},
             status: ['power'],
             check: function () {
               return true
@@ -355,13 +218,7 @@ export default {
           },
           {
             normal: {name: '天気の日○', value: 40},
-            status: ['guts'],
-            check: function () {
-              return true
-            }
-          },
-          {
-            normal: {name: '天気の日◎', value: 60},
+            rare: {name: '天気の日◎', value: 60},
             status: ['guts'],
             check: function () {
               return true
@@ -369,13 +226,7 @@ export default {
           },
           {
             normal: {name: '徹底マーク○', value: 40},
-            status: ['guts'],
-            check: function () {
-              return true
-            }
-          },
-          {
-            normal: {name: '徹底マーク◎', value: 60},
+            rare: {name: '徹底マーク◎', value: 60},
             status: ['guts'],
             check: function () {
               return true
@@ -383,15 +234,7 @@ export default {
           },
           {
             normal: {name: '内枠得意○', value: 40},
-            status: ['wisdom'],
-            tooltip: '発動率33%として扱う(チャンピオンズミーティング基準)',
-            triggerRate: 3.0 / 9,
-            check: function () {
-              return true
-            }
-          },
-          {
-            normal: {name: '内枠得意◎', value: 60},
+            rare: {name: '内枠得意◎', value: 60},
             status: ['wisdom'],
             tooltip: '発動率33%として扱う(チャンピオンズミーティング基準)',
             triggerRate: 3.0 / 9,
@@ -401,14 +244,7 @@ export default {
           },
           {
             normal: {name: '逃げのコツ○', value: 40},
-            status: ['wisdom'],
-            styleLimit: [1],
-            check: function () {
-              return thiz.isRunningStyle(1)
-            }
-          },
-          {
-            normal: {name: '逃げのコツ◎', value: 60},
+            rare: {name: '逃げのコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [1],
             check: function () {
@@ -417,14 +253,7 @@ export default {
           },
           {
             normal: {name: '先行のコツ○', value: 40},
-            status: ['wisdom'],
-            styleLimit: [2],
-            check: function () {
-              return thiz.isRunningStyle(2)
-            }
-          },
-          {
-            normal: {name: '先行のコツ◎', value: 60},
+            rare: {name: '先行のコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [2],
             check: function () {
@@ -433,14 +262,7 @@ export default {
           },
           {
             normal: {name: '差しのコツ○', value: 40},
-            status: ['wisdom'],
-            styleLimit: [3],
-            check: function () {
-              return thiz.isRunningStyle(3)
-            }
-          },
-          {
-            normal: {name: '差しのコツ◎', value: 60},
+            rare: {name: '差しのコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [3],
             check: function () {
@@ -449,14 +271,7 @@ export default {
           },
           {
             normal: {name: '追込のコツ○', value: 40},
-            status: ['wisdom'],
-            styleLimit: [4],
-            check: function () {
-              return thiz.isRunningStyle(4)
-            }
-          },
-          {
-            normal: {name: '追込のコツ◎', value: 60},
+            rare: {name: '追込のコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [4],
             check: function () {
@@ -1476,7 +1291,7 @@ export default {
             }
           },
           {
-            inherit: {name: '∴win Q.E.D.', targetSpeed: 0.15},
+            inherit: {name: '∴win Q.E.D.', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う',
             init: function () {
@@ -1487,7 +1302,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'ブルーローズチェイサー', targetSpeed: 0.15},
+            inherit: {name: 'ブルーローズチェイサー', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動」として扱う',
             init: function () {
@@ -1498,7 +1313,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'Nemesis', targetSpeed: 0.15},
+            inherit: {name: 'Nemesis', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う',
             init: function () {
@@ -1509,7 +1324,7 @@ export default {
             }
           },
           {
-            inherit: {name: '絶対に、ボクだ', targetSpeed: 0.15},
+            inherit: {name: '絶対に、ボクだ', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動」として扱う',
             init: function () {
@@ -1520,7 +1335,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'フラワリー☆マニューバ(前)', targetSpeed: 0.15},
+            inherit: {name: 'フラワリー☆マニューバ(前)', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
             init: function () {
@@ -1531,11 +1346,11 @@ export default {
             }
           },
           {
-            inherit: {name: '薫風、永遠なる瞬間を', targetSpeed: 0.15},
+            inherit: {name: '薫風、永遠なる瞬間を', value: 0.15},
             duration: 3,
             tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
             init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
+              this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
               return thiz.isContainRandom(this.randoms, startPosition)
@@ -1771,8 +1586,7 @@ export default {
             }
           },
           {
-            name: 'フラワリー☆マニューバ(後)',
-            acceleration: 0.2,
+            inherit: {name: 'フラワリー☆マニューバ(後)', value: 0.2},
             duration: 2.4,
             styleLimit: [3, 4],
             tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
@@ -2721,13 +2535,12 @@ export default {
           duration: 5,
           tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
           init: function () {
-            this.randoms = thiz.initFinalCornerRandom()
+            this.randoms = thiz.initPhaseRandom(1)
           },
           check: function (startPosition) {
             return thiz.isContainRandom(this.randoms, startPosition)
           }
         },
-        // Unique speed
         {
           name: '紅焔ギア/LP1211-M',
           acceleration: 0.4,
@@ -2898,7 +2711,6 @@ export default {
             return thiz.isContainRandom(this.randoms, startPosition)
           }
         },
-        // Unique boost
       ],
     }
   },
@@ -2964,9 +2776,15 @@ export default {
         for (const rarity of Object.keys(this.hasSkills[type])) {
           for (const index of this.hasSkills[type][rarity]) {
             const skill = this.skills[type][rarity][index]
+            // Corrupted saved uma
+            if (!skill) {
+              continue
+            }
             let invokeRate
             if (type === 'fatigue' || type === 'speed') {
               invokeRate = 80
+            } else if (type === 'passive') {
+              invokeRate = 100
             } else {
               // FIXME: for debug, always pass wisdom check
               if (this.production) {
