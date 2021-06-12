@@ -1537,8 +1537,8 @@ export default {
             }
           },
           {
-            normal: {name: '垂れウマ回避', value: 0.2},
-            rare: {name: 'ノンストップガール', value: 0.4},
+            normal: {id: 200492, name: '垂れウマ回避', value: 0.2},
+            rare: {id: 200491, name: 'ノンストップガール', value: 0.4},
             duration: 3,
             tooltip: '「終盤のどこか」として扱う。実際に発動するかどうかは自己判断で。',
             init: function () {
@@ -1674,7 +1674,7 @@ export default {
           {
             normal: {id: 200432, name: '集中力', value: 0.9},
             rare: {id: 200431, name: 'コンセントレーション', value: 0.4},
-            inherit: {id: 0, name: 'ゲード難', value: 1.5},
+            inherit: {id: 200433, name: 'ゲート難', value: 1.5},
           }
         ],
         speed: [
@@ -2939,7 +2939,7 @@ export default {
     initPhaseRandom(phase) {
       switch (phase) {
         case 0:
-          return [this.chooseRandom(0,  this.courseLength / 6.0)]
+          return [this.chooseRandom(0, this.courseLength / 6.0)]
         case 1:
           return [this.chooseRandom(this.courseLength / 6.0, this.courseLength * 2.0 / 3)]
         case 2:
