@@ -239,7 +239,7 @@
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
-      コースステータスチェック：{{ displayStatusCheck }}
+      ステータス総合：{{ totalStatus }}／コースステータスチェック：{{ displayStatusCheck }}
     </div>
     <div>
       補正後：スピード{{ modifiedSpeed.toFixed(1) }} ／スタミナ{{ modifiedStamina.toFixed(1) }} ／パワー{{ modifiedPower.toFixed(1) }}
@@ -316,11 +316,11 @@ export default {
   data() {
     return {
       umaStatus: {
-        speed: 900,
-        stamina: 1000,
-        power: 700,
-        guts: 400,
-        wisdom: 400,
+        speed: '',
+        stamina: '',
+        power: '',
+        guts: '',
+        wisdom: '',
         condition: '2',
         style: '4',
         distanceFit: 'A',
@@ -711,6 +711,11 @@ export default {
         return '-'
       }
       return (-sum / count).toFixed(1)
+    },
+    totalStatus() {
+      return parseInt(this.umaStatus.speed) + parseInt(this.umaStatus.stamina)
+          + parseInt(this.umaStatus.power) + parseInt(this.umaStatus.guts)
+          + parseInt(this.umaStatus.wisdom)
     },
     displayStatusCheck() {
       const STATUS = ['', 'スピード', 'スタミナ', 'パワー', '根性', '賢さ']
