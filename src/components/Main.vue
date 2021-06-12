@@ -756,10 +756,10 @@ export default {
       this.initCondition()
       this.initTemptation()
       this.initializeSkills()
-      this.sp = this.spMax
-      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
       this.startDelay = Math.random() * 0.1
       this.triggerStartSkills()
+      this.sp = this.spMax
+      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
       this.progressRace()
     },
     resetRace() {
@@ -1528,5 +1528,11 @@ export default {
   padding: 2px;
   min-width: 90px;
 }
+</style>
 
+<style>
+.el-collapse-item__header {
+  font-size: large;
+  color: blueviolet;
+}
 </style>
