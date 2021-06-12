@@ -1673,7 +1673,7 @@ export default {
         gate: [
           {
             normal: {id: 200432, name: '集中力', value: 0.9},
-            rare: {id: 200431, name: 'コンセントレーション', value: 0.4}
+            rare: {id: 200431, name: 'コンセントレーション', value: 0.4},
             inherit: {id: 0, name: 'ゲード難', value: 1.5},
           }
         ],
