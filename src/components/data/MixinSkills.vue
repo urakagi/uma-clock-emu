@@ -1673,7 +1673,8 @@ export default {
         gate: [
           {
             normal: {name: '集中力', value: 0.9},
-            rare: {name: 'コンセントレーション', value: 0.4}
+            rare: {name: 'コンセントレーション', value: 0.4},
+            inherit: {name: 'ゲード難', value: 1.5},
           }
         ],
         speed: [
