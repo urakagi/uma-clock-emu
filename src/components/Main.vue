@@ -41,7 +41,9 @@
         </el-popconfirm>
       </el-form-item>
       <el-form-item>
-        <el-button @click="importUma">race_horse_data / trained_chara からインポート</el-button>
+        <el-tooltip content="race_horse_data / trained_chara">
+          <el-button @click="importUma">JSON からインポート</el-button>
+        </el-tooltip>
       </el-form-item>
       <br>
       <el-form-item label="スピード">
