@@ -22,16 +22,16 @@ export default {
       skillData: {
         passive: [
           {
-            normal: {name: '左回り○', value: 40},
-            rare: {name: '左回り◎', value: 60},
+            normal: {id: 200022, name: '左回り○', value: 40},
+            rare: {id: 200021, name: '左回り◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [2]
             },
           },
           {
-            normal: {name: '右回り○', value: 40},
-            rare: {name: '右回り◎', value: 60},
+            normal: {id: 200012, name: '右回り○', value: 40},
+            rare: {id: 200011, name: '右回り◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
@@ -46,24 +46,24 @@ export default {
             },
           },
           {
-            normal: {name: 'おひとり様○', value: 40},
-            rare: {name: 'おひとり様◎', value: 60},
+            normal: {id: 200272, name: 'おひとり様○', value: 40},
+            rare: {id: 200271, name: 'おひとり様◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
             },
           },
           {
-            normal: {name: '伏兵○', value: 40},
-            rare: {name: '伏兵◎', value: 60},
+            normal: {id: 200302, name: '伏兵○', value: 40},
+            rare: {id: 200301, name: '伏兵◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
             },
           },
           {
-            normal: {name: '外枠得意○', value: 40},
-            rare: {name: '外枠得意◎', value: 60},
+            normal: {id: 200262, name: '外枠得意○', value: 40},
+            rare: {id: 200261, name: '外枠得意◎', value: 60},
             status: ['speed'],
             tooltip: '発動率44%として扱う(チャンピオンズミーティング基準)',
             triggerRate: 4.0 / 9,
@@ -72,118 +72,118 @@ export default {
             }
           },
           {
-            normal: {name: 'シンパシー', value: 40},
+            normal: {id: 201631, name: 'シンパシー', value: 40},
             status: ['speed'],
             check: function () {
               return true
             }
           },
           {
-            normal: {name: '一匹狼', value: 40},
+            normal: {id: 201641, name: '一匹狼', value: 40},
             status: ['speed'],
             check: function () {
               return true
             }
           },
           {
-            normal: {name: '札幌レース場○', value: 40},
-            rare: {name: '札幌レース場◎', value: 60},
+            normal: {id: 200082, name: '札幌レース場○', value: 40},
+            rare: {id: 200081, name: '札幌レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10001]
             },
           },
           {
-            normal: {name: '函館レース場○', value: 40},
-            rare: {name: '函館レース場◎', value: 60},
+            normal: {id: 200092, name: '函館レース場○', value: 40},
+            rare: {id: 200091, name: '函館レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10002]
             },
           },
           {
-            normal: {name: '新潟レース場○', value: 40},
-            rare: {name: '新潟レース場◎', value: 60},
+            normal: {id: 200112, name: '新潟レース場○', value: 40},
+            rare: {id: 200111, name: '新潟レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10003]
             },
           },
           {
-            normal: {name: '福島レース場○', value: 40},
-            rare: {name: '福島レース場◎', value: 60},
+            normal: {id: 200102, name: '福島レース場○', value: 40},
+            rare: {id: 200101, name: '福島レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10004]
             },
           },
           {
-            normal: {name: '中山レース場○', value: 40},
-            rare: {name: '中山レース場◎', value: 60},
+            normal: {id: 200042, name: '中山レース場○', value: 40},
+            rare: {id: 200041, name: '中山レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10005]
             },
           },
           {
-            normal: {name: '東京レース場○', value: 40},
-            rare: {name: '東京レース場◎', value: 60},
+            normal: {id: 200032, name: '東京レース場○', value: 40},
+            rare: {id: 200031, name: '東京レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10006]
             },
           },
           {
-            normal: {name: '中京レース場○', value: 40},
-            rare: {name: '中京レース場◎', value: 60},
+            normal: {id: 200072, name: '中京レース場○', value: 40},
+            rare: {id: 200071, name: '中京レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10007]
             },
           },
           {
-            normal: {name: '京都レース場○', value: 40},
-            rare: {name: '京都レース場◎', value: 60},
+            normal: {id: 200062, name: '京都レース場○', value: 40},
+            rare: {id: 200061, name: '京都レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10008]
             },
           },
           {
-            normal: {name: '阪神レース場○', value: 40},
-            rare: {name: '阪神レース場◎', value: 60},
+            normal: {id: 200052, name: '阪神レース場○', value: 40},
+            rare: {id: 200051, name: '阪神レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10009]
             },
           },
           {
-            normal: {name: '小倉レース場○', value: 40},
-            rare: {name: '小倉レース場◎', value: 60},
+            normal: {id: 200122, name: '小倉レース場○', value: 40},
+            rare: {id: 200121, name: '小倉レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10010]
             },
           },
           {
-            normal: {name: '大井レース場○', value: 40},
-            rare: {name: '大井レース場◎', value: 60},
+            normal: {id: 200952, name: '大井レース場○', value: 40},
+            rare: {id: 200951, name: '大井レース場◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10101]
             },
           },
           {
-            normal: {name: '根幹距離○', value: 40},
-            rare: {name: '根幹距離◎', value: 60},
+            normal: {id: 200132, name: '根幹距離○', value: 40},
+            rare: {id: 200131, name: '根幹距離◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'distance': [1200, 1600, 2000, 2400, 2800, 3200, 3600]
             },
           },
           {
-            normal: {name: '非根幹距離○', value: 40},
-            rare: {name: '非根幹距離◎', value: 60},
+            normal: {id: 200142, name: '非根幹距離○', value: 40},
+            rare: {id: 200141, name: '非根幹距離◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'distance': [1000, 1100, 1300, 1400, 1500, 1700, 1800, 1900, 2100, 2200
@@ -191,8 +191,8 @@ export default {
             },
           },
           {
-            normal: {name: '良馬場○', value: 40},
-            rare: {name: '良馬場◎', value: 60},
+            normal: {id: 200152, name: '良バ場○', value: 40},
+            rare: {id: 200151, name: '良バ場◎', value: 60},
             surfaceConditionLimit: ['0'],
             status: ['power'],
             check: function () {
@@ -200,8 +200,8 @@ export default {
             }
           },
           {
-            normal: {name: '道悪○', value: 40},
-            rare: {name: '道悪◎', value: 60},
+            normal: {id: 200162, name: '道悪○', value: 40},
+            rare: {id: 200161, name: '道悪◎', value: 60},
             surfaceConditionLimit: ['1', '2', '3'],
             status: ['power'],
             check: function () {
@@ -209,8 +209,8 @@ export default {
             }
           },
           {
-            normal: {name: '対抗意識○', value: 40},
-            rare: {name: '対抗意識◎', value: 60},
+            normal: {id: 200282, name: '対抗意識○', value: 40},
+            rare: {id: 200281, name: '対抗意識◎', value: 60},
             status: ['power'],
             check: function () {
               return true
@@ -225,16 +225,16 @@ export default {
             }
           },
           {
-            normal: {name: '徹底マーク○', value: 40},
-            rare: {name: '徹底マーク◎', value: 60},
+            normal: {id: 200292, name: '徹底マーク○', value: 40},
+            rare: {id: 200291, name: '徹底マーク◎', value: 60},
             status: ['guts'],
             check: function () {
               return true
             }
           },
           {
-            normal: {name: '内枠得意○', value: 40},
-            rare: {name: '内枠得意◎', value: 60},
+            normal: {id: 200252, name: '内枠得意○', value: 40},
+            rare: {id: 200251, name: '内枠得意◎', value: 60},
             status: ['wisdom'],
             tooltip: '発動率33%として扱う(チャンピオンズミーティング基準)',
             triggerRate: 3.0 / 9,
@@ -243,8 +243,8 @@ export default {
             }
           },
           {
-            normal: {name: '逃げのコツ○', value: 40},
-            rare: {name: '逃げのコツ◎', value: 60},
+            normal: {id: 201522, name: '逃げのコツ○', value: 40},
+            rare: {id: 201521, name: '逃げのコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [1],
             check: function () {
@@ -252,8 +252,8 @@ export default {
             }
           },
           {
-            normal: {name: '先行のコツ○', value: 40},
-            rare: {name: '先行のコツ◎', value: 60},
+            normal: {id: 201532, name: '先行のコツ○', value: 40},
+            rare: {id: 201531, name: '先行のコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [2],
             check: function () {
@@ -261,8 +261,8 @@ export default {
             }
           },
           {
-            normal: {name: '差しのコツ○', value: 40},
-            rare: {name: '差しのコツ◎', value: 60},
+            normal: {id: 201542, name: '差しのコツ○', value: 40},
+            rare: {id: 201541, name: '差しのコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [3],
             check: function () {
@@ -270,8 +270,8 @@ export default {
             }
           },
           {
-            normal: {name: '追込のコツ○', value: 40},
-            rare: {name: '追込のコツ◎', value: 60},
+            normal: {id: 201552, name: '追込のコツ○', value: 40},
+            rare: {id: 201551, name: '追込のコツ◎', value: 60},
             status: ['wisdom'],
             styleLimit: [4],
             check: function () {
@@ -279,8 +279,8 @@ export default {
             }
           },
           {
-            normal: {name: 'ラッキーセブン', value: 40},
-            rare: {name: 'スーパーラッキーセブン', value: 60},
+            normal: {id: 201562, name: 'ラッキーセブン', value: 40},
+            rare: {id: 201561, name: 'スーパーラッキーセブン', value: 60},
             status: ['speed', 'stamina', 'power'],
             tooltip: '発動率1/18として扱う(チャンピオンズミーティング基準)',
             triggerRate: 1.0 / 18,
@@ -291,8 +291,8 @@ export default {
         ],
         heal: [
           {
-            normal: {name: 'コーナー回復○', value: 150},
-            rare: {name: '円弧のマエストロ', value: 550},
+            normal: {id: 200352, name: 'コーナー回復○', value: 150},
+            rare: {id: 200351, name: '円弧のマエストロ', value: 550},
             init: function () {
               this.randoms = thiz.initCornerRandom()
             },
@@ -301,8 +301,8 @@ export default {
             }
           },
           {
-            normal: {name: '直線回復', value: 150},
-            rare: {name: '好転一息', value: 550},
+            normal: {id: 200382, name: '直線回復', value: 150},
+            rare: {id: 200381, name: '好転一息', value: 550},
             init: function () {
               this.randoms = thiz.initStraightRandom()
             },
@@ -311,8 +311,8 @@ export default {
             }
           },
           {
-            normal: {name: '深呼吸', value: 150},
-            rare: {name: 'クールダウン', value: 550},
+            normal: {id: 200742, name: '深呼吸', value: 150},
+            rare: {id: 200741, name: 'クールダウン', value: 550},
             distanceLimit: [4],
             init: function () {
               this.randoms = thiz.initStraightRandom()
@@ -322,7 +322,7 @@ export default {
             }
           },
           {
-            normal: {name: 'スリーセブン', value: 150},
+            normal: {id: 201571, name: 'スリーセブン', value: 150},
             init: function () {
               this.randoms = [thiz.courseLength - 777]
             },
@@ -331,14 +331,14 @@ export default {
             }
           },
           {
-            normal: {name: 'ふり絞り', value: 150},
+            normal: {id: 201621, name: 'ふり絞り', value: 150},
             check: function () {
               return thiz.skillTriggerCount[2] + thiz.skillTriggerCount[3] >= 3
             }
           },
           {
-            normal: {name: '下校の楽しみ', value: 150},
-            rare: {name: '下校後のスペシャリスト', value: 550},
+            normal: {id: 201482, name: '下校の楽しみ', value: 150},
+            rare: {id: 201481, name: '下校後のスペシャリスト', value: 550},
             styleLimit: [4],
             check: function () {
               return thiz.accTimePassed(10) && thiz.isRunningStyle(4)
@@ -346,8 +346,8 @@ export default {
             }
           },
           {
-            normal: {name: '勢い任せ', value: 150},
-            rare: {name: 'じゃじゃウマ娘', value: 550},
+            normal: {id: 201282, name: '勢い任せ', value: 150},
+            rare: {id: 201281, name: 'じゃじゃウマ娘', value: 550},
             styleLimit: [1],
             check: function () {
               return thiz.accTimePassed(10) && thiz.isRunningStyle(1)
@@ -355,8 +355,8 @@ export default {
             }
           },
           {
-            normal: {name: '栄養補給', value: 150},
-            rare: {name: '食いしん坊', value: 550},
+            normal: {id: 201352, name: '栄養補給', value: 150},
+            rare: {id: 201351, name: '食いしん坊', value: 550},
             styleLimit: [2],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -366,8 +366,8 @@ export default {
             }
           },
           {
-            normal: {name: '好位追走', value: 150},
-            rare: {name: 'レースプランナー', value: 550},
+            normal: {id: 200572, name: '好位追走', value: 150},
+            rare: {id: 200571, name: 'レースプランナー', value: 550},
             styleLimit: [2],
             tooltip: '順位<=50%は満たしていると見なす',
             init: function () {
@@ -378,7 +378,7 @@ export default {
             }
           },
           {
-            normal: {name: '様子見', value: 150},
+            normal: {id: 200662, name: '様子見', value: 150},
             styleLimit: [3, 4],
             distanceLimit: [1],
             tooltip: '順位>50%は満たしていると見なす',
@@ -390,7 +390,7 @@ export default {
             }
           },
           {
-            normal: {name: 'スタミナイーター', value: 150},
+            normal: {id: 201222, name: 'スタミナイーター', value: 150},
             styleLimit: [2, 3, 4],
             distanceLimit: [4],
             tooltip: '5番手かそれ以降満たしていると見なす',
@@ -402,8 +402,8 @@ export default {
             }
           },
           {
-            normal: {name: '前途洋々', value: 150},
-            rare: {name: '切り開く者', value: 550},
+            normal: {id: 200712, name: '前途洋々', value: 150},
+            rare: {id: 200711, name: '切り開く者', value: 550},
             styleLimit: [1, 2],
             distanceLimit: [3],
             tooltip: 'ランダム発動地点で1番手限定なので見た目以上に発動が厳しい。これを満たしていると見なす',
@@ -415,8 +415,8 @@ export default {
             }
           },
           {
-            normal: {name: '後方待機', value: 150},
-            rare: {name: '眠れる獅子', value: 550},
+            normal: {id: 200622, name: '後方待機', value: 150},
+            rare: {id: 200621, name: '眠れる獅子', value: 550},
             styleLimit: [4],
             tooltip: '位置>=75%は満たしていると見なす。先行勢より条件が難しいので注意すべし。特にゴルシ。',
             init: function () {
@@ -427,7 +427,7 @@ export default {
             }
           },
           {
-            normal: {name: 'パス上手', value: 150},
+            normal: {id: 201202, name: 'パス上手', value: 150},
             distanceLimit: [4],
             tooltip: '「序盤か中盤のどこかで発動」として扱う。適当実装注意。',
             init: function () {
@@ -443,8 +443,8 @@ export default {
             }
           },
           {
-            normal: {name: '軽やかなステップ', value: 150},
-            rare: {name: '神業ステップ', value: 550},
+            normal: {id: 201142, name: '軽やかステップ', value: 150},
+            rare: {id: 201141, name: '神業ステップ', value: 550},
             distanceLimit: [3],
             tooltip: '「スタート後20秒で発動」として扱う。大体そこら辺で内コースを取り始めるため。多分（ガバ）',
             check: function () {
@@ -452,8 +452,8 @@ export default {
             }
           },
           {
-            normal: {name: 'スタミナキープ', value: 150},
-            rare: {name: '余裕綽々', value: 550},
+            normal: {id: 200562, name: 'スタミナキープ', value: 150},
+            rare: {id: 200561, name: '余裕綽々', value: 550},
             styleLimit: [2],
             tooltip: '順位<=50%は満たしていると見なす',
             init: function () {
@@ -465,8 +465,8 @@ export default {
             }
           },
           {
-            normal: {name: '展開窺い', value: 150},
-            rare: {name: '慧眼', value: 550},
+            normal: {id: 200692, name: '展開窺い', value: 150},
+            rare: {id: 200691, name: '慧眼', value: 550},
             distanceLimit: [2],
             styleLimit: [3, 4],
             tooltip: '順位>50%は満たしていると見なす。実質差し追込限定。',
@@ -479,7 +479,7 @@ export default {
             }
           },
           {
-            normal: {name: '小休憩', value: 150},
+            normal: {id: 201422, name: '小休憩', value: 150},
             styleLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -489,15 +489,15 @@ export default {
             }
           },
           {
-            normal: {name: '隠れ蓑', value: 150},
-            rare: {name: '鋼の意志', value: 550},
+            normal: {id: 200442, name: '隠れ蓑', value: 150},
+            rare: {id: 200441, name: '鋼の意志', value: 550},
             tooltip: '「上り坂で発動」として扱う（一番現実的な発動方法なため）。実戦でやろうとしたら自前の低パワー逃げ馬が必要で先行馬限定とか色々厳しそうだけど適当実装なので自己判断＆自己責任で。',
             check: function () {
               return thiz.accTimePassed(5) && thiz.isInSlope('up')
             }
           },
           {
-            normal: {name: '冷静', value: 150},
+            normal: {id: 201492, name: '冷静', value: 150},
             styleLimit: [4],
             tooltip: '「中盤のどこかで発動」として扱う。適当実装注意。',
             init: function () {
@@ -509,8 +509,8 @@ export default {
             }
           },
           {
-            normal: {name: 'ペースキープ', value: 150},
-            rare: {name: '不屈の心', value: 550},
+            normal: {id: 200472, name: 'ペースキープ', value: 150},
+            rare: {id: 200471, name: '不屈の心', value: 550},
             tooltip: '「中盤のどこか」として扱う。実戦で発動できるかどうかは各自判断すべし。',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -520,8 +520,8 @@ export default {
             }
           },
           {
-            normal: {name: 'ウマ込み冷静', value: 150},
-            rare: {name: 'どこ吹く風', value: 550},
+            normal: {id: 200482, name: 'ウマ込み冷静', value: 150},
+            rare: {id: 200481, name: 'どこ吹く風', value: 550},
             tooltip: '「中盤のどこか」として扱う。実戦で発動できるかどうかは各自判断すべし。ていうかあまり発動しないんじゃね？',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -531,22 +531,22 @@ export default {
             }
           },
           {
-            normal: {name: '別腹タンク', value: 150},
-            rare: {name: '火事場のバ鹿力', value: 550},
+            normal: {id: 200762, name: '別腹タンク', value: 150},
+            rare: {id: 200761, name: '火事場のバ鹿力', value: 550},
             distanceLimit: [4],
             check: function () {
               return thiz.isDistanceType(4) && thiz.sp <= 0
             }
           },
           {
-            inherit: {name: 'U=ma2', value: 150},
+            inherit: {id: 900321, name: 'U=ma2', value: 150},
             tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
             check: function () {
               return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
             }
           },
           {
-            inherit: {name: 'ピュリティオブハート', value: 150},
+            inherit: {id: 900451, name: 'ピュリティオブハート', value: 150},
             heal: 583,
             tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
             init: function () {
@@ -557,7 +557,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'ワクワククライマックス', value: 150},
+            inherit: {id: 900521, name: 'ワクワククライマックス', value: 150},
             tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
             check: function () {
               return thiz.isInFinalCorner()
@@ -566,8 +566,8 @@ export default {
         ],
         targetSpeed: [
           {
-            normal: {name: 'コーナー巧者○', value: 0.15},
-            rare: {name: '弧線のプロフェッサー', value: 0.35},
+            normal: {id: 200332, name: 'コーナー巧者○', value: 0.15},
+            rare: {id: 200331, name: '弧線のプロフェッサー', value: 0.35},
             duration: 1.8,
             cd: 30,
             init: function () {
@@ -578,8 +578,8 @@ export default {
             }
           },
           {
-            normal: {name: '短距離コーナー○', value: 0.15},
-            rare: {name: '短距離コーナー◎', value: 0.25},
+            normal: {id: 200972, name: '短距離コーナー○', value: 0.15},
+            rare: {id: 200971, name: '短距離コーナー◎', value: 0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -590,8 +590,8 @@ export default {
             }
           },
           {
-            normal: {name: 'マイルコーナー○', value: 0.15},
-            rare: {name: 'マイルコーナー◎', value: 0.25},
+            normal: {id: 201042, name: 'マイルコーナー○', value: 0.15},
+            rare: {id: 201041, name: 'マイルコーナー◎', value: 0.25},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -602,8 +602,8 @@ export default {
             }
           },
           {
-            normal: {name: '中距離コーナー○', value: 0.15},
-            rare: {name: '中距離コーナー◎', value: 0.25},
+            normal: {id: 201112, name: '中距離コーナー○', value: 0.15},
+            rare: {id: 201111, name: '中距離コーナー◎', value: 0.25},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -614,8 +614,8 @@ export default {
             }
           },
           {
-            normal: {name: '長距離コーナー○', value: 0.15},
-            rare: {name: '長距離コーナー◎', value: 0.25},
+            normal: {id: 201182, name: '長距離コーナー○', value: 0.15},
+            rare: {id: 201181, name: '長距離コーナー◎', value: 0.25},
             duration: 3,
             distanceLimit: [4],
             init: function () {
@@ -626,8 +626,8 @@ export default {
             }
           },
           {
-            normal: {name: '逃げコーナー○', value: 0.15},
-            rare: {name: '逃げコーナー◎', value: 0.25},
+            normal: {id: 201252, name: '逃げコーナー○', value: 0.15},
+            rare: {id: 201251, name: '逃げコーナー◎', value: 0.25},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -638,8 +638,8 @@ export default {
             }
           },
           {
-            normal: {name: '先行コーナー○', value: 0.15},
-            rare: {name: '先行コーナー◎', value: 0.25},
+            normal: {id: 201322, name: '先行コーナー○', value: 0.15},
+            rare: {id: 201321, name: '先行コーナー◎', value: 0.25},
             duration: 3,
             styleLimit: [2],
             init: function () {
@@ -650,8 +650,8 @@ export default {
             }
           },
           {
-            normal: {name: '差しコーナー○', value: 0.15},
-            rare: {name: '差しコーナー◎', value: 0.25},
+            normal: {id: 201392, name: '差しコーナー○', value: 0.15},
+            rare: {id: 201391, name: '差しコーナー◎', value: 0.25},
             duration: 3,
             styleLimit: [3],
             init: function () {
@@ -662,8 +662,8 @@ export default {
             }
           },
           {
-            normal: {name: '追込コーナー○', value: 0.15},
-            rare: {name: '追込コーナー◎', value: 0.25},
+            normal: {id: 201462, name: '追込コーナー○', value: 0.15},
+            rare: {id: 201461, name: '追込コーナー◎', value: 0.25},
             duration: 3,
             styleLimit: [4],
             init: function () {
@@ -674,8 +674,8 @@ export default {
             }
           },
           {
-            normal: {name: '直線巧者', value: 0.15},
-            rare: {name: 'ハヤテ一文字', value: 0.35},
+            normal: {id: 200362, name: '直線巧者', value: 0.15},
+            rare: {id: 200361, name: 'ハヤテ一文字', value: 0.35},
             duration: 0.9,
             cd: 30,
             init: function () {
@@ -686,8 +686,8 @@ export default {
             }
           },
           {
-            normal: {name: '短距離直線○', value: 0.15},
-            rare: {name: '短距離直線◎', value: 0.25},
+            normal: {id: 200962, name: '短距離直線○', value: 0.15},
+            rare: {id: 200961, name: '短距離直線◎', value: 0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -698,8 +698,8 @@ export default {
             }
           },
           {
-            normal: {name: 'マイル直線○', value: 0.15},
-            rare: {name: 'マイル直線◎', value: 0.25},
+            normal: {id: 201032, name: 'マイル直線○', value: 0.15},
+            rare: {id: 201031, name: 'マイル直線◎', value: 0.25},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -710,8 +710,8 @@ export default {
             }
           },
           {
-            normal: {name: '中距離直線○', value: 0.15},
-            rare: {name: '中距離直線◎', value: 0.25},
+            normal: {id: 201102, name: '中距離直線○', value: 0.15},
+            rare: {id: 201101, name: '中距離直線◎', value: 0.25},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -722,8 +722,8 @@ export default {
             }
           },
           {
-            normal: {name: '長距離直線○', value: 0.15},
-            rare: {name: '長距離直線◎', value: 0.25},
+            normal: {id: 201172, name: '長距離直線○', value: 0.15},
+            rare: {id: 201171, name: '長距離直線◎', value: 0.25},
             duration: 3,
             distanceLimit: [4],
             init: function () {
@@ -734,8 +734,8 @@ export default {
             }
           },
           {
-            normal: {name: '逃げ直線○', value: 0.15},
-            rare: {name: '逃げ直線◎', value: 0.25},
+            normal: {id: 201242, name: '逃げ直線○', value: 0.15},
+            rare: {id: 201241, name: '逃げ直線◎', value: 0.25},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -746,8 +746,8 @@ export default {
             }
           },
           {
-            normal: {name: '先行直線○', value: 0.15},
-            rare: {name: '先行直線◎', value: 0.25},
+            normal: {id: 201312, name: '先行直線○', value: 0.15},
+            rare: {id: 201311, name: '先行直線◎', value: 0.25},
             duration: 3,
             styleLimit: [2],
             init: function () {
@@ -758,8 +758,8 @@ export default {
             }
           },
           {
-            normal: {name: '差し直線○', value: 0.15},
-            rare: {name: '差し直線◎', value: 0.25},
+            normal: {id: 201382, name: '差し直線○', value: 0.15},
+            rare: {id: 201381, name: '差し直線◎', value: 0.25},
             duration: 3,
             styleLimit: [3],
             init: function () {
@@ -770,8 +770,8 @@ export default {
             }
           },
           {
-            normal: {name: '追込直線○', value: 0.15},
-            rare: {name: '追込直線◎', value: 0.25},
+            normal: {id: 201452, name: '追込直線○', value: 0.15},
+            rare: {id: 201451, name: '追込直線◎', value: 0.25},
             duration: 3,
             styleLimit: [4],
             init: function () {
@@ -782,8 +782,8 @@ export default {
             }
           },
           {
-            normal: {name: '急ぎ足', value: 0.15},
-            rare: {name: '脱出術', value: 0.35},
+            normal: {id: 200542, name: '急ぎ足', value: 0.15},
+            rare: {id: 200541, name: '脱出術', value: 0.35},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -794,8 +794,8 @@ export default {
             }
           },
           {
-            normal: {name: '位置取り押し上げ', value: 0.15},
-            rare: {name: '迅速果断', value: 0.35},
+            normal: {id: 200592, name: '位置取り押し上げ', value: 0.15},
+            rare: {id: 200591, name: '迅速果断', value: 0.35},
             duration: 1.8,
             styleLimit: [3],
             tooltip: '順位>50%を満たしたと見なす',
@@ -807,7 +807,7 @@ export default {
             }
           },
           {
-            normal: {name: '先頭プライド', value: 0.15},
+            normal: {id: 201272, name: '先頭プライド', value: 0.15},
             duration: 3,
             styleLimit: [1],
             tooltip: '「序盤のどこかで発動」として扱う',
@@ -820,8 +820,8 @@ export default {
             }
           },
           {
-            normal: {name: '抜け出し準備', value: 0.15},
-            rare: {name: 'スピードスター', value: 0.35},
+            normal: {id: 200582, name: '抜け出し準備', value: 0.15},
+            rare: {id: 200581, name: 'スピードスター', value: 0.35},
             duration: 1.2,
             styleLimit: [2],
             tooltip: '順位条件の<=50%は満たしていると見なす',
@@ -833,8 +833,8 @@ export default {
             }
           },
           {
-            normal: {name: '外差し準備', value: 0.15},
-            rare: {name: '昇り龍', value: 0.35},
+            normal: {id: 200612, name: '外差し準備', value: 0.15},
+            rare: {id: 200611, name: '昇り龍', value: 0.35},
             duration: 3,
             styleLimit: [3],
             tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
@@ -846,7 +846,7 @@ export default {
             }
           },
           {
-            normal: {name: '十万バリキ', value: 0.15},
+            normal: {id: 201412, name: '十万バリキ', value: 0.15},
             duration: 1.8,
             styleLimit: [3],
             check: function () {
@@ -854,8 +854,8 @@ export default {
             }
           },
           {
-            normal: {name: '大きなリード', value: 0.15},
-            rare: {name: '圧倒的リード', value: 0.35},
+            normal: {id: 200982, name: '大きなリード', value: 0.15},
+            rare: {id: 200981, name: '圧倒的リード', value: 0.35},
             duration: 1.2,
             distanceLimit: [1],
             styleLimit: [1],
@@ -865,8 +865,8 @@ export default {
             }
           },
           {
-            normal: {name: '詰め寄り', value: 0.15},
-            rare: {name: '電撃の煌めき', value: 0.35},
+            normal: {id: 200672, name: '詰め寄り', value: 0.15},
+            rare: {id: 200671, name: '電撃の煌めき', value: 0.35},
             duration: 3,
             distanceLimit: [1],
             styleLimit: [3, 4],
@@ -879,8 +879,8 @@ export default {
             }
           },
           {
-            normal: {name: '積極策', value: 0.15},
-            rare: {name: 'マイルの支配者', value: 0.35},
+            normal: {id: 200682, name: '積極策', value: 0.15},
+            rare: {id: 200681, name: 'マイルの支配者', value: 0.35},
             duration: 3,
             distanceLimit: [2],
             styleLimit: [1, 2],
@@ -894,8 +894,8 @@ export default {
             }
           },
           {
-            normal: {name: 'ギアシフト', value: 0.15},
-            rare: {name: 'ギアチェンジ', value: 0.35},
+            normal: {id: 201052, name: 'ギアシフト', value: 0.15},
+            rare: {id: 201051, name: 'ギアチェンジ', value: 0.35},
             duration: 1.2,
             distanceLimit: [2],
             styleLimit: [1, 2],
@@ -908,8 +908,8 @@ export default {
             }
           },
           {
-            normal: {name: '負けん気', value: 0.15},
-            rare: {name: '姉御肌', value: 0.35},
+            normal: {id: 201072, name: '負けん気', value: 0.15},
+            rare: {id: 201071, name: '姉御肌', value: 0.35},
             duration: 1.8,
             distanceLimit: [2],
             tooltip: '「中盤のどこか」として扱う。',
@@ -922,8 +922,8 @@ export default {
             }
           },
           {
-            normal: {name: 'テンポアップ', value: 0.15},
-            rare: {name: 'キラーチューン', value: 0.35},
+            normal: {id: 200722, name: 'テンポアップ', value: 0.15},
+            rare: {id: 200721, name: 'キラーチューン', value: 0.35},
             duration: 0.9,
             distanceLimit: [3],
             styleLimit: [1, 2],
@@ -936,8 +936,8 @@ export default {
             }
           },
           {
-            normal: {name: '食い下がり', value: 0.15},
-            rare: {name: '勝利への執念', value: 0.35},
+            normal: {id: 200732, name: '食い下がり', value: 0.15},
+            rare: {id: 200731, name: '勝利への執念', value: 0.35},
             duration: 3,
             distanceLimit: [3],
             tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
@@ -949,7 +949,7 @@ export default {
             }
           },
           {
-            normal: {name: '内弁慶', value: 0.15},
+            normal: {id: 200752, name: '内弁慶', value: 0.15},
             duration: 3,
             distanceLimit: [4],
             tooltip: '内ラチ側にいると見なす。実質逃げ馬用かな？知らないけど。',
@@ -961,8 +961,8 @@ export default {
             }
           },
           {
-            normal: {name: 'リードキープ', value: 0.15},
-            rare: {name: '先陣の心得', value: 0.35},
+            normal: {id: 201192, name: 'リードキープ', value: 0.15},
+            rare: {id: 201191, name: '先陣の心得', value: 0.35},
             duration: 3,
             distanceLimit: [4],
             tooltip: '「中盤のどこか」の時に3馬身リードしていると見なす。普通は単独逃げ馬以外では夢物語。',
@@ -974,7 +974,7 @@ export default {
             }
           },
           {
-            normal: {name: '遊びはおしまいっ！', value: 0.15},
+            normal: {id: 201661, name: '遊びはおしまいっ！', value: 0.15},
             duration: 3,
             tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
             init: function () {
@@ -985,7 +985,7 @@ export default {
             }
           },
           {
-            normal: {name: 'スリップストリーム', value: 0.15},
+            normal: {id: 201651, name: 'スリップストリーム', value: 0.15},
             duration: 3,
             tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
             init: function () {
@@ -996,7 +996,7 @@ export default {
             }
           },
           {
-            normal: {name: '仕掛け抜群', value: 0.15},
+            normal: {id: 200632, name: '仕掛け抜群', value: 0.15},
             duration: 3,
             styleLimit: [4],
             tooltip: '位置>75%を満たしたと見なす。実戦は条件を注意すべし。',
@@ -1008,7 +1008,7 @@ export default {
             }
           },
           {
-            normal: {name: '追い上げ', value: 0.15},
+            normal: {id: 201212, name: '追い上げ', value: 0.15},
             duration: 3,
             distanceLimit: [4],
             tooltip: '「終盤のどこか」として扱う。実際は加速中に消化されるのが大半。',
@@ -1020,7 +1020,7 @@ export default {
             }
           },
           {
-            normal: {name: 'スピードイーター', value: 0.15},
+            normal: {id: 201082, name: 'スピードイーター', value: 0.15},
             duration: 3,
             styleLimit: [1],
             distanceLimit: [2],
@@ -1033,8 +1033,8 @@ export default {
             }
           },
           {
-            normal: {name: 'ペースアップ', value: 0.15},
-            rare: {name: 'アガってきた！', value: 0.35},
+            normal: {id: 200462, name: 'ペースアップ', value: 0.15},
+            rare: {id: 200461, name: 'アガッてきた！', value: 0.35},
             duration: 1.8,
             tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
             init: function () {
@@ -1045,8 +1045,8 @@ export default {
             }
           },
           {
-            normal: {name: 'レコメンド', value: 0.15},
-            rare: {name: 'チャート急上昇！', value: 0.35},
+            normal: {id: 201672, name: 'レコメンド', value: 0.15},
+            rare: {id: 201671, name: 'チャート急上昇！', value: 0.35},
             duration: 1.8,
             surfaceLimit: [2],
             tooltip: '「中盤のどこか」として扱う。',
@@ -1058,8 +1058,8 @@ export default {
             }
           },
           {
-            normal: {name: '末脚', value: 0.15},
-            rare: {name: '全身全霊', value: 0.35},
+            normal: {id: 200512, name: '末脚', value: 0.15},
+            rare: {id: 200511, name: '全身全霊', value: 0.35},
             duration: 1.8,
             init: function () {
               this.randoms = thiz.initPhaseRandom(3)
@@ -1069,14 +1069,14 @@ export default {
             }
           },
           {
-            normal: {name: '尻尾上がり', value: 0.15},
+            normal: {id: 201611, name: '尻尾上がり', value: 0.15},
             duration: 3,
             check: function () {
               return thiz.skillTriggerCount[1] >= 3
             }
           },
           {
-            inherit: {name: '不沈艦、抜錨ォッ！', value: 0.05},
+            inherit: {id: 900071, name: '不沈艦、抜錨ォッ！', value: 0.05},
             duration: 3.6,
             tooltip: '順位条件の<=50%は満たしていると見なす',
             check: function () {
@@ -1084,7 +1084,7 @@ export default {
             }
           },
           {
-            inherit: {name: '貴顕の使命を果たすべく', value: 0.15},
+            inherit: {id: 900131, name: '貴顕の使命を果たすべく', value: 0.15},
             duration: 3,
             tooltip: '位置<=30%は満たしていると見なす。',
             check: function () {
@@ -1092,7 +1092,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'G00 1st.F∞;', value: 0.15},
+            inherit: {id: 900261, name: 'G00 1st.F∞;', value: 0.15},
             duration: 3,
             check: function () {
               return thiz.temptationModeStart == null && thiz.startDelay < 0.08
@@ -1100,7 +1100,7 @@ export default {
             }
           },
           {
-            inherit: {name: '最強の名を懸けて', value: 0.15},
+            inherit: {id: 910131, name: '最強の名を懸けて', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこか」として扱う。',
             init: function () {
@@ -1118,7 +1118,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'カッティング✕DRIVE！', value: 0.15},
+            inherit: {id: 900081, name: 'カッティング×DRIVE！', value: 0.15},
             duration: 3,
             tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
             check: function (startPosition) {
@@ -1127,7 +1127,7 @@ export default {
             }
           },
           {
-            inherit: {name: '勝利の鼓動', value: 0.25},
+            inherit: {id: 900061, name: '勝利の鼓動', value: 0.25},
             duration: 3,
             tooltip: '順位条件は満たしてると見なす',
             check: function (startPosition) {
@@ -1136,7 +1136,7 @@ export default {
             }
           },
           {
-            inherit: {name: '汝、皇帝の神威を見よ', value: 0.25},
+            inherit: {id: 900171, name: '汝、皇帝の神威を見よ', value: 0.25},
             duration: 3,
             tooltip: '最終コーナーで3人追い抜きは満たしたと見なす',
             check: function () {
@@ -1153,7 +1153,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'ブレイズ・オブ・プライド', value: 0.15},
+            inherit: {id: 900181, name: 'ブレイズ・オブ・プライド', value: 0.15},
             duration: 3,
             tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
             init: function () {
@@ -1173,7 +1173,7 @@ export default {
             }
           },
           {
-            inherit: {name: '勝利のチケットを、君にッ！', value: 0.15},
+            inherit: {id: 900351, name: '勝利のチケットを、君にッ！', value: 0.15},
             duration: 3,
             tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
             init: function () {
@@ -1184,7 +1184,7 @@ export default {
             }
           },
           {
-            inherit: {name: '優等生×バクシン＝大勝利ッ', value: 0.15},
+            inherit: {id: 900411, name: '優等生×バクシン＝大勝利ッ', value: 0.15},
             duration: 3,
             tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
             init: function () {
@@ -1195,7 +1195,7 @@ export default {
             }
           },
           {
-            inherit: {name: '来ます来てます来させます！', value: 0.15},
+            inherit: {id: 900561, name: '来ます来てます来させます！', value: 0.15},
             duration: 3,
             tooltip: '「終盤のどこかで発動する」として扱う。',
             init: function () {
@@ -1206,7 +1206,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'きっとその先へ…！', value: 0.15},
+            inherit: {id: 900601, name: 'きっとその先へ…！', value: 0.15},
             duration: 3,
             tooltip: '「ラストスパートのどこかで発動する」として扱う。',
             init: function () {
@@ -1217,7 +1217,7 @@ export default {
             }
           },
           {
-            inherit: {name: '精神一到何事か成らざらん', value: 0.15},
+            inherit: {id: 900111, name: '精神一到何事か成らざらん', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動する」として扱う。',
             init: function () {
@@ -1228,7 +1228,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'Pride of KING', value: 0.25},
+            inherit: {id: 900611, name: 'Pride of KING', value: 0.25},
             duration: 3,
             check: function (startPosition) {
               return startPosition <= thiz.toPosition(200)
@@ -1237,7 +1237,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'シューティングスター', value: 0.15},
+            inherit: {id: 900011, name: 'シューティングスター', value: 0.15},
             duration: 3,
             tooltip: '「終盤のどこかで発動する」として扱う。',
             init: function () {
@@ -1248,14 +1248,14 @@ export default {
             }
           },
           {
-            inherit: {name: '先頭の景色は譲らない…！', value: 0.15},
+            inherit: {id: 900021, name: '先頭の景色は譲らない…！', value: 0.15},
             duration: 3,
             check: function () {
               return thiz.isInFinalStraight()
             }
           },
           {
-            inherit: {name: '究極テイオーステップ', value: 0.25},
+            inherit: {id: 900031, name: '究極テイオーステップ', value: 0.25},
             duration: 3,
             tooltip: '他の条件は無視して「最終直線であれば発動する」として扱う',
             check: function () {
@@ -1263,7 +1263,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'ヴィットーリアに捧ぐ舞踏', value: 0.15},
+            inherit: {id: 900151, name: 'ヴィットーリアに捧ぐ舞踏', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う。まぁ発動しないけど。',
             init: function () {
@@ -1274,7 +1274,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'Shadow Break', value: 0.15},
+            inherit: {id: 900161, name: 'Shadow Break', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う',
             init: function () {
@@ -1285,7 +1285,7 @@ export default {
             }
           },
           {
-            inherit: {name: '∴win Q.E.D.', value: 0.15},
+            inherit: {id: 900231, name: '∴win Q.E.D.', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う',
             init: function () {
@@ -1296,7 +1296,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'ブルーローズチェイサー', value: 0.15},
+            inherit: {id: 900301, name: 'ブルーローズチェイサー', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動」として扱う',
             init: function () {
@@ -1307,7 +1307,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'Nemesis', value: 0.15},
+            inherit: {id: 900501, name: 'Nemesis', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う',
             init: function () {
@@ -1318,7 +1318,7 @@ export default {
             }
           },
           {
-            inherit: {name: '絶対は、ボクだ', value: 0.15},
+            inherit: {id: 910031, name: '絶対は、ボクだ', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動」として扱う',
             init: function () {
@@ -1329,7 +1329,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'フラワリー☆マニューバ(前)', value: 0.15},
+            inherit: {id: 910241, name: 'フラワリー☆マニューバ(前)', value: 0.15},
             duration: 3,
             tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
             init: function () {
@@ -1340,7 +1340,7 @@ export default {
             }
           },
           {
-            inherit: {name: '薫風、永遠なる瞬間を', value: 0.15},
+            inherit: {id: 910181, name: '薫風、永遠なる瞬間を', value: 0.15},
             duration: 3,
             tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
             init: function () {
@@ -1353,8 +1353,8 @@ export default {
         ],
         acceleration: [
           {
-            normal: {name: 'コーナー加速', value: 0.2},
-            rare: {name: '曲線のソムリエ', value: 0.4},
+            normal: {id: 200342, name: 'コーナー加速○', value: 0.2},
+            rare: {id: 200341, name: '曲線のソムリエ', value: 0.4},
             duration: 1.8,
             cd: 30,
             init: function () {
@@ -1365,8 +1365,8 @@ export default {
             }
           },
           {
-            normal: {name: '直線加速', value: 0.2},
-            rare: {name: '一陣の風', value: 0.4},
+            normal: {id: 200372, name: '直線加速', value: 0.2},
+            rare: {id: 200371, name: '一陣の風', value: 0.4},
             duration: 1.8,
             cd: 30,
             init: function () {
@@ -1377,8 +1377,8 @@ export default {
             }
           },
           {
-            normal: {name: '先駆け', value: 0.2},
-            rare: {name: '先手必勝', value: 0.4},
+            normal: {id: 200532, name: '先駆け', value: 0.2},
+            rare: {id: 200531, name: '先手必勝', value: 0.4},
             styleLimit: [1],
             duration: 1.2,
             check: function () {
@@ -1386,8 +1386,8 @@ export default {
             }
           },
           {
-            normal: {name: '押し切り準備', value: 0.2},
-            rare: {name: '逃亡者', value: 0.4},
+            normal: {id: 200552, name: '押し切り準備', value: 0.2},
+            rare: {id: 200551, name: '逃亡者', value: 0.4},
             styleLimit: [1],
             duration: 3,
             tooltip: '1位は満たしていると見なす',
@@ -1399,8 +1399,8 @@ export default {
             }
           },
           {
-            normal: {name: '差し切り体制', value: 0.2},
-            rare: {name: '乗り換え上手', value: 0.4},
+            normal: {id: 200602, name: '差し切り体勢', value: 0.2},
+            rare: {id: 200601, name: '乗り換え上手', value: 0.4},
             styleLimit: [3],
             duration: 1.8,
             tooltip: '順位>=50%は満たしていると見なす',
@@ -1412,8 +1412,8 @@ export default {
             }
           },
           {
-            normal: {name: '直線一気', value: 0.2},
-            rare: {name: '迫る影', value: 0.4},
+            normal: {id: 200642, name: '直線一気', value: 0.2},
+            rare: {id: 200641, name: '迫る影', value: 0.4},
             duration: 0.9,
             styleLimit: [4],
             check: function () {
@@ -1421,8 +1421,8 @@ export default {
             }
           },
           {
-            normal: {name: 'スプリントギア', value: 0.2},
-            rare: {name: 'スプリントターボ', value: 0.4},
+            normal: {id: 200652, name: 'スプリントギア', value: 0.2},
+            rare: {id: 200651, name: 'スプリントターボ', value: 0.4},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -1433,8 +1433,8 @@ export default {
             }
           },
           {
-            normal: {name: '上昇気流', value: 0.2},
-            rare: {name: '豪脚', value: 0.4},
+            normal: {id: 200702, name: '上昇気流', value: 0.2},
+            rare: {id: 200701, name: '豪脚', value: 0.4},
             duration: 3,
             styleLimit: [3, 4],
             distanceLimit: [2],
@@ -1447,8 +1447,8 @@ export default {
             }
           },
           {
-            normal: {name: '善後策', value: 0.2},
-            rare: {name: 'プランX', value: 0.4},
+            normal: {id: 200992, name: '善後策', value: 0.2},
+            rare: {id: 200991, name: 'プランX', value: 0.4},
             duration: 3,
             styleLimit: [1, 2],
             distanceLimit: [1],
@@ -1461,8 +1461,8 @@ export default {
             }
           },
           {
-            normal: {name: 'アクセラレーション', value: 0.2},
-            rare: {name: 'アクセル全開！', value: 0.4},
+            normal: {id: 201062, name: 'アクセラレーション', value: 0.2},
+            rare: {id: 201061, name: 'アクセル全開！', value: 0.4},
             duration: 1.2,
             distanceLimit: [2],
             tooltip: '「中盤のどこかで発動」として扱う。',
@@ -1474,7 +1474,7 @@ export default {
             }
           },
           {
-            normal: {name: '二の矢', value: 0.2},
+            normal: {id: 201292, name: '二の矢', value: 0.2},
             duration: 3,
             styleLimit: [1],
             tooltip: '「中盤のどこかで発動」として扱う。',
@@ -1486,8 +1486,8 @@ export default {
             }
           },
           {
-            normal: {name: '巧みなステップ', value: 0.2},
-            rare: {name: '技巧派', value: 0.3},
+            normal: {id: 201332, name: '巧みなステップ', value: 0.2},
+            rare: {id: 201331, name: '技巧派', value: 0.3},
             duration: 1.8,
             styleLimit: [2],
             tooltip: '「スタート後20秒で発動」として扱う。ガバガバ実装。',
@@ -1496,8 +1496,8 @@ export default {
             }
           },
           {
-            normal: {name: '直滑降', value: 0.2},
-            rare: {name: '決意の直滑降', value: 0.3},
+            normal: {id: 201342, name: '直滑降', value: 0.2},
+            rare: {id: 201341, name: '決意の直滑降', value: 0.3},
             duration: 3,
             styleLimit: [2],
             check: function () {
@@ -1505,14 +1505,14 @@ export default {
             }
           },
           {
-            normal: {name: '登山家', value: 0.2},
+            normal: {id: 201581, name: '登山家', value: 0.2},
             duration: 3,
             check: function () {
               return thiz.isInSlope('up')
             }
           },
           {
-            normal: {name: 'まき直し', value: 0.2},
+            normal: {id: 201362, name: 'まき直し', value: 0.2},
             duration: 3,
             styleLimit: [2],
             tooltip: '順位>50%は満たしていると見なす',
@@ -1524,8 +1524,8 @@ export default {
             }
           },
           {
-            normal: {name: 'がんばり屋', value: 0.2},
-            rare: {name: '努力家', value: 0.3},
+            normal: {id: 201402, name: 'がんばり屋', value: 0.2},
+            rare: {id: 201401, name: '努力家', value: 0.3},
             duration: 3,
             styleLimit: [3],
             tooltip: '「中盤のどこか」として扱う。はいはいガバ実装ガバ実装。',
@@ -1549,7 +1549,7 @@ export default {
             }
           },
           {
-            normal: {name: '地固め', value: 0.2},
+            normal: {id: 201601, name: '地固め', value: 0.2},
             duration: 3,
             tooltip: '「緑スキルや集中力系でスタートと同時に発動」として扱う',
             check: function () {
@@ -1557,7 +1557,7 @@ export default {
             }
           },
           {
-            inherit: {name: '紅焔ギア/LP1211-M', value: 0.2},
+            inherit: {id: 900041, name: '紅焔ギア/LP1211-M', value: 0.2},
             duration: 2.4,
             tooltip: '順位<=5及び<=50%は満たしていると見なす',
             check: function () {
@@ -1565,7 +1565,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'ヴィクトリーショット！', value: 0.2},
+            inherit: {id: 900101, name: 'ヴィクトリーショット！', value: 0.2},
             duration: 2.4,
             styleLimit: [1, 2],
             tooltip: '順位>=3及び<=50%は満たしていると見なす',
@@ -1574,7 +1574,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'レッツ・アナボリック', value: 0.2},
+            inherit: {id: 900271, name: 'レッツ・アナボリック！', value: 0.2},
             duration: 2.4,
             styleLimit: [3, 4],
             tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
@@ -1583,7 +1583,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'アングリング×スキミング', value: 0.2},
+            inherit: {id: 900201, name: 'アングリング×スキーミング', value: 0.2},
             duration: 2.4,
             styleLimit: [1],
             tooltip: '順位1位は満たしたと見なす',
@@ -1592,7 +1592,7 @@ export default {
             }
           },
           {
-            inherit: {name: 'フラワリー☆マニューバ(後)', value: 0.2},
+            inherit: {id: 910241, name: 'フラワリー☆マニューバ(後)', value: 0.2},
             duration: 2.4,
             styleLimit: [3, 4],
             tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
@@ -1607,7 +1607,7 @@ export default {
         boost: [
           {
             inherit: {
-              name: 'ブリリアント・レッドエース',
+              id: 900091, name: 'ブリリアント・レッドエース',
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
@@ -1621,7 +1621,7 @@ export default {
           },
           {
             inherit: {
-              name: 'ブランチャ☆ガナドール',
+              id: 900141, name: 'プランチャ☆ガナドール',
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
@@ -1632,7 +1632,7 @@ export default {
           },
           {
             inherit: {
-              name: 'ひらめき☆ランディング',
+              id: 900241, name: 'ひらめき☆ランディング',
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
@@ -1643,7 +1643,7 @@ export default {
           },
           {
             inherit: {
-              name: '#LookatCurren',
+              id: 900381, name: '#LookatCurren',
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
@@ -1657,7 +1657,7 @@ export default {
           },
           {
             inherit: {
-              name: 'キラキラ☆STARDOM',
+              id: 900461, name: 'キラキラ☆STARDOM',
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
@@ -1672,9 +1672,9 @@ export default {
         ],
         gate: [
           {
-            normal: {name: '集中力', value: 0.9},
-            rare: {name: 'コンセントレーション', value: 0.4},
-            inherit: {name: 'ゲード難', value: 1.5},
+            normal: {id: 200432, name: '集中力', value: 0.9},
+            rare: {id: 200431, name: 'コンセントレーション', value: 0.4}
+            inherit: {id: 0, name: 'ゲード難', value: 1.5},
           }
         ],
         speed: [
@@ -2125,7 +2125,7 @@ export default {
           }
         },
         {
-          name: 'introduction: My body',
+          id: 10321, name: 'introduction：My body',
           heal: 350,
           tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
           check: function () {
@@ -2133,7 +2133,7 @@ export default {
           }
         },
         {
-          name: 'U=ma2',
+          id: 100321, name: 'U=ma2',
           heal: 550,
           tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
           check: function () {
@@ -2141,7 +2141,7 @@ export default {
           }
         },
         {
-          name: 'クリアハート',
+          id: 10451, name: 'クリアハート',
           heal: 350,
           tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
           init: function () {
@@ -2152,7 +2152,7 @@ export default {
           }
         },
         {
-          name: 'ピュリティオブハート',
+          id: 100451, name: 'ピュリティオブハート',
           heal: 550,
           tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
           init: function () {
@@ -2163,7 +2163,7 @@ export default {
           }
         },
         {
-          name: 'ワクワクよーいドン',
+          id: 10521, name: 'ワクワクよーいドン',
           heal: 350,
           tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
           check: function () {
@@ -2171,7 +2171,7 @@ export default {
           }
         },
         {
-          name: ' ワクワククライマックス',
+          id: 100521, name: 'ワクワククライマックス',
           heal: 550,
           tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
           check: function () {
@@ -2179,7 +2179,7 @@ export default {
           }
         },
         {
-          name: '波乱注意報！',
+          id: 10071, name: '波乱注意砲！',
           targetSpeed: 0.15,
           duration: 6,
           tooltip: '順位条件の<=50%は満たしていると見なす',
@@ -2188,7 +2188,7 @@ export default {
           }
         },
         {
-          name: '不沈艦、抜錨ォッ！',
+          id: 100071, name: '不沈艦、抜錨ォッ！',
           targetSpeed: 0.25,
           duration: 6,
           tooltip: '順位条件の<=50%は満たしていると見なす',
@@ -2197,7 +2197,7 @@ export default {
           }
         },
         {
-          name: '貴顕の使命を果たすべく',
+          id: 100131, name: '貴顕の使命を果たすべく',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '位置<=30%は満たしていると見なす。',
@@ -2206,7 +2206,7 @@ export default {
           }
         },
         {
-          name: 'G00 1st.F∞;',
+          id: 100261, name: 'G00 1st.F∞;',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2215,7 +2215,7 @@ export default {
           }
         },
         {
-          name: '最強の名を懸けて',
+          id: 110131, name: '最強の名を懸けて',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこか」として扱う。',
@@ -2227,7 +2227,7 @@ export default {
           }
         },
         {
-          name: 'アクセルX',
+          id: 10081, name: 'アクセルX',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
@@ -2237,7 +2237,7 @@ export default {
           }
         },
         {
-          name: 'カッティング✕DRIVE！',
+          id: 100081, name: 'カッティング×DRIVE！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
@@ -2247,7 +2247,7 @@ export default {
           }
         },
         {
-          name: '勝利の鼓動',
+          id: 100061, name: '勝利の鼓動',
           targetSpeed: 0.45,
           duration: 5,
           tooltip: '順位条件は満たしてると見なす',
@@ -2257,7 +2257,7 @@ export default {
           }
         },
         {
-          name: '汝、皇帝の神威を見よ',
+          id: 100171, name: '汝、皇帝の神威を見よ',
           targetSpeed: 0.45,
           duration: 5,
           tooltip: '最終コーナーで3人追い抜きは満たしたと見なす',
@@ -2266,7 +2266,7 @@ export default {
           }
         },
         {
-          name: 'エンプレス・プライド',
+          id: 10181, name: 'エンプレス・プライド',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
@@ -2278,7 +2278,7 @@ export default {
           }
         },
         {
-          name: 'ブレイズ・オブ・プライド',
+          id: 100181, name: 'ブレイズ・オブ・プライド',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
@@ -2290,7 +2290,7 @@ export default {
           }
         },
         {
-          name: '全力Vサインッ！',
+          id: 10351, name: '全力Vサインッ！',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
@@ -2302,7 +2302,7 @@ export default {
           }
         },
         {
-          name: '勝利のチケットを、君にッ！',
+          id: 100351, name: '勝利のチケットを、君にッ！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
@@ -2314,7 +2314,7 @@ export default {
           }
         },
         {
-          name: '学級委員長+速さ＝バクシン',
+          id: 10411, name: '学級委員長+速さ＝バクシン',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
@@ -2326,7 +2326,7 @@ export default {
           }
         },
         {
-          name: '優等生×バクシン＝大勝利ッ',
+          id: 100411, name: '優等生×バクシン＝大勝利ッ',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
@@ -2338,7 +2338,7 @@ export default {
           }
         },
         {
-          name: '来てください来てください！',
+          id: 10561, name: '来てください来てください！',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「終盤のどこかで発動する」として扱う。',
@@ -2350,7 +2350,7 @@ export default {
           }
         },
         {
-          name: '来ます来てます来させます！',
+          id: 100561, name: '来ます来てます来させます！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「終盤のどこかで発動する」として扱う。',
@@ -2362,7 +2362,7 @@ export default {
           }
         },
         {
-          name: 'アタシもたまには、ね？',
+          id: 10601, name: 'アタシもたまには、ね？',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「ラストスパートのどこかで発動する」として扱う。',
@@ -2374,7 +2374,7 @@ export default {
           }
         },
         {
-          name: 'きっとその先へ…！',
+          id: 100601, name: 'きっとその先へ…！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「ラストスパートのどこかで発動する」として扱う。',
@@ -2386,7 +2386,7 @@ export default {
           }
         },
         {
-          name: '精神一到',
+          id: 10111, name: '精神一到',
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「最終直線のどこかで発動する」として扱う。',
@@ -2398,7 +2398,7 @@ export default {
           }
         },
         {
-          name: '精神一到何事か成らざらん',
+          id: 100111, name: '精神一到何事か成らざらん',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動する」として扱う。',
@@ -2410,7 +2410,7 @@ export default {
           }
         },
         {
-          name: 'Call me KING',
+          id: 10611, name: 'Call me KING',
           targetSpeed: 0.35,
           duration: 5,
           check: function (startPosition) {
@@ -2420,7 +2420,7 @@ export default {
           }
         },
         {
-          name: 'Pride of KING',
+          id: 100611, name: 'Pride of KING',
           targetSpeed: 0.45,
           duration: 5,
           check: function (startPosition) {
@@ -2430,7 +2430,7 @@ export default {
           }
         },
         {
-          name: 'シューティングスター',
+          id: 100011, name: 'シューティングスター',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「終盤のどこかで発動する」として扱う。',
@@ -2442,7 +2442,7 @@ export default {
           }
         },
         {
-          name: '先頭の景色は譲らない…！',
+          id: 100021, name: '先頭の景色は譲らない…！',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2450,7 +2450,7 @@ export default {
           }
         },
         {
-          name: '究極テイオーステップ',
+          id: 100031, name: '究極テイオーステップ',
           targetSpeed: 0.45,
           duration: 5,
           tooltip: '他の条件は無視して「最終直線であれば発動する」として扱う',
@@ -2459,7 +2459,7 @@ export default {
           }
         },
         {
-          name: 'ヴィットーリアに捧ぐ舞踏',
+          id: 100151, name: 'ヴィットーリアに捧ぐ舞踏',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う。まぁ発動しないけど。',
@@ -2471,7 +2471,7 @@ export default {
           }
         },
         {
-          name: 'Shadow Break',
+          id: 100161, name: 'Shadow Break',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2483,7 +2483,7 @@ export default {
           }
         },
         {
-          name: '∴win Q.E.D.',
+          id: 100231, name: '∴win Q.E.D.',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2495,7 +2495,7 @@ export default {
           }
         },
         {
-          name: 'ブルーローズチェイサー',
+          id: 100301, name: 'ブルーローズチェイサー',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動」として扱う',
@@ -2507,7 +2507,7 @@ export default {
           }
         },
         {
-          name: 'Nemesis',
+          id: 100501, name: 'Nemesis',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2519,7 +2519,7 @@ export default {
           }
         },
         {
-          name: '絶対は、ボクだ',
+          id: 110031, name: '絶対は、ボクだ',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動」として扱う',
@@ -2531,7 +2531,7 @@ export default {
           }
         },
         {
-          name: 'フラワリー☆マニューバ(前)',
+          id: 110241, name: 'フラワリー☆マニューバ(前)',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
@@ -2543,7 +2543,7 @@ export default {
           }
         },
         {
-          name: '薫風、永遠なる瞬間を',
+          id: 110181, name: '薫風、永遠なる瞬間を',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
@@ -2555,7 +2555,7 @@ export default {
           }
         },
         {
-          name: '紅焔ギア/LP1211-M',
+          id: 100041, name: '紅焔ギア/LP1211-M',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [1, 2],
@@ -2565,7 +2565,7 @@ export default {
           }
         },
         {
-          name: 'ヴィクトリーショット！',
+          id: 100101, name: 'ヴィクトリーショット！',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [1, 2],
@@ -2575,7 +2575,7 @@ export default {
           }
         },
         {
-          name: '燃えろ筋肉！',
+          id: 10271, name: '燃えろ筋肉！',
           acceleration: 0.3,
           duration: 4,
           styleLimit: [3, 4],
@@ -2585,7 +2585,7 @@ export default {
           }
         },
         {
-          name: 'レッツ・アナボリック',
+          id: 100271, name: 'レッツ・アナボリック！',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [3, 4],
@@ -2595,7 +2595,7 @@ export default {
           }
         },
         {
-          name: 'アングリング×スキミング',
+          id: 100201, name: 'アングリング×スキーミング',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [1],
@@ -2605,7 +2605,7 @@ export default {
           }
         },
         {
-          name: 'フラワリー☆マニューバ(後)',
+          id: 110241, name: 'フラワリー☆マニューバ(後)',
           acceleration: 0.4,
           duration: 4,
           tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
@@ -2617,7 +2617,7 @@ export default {
           }
         },
         {
-          name: 'レッドエース',
+          id: 10091, name: 'レッドエース',
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
@@ -2632,7 +2632,7 @@ export default {
           }
         },
         {
-          name: 'ブリリアント・レッドエース',
+          id: 100091, name: 'ブリリアント・レッドエース',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2647,7 +2647,7 @@ export default {
           }
         },
         {
-          name: '熱血☆アミーゴ',
+          id: 10141, name: '熱血☆アミーゴ',
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
@@ -2659,7 +2659,7 @@ export default {
           }
         },
         {
-          name: 'ブランチャ☆ガナドール',
+          id: 100141, name: 'プランチャ☆ガナドール',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2671,7 +2671,7 @@ export default {
           }
         },
         {
-          name: '勝利のキッス☆',
+          id: 10241, name: '勝利のキッス☆',
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
@@ -2683,7 +2683,7 @@ export default {
           }
         },
         {
-          name: 'ひらめき☆ランディング',
+          id: 100241, name: 'ひらめき☆ランディング',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2695,7 +2695,7 @@ export default {
           }
         },
         {
-          name: '#LookatCurren',
+          id: 100381, name: '#LookatCurren',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2710,7 +2710,7 @@ export default {
           }
         },
         {
-          name: 'キラキラ☆STARDOM',
+          id: 100461, name: 'キラキラ☆STARDOM',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -3051,6 +3051,9 @@ export default {
           for (const rarity of this.rarities) {
             if (rarity in skill) {
               const copy = {...skill}
+              if (skill[rarity].id) {
+                copy.id = skill[rarity].id
+              }
               copy.name = skill[rarity].name
               copy.value = skill[rarity].value
               if (skill[rarity].duration) {
