@@ -755,10 +755,10 @@ export default {
       this.resetRace()
       this.initCondition()
       this.initTemptation()
+      this.initializeSkills()
       this.sp = this.spMax
       this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
       this.startDelay = Math.random() * 0.1
-      this.initializeSkills()
       this.triggerStartSkills()
       this.progressRace()
     },
