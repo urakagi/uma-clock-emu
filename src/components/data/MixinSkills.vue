@@ -297,7 +297,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -307,7 +307,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -318,7 +318,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -327,7 +327,7 @@ export default {
               this.randoms = [thiz.courseLength - 777]
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -362,7 +362,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -374,7 +374,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -386,7 +386,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -398,7 +398,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -411,7 +411,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -423,7 +423,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -439,7 +439,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(4) && thiz.accTimePassed(5) &&
-                  thiz.isContainRandom(this.randoms, startPosition)
+                  thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -461,7 +461,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isRunningStyle(2) && thiz.accTimePassed(5)
-                  && thiz.isContainRandom(this.randoms, startPosition)
+                  && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -475,7 +475,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(2) && thiz.accTimePassed(5)
-                  && thiz.isContainRandom(this.randoms, startPosition)
+                  && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -485,7 +485,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -505,7 +505,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isRunningStyle(4) && thiz.accTimePassed(10) &&
-                  thiz.isContainRandom(this.randoms, startPosition)
+                  thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -516,7 +516,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -527,7 +527,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -553,7 +553,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -574,7 +574,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -586,7 +586,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -598,7 +598,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -610,7 +610,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -622,7 +622,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -634,7 +634,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -646,7 +646,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -658,7 +658,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -670,7 +670,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -682,7 +682,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -694,7 +694,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -706,7 +706,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -718,7 +718,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -730,7 +730,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -742,7 +742,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -754,7 +754,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -766,7 +766,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -778,7 +778,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -790,7 +790,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -803,7 +803,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -816,7 +816,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.accTimePassed(5) && thiz.isRunningStyle(1)
-                  && thiz.isContainRandom(this.randoms, startPosition)
+                  && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -829,7 +829,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -842,7 +842,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -875,7 +875,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -889,7 +889,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
                   && thiz.accTimePassed(5)
             }
           },
@@ -904,7 +904,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -917,7 +917,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
                   && thiz.accTimePassed(5)
             }
           },
@@ -932,7 +932,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -945,7 +945,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -957,7 +957,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -970,7 +970,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -981,7 +981,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.accTimePassed(10) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.accTimePassed(10) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -992,7 +992,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.accTimePassed(10) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.accTimePassed(10) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1004,7 +1004,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1016,7 +1016,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1029,7 +1029,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1041,7 +1041,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1054,7 +1054,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isSurfaceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isSurfaceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1065,7 +1065,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(3)
             },
             check: function (startPosition) {
-              return thiz.isInSpurt && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInSpurt && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1107,7 +1107,7 @@ export default {
               this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1149,7 +1149,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1160,7 +1160,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1169,7 +1169,7 @@ export default {
               this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1180,7 +1180,7 @@ export default {
               this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1191,7 +1191,7 @@ export default {
               this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1202,7 +1202,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1213,7 +1213,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(3)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1224,7 +1224,7 @@ export default {
               this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1244,7 +1244,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1270,7 +1270,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1281,7 +1281,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1292,7 +1292,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1303,7 +1303,7 @@ export default {
               this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1314,18 +1314,18 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
-            inherit: {name: '絶対に、ボクだ', value: 0.15},
+            inherit: {name: '絶対は、ボクだ', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動」として扱う',
             init: function () {
               this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1336,7 +1336,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1347,7 +1347,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
         ],
@@ -1361,7 +1361,7 @@ export default {
               this.randoms = thiz.initCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1373,7 +1373,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1395,7 +1395,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1408,7 +1408,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1429,7 +1429,7 @@ export default {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1443,7 +1443,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1457,7 +1457,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1470,7 +1470,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1482,7 +1482,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1520,7 +1520,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1533,7 +1533,19 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {name: '垂れウマ回避', value: 0.2},
+            rare: {name: 'ノンストップガール', value: 0.4},
+            duration: 3,
+            tooltip: '「終盤のどこか」として扱う。実際に発動するかどうかは自己判断で。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1588,7 +1600,7 @@ export default {
               this.randoms = thiz.initFinalCornerRandom()
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
         ],
@@ -1604,7 +1616,7 @@ export default {
               this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1640,7 +1652,7 @@ export default {
               this.randoms = thiz.initIntervalRandom(0.5, 0.65)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1654,7 +1666,7 @@ export default {
               this.randoms = thiz.initStraightRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
         ],
@@ -1673,7 +1685,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1685,7 +1697,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1696,7 +1708,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1708,7 +1720,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1719,7 +1731,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1731,7 +1743,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1742,7 +1754,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1754,7 +1766,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1765,7 +1777,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
                   && this.accTimePassed(5)
             }
           },
@@ -1777,7 +1789,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
                   && this.accTimePassed(5)
             }
           },
@@ -1789,7 +1801,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1800,7 +1812,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1811,7 +1823,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1821,7 +1833,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
         ],
@@ -1833,7 +1845,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1844,7 +1856,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1854,7 +1866,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1865,7 +1877,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1875,7 +1887,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1886,7 +1898,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1896,7 +1908,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1907,7 +1919,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1917,7 +1929,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1928,7 +1940,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1938,7 +1950,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1949,7 +1961,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(1) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1959,7 +1971,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1970,7 +1982,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(2) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1980,7 +1992,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1991,7 +2003,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2001,7 +2013,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2012,7 +2024,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isRunningStyle(4) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2022,7 +2034,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(0)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(1) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
                   && thiz.accTimePassed(5)
             }
           },
@@ -2033,7 +2045,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2043,7 +2055,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2053,7 +2065,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2063,7 +2075,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(3) && thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2072,7 +2084,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2081,7 +2093,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2090,7 +2102,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -2099,7 +2111,7 @@ export default {
               this.randoms = thiz.initPhaseRandom(2)
             },
             check: function (startPosition) {
-              return thiz.isContainRandom(this.randoms, startPosition)
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
         ]
@@ -2135,7 +2147,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(1)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2146,7 +2158,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(1)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2210,7 +2222,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2261,7 +2273,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2273,7 +2285,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2285,7 +2297,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2297,7 +2309,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2309,7 +2321,7 @@ export default {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2321,7 +2333,7 @@ export default {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2333,7 +2345,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(2)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2345,7 +2357,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(2)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2357,7 +2369,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(3)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2369,7 +2381,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(3)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2381,7 +2393,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2393,7 +2405,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2425,7 +2437,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(2)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2454,7 +2466,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2466,7 +2478,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2478,7 +2490,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2490,7 +2502,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2502,11 +2514,11 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
-          name: '絶対に、ボクだ',
+          name: '絶対は、ボクだ',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動」として扱う',
@@ -2514,7 +2526,7 @@ export default {
             this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2526,7 +2538,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2538,7 +2550,7 @@ export default {
             this.randoms = thiz.initPhaseRandom(1)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2600,7 +2612,7 @@ export default {
             this.randoms = thiz.initFinalCornerRandom()
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2615,7 +2627,7 @@ export default {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2630,7 +2642,7 @@ export default {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2693,7 +2705,7 @@ export default {
             this.randoms = thiz.initIntervalRandom(0.5, 0.65)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
         {
@@ -2708,7 +2720,7 @@ export default {
             this.randoms = thiz.initStraightRandom(1)
           },
           check: function (startPosition) {
-            return thiz.isContainRandom(this.randoms, startPosition)
+            return thiz.isInRandom(this.randoms, startPosition)
           }
         },
       ],
@@ -2760,7 +2772,10 @@ export default {
       return this.trackDetail.distance / 1000.0
     },
     isInSpurt() {
-      return !!this.spurtParameters
+      if (!this.spurtParameters) {
+        return false
+      }
+      return this.spurtParameters.distance + this.position >= this.courseLength
     },
   },
   created() {
@@ -2896,11 +2911,13 @@ export default {
       }
       return skillTriggered
     },
-    chooseRandom(start, end) {
-      const realStart = Math.ceil(start / 10.0) * 10
-      const realEnd = Math.ceil(end / 10.0 - 1) * 10
-      const interval = (realEnd - realStart + 1) / 10
-      return Math.floor(Math.random() * interval) * 10 + realStart
+    chooseRandom(zoneStart, zoneEnd) {
+      const start = Math.random() * (zoneEnd - zoneStart) + zoneStart
+      let end = start + 10
+      if (end > zoneEnd) {
+        end = zoneEnd
+      }
+      return {start, end}
     },
     initCornerRandom() {
       const ret = []
@@ -2915,7 +2932,7 @@ export default {
         const straights = this.getStraights()
         const chosen = Math.floor(Math.random() * straights.length)
         ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
-      } while (phaseLimit && (this.getPhase(ret) !== phaseLimit))
+      } while (phaseLimit && (this.getPhase(ret.start) !== phaseLimit))
       return [ret]
     },
     initPhaseRandom(phase) {
@@ -2948,9 +2965,9 @@ export default {
       const end = this.courseLength * endRate
       return [this.chooseRandom(start, end)]
     },
-    isContainRandom(randoms, startPosition) {
+    isInRandom(randoms) {
       for (const random of randoms) {
-        if (startPosition <= random && this.position >= random) {
+        if (this.position <= random.end && this.position >= random.start) {
           return true
         }
       }
