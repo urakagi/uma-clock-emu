@@ -30,7 +30,7 @@ export default {
       const slopePoints = this.trackDetail.slopes
       const t = 1000 * position / this.courseLength
       const i = Math.floor(t)
-      return 100 * slopePoints[i] + (slopePoints[i + 1] - slopePoints[i]) * (t - i)
+      return 100 * (slopePoints[i] + (slopePoints[i + 1] - slopePoints[i]) * (t - i))
     },
     getStraights(track) {
       if (!track) {
