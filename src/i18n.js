@@ -145,7 +145,7 @@ const messages = {
 
 
 // 取得預設語系
-const locale = localStorage.getItem('locale') || 'tw'
+const locale = localStorage.getItem('locale') || 'jp'
 
 const i18n = new VueI18n({
   locale,
