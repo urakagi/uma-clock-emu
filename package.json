@@ -16,6 +16,7 @@
     "vue-chartjs": "^3.5.1",
     "vue-google-adsense": "^1.9.3",
     "vue-gtag": "^1.16.1",
+    "vue-i18n": "^8.24.4",
     "vue-script2": "^2.1.0"
   },
   "devDependencies": {

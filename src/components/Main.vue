@@ -8,61 +8,61 @@
     </p>
     <el-form class="input-form" :inline="true">
       <el-form-item>
-        <el-button @click="saveUma">セーブ</el-button>
+        <el-button @click="saveUma">{{ $t("message.saveUma") }}</el-button>
       </el-form-item>
       <el-form-item>
-        <el-select v-model="umaToLoad" placeholder="保存済みウマ娘">
+        <el-select v-model="umaToLoad" :placeholder="$t('message.umaToLoad')">
           <el-option v-for="(data, key) in savedUmas" :label="key" :value="key" :key="key"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button @click="loadUma">ロード</el-button>
+        <el-button @click="loadUma">{{ $t("message.loadUma") }}</el-button>
       </el-form-item>
       <el-form-item>
         <el-popconfirm
-            confirm-button-text="はい"
-            cancel-button-text="いいえ"
-            title="削除しますか？"
+            :confirm-button-text="$t('message.yes')"
+            :cancel-button-text="$t('message.no')"
+            :title="$t('message.deleteOrNot')"
             trigger="click"
             @confirm="removeUma"
         >
-          <el-button slot="reference">削除</el-button>
+          <el-button slot="reference">{{ $t("message.delete") }}</el-button>
         </el-popconfirm>
       </el-form-item>
       <el-form-item>
         <el-popconfirm
-            confirm-button-text="はい"
-            cancel-button-text="いいえ"
-            title="リセットしますか？"
+            :confirm-button-text="$t('message.yes')"
+            :cancel-button-text="$t('message.no')"
+            :title="$t('message.resetOrNot')"
             trigger="click"
             @confirm="resetUma"
         >
-          <el-button slot="reference">リセット</el-button>
+          <el-button slot="reference">{{ $t("message.reset") }}</el-button>
         </el-popconfirm>
       </el-form-item>
       <el-form-item>
         <el-tooltip content="race_horse_data / trained_chara">
-          <el-button @click="importUma">JSON からインポート</el-button>
+          <el-button @click="importUma">{{ $t("message.importUma") }}</el-button>
         </el-tooltip>
       </el-form-item>
       <br>
-      <el-form-item label="スピード">
+      <el-form-item :label="$t('message.speed')">
         <el-input v-model="umaStatus.speed" class="input-status"></el-input>
       </el-form-item>
-      <el-form-item label="スタミナ">
+      <el-form-item :label="$t('message.stamina')">
         <el-input v-model="umaStatus.stamina" class="input-status"></el-input>
       </el-form-item>
-      <el-form-item label="パワー">
+      <el-form-item :label="$t('message.power')">
         <el-input v-model="umaStatus.power" class="input-status"></el-input>
       </el-form-item>
-      <el-form-item label="根性">
+      <el-form-item :label="$t('message.guts')">
         <el-input v-model="umaStatus.guts" class="input-status"></el-input>
       </el-form-item>
-      <el-form-item label="賢さ">
+      <el-form-item :label="$t('message.wisdom')">
         <el-input v-model="umaStatus.wisdom" class="input-status"></el-input>
       </el-form-item>
       <br>
-      <el-form-item label="脚質">
+      <el-form-item :label="$t('message.style')">
         <el-select v-model="umaStatus.style" style="width: 100px;">
           <el-option label="逃げ" value="1"></el-option>
           <el-option label="先行" value="2"></el-option>
@@ -70,17 +70,17 @@
           <el-option label="追込" value="4"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="距離適性">
+      <el-form-item :label="$t('message.distanceFit')">
         <el-select v-model="umaStatus.distanceFit" style="width: 70px;">
           <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="バ場適性">
+      <el-form-item :label="$t('message.surfaceFit')">
         <el-select v-model="umaStatus.surfaceFit" style="width: 70px;">
           <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="脚質適性">
+      <el-form-item :label="$t('message.styleFit')">
         <el-select v-model="umaStatus.styleFit" style="width: 70px;">
           <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
@@ -92,12 +92,12 @@
           <el-option label="普通" value="2"></el-option>
           <el-option label="不調" value="3"></el-option>
           <el-option label="絶不調" value="4"></el-option>
-          <el-option label="ランダム" value="5"></el-option>
-          <el-option label="ランダム(3種)" value="6"></el-option>
+          <el-option :label="$t('message.random')" value="5"></el-option>
+          <el-option :label="$t('message.random') + '(3種)'" value="6"></el-option>
         </el-select>
       </el-form-item>
       <br>
-      <el-form-item label="コース">
+      <el-form-item :label="$t('message.course')">
         <el-select v-model="track.location" @change="locationChanged" style="width: 120px;">
           <el-option
               v-for="(raceTrack, trackId) in this.trackData"
@@ -116,7 +116,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="バ場状態">
+      <el-form-item :label="$t('message.surfaceCondition')">
         <el-select v-model="track.surfaceCondition" style="width: 90px;">
           <el-option label="良" value="0"></el-option>
           <el-option label="稍重" value="1"></el-option>
@@ -125,7 +125,7 @@
         </el-select>
       </el-form-item>
       <br>
-      <el-form-item label="固有スキル">
+      <el-form-item :label="$t('message.uniqueSkill')">
         <el-select v-model="selectedUnique">
           <el-option
               v-for="skill in this.uniqueSkillData"
@@ -166,10 +166,10 @@
       <br>
       <el-form-item>
         <el-button @click="exec" type="success">
-          エミュレート開始
+          {{ $t("message.emulateStart") }}
         </el-button>
       </el-form-item>
-      <el-form-item label="回数">
+      <el-form-item :label="$t('message.testTime')">
         <el-input-number value="20" v-model="maxEpoch"></el-input-number>
       </el-form-item>
     </el-form>
@@ -179,20 +179,20 @@
              data-ad-slot="6969023753">
     </Adsense>
     <div>
-      <h3>時計統計</h3>
+      <h3>{{ $t("message.emulationResult") }}</h3>
       <table border="1" class="emulation-result">
         <tr>
           <th></th>
-          <th>実タイム</th>
-          <th>標準偏差</th>
-          <th>ベスト</th>
-          <th>ワースト</th>
-          <th>ゲーム表記</th>
-          <th>ベスト</th>
-          <th>ワースト</th>
+          <th>{{ $t("message.realTime") }}</th>
+          <th>{{ $t("message.StandardDeviation") }}</th>
+          <th>{{ $t("message.best") }}</th>
+          <th>{{ $t("message.worst") }}</th>
+          <th>{{ $t("message.timeInGame") }}</th>
+          <th>{{ $t("message.best") }}</th>
+          <th>{{ $t("message.worst") }}</th>
         </tr>
         <tr>
-          <th>平均</th>
+          <th>{{ $t("message.avg") }}</th>
           <td>{{ formatTime(avgRaceTime, 2) }}</td>
           <td>{{ timeStandardDeviation.toFixed(3) }}</td>
           <td>{{ formatTime(bestTime, 2) }}</td>
@@ -202,7 +202,7 @@
           <td>{{ formatTime(toDisplayTime(worstTime), 1) }}</td>
         </tr>
         <tr>
-          <th>最大ｽﾊﾟｰﾄ</th>
+          <th>{{ $t("message.MaxSpurt") }}</th>
           <td>{{ formatTime(avgRaceTimeMaxSpurt, 2) }}</td>
           <td>{{ timeStandardDeviationMaxSpurt.toFixed(3) }}</td>
           <td>{{ formatTime(bestTimeMaxSpurt, 2) }}</td>
@@ -212,7 +212,7 @@
           <td>{{ formatTime(toDisplayTime(worstTimeMaxSpurt), 1) }}</td>
         </tr>
         <tr>
-          <th>非最大ｽﾊﾟｰﾄ</th>
+          <th>{{ $t("message.NotMaxSpurt") }}</th>
           <td>{{ formatTime(avgRaceTimeNotMaxSpurt, 2) }}</td>
           <td>{{ timeStandardDeviationNotMaxSpurt.toFixed(3) }}</td>
           <td>{{ formatTime(bestTimeNotMaxSpurt, 2) }}</td>
@@ -222,12 +222,12 @@
           <td>{{ formatTime(toDisplayTime(worstTimeNotMaxSpurt), 1) }}</td>
         </tr>
       </table>
-      <h3>スパート平均</h3>
+      <h3>{{ $t("message.spurtAverage") }}</h3>
       <table border="1" class="emulation-result">
         <tr>
-          <th>最大スパート率</th>
-          <th>最大時耐力余剰</th>
-          <th>非最大時不足分</th>
+          <th>{{ $t("message.maxSpurtRate") }}</th>
+          <th>{{ $t("message.maxSpurtSPLeft") }}</th>
+          <th>{{ $t("message.nonMaxSpurtSPLack") }}</th>
         </tr>
         <tr>
           <td>{{ maxSpurtRate }}%</td>
@@ -237,26 +237,26 @@
       </table>
     </div>
     <el-divider/>
-    <h3>直近レース詳細({{ formatTime(latestRaceTime, 2) }})</h3>
+    <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }})</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
-      ステータス総合：{{ totalStatus }}／コースステータスチェック：{{ displayStatusCheck }}
+      {{ $t("message.totalStatus") }}：{{ totalStatus }}／：{{ $t("message.displayStatusCheck") }}{{ displayStatusCheck }}
     </div>
     <div>
-      補正後：スピード{{ modifiedSpeed.toFixed(1) }} ／スタミナ{{ modifiedStamina.toFixed(1) }} ／パワー{{ modifiedPower.toFixed(1) }}
-      ／根性{{ modifiedGuts.toFixed(1) }} ／賢さ{{ modifiedWisdom.toFixed(1) }}
+      補正後：{{ $t("message.speed") }}スピード{{ modifiedSpeed.toFixed(1) }} ／{{ $t("message.stamina") }}{{ modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}パワー{{ modifiedPower.toFixed(1) }}
+      ／{{ $t("message.guts") }}根性{{ modifiedGuts.toFixed(1) }} ／{{ $t("message.wisdom") }}賢さ{{ modifiedWisdom.toFixed(1) }}
     </div>
     <div>
-      初期耐力：{{ spMax.toFixed(1) }}／金回復≒{{ getEqualStamina(550) }}スタミナ／白回復≒{{
+      初期耐力：{{ spMax.toFixed(1) }}／金回復≒{{ getEqualStamina(550) }}{{ $t("message.stamina") }}／白回復≒{{
         getEqualStamina(150)
-      }}スタミナ／終盤耐力消耗係数：{{ spurtSpCoef.toFixed(3) }}
+      }}{{ $t("message.stamina") }}スタミナ／終盤耐力消耗係数：{{ spurtSpCoef.toFixed(3) }}
     </div>
     <div>
-      スキル発動率：{{ skillActivateRate.toFixed(1) }}％／掛かり率：{{ temperamentRate.toFixed(1) }}％
+      {{ $t("message.skillActivateRate") }}：{{ skillActivateRate.toFixed(1) }}％／{{ $t("message.temperamentRate") }}：{{ temperamentRate.toFixed(1) }}％
     </div>
     <div>
-      スタート目標速度：{{ v0.toFixed(2) }}／スタート加速度：{{ a0.toFixed(3) }}
+      {{ $t("message.v0") }}：{{ v0.toFixed(2) }}／{{ $t("message.a0") }}：{{ a0.toFixed(3) }}
     </div>
     <div>
       序盤目標速度：{{ v1.toFixed(2) }}／序盤加速度：{{ a1.toFixed(3) }} ｜
@@ -264,7 +264,7 @@
     </div>
     <div>
       終盤目標速度：{{ v3.toFixed(2) }}／終盤加速度：{{ a3.toFixed(3) }} ｜
-      最高スパート速度：{{ maxSpurtSpeed.toFixed(2) }}
+      {{ $t("message.maxSpurtSpeed") }}：{{ maxSpurtSpeed.toFixed(2) }}
     </div>
     <el-divider/>
     <h3>最終更新：{{ releases[releases.length - 1].timestamp }}</h3>
@@ -282,18 +282,18 @@
     </el-collapse>
     <h3>注意事項</h3>
     <ol>
-      <li>あくまで目安。適当実装＆データの正確性が低いので参考までに。</li>
-      <li>灰色の背景は掛かり区間、淡紫色の背景はコーナー。</li>
-      <li>データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。多分安定しました。</li>
-      <li>ポジションキープを始めとした他ウマ娘が絡む要素は未実装。</li>
-      <li>それが条件になるスキルは適当にそれっぽく実装してます。</li>
-      <li>喰らう妨害スキルは一律発動率80％としています。</li>
-      <li>適性は直接ステータスを修正するものではないので、下の補正後ステータスには反映されません。</li>
-      <li>作った人：砂井裏鍵。各種別情報は大いに参考させて頂きました。</li>
-      <li><a href="https://twitter.com/urakagi">ツイッターはこ↑こ↓</a></li>
+      <li>{{ $t("message.remark1") }}</li>
+      <li>{{ $t("message.remark2") }}</li>
+      <li>{{ $t("message.remark3") }}</li>
+      <li>{{ $t("message.remark4") }}</li>
+      <li>{{ $t("message.remark5") }}</li>
+      <li>{{ $t("message.remark6") }}</li>
+      <li>{{ $t("message.remark7") }}</li>
+      <li>{{ $t("message.remark8") }}</li>
+      <li><a href="https://twitter.com/urakagi">{{ $t("message.contact") }}</a></li>
     </ol>
     <el-dialog :visible.sync='emulating' style="text-align: center;">
-      エミュレート中、少々お待ち下さい……
+      {{ $t("message.emulating") }}
       <el-progress :percentage="Math.min(100, Math.floor(100 * epoch / maxEpoch))"></el-progress>
       <p>
         <Adsense v-if="production"
