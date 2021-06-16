@@ -24,6 +24,7 @@
 		"course": "コース",
 		"surfaceCondition": "バ場状態",
 		"uniqueSkill": "固有スキル",
+		"emulateStart": "エミュレート開始",
 		"testTime": "回数",
 		"emulationResult": "時計統計",
 		"realTime": "実タイム",
@@ -42,7 +43,7 @@
 		"totalStatus": "ステータス総合",
 		"displayStatusCheck": "コースステータスチェック",
 
-		"skillActivateRate ": "スキル発動率",
+		"skillActivateRate": "スキル発動率",
 		"temperamentRate": "掛かり率",
 		"v0": "スタート目標速度",
 		"a0": "スタート加速度",
