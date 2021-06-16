@@ -1,0 +1,67 @@
+{
+	"message": {
+		"saveUma": "儲存",
+		"umaToLoad": "已儲存的馬娘",
+		"loadUma": "載入",
+		"yes": "是",
+		"no": "否",
+		"deleteOrNot": "確定要刪除嗎？",
+		"delete": "刪除",
+		"resetOrNot": "確定要重設嗎？",
+		"reset": "重設",
+		"importUma": "從JSON載入",
+		"speed": "速度",
+		"stamina": "耐力",
+		"power": "力量",
+		"guts": "根性",
+		"wisdom": "智慧",
+		"style": "腳質",
+
+		"distanceFit": "距離適性",
+		"surfaceFit": "馬場適性",
+		"styleFit": "腳質適性",
+		"random": "隨機",
+		"course": "場地",
+		"surfaceCondition": "馬場狀態",
+		"uniqueSkill": "固有技能",
+		"emulateStart": "模擬開始",
+		"testTime": "回數",
+		"emulationResult": "時計統計",
+		"realTime": "實際時間",
+		"StandardDeviation": "標準差",
+		"best": "最佳",
+		"worst": "最差",
+		"timeInGame": "遊戲內時間",
+		"avg": "平均",
+		"MaxSpurt": "最大衝刺",
+		"NotMaxSpurt": "非最大衝刺",
+		"spurtAverage": "平均衝刺",
+		"maxSpurtRate": "最大衝刺率",
+		"maxSpurtSPLeft": "最大時剩餘耐力",
+		"nonMaxSpurtSPLack": "非最大時不足耐力",
+
+		"latestRaceTime": "直近レース詳細",
+		"totalStatus": "ステータス総合",
+		"displayStatusCheck": "コースステータスチェック",
+
+		"skillActivateRate ": "技能發動率",
+		"temperamentRate": "焦慮率(掛かり率)",
+		"v0": "起跑目標速度",
+		"a0": "起跑加速度",
+		"maxSpurtSpeed": "最高衝刺速度",
+
+
+
+		"remark1": "あくまで目安。適当実装＆データの正確性が低いので参考までに。",
+		"remark2": "背景灰色的部分是焦慮(掛かり)的區間、淡紫色是彎道。",
+		"remark3": "データが安定するまではいつでもロードデータが使えなくなる可能性があります。その都度作り直して下さい。安定したらこんなことはなくなります。多分安定しました。",
+		"remark4": "ポジションキープを始めとした他ウマ娘が絡む要素は未実装。",
+		"remark5": "それが条件になるスキルは適当にそれっぽく実装してます。",
+		"remark6": "喰らう妨害技能一律以發動率80％計算。",
+		"remark7": "因為適性並不會直接影響ステータスを修正するものではないので、下の補正後ステータスには反映されません。",
+		"remark8": "作者：砂井裏鍵。各種別情報は大いに参考させて頂きました。",
+
+		"contact": "推特在↑這↓",
+		"emulating": "模擬中、請稍候……"
+	}
+}

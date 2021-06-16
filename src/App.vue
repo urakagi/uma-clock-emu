@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+
+    <LangDropdown />
+
+
     <Main />
   </div>
 </template>
@@ -7,11 +11,13 @@
 <script>
 
 import Main from "@/components/Main";
+import LangDropdown from "@/components/LangDropdown";
 
 export default {
   name: 'App',
   components: {
-    Main
+    Main,
+    LangDropdown
   }
 }
 </script>
@@ -26,3 +32,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+
