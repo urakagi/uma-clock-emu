@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-
-    <LangDropdown />
-
-
     <Main />
+    <LangDropdown />
   </div>
 </template>
 
