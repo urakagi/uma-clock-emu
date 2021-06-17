@@ -41,9 +41,18 @@
         </el-popconfirm>
       </el-form-item>
       <el-form-item>
-        <el-tooltip content="race_horse_data / trained_chara">
-          <el-button @click="importUma">{{ $t("message.importUma") }}</el-button>
-        </el-tooltip>
+        <el-button @click="exportUma">{{ $t("message.exportUma") }}</el-button>
+        <el-dropdown @command="importUma">
+          <el-button>
+            {{ $t("message.importUma") }}<i class="el-icon-arrow-down el-icon--right"></i>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="tool">{{ $t("message.importUmaFromTool") }}</el-dropdown-item>
+            <el-tooltip content="race_horse_data / trained_chara">
+              <el-dropdown-item command="game">{{ $t("message.importUmaFromGame") }}</el-dropdown-item>
+            </el-tooltip>
+          </el-dropdown-menu>
+        </el-dropdown>
       </el-form-item>
       <br>
       <el-form-item :label="$t('message.speed')">
@@ -1138,13 +1147,7 @@ export default {
         inputErrorMessage: '名前を入力して下さい。'
       }).then(({value}) => {
         const umas = JSON.parse(localStorage.getItem('umas') || '{}')
-        umas[value] = {
-          status: this.umaStatus,
-          track: this.track,
-          hasSkills: this.hasSkills,
-          selectedUnique: this.selectedUnique,
-          uniqueLevel: this.uniqueLevel
-        }
+        umas[value] = this.saveUmaToObject()
         localStorage.setItem('umas', JSON.stringify(umas))
         this.$message({
           type: 'success',
@@ -1154,9 +1157,24 @@ export default {
         this.umaToLoad = value
       })
     },
+    saveUmaToObject() {
+      return {
+        status: this.umaStatus,
+        track: this.track,
+        hasSkills: this.hasSkills,
+        selectedUnique: this.selectedUnique,
+        uniqueLevel: this.uniqueLevel
+      }
+    },
     loadUma() {
       const umas = JSON.parse(localStorage.getItem('umas') || '{}')
-      const u = umas[this.umaToLoad]
+      this.loadUmaFromObject(umas[this.umaToLoad])
+      this.$message({
+        type: 'success',
+        message: `${this.umaToLoad}をロードしました。`
+      })
+    },
+    loadUmaFromObject(u) {
       this.umaStatus = u.status
       this.locationChanged(u.track.location)
       this.track = u.track
@@ -1167,12 +1185,40 @@ export default {
       }
       this.fixOldSavedUma()
       this.initCondition()
-      this.$message({
-        type: 'success',
-        message: `${this.umaToLoad}をロードしました。`
+    },
+    exportUma() {
+      navigator.clipboard.writeText(JSON.stringify(this.saveUmaToObject())).then(() => {
+        this.$message({
+          type: 'success',
+          message: `クリップボードへのエクスポートに成功しました。`
+        })
       })
     },
-    importUma() {
+    importUma(command) {
+      switch (command) {
+        case 'tool':
+          this.importUmaFromTool()
+          break
+        case 'game':
+          this.importUmaFromGame()
+          break
+      }
+    },
+    importUmaFromTool() {
+      this.$prompt('データをここに貼り付けてください', '', {
+        confirmButtonText: 'インポート',
+        cancelButtonText: 'キャンセル',
+        inputPattern: /.+/,
+        inputErrorMessage: ''
+      }).then(({value}) => {
+        this.loadUmaFromObject(JSON.parse(value))
+        this.$message({
+          type: 'success',
+          message: `インポートに成功しました。`
+        })
+      })
+    },
+    importUmaFromGame() {
       this.$prompt('race_horse_data もしくは trained_chara (の JSON) をここに貼り付けてください', '', {
         confirmButtonText: 'インポート',
         cancelButtonText: 'キャンセル',
