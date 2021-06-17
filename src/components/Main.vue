@@ -494,7 +494,7 @@ export default {
                 Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
             break
         }
-        baseTargetSpeed *= (1 + this.sectionTargetSpeedRandoms[this.currentSection])
+        baseTargetSpeed += this.baseSpeed * this.sectionTargetSpeedRandoms[this.currentSection]
       }
       let ret = baseTargetSpeed
       const upSlope = this.isInSlope('up')
@@ -1280,7 +1280,7 @@ export default {
       const ret = []
       for (let i = 0; i < 24; i++) {
         const max = (this.modifiedWisdom / 5500.0) * Math.log10(this.modifiedWisdom * 0.1) * 0.01
-        ret.push(Math.random() * max - 0.0065)
+        ret.push(max + Math.random() * -0.0065)
       }
       return ret
     },
