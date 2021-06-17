@@ -14,7 +14,6 @@
 	export default {
 		methods: {
 			handleCommand(command) {
-				console.log(command)
 				window.location.href = '/' + command
 			}
 		}

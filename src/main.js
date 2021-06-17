@@ -4,8 +4,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueGtag from "vue-gtag"
 import Ads from 'vue-google-adsense'
 import App from './App.vue'
+import VueRouter from 'vue-router'
 
 import i18n from './i18n'
+import routes from "@/routes";
 
 Vue.config.productionTip = false
 
@@ -16,8 +18,12 @@ Vue.use(VueGtag, {
 
 Vue.use(require('vue-script2'))
 Vue.use(Ads.Adsense)
+Vue.use(VueRouter)
+
+const router = new VueRouter({routes})
 
 new Vue({
 	i18n,
+    router,
     render: h => h(App),
 }).$mount('#app')

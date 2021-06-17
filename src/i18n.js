@@ -20,12 +20,10 @@ var pathname = window.location.pathname.substring(1)
 if (pathname.includes('/')) {
 	pathname = pathname.substring(0, pathname.indexOf('/', 0))
 }
-console.log(pathname)
-
 
 
 // default
-if (pathname.length == 0) {
+if (pathname.length === 0) {
 
 	// get locale language
 	locale_lang = (window.navigator.userLanguage || window.navigator.language)
@@ -48,6 +46,10 @@ if (pathname.length == 0) {
 		locale = 'ja'
 	}
 }
+
+
+// FIXME: Until path problem is fixed, always set ja
+locale = 'ja'
 
 
 const i18n = new VueI18n({

@@ -29,8 +29,8 @@ export default {
           timestamp: '2021-06-13'
         },
         {
-          content: '賢さによるランダム速度の式を修正＆多言語化',
-          timestamp: '2021-06-13'
+          content: '賢さによるランダム速度の式を修正',
+          timestamp: '2021-06-17'
         },
       ]
     }

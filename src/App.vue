@@ -1,20 +1,21 @@
 <template>
   <div id="app">
     <Main />
-    <LangDropdown />
+<!--    <LangDropdown />-->
   </div>
 </template>
 
 <script>
 
 import Main from "@/components/Main";
-import LangDropdown from "@/components/LangDropdown";
+// import LangDropdown from "@/components/LangDropdown";
 
 export default {
   name: 'App',
   components: {
     Main,
-    LangDropdown
+    // FIXME: Until path problem is fixed, disable language select
+    // LangDropdown
   }
 }
 </script>
