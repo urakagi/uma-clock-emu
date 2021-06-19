@@ -3000,6 +3000,10 @@ export default {
         position = this.position
       }
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      if (!fc) {
+        // 直線のみ
+        return this.getPhase(position) >= 2
+      }
       return position > this.cornerEnd(fc)
     },
     isInCoolDown(skill) {

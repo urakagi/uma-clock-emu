@@ -32,6 +32,10 @@ export default {
           content: '賢さによるランダム速度の式を修正',
           timestamp: '2021-06-17'
         },
+        {
+          content: '直線コースがバグったのを修正',
+          timestamp: '2021-06-19'
+        },
       ]
     }
   }
