@@ -3081,6 +3081,9 @@ export default {
         position = this.position
       }
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      if (!fc) {
+        return false
+      }
       return position >= fc.start && position <= this.cornerEnd(fc)
     },
     isInFinalStraight(position) {
