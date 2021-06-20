@@ -1,21 +1,38 @@
 <template>
   <div id="app">
-    <Main />
+    <el-menu default-active="1" mode="horizontal" @select="handleSelect">
+      <el-menu-item index="1">競技場エミュレーター</el-menu-item>
+      <el-menu-item index="2">チャンピオンズミーティングエミュ</el-menu-item>
+    </el-menu>
+    <router-view></router-view>
 <!--    <LangDropdown />-->
   </div>
 </template>
 
 <script>
 
-import Main from "@/components/Main";
 // import LangDropdown from "@/components/LangDropdown";
 
 export default {
   name: 'App',
-  components: {
-    Main,
-    // FIXME: Until path problem is fixed, disable language select
-    // LangDropdown
+  data() {
+    return {
+      navLink: [
+          null,
+          '/colosseum',
+          '/champions-meeting'
+      ]
+    }
+  },
+  mounted() {
+  },
+  methods: {
+    handleSelect(key) {
+      const link = this.navLink[key]
+      if (link !== this.$router.currentRoute.path) {
+        this.$router.push(link)
+      }
+    }
   }
 }
 </script>
@@ -27,7 +44,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
 
