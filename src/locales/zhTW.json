@@ -25,6 +25,7 @@
 		"styleFit": "腳質適性",
 		"random": "隨機",
 		"course": "場地",
+		"raceType": "種類",
 		"surfaceCondition": "馬場狀態",
 		"uniqueSkill": "固有技能",
 		"emulateStart": "模擬開始",
@@ -66,5 +67,10 @@
 
 		"contact": "推特在↑這↓",
 		"emulating": "模擬中、請稍候……"
+
+	},
+	"emulatorType": {
+		"teamRace": "競技場",
+		"champMeet": "冠軍會議"
 	}
 }

@@ -106,31 +106,13 @@
         </el-select>
       </el-form-item>
       <br>
-      <el-form-item :label="$t('message.course')">
-        <el-select v-model="track.location" @change="locationChanged" style="width: 120px;">
-          <el-option
-              v-for="(raceTrack, trackId) in this.trackData"
-              :label="raceTrack.name"
-              :value="trackId"
-              :key="trackId"
-          ></el-option>
-        </el-select>
-        <el-select v-model="track.course" style="width: 170px;">
-          <el-option
-              v-for="(obj, key) in courseList"
-              :label="obj.name"
-              :value="key"
-              :key="key"
-          >
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item :label="$t('message.surfaceCondition')">
-        <el-select v-model="track.surfaceCondition" style="width: 90px;">
-          <el-option label="良" value="0"></el-option>
-          <el-option label="稍重" value="1"></el-option>
-          <el-option label="重" value="2"></el-option>
-          <el-option label="不良" value="3"></el-option>
+      <el-form-item :label="$t('message.raceType')">
+        <el-select v-model="raceType" style="width: 130px;">
+          <el-option label="短距離" value="0"></el-option>
+          <el-option label="マイル" value="1"></el-option>
+          <el-option label="中距離" value="2"></el-option>
+          <el-option label="長距離" value="3"></el-option>
+          <el-option label="ダート" value="4"></el-option>
         </el-select>
       </el-form-item>
       <br>
@@ -246,15 +228,20 @@
       </table>
     </div>
     <el-divider/>
-    <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }})</h3>
+    <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }}) -
+      {{ this.trackData[this.track.location].name + this.trackDetail.name }}</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
-      {{ $t("message.totalStatus") }}：{{ totalStatus }}／：{{ $t("message.displayStatusCheck") }}{{ displayStatusCheck }}
+      {{ $t("message.totalStatus") }}：{{ totalStatus }}／{{ $t("message.displayStatusCheck") }}：{{ displayStatusCheck }}
     </div>
     <div>
-      補正後：{{ $t("message.speed") }}スピード{{ modifiedSpeed.toFixed(1) }} ／{{ $t("message.stamina") }}{{ modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}パワー{{ modifiedPower.toFixed(1) }}
-      ／{{ $t("message.guts") }}根性{{ modifiedGuts.toFixed(1) }} ／{{ $t("message.wisdom") }}賢さ{{ modifiedWisdom.toFixed(1) }}
+      補正後：{{ $t("message.speed") }}スピード{{ modifiedSpeed.toFixed(1) }} ／{{
+        $t("message.stamina")
+      }}{{ modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}パワー{{ modifiedPower.toFixed(1) }}
+      ／{{ $t("message.guts") }}根性{{ modifiedGuts.toFixed(1) }} ／{{ $t("message.wisdom") }}賢さ{{
+        modifiedWisdom.toFixed(1)
+      }}
     </div>
     <div>
       初期耐力：{{ spMax.toFixed(1) }}／金回復≒{{ getEqualStamina(550) }}{{ $t("message.stamina") }}／白回復≒{{
@@ -262,7 +249,9 @@
       }}{{ $t("message.stamina") }}スタミナ／終盤耐力消耗係数：{{ spurtSpCoef.toFixed(3) }}
     </div>
     <div>
-      {{ $t("message.skillActivateRate") }}：{{ skillActivateRate.toFixed(1) }}％／{{ $t("message.temperamentRate") }}：{{ temperamentRate.toFixed(1) }}％
+      {{ $t("message.skillActivateRate") }}：{{ skillActivateRate.toFixed(1) }}％／{{
+        $t("message.temperamentRate")
+      }}：{{ temperamentRate.toFixed(1) }}％
     </div>
     <div>
       {{ $t("message.v0") }}：{{ v0.toFixed(2) }}／{{ $t("message.a0") }}：{{ a0.toFixed(3) }}
@@ -284,7 +273,7 @@
               v-for="(release, index) in releases"
               :key="index"
               :timestamp="release.timestamp">
-            {{ release.content }}
+            <div v-html="release.content"></div>
           </el-timeline-item>
         </el-timeline>
       </el-collapse-item>
@@ -318,7 +307,69 @@
 import MixinRaceCore from "@/components/data/MixinRaceCore";
 
 export default {
-  name: 'Colosseum',
-  mixins: [MixinRaceCore]
+  name: 'TeamRace',
+  mixins: [MixinRaceCore],
+  data() {
+    return {
+      emulatorType: 'team',
+      raceType: '0'
+    }
+  },
+  computed: {
+    coursesByRaceType() {
+      const ret = {0: [], 1: [], 2: [], 3: [], 4: []}
+      for (const location in this.trackData) {
+        const courses = this.trackData[location].courses
+        for (const cid in courses) {
+          const course = courses[cid]
+          if (course.surface === 1) {
+            // 唯一除外されているのは阪神3200m
+            if (cid !== 10914) {
+              ret[course.distanceType - 1].push({location, cid})
+            }
+          } else {
+            if (course.distanceType === 2) {
+              ret[4].push({location, cid})
+            }
+          }
+        }
+      }
+      return ret
+    },
+    distanceType() {
+      switch (this.raceType) {
+        case '0':
+          return 1
+        case '1':
+          return 2
+        case '2':
+          return 3
+        case '3':
+          return 4
+        case '4':
+        default:
+          return 2
+      }
+    },
+  },
+  methods: {
+    initCourse() {
+      // コース
+      const courses = this.coursesByRaceType[this.raceType]
+      const c = courses[Math.floor(Math.random() * courses.length)]
+      this.track.course = c.cid
+      this.track.location = c.location
+
+      // 馬場状態
+      const SURFACE_RATES = [0.77, 0.87, 0.95, 1]
+      const s = Math.random()
+      for (let i = 0; i < SURFACE_RATES.length; i++) {
+        if (s < SURFACE_RATES[i]) {
+          this.track.surfaceCondition = i
+          break
+        }
+      }
+    }
+  }
 }
 </script>

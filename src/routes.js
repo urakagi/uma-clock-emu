@@ -1,9 +1,9 @@
 import ChampMeet from "@/components/ChampMeet";
-import ColosseumEmulator from "@/components/Colosseum";
+import TeamRace from "@/components/TeamRace";
 
 const routes = [
-    {path: '/', redirect: '/colosseum'},
-    {path: '/colosseum', component: ColosseumEmulator},
+    {path: '/', redirect: '/team-race'},
+    {path: '/team-race', component: TeamRace},
     {path: '/champions-meeting', component: ChampMeet},
 ]
 

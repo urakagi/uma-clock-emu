@@ -25,6 +25,7 @@
 		"styleFit": "脚質適性",
 		"random": "ランダム",
 		"course": "コース",
+		"raceType": "レースタイプ",
 		"surfaceCondition": "バ場状態",
 		"uniqueSkill": "固有スキル",
 		"emulateStart": "エミュレート開始",
@@ -44,7 +45,7 @@
 		"nonMaxSpurtSPLack": "非最大時不足分",
 		"latestRaceTime": "直近レース詳細",
 		"totalStatus": "ステータス総合",
-		"displayStatusCheck": "コースステータスチェック",
+		"displayStatusCheck": "ステータスチェック",
 
 		"skillActivateRate": "スキル発動率",
 		"temperamentRate": "掛かり率",
@@ -63,5 +64,9 @@
 
 		"contact": "ツイッターはこ↑こ↓",
 		"emulating": "エミュレート中、少々お待ち下さい……"
+	},
+	"emulatorType": {
+		"teamRace": "チーム競技場",
+		"champMeet": "チャンピオンズミーティング"
 	}
 }

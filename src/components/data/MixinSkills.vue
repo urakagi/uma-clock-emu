@@ -41,25 +41,26 @@ export default {
             normal: {name: '季節ウマ娘○', value: 40},
             rare: {name: '季節ウマ娘◎', value: 60},
             status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
+            emulatorTypeLimit: ['cm'],
+            check: function () {
+              return thiz.emulatorType === 'cm'
+            }
           },
           {
             normal: {id: 200272, name: 'おひとり様○', value: 40},
             rare: {id: 200271, name: 'おひとり様◎', value: 60},
             status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
+            check: function () {
+              return true
+            }
           },
           {
             normal: {id: 200302, name: '伏兵○', value: 40},
             rare: {id: 200301, name: '伏兵◎', value: 60},
             status: ['speed'],
-            courseLimit: {
-              'turn': [1]
-            },
+            check: function () {
+              return true
+            }
           },
           {
             normal: {id: 200262, name: '外枠得意○', value: 40},
@@ -220,8 +221,9 @@ export default {
             normal: {name: '天気の日○', value: 40},
             rare: {name: '天気の日◎', value: 60},
             status: ['guts'],
+            emulatorTypeLimit: ['cm'],
             check: function () {
-              return true
+              return thiz.emulatorType === 'cm'
             }
           },
           {
@@ -286,6 +288,86 @@ export default {
             triggerRate: 1.0 / 18,
             check: function () {
               return true
+            }
+          },
+          {
+            normal: {name: '春ウマ娘○', value: 40},
+            rare: {name: '春ウマ娘◎', value: 60},
+            status: ['speed'],
+            tooltip: '発動率40%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.season === 0
+            }
+          },
+          {
+            normal: {name: '夏ウマ娘○', value: 40},
+            rare: {name: '夏ウマ娘◎', value: 60},
+            status: ['speed'],
+            tooltip: '発動率20%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.season === 1
+            }
+          },
+          {
+            normal: {name: '秋ウマ娘○', value: 40},
+            rare: {name: '秋ウマ娘◎', value: 60},
+            status: ['speed'],
+            tooltip: '発動率20%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.season === 2
+            }
+          },
+          {
+            normal: {name: '冬ウマ娘○', value: 40},
+            rare: {name: '冬ウマ娘◎', value: 60},
+            status: ['speed'],
+            tooltip: '発動率20%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.season === 3
+            }
+          },
+          {
+            normal: {name: '晴れの日○', value: 40},
+            rare: {name: '晴れの日◎', value: 60},
+            status: ['guts'],
+            tooltip: '発動率57.5%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.weather === 0
+            }
+          },
+          {
+            normal: {name: '曇りの日○', value: 40},
+            rare: {name: '曇りの日◎', value: 60},
+            status: ['guts'],
+            tooltip: '発動率30%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.weather === 1
+            }
+          },
+          {
+            normal: {name: '雨の日○', value: 40},
+            rare: {name: '雨の日◎', value: 60},
+            status: ['guts'],
+            tooltip: '発動率11%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.weather === 2
+            }
+          },
+          {
+            normal: {name: '雪の日○', value: 40},
+            rare: {name: '雪の日◎', value: 60},
+            status: ['guts'],
+            tooltip: '発動率1.5%として扱う。',
+            emulatorTypeLimit: ['team'],
+            check: function () {
+              return thiz.weather === 3
             }
           },
         ],
@@ -2736,30 +2818,36 @@ export default {
           ret[type][rarity] = []
           for (const i in this.skills[type][rarity]) {
             const skill = this.skills[type][rarity][i]
+            if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
+              continue
+            }
             if (skill.styleLimit && skill.styleLimit.indexOf(this.runningStyle) < 0) {
               continue
             }
-            if (skill.distanceLimit && skill.distanceLimit.indexOf(this.trackDetail.distanceType) < 0) {
+            if (skill.distanceLimit && skill.distanceLimit.indexOf(this.distanceType) < 0) {
               continue
             }
             if (skill.surfaceLimit && skill.surfaceLimit.indexOf(this.trackDetail.surface) < 0) {
               continue
             }
-            if (skill.courseLimit) {
-              let notMatch = true
-              for (const limit in skill.courseLimit) {
-                if (skill.courseLimit[limit].indexOf(this.trackDetail[limit]) >= 0) {
-                  notMatch = false
-                  break
+            // コースと馬場状態指定はチャンミのみ
+            if (this.emulatorType === 'cm') {
+              if (skill.courseLimit) {
+                let notMatch = true
+                for (const limit in skill.courseLimit) {
+                  if (skill.courseLimit[limit].indexOf(this.trackDetail[limit]) >= 0) {
+                    notMatch = false
+                    break
+                  }
+                }
+                if (notMatch) {
+                  continue
                 }
               }
-              if (notMatch) {
-                continue
-              }
-            }
-            if (skill.surfaceConditionLimit) {
-              if (skill.surfaceConditionLimit.indexOf(this.track.surfaceCondition) < 0) {
-                continue
+              if (skill.surfaceConditionLimit) {
+                if (skill.surfaceConditionLimit.indexOf(this.track.surfaceCondition) < 0) {
+                  continue
+                }
               }
             }
             skill.index = parseInt(i)
@@ -3035,7 +3123,7 @@ export default {
     },
     isDistanceType(distanceType) {
       // 1: 短距離, 2: マイル, 3: 中距離, 4: 長距離
-      return this.trackDetail.distanceType === distanceType
+      return this.distanceType === distanceType
     },
     isSurfaceType(surfaceType) {
       // 1: 芝, 2: ダート

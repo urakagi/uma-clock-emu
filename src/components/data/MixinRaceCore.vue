@@ -21,13 +21,13 @@ export default {
         style: '4',
         distanceFit: 'A',
         surfaceFit: 'A',
-        styleFit: 'A'
+        styleFit: 'A',
       },
       passiveBonus: {},
       track: {
         location: '10008',
         course: '10809',
-        surfaceCondition: '0'
+        surfaceCondition: '0',
       },
       courseList: [],
       // Results
@@ -35,6 +35,8 @@ export default {
       // Race variables
       epoch: 0,
       maxEpoch: 50,
+      season: -1,
+      weather: -1,
       modifiedCondition: -1,
       temptationSection: -1,
       sectionTargetSpeedRandoms: [],
@@ -63,10 +65,15 @@ export default {
     }
   },
   created() {
-    // FIXME: Change to the course in time
-    this.track.location = Object.keys(this.trackData)[7]
-    this.locationChanged(this.track.location)
-    this.track.course = Object.keys(this.courseList)[10]
+    switch (this.emulatorType) {
+      case 'cm':
+        this.track.location = Object.keys(this.trackData)[7]
+        this.locationChanged(this.track.location)
+        this.track.course = Object.keys(this.courseList)[10]
+        break
+      case 'team':
+        break
+    }
     this.maxEpoch = localStorage.getItem('maxEpoch')
     if (!this.maxEpoch) {
       this.maxEpoch = 50
@@ -458,6 +465,10 @@ export default {
     start: function () {
       this.resetRace()
       this.initCondition()
+      this.initClimate()
+      if (this.emulatorType === 'team') {
+        this.initCourse()
+      }
       this.initTemptation()
       this.initializeSkills()
       this.startDelay = Math.random() * 0.1
@@ -493,6 +504,8 @@ export default {
       this.temptationWaste = 0
       this.modifiedCondition = -1
       this.temptationSection = -1
+      this.season = -1
+      this.weather = -1
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {
@@ -503,6 +516,24 @@ export default {
       } else {
         // 3種ランダム
         this.modifiedCondition = Math.floor(Math.random() * 3)
+      }
+    },
+    initClimate() {
+      // 0=春だけ40%、他20%
+      this.season = Math.floor(Math.random() * 5) - 1
+      if (this.season < 0) this.season = 0
+      // 0=晴れ、1=曇り、2=雨、3=雪
+      const WEATHER_RATES = [0.575, 0.875, 1]
+      const w = Math.random()
+      for (let i = 0; i < WEATHER_RATES.length; i++) {
+        if (w < WEATHER_RATES[i]) {
+          this.weather = i
+          break
+        }
+      }
+      // 冬の雨は1/3の確率で雪にする
+      if (this.weather === 2 && this.season === 3 && Math.random() < 1.0 / 3) {
+        this.weather = 3
       }
     },
     initTemptation() {
@@ -847,7 +878,8 @@ export default {
         track: this.track,
         hasSkills: this.hasSkills,
         selectedUnique: this.selectedUnique,
-        uniqueLevel: this.uniqueLevel
+        uniqueLevel: this.uniqueLevel,
+        raceType: this.raceType
       }
     },
     loadUma() {
@@ -867,6 +899,7 @@ export default {
         this.selectedUnique = u.selectedUnique
         this.uniqueLevel = u.uniqueLevel
       }
+      this.raceType = u.raceType
       this.fixOldSavedUma()
       this.initCondition()
     },

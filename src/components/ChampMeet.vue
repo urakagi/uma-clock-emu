@@ -250,7 +250,7 @@
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <div>
-      {{ $t("message.totalStatus") }}：{{ totalStatus }}／：{{ $t("message.displayStatusCheck") }}{{ displayStatusCheck }}
+      {{ $t("message.totalStatus") }}：{{ totalStatus }}／{{ $t("message.displayStatusCheck") }}：{{ displayStatusCheck }}
     </div>
     <div>
       補正後：{{ $t("message.speed") }}スピード{{ modifiedSpeed.toFixed(1) }} ／{{
@@ -290,7 +290,7 @@
               v-for="(release, index) in releases"
               :key="index"
               :timestamp="release.timestamp">
-            {{ release.content }}
+            <div v-html="release.content"></div>
           </el-timeline-item>
         </el-timeline>
       </el-collapse-item>
@@ -326,8 +326,16 @@ import MixinRaceCore from "@/components/data/MixinRaceCore";
 
 export default {
   name: 'ChampMeet',
-  mixins: [MixinRaceCore]
+  mixins: [MixinRaceCore],
+  data() {
+    return {
+      emulatorType: 'cm'
+    }
+  },
+  computed: {
+    distanceType() {
+      return this.trackDetail.distanceType
+    }
+  }
 }
 </script>
-
-
