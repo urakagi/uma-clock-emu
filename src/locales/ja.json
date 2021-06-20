@@ -36,6 +36,7 @@
 		"best": "ベスト",
 		"worst": "ワースト",
 		"timeInGame": "ゲーム表記",
+		"timeDelta": "基準差",
 		"avg": "平均",
 		"MaxSpurt": "最大ｽﾊﾟｰﾄ",
 		"NotMaxSpurt": "非最大ｽﾊﾟｰﾄ",
@@ -46,6 +47,7 @@
 		"latestRaceTime": "直近レース詳細",
 		"totalStatus": "ステータス総合",
 		"displayStatusCheck": "ステータスチェック",
+		"deltaHint": "基準差＝走ったコースに設定されている最遅実タイムとの差。マイナスの値が大きい程早い。",
 
 		"skillActivateRate": "スキル発動率",
 		"temperamentRate": "掛かり率",

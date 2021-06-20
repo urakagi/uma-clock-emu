@@ -36,6 +36,7 @@
 		"best": "最佳",
 		"worst": "最差",
 		"timeInGame": "遊戲內時間",
+		"timeDelta": "基準差",
 		"avg": "平均",
 		"MaxSpurt": "最大衝刺",
 		"NotMaxSpurt": "非最大衝刺",
@@ -47,6 +48,7 @@
 		"latestRaceTime": "最後一次模擬的細節",
 		"totalStatus": "素質總和",
 		"displayStatusCheck": "賽場檢定",
+		"deltaHint": "基準差＝和各賽道設定的最長實際時間的差距。數字負越多代表越快。",
 
 		"skillActivateRate": "技能發動率",
 		"temperamentRate": "焦慮率(掛かり率)",

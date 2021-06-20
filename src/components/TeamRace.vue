@@ -174,45 +174,48 @@
       <table border="1" class="emulation-result">
         <tr>
           <th></th>
-          <th>{{ $t("message.realTime") }}</th>
+          <th>{{ $t("message.timeDelta") }}</th>
           <th>{{ $t("message.StandardDeviation") }}</th>
           <th>{{ $t("message.best") }}</th>
           <th>{{ $t("message.worst") }}</th>
-          <th>{{ $t("message.timeInGame") }}</th>
+          <th>{{ $t("message.realTime") }}</th>
           <th>{{ $t("message.best") }}</th>
           <th>{{ $t("message.worst") }}</th>
         </tr>
         <tr>
           <th>{{ $t("message.avg") }}</th>
+          <td>{{ formatTime(avgRaceTimeDelta, 2) }}</td>
+          <td>{{ timeDeltaStandardDeviation.toFixed(3) }}</td>
+          <td>{{ formatTime(bestTimeDelta, 1) }}</td>
+          <td>{{ formatTime(worstTimeDelta, 1) }}</td>
           <td>{{ formatTime(avgRaceTime, 2) }}</td>
-          <td>{{ timeStandardDeviation.toFixed(3) }}</td>
           <td>{{ formatTime(bestTime, 2) }}</td>
           <td>{{ formatTime(worstTime, 2) }}</td>
-          <td>{{ formatTime(toDisplayTime(avgRaceTime), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(bestTime), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(worstTime), 1) }}</td>
         </tr>
         <tr>
           <th>{{ $t("message.MaxSpurt") }}</th>
+          <td>{{ formatTime(avgRaceTimeDeltaMaxSpurt, 2) }}</td>
+          <td>{{ timeDeltaStandardDeviationMaxSpurt.toFixed(3) }}</td>
+          <td>{{ formatTime(bestTimeDeltaMaxSpurt, 1) }}</td>
+          <td>{{ formatTime(worstTimeDeltaMaxSpurt, 1) }}</td>
           <td>{{ formatTime(avgRaceTimeMaxSpurt, 2) }}</td>
-          <td>{{ timeStandardDeviationMaxSpurt.toFixed(3) }}</td>
           <td>{{ formatTime(bestTimeMaxSpurt, 2) }}</td>
           <td>{{ formatTime(worstTimeMaxSpurt, 2) }}</td>
-          <td>{{ formatTime(toDisplayTime(avgRaceTimeMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(bestTimeMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(worstTimeMaxSpurt), 1) }}</td>
         </tr>
         <tr>
           <th>{{ $t("message.NotMaxSpurt") }}</th>
+          <td>{{ formatTime(avgRaceTimeDeltaNotMaxSpurt, 2) }}</td>
+          <td>{{ timeDeltaStandardDeviationNotMaxSpurt.toFixed(3) }}</td>
+          <td>{{ formatTime(bestTimeDeltaNotMaxSpurt, 1) }}</td>
+          <td>{{ formatTime(worstTimeDeltaNotMaxSpurt, 1) }}</td>
           <td>{{ formatTime(avgRaceTimeNotMaxSpurt, 2) }}</td>
-          <td>{{ timeStandardDeviationNotMaxSpurt.toFixed(3) }}</td>
           <td>{{ formatTime(bestTimeNotMaxSpurt, 2) }}</td>
           <td>{{ formatTime(worstTimeNotMaxSpurt, 2) }}</td>
-          <td>{{ formatTime(toDisplayTime(avgRaceTimeNotMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(bestTimeNotMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(worstTimeNotMaxSpurt), 1) }}</td>
         </tr>
       </table>
+      <ul>
+        <li>{{$t("message.deltaHint")}}</li>
+      </ul>
       <h3>{{ $t("message.spurtAverage") }}</h3>
       <table border="1" class="emulation-result">
         <tr>
@@ -350,6 +353,42 @@ export default {
         default:
           return 2
       }
+    },
+    avgRaceTimeDelta() {
+      return this.calcAvg('all', 'raceTimeDelta')
+    },
+    avgRaceTimeDeltaMaxSpurt() {
+      return this.calcAvg('max', 'raceTimeDelta')
+    },
+    avgRaceTimeDeltaNotMaxSpurt() {
+      return this.calcAvg('notMax', 'raceTimeDelta')
+    },
+    bestTimeDelta() {
+      return this.pickEdge('all', 'raceTimeDelta', 'best')
+    },
+    worstTimeDelta() {
+      return this.pickEdge('all', 'raceTimeDelta', 'worst')
+    },
+    bestTimeDeltaMaxSpurt() {
+      return this.pickEdge('max', 'raceTimeDelta', 'best')
+    },
+    worstTimeDeltaMaxSpurt() {
+      return this.pickEdge('max', 'raceTimeDelta', 'worst')
+    },
+    bestTimeDeltaNotMaxSpurt() {
+      return this.pickEdge('notMax', 'raceTimeDelta', 'best')
+    },
+    worstTimeDeltaNotMaxSpurt() {
+      return this.pickEdge('notMax', 'raceTimeDelta', 'worst')
+    },
+    timeDeltaStandardDeviationMaxSpurt() {
+      return this.calcStdDev('max', 'raceTimeDelta')
+    },
+    timeDeltaStandardDeviation() {
+      return this.calcStdDev('all', 'raceTimeDelta')
+    },
+    timeDeltaStandardDeviationNotMaxSpurt() {
+      return this.calcStdDev('notMax', 'raceTimeDelta')
     },
   },
   methods: {

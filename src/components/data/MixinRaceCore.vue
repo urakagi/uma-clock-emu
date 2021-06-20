@@ -761,6 +761,7 @@ export default {
     },
     goal() {
       const raceTime = this.frameElapsed * this.frameLength + this.startDelay
+      const raceTimeDelta = raceTime - this.trackDetail.finishTimeMax / 1.18
 
       if (this.epoch === this.maxEpoch - 1) {
         this.updateChart()
@@ -768,6 +769,7 @@ export default {
 
       const emu = {
         raceTime,
+        raceTimeDelta,
         maxSpurt: this.spurtParameters.speed === this.maxSpurtSpeed,
         spDiff: this.spurtParameters.spDiff
       }
@@ -788,6 +790,11 @@ export default {
       if (time === 0) {
         return '-'
       }
+      let sign = ''
+      if (time < 0) {
+        sign = '-'
+        time = -time
+      }
       const min = Math.floor(time / 60)
       let sec = Math.floor(time) % 60
       if (sec < 10) {
@@ -799,9 +806,9 @@ export default {
           decimal = '0' + decimal
         }
       }
-      return `${min}:${sec}.${decimal}`
+      return `${sign}${min}:${sec}.${decimal}`
     },
-    calcAvg(scope) {
+    calcAvg(scope, field) {
       let sum = 0
       let count = 0
       for (const e of this.emulations) {
@@ -810,7 +817,7 @@ export default {
         } else if (scope === 'notMax' && e.maxSpurt) {
           continue
         }
-        sum += e.raceTime
+        sum += e[field]
         count++
       }
       if (count === 0) {
@@ -818,8 +825,11 @@ export default {
       }
       return sum / count
     },
-    calcStdDev(scope) {
-      const avg = this.calcAvg(scope)
+    calcStdDev(scope, field) {
+      if (!field) {
+        field = 'raceTime'
+      }
+      const avg = this.calcAvg(scope, field)
       let sum = 0
       let count = 0
       for (const e of this.emulations) {
@@ -828,7 +838,7 @@ export default {
         } else if (scope === 'notMax' && e.maxSpurt) {
           continue
         }
-        sum += Math.pow(e.raceTime - avg, 2)
+        sum += Math.pow(e[field] - avg, 2)
         count++
       }
       if (count === 0) {
@@ -837,7 +847,7 @@ export default {
       return Math.sqrt(sum / count)
     },
     pickEdge(scope, field, dir) {
-      let ret = dir === 'best' ? 999999 : -1
+      let ret = dir === 'best' ? 999999 : -999999
       for (const e of this.emulations) {
         if (scope === 'max' && !e.maxSpurt) {
           continue
@@ -845,10 +855,10 @@ export default {
           continue
         }
         if ((dir === 'best' && e[field] < ret) || (dir === 'worst' && e[field] > ret)) {
-          ret = e.raceTime
+          ret = e[field]
         }
       }
-      if (ret === 999999 || ret < 0) {
+      if (ret === 999999 || ret === -999999) {
         return 0
       }
       return ret
