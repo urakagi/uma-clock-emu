@@ -268,19 +268,7 @@
       {{ $t("message.maxSpurtSpeed") }}：{{ maxSpurtSpeed.toFixed(2) }}
     </div>
     <el-divider/>
-    <h3>最終更新：{{ releases[releases.length - 1].timestamp }}</h3>
-    <el-collapse v-model="releaseNote">
-      <el-collapse-item title="更新履歴">
-        <el-timeline :reverse="true">
-          <el-timeline-item
-              v-for="(release, index) in releases"
-              :key="index"
-              :timestamp="release.timestamp">
-            <div v-html="release.content"></div>
-          </el-timeline-item>
-        </el-timeline>
-      </el-collapse-item>
-    </el-collapse>
+    <release-note/>
     <h3>注意事項</h3>
     <ol>
       <li>{{ $t("message.remark1") }}</li>
@@ -308,9 +296,11 @@
 
 <script>
 import MixinRaceCore from "@/components/data/MixinRaceCore";
+import ReleaseNote from "@/components/ReleaseNote";
 
 export default {
   name: 'TeamRace',
+  components: {ReleaseNote},
   mixins: [MixinRaceCore],
   data() {
     return {

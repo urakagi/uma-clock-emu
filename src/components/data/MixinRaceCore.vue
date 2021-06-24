@@ -3,7 +3,7 @@ import RaceGraph from "@/components/RaceGraph";
 import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
-import MixinReleaseNote from "@/components/data/MixinReleaseNote";
+import MixinReleaseNote from "@/components/ReleaseNote";
 
 export default {
   name: "MixinRaceCore",

@@ -3040,12 +3040,18 @@ export default {
     initFinalCornerRandom() {
       const ret = []
       const corner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      if (!corner) {
+        return []
+      }
       ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
       return ret
     },
     initFinalStraightRandom() {
       const ret = []
       const finalCorner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      if (!finalCorner) {
+        return []
+      }
       ret.push(this.chooseRandom(this.cornerEnd(finalCorner), this.courseLength))
       return ret
     },
