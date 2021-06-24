@@ -232,7 +232,7 @@
     </div>
     <el-divider/>
     <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }}) -
-      {{ this.trackData[this.track.location].name + this.trackDetail.name }}</h3>
+      {{ this.locationName + this.trackDetail.name }}</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <calculated-values/>

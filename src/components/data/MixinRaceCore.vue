@@ -88,6 +88,12 @@ export default {
     runningStyle() {
       return parseInt(this.umaStatus.style)
     },
+    locationName() {
+      if (!this.track.location) {
+        return ''
+      }
+      return this.trackData[this.track.location].name
+    },
     trackDetail() {
       if (!this.track.location) {
         return {distance: 0, surface: 1, courseSetStatus: []}
