@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <el-menu default-active="1" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">チーム競技場</el-menu-item>
-      <el-menu-item index="2">チャンピオンズミーティング</el-menu-item>
+    <el-menu :default-active="defaultActive" mode="horizontal" @select="handleSelect">
+      <el-menu-item index="0">チーム競技場</el-menu-item>
+      <el-menu-item index="1">チャンピオンズミーティング</el-menu-item>
     </el-menu>
     <router-view></router-view>
 <!--    <LangDropdown />-->
@@ -18,10 +18,21 @@ export default {
   data() {
     return {
       navLink: [
-          null,
           '/team-race',
           '/champions-meeting'
       ]
+    }
+  },
+  computed: {
+    defaultActive() {
+      const p = this.$router.currentRoute.path.split('/')
+      const path = '/' + p[p.length - 1]
+      for (const i in this.navLink) {
+        if (path === this.navLink[i]) {
+          return i
+        }
+      }
+      return 0
     }
   },
   mounted() {

@@ -8,6 +8,7 @@ import VueRouter from 'vue-router'
 
 import i18n from './i18n'
 import routes from "@/routes";
+import PluginUtils from "@/components/plugins/PluginUtils";
 
 Vue.config.productionTip = false
 
@@ -19,6 +20,7 @@ Vue.use(VueGtag, {
 Vue.use(require('vue-script2'))
 Vue.use(Ads.Adsense)
 Vue.use(VueRouter)
+Vue.use(PluginUtils)
 
 const router = new VueRouter({routes})
 

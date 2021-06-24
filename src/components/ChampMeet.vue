@@ -115,7 +115,7 @@
               :key="trackId"
           ></el-option>
         </el-select>
-        <el-select v-model="track.course" style="width: 170px;">
+        <el-select v-model="track.course" @change="courseChanged" style="width: 170px;">
           <el-option
               v-for="(obj, key) in courseList"
               :label="obj.name"
@@ -249,38 +249,7 @@
     <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }})</h3>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
-    <div>
-      {{ $t("message.totalStatus") }}：{{ totalStatus }}／{{ $t("message.displayStatusCheck") }}：{{ displayStatusCheck }}
-    </div>
-    <div>
-      補正後：{{ $t("message.speed") }}スピード{{ modifiedSpeed.toFixed(1) }} ／{{
-        $t("message.stamina")
-      }}{{ modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}パワー{{ modifiedPower.toFixed(1) }}
-      ／{{ $t("message.guts") }}根性{{ modifiedGuts.toFixed(1) }} ／{{ $t("message.wisdom") }}賢さ{{
-        modifiedWisdom.toFixed(1)
-      }}
-    </div>
-    <div>
-      初期耐力：{{ spMax.toFixed(1) }}／金回復≒{{ getEqualStamina(550) }}{{ $t("message.stamina") }}／白回復≒{{
-        getEqualStamina(150)
-      }}{{ $t("message.stamina") }}スタミナ／終盤耐力消耗係数：{{ spurtSpCoef.toFixed(3) }}
-    </div>
-    <div>
-      {{ $t("message.skillActivateRate") }}：{{ skillActivateRate.toFixed(1) }}％／{{
-        $t("message.temperamentRate")
-      }}：{{ temperamentRate.toFixed(1) }}％
-    </div>
-    <div>
-      {{ $t("message.v0") }}：{{ v0.toFixed(2) }}／{{ $t("message.a0") }}：{{ a0.toFixed(3) }}
-    </div>
-    <div>
-      序盤目標速度：{{ v1.toFixed(2) }}／序盤加速度：{{ a1.toFixed(3) }} ｜
-      中盤目標速度：{{ v2.toFixed(2) }}／中盤加速度：{{ a2.toFixed(3) }}
-    </div>
-    <div>
-      終盤目標速度：{{ v3.toFixed(2) }}／終盤加速度：{{ a3.toFixed(3) }} ｜
-      {{ $t("message.maxSpurtSpeed") }}：{{ maxSpurtSpeed.toFixed(2) }}
-    </div>
+    <calculated-values/>
     <el-divider/>
     <release-note/>
     <h3>注意事項</h3>
@@ -312,10 +281,11 @@
 
 import MixinRaceCore from "@/components/data/MixinRaceCore";
 import ReleaseNote from "@/components/ReleaseNote";
+import CalculatedValues from "@/components/CalculatedValues";
 
 export default {
   name: 'ChampMeet',
-  components: {ReleaseNote},
+  components: {CalculatedValues, ReleaseNote},
   mixins: [MixinRaceCore],
   data() {
     return {
@@ -325,6 +295,19 @@ export default {
   computed: {
     distanceType() {
       return this.trackDetail.distanceType
+    }
+  },
+  mounted() {
+    const sc = localStorage.getItem('selectedCourse')
+    if (sc) {
+      const j = JSON.parse(sc)
+      this.track.location = j.location
+      this.locationChanged(this.track.location)
+      this.track.course = j.course
+    } else {
+      this.track.location = Object.keys(this.trackData)[0]
+      this.locationChanged(this.track.location)
+      this.track.course = Object.keys(this.courseList)[0]
     }
   }
 }

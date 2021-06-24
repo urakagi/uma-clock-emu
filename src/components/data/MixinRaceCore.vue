@@ -3,12 +3,11 @@ import RaceGraph from "@/components/RaceGraph";
 import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
-import MixinReleaseNote from "@/components/ReleaseNote";
 
 export default {
   name: "MixinRaceCore",
   components: {RaceGraph},
-  mixins: [MixinCourseData, MixinConstants, MixinSkills, MixinReleaseNote],
+  mixins: [MixinCourseData, MixinConstants, MixinSkills],
   data() {
     return {
       umaStatus: {
@@ -25,8 +24,8 @@ export default {
       },
       passiveBonus: {},
       track: {
-        location: '10008',
-        course: '10809',
+        location: '',
+        course: '',
         surfaceCondition: '0',
       },
       courseList: [],
@@ -59,21 +58,11 @@ export default {
       umaToLoad: null,
       chartData: {},
       chartOptions: {},
-      releaseNote: '',
       // Constants
       fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
     }
   },
   created() {
-    switch (this.emulatorType) {
-      case 'cm':
-        this.track.location = Object.keys(this.trackData)[7]
-        this.locationChanged(this.track.location)
-        this.track.course = Object.keys(this.courseList)[10]
-        break
-      case 'team':
-        break
-    }
     this.maxEpoch = localStorage.getItem('maxEpoch')
     if (!this.maxEpoch) {
       this.maxEpoch = 50
@@ -154,7 +143,7 @@ export default {
     skillActivateRate() {
       return 100 - 9000.0 / this.umaStatus.wisdom
     },
-    temperamentRate() {
+    temptationRate() {
       return Math.pow(6.5 / (Math.log10(0.1 * this.modifiedWisdom + 1)), 2)
     },
     currentPhase() {
@@ -173,8 +162,8 @@ export default {
       }
       // スタート時
       // 他に0.85倍の基準速度を下回る可能性がない（耐力枯渇してもこれよりは高い）
-      if (this.currentSpeed < 0.85 * this.baseSpeed) {
-        return 0.85 * this.baseSpeed
+      if (this.currentSpeed < this.v0) {
+        return this.v0
       }
       let baseTargetSpeed
       // スパート中
@@ -222,7 +211,7 @@ export default {
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
       // スタート時加算
-      if (this.currentSpeed < 0.85 * this.baseSpeed) {
+      if (this.currentSpeed < this.v0) {
         ret += 24
       }
       for (const skill of this.operatingSkills.acceleration) {
@@ -415,24 +404,6 @@ export default {
       }
       return (-sum / count).toFixed(1)
     },
-    totalStatus() {
-      return parseInt(this.umaStatus.speed) + parseInt(this.umaStatus.stamina)
-          + parseInt(this.umaStatus.power) + parseInt(this.umaStatus.guts)
-          + parseInt(this.umaStatus.wisdom)
-    },
-    displayStatusCheck() {
-      const STATUS = ['', 'スピード', 'スタミナ', 'パワー', '根性', '賢さ']
-      const check = this.trackDetail.courseSetStatus
-      switch (check.length) {
-        case 0:
-          return '無'
-        case 1:
-          return STATUS[check[0]]
-        case 2:
-        default:
-          return STATUS[check[0]] + '、' + STATUS[check[1]]
-      }
-    },
     production() {
       return process.env.NODE_ENV === 'production'
     }
@@ -441,9 +412,19 @@ export default {
     locationChanged(location) {
       this.courseList = this.trackData[location].courses
       this.track.course = Object.keys(this.courseList)[0]
+      this.saveSelectedCourse()
     },
-    getEqualStamina(value) {
-      return Math.floor(this.spMax * value / 10000.0 / 0.8 / this.styleSpCoef[this.umaStatus.style])
+    courseChanged() {
+      this.saveSelectedCourse()
+    },
+    saveSelectedCourse() {
+      if (!this.track.location) {
+        return
+      }
+      localStorage.setItem('selectedCourse', JSON.stringify({
+        location: this.track.location,
+        course: this.track.course
+      }))
     },
     exec: function () {
       this.emulating = true
@@ -537,7 +518,7 @@ export default {
       }
     },
     initTemptation() {
-      if (Math.random() * 100 < Math.pow(6.5 / Math.log10(0.1 * this.modifiedWisdom + 1), 2)) {
+      if (Math.random() * 100 < this.temptationRate) {
         this.temptationSection = 1 + Math.floor(Math.random() * 8)
       } else {
         this.temptationSection = -1
@@ -785,28 +766,6 @@ export default {
         ret = max - 1 + 2 * Math.random()
       }
       return ret
-    },
-    formatTime(time, digit) {
-      if (time === 0) {
-        return '-'
-      }
-      let sign = ''
-      if (time < 0) {
-        sign = '-'
-        time = -time
-      }
-      const min = Math.floor(time / 60)
-      let sec = Math.floor(time) % 60
-      if (sec < 10) {
-        sec = '0' + sec
-      }
-      let decimal = Math.floor((time - Math.floor(time)) * Math.pow(10, digit))
-      for (let d = 1; d < digit; d++) {
-        if (parseInt(decimal) < Math.pow(10, d)) {
-          decimal = '0' + decimal
-        }
-      }
-      return `${sign}${min}:${sec}.${decimal}`
     },
     calcAvg(scope, field) {
       let sum = 0

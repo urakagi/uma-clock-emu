@@ -21,6 +21,7 @@ export default {
   name: "ReleaseNote",
   data: function () {
     return {
+      releaseNote: '',
       releases: [
         {
           content: 'αリリース',
@@ -58,7 +59,10 @@ export default {
           content: '競技場エミュレーターを追加。季節や天候の比例は見かけたものと自前のデータを参考にしてふわっと定めました。各々の確率は緑スキルに記載。<br>新潟1000mがバグる問題修正',
           timestamp: '2021-06-20'
         },
-      ]
+        {
+          content: 'コース毎の最小及び最大タイムを表記、他色々細かいバグ修正',
+          timestamp: '2021-06-24'
+        },      ]
     }
   }
 }
