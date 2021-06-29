@@ -291,8 +291,8 @@ export default {
             }
           },
           {
-            normal: {name: '春ウマ娘○', value: 40},
-            rare: {name: '春ウマ娘◎', value: 60},
+            normal: {id: 200172, name: '春ウマ娘○', value: 40},
+            rare: {id: 200171, name: '春ウマ娘◎', value: 60},
             status: ['speed'],
             tooltip: '発動率40%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -301,8 +301,8 @@ export default {
             }
           },
           {
-            normal: {name: '夏ウマ娘○', value: 40},
-            rare: {name: '夏ウマ娘◎', value: 60},
+            normal: {id: 200182, name: '夏ウマ娘○', value: 40},
+            rare: {id: 200181, name: '夏ウマ娘◎', value: 60},
             status: ['speed'],
             tooltip: '発動率20%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -311,8 +311,8 @@ export default {
             }
           },
           {
-            normal: {name: '秋ウマ娘○', value: 40},
-            rare: {name: '秋ウマ娘◎', value: 60},
+            normal: {id: 200192, name: '秋ウマ娘○', value: 40},
+            rare: {id: 200191, name: '秋ウマ娘◎', value: 60},
             status: ['speed'],
             tooltip: '発動率20%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -321,8 +321,8 @@ export default {
             }
           },
           {
-            normal: {name: '冬ウマ娘○', value: 40},
-            rare: {name: '冬ウマ娘◎', value: 60},
+            normal: {id: 200202, name: '冬ウマ娘○', value: 40},
+            rare: {id: 200201, name: '冬ウマ娘◎', value: 60},
             status: ['speed'],
             tooltip: '発動率20%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -331,8 +331,8 @@ export default {
             }
           },
           {
-            normal: {name: '晴れの日○', value: 40},
-            rare: {name: '晴れの日◎', value: 60},
+            normal: {id: 200212, name: '晴れの日○', value: 40},
+            rare: {id: 200211, name: '晴れの日◎', value: 60},
             status: ['guts'],
             tooltip: '発動率57.5%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -341,8 +341,8 @@ export default {
             }
           },
           {
-            normal: {name: '曇りの日○', value: 40},
-            rare: {name: '曇りの日◎', value: 60},
+            normal: {id: 200222, name: '曇りの日○', value: 40},
+            rare: {id: 200221, name: '曇りの日◎', value: 60},
             status: ['guts'],
             tooltip: '発動率30%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -351,8 +351,8 @@ export default {
             }
           },
           {
-            normal: {name: '雨の日○', value: 40},
-            rare: {name: '雨の日◎', value: 60},
+            normal: {id: 200232, name: '雨の日○', value: 40},
+            rare: {id: 200231, name: '雨の日◎', value: 60},
             status: ['guts'],
             tooltip: '発動率11%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -361,8 +361,8 @@ export default {
             }
           },
           {
-            normal: {name: '雪の日○', value: 40},
-            rare: {name: '雪の日◎', value: 60},
+            normal: {id: 200242, name: '雪の日○', value: 40},
+            rare: {id: 200241, name: '雪の日◎', value: 60},
             status: ['guts'],
             tooltip: '発動率1.5%として扱う。',
             emulatorTypeLimit: ['team'],
@@ -562,7 +562,7 @@ export default {
           },
           {
             normal: {id: 201422, name: '小休憩', value: 150},
-            rare: {id: 0, name: 'リラックス', value: 550},
+            rare: {id: 201421, name: 'リラックス', value: 550},
             styleLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -1033,7 +1033,7 @@ export default {
           },
           {
             normal: {id: 200752, name: '内弁慶', value: 0.15},
-            rare: {id: 0, name: '内的体験', value: 0.35},
+            rare: {id: 200751, name: '内的体験', value: 0.35},
             duration: 3,
             distanceLimit: [4],
             tooltip: '内ラチ側にいると見なす。実質逃げ馬用かな？知らないけど。',
@@ -2639,7 +2639,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'タイマン！デッドヒート！',
+          id: 100121, name: 'タイマン！デッドヒート！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動」として扱う。',
