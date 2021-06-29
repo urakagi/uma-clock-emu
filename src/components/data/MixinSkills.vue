@@ -562,6 +562,7 @@ export default {
           },
           {
             normal: {id: 201422, name: '小休憩', value: 150},
+            rare: {id: 0, name: 'リラックス', value: 550},
             styleLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -1032,6 +1033,7 @@ export default {
           },
           {
             normal: {id: 200752, name: '内弁慶', value: 0.15},
+            rare: {id: 0, name: '内的体験', value: 0.35},
             duration: 3,
             distanceLimit: [4],
             tooltip: '内ラチ側にいると見なす。実質逃げ馬用かな？知らないけど。',
@@ -2631,6 +2633,18 @@ export default {
           tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
           init: function () {
             this.randoms = thiz.initPhaseRandom(1)
+          },
+          check: function (startPosition) {
+            return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        {
+          id: 0, name: 'タイマン！デッドヒート！',
+          targetSpeed: 0.35,
+          duration: 5,
+          tooltip: '「最終直線のどこかで発動」として扱う。',
+          init: function () {
+            this.randoms = thiz.initFinalStraightRandom()
           },
           check: function (startPosition) {
             return thiz.isInRandom(this.randoms, startPosition)
