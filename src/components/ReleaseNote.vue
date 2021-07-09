@@ -1,18 +1,18 @@
 <template>
   <div>
-  <h3>最終更新：{{ releases[releases.length - 1].timestamp }}</h3>
-  <el-collapse v-model="releaseNote">
-    <el-collapse-item title="更新履歴">
-      <el-timeline :reverse="true">
-        <el-timeline-item
-            v-for="(release, index) in releases"
-            :key="index"
-            :timestamp="release.timestamp">
-          <div v-html="release.content"></div>
-        </el-timeline-item>
-      </el-timeline>
-    </el-collapse-item>
-  </el-collapse>
+    <h3>最終更新：{{ releases[releases.length - 1].timestamp }}</h3>
+    <el-collapse v-model="releaseNote">
+      <el-collapse-item title="更新履歴">
+        <el-timeline :reverse="true">
+          <el-timeline-item
+              v-for="(release, index) in releases"
+              :key="index"
+              :timestamp="release.timestamp">
+            <div v-html="release.content"></div>
+          </el-timeline-item>
+        </el-timeline>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 
@@ -62,7 +62,12 @@ export default {
         {
           content: 'コース毎の最小及び最大タイムを表記、他色々細かいバグ修正',
           timestamp: '2021-06-24'
-        },      ]
+        },
+        {
+          content: '坂バグの修正に対応。中山や阪神などは仕様ということらしい。',
+          timestamp: '2021-07-09'
+        },
+      ]
     }
   }
 }

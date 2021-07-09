@@ -405,11 +405,8 @@ export default {
           },
           {
             normal: {id: 201571, name: 'スリーセブン', value: 150},
-            init: function () {
-              this.randoms = [thiz.courseLength - 777]
-            },
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isContainsRemainingDistance(777, startPosition)
             }
           },
           {
@@ -646,6 +643,17 @@ export default {
               return thiz.isInFinalCorner()
             }
           },
+          {
+            inherit: {id: 0, name: 'ゲインヒール・スペリアー', value: 150},
+            tooltip: '中盤のどこかで発動として見なす。',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          // End of heal skills
         ],
         targetSpeed: [
           {
@@ -1195,19 +1203,11 @@ export default {
             }
           },
           {
-            tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
-            check: function (startPosition) {
-              return startPosition <= thiz.toPosition(200)
-                  && thiz.position >= thiz.toPosition(200)
-            }
-          },
-          {
             inherit: {id: 900081, name: 'カッティング×DRIVE！', value: 0.15},
             duration: 3,
             tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
             check: function (startPosition) {
-              return startPosition <= thiz.toPosition(200)
-                  && thiz.position >= thiz.toPosition(200)
+              return thiz.isContainsRemainingDistance(200, startPosition)
             }
           },
           {
@@ -1215,8 +1215,7 @@ export default {
             duration: 3,
             tooltip: '順位条件は満たしてると見なす',
             check: function (startPosition) {
-              return startPosition <= thiz.toPosition(200)
-                  && thiz.position >= thiz.toPosition(200)
+              return thiz.isContainsRemainingDistance(200, startPosition)
             }
           },
           {
@@ -1228,29 +1227,11 @@ export default {
             }
           },
           {
-            tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
             inherit: {id: 900181, name: 'ブレイズ・オブ・プライド', value: 0.15},
             duration: 3,
             tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
             init: function () {
               this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
             },
             check: function (startPosition) {
               return thiz.isInRandom(this.randoms, startPosition)
@@ -1434,6 +1415,18 @@ export default {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            inherit: {id: 0, name: 'タイマン！デッドヒート！', value: 0.35},
+            duration: 3,
+            tooltip: '「最終直線のどこかで発動」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          // End of target speed skills
         ],
         acceleration: [
           {
@@ -1687,7 +1680,19 @@ export default {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            inherit: {id: 0, name: 'コンドル猛撃波', value: 0.2},
+            duration: 2.4,
+            tooltip: '「最終コーナーのどこかで発動」として扱う。',
+            init: function () {
+              this.randoms = thiz.initFinalCornerRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
         ],
+        // End of acc skills
         boost: [
           {
             inherit: {
@@ -1760,6 +1765,7 @@ export default {
             rare: {id: 200431, name: 'コンセントレーション', value: 0.4},
             inherit: {id: 200433, name: 'ゲート難', value: 1.5},
           }
+          // End of boost skills
         ],
         speed: [
           {
@@ -2263,6 +2269,18 @@ export default {
           }
         },
         {
+          id: 0, name: 'ゲインヒール・スペリアー',
+          value: 550,
+          tooltip: '中盤のどこかで発動として見なす。',
+          init: function () {
+            this.randoms = thiz.initPhaseRandom(1)
+          },
+          check: function (startPosition) {
+            return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        // End of heal unique skills
+        {
           id: 10071, name: '波乱注意砲！',
           targetSpeed: 0.15,
           duration: 6,
@@ -2650,6 +2668,7 @@ export default {
             return thiz.isInRandom(this.randoms, startPosition)
           }
         },
+        // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
           acceleration: 0.4,
@@ -2712,6 +2731,18 @@ export default {
             return thiz.isInRandom(this.randoms, startPosition)
           }
         },
+        {
+          id: 100131, name: 'コンドル猛撃波',
+          acceleration: 0.4,
+          duration: 4,
+          init: function () {
+            this.randoms = thiz.initFinalCornerRandom()
+          },
+          check: function (startPosition) {
+            return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        // End of acc unique skills
         {
           id: 10091, name: 'レッドエース',
           boost: {
@@ -2820,7 +2851,7 @@ export default {
             return thiz.isInRandom(this.randoms, startPosition)
           }
         },
-      ],
+      ], // End of boost uniqueSkills
     }
   },
   computed: {
@@ -3116,6 +3147,10 @@ export default {
         return this.getPhase(position) >= 2
       }
       return position > this.cornerEnd(fc)
+    },
+    isContainsRemainingDistance(remain, startPosition) {
+      return startPosition <= this.toPosition(remain)
+          && this.position >= this.toPosition(remain)
     },
     isInCoolDown(skill) {
       if (!(skill.name in this.coolDownMap)) {
