@@ -49,7 +49,7 @@ if (pathname.length === 0) {
 
 
 // FIXME: Until path problem is fixed, always set ja
-locale = 'ja'
+// locale = 'ja'
 
 
 const i18n = new VueI18n({
