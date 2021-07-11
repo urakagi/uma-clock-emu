@@ -5,7 +5,17 @@
       <el-menu-item index="1">チャンピオンズミーティング</el-menu-item>
     </el-menu>
     <router-view></router-view>
-<!--    <LangDropdown />-->
+
+    <div style="text-align: left;">
+      <el-dropdown split-button @command="handleCommand">
+        語言
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="ja">日文</el-dropdown-item>
+          <el-dropdown-item command="zhTW">繁體中文</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+
   </div>
 </template>
 
@@ -15,6 +25,7 @@
 
 export default {
   name: 'App',
+  components: {},
   data() {
     return {
       navLink: [
@@ -43,6 +54,9 @@ export default {
       if (link !== this.$router.currentRoute.path) {
         this.$router.push(link)
       }
+    },
+    handleCommand(command) {
+      this.$i18n.locale = command;
     }
   }
 }
