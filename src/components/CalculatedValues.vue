@@ -4,17 +4,17 @@
       {{ $t("message.totalStatus") }}：{{ totalStatus }}／{{ $t("message.displayStatusCheck") }}：{{ displayStatusCheck }}／最小タイム：{{formatTime($parent.trackDetail.finishTimeMin, 1)}}／最大タイム：{{formatTime($parent.trackDetail.finishTimeMax, 1)}}
     </div>
     <div>
-      補正後：{{ $t("message.speed") }}スピード{{ $parent.modifiedSpeed.toFixed(1) }} ／{{
+      補正後：{{ $t("message.speed") }}{{ $parent.modifiedSpeed.toFixed(1) }} ／{{
         $t("message.stamina")
-      }}{{ $parent.modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}パワー{{ $parent.modifiedPower.toFixed(1) }}
-      ／{{ $t("message.guts") }}根性{{ $parent.modifiedGuts.toFixed(1) }} ／{{ $t("message.wisdom") }}賢さ{{
+      }}{{ $parent.modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}{{ $parent.modifiedPower.toFixed(1) }}
+      ／{{ $t("message.guts") }}{{ $parent.modifiedGuts.toFixed(1) }} ／{{ $t("message.wisdom") }}{{
         $parent.modifiedWisdom.toFixed(1)
       }}
     </div>
     <div>
       初期耐力：{{ $parent.spMax.toFixed(1) }}／金回復≒{{ getEqualStamina(550) }}{{ $t("message.stamina") }}／白回復≒{{
         getEqualStamina(150)
-      }}{{ $t("message.stamina") }}スタミナ／終盤耐力消耗係数：{{ $parent.spurtSpCoef.toFixed(3) }}
+      }}{{ $t("message.stamina") }}／終盤耐力消耗係数：{{ $parent.spurtSpCoef.toFixed(3) }}
     </div>
     <div>
       {{ $t("message.skillActivateRate") }}：{{ $parent.skillActivateRate.toFixed(1) }}％／{{
