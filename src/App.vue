@@ -57,6 +57,7 @@ export default {
     },
     handleCommand(command) {
       this.$i18n.locale = command;
+      localStorage.setItem('lang', command);
     }
   }
 }
