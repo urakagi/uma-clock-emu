@@ -3,13 +3,15 @@ import VueI18n from 'vue-i18n'
 
 import ja from './locales/ja.json'
 import zhTW from './locales/zhTW.json'
+import en from './locales/en.json'
 
 Vue.use(VueI18n)
 
-const lang_array = ['ja', 'zhTW']
+const lang_array = ['ja', 'zhTW', 'en']
 const messages = {
 	ja,
-	zhTW
+	zhTW,
+	en
 }
 
 let lang
