@@ -94,7 +94,7 @@
           <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="調子">
+      <el-form-item :label="$t('message.mood')">
         <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
           <el-option label="絶好調" value="0"></el-option>
           <el-option label="好調" value="1"></el-option>
