@@ -876,7 +876,9 @@ export default {
         this.uniqueLevel = u.uniqueLevel
       }
       this.raceType = u.raceType
-      this.emulations = u.emulations
+      if (u.emulations) {
+        this.emulations = u.emulations
+      }
       this.fixOldSavedUma()
       this.initCondition()
     },
