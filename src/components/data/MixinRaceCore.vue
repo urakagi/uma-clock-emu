@@ -1201,7 +1201,10 @@ export default {
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'pink',
-              borderWidth: 2
+              borderWidth: 2,
+              onClick: function () {
+                  thiz.$message(`${(thiz.courseLength - frame.startPosition).toFixed(0)}m地点`)
+              }
             })
             nextSkillYAdjust(skillYAdjust)
           }
@@ -1219,7 +1222,10 @@ export default {
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'silver',
-              borderWidth: 2
+              borderWidth: 2,
+              onClick: function () {
+                thiz.$message(`${(thiz.courseLength - frame.startPosition).toFixed(0)}m地点`)
+              }
             })
             nextSkillYAdjust(skillYAdjust)
           }
