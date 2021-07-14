@@ -854,7 +854,8 @@ export default {
         hasSkills: this.hasSkills,
         selectedUnique: this.selectedUnique,
         uniqueLevel: this.uniqueLevel,
-        raceType: this.raceType
+        raceType: this.raceType,
+        emulations: this.emulations
       }
     },
     loadUma() {
@@ -875,6 +876,7 @@ export default {
         this.uniqueLevel = u.uniqueLevel
       }
       this.raceType = u.raceType
+      this.emulations = u.emulations
       this.fixOldSavedUma()
       this.initCondition()
     },
