@@ -7,9 +7,9 @@ export default {
     return {
       rarities: ['rare', 'normal', 'inherit', 'all'],
       rarityString: {
-        rare: this.$t("skills.rare"),
-        normal: this.$t("skills.normal"),
-        inherit: this.$t("skills.inherit"),
+        rare: 'skills.rare',
+        normal: 'skills.normal',
+        inherit: 'skills.inherit',
         all: '',
       },
       invokedSkills: [],
