@@ -94,7 +94,7 @@
           <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="調子">
+      <el-form-item :label="$t('message.mood')">
         <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
           <el-option label="絶好調" value="0"></el-option>
           <el-option label="好調" value="1"></el-option>
@@ -138,7 +138,7 @@
             :key="menu.title"
         >
           <div v-for="rarity in rarities" :key="menu.type + rarity">
-            <h3 v-if="availableSkills[menu.type][rarity].length > 0">{{ rarityString[rarity] }}</h3>
+            <h3 v-if="availableSkills[menu.type][rarity].length > 0">{{ $t(rarityString[rarity]) }}</h3>
             <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
               <el-tooltip
                   v-for="skill in availableSkills[menu.type][rarity]"
@@ -163,6 +163,14 @@
       <el-form-item :label="$t('message.testTime')">
         <el-input-number value="20" v-model="maxEpoch"></el-input-number>
       </el-form-item>
+
+      <el-form-item :label="$t('message.skillActivateAdjustment')">
+        <el-select v-model="skillActivateAdjustment" style="width: 130px;">
+          <el-option :label="$t('message.skillActivateAdjustment0')" value="0"></el-option>
+          <el-option :label="$t('message.skillActivateAdjustment1')" value="1"></el-option>
+        </el-select>
+      </el-form-item>
+      
     </el-form>
     <el-divider/>
     <Adsense v-if="production"

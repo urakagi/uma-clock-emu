@@ -44,6 +44,7 @@ export default {
       currentSpeed: 3,
       sp: 0,
       operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
+      skillActivateAdjustment: '0',
       frames: [],
       startDelay: 0,
       spurtParameters: null,
@@ -307,14 +308,14 @@ export default {
     },
     skillMenu() {
       const TITLE_TYPE = {
-        passive: 'パッシブスキル',
-        heal: '回復スキル',
-        targetSpeed: '速度スキル',
-        acceleration: '加速度スキル',
-        boost: 'ブーストスキル(速度と加速度が両方上がる)',
-        gate: 'ゲートスキル',
-        speed: '喰らう減速スキル',
-        fatigue: '喰らう疲労スキル',
+        passive: `${this.$t("skills.passive")}`,
+        heal: `${this.$t("skills.heal")}`,
+        targetSpeed: `${this.$t("skills.targetSpeed")}`,
+        acceleration: `${this.$t("skills.acceleration")}`,
+        boost: `${this.$t("skills.boost")}`,
+        gate: `${this.$t("skills.gate")}`,
+        speed: `${this.$t("skills.speed")}`,
+        fatigue: `${this.$t("skills.fatigue")}`,
       }
       const ret = []
       for (const type in this.skills) {
@@ -459,7 +460,7 @@ export default {
         this.initCourse()
       }
       this.initTemptation()
-      this.initializeSkills()
+      this.initializeSkills(this.skillActivateAdjustment)
       this.startDelay = Math.random() * 0.1
       this.triggerStartSkills()
       this.sp = this.spMax
@@ -1045,7 +1046,7 @@ export default {
           skillYAdjust = 0
         }
       }
-      const PHASE_NAMES = ['←序盤|中盤→', '中盤←|終盤→', 'ﾗｽﾄｽﾊﾟｰﾄ→']
+      const PHASE_NAMES = [this.$t("chart.phase1"), this.$t("chart.phase2"), this.$t("chart.phase3")]
       const SKILL_COLORS = {
         heal: 'cyan',
         speed: 'darkred',
@@ -1061,7 +1062,7 @@ export default {
       annotations.push({
         type: 'line',
         label: {
-          content: this.startDelay >= 0.08 ? ' 出遅れ ' : 'スタート',
+          content: this.startDelay >= 0.08 ? this.$t("chart.lateStart") : this.$t("chart.start"),
           position: 'bottom',
           enabled: true,
           xAdjust: -30
@@ -1176,7 +1177,7 @@ export default {
             annotations.push({
               type: 'line',
               label: {
-                content: 'ポジキープ終了',
+                content: this.$t("chart.positionKeepEnd"),
                 position: 'bottom',
                 enabled: true
               },
@@ -1194,7 +1195,7 @@ export default {
             annotations.push({
               type: 'line',
               label: {
-                content: '上り坂',
+                content: this.$t("chart.upSlope"),
                 position: 'top',
                 enabled: true,
                 yAdjust: skillYAdjust
@@ -1215,7 +1216,7 @@ export default {
             annotations.push({
               type: 'line',
               label: {
-                content: '下り坂',
+                content: this.$t("chart.downSlope"),
                 position: 'top',
                 enabled: true,
                 yAdjust: skillYAdjust
@@ -1235,7 +1236,7 @@ export default {
             annotations.push({
               type: 'line',
               label: {
-                content: 'スパート開始',
+                content: this.$t("chart.spurt"),
                 position: 'bottom',
                 enabled: true,
                 yAdjust: 30
@@ -1287,13 +1288,13 @@ export default {
         labels: labels,
         datasets: [{
           fill: false,
-          label: '耐力',
+          label: this.$t("chart.hp"),
           yAxisID: 'sp',
           borderColor: 'rgb(255, 132, 99)',
           data: dataSp
         }, {
           fill: false,
-          label: '走行速度',
+          label: this.$t("chart.speed"),
           yAxisID: 'speed',
           borderColor: 'rgb(30, 21, 155)',
           data: dataSpeed

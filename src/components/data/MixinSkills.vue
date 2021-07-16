@@ -7,15 +7,15 @@ export default {
     return {
       rarities: ['rare', 'normal', 'inherit', 'all'],
       rarityString: {
-        rare: 'レア・ノーマル上位',
-        normal: 'ノーマル下位',
-        inherit: '固有(継承)',
+        rare: 'skills.rare',
+        normal: 'skills.normal',
+        inherit: 'skills.inherit',
         all: '',
       },
       invokedSkills: [],
       coolDownMap: {},
       hasSkills: {},
-      selectedUnique: 'なし／発動しない',
+      selectedUnique: this.$t("skills.selectedUnique"),
       uniqueLevel: 4,
       skillTriggerCount: [0, 0, 0, 0],
       skills: {},
@@ -2917,7 +2917,7 @@ export default {
     this.resetHasSkills()
   },
   methods: {
-    initializeSkills() {
+    initializeSkills(skillActivateAdjustment) {
       this.invokedSkills = []
       this.coolDownMap = {}
       this.skillTriggerCount = [0, 0, 0, 0]
@@ -2935,11 +2935,15 @@ export default {
             } else if (type === 'passive') {
               invokeRate = 100
             } else {
+
+              if (skillActivateAdjustment==="1") {
+                invokeRate = 100
+              }
               // FIXME: for debug, always pass wisdom check
-              if (this.production) {
-                invokeRate = 100 - 9000.0 / this.umaStatus.wisdom
+              else if (this.production) {
+                invokeRate = Math.max(100 - 9000.0 / this.umaStatus.wisdom, 20)
               } else {
-                invokeRate = 100000 - 9000.0 / this.umaStatus.wisdom
+                invokeRate = Math.max(100000 - 9000.0 / this.umaStatus.wisdom, 20)
               }
             }
             if (Math.random() * 100 < invokeRate) {
