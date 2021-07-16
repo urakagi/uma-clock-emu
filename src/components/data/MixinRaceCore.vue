@@ -44,6 +44,7 @@ export default {
       currentSpeed: 3,
       sp: 0,
       operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
+      skillActivateAdjustment: '0',
       frames: [],
       startDelay: 0,
       spurtParameters: null,
@@ -457,7 +458,7 @@ export default {
         this.initCourse()
       }
       this.initTemptation()
-      this.initializeSkills()
+      this.initializeSkills(this.skillActivateAdjustment)
       this.startDelay = Math.random() * 0.1
       this.triggerStartSkills()
       this.sp = this.spMax
