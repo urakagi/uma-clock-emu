@@ -1001,11 +1001,7 @@ export default {
       }
     },
     resetTrack() {
-      this.track = {
-        location: '10008',
-        course: '10811',
-        surfaceCondition: '0'
-      }
+      // Do nothing
     },
     fixOldSavedUma() {
       const o = {...this.hasSkills}
