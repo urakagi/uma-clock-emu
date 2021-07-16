@@ -121,17 +121,19 @@ export default {
           statusCheckModifier += bonus
         }
       }
-      return this.umaStatus.speed * statusCheckModifier * this.condCoef[this.modifiedCondition]
+      const ret =  this.umaStatus.speed * statusCheckModifier * this.condCoef[this.modifiedCondition]
           + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]
           + this.passiveBonus.speed
+      return ret > 0 ? ret : 1
     },
     modifiedStamina() {
       return this.umaStatus.stamina * this.condCoef[this.modifiedCondition] + this.passiveBonus.stamina
     },
     modifiedPower() {
-      return this.umaStatus.power * this.condCoef[this.modifiedCondition]
+      const ret = this.umaStatus.power * this.condCoef[this.modifiedCondition]
           + this.surfacePowerModify[this.trackDetail.surface][this.track.surfaceCondition]
           + this.passiveBonus.power
+      return ret > 0 ? ret : 1
     },
     modifiedGuts() {
       return this.umaStatus.guts * this.condCoef[this.modifiedCondition] + this.passiveBonus.guts
