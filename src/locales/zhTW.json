@@ -46,8 +46,8 @@
 		"NotMaxSpurt": "非最大衝刺",
 		"spurtAverage": "平均衝刺",
 		"maxSpurtRate": "最大衝刺率",
-		"maxSpurtSPLeft": "最大時剩餘耐力",
-		"nonMaxSpurtSPLack": "非最大時不足耐力",
+		"maxSpurtSPLeft": "最大時剩餘HP",
+		"nonMaxSpurtSPLack": "非最大時不足HP",
 
 		"latestRaceTime": "最後一次模擬的細節",
 		"totalStatus": "素質總和",
@@ -63,10 +63,10 @@
 		"minTime": "最小タイム",
 		"maxTime": "最大タイム",
 		"corrected": "補正後",
-		"startHP": "初期耐力",
+		"startHP": "初期HP",
 		"rareHP": "金回復",
 		"normalHP": "白回復",
-		"spurtCoeff": "終盤耐力消耗係数",
+		"spurtCoeff": "終盤HP消耗係数",
 		"startSpeed": "序盤目標速度",
 		"startAccel": "序盤加速度",
 		"midSpeed": "中盤目標速度",
@@ -93,18 +93,18 @@
 		"champMeet": "冠軍會議"
 	},
 	"skills": {
-		"passive": "パッシブスキル",
-		"heal": "回復スキル",
-		"targetSpeed": "速度スキル",
-		"acceleration": "加速度スキル",
-		"boost": "ブーストスキル(速度と加速度が両方上がる)",
-		"gate": "ゲートスキル",
-		"speed": "喰らう減速スキル",
-		"fatigue": "喰らう疲労スキ",
-		"rare": "レア・ノーマル上位",
-		"normal": "ノーマル下位",
-		"inherit": "固有(継承)",
-		"selectedUnique": "なし／発動しない"
+		"passive": "被動技能",
+		"heal": "回復技能",
+		"targetSpeed": "速度技能",
+		"acceleration": "加速度技能",
+		"boost": "雙效技能（速度和加速度同時上升）",
+		"gate": "出閘技能",
+		"speed": "受到的減速技能",
+		"fatigue": "受到的疲勞技能",
+		"rare": "金、雙圈",
+		"normal": "白",
+		"inherit": "固有(繼承)",
+		"selectedUnique": "無／不發動"
 	},
 	"chart": {
 		"phase1": "←序盤|中盤→",
@@ -116,7 +116,7 @@
 		"upSlope": "上り坂",
 		"downSlope": "下り坂",
 		"spurt": "スパート開始",
-		"hp": "耐力",
+		"hp": "HP",
 		"speed": "走行速度"
 	}
 }
