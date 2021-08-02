@@ -18,6 +18,7 @@ export default {
       selectedUnique: this.$t("skills.selectedUnique"),
       uniqueLevel: 4,
       skillTriggerCount: [0, 0, 0, 0],
+      healTriggerCount: 0,
       skills: {},
       skillData: {
         passive: [
@@ -641,16 +642,6 @@ export default {
             tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
             check: function () {
               return thiz.isInFinalCorner()
-            }
-          },
-          {
-            inherit: {id: 0, name: 'ゲインヒール・スペリアー', value: 150},
-            tooltip: '中盤のどこかで発動として見なす。',
-            init: function () {
-              this.randoms = thiz.initPhaseRandom(1)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           // End of heal skills
@@ -1416,7 +1407,7 @@ export default {
             }
           },
           {
-            inherit: {id: 0, name: 'タイマン！デッドヒート！', value: 0.35},
+            inherit: {id: 0, name: 'タイマン！デッドヒート！', value: 0.15},
             duration: 3,
             tooltip: '「最終直線のどこかで発動」として扱う。',
             init: function () {
@@ -1662,7 +1653,7 @@ export default {
           {
             inherit: {id: 900201, name: 'アングリング×スキーミング', value: 0.2},
             duration: 2.4,
-            styleLimit: [1],
+            styleLimit: [1, 2],
             tooltip: '順位1位は満たしたと見なす',
             check: function () {
               return thiz.currentPhase >= 2 && thiz.isInCorner()
@@ -2270,13 +2261,20 @@ export default {
         },
         {
           id: 0, name: 'ゲインヒール・スペリアー',
-          value: 550,
+          heal: 550,
           tooltip: '中盤のどこかで発動として見なす。',
           init: function () {
             this.randoms = thiz.initPhaseRandom(1)
           },
           check: function (startPosition) {
             return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        {
+          id: 0, name: 'わやかわ♪マリンダイヴ',
+          heal: 550,
+          check: function () {
+            return thiz.skillTriggerCount[1] >= 2
           }
         },
         // End of heal unique skills
@@ -2668,6 +2666,14 @@ export default {
             return thiz.isInRandom(this.randoms, startPosition)
           }
         },
+        {
+          id: 0, name: 'グッときて♪Chu',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function () {
+            return thiz.position >= thiz.courseLength * 0.5 && thiz.healTriggerCount > 0
+          }
+        },
         // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
@@ -2921,6 +2927,7 @@ export default {
       this.invokedSkills = []
       this.coolDownMap = {}
       this.skillTriggerCount = [0, 0, 0, 0]
+      this.healTriggerCount = 0
       for (const type in this.hasSkills) {
         for (const rarity of Object.keys(this.hasSkills[type])) {
           for (const index of this.hasSkills[type][rarity]) {
@@ -2936,7 +2943,7 @@ export default {
               invokeRate = 100
             } else {
 
-              if (skillActivateAdjustment==="1") {
+              if (skillActivateAdjustment === "1") {
                 invokeRate = 100
               }
               // FIXME: for debug, always pass wisdom check
@@ -3147,8 +3154,8 @@ export default {
       }
       const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
       if (!fc) {
-        // 直線のみ
-        return this.getPhase(position) >= 2
+        // 千直、最終直線は仕様上存在しないことになっている
+        return false
       }
       return position > this.cornerEnd(fc)
     },
@@ -3177,6 +3184,7 @@ export default {
       } else {
         detail = {heal, waste: 0}
       }
+      this.healTriggerCount++
       return detail
     },
     isRunningStyle(style) {
@@ -3195,6 +3203,43 @@ export default {
       return this.frameElapsed >= 15 * second
     },
     fillSkillData() {
+      // First build up inherit skills
+      // id > 0 skills have manual data, skip
+      for (const skill of this.uniqueSkillData) {
+        if (skill.id !== 0) {
+          continue
+        }
+        const copy = {...skill}
+        let value, skillType
+        const TYPES = ['heal', 'targetSpeed', 'acceleration', 'boost']
+        for (const type of TYPES) {
+          if (skill[type]) {
+            skillType = type
+            if (type === 'heal') {
+              value = 150
+            } else {
+              value = skill[type] - 0.2
+            }
+            break
+          }
+        }
+        delete copy.id
+        delete copy.name
+        copy.inherit = {
+          id: 0,
+          name: skill.name,
+          value: value
+        }
+        copy.cd = 500
+        if (skill.duration) {
+          copy.duration = skill.duration * 0.6
+        } else {
+          copy.duration = 0
+        }
+        this.skillData[skillType].push(copy)
+      }
+
+      // Then fill fields, this.skillData must already been fulfill
       for (const type in this.skillData) {
         const o = {}
         for (const rarity of this.rarities) {
