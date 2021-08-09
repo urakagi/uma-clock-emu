@@ -211,6 +211,12 @@ export default {
       for (const skill of this.operatingSkills.boost) {
         ret += skill.data.value.targetSpeed
       }
+      // 減速スキルの目標速度低下分
+      for (const skill of this.operatingSkills.speed) {
+        if (skill.data.value < 0) {
+          ret += skill.data.value
+        }
+      }
       return ret
     },
     acceleration() {
@@ -539,9 +545,6 @@ export default {
         const startSp = this.sp
         const startPhase = this.currentPhase
         this.frames[this.frameElapsed].speed = this.currentSpeed
-        for (const skill of this.operatingSkills.speed) {
-          this.frames[this.frameElapsed].speed += skill.data.value
-        }
         this.frames[this.frameElapsed].sp = this.sp
         this.frames[this.frameElapsed].startPosition = startPosition
 
@@ -633,22 +636,14 @@ export default {
       const staticTime = this.frameLength - changeTime
       const endSpeed = startSpeed + changeTime * changeRate
 
-      // 減速スキル分
-      let realStartSpeed = startSpeed
-      let realEndSpeed = endSpeed
-      for (const skill of this.operatingSkills.speed) {
-        realStartSpeed += skill.data.value
-        realEndSpeed += skill.data.value
-      }
-
       // 移動距離及び耐力消耗を算出
       // 速度変化中の分
-      const movementChanging = (realStartSpeed + realEndSpeed) * changeTime / 2.0
-      const consumeChanging = this.consumePerSecondChanging(realStartSpeed, realEndSpeed,
+      const movementChanging = (startSpeed + endSpeed) * changeTime / 2.0
+      const consumeChanging = this.consumePerSecondChanging(startSpeed, endSpeed,
           changeRate, this.currentPhase)
       // 速度変化終了後の分
-      const movementStatic = realEndSpeed * staticTime
-      const consumeStatic = this.consumePerSecond(realEndSpeed, this.currentPhase) * staticTime
+      const movementStatic = endSpeed * staticTime
+      const consumeStatic = this.consumePerSecond(endSpeed, this.currentPhase) * staticTime
 
       // 反映させる
       this.currentSpeed = endSpeed

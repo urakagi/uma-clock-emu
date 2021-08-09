@@ -109,14 +109,14 @@
 	"chart": {
 		"phase1": "←序盤|中盤→",
 		"phase2": "←中盤|終盤→",
-		"phase3": "ﾗｽﾄｽﾊﾟｰﾄ→",
-		"start": "スタート",
-		"lateStart": " 出遅れ ",
-		"positionKeepEnd": "ポジキープ終了",
-		"upSlope": "上り坂",
-		"downSlope": "下り坂",
-		"spurt": "スパート開始",
+		"phase3": "p3→",
+		"start": "起跑",
+		"lateStart": " 出遲 ",
+		"positionKeepEnd": "位置意識結束",
+		"upSlope": "上坡",
+		"downSlope": "下坡",
+		"spurt": "衝刺開始",
 		"hp": "HP",
-		"speed": "走行速度"
+		"speed": "速度"
 	}
 }

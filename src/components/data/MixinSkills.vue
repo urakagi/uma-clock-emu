@@ -2942,7 +2942,6 @@ export default {
             } else if (type === 'passive') {
               invokeRate = 100
             } else {
-
               if (skillActivateAdjustment === "1") {
                 invokeRate = 100
               }
@@ -2994,6 +2993,10 @@ export default {
               copy.trigger = function () {
                 return thiz.doHeal(this.value)
               }
+            } else if (type === 'speed') {
+              copy.trigger = function () {
+                return thiz.currentSpeed += this.value
+              }
             }
             if (copy.init) {
               copy.init()
@@ -3043,11 +3046,14 @@ export default {
           continue
         }
         if (skill.check(startPosition)) {
+          let skillDetail = null
+          if (skill.trigger) {
+            skillDetail = skill.trigger()
+          }
           if (skill.duration) {
             this.operatingSkills[skill.type].push({data: skill, startFrame: this.frameElapsed})
             skillTriggered.push({data: skill})
           } else {
-            const skillDetail = skill.trigger()
             skillTriggered.push({data: skill, detail: skillDetail})
           }
           this.skillTriggerCount[this.currentPhase]++
@@ -3281,6 +3287,12 @@ export default {
           }
           break
         case 'speed':
+          if (!copy.trigger) {
+            copy.trigger = function () {
+              return thiz.currentSpeed += this.value
+            }
+          }
+          break
         case 'targetSpeed':
         case 'acceleration':
         case 'boost':
