@@ -2822,9 +2822,9 @@ export default {
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '条件を満たして最終直線入ったときに発動するとして扱う',
+          tooltip: '最終コーナーで発動として扱う',
           check: function () {
-            return thiz.isInFinalStraight()
+            return thiz.isInFinalCorner()
           }
         },
         {
