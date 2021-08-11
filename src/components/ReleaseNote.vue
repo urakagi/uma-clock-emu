@@ -83,6 +83,10 @@ export default {
           content: '減速スキルの仕様を修正。',
           timestamp: '2021-08-08'
         },
+        {
+          content: 'スタミナ切れの時の速度とステータスチェック計算式を修正。',
+          timestamp: '2021-08-11'
+        },
       ]
     }
   }
