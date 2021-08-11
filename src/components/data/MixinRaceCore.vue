@@ -108,7 +108,7 @@ export default {
         const CHECK_KEYS = ['', 'speed', 'stamina', 'power', 'guts', 'wisdom']
         for (const c of check) {
           let bonus
-          const status = this.umaStatus[CHECK_KEYS[c]]
+          const status = this.umaStatus[CHECK_KEYS[c]] * this.condCoef[this.modifiedCondition]
           if (status <= 300) {
             bonus = 0.05
           } else if (status <= 600) {
@@ -118,7 +118,7 @@ export default {
           } else {
             bonus = 0.2
           }
-          bonus /= check.length
+          // bonus /= check.length
           statusCheckModifier += bonus
         }
       }
@@ -283,7 +283,7 @@ export default {
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
     },
     vMin() {
-      return 0.85 * this.baseSpeed + 0.01 * Math.sqrt(this.modifiedGuts * 200)
+      return 0.85 * this.baseSpeed + 0.001 * Math.sqrt(this.modifiedGuts * 200)
     },
     a0() {
       return 24 + 0.0006 * Math.sqrt(500 * this.modifiedPower)

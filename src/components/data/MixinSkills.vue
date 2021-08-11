@@ -2939,14 +2939,11 @@ export default {
             let invokeRate
             if (type === 'fatigue' || type === 'speed') {
               invokeRate = 80
-            } else if (type === 'passive') {
+            } else if (type === 'passive' || skillActivateAdjustment === "1") {
               invokeRate = 100
             } else {
-              if (skillActivateAdjustment === "1") {
-                invokeRate = 100
-              }
               // FIXME: for debug, always pass wisdom check
-              else if (this.production) {
+              if (this.production) {
                 invokeRate = Math.max(100 - 9000.0 / this.umaStatus.wisdom, 20)
               } else {
                 invokeRate = Math.max(100000 - 9000.0 / this.umaStatus.wisdom, 20)
