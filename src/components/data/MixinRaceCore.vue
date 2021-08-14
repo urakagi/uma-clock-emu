@@ -47,6 +47,8 @@ export default {
       skillActivateAdjustment: '0',
       frames: [],
       startDelay: 0,
+      isStartDash: false,
+      delayTime: 0,
       spurtParameters: null,
       downSlopeModeStart: null,
       temptationModeStart: null,
@@ -226,7 +228,7 @@ export default {
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
       // スタート時加算
-      if (this.currentSpeed < this.v0) {
+      if (this.isStartDash) {
         ret += 24
       }
       for (const skill of this.operatingSkills.acceleration) {
@@ -468,7 +470,9 @@ export default {
       this.initTemptation()
       this.initializeSkills(this.skillActivateAdjustment)
       this.startDelay = Math.random() * 0.1
-      this.triggerStartSkills()
+      this.triggerStartSkills();
+      this.isStartDash = true;
+      this.delayTime = this.startDelay;
       this.sp = this.spMax
       this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
       this.progressRace()
@@ -589,7 +593,7 @@ export default {
           this.temptationSection = -1
         }
 
-        this.move()
+        this.move(this.frameLength)
         this.frames[this.frameElapsed].movement = this.position - startPosition
         this.frames[this.frameElapsed].consume = this.sp - startSp
         this.frameElapsed++
@@ -625,35 +629,56 @@ export default {
       }
       this.goal()
     },
-    move() {
-      const diff = this.targetSpeed - this.currentSpeed
-      const startSpeed = this.currentSpeed
-      const changeRate = diff >= 0 ? this.acceleration : this.deceleration
-      let changeTime = diff / changeRate
-      if (changeTime > this.frameLength) {
-        changeTime = this.frameLength
+    move(elapsedTime) {
+      if (this.delayTime > 0) {
+        this.delayTime -= elapsedTime
       }
-      const staticTime = this.frameLength - changeTime
-      const endSpeed = startSpeed + changeTime * changeRate
+      if (this.delayTime <= 0) {
+        let timeAfterDelay = elapsedTime
+        if (this.delayTime < 0) {
+          timeAfterDelay = Math.abs(this.delayTime)
+          this.delayTime = 0
+        }
 
-      // 移動距離及び耐力消耗を算出
-      // 速度変化中の分
-      const movementChanging = (startSpeed + endSpeed) * changeTime / 2.0
-      const consumeChanging = this.consumePerSecondChanging(startSpeed, endSpeed,
-          changeRate, this.currentPhase)
-      // 速度変化終了後の分
-      const movementStatic = endSpeed * staticTime
-      const consumeStatic = this.consumePerSecond(endSpeed, this.currentPhase) * staticTime
+        this.updateSelfSpeed(elapsedTime /* NOT timeAfterDelay!! */)
 
-      // 反映させる
-      this.currentSpeed = endSpeed
-      this.position += movementChanging + movementStatic
-      let consume = (consumeChanging + consumeStatic) * (this.downSlopeModeStart != null ? 0.4 : 1)
-      if (this.isInTemptation) {
-        this.temptationWaste += consume * 0.6
-        consume *= 1.6
+        // TODO apply current speed debuff
+        const actualSpeed = this.currentSpeed
+
+        // 移動距離及び耐力消耗を算出
+        this.position += actualSpeed * timeAfterDelay
+        const baseSpeed = this.isStartDash ? this.currentSpeed : this.baseSpeed
+        let consume = this.consumePerSecond(baseSpeed, this.currentSpeed, this.currentPhase) * elapsedTime
+        if (this.downSlopeModeStart != null) {
+          consume *= 0.4
+        }
+        if (this.isInTemptation) {
+          this.temptationWaste += consume * 0.6
+          consume *= 1.6
+        }
+        this.sp -= consume
+
+        this.updateStartDash();
       }
-      this.sp -= consume
+    },
+    updateSelfSpeed(elapsedTime) {
+      const MAX_SPEED = 30.0
+      let newSpeed
+      if (this.currentSpeed < this.targetSpeed) {
+        newSpeed = Math.min(this.currentSpeed + elapsedTime * this.acceleration, this.targetSpeed)
+      } else {
+        newSpeed = Math.max(this.currentSpeed + elapsedTime * this.deceleration, this.targetSpeed)
+      }
+      if (this.isStartDash && newSpeed > this.v0) {
+        newSpeed = this.v0
+      }
+      newSpeed = Math.min(newSpeed, MAX_SPEED)
+      this.currentSpeed = newSpeed
+    },
+    updateStartDash() {
+      if (this.isStartDash && this.currentSpeed >= this.v0) {
+        this.isStartDash = false;
+      }
     },
     calcSpurtParameter() {
       const maxDistance = this.trackDetail.distance / 3.0
@@ -720,18 +745,9 @@ export default {
               Math.pow(this.v3 - this.baseSpeed + 12, 2) /
               144 / this.v3))
     },
-    consumePerSecond(v, phase) {
+    consumePerSecond(baseSpeed, v, phase) {
       let ret = 20.0 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          Math.pow(v - this.baseSpeed + 12, 2) / 144
-      if (phase >= 2) {
-        ret *= this.spurtSpCoef
-      }
-      return ret
-    },
-    consumePerSecondChanging(startSpeed, endSpeed, changeRate, phase) {
-      let ret = 20.0 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          (Math.pow(endSpeed - this.baseSpeed + 12, 3) - Math.pow(startSpeed - this.baseSpeed + 12, 3)) /
-          (3 * changeRate) / 144
+          Math.pow(v - baseSpeed + 12, 2) / 144
       if (phase >= 2) {
         ret *= this.spurtSpCoef
       }
@@ -745,7 +761,7 @@ export default {
           || (direction === 'down' && this.getSlope(position) < -1)
     },
     goal() {
-      const raceTime = this.frameElapsed * this.frameLength + this.startDelay
+      const raceTime = this.frameElapsed * this.frameLength
       const raceTimeDelta = raceTime - this.trackDetail.finishTimeMax / 1.18
 
       if (this.epoch === this.maxEpoch - 1) {
