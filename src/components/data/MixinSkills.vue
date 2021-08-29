@@ -1635,7 +1635,6 @@ export default {
           {
             inherit: {id: 900101, name: 'ヴィクトリーショット！', value: 0.2},
             duration: 2.4,
-            styleLimit: [1, 2],
             tooltip: '順位>=3及び<=50%は満たしていると見なす',
             check: function () {
               return thiz.isInFinalCorner()
@@ -1860,7 +1859,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
-                  && this.accTimePassed(5)
+                  && thiz.accTimePassed(5)
             }
           },
           {
@@ -1872,7 +1871,7 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
-                  && this.accTimePassed(5)
+                  && thiz.accTimePassed(5)
             }
           },
           {
@@ -2674,6 +2673,15 @@ export default {
             return thiz.position >= thiz.courseLength * 0.5 && thiz.healTriggerCount > 0
           }
         },
+        {
+          id: 0, name: 'Schwarze Schwert',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function () {
+            return thiz.isInFinalStraight() && thiz.temptationModeStart == null
+                && thiz.startDelay < 0.08
+          }
+        },
         // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
@@ -2689,7 +2697,6 @@ export default {
           id: 100101, name: 'ヴィクトリーショット！',
           acceleration: 0.4,
           duration: 4,
-          styleLimit: [1, 2],
           tooltip: '順位>=3及び<=50%は満たしていると見なす',
           check: function () {
             return thiz.isInFinalCorner()
@@ -2852,6 +2859,21 @@ export default {
           tooltip: '「中盤直線のどこか」として扱う',
           init: function () {
             this.randoms = thiz.initStraightRandom(1)
+          },
+          check: function (startPosition) {
+            return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        {
+          id: 0, name: 'I Never Goof Up!',
+          boost: {
+            targetSpeed: 0.25,
+            acceleration: 0.3
+          },
+          duration: 5,
+          tooltip: '「終盤のコーナーのどこかで発動」として扱う',
+          init: function () {
+            this.randoms = thiz.initPhase2CornerRandom()
           },
           check: function (startPosition) {
             return thiz.isInRandom(this.randoms, startPosition)
@@ -3104,6 +3126,27 @@ export default {
       }
       ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
       return ret
+    },
+    initPhase2CornerRandom() {
+      let start = -1
+      let end = -1
+      for (const corner of this.trackDetail.corners) {
+        if (corner.start >= this.courseLength * 2.0 / 3) {
+          if (start < 0) {
+            start = corner.start
+          }
+        }
+        if (this.cornerEnd(corner) >= this.courseLength * 2.0 / 3) {
+          end = this.cornerEnd(corner)
+          if (start < 0) {
+            start = this.courseLength * 2.0 / 3
+          }
+        }
+      }
+      if (start < 0) {
+        return []
+      }
+      return [this.chooseRandom(start, end)]
     },
     initFinalStraightRandom() {
       const ret = []
