@@ -117,6 +117,11 @@
 		"downSlope": "下坡",
 		"spurt": "衝刺開始",
 		"hp": "HP",
-		"speed": "速度"
+		"speed": "速度",
+		"hintBackground": "背景色意義：",
+		"corner": "彎角",
+		"straight": "直線",
+		"temptation": "焦躁",
+		"none": "無"
 	}
 }

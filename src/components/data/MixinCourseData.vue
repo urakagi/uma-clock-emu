@@ -36,22 +36,7 @@ export default {
       if (!track) {
         track = this.trackDetail
       }
-      const ret = []
-      let mark = 0
-      for (const corner of track.corners) {
-        if (mark !== corner.start) {
-          ret.push({
-            start: mark,
-            end: corner.start
-          })
-        }
-        mark = this.cornerEnd(corner)
-      }
-      ret.push({
-        start: mark,
-        end: this.courseLength
-      })
-      return ret
+      return track.straights
     }
   }
 }

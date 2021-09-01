@@ -1101,6 +1101,7 @@ export default {
 
       let cornerIndex = 0
       let cornerStart = -1
+      let straightStart = -1
       // const step = Math.floor(this.frames.length / 500)
       const step = 1
       for (let index = 0; index < this.frames.length; index += step) {
@@ -1158,6 +1159,23 @@ export default {
               cornerIndex = 0
             }
           }
+        }
+        // 直線
+        if (!this.isInStraight(this.frames[index].startPosition)
+            && this.isInStraight(this.frames[index].startPosition + this.frames[index].movement)) {
+          straightStart = index
+        } else if (this.isInStraight(this.frames[index].startPosition)
+            && !this.isInStraight(this.frames[index].startPosition + this.frames[index].movement)) {
+          annotations.push({
+            type: 'box',
+            xMin: straightStart,
+            xMax: index,
+            yMin: 0,
+            yMax: 100,
+            xScaleID: 'x-axis-0',
+            backgroundColor: 'rgba(210, 235, 255, 0.2)',
+            drawTime: 'beforeDatasetsDraw',
+          })
         }
         // Phase annotations
         if (index + step < this.frames.length) {

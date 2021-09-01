@@ -115,6 +115,11 @@
 		"downSlope": "Downhill",
 		"spurt": "Spurt Start",
 		"hp": "HP",
-		"speed": "Current Speed"
+		"speed": "Current Speed",
+		"hintBackground": "The meaning of background colors: ",
+		"corner": "Corner",
+		"straight": "Straight",
+		"temptation": "Temptation",
+		"none": "None"
 	}
 }

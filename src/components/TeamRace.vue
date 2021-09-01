@@ -241,6 +241,7 @@
     <el-divider/>
     <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }}) -
       {{ this.locationName + this.trackDetail.name }}</h3>
+    <chart-hint/>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
     <el-divider/>
     <calculated-values/>
@@ -275,10 +276,11 @@
 import MixinRaceCore from "@/components/data/MixinRaceCore";
 import ReleaseNote from "@/components/ReleaseNote";
 import CalculatedValues from "@/components/CalculatedValues";
+import ChartHint from "./ChartHint";
 
 export default {
   name: 'TeamRace',
-  components: {CalculatedValues, ReleaseNote},
+  components: {CalculatedValues, ReleaseNote, ChartHint},
   mixins: [MixinRaceCore],
   data() {
     return {

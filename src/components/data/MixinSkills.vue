@@ -1485,7 +1485,7 @@ export default {
             duration: 0.9,
             styleLimit: [4],
             check: function () {
-              return thiz.isRunningStyle(4) && thiz.isInSpurt && thiz.isInStraight()
+              return thiz.isRunningStyle(4) && thiz.isInSpurt && !thiz.isInCorner()
             }
           },
           {
@@ -1715,9 +1715,9 @@ export default {
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
-            tooltip: '条件を満たして最終直線入ったときに発動するとして扱う',
+            tooltip: '最終コーナーで発動として扱う',
             check: function () {
-              return thiz.isInFinalStraight()
+              return thiz.isInFinalCorner()
             }
           },
           {
@@ -1740,12 +1740,9 @@ export default {
               value: {targetSpeed: 0.05, acceleration: 0.1}
             },
             duration: 3,
-            tooltip: '「中盤直線のどこか」として扱う',
-            init: function () {
-              this.randoms = thiz.initStraightRandom(1)
-            },
+            tooltip: '中盤のコーナーではない地点と即発動としてみなす',
             check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
+              return !thiz.isInCorner(startPosition) && thiz.getPhase(startPosition) === 1
             }
           },
         ],
@@ -2856,12 +2853,9 @@ export default {
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '「中盤直線のどこか」として扱う',
-          init: function () {
-            this.randoms = thiz.initStraightRandom(1)
-          },
+          tooltip: '中盤のコーナーではない地点と即発動としてみなす',
           check: function (startPosition) {
-            return thiz.isInRandom(this.randoms, startPosition)
+            return !thiz.isInCorner(startPosition) && thiz.getPhase(startPosition) === 1
           }
         },
         {
@@ -3096,13 +3090,11 @@ export default {
       }
       return ret
     },
-    initStraightRandom(phaseLimit) {
+    initStraightRandom() {
       let ret
-      do {
-        const straights = this.getStraights()
-        const chosen = Math.floor(Math.random() * straights.length)
-        ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
-      } while (phaseLimit && (this.getPhase(ret.start) !== phaseLimit))
+      const straights = this.getStraights()
+      const chosen = Math.floor(Math.random() * straights.length)
+      ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
       return [ret]
     },
     initPhaseRandom(phase) {
@@ -3182,7 +3174,15 @@ export default {
       return false
     },
     isInStraight(position) {
-      return !this.isInCorner(position)
+      if (!position) {
+        position = this.position
+      }
+      for (const straight of this.trackDetail.straights) {
+        if (position >= straight.start && position <= straight.end) {
+          return true
+        }
+      }
+      return false
     },
     isInFinalCorner(position) {
       if (!position) {

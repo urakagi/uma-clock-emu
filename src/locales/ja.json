@@ -115,6 +115,11 @@
 		"downSlope": "下り坂",
 		"spurt": "スパート開始",
 		"hp": "耐力",
-		"speed": "走行速度"
+		"speed": "走行速度",
+		"hintBackground": "背景色の意味：",
+		"corner": "コーナー",
+		"straight": "直線",
+		"temptation": "掛かり",
+		"none": "どちらでもない"
 	}
 }
