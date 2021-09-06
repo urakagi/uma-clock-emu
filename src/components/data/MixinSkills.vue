@@ -619,31 +619,6 @@ export default {
               return thiz.isDistanceType(4) && thiz.sp <= 0
             }
           },
-          {
-            inherit: {id: 900321, name: 'U=ma2', value: 150},
-            tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
-            check: function () {
-              return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
-            }
-          },
-          {
-            inherit: {id: 900451, name: 'ピュリティオブハート', value: 150},
-            heal: 583,
-            tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
-            init: function () {
-              this.randoms = thiz.initPhaseRandom(1)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900521, name: 'ワクワククライマックス', value: 150},
-            tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
-            check: function () {
-              return thiz.isInFinalCorner()
-            }
-          },
           // End of heal skills
         ],
         targetSpeed: [
@@ -1159,265 +1134,6 @@ export default {
               return thiz.skillTriggerCount[1] >= 3
             }
           },
-          {
-            inherit: {id: 900071, name: '不沈艦、抜錨ォッ！', value: 0.05},
-            duration: 3.6,
-            tooltip: '順位条件の<=50%は満たしていると見なす',
-            check: function () {
-              return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
-            }
-          },
-          {
-            inherit: {id: 900131, name: '貴顕の使命を果たすべく', value: 0.15},
-            duration: 3,
-            tooltip: '位置<=30%は満たしていると見なす。',
-            check: function () {
-              return thiz.isInFinalCorner() || thiz.isInFinalStraight()
-            }
-          },
-          {
-            inherit: {id: 900261, name: 'G00 1st.F∞;', value: 0.15},
-            duration: 3,
-            check: function () {
-              return thiz.temptationModeStart == null && thiz.startDelay < 0.08
-                  && thiz.isInFinalStraight()
-            }
-          },
-          {
-            inherit: {id: 910131, name: '最強の名を懸けて', value: 0.15},
-            duration: 3,
-            tooltip: '「最終直線のどこか」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900081, name: 'カッティング×DRIVE！', value: 0.15},
-            duration: 3,
-            tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
-            check: function (startPosition) {
-              return thiz.isContainsRemainingDistance(200, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900061, name: '勝利の鼓動', value: 0.25},
-            duration: 3,
-            tooltip: '順位条件は満たしてると見なす',
-            check: function (startPosition) {
-              return thiz.isContainsRemainingDistance(200, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900171, name: '汝、皇帝の神威を見よ', value: 0.25},
-            duration: 3,
-            tooltip: '最終コーナーで3人追い抜きは満たしたと見なす',
-            check: function () {
-              return thiz.isInFinalStraight()
-            }
-          },
-          {
-            inherit: {id: 900181, name: 'ブレイズ・オブ・プライド', value: 0.15},
-            duration: 3,
-            tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900351, name: '勝利のチケットを、君にッ！', value: 0.15},
-            duration: 3,
-            tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900411, name: '優等生×バクシン＝大勝利ッ', value: 0.15},
-            duration: 3,
-            tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900561, name: '来ます来てます来させます！', value: 0.15},
-            duration: 3,
-            tooltip: '「終盤のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initPhaseRandom(2)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900601, name: 'きっとその先へ…！', value: 0.15},
-            duration: 3,
-            tooltip: '「ラストスパートのどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initPhaseRandom(3)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900111, name: '精神一到何事か成らざらん', value: 0.15},
-            duration: 3,
-            tooltip: '「最終直線のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900611, name: 'Pride of KING', value: 0.25},
-            duration: 3,
-            check: function (startPosition) {
-              return startPosition <= thiz.toPosition(200)
-                  && thiz.position >= thiz.toPosition(200)
-                  && thiz.temptationModeStart == null && thiz.startDelay < 0.08
-            }
-          },
-          {
-            inherit: {id: 900011, name: 'シューティングスター', value: 0.15},
-            duration: 3,
-            tooltip: '「終盤のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initPhaseRandom(2)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900021, name: '先頭の景色は譲らない…！', value: 0.15},
-            duration: 3,
-            check: function () {
-              return thiz.isInFinalStraight()
-            }
-          },
-          {
-            inherit: {id: 900031, name: '究極テイオーステップ', value: 0.25},
-            duration: 3,
-            tooltip: '他の条件は無視して「最終直線であれば発動する」として扱う',
-            check: function () {
-              return thiz.isInFinalStraight()
-            }
-          },
-          {
-            inherit: {id: 900151, name: 'ヴィットーリアに捧ぐ舞踏', value: 0.15},
-            duration: 3,
-            tooltip: '「最終コーナーのどこかで発動」として扱う。まぁ発動しないけど。',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900161, name: 'Shadow Break', value: 0.15},
-            duration: 3,
-            tooltip: '「最終コーナーのどこかで発動」として扱う',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900231, name: '∴win Q.E.D.', value: 0.15},
-            duration: 3,
-            tooltip: '「最終コーナーのどこかで発動」として扱う',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900301, name: 'ブルーローズチェイサー', value: 0.15},
-            duration: 3,
-            tooltip: '「最終直線のどこかで発動」として扱う',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 900501, name: 'Nemesis', value: 0.15},
-            duration: 3,
-            tooltip: '「最終コーナーのどこかで発動」として扱う',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 910031, name: '絶対は、ボクだ', value: 0.15},
-            duration: 3,
-            tooltip: '「最終直線のどこかで発動」として扱う',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 910241, name: 'フラワリー☆マニューバ(前)', value: 0.15},
-            duration: 3,
-            tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 910181, name: '薫風、永遠なる瞬間を', value: 0.15},
-            duration: 3,
-            tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
-            init: function () {
-              this.randoms = thiz.initPhaseRandom(1)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 0, name: 'タイマン！デッドヒート！', value: 0.15},
-            duration: 3,
-            tooltip: '「最終直線のどこかで発動」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalStraightRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
           // End of target speed skills
         ],
         acceleration: [
@@ -1625,128 +1341,9 @@ export default {
               return true
             }
           },
-          {
-            inherit: {id: 900041, name: '紅焔ギア/LP1211-M', value: 0.2},
-            duration: 2.4,
-            tooltip: '順位<=5及び<=50%は満たしていると見なす',
-            check: function () {
-              return thiz.isInFinalCorner() || thiz.isInFinalStraight()
-            }
-          },
-          {
-            inherit: {id: 900101, name: 'ヴィクトリーショット！', value: 0.2},
-            duration: 2.4,
-            tooltip: '順位>=3及び<=50%は満たしていると見なす',
-            check: function () {
-              return thiz.isInFinalCorner()
-            }
-          },
-          {
-            inherit: {id: 900271, name: 'レッツ・アナボリック！', value: 0.2},
-            duration: 2.4,
-            styleLimit: [3, 4],
-            tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
-            check: function () {
-              return thiz.currentPhase >= 2 && thiz.isInCorner()
-            }
-          },
-          {
-            inherit: {id: 900201, name: 'アングリング×スキーミング', value: 0.2},
-            duration: 2.4,
-            styleLimit: [1, 2],
-            tooltip: '順位1位は満たしたと見なす',
-            check: function () {
-              return thiz.currentPhase >= 2 && thiz.isInCorner()
-            }
-          },
-          {
-            inherit: {id: 910241, name: 'フラワリー☆マニューバ(後)', value: 0.2},
-            duration: 2.4,
-            styleLimit: [3, 4],
-            tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {id: 0, name: 'コンドル猛撃波', value: 0.2},
-            duration: 2.4,
-            tooltip: '「最終コーナーのどこかで発動」として扱う。',
-            init: function () {
-              this.randoms = thiz.initFinalCornerRandom()
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
         ],
         // End of acc skills
-        boost: [
-          {
-            inherit: {
-              id: 900091, name: 'ブリリアント・レッドエース',
-              value: {targetSpeed: 0.05, acceleration: 0.1}
-            },
-            duration: 3,
-            tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
-            init: function () {
-              this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {
-              id: 900141, name: 'プランチャ☆ガナドール',
-              value: {targetSpeed: 0.05, acceleration: 0.1}
-            },
-            duration: 3,
-            tooltip: '順位2位以内は満たしていると見なす',
-            check: function () {
-              return thiz.isInFinalStraight() && thiz.sp >= 0.3 * thiz.spMax
-            }
-          },
-          {
-            inherit: {
-              id: 900241, name: 'ひらめき☆ランディング',
-              value: {targetSpeed: 0.05, acceleration: 0.1}
-            },
-            duration: 3,
-            tooltip: '最終コーナーで発動として扱う',
-            check: function () {
-              return thiz.isInFinalCorner()
-            }
-          },
-          {
-            inherit: {
-              id: 900381, name: '#LookatCurren',
-              value: {targetSpeed: 0.05, acceleration: 0.1}
-            },
-            duration: 3,
-            tooltip: '「レース50%-65%のどこかで発動する」として扱う',
-            init: function () {
-              this.randoms = thiz.initIntervalRandom(0.5, 0.65)
-            },
-            check: function (startPosition) {
-              return thiz.isInRandom(this.randoms, startPosition)
-            }
-          },
-          {
-            inherit: {
-              id: 900461, name: 'キラキラ☆STARDOM',
-              value: {targetSpeed: 0.05, acceleration: 0.1}
-            },
-            duration: 3,
-            tooltip: '中盤のコーナーではない地点と即発動としてみなす',
-            check: function (startPosition) {
-              return !thiz.isInCorner(startPosition) && thiz.getPhase(startPosition) === 1
-            }
-          },
-        ],
+        boost: [],
         gate: [
           {
             normal: {id: 200432, name: '集中力', value: 0.9},
@@ -2257,7 +1854,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'ゲインヒール・スペリアー',
+          id: 110111, name: 'ゲインヒール・スペリアー',
           heal: 550,
           tooltip: '中盤のどこかで発動として見なす。',
           init: function () {
@@ -2268,7 +1865,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'わやかわ♪マリンダイヴ',
+          id: 110011, name: 'わやかわ♪マリンダイヴ',
           heal: 550,
           check: function () {
             return thiz.skillTriggerCount[1] >= 2
@@ -2664,7 +2261,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'グッときて♪Chu',
+          id: 110041, name: 'グッときて♪Chu',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2672,7 +2269,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'Schwarze Schwert',
+          id: 100371, name: 'Schwarze Schwert',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2869,7 +2466,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'I Never Goof Up!',
+          id: 100581, name: 'I Never Goof Up!',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -3260,11 +2857,7 @@ export default {
     },
     fillSkillData() {
       // First build up inherit skills
-      // id > 0 skills have manual data, skip
       for (const skill of this.uniqueSkillData) {
-        if (skill.id !== 0) {
-          continue
-        }
         const copy = {...skill}
         let value, skillType
         const TYPES = ['heal', 'targetSpeed', 'acceleration', 'boost']
@@ -3279,10 +2872,13 @@ export default {
             break
           }
         }
+        if (skillType === undefined) {
+          continue
+        }
         delete copy.id
         delete copy.name
         copy.inherit = {
-          id: 0,
+          id: skill.id + 800000,
           name: skill.name,
           value: value
         }
