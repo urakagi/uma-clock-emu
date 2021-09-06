@@ -1080,6 +1080,7 @@ export default {
           },
           {
             normal: {id: 200632, name: '仕掛け抜群', value: 0.15},
+            rare: {id: 0, name: '疾風怒濤', value: 0.35},
             duration: 3,
             styleLimit: [4],
             tooltip: '位置>75%を満たしたと見なす。実戦は条件を注意すべし。',
@@ -2750,6 +2751,15 @@ export default {
           },
           check: function (startPosition) {
             return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        {
+          id: 0, name: 'KEEP IT REAL.',
+          acceleration: 0.3,
+          duration: 6,
+          tooltip: '50%地点で即発動として扱う',
+          check: function () {
+            return thiz.position >= thiz.courseLength / 2.0
           }
         },
         // End of acc unique skills
