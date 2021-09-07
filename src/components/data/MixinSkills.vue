@@ -619,6 +619,17 @@ export default {
               return thiz.isDistanceType(4) && thiz.sp <= 0
             }
           },
+          {
+            normal: {id: 0, name: 'アオハル点火・体', value: 165},
+            rare: {id: 0, name: 'アオハル燃焼・体', value: 605},
+            tooltip: '効果1.1倍として扱う',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
           // End of heal skills
         ],
         targetSpeed: [
@@ -1099,7 +1110,7 @@ export default {
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
-            check: function (startPosition) {
+            check: function す(startPosition) {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
@@ -1132,6 +1143,18 @@ export default {
             duration: 3,
             check: function () {
               return thiz.skillTriggerCount[1] >= 3
+            }
+          },
+          {
+            normal: {id: 0, name: 'アオハル点火・速', value: 0.1725},
+            rare: {id: 0, name: 'アオハル燃焼・速', value: 0.4025},
+            duration: 1.8,
+            tooltip: '効果1.15倍として扱う',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
             }
           },
           // End of target speed skills
@@ -1341,16 +1364,41 @@ export default {
               return true
             }
           },
+          {
+            normal: {id: 0, name: 'アオハル点火・力', value: 0.22},
+            rare: {id: 0, name: 'アオハル燃焼・力', value: 0.44},
+            duration: 1.2,
+            tooltip: '効果1.1倍として扱う',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
         ],
         // End of acc skills
-        boost: [],
+        boost: [
+          {
+            normal: {id: 0, name: 'アオハル点火・根', value: {targetSpeed: 0.055, acceleration: 0.11}},
+            rare: {id: 0, name: 'アオハル燃焼・根', value: {targetSpeed: 0.275, acceleration: 0.33}},
+            duration: 1.8,
+            tooltip: '効果1.1倍として扱う',
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+        ],
+        // End of boost skills
         gate: [
           {
             normal: {id: 200432, name: '集中力', value: 0.9},
             rare: {id: 200431, name: 'コンセントレーション', value: 0.4},
             inherit: {id: 200433, name: 'ゲート難', value: 1.5},
           }
-          // End of boost skills
         ],
         speed: [
           {
@@ -2321,7 +2369,7 @@ export default {
           id: 100201, name: 'アングリング×スキーミング',
           acceleration: 0.4,
           duration: 4,
-          styleLimit: [1],
+          styleLimit: [1, 2],
           tooltip: '順位1位は満たしたと見なす',
           check: function () {
             return thiz.currentPhase >= 2 && thiz.isInCorner()
