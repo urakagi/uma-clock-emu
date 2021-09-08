@@ -2914,6 +2914,11 @@ export default {
             skillType = type
             if (type === 'heal') {
               value = 150
+            } else if (type === 'boost') {
+              value = {
+                targetSpeed: skill[type].targetSpeed - 0.2,
+                acceleration: skill[type].acceleration - 0.2
+              }
             } else {
               value = skill[type] - 0.2
             }
