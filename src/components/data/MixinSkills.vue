@@ -2528,7 +2528,19 @@ export default {
             return thiz.isInRandom(this.randoms, startPosition)
           }
         },
-      ], // End of boost uniqueSkills
+        {
+          id: 0, name: 'I\'M☆FULL☆SPEED!!',
+          boost: {
+            targetSpeed: 0.25,
+            acceleration: 0.3
+          },
+          duration: 5,
+          tooltip: '順位条件は満たしてると見なす',
+          check: function () {
+            return thiz.isInDistanceRate(0.45, 0.6) && thiz.isSPInRange(0, 0.7)
+          }
+        },
+      ], // End of boost unique skills
     }
   },
   computed: {
@@ -2863,6 +2875,13 @@ export default {
     isContainsRemainingDistance(remain, startPosition) {
       return startPosition <= this.toPosition(remain)
           && this.position >= this.toPosition(remain)
+    },
+    isInDistanceRate(startRate, endRate) {
+      return this.position >= this.courseLength * startRate &&
+          this.position <= this.courseLength * endRate
+    },
+    isSPInRange(minRate, maxRate) {
+      return this.sp >= this.spMax * minRate && this.sp <= this.spMax * maxRate
     },
     isInCoolDown(skill) {
       if (!(skill.name in this.coolDownMap)) {
