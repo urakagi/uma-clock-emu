@@ -95,6 +95,10 @@ export default {
           content: 'アオハルスキルを追加。',
           timestamp: '2021-09-07'
         },
+        {
+          content: '一回ボタンを追加。コース確認に便利。',
+          timestamp: '2021-09-28'
+        },
       ]
     }
   }

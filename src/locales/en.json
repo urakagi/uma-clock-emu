@@ -30,6 +30,7 @@
 		"surfaceCondition": "Condition",
 		"uniqueSkill": "Unique Skill",
 		"emulateStart": "Start Simulation",
+		"emulateOnce": "Once",
 		"testTime": "Iterations",
 		"skillActivateAdjustment": "Skill invoke rate bonus",
 		"skillActivateAdjustment0": "None",
@@ -58,7 +59,7 @@
 		"v0": "Starting Target Speed",
 		"a0": "Starting Acceleration",
 		"maxSpurtSpeed": "Maximum Spurt Speed",
-		
+
 		"minTime": "Minimum Time",
 		"maxTime": "Maximum Time",
 		"corrected": "Corrected",

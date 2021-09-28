@@ -32,8 +32,7 @@ export default {
       // Results
       emulations: [],
       // Race variables
-      epoch: 0,
-      maxEpoch: 50,
+      maxEpoch: 0,
       season: -1,
       weather: -1,
       modifiedCondition: -1,
@@ -44,7 +43,6 @@ export default {
       currentSpeed: 3,
       sp: 0,
       operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
-      skillActivateAdjustment: '0',
       frames: [],
       startDelay: 0,
       isStartDash: false,
@@ -56,7 +54,6 @@ export default {
       temptationWaste: 0,
       // UI
       skillGroups: '',
-      emulating: false,
       savedUmas: {},
       umaToLoad: null,
       chartData: {},
@@ -65,26 +62,15 @@ export default {
       fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
     }
   },
-  created() {
-    this.maxEpoch = localStorage.getItem('maxEpoch')
-    if (!this.maxEpoch) {
-      this.maxEpoch = 50
-    }
-  },
   mounted() {
     this.updateSavedUmas()
     this.updateChart()
     if (!this.production) {
       this.umaToLoad = 'test'
       this.loadUma()
-      if (this.maxEpoch === 1) {
+      if (this.$refs.executeBlock.indicatedMaxEpoch === 1) {
         this.exec()
       }
-    }
-  },
-  watch: {
-    maxEpoch(value) {
-      localStorage.setItem('maxEpoch', value)
     }
   },
   computed: {
@@ -443,20 +429,37 @@ export default {
         course: this.track.course
       }))
     },
-    exec: function () {
-      this.emulating = true
+    exec(maxEpoch) {
+      this.fullFillStatus()
       this.emulations = []
-      this.epoch = 0
+      this.maxEpoch = maxEpoch
       this.progressEpoch()
+    },
+    fullFillStatus() {
+      if (this.umaStatus.speed === '') {
+        this.umaStatus.speed = 1000
+      }
+      if (this.umaStatus.stamina === '') {
+        this.umaStatus.stamina = 2000
+      }
+      if (this.umaStatus.power === '') {
+        this.umaStatus.power = 1000
+      }
+      if (this.umaStatus.guts === '') {
+        this.umaStatus.guts = 1000
+      }
+      if (this.umaStatus.wisdom === '') {
+        this.umaStatus.wisdom = 1000
+      }
     },
     progressEpoch() {
       setTimeout(() => {
         this.start()
-        this.epoch++
-        if (this.epoch < this.maxEpoch) {
+        this.$refs.executeBlock.epoch++
+        if (this.$refs.executeBlock.epoch < this.maxEpoch) {
           this.progressEpoch()
         } else {
-          this.emulating = false
+          this.$refs.executeBlock.emulating = false
         }
       }, 70)
     },
@@ -468,7 +471,7 @@ export default {
         this.initCourse()
       }
       this.initTemptation()
-      this.initializeSkills(this.skillActivateAdjustment)
+      this.initializeSkills(this.$refs.executeBlock.skillActivateAdjustment)
       this.startDelay = Math.random() * 0.1
       this.triggerStartSkills();
       this.isStartDash = true;
@@ -764,7 +767,7 @@ export default {
       const raceTime = this.frameElapsed * this.frameLength
       const raceTimeDelta = raceTime - this.trackDetail.finishTimeMax / 1.18
 
-      if (this.epoch === this.maxEpoch - 1) {
+      if (this.$refs.executeBlock.epoch === this.maxEpoch - 1) {
         this.updateChart()
       }
 

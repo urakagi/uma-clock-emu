@@ -30,6 +30,7 @@
 		"surfaceCondition": "バ場状態",
 		"uniqueSkill": "固有スキル",
 		"emulateStart": "エミュレート開始",
+		"emulateOnce": "一回",
 		"testTime": "回数",
 		"skillActivateAdjustment": "スキル發動率修正",
 		"skillActivateAdjustment0": "無",
@@ -58,7 +59,7 @@
 		"v0": "スタート目標速度",
 		"a0": "スタート加速度",
 		"maxSpurtSpeed": "最高スパート速度",
-		
+
 		"minTime": "最小タイム",
 		"maxTime": "最大タイム",
 		"corrected": "補正後",

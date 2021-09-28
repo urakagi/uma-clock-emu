@@ -155,22 +155,7 @@
         </el-collapse-item>
       </el-collapse>
       <br>
-      <el-form-item>
-        <el-button @click="exec" type="success">
-          {{ $t("message.emulateStart") }}
-        </el-button>
-      </el-form-item>
-      <el-form-item :label="$t('message.testTime')">
-        <el-input-number value="20" v-model="maxEpoch"></el-input-number>
-      </el-form-item>
-
-      <el-form-item :label="$t('message.skillActivateAdjustment')">
-        <el-select v-model="skillActivateAdjustment" style="width: 130px;">
-          <el-option :label="$t('message.skillActivateAdjustment0')" value="0"></el-option>
-          <el-option :label="$t('message.skillActivateAdjustment1')" value="1"></el-option>
-        </el-select>
-      </el-form-item>
-
+      <ExecuteBlock ref="executeBlock" :exec-function="this.exec" />
     </el-form>
     <el-divider/>
     <Adsense v-if="production"
@@ -222,7 +207,7 @@
         </tr>
       </table>
       <ul>
-        <li>{{$t("message.deltaHint")}}</li>
+        <li>{{ $t("message.deltaHint") }}</li>
       </ul>
       <h3>{{ $t("message.spurtAverage") }}</h3>
       <table border="1" class="emulation-result">
@@ -259,16 +244,6 @@
       <li>{{ $t("message.remark8") }}</li>
       <li><a href="https://twitter.com/urakagi">{{ $t("message.contact") }}</a></li>
     </ol>
-    <el-dialog :visible.sync='emulating' style="text-align: center;">
-      {{ $t("message.emulating") }}
-      <el-progress :percentage="Math.min(100, Math.floor(100 * epoch / maxEpoch))"></el-progress>
-      <p>
-        <Adsense v-if="production"
-                 data-ad-client="ca-pub-4611969396217909"
-                 data-ad-slot="6969023753">
-        </Adsense>
-      </p>
-    </el-dialog>
   </div>
 </template>
 
@@ -278,10 +253,11 @@ import ReleaseNote from "@/components/ReleaseNote";
 import CalculatedValues from "@/components/CalculatedValues";
 import ChartHint from "./ChartHint";
 import {DISTANCE, SURFACE} from "./data/constants";
+import ExecuteBlock from "./ExecuteBlock";
 
 export default {
   name: 'TeamRace',
-  components: {CalculatedValues, ReleaseNote, ChartHint},
+  components: {ExecuteBlock, CalculatedValues, ReleaseNote, ChartHint},
   mixins: [MixinRaceCore],
   data() {
     return {
