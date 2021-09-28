@@ -288,7 +288,7 @@
 
 <script>
 
-import MixinRaceCore from "@/components/data/MixinRaceCore";
+import MixinRaceCore from "@/components/MixinRaceCore";
 import ReleaseNote from "@/components/ReleaseNote";
 import CalculatedValues from "@/components/CalculatedValues";
 import ChartHint from "./ChartHint";
@@ -305,6 +305,9 @@ export default {
   computed: {
     distanceType() {
       return this.trackDetail.distanceType
+    },
+    surfaceType() {
+      return this.trackDetail.surface
     }
   },
   mounted() {

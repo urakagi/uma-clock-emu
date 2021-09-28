@@ -170,7 +170,7 @@
           <el-option :label="$t('message.skillActivateAdjustment1')" value="1"></el-option>
         </el-select>
       </el-form-item>
-      
+
     </el-form>
     <el-divider/>
     <Adsense v-if="production"
@@ -273,10 +273,11 @@
 </template>
 
 <script>
-import MixinRaceCore from "@/components/data/MixinRaceCore";
+import MixinRaceCore from "@/components/MixinRaceCore";
 import ReleaseNote from "@/components/ReleaseNote";
 import CalculatedValues from "@/components/CalculatedValues";
 import ChartHint from "./ChartHint";
+import {DISTANCE, SURFACE} from "./data/constants";
 
 export default {
   name: 'TeamRace',
@@ -312,16 +313,24 @@ export default {
     distanceType() {
       switch (this.raceType) {
         case '0':
-          return 1
+          return DISTANCE.SHORT
         case '1':
-          return 2
+          return DISTANCE.MILE
         case '2':
-          return 3
+          return DISTANCE.MIDDLE
         case '3':
-          return 4
+          return DISTANCE.LONG
         case '4':
         default:
-          return 2
+          return DISTANCE.MILE
+      }
+    },
+    surfaceType() {
+      switch (this.raceType) {
+        case '4':
+          return SURFACE.DIRT
+        default:
+          return SURFACE.TURF
       }
     },
     avgRaceTimeDelta() {

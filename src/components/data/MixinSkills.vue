@@ -1,5 +1,10 @@
 <script>
 
+const {
+  SurfaceLimit, StyleLimit, DistanceLimit,
+  SURFACE, STYLE, DISTANCE
+} = require('./constants')
+
 export default {
   name: "MixinSkills",
   data() {
@@ -251,7 +256,7 @@ export default {
             status: ['wisdom'],
             styleLimit: [1],
             check: function () {
-              return thiz.isRunningStyle(1)
+              return thiz.isRunningStyle(STYLE.NIGE)
             }
           },
           {
@@ -396,12 +401,12 @@ export default {
           {
             normal: {id: 200742, name: '深呼吸', value: 150},
             rare: {id: 200741, name: 'クールダウン', value: 550},
-            distanceLimit: [4],
+            distanceLimit: DistanceLimit.Long,
             init: function () {
               this.randoms = thiz.initStraightRandom()
             },
             check: function (startPosition) {
-              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isDistanceType(DISTANCE.LONG) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1118,13 +1123,13 @@ export default {
             normal: {id: 201672, name: 'レコメンド', value: 0.15},
             rare: {id: 201671, name: 'チャート急上昇！', value: 0.35},
             duration: 1.8,
-            surfaceLimit: [2],
+            surfaceLimit: SurfaceLimit.Dirt,
             tooltip: '「中盤のどこか」として扱う。',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
             check: function (startPosition) {
-              return thiz.isSurfaceType(2) && thiz.isInRandom(this.randoms, startPosition)
+              return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
@@ -1244,8 +1249,8 @@ export default {
             normal: {id: 200702, name: '上昇気流', value: 0.2},
             rare: {id: 200701, name: '豪脚', value: 0.4},
             duration: 3,
-            styleLimit: [3, 4],
-            distanceLimit: [2],
+            styleLimit: StyleLimit.Behind,
+            distanceLimit: DistanceLimit.Mile,
             tooltip: '順位>50%は満たしていると見なす',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -1374,6 +1379,18 @@ export default {
             },
             check: function (startPosition) {
               return thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {id: 0, name: '前列狙い', value: 0.2},
+            rare: {id: 0, name: '狙うは最前列！', value: 0.3},
+            duration: 3,
+            surfaceLimit: SurfaceLimit.Dirt,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
         ],
@@ -2325,6 +2342,30 @@ export default {
                 && thiz.startDelay < 0.08
           }
         },
+        {
+          id: 0, name: '禾スナハチ登ル',
+          targetSpeed: 0.35,
+          duration: 5,
+          tooltip: '50%-60%地点のどこかで発動として扱う',
+          init: function () {
+            this.randoms = thiz.initIntervalRandom(0.5, 0.6)
+          },
+          check: function (startPosition) {
+            return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
+        {
+          id: 0, name: '尊み☆ﾗｽﾄｽﾊﾟ━━(ﾟ∀ﾟ)━━ﾄ!',
+          targetSpeed: 0.35,
+          duration: 5,
+          tooltip: 'フェイズ2のどこか発動として扱う',
+          init: function () {
+            this.randoms = thiz.initPhaseRandom(2)
+          },
+          check: function (startPosition) {
+            return thiz.isInRandom(this.randoms, startPosition)
+          }
+        },
         // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
@@ -2561,7 +2602,7 @@ export default {
             if (skill.distanceLimit && skill.distanceLimit.indexOf(this.distanceType) < 0) {
               continue
             }
-            if (skill.surfaceLimit && skill.surfaceLimit.indexOf(this.trackDetail.surface) < 0) {
+            if (skill.surfaceLimit && skill.surfaceLimit.indexOf(this.surfaceType) < 0) {
               continue
             }
             // コースと馬場状態指定はチャンミのみ
@@ -2908,16 +2949,13 @@ export default {
       return detail
     },
     isRunningStyle(style) {
-      // 1: 逃げ, 2: 先行, 3: 差し, 4: 追込
       return this.runningStyle === style
     },
     isDistanceType(distanceType) {
-      // 1: 短距離, 2: マイル, 3: 中距離, 4: 長距離
       return this.distanceType === distanceType
     },
     isSurfaceType(surfaceType) {
-      // 1: 芝, 2: ダート
-      return this.trackDetail.surface === surfaceType
+      return this.surfaceType === surfaceType
     },
     accTimePassed(second) {
       return this.frameElapsed >= 15 * second
