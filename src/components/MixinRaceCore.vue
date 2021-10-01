@@ -106,7 +106,7 @@ export default {
           } else {
             bonus = 0.2
           }
-          // bonus /= check.length
+          bonus /= check.length
           statusCheckModifier += bonus
         }
       }
