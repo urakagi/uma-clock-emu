@@ -635,6 +635,17 @@ export default {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            normal: {id: 0, name: '静かな呼吸', value: 150},
+            rare: {id: 0, name: '潜伏態勢', value: 550},
+            styleLimit: StyleLimit.Sasi,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(0, {startRate: 0.5})
+            },
+            check: function (startPosition) {
+              return thiz.isRunningStyle(STYLE.SASI) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
           // End of heal skills
         ],
         targetSpeed: [
@@ -920,6 +931,7 @@ export default {
           },
           {
             normal: {id: 201412, name: '十万バリキ', value: 0.15},
+            rare: {id: 201411, name: '百万バリキ', value: 0.35},
             duration: 1.8,
             styleLimit: [3],
             check: function () {
@@ -1936,6 +1948,14 @@ export default {
             return thiz.skillTriggerCount[1] >= 2
           }
         },
+        {
+          id: 0, name: 'Drain for rose',
+          heal: 550,
+          tooltip: '50%地点で即発動として扱う。',
+          check: function (startPosition) {
+            return thiz.isContainsRemainingDistance(thiz.courseLength * 0.5, startPosition)
+          }
+        },
         // End of heal unique skills
         {
           id: 10071, name: '波乱注意砲！',
@@ -2498,7 +2518,7 @@ export default {
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '順位2位以内は満たしていると見なす',
+          tooltip: '順位2位以内は満たしていると見なす。最終直線に入った瞬間に発動として扱う。',
           check: function () {
             return thiz.isInFinalStraight() && thiz.sp >= 0.3 * thiz.spMax
           }
@@ -2579,6 +2599,18 @@ export default {
           tooltip: '順位条件は満たしてると見なす',
           check: function () {
             return thiz.isInDistanceRate(0.45, 0.6) && thiz.isSPInRange(0, 0.7)
+          }
+        },
+        {
+          id: 0, name: 'ぐるぐるマミートリック♡',
+          boost: {
+            targetSpeed: 0.25,
+            acceleration: 0.3
+          },
+          duration: 5,
+          tooltip: '最終直線に入った瞬間に発動として扱う。順位条件は満たしてると見なす。',
+          check: function () {
+            return thiz.isInFinalStraight()
           }
         },
       ], // End of boost unique skills
@@ -2805,18 +2837,33 @@ export default {
       ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
       return [ret]
     },
-    initPhaseRandom(phase) {
+    initPhaseRandom(phase, options) {
+      const startRate = (options && options.startRate) || 0
+      const endRate = (options && options.endRate) || 1
+      let zoneStart, zoneEnd
       switch (phase) {
         case 0:
-          return [this.chooseRandom(0, this.courseLength / 6.0)]
+          zoneStart = 0
+          zoneEnd = this.courseLength / 6.0
+          break
         case 1:
-          return [this.chooseRandom(this.courseLength / 6.0, this.courseLength * 2.0 / 3)]
+          zoneStart = this.courseLength / 6.0
+          zoneEnd = this.courseLength * 2.0 / 3
+          break
         case 2:
-          return [this.chooseRandom(this.courseLength * 2.0 / 3, this.courseLength * 5.0 / 6)]
+          zoneStart = this.courseLength * 2.0 / 3
+          zoneEnd = this.courseLength * 5.0 / 6
+          break
         case 3:
         default:
-          return [this.chooseRandom(this.courseLength * 5.0 / 6, this.courseLength)]
+          zoneStart = this.courseLength * 5.0 / 6
+          zoneEnd = this.courseLength
+          break
       }
+      const zoneLength = zoneEnd - zoneStart
+      zoneStart += zoneLength * startRate
+      zoneEnd -= zoneLength * (1 - endRate)
+      return [this.chooseRandom(zoneStart, zoneEnd)]
     },
     initFinalCornerRandom() {
       const ret = []

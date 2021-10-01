@@ -22,8 +22,6 @@
 
 <script>
 
-// import LangDropdown from "@/components/LangDropdown";
-
 export default {
   name: 'App',
   components: {},
