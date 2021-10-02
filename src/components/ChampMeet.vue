@@ -242,6 +242,7 @@
     <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 2) }})</h3>
     <chart-hint/>
     <race-graph :chart-data="chartData" :options="chartOptions"/>
+    <course-info :track="this.track"/>
     <el-divider/>
     <calculated-values/>
     <el-divider/>
@@ -264,6 +265,7 @@
 <script>
 
 import MixinRaceCore from "@/components/MixinRaceCore";
+import CourseInfo from "@/components/CourseInfo";
 import ReleaseNote from "@/components/ReleaseNote";
 import CalculatedValues from "@/components/CalculatedValues";
 import ChartHint from "./ChartHint";
@@ -271,7 +273,7 @@ import ExecuteBlock from "./ExecuteBlock";
 
 export default {
   name: 'ChampMeet',
-  components: {ExecuteBlock, ChartHint, CalculatedValues, ReleaseNote},
+  components: {ExecuteBlock, ChartHint, CalculatedValues, ReleaseNote, CourseInfo},
   mixins: [MixinRaceCore],
   data() {
     return {

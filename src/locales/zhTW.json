@@ -123,6 +123,8 @@
 		"corner": "彎角",
 		"straight": "直線",
 		"temptation": "焦躁",
-		"none": "無"
+		"none": "無",
+		"phaseSeparators": "中盤開始：{0}m | 終盤開始：{1}m",
+		"firstSlopes": "最初爬坡：{0} | 下坡：{1}"
 	}
 }

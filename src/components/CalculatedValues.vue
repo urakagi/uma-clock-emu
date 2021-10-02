@@ -1,9 +1,7 @@
 <template>
   <div>
     <div>
-      {{ $t("message.totalStatus") }}：{{ totalStatus }}／{{ $t("message.displayStatusCheck") }}：{{ displayStatusCheck }}／{{ $t("message.minTime") }}：{{formatTime($parent.trackDetail.finishTimeMin, 1)}}／{{ $t("message.maxTime") }}：{{formatTime($parent.trackDetail.finishTimeMax, 1)}}
-    </div>
-    <div>
+      {{ $t("message.totalStatus") }}：{{ totalStatus }}／
       {{ $t("message.corrected") }}：{{ $t("message.speed") }}{{ $parent.modifiedSpeed.toFixed(1) }} ／{{
         $t("message.stamina")
       }}{{ $parent.modifiedStamina.toFixed(1) }} ／{{ $t("message.power") }}{{ $parent.modifiedPower.toFixed(1) }}
@@ -43,19 +41,6 @@ export default {
       return parseInt(this.$parent.umaStatus.speed) + parseInt(this.$parent.umaStatus.stamina)
           + parseInt(this.$parent.umaStatus.power) + parseInt(this.$parent.umaStatus.guts)
           + parseInt(this.$parent.umaStatus.wisdom)
-    },
-    displayStatusCheck() {
-      const STATUS = ['', this.$t("message.speed"), this.$t("message.stamina"), this.$t("message.power"), this.$t("message.guts"), this.$t("message.wisdom")]
-      const check = this.$parent.trackDetail.courseSetStatus
-      switch (check.length) {
-        case 0:
-          return this.$t("message.none")
-        case 1:
-          return STATUS[check[0]]
-        case 2:
-        default:
-          return STATUS[check[0]] + '、' + STATUS[check[1]]
-      }
     },
   },
   methods: {

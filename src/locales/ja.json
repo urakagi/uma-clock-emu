@@ -121,6 +121,8 @@
 		"corner": "コーナー",
 		"straight": "直線",
 		"temptation": "掛かり",
-		"none": "どちらでもない"
+		"none": "どちらでもない",
+		"phaseSeparators": "中盤入り：{0}m | 終盤入り：{1}m",
+		"firstSlopes": "最初の上り坂：{0} | 下り坂：{1}"
 	}
 }

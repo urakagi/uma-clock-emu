@@ -2,7 +2,7 @@
 import TrackData from './course_data.json'
 
 export default {
-  name: "MixinTrackData",
+  name: "MixinCourseData",
   data: function () {
     return {
       'trackData': TrackData
