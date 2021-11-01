@@ -190,8 +190,6 @@
           <th>{{ $t("message.best") }}</th>
           <th>{{ $t("message.worst") }}</th>
           <th>{{ $t("message.timeInGame") }}</th>
-          <th>{{ $t("message.best") }}</th>
-          <th>{{ $t("message.worst") }}</th>
         </tr>
         <tr>
           <th>{{ $t("message.avg") }}</th>
@@ -200,8 +198,6 @@
           <td>{{ formatTime(bestTime, 2) }}</td>
           <td>{{ formatTime(worstTime, 2) }}</td>
           <td>{{ formatTime(toDisplayTime(avgRaceTime), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(bestTime), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(worstTime), 1) }}</td>
         </tr>
         <tr>
           <th>{{ $t("message.MaxSpurt") }}</th>
@@ -210,8 +206,6 @@
           <td>{{ formatTime(bestTimeMaxSpurt, 2) }}</td>
           <td>{{ formatTime(worstTimeMaxSpurt, 2) }}</td>
           <td>{{ formatTime(toDisplayTime(avgRaceTimeMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(bestTimeMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(worstTimeMaxSpurt), 1) }}</td>
         </tr>
         <tr>
           <th>{{ $t("message.NotMaxSpurt") }}</th>
@@ -220,8 +214,6 @@
           <td>{{ formatTime(bestTimeNotMaxSpurt, 2) }}</td>
           <td>{{ formatTime(worstTimeNotMaxSpurt, 2) }}</td>
           <td>{{ formatTime(toDisplayTime(avgRaceTimeNotMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(bestTimeNotMaxSpurt), 1) }}</td>
-          <td>{{ formatTime(toDisplayTime(worstTimeNotMaxSpurt), 1) }}</td>
         </tr>
       </table>
       <h3>{{ $t("message.spurtAverage") }}</h3>
@@ -234,7 +226,7 @@
         <tr>
           <td>{{ maxSpurtRate }}%</td>
           <td>{{ maxSpurtSPLeft }}</td>
-          <td>{{ nonMaxSpurtSPLack }}</td>
+           <td>{{ nonMaxSpurtSPLack }}</td>
         </tr>
       </table>
     </div>

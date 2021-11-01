@@ -183,6 +183,7 @@ export default {
         baseTargetSpeed += this.baseSpeed * this.sectionTargetSpeedRandoms[this.currentSection]
       }
       let ret = baseTargetSpeed
+
       const upSlope = this.isInSlope('up')
       if (upSlope) {
         ret -= Math.abs(this.currentSlope) * 200.0 / this.modifiedPower
@@ -1048,6 +1049,7 @@ export default {
       const labels = []
       const dataSpeed = []
       const dataSp = []
+      const dataPosition = []
       const annotations = []
       let skillYAdjust = 0
       const nextSkillYAdjust = function () {
@@ -1113,6 +1115,7 @@ export default {
         labels.push(label)
         dataSpeed.push(frame.speed)
         dataSp.push(frame.sp)
+        dataPosition.push(frame.startPosition.toFixed(2))
         for (let mi = index; mi < index + step && mi < this.frames.length; mi++) {
           // Skill annotations
           for (const skill of this.frames[mi].skills) {
@@ -1308,6 +1311,13 @@ export default {
               min: 15,
               max: 27
             }
+          }, {
+            id: 'position',
+            type: 'linear',
+            position: 'right',
+            ticks: {
+              min: -this.courseLength / 10,
+            }
           }]
         },
         maintainAspectRatio: false
@@ -1326,6 +1336,12 @@ export default {
           yAxisID: 'speed',
           borderColor: 'rgb(30, 21, 155)',
           data: dataSpeed
+        }, {
+          fill: false,
+          label: this.$t("chart.position"),
+          yAxisID: 'position',
+          borderColor: 'rgb(215, 255, 215)',
+          data: dataPosition
         }]
       }
     },

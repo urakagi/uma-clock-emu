@@ -476,6 +476,7 @@ export default {
           },
           {
             normal: {id: 201222, name: 'スタミナイーター', value: 150},
+            rare: {id: 201221, name: 'スタミナグリード', value: 350},
             styleLimit: [2, 3, 4],
             distanceLimit: [4],
             tooltip: '5番手かそれ以降満たしていると見なす',
@@ -1174,6 +1175,14 @@ export default {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            normal: {id: 201702, name: 'ありったけ', value: 0.15},
+            rare: {id: 201701, name: '決死の覚悟', value: 0.35},
+            duration: 2.4,
+            check: function () {
+              return thiz.isInStraight() && thiz.isInSpurt
+            }
+          },
           // End of target speed skills
         ],
         acceleration: [
@@ -1589,6 +1598,20 @@ export default {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            all: {name: 'アナタヲ・オイカケテ', value: -0.05},
+            duration: 6,
+            check: function () {
+              return thiz.position >= thiz.courseLength * 0.5
+            }
+          },
+          {
+            all: {name: 'アナタヲ・オイカケテ(継承)', value: -0.025},
+            duration: 3.6,
+            check: function () {
+              return thiz.position >= thiz.courseLength * 0.5
+            }
+          },
         ],
         fatigue: [
           {
@@ -1867,6 +1890,16 @@ export default {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            all: {name: 'スタミナグリード', value: 100},
+            distanceLimit: [4],
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
         ]
       },
       uniqueSkillData: [
@@ -1878,6 +1911,7 @@ export default {
         },
         {
           id: 10321, name: 'introduction：My body',
+          noInherit: true,
           heal: 350,
           tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
           check: function () {
@@ -1894,6 +1928,7 @@ export default {
         },
         {
           id: 10451, name: 'クリアハート',
+          noInherit: true,
           heal: 350,
           tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
           init: function () {
@@ -1916,6 +1951,7 @@ export default {
         },
         {
           id: 10521, name: 'ワクワクよーいドン',
+          noInherit: true,
           heal: 350,
           tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
           check: function () {
@@ -1959,6 +1995,7 @@ export default {
         // End of heal unique skills
         {
           id: 10071, name: '波乱注意砲！',
+          noInherit: true,
           targetSpeed: 0.15,
           duration: 6,
           tooltip: '順位条件の<=50%は満たしていると見なす',
@@ -2007,6 +2044,7 @@ export default {
         },
         {
           id: 10081, name: 'アクセルX',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
@@ -2046,6 +2084,7 @@ export default {
         },
         {
           id: 10181, name: 'エンプレス・プライド',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
@@ -2070,6 +2109,7 @@ export default {
         },
         {
           id: 10351, name: '全力Vサインッ！',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
@@ -2094,6 +2134,7 @@ export default {
         },
         {
           id: 10411, name: '学級委員長+速さ＝バクシン',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
@@ -2118,6 +2159,7 @@ export default {
         },
         {
           id: 10561, name: '来てください来てください！',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「終盤のどこかで発動する」として扱う。',
@@ -2142,6 +2184,7 @@ export default {
         },
         {
           id: 10601, name: 'アタシもたまには、ね？',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「ラストスパートのどこかで発動する」として扱う。',
@@ -2166,6 +2209,7 @@ export default {
         },
         {
           id: 10111, name: '精神一到',
+          noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
           tooltip: '「最終直線のどこかで発動する」として扱う。',
@@ -2190,6 +2234,7 @@ export default {
         },
         {
           id: 10611, name: 'Call me KING',
+          noInherit: true,
           targetSpeed: 0.35,
           duration: 5,
           check: function (startPosition) {
@@ -2386,6 +2431,24 @@ export default {
             return thiz.isInRandom(this.randoms, startPosition)
           }
         },
+        {
+          id: 0, name: '姫たるもの、勝利をこの手に',
+          targetSpeed: 0.35,
+          duration: 5,
+          tooltip: '最終直線に入ってすぐ発動として扱う',
+          check: function () {
+            return thiz.isInFinalStraight()
+          }
+        },
+        {
+          id: 0, name: 'アナタヲ・オイカケテ',
+          targetSpeed: 0.25,
+          duration: 6,
+          tooltip: '順位条件は満たしていると見なす',
+          check: function () {
+            return thiz.position >= thiz.courseLength * 0.5
+          }
+        },
         // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
@@ -2408,6 +2471,7 @@ export default {
         },
         {
           id: 10271, name: '燃えろ筋肉！',
+          noInherit: true,
           acceleration: 0.3,
           duration: 4,
           styleLimit: [3, 4],
@@ -2471,6 +2535,7 @@ export default {
         // End of acc unique skills
         {
           id: 10091, name: 'レッドエース',
+          noInherit: true,
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
@@ -2501,6 +2566,7 @@ export default {
         },
         {
           id: 10141, name: '熱血☆アミーゴ',
+          noInherit: true,
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
@@ -2525,6 +2591,7 @@ export default {
         },
         {
           id: 10241, name: '勝利のキッス☆',
+          noInherit: true,
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
@@ -3034,10 +3101,12 @@ export default {
         }
         delete copy.id
         delete copy.name
-        copy.inherit = {
-          id: skill.id + 800000,
-          name: skill.name,
-          value: value
+        if (!skill.noInherit) {
+          copy.inherit = {
+            id: skill.id + 800000,
+            name: skill.name,
+            value: value
+          }
         }
         copy.cd = 500
         if (skill.duration) {

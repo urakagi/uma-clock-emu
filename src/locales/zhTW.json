@@ -119,6 +119,7 @@
 		"spurt": "衝刺開始",
 		"hp": "HP",
 		"speed": "速度",
+		"position": "位置",
 		"hintBackground": "背景色意義：",
 		"corner": "彎角",
 		"straight": "直線",

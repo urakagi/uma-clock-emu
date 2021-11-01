@@ -117,6 +117,7 @@
 		"spurt": "Spurt Start",
 		"hp": "HP",
 		"speed": "Current Speed",
+		"position": "Position",
 		"hintBackground": "The meaning of background colors: ",
 		"corner": "Corner",
 		"straight": "Straight",
