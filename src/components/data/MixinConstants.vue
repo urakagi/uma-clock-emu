@@ -4,6 +4,8 @@ export default {
   data() {
     return {
       frameLength: 1.0 / 15,
+      startSpeed: 3.0,
+      maxSpeed: 30.0,
       condCoef: {
         0: 1.04,
         1: 1.02,

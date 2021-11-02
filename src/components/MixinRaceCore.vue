@@ -40,7 +40,7 @@ export default {
       sectionTargetSpeedRandoms: [],
       frameElapsed: 0,  // 15 frames per second
       position: 0,
-      currentSpeed: 3,
+      currentSpeed: null,
       sp: 0,
       operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
       frames: [],
@@ -272,6 +272,9 @@ export default {
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
     },
     vMin() {
+      if (this.isStartDash) {
+        return this.startSpeed
+      }
       return 0.85 * this.baseSpeed + 0.001 * Math.sqrt(this.modifiedGuts * 200)
     },
     a0() {
@@ -485,7 +488,7 @@ export default {
       this.frameElapsed = 0
       this.sp = 0
       this.position = 0
-      this.currentSpeed = 3
+      this.currentSpeed = this.startSpeed
       this.passiveBonus = {
         speed: 0,
         stamina: 0,
@@ -666,7 +669,6 @@ export default {
       }
     },
     updateSelfSpeed(elapsedTime) {
-      const MAX_SPEED = 30.0
       let newSpeed
       if (this.currentSpeed < this.targetSpeed) {
         newSpeed = Math.min(this.currentSpeed + elapsedTime * this.acceleration, this.targetSpeed)
@@ -676,7 +678,7 @@ export default {
       if (this.isStartDash && newSpeed > this.v0) {
         newSpeed = this.v0
       }
-      newSpeed = Math.min(newSpeed, MAX_SPEED)
+      newSpeed = Math.max(Math.min(newSpeed, this.maxSpeed), this.vMin)
       this.currentSpeed = newSpeed
     },
     updateStartDash() {
