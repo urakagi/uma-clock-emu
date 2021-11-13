@@ -2712,7 +2712,7 @@ export default {
           duration: 5,
           tooltip: '最終コーナーに入った瞬間に発動として扱う。順位条件は満たしてると見なす。',
           check: function () {
-            return thiz.isInFinalStraight()
+            return thiz.isInFinalCorner();
           }
         },
       ], // End of boost unique skills
