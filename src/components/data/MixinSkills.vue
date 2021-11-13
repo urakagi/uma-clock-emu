@@ -376,6 +376,13 @@ export default {
               return thiz.weather === 3
             }
           },
+          {
+            rare: {id: 200194, name: '初嵐', value: 60},
+            status: ['speed', 'power'],
+            check: function () {
+              return thiz.season === 2
+            }
+          },
         ],
         heal: [
           {
@@ -2449,6 +2456,22 @@ export default {
             return thiz.position >= thiz.courseLength * 0.5
           }
         },
+        {
+          id: 100171, name: '翳り退く、さざめきの矢',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function () {
+            return thiz.isInFinalCorner();
+          }
+        },
+        {
+          id: 100481, name: 'YEAH☆VIVID TIME!',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function () {
+            return thiz.isInFinalStraight();
+          }
+        },
         // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
@@ -2676,6 +2699,18 @@ export default {
           },
           duration: 5,
           tooltip: '最終直線に入った瞬間に発動として扱う。順位条件は満たしてると見なす。',
+          check: function () {
+            return thiz.isInFinalStraight()
+          }
+        },
+        {
+          id: 110401, name: 'GET DOWN',
+          boost: {
+            targetSpeed: 0.25,
+            acceleration: 0.3
+          },
+          duration: 5,
+          tooltip: '最終コーナーに入った瞬間に発動として扱う。順位条件は満たしてると見なす。',
           check: function () {
             return thiz.isInFinalStraight()
           }
