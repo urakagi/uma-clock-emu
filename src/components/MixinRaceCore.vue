@@ -42,7 +42,7 @@ export default {
       position: 0,
       currentSpeed: null,
       sp: 0,
-      operatingSkills: {speed: [], targetSpeed: [], acceleration: []},
+      operatingSkills: [],
       frames: [],
       startDelay: 0,
       isStartDash: false,
@@ -194,16 +194,13 @@ export default {
           ret += Math.abs(this.currentSlope) / 10.0 + 0.3
         }
       }
-      for (const skill of this.operatingSkills.targetSpeed) {
-        ret += skill.data.value
-      }
-      for (const skill of this.operatingSkills.boost) {
-        ret += skill.data.value.targetSpeed
-      }
-      // 減速スキルの目標速度低下分
-      for (const skill of this.operatingSkills.speed) {
-        if (skill.data.value < 0) {
-          ret += skill.data.value
+      for (const skill of this.operatingSkills) {
+        if (skill.data.targetSpeed) {
+          ret += skill.data.targetSpeed
+        }
+        // 減速スキルの目標速度低下分
+        if (skill.data.speed) {
+          ret += skill.data.speed
         }
       }
       return ret
@@ -218,11 +215,10 @@ export default {
       if (this.isStartDash) {
         ret += 24
       }
-      for (const skill of this.operatingSkills.acceleration) {
-        ret += skill.data.value
-      }
-      for (const skill of this.operatingSkills.boost) {
-        ret += skill.data.value.acceleration
+      for (const skill of this.operatingSkills) {
+        if (skill.data.acceleration) {
+          ret += skill.data.acceleration
+        }
       }
       return ret
     },
@@ -496,12 +492,7 @@ export default {
         guts: 0,
         wisdom: 0
       }
-      this.operatingSkills = {
-        speed: [],
-        targetSpeed: [],
-        acceleration: [],
-        boost: []
-      }
+      this.operatingSkills = []
       delete this.frames
       this.frames = [{skills: []}]
       this.spurtParameters = null
@@ -623,14 +614,12 @@ export default {
         })
 
         // Remove overtime skills
-        for (const type in this.operatingSkills) {
-          for (let i = 0; i < this.operatingSkills[type].length; i++) {
-            if ((this.frameElapsed - this.operatingSkills[type][i].startFrame) * this.frameLength
-                > this.operatingSkills[type][i].data.duration * this.timeCoef) {
-              this.operatingSkills[type].splice(i, 1)
-              i-- // Without this line, the original next element will be skipped
-              break
-            }
+        for (let i = 0; i < this.operatingSkills.length; i++) {
+          if ((this.frameElapsed - this.operatingSkills[i].startFrame) * this.frameLength
+              > this.operatingSkills[i].data.duration * this.timeCoef) {
+            this.operatingSkills.splice(i, 1)
+            i-- // Without this line, the original next element will be skipped
+            break
           }
         }
       }

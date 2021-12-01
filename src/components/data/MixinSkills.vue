@@ -520,6 +520,7 @@ export default {
             }
           },
           {
+            rare: {id: 201201, name: 'VIP顔パス', value: 550},
             normal: {id: 201202, name: 'パス上手', value: 150},
             distanceLimit: [4],
             tooltip: '「序盤か中盤のどこかで発動」として扱う。適当実装注意。',
@@ -1421,6 +1422,17 @@ export default {
               return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            normal: {id: 201902, name: '真っ向勝負', value: 0.2},
+            styleLimit: [2],
+            duration: 1.8,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(2)
+            },
+            check: function (startPosition) {
+              return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
         ],
         // End of acc skills
         boost: [
@@ -1912,6 +1924,7 @@ export default {
       uniqueSkillData: [
         {
           name: 'なし／発動しない',
+          noInherit: true,
           check: function () {
             return false
           }
@@ -2472,6 +2485,14 @@ export default {
             return thiz.isInFinalStraight();
           }
         },
+        {
+          id: 100231, name: 'Presents from X',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function () {
+            return thiz.position >= thiz.courseLength * 0.5
+          }
+        },
         // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
@@ -2553,6 +2574,18 @@ export default {
           tooltip: '50%地点で即発動として扱う',
           check: function () {
             return thiz.position >= thiz.courseLength / 2.0
+          }
+        },
+        {
+          id: 100591, name: '彼方、その先へ…',
+          acceleration: 0.4,
+          duration: 4,
+          styleLimit: [3, 4],
+          tooltip: '常に順位>=50%及び<=70%は満たしていると見なす。',
+          check: function () {
+            return thiz.temptationModeStart == null &&
+                ((thiz.currentPhase >= 2 && !thiz.isInFinalCorner() && thiz.isInCorner()) ||
+                    (thiz.currentPhase === 1 && thiz.isInFinalCorner() && thiz.isInCorner()))
           }
         },
         // End of acc unique skills
@@ -2715,6 +2748,16 @@ export default {
             return thiz.isInFinalCorner();
           }
         },
+        {
+          id: 110061, name: '聖夜のミラクルラン！',
+          targetSpeed: 0.25,
+          acceleration: 0.3,
+          heal: 350,
+          duration: 5,
+          check: function () {
+            return thiz.position >= thiz.courseLength * 0.5 && thiz.healTriggerCount >= 3
+          }
+        },
       ], // End of boost unique skills
     }
   },
@@ -2825,40 +2868,53 @@ export default {
         const copy = {...skill}
         copy.name = skill.name
         copy.cd = 500
+        copy.triggers = []
+        copy.trigger = function () {
+          let ret = null
+          for (const tri of this.triggers) {
+            const r = tri()
+            if (r) {
+              ret = r
+            }
+          }
+          return ret
+        }
         if (skill.duration) {
           copy.duration = skill.duration
         } else {
           copy.duration = 0
         }
-        const TYPES = ['heal', 'targetSpeed', 'acceleration', 'boost']
-        for (const type of TYPES) {
-          if (skill[type]) {
-            copy.type = type
-            if (typeof skill[type] === 'object') {
-              copy.value = {}
-              for (const key in skill[type]) {
-                const multiplier = key === 'targetSpeed' ? 0.03 : 0.02
-                copy.value[key] = skill[type][key] * (1 + this.uniqueLevel * multiplier)
-              }
-            } else {
-              const multiplier = type === 'targetSpeed' ? 0.03 : 0.02
-              copy.value = skill[type] * (1 + this.uniqueLevel * multiplier)
-            }
-            if (type === 'heal') {
-              copy.trigger = function () {
-                return thiz.doHeal(this.value)
-              }
-            } else if (type === 'speed') {
-              copy.trigger = function () {
-                return thiz.currentSpeed += this.value
-              }
-            }
-            if (copy.init) {
-              copy.init()
-            }
-            this.invokedSkills.push(copy)
-          }
+        // New logic, so you see many backward compatibility
+        let effectCount = 0
+        if (skill.boost) {
+          skill.targetSpeed = skill.boost.targetSpeed
+          skill.acceleration = skill.boost.acceleration
         }
+        if (skill.heal) {
+          copy.type = 'heal'
+          copy.heal = skill.heal * (1 + this.uniqueLevel * 0.02)
+          copy.triggers.push(function () {
+            return thiz.doHeal(copy.heal)
+          })
+          effectCount++
+        }
+        if (skill.targetSpeed) {
+          copy.type = 'targetSpeed'
+          copy.targetSpeed = skill.targetSpeed * (1 + this.uniqueLevel * 0.03)
+          effectCount++
+        }
+        if (skill.acceleration) {
+          copy.type = 'acceleration'
+          copy.acceleration = skill.acceleration * (1 + this.uniqueLevel * 0.02)
+          effectCount++
+        }
+        if (effectCount > 1) {
+          copy.type = 'boost'
+        }
+        if (copy.init) {
+          copy.init()
+        }
+        this.invokedSkills.push(copy)
         break
       }
     },
@@ -2906,7 +2962,7 @@ export default {
             skillDetail = skill.trigger()
           }
           if (skill.duration) {
-            this.operatingSkills[skill.type].push({data: skill, startFrame: this.frameElapsed})
+            this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
             skillTriggered.push({data: skill})
           } else {
             skillTriggered.push({data: skill, detail: skillDetail})
@@ -3112,36 +3168,15 @@ export default {
     fillSkillData() {
       // First build up inherit skills
       for (const skill of this.uniqueSkillData) {
-        const copy = {...skill}
-        let value, skillType
-        const TYPES = ['heal', 'targetSpeed', 'acceleration', 'boost']
-        for (const type of TYPES) {
-          if (skill[type]) {
-            skillType = type
-            if (type === 'heal') {
-              value = 150
-            } else if (type === 'boost') {
-              value = {
-                targetSpeed: skill[type].targetSpeed - 0.2,
-                acceleration: skill[type].acceleration - 0.2
-              }
-            } else {
-              value = skill[type] - 0.2
-            }
-            break
-          }
-        }
-        if (skillType === undefined) {
+        if (skill.noInherit) {
           continue
         }
-        delete copy.id
-        delete copy.name
-        if (!skill.noInherit) {
-          copy.inherit = {
-            id: skill.id + 800000,
-            name: skill.name,
-            value: value
-          }
+        let skillType = null
+        let effectCount = 0
+        const copy = {...skill}
+        copy.inherit = {
+          id: skill.id + 800000,
+          name: skill.name,
         }
         copy.cd = 500
         if (skill.duration) {
@@ -3149,9 +3184,34 @@ export default {
         } else {
           copy.duration = 0
         }
+        if (skill.boost) {
+          skill.targetSpeed = skill.boost.targetSpeed
+          skill.acceleration = skill.boost.acceleration
+        }
+        if (skill.heal) {
+          copy.inherit.heal = skill.heal === 550 ? 150 : 50
+          skillType = 'heal'
+          effectCount++
+        }
+        if (skill.targetSpeed) {
+          copy.inherit.targetSpeed = skill.targetSpeed - 0.2
+          skillType = 'targetSpeed'
+          effectCount++
+        }
+        if (skill.acceleration) {
+          copy.inherit.acceleration = skill.acceleration - 0.2
+          skillType = 'acceleration'
+          effectCount++
+        }
+        if (effectCount > 1) {
+          skillType = 'boost'
+        }
+        delete copy.id
+        delete copy.name
         this.skillData[skillType].push(copy)
       }
 
+      const EFFECTS = ['heal', 'targetSpeed', 'acceleration', 'speed', 'fatigue']
       // Then fill fields, this.skillData must already been fulfill
       for (const type in this.skillData) {
         const o = {}
@@ -3167,12 +3227,26 @@ export default {
                 copy.id = skill[rarity].id
               }
               copy.name = skill[rarity].name
-              copy.value = skill[rarity].value
+              if (skill[rarity].value) {
+                copy.value = skill[rarity].value
+              } else {
+                for (const effect of EFFECTS) {
+                  if (skill[rarity][effect]) {
+                    copy[effect] = skill[rarity][effect]
+                  }
+                }
+              }
               if (skill[rarity].duration) {
                 copy.duration = skill[rarity].duration
               }
               copy.type = type
-              this.fillCommonFields(copy, type)
+              if (copy.value) {
+                this.fillCommonFields(copy, type)
+              }
+              delete copy.normal
+              delete copy.rare
+              delete copy.inherit
+              delete copy.all
               this.skills[type][rarity].push(copy)
             }
           }
@@ -3187,28 +3261,33 @@ export default {
       switch (type) {
         case 'heal':
           copy.duration = 0
+          copy.heal = copy.value
           if (!copy.trigger) {
             copy.trigger = function () {
-              return thiz.doHeal(this.value)
+              return thiz.doHeal(this.heal)
             }
           }
           break
         case 'speed':
+          copy.speed = copy.value
           if (!copy.trigger) {
             copy.trigger = function () {
-              return thiz.currentSpeed += this.value
+              return thiz.currentSpeed += this.speed
             }
           }
           break
         case 'targetSpeed':
+          copy.targetSpeed = copy.value
+          break
         case 'acceleration':
-        case 'boost':
+          copy.acceleration = copy.value
           break
         case 'fatigue':
           copy.duration = 0
+          copy.fatigue = copy.value
           if (!copy.trigger) {
             copy.trigger = function () {
-              return thiz.doHeal(-this.value)
+              return thiz.doHeal(-this.fatigue)
             }
           }
           break
