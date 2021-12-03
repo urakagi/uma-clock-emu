@@ -2498,8 +2498,7 @@ export default {
           id: 100041, name: '紅焔ギア/LP1211-M',
           acceleration: 0.4,
           duration: 4,
-          styleLimit: [1, 2],
-          tooltip: '順位<=5及び<=50%は満たしていると見なす',
+          tooltip: '順位<=5及び<=50%は満たしていると見なす。どの脚質でも最速発動扱い。',
           check: function () {
             return thiz.isInFinalCorner() || thiz.isInFinalStraight()
           }
@@ -3190,6 +3189,10 @@ export default {
         }
         if (skill.heal) {
           copy.inherit.heal = skill.heal === 550 ? 150 : 50
+          const thiz = this
+          copy.trigger = function () {
+            return thiz.doHeal(this.heal)
+          }
           skillType = 'heal'
           effectCount++
         }
