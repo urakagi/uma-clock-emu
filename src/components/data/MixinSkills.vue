@@ -3149,7 +3149,9 @@ export default {
       } else {
         detail = {heal, waste: 0}
       }
-      this.healTriggerCount++
+      if (value > 0) {
+        this.healTriggerCount++
+      }
       return detail
     },
     isRunningStyle(style) {
