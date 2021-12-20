@@ -655,6 +655,17 @@ export default {
               return thiz.isRunningStyle(STYLE.SASI) && thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            normal: {id: 202002, name: '砂塵慣れ', heal: 150},
+            styleLimit: StyleLimit.Behind,
+            surfaceLimit: SurfaceLimit.Dirt,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function (startPosition) {
+              return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
           // End of heal skills
         ],
         targetSpeed: [
@@ -2012,7 +2023,6 @@ export default {
             return thiz.isContainsRemainingDistance(thiz.courseLength * 0.5, startPosition)
           }
         },
-        // End of heal unique skills
         {
           id: 10071, name: '波乱注意砲！',
           noInherit: true,
@@ -2493,7 +2503,6 @@ export default {
             return thiz.position >= thiz.courseLength * 0.5
           }
         },
-        // End of target speed unique skills
         {
           id: 100041, name: '紅焔ギア/LP1211-M',
           acceleration: 0.4,
@@ -2587,7 +2596,6 @@ export default {
                     (thiz.currentPhase === 1 && thiz.isInFinalCorner() && thiz.isInCorner()))
           }
         },
-        // End of acc unique skills
         {
           id: 10091, name: 'レッドエース',
           noInherit: true,
@@ -2757,7 +2765,15 @@ export default {
             return thiz.position >= thiz.courseLength * 0.5 && thiz.healTriggerCount >= 3
           }
         },
-      ], // End of boost unique skills
+        {
+          id: 100221, name: 'Fairy tale',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function () {
+            return thiz.position >= thiz.courseLength * 0.52
+          }
+        },
+      ], // End of unique skills
     }
   },
   computed: {
