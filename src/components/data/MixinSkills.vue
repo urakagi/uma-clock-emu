@@ -1177,6 +1177,7 @@ export default {
           },
           {
             normal: {id: 201611, name: '尻尾上がり', value: 0.15},
+            rare: {id: 201612, name: '尻尾の滝登り', value: 0.35},
             duration: 3,
             check: function () {
               return thiz.skillTriggerCount[1] >= 3
@@ -2773,6 +2774,15 @@ export default {
             return thiz.position >= thiz.courseLength * 0.52
           }
         },
+        {
+          id: 100211, name: '白い稲妻、見せたるで！',
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+          duration: 5,
+          check: function () {
+            return thiz.isInStraight() && thiz.position >= thiz.courseLength * 0.5
+          }
+        },
       ], // End of unique skills
     }
   },
@@ -3220,7 +3230,12 @@ export default {
           effectCount++
         }
         if (skill.acceleration) {
-          copy.inherit.acceleration = skill.acceleration - 0.2
+          const value = skill.acceleration
+          if (value > 0.1) {
+            copy.inherit.acceleration = value - 0.2
+          } else {
+            copy.inherit.acceleration = 0.05
+          }
           skillType = 'acceleration'
           effectCount++
         }
