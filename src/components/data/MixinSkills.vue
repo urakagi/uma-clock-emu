@@ -1204,30 +1204,30 @@ export default {
             }
           },
           {
-            normal: {id: 202012, name: '影打ち', targetSpeed: 0.15},
-            rare: {id: 202011, name: '真打ち', targetSpeed: 0.35},
+            normal: {id: 202012, name: '影打ち', value: 0.15},
+            rare: {id: 202011, name: '真打ち', value: 0.35},
             duration: 2.4,
-            distanceLimit: DistanceLimit.LONG,
+            distanceLimit: DistanceLimit.Long,
             init: function () {
               this.randoms = thiz.initPhaseRandom(1, {
                 startRate: 0.5,
                 endRate: 1
               })
             },
-            check: function () {
-              return thiz.isDistanceType(DistanceType.LONG) &&
+            check: function (startPosition) {
+              return thiz.isDistanceType(4) &&
                   thiz.isInRandom(this.randoms, startPosition)
             }
           },
           {
-            normal: {id: 202021, name: '早仕掛け', targetSpeed: 0.05},
-            rare: {id: 202022, name: '強攻策', targetSpeed: 0.25},
+            normal: {id: 202021, name: '早仕掛け', value: 0.05},
+            rare: {id: 202022, name: '強攻策', value: 0.25},
             duration: 4,
             styleLimit: StyleLimit.Oi,
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
-            check: function () {
+            check: function (startPosition) {
               return thiz.isRunningStyle(4) &&
                   thiz.isInRandom(this.randoms, startPosition)
             }
@@ -2826,7 +2826,7 @@ export default {
           targetSpeed: 0.45,
           duration: 4,
           tooltip: '7回発動したとして扱う。じゃないと弱すぎる。',
-          check: function () {
+          check: function (startPosition) {
             return startPosition <= thiz.toPosition(400)
                 && thiz.position >= thiz.toPosition(400)
           }
