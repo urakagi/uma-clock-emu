@@ -1203,6 +1203,35 @@ export default {
               return thiz.isInStraight() && thiz.isInSpurt
             }
           },
+          {
+            normal: {id: 202012, name: '影打ち', targetSpeed: 0.15},
+            rare: {id: 202011, name: '真打ち', targetSpeed: 0.35},
+            duration: 2.4,
+            distanceLimit: DistanceLimit.LONG,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1, {
+                startRate: 0.5,
+                endRate: 1
+              })
+            },
+            check: function () {
+              return thiz.isDistanceType(DistanceType.LONG) &&
+                  thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
+          {
+            normal: {id: 202021, name: '早仕掛け', targetSpeed: 0.05},
+            rare: {id: 202022, name: '強攻策', targetSpeed: 0.25},
+            duration: 4,
+            styleLimit: StyleLimit.Oi,
+            init: function () {
+              this.randoms = thiz.initPhaseRandom(1)
+            },
+            check: function () {
+              return thiz.isRunningStyle(4) &&
+                  thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
           // End of target speed skills
         ],
         acceleration: [
@@ -2781,6 +2810,25 @@ export default {
           duration: 5,
           check: function () {
             return thiz.isInStraight() && thiz.position >= thiz.courseLength * 0.5
+          }
+        },
+        {
+          id: 110521, name: '113転び114起き',
+          targetSpeed: 0.25,
+          duration: 6,
+          tooltip: '6秒持続として扱う',
+          check: function () {
+            return thiz.isInFinalCorner()
+          }
+        },
+        {
+          id: 110151, name: '恵福バルカローレ',
+          targetSpeed: 0.45,
+          duration: 4,
+          tooltip: '7回発動したとして扱う。じゃないと弱すぎる。',
+          check: function () {
+            return startPosition <= thiz.toPosition(400)
+                && thiz.position >= thiz.toPosition(400)
           }
         },
       ], // End of unique skills
