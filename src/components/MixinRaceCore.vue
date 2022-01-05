@@ -74,6 +74,12 @@ export default {
     }
   },
   computed: {
+    skillActivateAdjustment() {
+      return this.$refs.executeBlock.skillActivateAdjustment
+    },
+    fixRandom() {
+      return this.skillActivateAdjustment === '2'
+    },
     runningStyle() {
       return parseInt(this.umaStatus.style)
     },
@@ -141,7 +147,11 @@ export default {
       return 100 - 9000.0 / this.umaStatus.wisdom
     },
     temptationRate() {
-      return Math.pow(6.5 / (Math.log10(0.1 * this.modifiedWisdom + 1)), 2)
+      if (this.fixRandom) {
+        return 0
+      } else {
+        return Math.pow(6.5 / (Math.log10(0.1 * this.modifiedWisdom + 1)), 2)
+      }
     },
     currentPhase() {
       return this.getPhase(this.position)
@@ -471,8 +481,12 @@ export default {
         this.initCourse()
       }
       this.initTemptation()
-      this.initializeSkills(this.$refs.executeBlock.skillActivateAdjustment)
-      this.startDelay = Math.random() * 0.1
+      this.initializeSkills(this.skillActivateAdjustment)
+      if (this.fixRandom) {
+        this.startDelay = 0
+      } else {
+        this.startDelay = Math.random() * 0.1
+      }
       this.triggerStartSkills();
       this.isStartDash = true;
       this.delayTime = this.startDelay;
@@ -715,6 +729,9 @@ export default {
       for (const i in candidates) {
         candidates[i].order = parseInt(i) + 1
         const c = candidates[i]
+        if (this.fixRandom) {
+          return c
+        }
         if (Math.random() * 100 < 15 + 0.05 * this.modifiedWisdom) {
           return c
         }
@@ -1027,7 +1044,11 @@ export default {
       const ret = []
       for (let i = 0; i < 24; i++) {
         const max = (this.modifiedWisdom / 5500.0) * Math.log10(this.modifiedWisdom * 0.1) * 0.01
-        ret.push(max + Math.random() * -0.0065)
+        if (this.fixRandom) {
+          ret.push(max - 0.00325)
+        } else {
+          ret.push(max + Math.random() * -0.0065)
+        }
       }
       return ret
     },

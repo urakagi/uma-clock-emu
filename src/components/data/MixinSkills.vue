@@ -2913,7 +2913,8 @@ export default {
             let invokeRate
             if (type === 'fatigue' || type === 'speed') {
               invokeRate = 80
-            } else if (type === 'passive' || skillActivateAdjustment === "1") {
+            } else if (type === 'passive' || skillActivateAdjustment === "1" ||
+                skillActivateAdjustment === "2") {
               invokeRate = 100
             } else {
               // FIXME: for debug, always pass wisdom check

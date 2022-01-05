@@ -35,6 +35,7 @@
 		"skillActivateAdjustment": "Skill invoke rate bonus",
 		"skillActivateAdjustment0": "None",
 		"skillActivateAdjustment1": "Fixed to 100%",
+		"skillActivateAdjustment2": "Fix all RNG",
 		"emulationResult": "Results",
 		"realTime": "Real Time",
 		"StandardDeviation": "Standard Deviation",

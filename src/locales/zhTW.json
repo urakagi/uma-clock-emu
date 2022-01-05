@@ -35,6 +35,7 @@
 		"skillActivateAdjustment": "技能發動率修正",
 		"skillActivateAdjustment0": "無",
 		"skillActivateAdjustment1": "必發動",
+		"skillActivateAdjustment2": "全亂數固定",
 		"emulationResult": "時計統計",
 		"realTime": "實際時間",
 		"StandardDeviation": "標準差",

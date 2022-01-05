@@ -18,6 +18,7 @@
       <el-select v-model="skillActivateAdjustment" style="width: 130px;">
         <el-option :label="$t('message.skillActivateAdjustment0')" value="0"></el-option>
         <el-option :label="$t('message.skillActivateAdjustment1')" value="1"></el-option>
+        <el-option :label="$t('message.skillActivateAdjustment2')" value="2"></el-option>
       </el-select>
     </el-form-item>
 
