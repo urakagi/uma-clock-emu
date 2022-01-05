@@ -22,6 +22,17 @@
       </el-select>
     </el-form-item>
 
+    <el-form-item :label="$t('message.randomPosition')">
+      <el-select v-model="randomPosition" style="width: 130px;">
+        <el-option :label="$t('message.randomPosition0')" value="0"></el-option>
+        <el-option :label="$t('message.randomPosition1')" value="1"></el-option>
+        <el-option :label="$t('message.randomPosition2')" value="2"></el-option>
+        <el-option :label="$t('message.randomPosition3')" value="3"></el-option>
+        <el-option :label="$t('message.randomPosition4')" value="4"></el-option>
+        <el-option :label="$t('message.randomPosition5')" value="5"></el-option>
+      </el-select>
+    </el-form-item>
+
     <el-dialog :visible.sync='emulating' style="text-align: center;">
       {{ $t("message.emulating") }}
       <el-progress :percentage="Math.min(100, Math.floor(100 * epoch / runMaxEpoch))"></el-progress>
@@ -46,7 +57,8 @@ export default {
       indicatedMaxEpoch: 50,
       runMaxEpoch: 50,
       emulating: false,
-      skillActivateAdjustment: '0'
+      skillActivateAdjustment: '0',
+      randomPosition: '0',
     }
   },
   created() {

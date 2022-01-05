@@ -86,7 +86,15 @@
 		"remark8": "作った人：砂井裏鍵。各種別情報は大いに参考させて頂きました。",
 
 		"contact": "ツイッターはこ↑こ↓",
-		"emulating": "エミュレート中、少々お待ち下さい……"
+		"emulating": "エミュレート中、少々お待ち下さい……",
+
+		"randomPosition": "ランダム区間",
+		"randomPosition0": "ランダム",
+		"randomPosition1": "最速",
+		"randomPosition2": "1/4",
+		"randomPosition3": "中間",
+		"randomPosition4": "3/4",
+		"randomPosition5": "最遅"
 	},
 	"emulatorType": {
 		"teamRace": "チーム競技場",

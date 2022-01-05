@@ -3048,7 +3048,30 @@ export default {
       return skillTriggered
     },
     chooseRandom(zoneStart, zoneEnd) {
-      const start = Math.random() * (zoneEnd - zoneStart) + zoneStart
+      let rate
+      switch (this.randomPosition) {
+        case '0':
+          rate = Math.random()
+          break
+        case '1':
+          rate = 0
+          break
+        case '2':
+          rate = 0.25
+          break
+        case '3':
+          rate = 0.5
+          break
+        case '4':
+          rate = 0.75
+          break
+        case '5':
+        default:
+          rate = 0.98
+          break
+      }
+
+      const start = rate * (zoneEnd - zoneStart) + zoneStart
       let end = start + 10
       if (end > zoneEnd) {
         end = zoneEnd

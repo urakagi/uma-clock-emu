@@ -80,6 +80,9 @@ export default {
     fixRandom() {
       return this.skillActivateAdjustment === '2'
     },
+    randomPosition() {
+      return this.$refs.executeBlock.randomPosition
+    },
     runningStyle() {
       return parseInt(this.umaStatus.style)
     },
@@ -565,7 +568,7 @@ export default {
         this.frames[this.frameElapsed].startPosition = startPosition
 
         // 下り坂モードに入るか・終わるかどうかの判定
-        if (this.isInSlope('down')) {
+        if (this.isInSlope('down') && !this.fixRandom) {
           // 1秒置きなので、このフレームは整数秒を含むかどうかのチェック
           if (Math.floor(this.frameElapsed * this.frameLength) !==
               Math.floor((this.frameElapsed + 1) * this.frameLength)) {
