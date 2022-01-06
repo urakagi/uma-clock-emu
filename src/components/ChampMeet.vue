@@ -193,26 +193,26 @@
         </tr>
         <tr>
           <th>{{ $t("message.avg") }}</th>
-          <td>{{ formatTime(avgRaceTime, 2) }}</td>
+          <td>{{ formatTime(avgRaceTime, 3) }}</td>
           <td>{{ timeStandardDeviation.toFixed(3) }}</td>
-          <td>{{ formatTime(bestTime, 2) }}</td>
-          <td>{{ formatTime(worstTime, 2) }}</td>
+          <td>{{ formatTime(bestTime, 3) }}</td>
+          <td>{{ formatTime(worstTime, 3) }}</td>
           <td>{{ formatTime(toDisplayTime(avgRaceTime), 1) }}</td>
         </tr>
         <tr>
           <th>{{ $t("message.MaxSpurt") }}</th>
-          <td>{{ formatTime(avgRaceTimeMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(avgRaceTimeMaxSpurt, 3) }}</td>
           <td>{{ timeStandardDeviationMaxSpurt.toFixed(3) }}</td>
-          <td>{{ formatTime(bestTimeMaxSpurt, 2) }}</td>
-          <td>{{ formatTime(worstTimeMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(bestTimeMaxSpurt, 3) }}</td>
+          <td>{{ formatTime(worstTimeMaxSpurt, 3) }}</td>
           <td>{{ formatTime(toDisplayTime(avgRaceTimeMaxSpurt), 1) }}</td>
         </tr>
         <tr>
           <th>{{ $t("message.NotMaxSpurt") }}</th>
-          <td>{{ formatTime(avgRaceTimeNotMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(avgRaceTimeNotMaxSpurt, 3) }}</td>
           <td>{{ timeStandardDeviationNotMaxSpurt.toFixed(3) }}</td>
-          <td>{{ formatTime(bestTimeNotMaxSpurt, 2) }}</td>
-          <td>{{ formatTime(worstTimeNotMaxSpurt, 2) }}</td>
+          <td>{{ formatTime(bestTimeNotMaxSpurt, 3) }}</td>
+          <td>{{ formatTime(worstTimeNotMaxSpurt, 3) }}</td>
           <td>{{ formatTime(toDisplayTime(avgRaceTimeNotMaxSpurt), 1) }}</td>
         </tr>
       </table>

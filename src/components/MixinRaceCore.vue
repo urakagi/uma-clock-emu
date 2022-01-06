@@ -776,7 +776,8 @@ export default {
           || (direction === 'down' && this.getSlope(position) < -1)
     },
     goal() {
-      const raceTime = this.frameElapsed * this.frameLength
+      const excessTime = (this.position - this.courseLength) / this.currentSpeed
+      const raceTime = this.frameElapsed * this.frameLength - excessTime
       const raceTimeDelta = raceTime - this.trackDetail.finishTimeMax / 1.18
 
       if (this.$refs.executeBlock.epoch === this.maxEpoch - 1) {
