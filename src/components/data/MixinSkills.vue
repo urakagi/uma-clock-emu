@@ -383,6 +383,14 @@ export default {
               return thiz.season === 2
             }
           },
+          {
+            rare: {id: 200174, name: '春一番', value: 60},
+            status: ['speed', 'power'],
+            check: function () {
+              return thiz.season === 1
+            }
+          },
+            // End of passive skills
         ],
         heal: [
           {
@@ -2831,7 +2839,17 @@ export default {
                 && thiz.position >= thiz.toPosition(400)
           }
         },
-      ], // End of unique skills
+        {
+          id: 100691, hid: 900691, name: '憧れは桜を越える！',
+          targetSpeed: 0.35,
+          duration: 5,
+          check: function (startPosition) {
+            return startPosition <= thiz.toPosition(300)
+                && thiz.position >= thiz.toPosition(300)
+          }
+        },
+        // End of unique skills
+      ],
     }
   },
   computed: {
