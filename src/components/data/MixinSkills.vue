@@ -1240,6 +1240,17 @@ export default {
                   thiz.isInRandom(this.randoms, startPosition)
             }
           },
+          {
+            rare: {id: 201103, name: '光芒一閃', value: 0.35},
+            duration: 3,
+            distanceLimit: [3],
+            init: function () {
+              this.randoms = thiz.initStraightRandom()
+            },
+            check: function (startPosition) {
+              return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+            }
+          },
           // End of target speed skills
         ],
         acceleration: [
@@ -2846,6 +2857,24 @@ export default {
           check: function (startPosition) {
             return startPosition <= thiz.toPosition(300)
                 && thiz.position >= thiz.toPosition(300)
+          }
+        },
+        {
+          id: 110261, name: 'オペレーション・Cacao',
+          targetSpeed: 0.35,
+          heal: 150,
+          duration: 5,
+          check: function () {
+            return thiz.curretPhase === 1 && thiz.isInCorner()
+          }
+        },
+        {
+          id: 110371, name: 'Guten Appetit♪',
+          targetSpeed: 0.35,
+          duration: 6,
+          tooltip: '最終コーナー以降で3人追い抜きは満たしたと見なす',
+          check: function () {
+            return thiz.isInFinalStraight()
           }
         },
         // End of unique skills
