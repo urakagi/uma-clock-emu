@@ -2865,7 +2865,7 @@ export default {
           heal: 150,
           duration: 5,
           check: function () {
-            return thiz.curretPhase === 1 && thiz.isInCorner()
+            return thiz.currentPhase === 1 && thiz.isInCorner()
           }
         },
         {
