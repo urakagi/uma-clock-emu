@@ -191,10 +191,12 @@ export default {
           default:
             baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][2] +
                 Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
+            baseTargetSpeed += Math.pow(this.modifiedGuts * 450, 0.597) * 0.0001
             break
         }
         baseTargetSpeed += this.baseSpeed * this.sectionTargetSpeedRandoms[this.currentSection]
       }
+      // 根性補正
       let ret = baseTargetSpeed
 
       // 坂
