@@ -99,6 +99,10 @@ export default {
           content: '一回ボタンを追加。コース確認に便利。',
           timestamp: '2021-09-28'
         },
+        {
+          content: '坂データ更新＆根性のスパート速度増加を実装',
+          timestamp: '2022-02-25'
+        },
       ]
     }
   }

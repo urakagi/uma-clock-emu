@@ -257,6 +257,7 @@ export default {
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
           1.05 + Math.sqrt(500 * this.modifiedSpeed) *
           this.distanceFitSpeedCoef[this.umaStatus.distanceFit] * 0.002
+          + Math.pow(450 * this.modifiedGuts, 0.597) * 0.0001
     },
     isInTemptation() {
       if (this.temptationModeStart == null || this.frameElapsed < this.temptationModeStart) {
