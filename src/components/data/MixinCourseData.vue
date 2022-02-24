@@ -23,14 +23,19 @@ export default {
     cornerEnd(corner) {
       return corner.start + corner.length
     },
+    slopeEnd(slope) {
+      return slope.start + slope.length
+    },
     getSlope(position) {
       if (!position) {
         position = this.position
       }
-      const slopePoints = this.trackDetail.slopes
-      const t = 1000 * position / this.courseLength
-      const i = Math.floor(t)
-      return 100 * (slopePoints[i] + (slopePoints[i + 1] - slopePoints[i]) * (t - i))
+      for (const slope of this.trackDetail.slopes) {
+        if (position >= slope.start && position <= this.slopeEnd(slope)) {
+          return 0.0001 * slope.slope
+        }
+      }
+      return 0
     },
     getStraights(track) {
       if (!track) {

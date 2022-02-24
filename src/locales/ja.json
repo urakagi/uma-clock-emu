@@ -130,6 +130,7 @@
 		"hintBackground": "背景色の意味：",
 		"corner": "コーナー",
 		"straight": "直線",
+		"slope": "坂",
 		"temptation": "掛かり",
 		"none": "どちらでもない",
 		"phaseSeparators": "中盤入り：{0}m | 終盤入り：{1}m",

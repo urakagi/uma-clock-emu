@@ -13,14 +13,17 @@
     </span>
     </div>
     <div>
+      {{ $t("chart.slope") }}：
+      <span v-for="slope in this.slopes" :key="slope" :class="'box ' + slopeClass(slope)">
+      {{ slope }}
+    </span>
+    </div>
+    <div>
       {{
         $t("chart.phaseSeparators",
             [(this.trackDetail.distance / 6).toFixed(0)
               , (this.trackDetail.distance * 2 / 3).toFixed(0)])
       }}
-    </div>
-    <div>
-      {{ $t("chart.firstSlopes", this.firstSlopes) }}
     </div>
     <div>
       {{ $t("message.displayStatusCheck") }}：{{ displayStatusCheck }} | {{
@@ -63,20 +66,11 @@ export default {
       }
       return ret
     },
-    firstSlopes() {
-      const ret = [this.$t('message.none'), this.$t('message.none')]
-      const found = [false, false]
-      for (let i = 0; i <= this.trackDetail.distance; i++) {
-        if (!found[0] && this.getSlope(i) > 1) {
-          ret[0] = `${i}m`
-          found[0] = true
-        } else if (!found[1] && this.getSlope(i) < -1) {
-          ret[1] = `${i}m`
-          found[1] = true
-        }
-        if (found[0] && found[1]) {
-          break
-        }
+    slopes() {
+      const ret = []
+      for (const slope of this.trackDetail.slopes) {
+        const s =  slope.slope > 0 ? `↑${slope.slope * 0.0001}` : `↓${-slope.slope * 0.0001}`
+        ret.push(`${slope.start}m～${slope.start + slope.length}m (${s})`)
       }
       return ret
     },
@@ -94,6 +88,11 @@ export default {
       }
     },
   },
+  methods: {
+    slopeClass(slope) {
+      return slope.indexOf('↑') > 0 ? 'up-slope' : 'down-slope'
+    },
+  }
 }
 </script>
 
@@ -113,5 +112,15 @@ export default {
 .straight {
   display: inline-block;
   background: rgba(210, 235, 255, 0.2);
+}
+
+.up-slope {
+  display: inline-block;
+  background: rgba(240, 235, 105, 0.2);
+}
+
+.down-slope {
+  display: inline-block;
+  background: rgba(125, 255, 190, 0.2);
 }
 </style>

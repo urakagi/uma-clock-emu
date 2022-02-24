@@ -122,6 +122,7 @@
 		"hintBackground": "The meaning of background colors: ",
 		"corner": "Corner",
 		"straight": "Straight",
+		"slope": "Slope",
 		"temptation": "Temptation",
 		"none": "None",
 		"phaseSeparators": "Phase 1 starts at {0}m, phase 2 starts at {1}m",

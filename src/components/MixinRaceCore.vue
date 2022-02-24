@@ -197,6 +197,7 @@ export default {
       }
       let ret = baseTargetSpeed
 
+      // 坂
       const upSlope = this.isInSlope('up')
       if (upSlope) {
         ret -= Math.abs(this.currentSlope) * 200.0 / this.modifiedPower
@@ -772,8 +773,8 @@ export default {
       if (!position) {
         position = this.position
       }
-      return (direction === 'up' && this.getSlope(position) > 1)
-          || (direction === 'down' && this.getSlope(position) < -1)
+      return (direction === 'up' && this.getSlope(position) >= 1)
+          || (direction === 'down' && this.getSlope(position) <= -1)
     },
     goal() {
       const excessTime = (this.position - this.courseLength) / this.currentSpeed
@@ -1123,6 +1124,8 @@ export default {
       let cornerIndex = 0
       let cornerStart = -1
       let straightStart = -1
+      let upSlopeStart = -1
+      let downSlopeStart = -1
       // const step = Math.floor(this.frames.length / 500)
       const step = 1
       for (let index = 0; index < this.frames.length; index += step) {
@@ -1199,6 +1202,41 @@ export default {
             drawTime: 'beforeDatasetsDraw',
           })
         }
+        // 上り坂
+        if (!this.isInSlope('up', this.frames[index].startPosition)
+            && this.isInSlope('up', this.frames[index].startPosition + this.frames[index].movement)) {
+          upSlopeStart = index
+        } else if (this.isInSlope('up', this.frames[index].startPosition)
+            && !this.isInSlope('up', this.frames[index].startPosition + this.frames[index].movement)) {
+          annotations.push({
+            type: 'box',
+            xMin: upSlopeStart,
+            xMax: index,
+            yMin: 0,
+            yMax: 100,
+            xScaleID: 'x-axis-0',
+            backgroundColor: 'rgba(240, 235, 105, 0.2)',
+            drawTime: 'beforeDatasetsDraw',
+          })
+        }
+        // 下り坂
+        if (!this.isInSlope('down', this.frames[index].startPosition)
+            && this.isInSlope('down', this.frames[index].startPosition + this.frames[index].movement)) {
+          downSlopeStart = index
+        } else if (this.isInSlope('down', this.frames[index].startPosition)
+            && !this.isInSlope('down', this.frames[index].startPosition + this.frames[index].movement)) {
+          annotations.push({
+            type: 'box',
+            xMin: downSlopeStart,
+            xMax: index,
+            yMin: 0,
+            yMax: 100,
+            xScaleID: 'x-axis-0',
+            backgroundColor: 'rgba(125, 255, 190, 0.15)',
+            drawTime: 'beforeDatasetsDraw',
+          })
+        }
+
         // Phase annotations
         if (index + step < this.frames.length) {
           const phase = this.getPhase(frame.startPosition)
