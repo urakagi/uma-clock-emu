@@ -101,7 +101,7 @@
 		"gate": "Gate Skills",
 		"speed": "Speed Debuffs",
 		"fatigue": "Stamina Debuffs",
-		"rare": "Rare / Upgraded Normal",
+		"rare": "Rare",
 		"normal": "Normal",
 		"inherit": "Uniques (Inherited)",
 		"selectedUnique": "None / Not Applicable"

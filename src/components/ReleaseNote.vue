@@ -103,6 +103,10 @@ export default {
           content: '坂データ更新＆根性のスパート速度増加を実装',
           timestamp: '2022-02-25'
         },
+        {
+          content: 'スキル新データの下準備',
+          timestamp: '2022-02-28'
+        },
       ]
     }
   }

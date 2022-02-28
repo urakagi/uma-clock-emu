@@ -103,7 +103,7 @@
 		"gate": "出閘技能",
 		"speed": "受到的減速技能",
 		"fatigue": "受到的疲勞技能",
-		"rare": "金、雙圈",
+		"rare": "金",
 		"normal": "白",
 		"inherit": "固有(繼承)",
 		"selectedUnique": "無／不發動"

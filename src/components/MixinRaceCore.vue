@@ -210,6 +210,8 @@ export default {
           ret += Math.abs(this.currentSlope) / 10.0 + 0.3
         }
       }
+
+      // 持続中スキル
       for (const skill of this.operatingSkills) {
         if (skill.data.targetSpeed) {
           ret += skill.data.targetSpeed
@@ -697,7 +699,7 @@ export default {
       }
     },
     calcSpurtParameter() {
-      const maxDistance = this.trackDetail.distance / 3.0
+      const maxDistance = this.trackDetail.distance - this.position
       const spurtDistance = this.calcSpurtDistance(this.maxSpurtSpeed)
       const totalConsume = this.calcRequiredSp(this.maxSpurtSpeed)
       if (spurtDistance >= maxDistance) {
@@ -746,7 +748,7 @@ export default {
       return candidates[candidates.length - 1]
     },
     calcSpurtDistance(v) {
-      return (this.sp - (this.courseLength / 3.0 - 60) * 20 *
+      return (this.sp - (this.courseLength - this.position - 60) * 20 *
           this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
           this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3) / (
           20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
@@ -755,10 +757,10 @@ export default {
           144 / this.v3)) + 60
     },
     calcRequiredSp(v) {
-      return (this.courseLength / 3.0 - 60) * 20 *
+      return (this.courseLength - this.position - 60) * 20 *
           this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
           this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3 + (
-              this.courseLength / 3.0 - 60) * (
+              this.courseLength - this.position- 60) * (
               20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
               this.spurtSpCoef * (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
               Math.pow(this.v3 - this.baseSpeed + 12, 2) /
