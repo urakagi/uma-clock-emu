@@ -189,7 +189,9 @@ export default {
         return
       }
       const thiz = this
-      skill.checks = []
+      if (!skill.checks) {
+        skill.checks = []
+      }
       // ランダム位置発動系
       skill.randoms = []
       for (const cond in skill.conditions) {
@@ -200,6 +202,18 @@ export default {
             skill.checks.push(function (startPosition) {
               return thiz.isInRandom(skill.randoms, startPosition)
             })
+            break
+          case 'all_corner_random':
+            skill.randoms = this.initAllCornerRandom()
+            skill.checks.push(function (startPosition) {
+              return thiz.isInRandom(skill.randoms, startPosition)
+            })
+            break
+          case 'running_style':
+            skill.checks.push(() => thiz.isRunningStyle(value))
+            break
+          case 'distance_type':
+            skill.checks.push(() => thiz.isDistanceType(value))
             break
         }
       }
@@ -302,6 +316,35 @@ export default {
         ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
       }
       return ret
+    },
+    initAllCornerRandom() {
+      const corners = [...this.trackDetail.corners]
+      const triggers = []
+
+      function logTrigger(min, max) {
+        max = Math.max(min, max - 10)
+        const start = min + Math.random() * (max - min)
+        const end = start + 10
+        triggers.push({start, end})
+        triggers.sort((a, b) => a.start - b.start)
+        return {start, end}
+      }
+
+      for (let x = 0; x < 4; x++) {
+        if (corners.length < 1) {
+          break
+        }
+        const i = Math.floor(Math.random() * corners.length)
+        const corner = corners[i]
+        const trigger = logTrigger(corner.start, corner.start + corner.length)
+        if (corner.end - trigger.end >= 10) {
+          corner.start = trigger.end
+        } else {
+          corners.splice(i, 1)
+        }
+        corners.splice(0, i)
+      }
+      return triggers
     },
     initStraightRandom() {
       let ret
@@ -466,7 +509,7 @@ export default {
     },
     isInInterval(start, end) {
       return this.position >= this.courseLength * start
-          && this.position <=  this.courseLength * end
+          && this.position <= this.courseLength * end
     },
     isInCoolDown(skill) {
       if (!(skill.name in this.coolDownMap)) {
@@ -534,7 +577,19 @@ export default {
           skill.acceleration = skill.boost.acceleration
         }
         if (skill.heal) {
-          copy.inherit.heal = skill.heal === 550 ? 150 : 50
+          let healValue
+          switch (skill.heal) {
+            case 750:
+              healValue = 350
+              break
+            case 550:
+              healValue = 150
+              break
+            case 350:
+              healValue = 50
+              break
+          }
+          copy.inherit.heal healValue
           const thiz = this
           copy.trigger = function () {
             return thiz.doHeal(this.heal)
