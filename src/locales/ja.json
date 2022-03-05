@@ -112,7 +112,7 @@
 		"rare": "レア",
 		"normal": "ノーマル",
 		"inherit": "固有(継承)",
-		"selectedUnique": "なし／発動しない"
+		"selectedUnique": "  なし／発動しない"
 	},
 	"chart": {
 		"phase1": "←序盤|中盤→",

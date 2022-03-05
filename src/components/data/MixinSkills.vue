@@ -329,7 +329,7 @@ export default {
       return ret
     },
     initAllCornerRandom() {
-      const corners = [...this.trackDetail.corners]
+      const corners = this.trackDetail.corners.map(c => ({ start: c.start, length: c.length }))
       const triggers = []
 
       function logTrigger(min, max) {

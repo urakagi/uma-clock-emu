@@ -1983,7 +1983,7 @@ function normalSkillData(thiz) {
 const uniqueSkillData = (thiz) =>
     [
         {
-            name: 'なし／発動しない',
+            name: '  なし／発動しない',
             noInherit: true,
             check: function () {
                 return false
@@ -2925,8 +2925,20 @@ const uniqueSkillData = (thiz) =>
             check: function() {
                 return thiz.isInInterval(0.5, 1) && thiz.isPhase(1)
             }
+        },
+        {
+            id: 100051, name: '煌星のヴォードヴィル',
+            targetSpeed: 0.45,
+            duration: 5,
+            check: function () {
+                return thiz.isInFinalStraight()
+            }
         }
-    ]
+    ].sort((a, b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        return 0
+    })
 // End of unique skills
 
 export {normalSkillData, uniqueSkillData}
