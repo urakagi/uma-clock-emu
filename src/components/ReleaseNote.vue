@@ -107,6 +107,10 @@ export default {
           content: 'スキル新データの下準備',
           timestamp: '2022-02-28'
         },
+        {
+          content: 'スキルを新データに更新',
+          timestamp: '2022-03-05'
+        },
       ]
     }
   }

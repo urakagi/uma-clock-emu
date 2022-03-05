@@ -42,6 +42,12 @@ export default {
         track = this.trackDetail
       }
       return track.straights
+    },
+    getSlopes(track) {
+      if (!track) {
+        track = this.trackDetail
+      }
+      return track.slopes
     }
   }
 }

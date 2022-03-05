@@ -192,7 +192,6 @@ export default {
       if (!skill.checks) {
         skill.checks = []
       }
-      // ランダム位置発動系
       skill.randoms = []
       for (const cond in skill.conditions) {
         const value = skill.conditions[cond]
@@ -205,6 +204,18 @@ export default {
             break
           case 'all_corner_random':
             skill.randoms = this.initAllCornerRandom()
+            skill.checks.push(function (startPosition) {
+              return thiz.isInRandom(skill.randoms, startPosition)
+            })
+            break
+          case 'up_slope_random':
+            skill.randoms = this.initSlopeRandom('up')
+            skill.checks.push(function (startPosition) {
+              return thiz.isInRandom(skill.randoms, startPosition)
+            })
+            break
+          case 'down_slope_random':
+            skill.randoms = this.initSlopeRandom('down')
             skill.checks.push(function (startPosition) {
               return thiz.isInRandom(skill.randoms, startPosition)
             })
@@ -337,8 +348,9 @@ export default {
         const i = Math.floor(Math.random() * corners.length)
         const corner = corners[i]
         const trigger = logTrigger(corner.start, corner.start + corner.length)
-        if (corner.end - trigger.end >= 10) {
+        if (corner.start + corner.length - trigger.end >= 10) {
           corner.start = trigger.end
+          corner.length -= (trigger.end - corner.start)
         } else {
           corners.splice(i, 1)
         }
@@ -351,6 +363,14 @@ export default {
       const straights = this.getStraights()
       const chosen = Math.floor(Math.random() * straights.length)
       ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
+      return [ret]
+    },
+    initSlopeRandom(dir) {
+      let ret
+      const slopes = this.getSlopes().filter(
+          s => (s.slope > 0 && dir == 'up') || (s.slope < 0 && dir == 'down'))
+      const chosen = Math.floor(Math.random() * slopes.length)
+      ret = this.chooseRandom(slopes[chosen].start, slopes[chosen].start + slopes[chosen].length)
       return [ret]
     },
     initPhaseRandom(phase, options) {
@@ -589,7 +609,7 @@ export default {
               healValue = 50
               break
           }
-          copy.inherit.heal healValue
+          copy.inherit.heal = healValue
           const thiz = this
           copy.trigger = function () {
             return thiz.doHeal(this.heal)
@@ -632,6 +652,10 @@ export default {
           for (const rarity of this.rarities) {
             if (rarity in skill) {
               const copy = {...skill}
+              if (copy.duration) {
+                if (!copy.tooltip) copy.tooltip = ''
+                copy.tooltip += ` | ${Math.round(copy.duration * 10) / 10}s`
+              }
               if (skill[rarity].id) {
                 copy.id = skill[rarity].id
               }
@@ -642,6 +666,8 @@ export default {
                 for (const effect of EFFECTS) {
                   if (skill[rarity][effect]) {
                     copy[effect] = skill[rarity][effect]
+                    if (!copy.tooltip) copy.tooltip = ''
+                    copy.tooltip += ` | ${effect}: ${Math.round(copy[effect] * 100) / 100}`
                   }
                 }
               }
@@ -651,6 +677,8 @@ export default {
               copy.type = type
               if (copy.value) {
                 this.fillCommonFields(copy, type)
+                if (!copy.tooltip) copy.tooltip = ''
+                copy.tooltip += ` | ${type}: ${Math.round(copy.value * 100) / 100}`
               }
               if (!copy.cd) copy.cd = 500
               if (copy.heal) {
@@ -662,6 +690,9 @@ export default {
               delete copy.rare
               delete copy.inherit
               delete copy.all
+              if (copy.tooltip.startsWith(' | ')) {
+                copy.tooltip = copy.tooltip.substring(3)
+              }
               this.skills[type][rarity].push(copy)
             }
           }

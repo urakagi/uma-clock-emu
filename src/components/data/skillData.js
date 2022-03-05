@@ -32,8 +32,8 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200272, name: 'おひとり様○', value: 40},
-                rare: {id: 200271, name: 'おひとり様◎', value: 60},
+                normal: {id: 200272, name: 'おひとり様○', value: 60},
+                rare: {id: 200271, name: 'おひとり様◎', value: 80},
                 status: ['speed'],
                 check: function () {
                     return true
@@ -465,7 +465,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200662, name: '様子見', value: 150},
+                normal: {id: 200662, name: '様子見', heal: 150, acceleration: 0.1},
                 styleLimit: [3, 4],
                 distanceLimit: [1],
                 tooltip: '順位>50%は満たしていると見なす',
@@ -544,12 +544,11 @@ function normalSkillData(thiz) {
                 normal: {id: 200562, name: 'スタミナキープ', value: 150},
                 rare: {id: 200561, name: '余裕綽々', value: 550},
                 styleLimit: [2],
-                tooltip: '順位<=50%は満たしていると見なす',
                 init: function () {
-                    this.randoms = thiz.initPhaseRandom(0)
+                    this.randoms = thiz.initIntervalRandom(1.0 / 12, 1.0 / 6)
                 },
                 check: function (startPosition) {
-                    return thiz.isRunningStyle(2) && thiz.accTimePassed(5)
+                    return thiz.isRunningStyle(2)
                         && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
@@ -560,10 +559,10 @@ function normalSkillData(thiz) {
                 styleLimit: [3, 4],
                 tooltip: '順位>50%は満たしていると見なす。実質差し追込限定。',
                 init: function () {
-                    this.randoms = thiz.initPhaseRandom(0)
+                    this.randoms = thiz.initIntervalRandom(1.0 / 12, 1.0 / 6)
                 },
                 check: function (startPosition) {
-                    return thiz.isDistanceType(2) && thiz.accTimePassed(5)
+                    return thiz.isDistanceType(2)
                         && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
@@ -581,9 +580,11 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200442, name: '隠れ蓑', value: 150},
                 rare: {id: 200441, name: '鋼の意志', value: 550},
-                tooltip: '「上り坂で発動」として扱う（一番現実的な発動方法なため）。実戦でやろうとしたら自前の低パワー逃げ馬が必要で先行馬限定とか色々厳しそうだけど適当実装なので自己判断＆自己責任で。',
-                check: function () {
-                    return thiz.accTimePassed(5) && thiz.isInSlope('up')
+                init: function() {
+                    this.randoms = thiz.initIntervalRandom(0, 0.666)
+                },
+                check: function (startPosition) {
+                    thiz.isInRandom(this.randoms, startPosition)
                 }
             },
             {
@@ -625,7 +626,7 @@ function normalSkillData(thiz) {
                 rare: {id: 200761, name: '火事場のバ鹿力', value: 550},
                 distanceLimit: [4],
                 check: function () {
-                    return thiz.isDistanceType(4) && thiz.sp <= 0
+                    return thiz.isDistanceType(4) && thiz.sp <= thiz.spMax * 0.3
                 }
             },
             {
@@ -756,7 +757,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200362, name: '直線巧者', value: 0.15},
                 rare: {id: 200361, name: 'ハヤテ一文字', value: 0.35},
-                duration: 0.9,
+                duration: 2.4,
                 cd: 30,
                 init: function () {
                     this.randoms = thiz.initStraightRandom()
@@ -876,7 +877,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200592, name: '位置取り押し上げ', value: 0.15},
                 rare: {id: 200591, name: '迅速果断', value: 0.35},
-                duration: 1.8,
+                duration: 2.4,
                 styleLimit: [3],
                 tooltip: '順位>50%を満たしたと見なす',
                 init: function () {
@@ -890,9 +891,8 @@ function normalSkillData(thiz) {
                 normal: {id: 201272, name: '先頭プライド', value: 0.15},
                 duration: 3,
                 styleLimit: [1],
-                tooltip: '「序盤のどこかで発動」として扱う',
                 init: function () {
-                    this.randoms = thiz.initPhaseRandom(0)
+                    this.randoms = thiz.initIntervalRandom(0, 0.3)
                 },
                 check: function (startPosition) {
                     return thiz.accTimePassed(5) && thiz.isRunningStyle(1)
@@ -902,7 +902,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200582, name: '抜け出し準備', value: 0.15},
                 rare: {id: 200581, name: 'スピードスター', value: 0.35},
-                duration: 1.2,
+                duration: 1.8,
                 styleLimit: [2],
                 tooltip: '順位条件の<=50%は満たしていると見なす',
                 init: function () {
@@ -928,16 +928,17 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 201412, name: '十万バリキ', value: 0.15},
                 rare: {id: 201411, name: '百万バリキ', value: 0.35},
-                duration: 1.8,
+                duration: 2.4,
                 styleLimit: [3],
-                check: function () {
-                    return thiz.isRunningStyle(3) && thiz.isInSlope('up')
+                conditions: {
+                    up_slope_random: 1,
+                    running_style: 3
                 }
             },
             {
                 normal: {id: 200982, name: '大きなリード', value: 0.15},
                 rare: {id: 200981, name: '圧倒的リード', value: 0.35},
-                duration: 1.2,
+                duration: 3,
                 distanceLimit: [1],
                 styleLimit: [1],
                 tooltip: '中盤に入った瞬間に1位で5馬身リードしていると見なす。見なすな。',
@@ -946,8 +947,8 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200672, name: '詰め寄り', value: 0.15},
-                rare: {id: 200671, name: '電撃の煌めき', value: 0.35},
+                normal: {id: 200672, name: '詰め寄り', targetSpeed: 0.15, acceleration: 0.05 },
+                rare: {id: 200671, name: '電撃の煌めき', targetSpeed: 0.35, acceleration: 0.1 },
                 duration: 3,
                 distanceLimit: [1],
                 styleLimit: [3, 4],
@@ -977,7 +978,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 201052, name: 'ギアシフト', value: 0.15},
                 rare: {id: 201051, name: 'ギアチェンジ', value: 0.35},
-                duration: 1.2,
+                duration: 2.4,
                 distanceLimit: [2],
                 styleLimit: [1, 2],
                 tooltip: '順位<=50%を満たしたと見なす',
@@ -991,7 +992,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 201072, name: '負けん気', value: 0.15},
                 rare: {id: 201071, name: '姉御肌', value: 0.35},
-                duration: 1.8,
+                duration: 2.4,
                 distanceLimit: [2],
                 tooltip: '「中盤のどこか」として扱う。',
                 init: function () {
@@ -1005,7 +1006,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200722, name: 'テンポアップ', value: 0.15},
                 rare: {id: 200721, name: 'キラーチューン', value: 0.35},
-                duration: 0.9,
+                duration: 2.4,
                 distanceLimit: [3],
                 styleLimit: [1, 2],
                 tooltip: '順位<=50%を満たしたと見なす',
@@ -1017,8 +1018,8 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200732, name: '食い下がり', value: 0.15},
-                rare: {id: 200731, name: '勝利への執念', value: 0.35},
+                normal: {id: 200732, name: '食い下がり', targetSpeed: 0.15, acceleration: 0.05},
+                rare: {id: 200731, name: '勝利への執念', targetSpeed: 0.35, acceleration: 0.1},
                 duration: 3,
                 distanceLimit: [3],
                 tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
@@ -1130,7 +1131,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 201672, name: 'レコメンド', value: 0.15},
                 rare: {id: 201671, name: 'チャート急上昇！', value: 0.35},
-                duration: 1.8,
+                duration: 2.4,
                 surfaceLimit: SurfaceLimit.Dirt,
                 tooltip: '「中盤のどこか」として扱う。',
                 init: function () {
@@ -1143,7 +1144,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200512, name: '末脚', value: 0.15},
                 rare: {id: 200511, name: '全身全霊', value: 0.35},
-                duration: 1.8,
+                duration: 2.4,
                 init: function () {
                     this.randoms = thiz.initPhaseRandom(3)
                 },
@@ -1236,7 +1237,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200342, name: 'コーナー加速○', value: 0.2},
                 rare: {id: 200341, name: '曲線のソムリエ', value: 0.4},
-                duration: 1.8,
+                duration: 3,
                 cd: 30,
                 conditions: {
                     all_corner_random: 1
@@ -1245,7 +1246,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200372, name: '直線加速', value: 0.2},
                 rare: {id: 200371, name: '一陣の風', value: 0.4},
-                duration: 1.8,
+                duration: 3,
                 cd: 30,
                 init: function () {
                     this.randoms = thiz.initStraightRandom()
@@ -1260,7 +1261,7 @@ function normalSkillData(thiz) {
                 styleLimit: [1],
                 duration: 1.2,
                 check: function () {
-                    return thiz.isRunningStyle(1) && thiz.currentPhase === 0 && thiz.accTimePassed(5)
+                    return thiz.isRunningStyle(1) && thiz.currentPhase === 0
                 }
             },
             {
@@ -1330,9 +1331,8 @@ function normalSkillData(thiz) {
                 duration: 3,
                 styleLimit: [1, 2],
                 distanceLimit: [1],
-                tooltip: '順位>=2及び<=50%は満たしていると見なす。いや中盤どこか発動とか意味なさすぎね？',
                 init: function () {
-                    this.randoms = thiz.initPhaseRandom(1)
+                    this.randoms = thiz.initIntervalRandom(5.0 / 12, 2.0 / 3)
                 },
                 check: function (startPosition) {
                     return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
@@ -1341,7 +1341,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 201062, name: 'アクセラレーション', value: 0.2},
                 rare: {id: 201061, name: 'アクセル全開！', value: 0.4},
-                duration: 1.2,
+                duration: 3,
                 distanceLimit: [2],
                 tooltip: '「中盤のどこかで発動」として扱う。',
                 init: function () {
@@ -1378,15 +1378,16 @@ function normalSkillData(thiz) {
                 rare: {id: 201341, name: '決意の直滑降', value: 0.3},
                 duration: 3,
                 styleLimit: [2],
-                check: function () {
-                    return thiz.isRunningStyle(2) && thiz.isInSlope('down')
+                conditions: {
+                    down_slope_random: 1,
+                    running_style: 2
                 }
             },
             {
                 normal: {id: 201581, name: '登山家', value: 0.2},
                 duration: 3,
-                check: function () {
-                    return thiz.isInSlope('up')
+                conditions: {
+                    up_slope_random: 1
                 }
             },
             {
@@ -1404,7 +1405,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 201402, name: 'がんばり屋', value: 0.2},
                 rare: {id: 201401, name: '努力家', value: 0.3},
-                duration: 3,
+                duration: 4,
                 styleLimit: [3],
                 tooltip: '「中盤のどこか」として扱う。はいはいガバ実装ガバ実装。',
                 init: function () {
@@ -1868,6 +1869,17 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                all: {name: '逃亡禁止令', value: 300},
+                distanceLimit: [1],
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(0)
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
+                        && thiz.accTimePassed(5)
+                }
+            },
+            {
                 all: {name: '抜け駆け禁止', value: 100},
                 distanceLimit: [1],
                 init: function () {
@@ -1981,7 +1993,9 @@ const uniqueSkillData = (thiz) =>
             id: 10321, name: 'introduction：My body',
             noInherit: true,
             heal: 350,
-            tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
+            duration: 4,
+            targetSpeed: 0.15,
+            tooltip: '3～4位(<=40%)',
             check: function () {
                 return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
             }
@@ -1989,7 +2003,9 @@ const uniqueSkillData = (thiz) =>
         {
             id: 100321, name: 'U=ma2',
             heal: 550,
-            tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
+            duration: 4,
+            targetSpeed: 0.25,
+            tooltip: '3～4位(<=40%)',
             check: function () {
                 return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
             }
@@ -1997,7 +2013,7 @@ const uniqueSkillData = (thiz) =>
         {
             id: 10451, name: 'クリアハート',
             noInherit: true,
-            heal: 350,
+            heal: 550,
             tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
             init: function () {
                 this.randoms = thiz.initPhaseRandom(1)
@@ -2100,7 +2116,7 @@ const uniqueSkillData = (thiz) =>
         {
             id: 110131, name: '最強の名を懸けて',
             targetSpeed: 0.35,
-            duration: 5,
+            duration: 6,
             tooltip: '「最終直線のどこか」として扱う。',
             init: function () {
                 this.randoms = thiz.initFinalStraightRandom()
@@ -2228,6 +2244,7 @@ const uniqueSkillData = (thiz) =>
             id: 10561, name: '来てください来てください！',
             noInherit: true,
             targetSpeed: 0.25,
+            acceleration: 0.1,
             duration: 5,
             tooltip: '「終盤のどこかで発動する」として扱う。',
             init: function () {
@@ -2240,6 +2257,7 @@ const uniqueSkillData = (thiz) =>
         {
             id: 100561, name: '来ます来てます来させます！',
             targetSpeed: 0.35,
+            acceleration: 0.1,
             duration: 5,
             tooltip: '「終盤のどこかで発動する」として扱う。',
             init: function () {
@@ -2304,6 +2322,7 @@ const uniqueSkillData = (thiz) =>
             noInherit: true,
             targetSpeed: 0.35,
             duration: 5,
+            tooltip: '4～6位(<=70%)',
             check: function (startPosition) {
                 return startPosition <= thiz.toPosition(200)
                     && thiz.position >= thiz.toPosition(200)
@@ -2314,6 +2333,7 @@ const uniqueSkillData = (thiz) =>
             id: 100611, name: 'Pride of KING',
             targetSpeed: 0.45,
             duration: 5,
+            tooltip: '4～6位(<=70%)',
             check: function (startPosition) {
                 return startPosition <= thiz.toPosition(200)
                     && thiz.position >= thiz.toPosition(200)
@@ -2324,7 +2344,7 @@ const uniqueSkillData = (thiz) =>
             id: 100011, name: 'シューティングスター',
             targetSpeed: 0.35,
             duration: 5,
-            tooltip: '「終盤のどこかで発動する」として扱う。',
+            acceleration: 0.1,
             init: function () {
                 this.randoms = thiz.initPhaseRandom(2)
             },
@@ -2337,7 +2357,7 @@ const uniqueSkillData = (thiz) =>
             targetSpeed: 0.35,
             duration: 5,
             check: function () {
-                return thiz.isInFinalStraight()
+                return thiz.isInInterval(0.5, 1)
             }
         },
         {
@@ -2363,9 +2383,9 @@ const uniqueSkillData = (thiz) =>
         },
         {
             id: 100161, name: 'Shadow Break',
-            targetSpeed: 0.35,
+            targetSpeed: 0.45,
             duration: 5,
-            tooltip: '「最終コーナーのどこかで発動」として扱う',
+            tooltip: '競合あり、2～7位(<=75%)',
             init: function () {
                 this.randoms = thiz.initFinalCornerRandom()
             },
@@ -2697,9 +2717,9 @@ const uniqueSkillData = (thiz) =>
                 acceleration: 0.2
             },
             duration: 5,
-            tooltip: '条件を満たして最終直線入ったときに発動するとして扱う',
+            tooltip: '最終コーナーで発動として扱う',
             check: function () {
-                return thiz.isInFinalStraight()
+                return thiz.isInFinalCorner()
             }
         },
         {
@@ -2721,7 +2741,7 @@ const uniqueSkillData = (thiz) =>
                 acceleration: 0.3
             },
             duration: 5,
-            tooltip: '「レース50%-65%のどこかで発動する」として扱う',
+            tooltip: '2～4位(<=40%)。レース50%-65%のどこかで発動。',
             init: function () {
                 this.randoms = thiz.initIntervalRandom(0.5, 0.65)
             },
