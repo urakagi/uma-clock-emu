@@ -48,6 +48,7 @@ export default {
       isStartDash: false,
       delayTime: 0,
       spurtParameters: null,
+      maxSpurt: false,
       downSlopeModeStart: null,
       temptationModeStart: null,
       temptationModeEnd: null,
@@ -519,6 +520,7 @@ export default {
       delete this.frames
       this.frames = [{skills: []}]
       this.spurtParameters = null
+      this.maxSpurt = false
       this.downSlopeModeStart = null
       this.temptationModeStart = null
       this.temptationModeEnd = null
@@ -703,6 +705,9 @@ export default {
       const spurtDistance = this.calcSpurtDistance(this.maxSpurtSpeed)
       const totalConsume = this.calcRequiredSp(this.maxSpurtSpeed)
       if (spurtDistance >= maxDistance) {
+        if (this.position <= this.courseLength * 2.0 / 3 + 5) {
+          this.maxSpurt = true
+        }
         return {
           distance: maxDistance,
           speed: this.maxSpurtSpeed,
@@ -793,7 +798,7 @@ export default {
       const emu = {
         raceTime,
         raceTimeDelta,
-        maxSpurt: this.spurtParameters.speed === this.maxSpurtSpeed,
+        maxSpurt: this.maxSpurt,
         spDiff: this.spurtParameters.spDiff
       }
       this.emulations.push(emu)
