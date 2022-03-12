@@ -377,6 +377,16 @@ function normalSkillData(thiz) {
                     return thiz.track.surfaceCondition === '0'
                 }
             },
+            {
+                rare: {id: 200014, name: '右回りの鬼', value: 60},
+                courseLimit: {
+                    'turn': [1]
+                },
+                status: ['speed', 'power'],
+                check: function () {
+                    return thiz.track.surfaceCondition === '0'
+                }
+            },
             // End of passive skills
         ],
         heal: [
@@ -589,6 +599,7 @@ function normalSkillData(thiz) {
             },
             {
                 normal: {id: 201492, name: '冷静', value: 150},
+                rare: {id: 201491, name: '冷静沈着', value: 550},
                 styleLimit: [4],
                 tooltip: '「中盤のどこかで発動」として扱う。適当実装注意。',
                 init: function () {
@@ -2930,6 +2941,15 @@ const uniqueSkillData = (thiz) =>
             id: 100051, name: '煌星のヴォードヴィル',
             targetSpeed: 0.45,
             duration: 5,
+            check: function () {
+                return thiz.isInFinalStraight()
+            }
+        },
+        {
+            id: 100671, name: '晦冥を照らせ永遠の耀き',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '2～5位。発動時先頭から5m以内の場合。',
             check: function () {
                 return thiz.isInFinalStraight()
             }
