@@ -677,12 +677,14 @@ function normalSkillData(thiz) {
                 rare: {id: 202071, name: '泰然自若', heal: 750, speed: -0.15},
                 normal: {id: 202072, name: 'マイペース', heal: 350, speed: -0.15},
                 duration: 1.2,
+                distanceLimit: DistanceLimit.Long,
                 tooltip: '4-7位',
                 init: function () {
                     this.randoms = thiz.initPhaseRandom(1, {endRate: 0.5})
                 },
                 check: function (startPosition) {
-                    return thiz.isInRandom(this.randoms, startPosition)
+                    return thiz.isDistanceType(DISTANCE.LONG) &&
+                        thiz.isInRandom(this.randoms, startPosition)
                 }
             },
             // End of heal skills
@@ -2997,7 +2999,9 @@ const uniqueSkillData = (thiz) =>
                 for (const key in map) {
                     if (thiz.sp < key) {
                         skill.duration *= map[key]
-                        break
+                        return {
+                            extended: map[key].toString()
+                        }
                     }
                 }
             }

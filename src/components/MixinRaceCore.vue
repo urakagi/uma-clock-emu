@@ -1162,11 +1162,15 @@ export default {
               borderColor: SKILL_COLORS[skill.data.type],
               borderWidth: 2,
               onClick: function () {
-                if (skill.detail && 'waste' in skill.detail) {
-                  if (skill.detail.waste > 0) {
-                    thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復(${(skill.detail.waste).toFixed(1)}が溢れた)`)
-                  } else {
-                    thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復`)
+                if (skill.detail) {
+                  if ('waste' in skill.detail) {
+                    if (skill.detail.waste > 0) {
+                      thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復(${(skill.detail.waste).toFixed(1)}が溢れた)`)
+                    } else {
+                      thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復`)
+                    }
+                  } else if ('extended' in skill.detail) {
+                    thiz.$message(`x${skill.detail.extended}`)
                   }
                 }
               }

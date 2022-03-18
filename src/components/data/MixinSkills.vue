@@ -292,7 +292,7 @@ export default {
           }
           if (skill.duration) {
             this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
-            skillTriggered.push({data: skill})
+            skillTriggered.push({data: skill, detail: skillDetail})
           } else {
             skillTriggered.push({data: skill, detail: skillDetail})
           }
