@@ -134,10 +134,13 @@ export default {
         copy.name = skill.name
         copy.cd = 500
         copy.triggers = []
+        if (skill.trigger) {
+          copy.triggers.push(skill.trigger);
+        }
         copy.trigger = function () {
           let ret = null
           for (const tri of this.triggers) {
-            const r = tri()
+            const r = tri(skill)
             if (r) {
               ret = r
             }
@@ -225,6 +228,15 @@ export default {
             break
           case 'distance_type':
             skill.checks.push(() => thiz.isDistanceType(value))
+            break
+          case 'distance_rate':
+            skill.checks.push(() => {
+              if (value.startsWith('>=')) {
+                return thiz.isInInterval(parseInt(value.substring(2)) * 0.01, 1)
+              } else if (value.startsWith('<=')) {
+                return thiz.IsInInterval(0, parseInt(value.substring(2)) * 0.01)
+              }
+            })
             break
         }
       }
@@ -618,7 +630,11 @@ export default {
           effectCount++
         }
         if (skill.targetSpeed) {
-          copy.inherit.targetSpeed = skill.targetSpeed - 0.2
+          if (skill.targetSpeed == 0.15) {
+            copy.inherit.targetSpeed = 0.035
+          } else {
+            copy.inherit.targetSpeed = skill.targetSpeed - 0.2
+          }
           skillType = 'targetSpeed'
           effectCount++
         }
@@ -716,11 +732,6 @@ export default {
           break
         case 'speed':
           copy.speed = copy.value
-          if (!copy.trigger) {
-            copy.trigger = function () {
-              return thiz.currentSpeed += this.speed
-            }
-          }
           break
         case 'targetSpeed':
           copy.targetSpeed = copy.value
@@ -756,6 +767,15 @@ export default {
             }
           }
           break
+      }
+      if (copy.speed) {
+        const exist = copy.trigger;
+        copy.trigger = function () {
+          if (exist) {
+            exist();
+          }
+          return thiz.currentSpeed += this.speed
+        }
       }
     },
     resetHasSkills() {

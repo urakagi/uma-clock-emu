@@ -673,6 +673,18 @@ function normalSkillData(thiz) {
                     return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202071, name: '泰然自若', heal: 750, speed: -0.15},
+                normal: {id: 202072, name: 'マイペース', heal: 350, speed: -0.15},
+                duration: 1.2,
+                tooltip: '4-7位',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1, {endRate: 0.5})
+                },
+                check: function (startPosition) {
+                    return thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
             // End of heal skills
         ],
         targetSpeed: [
@@ -2952,6 +2964,42 @@ const uniqueSkillData = (thiz) =>
             tooltip: '2～5位。発動時先頭から5m以内の場合。',
             check: function () {
                 return thiz.isInFinalStraight()
+            }
+        },
+        {
+            id: 100711, name: '一期の夢、刹那の飛翔',
+            targetSpeed: 0.45,
+            heal: -100,
+            duration: 4,
+            check: function () {
+                return thiz.isInFinalStraight()
+            }
+        },
+        {
+            id: 100741, name: '麗しき花信風',
+            targetSpeed: 0.15,
+            duration: 5,
+            tooltip: '4～7位',
+            conditions: {
+                distance_rate: '>=50'
+            },
+            trigger: function(skill) {
+                const map = {
+                    2000: 1,
+                    2400: 1.5,
+                    2600: 2,
+                    2800: 2.2,
+                    3000: 2.5,
+                    3200: 3,
+                    3500: 3.5,
+                    99999999: 4,
+                }
+                for (const key in map) {
+                    if (thiz.sp < key) {
+                        skill.duration *= map[key]
+                        break
+                    }
+                }
             }
         }
     ].sort((a, b) => {
