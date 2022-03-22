@@ -465,13 +465,18 @@ export default {
       }
       return false
     },
-    isInCorner(position, cornerNumber) {
+    isInCorner(position, cornerNumber, interval) {
       if (!position) {
         position = this.position
       }
       for (const i in this.trackDetail.corners) {
         const corner = this.trackDetail.corners[i]
-        if (position >= corner.start && position <= this.cornerEnd(corner)) {
+        const start = interval ? interval.start * corner.start : corner.start
+        let end = this.cornerEnd(corner)
+        if (interval) {
+          end *= interval.end
+        }
+        if (position >= start && position <= end) {
           if (cornerNumber) {
             return i == this.trackDetail.corners.length + cornerNumber - 5
           } else {
@@ -492,7 +497,7 @@ export default {
       }
       return false
     },
-    isInFinalCorner(position) {
+    isInFinalCorner(position, interval) {
       if (!position) {
         position = this.position
       }
@@ -500,7 +505,12 @@ export default {
       if (!fc) {
         return false
       }
-      return position >= fc.start && position <= this.cornerEnd(fc)
+      const start = interval ? interval.start * fc.start : fc.start
+      let end = this.cornerEnd(corner)
+      if (interval) {
+        end *= interval.end
+      }
+      return position >= start && position <= end
     },
     isInFinalStraight(position) {
       if (!position) {

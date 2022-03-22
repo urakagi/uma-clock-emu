@@ -1117,6 +1117,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 201211, name: '怒涛の追い上げ', value: 0.35},
                 normal: {id: 201212, name: '追い上げ', value: 0.15},
                 duration: 3,
                 distanceLimit: [4],
@@ -1254,6 +1255,26 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202061, name: '日本一のウマ娘', value: 0.35},
+                duration: 3,
+                distanceLimit: [4],
+                init: function () {
+                    this.randoms = thiz.initFinalCornerRandom()
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(4) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                normal: {id: 201591, name: 'ウマ好み', value: 0.15},
+                rare: {id: 201592, name: 'ウママニア', value: 0.35},
+                duration: 3,
+                tooltip: '開始5秒で即発動扱い',
+                check: function () {
+                    return thiz.accTimePassed(5)
                 }
             },
         ],
@@ -2600,7 +2621,7 @@ const uniqueSkillData = (thiz) =>
             duration: 4,
             tooltip: '順位>=3及び<=50%は満たしていると見なす',
             check: function () {
-                return thiz.isInFinalCorner()
+                return thiz.isInFinalCorner({start: 0.5, end: 1})
             }
         },
         {
