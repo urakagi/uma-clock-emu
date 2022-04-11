@@ -505,11 +505,10 @@ export default {
       if (!fc) {
         return false
       }
-      const start = interval ? interval.start * fc.start : fc.start
-      let end = this.cornerEnd(corner)
-      if (interval) {
-        end *= interval.end
-      }
+      const startRate = interval ? interval.start : 0
+      const endRate = interval ? interval.end : 1
+      const start = fc.start + startRate * fc.length
+      const end = fc.start + endRate * fc.length
       return position >= start && position <= end
     },
     isInFinalStraight(position) {

@@ -1277,6 +1277,28 @@ function normalSkillData(thiz) {
                     return thiz.accTimePassed(5)
                 }
             },
+            {
+                rare: {id: 201271, name: 'トップランナー', value: 0.35},
+                duration: 3,
+                styleLimit: StyleLimit.Nige,
+                tooltip: '開始5秒で即発動扱い',
+                check: function () {
+                    return thiz.accTimePassed(5) && thiz.isRunningStyle(STYLE.NIGE)
+                }
+            },
+            {
+                rare: {id: 202101, name: '高揚感', value: 0.35},
+                normal: {id: 202102, name: '前のめり', value: 0.15},
+                duration: 2.4,
+                styleLimit: StyleLimit.Behind,
+                distanceLimit: DistanceLimit.Middle,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1507,6 +1529,7 @@ function normalSkillData(thiz) {
             },
             {
                 normal: {id: 201902, name: '真っ向勝負', value: 0.2},
+                rare: {id: 201901, name: '鍔迫り合い', value: 0.4},
                 styleLimit: [2],
                 duration: 1.8,
                 init: function () {
@@ -1514,6 +1537,20 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isRunningStyle(2) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202081, name: '起死回生', value: 0.4},
+                normal: {id: 202082, name: 'ワンチャンス', value: 0.2},
+                styleLimit: StyleLimit.Behind,
+                distanceLimit: DistanceLimit.Middle,
+                duration: 1.2,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(2)
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(DISTANCE.MIDDLE) &&
+                        thiz.isInRandom(this.randoms, startPosition)
                 }
             },
         ],
@@ -1539,7 +1576,20 @@ function normalSkillData(thiz) {
                 conditions: {
                     distance_rate_after_random: 50
                 }
-            }
+            },
+            {
+                rare: {id: 202091, name: '気炎万丈', targetSpeed: 0.25, heal: 350},
+                normal: {id: 202092, name: '闘争心', targetSpeed: 0.15, heal: 50},
+                duration: 1.8,
+                distanceLimit: DistanceLimit.Middle,
+                tooltip: '中盤ランダム発動扱い',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of boost skills
         gate: [
@@ -2621,7 +2671,7 @@ const uniqueSkillData = (thiz) =>
             duration: 4,
             tooltip: '順位>=3及び<=50%は満たしていると見なす',
             check: function () {
-                return thiz.isInFinalCorner({start: 0.5, end: 1})
+                return thiz.isInFinalCorner(thiz.position, {start: 0.5, end: 1})
             }
         },
         {
@@ -3026,12 +3076,40 @@ const uniqueSkillData = (thiz) =>
                     }
                 }
             }
-        }
+        },
+        {
+            id: 110051, name: 'Ravissant',
+            targetSpeed: 0.45,
+            duration: 4,
+            check: function () {
+                return thiz.isInFinalCorner() || thiz.isInFinalStraight()
+            }
+        },
+        {
+            id: 110201, name: 'Do Ya Breakin!',
+            targetSpeed: 0.35,
+            acceleration: 0.1,
+            duration: 5,
+            tooltip: '向正面発動扱い。',
+            check: function () {
+                return (thiz.isPhase(2) || thiz.isPhase(3)) &&
+                    (thiz.isInStraight())
+            }
+        },
+        {
+            id: 110511, name: 'つぼみ、ほころぶ時',
+            acceleration: 0.4,
+            duration: 4,
+            check: function () {
+                return (thiz.isPhase(2) || thiz.isPhase(3)) &&
+                    (thiz.isInFinalStraight() || thiz.isInFinalCorner(thiz.position, {start: 0.5, end: 1}))
+            }
+        },
+// End of unique skills
     ].sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
         return 0
     })
-// End of unique skills
 
 export {normalSkillData, uniqueSkillData}
