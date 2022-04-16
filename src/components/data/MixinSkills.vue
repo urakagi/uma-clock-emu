@@ -379,6 +379,7 @@ export default {
     },
     initSlopeRandom(dir) {
       let ret
+      if (!this.getSlopes()) return [];
       const slopes = this.getSlopes().filter(
           s => (s.slope > 0 && dir == 'up') || (s.slope < 0 && dir == 'down'))
       const chosen = Math.floor(Math.random() * slopes.length)
