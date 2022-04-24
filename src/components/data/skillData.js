@@ -3105,6 +3105,16 @@ const uniqueSkillData = (thiz) =>
                     (thiz.isInFinalStraight() || thiz.isInFinalCorner(thiz.position, {start: 0.5, end: 1}))
             }
         },
+        {
+            id: 100721, name: '烈火繚乱、無敵之舞',
+            targetSpeed: 0.35,
+            duration: 5,
+            tooltip: '<=40%(1～4位)',
+            check: function (startPosition) {
+                return startPosition <= thiz.toPosition(300)
+                    && thiz.position >= thiz.toPosition(300)
+            }
+        },
 // End of unique skills
     ].sort((a, b) => {
         if (a.name < b.name) return -1
