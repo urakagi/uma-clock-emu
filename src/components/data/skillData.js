@@ -1299,6 +1299,19 @@ function normalSkillData(thiz) {
                     return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202111, name: '破竹の勢い', value: 0.35},
+                normal: {id: 202112, name: '気合十分', value: 0.15},
+                duration: 1.8,
+                distanceLimit: DistanceLimit.Mile,
+                tooltip: '>=50%(5～9位)',
+                init: function () {
+                    this.randoms = thiz.initFinalCornerRandom()
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1346,8 +1359,8 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200602, name: '差し切り体勢', value: 0.2},
                 rare: {id: 200601, name: '乗り換え上手', value: 0.4},
+                normal: {id: 200602, name: '差し切り体勢', value: 0.2},
                 styleLimit: [3],
                 duration: 1.8,
                 tooltip: '順位>=50%は満たしていると見なす',
@@ -1588,6 +1601,19 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isDistanceType(3) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202121, name: '大胆不敵', targetSpeed: 0.35, acceleration: 0.1},
+                normal: {id: 202122, name: '恐れぬ心', targetSpeed: 0.15, acceleration: 0.05},
+                styleLimit: [3],
+                duration: 1.8,
+                tooltip: '>=40% <=70%(4～6位)',
+                init: function () {
+                    this.randoms = thiz.initIntervalRandom(0.5, 1);
+                },
+                check: function (startPosition) {
+                    return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
         ],
@@ -3113,6 +3139,24 @@ const uniqueSkillData = (thiz) =>
             check: function (startPosition) {
                 return startPosition <= thiz.toPosition(300)
                     && thiz.position >= thiz.toPosition(300)
+            }
+        },
+        {
+            id: 110601, name: 'Go☆Go☆for it!',
+            targetSpeed: 0.35,
+            duration: 6,
+            tooltip: '>=40% <=70%(4～6位)、4人気以下',
+            check: function () {
+                return thiz.isInFinalStraight();
+            }
+        },
+        {
+            id: 110611, name: '轟！トレセン応援団！！',
+            acceleration: 0.4,
+            duration: 4,
+            tooltip: '距離50%まで6～9位',
+            check: function () {
+                return thiz.isInFinalStraight() && thiz.temptationModeStart == null;
             }
         },
 // End of unique skills
