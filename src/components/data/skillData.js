@@ -1134,7 +1134,6 @@ function normalSkillData(thiz) {
                 duration: 3,
                 styleLimit: [1],
                 distanceLimit: [2],
-                tooltip: '1位条件は満たしていると見なす。どこか発動で1位要求なので実戦は安定しない。',
                 init: function () {
                     this.randoms = thiz.initPhaseRandom(1)
                 },
@@ -1310,6 +1309,20 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isDistanceType(2) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202131, name: '荒ぶる旋風', value: 0.35},
+                normal: {id: 202132, name: '気迫を込めて', value: 0.15},
+                duration: 1.8,
+                styleLimit: [1],
+                distanceLimit: [3],
+                tooltip: '1～3位。デバフは金0.15/白0.035。',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function () {
+                    return thiz.isDistanceType(3)
                 }
             },
         ],
@@ -3157,6 +3170,16 @@ const uniqueSkillData = (thiz) =>
             tooltip: '距離50%まで6～9位',
             check: function () {
                 return thiz.isInFinalStraight() && thiz.temptationModeStart == null;
+            }
+        },
+        {
+            id: 100311, name: 'チャージ完了！全速前進！',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '東京時、1～2位',
+            check: function (startPosition) {
+                return startPosition <= thiz.toPosition(300)
+                    && thiz.position >= thiz.toPosition(300)
             }
         },
 // End of unique skills
