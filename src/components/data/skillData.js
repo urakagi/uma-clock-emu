@@ -1082,6 +1082,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 201662, name: 'お先に失礼っ！', value: 0.35},
                 normal: {id: 201661, name: '遊びはおしまいっ！', value: 0.15},
                 duration: 3,
                 tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
@@ -3180,6 +3181,16 @@ const uniqueSkillData = (thiz) =>
             check: function (startPosition) {
                 return startPosition <= thiz.toPosition(300)
                     && thiz.position >= thiz.toPosition(300)
+            }
+        },
+        {
+            id: 100641, name: 'ぶっちぎりロード',
+            heal: 550,
+            targetSpeed: 0.25,
+            duration: 6,
+            tooltip: '距離50%までずっと1～2位',
+            check: function () {
+                return thiz.position >= thiz.courseLength * 0.5;
             }
         },
 // End of unique skills
