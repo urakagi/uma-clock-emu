@@ -1630,6 +1630,18 @@ function normalSkillData(thiz) {
                     return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202151, name: '勇往邁進', targetSpeed: 0.45, heal: -400},
+                normal: {id: 202152, name: 'フルスロットル', targetSpeed: 0.25, heal: -400},
+                styleLimit: [3],
+                duration: 2.4,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function (startPosition) {
+                    return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of boost skills
         gate: [
@@ -3191,6 +3203,26 @@ const uniqueSkillData = (thiz) =>
             tooltip: '距離50%までずっと1～2位',
             check: function () {
                 return thiz.position >= thiz.courseLength * 0.5;
+            }
+        },
+        {
+            id: 110221, name: 'Best day ever',
+            targetSpeed: 0.35,
+            acceleration: 0.1,
+            duration: 5,
+            tooltip: '2～4位。加速力は残り401m以上がある場合（自動で判断していない）',
+            check: function () {
+                return thiz.currentPhase >= 2 && thiz.isInFinalCorner();
+            }
+        },
+        {
+            id: 110381, name: 'One True Color',
+            targetSpeed: 0.25,
+            acceleration: 0.3,
+            duration: 5,
+            tooltip: '2～4位、後ろ１馬身。',
+            check: function (startPosition) {
+                return thiz.isContainsRemainingDistance(350, startPosition)
             }
         },
 // End of unique skills
