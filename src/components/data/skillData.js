@@ -358,16 +358,10 @@ function normalSkillData(thiz) {
             {
                 rare: {id: 200194, name: '初嵐', value: 60},
                 status: ['speed', 'power'],
-                check: function () {
-                    return thiz.season === 2
-                }
             },
             {
                 rare: {id: 200174, name: '春一番', value: 60},
                 status: ['speed', 'power'],
-                check: function () {
-                    return thiz.season === 1
-                }
             },
             {
                 rare: {id: 200154, name: '良バ場の鬼', value: 60},
