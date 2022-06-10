@@ -657,6 +657,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 202001, name: '砂の玄人', heal: 550},
                 normal: {id: 202002, name: '砂塵慣れ', heal: 150},
                 styleLimit: StyleLimit.Behind,
                 surfaceLimit: SurfaceLimit.Dirt,
@@ -3217,6 +3218,18 @@ const uniqueSkillData = (thiz) =>
             tooltip: '2～4位、後ろ１馬身。',
             check: function (startPosition) {
                 return thiz.isContainsRemainingDistance(350, startPosition)
+            }
+        },
+        {
+            id: 100341, name: '快走かな、快走かな！',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '最終直線ランダム発動として扱う',
+            init: function () {
+                this.randoms = thiz.initFinalStraightRandom()
+            },
+            check: function (startPosition) {
+                return thiz.isInRandom(this.randoms, startPosition)
             }
         },
 // End of unique skills
