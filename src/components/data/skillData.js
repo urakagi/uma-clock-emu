@@ -1648,7 +1648,7 @@ function normalSkillData(thiz) {
         ],
         speed: [
             {
-                all: {name: '逃げためらい', value: -0.15},
+                all: {name: '逃げためらい', value: -1.5},
                 duration: 3,
                 styleLimit: [1],
                 init: function () {

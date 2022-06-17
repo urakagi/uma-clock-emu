@@ -102,7 +102,7 @@ export default {
             }
             let invokeRate
             if (type === 'fatigue' || type === 'speed') {
-              invokeRate = 80
+              invokeRate = 90
             } else if (type === 'passive' || skillActivateAdjustment === "1" ||
                 skillActivateAdjustment === "2") {
               invokeRate = 100
@@ -777,15 +777,6 @@ export default {
             }
           }
           break
-      }
-      if (copy.speed) {
-        const exist = copy.trigger;
-        copy.trigger = function () {
-          if (exist) {
-            exist();
-          }
-          return thiz.currentSpeed += this.speed
-        }
       }
     },
     resetHasSkills() {

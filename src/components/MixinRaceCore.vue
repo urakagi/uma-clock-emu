@@ -662,9 +662,7 @@ export default {
         }
 
         this.updateSelfSpeed(elapsedTime /* NOT timeAfterDelay!! */)
-
-        // TODO apply current speed debuff
-        const actualSpeed = this.currentSpeed
+        let actualSpeed = this.currentSpeed
 
         // 移動距離及び耐力消耗を算出
         this.position += actualSpeed * timeAfterDelay
@@ -683,7 +681,7 @@ export default {
       }
     },
     updateSelfSpeed(elapsedTime) {
-      let newSpeed
+      let newSpeed;
       if (this.currentSpeed < this.targetSpeed) {
         newSpeed = Math.min(this.currentSpeed + elapsedTime * this.acceleration, this.targetSpeed)
       } else {
@@ -693,6 +691,18 @@ export default {
         newSpeed = this.v0
       }
       newSpeed = Math.max(Math.min(newSpeed, this.maxSpeed), this.vMin)
+      if (this.speedDebuff) {
+        newSpeed -= this.speedDebuff;
+      }
+      let speedModification = 0;
+      for (const skill of this.operatingSkills) {
+        // 減速スキルの現在速度低下分
+        if (skill.data.speed) {
+          speedModification += skill.data.speed;
+        }
+      }
+      this.speedDebuff = speedModification;
+      newSpeed += speedModification;
       this.currentSpeed = newSpeed
     },
     updateStartDash() {
