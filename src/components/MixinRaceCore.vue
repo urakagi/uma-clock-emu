@@ -710,18 +710,20 @@ export default {
         this.isStartDash = false;
       }
     },
-    calcSpurtParameter() {
+    calcSpurtParameter(isReCalc) {
       const maxDistance = this.trackDetail.distance - this.position
       const spurtDistance = this.calcSpurtDistance(this.maxSpurtSpeed)
       const totalConsume = this.calcRequiredSp(this.maxSpurtSpeed)
       if (spurtDistance >= maxDistance) {
         if (this.position <= this.courseLength * 2.0 / 3 + 5) {
-          this.maxSpurt = true
+          if (!isReCalc) {
+            this.maxSpurt = true
+          }
         }
         return {
           distance: maxDistance,
           speed: this.maxSpurtSpeed,
-          spDiff: this.sp - totalConsume
+          spDiff: isReCalc ? this.spurtParameters.spDiff : this.sp - totalConsume
         }
       }
       // SPが足りない場合の処理
@@ -732,7 +734,7 @@ export default {
         return {
           distance: 0,
           speed: this.v3,
-          spDiff: this.sp - totalConsume
+          spDiff: isReCalc ? this.spurtParameters.spDiff : this.sp - totalConsume
         }
       }
       for (let v = this.maxSpurtSpeed - 0.1; v >= this.v3; v -= 0.1) {
@@ -744,7 +746,7 @@ export default {
           distance: distanceV,
           speed: v,
           time: distanceV / v + (maxDistance - distanceV) / this.v3,
-          spDiff: this.sp - totalConsume
+          spDiff: isReCalc ? this.spurtParameters.spDiff : this.sp - totalConsume
         })
       }
       candidates.sort((a, b) => {

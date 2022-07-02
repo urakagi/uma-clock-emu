@@ -578,7 +578,7 @@ export default {
         this.healTriggerCount++
       }
       if (this.currentPhase >= 2) {
-        this.spurtParameters = this.calcSpurtParameter()
+        this.spurtParameters = this.calcSpurtParameter(true)
       }
       return detail
     },

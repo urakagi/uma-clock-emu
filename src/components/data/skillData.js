@@ -1321,6 +1321,13 @@ function normalSkillData(thiz) {
                     return thiz.isDistanceType(3)
                 }
             },
+            {
+                normal: {id: 202172, name: '下り坂巧者', value: 0.15},
+                duration: 2.4,
+                conditions: {
+                    down_slope_random: 1
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -3232,6 +3239,27 @@ const uniqueSkillData = (thiz) =>
                 return thiz.isInRandom(this.randoms, startPosition)
             }
         },
+        {
+            id: 110101, name: 'Joyful Voyage!',
+            targetSpeed: 0.35,
+            duration: 5,
+            tooltip: '2～4位。現在速度が変わる仕様は無視。',
+            check: function (startPosition) {
+                return thiz.isContainsRemainingDistance(200, startPosition)
+            }
+        },
+        {
+            id: 110591, name: 'ときめきが呼ぶほうへ',
+            targetSpeed: 0.35,
+            duration: 5,
+            tooltip: '4～7位。',
+            check: function () {
+                return thiz.position >= thiz.courseLength * 0.6 &&
+                    thiz.courseLength * thiz.position >= 500 &&
+                    thiz.isInSlope('down');
+            }
+        },
+
 // End of unique skills
     ].sort((a, b) => {
         if (a.name < b.name) return -1
