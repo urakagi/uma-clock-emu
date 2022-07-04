@@ -35,16 +35,14 @@ export default {
   },
   computed: {
     defaultActive() {
-      return 0
-      //
-      // const p = this.$router.currentRoute.path.split('/')
-      // const path = '/' + p[p.length - 1]
-      // for (const i in this.navLink) {
-      //   if (path === this.navLink[i]) {
-      //     return i
-      //   }
-      // }
-      // return 0
+      const p = this.$router.currentRoute.path.split('/')
+      const path = '/' + p[0]
+      for (const i in this.navLink) {
+        if (path === this.navLink[i]) {
+          return i.toString()
+        }
+      }
+      return '0'
     }
   },
   mounted() {

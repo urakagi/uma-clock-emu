@@ -2,7 +2,7 @@ import ChampMeet from "@/components/ChampMeet";
 import TeamRace from "@/components/TeamRace";
 
 const routes = [
-    {path: '/', redirect: '/champions-meeting'},
+    {path: '/', redirect: '/team-race'},
     {path: '/champions-meeting', component: ChampMeet},
     {path: '/team-race', component: TeamRace},
 ]
