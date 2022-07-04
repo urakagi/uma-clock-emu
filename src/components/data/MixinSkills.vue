@@ -44,8 +44,8 @@ export default {
             },
           },
           {
-            normal: {name: '各季節賽馬娘○', value: 40},
-            rare: {name: '各季節賽馬娘◎', value: 60},
+            normal: {name: '季節賽馬娘○', value: 40},
+            rare: {name: '季節賽馬娘◎', value: 60},
             status: ['speed'],
             emulatorTypeLimit: ['cm'],
             check: function () {
@@ -224,8 +224,8 @@ export default {
             }
           },
           {
-            normal: {name: '各氣候○', value: 40},
-            rare: {name: '各氣候◎(中文尚未實裝)', value: 60},
+            normal: {name: '天気の日○', value: 40},
+            rare: {name: '天気の日◎', value: 60},
             status: ['guts'],
             emulatorTypeLimit: ['cm'],
             check: function () {
@@ -251,8 +251,8 @@ export default {
             }
           },
           {
-            normal: {id: 201522, name: '領頭的訣竅○', value: 40},
-            rare: {id: 201521, name: '領頭的訣竅◎', value: 60},
+            normal: {id: 201522, name: '領放的訣竅○', value: 40},
+            rare: {id: 201521, name: '領放的訣竅◎', value: 60},
             status: ['wisdom'],
             styleLimit: [1],
             check: function () {
@@ -260,8 +260,8 @@ export default {
             }
           },
           {
-            normal: {id: 201532, name: '前列的訣竅○', value: 40},
-            rare: {id: 201531, name: '前列的訣竅◎', value: 60},
+            normal: {id: 201532, name: '先行的訣竅○', value: 40},
+            rare: {id: 201531, name: '先行的訣竅◎', value: 60},
             status: ['wisdom'],
             styleLimit: [2],
             check: function () {
@@ -269,8 +269,8 @@ export default {
             }
           },
           {
-            normal: {id: 201542, name: '居中的訣竅○', value: 40},
-            rare: {id: 201541, name: '居中的訣竅◎', value: 60},
+            normal: {id: 201542, name: '差行的訣竅○', value: 40},
+            rare: {id: 201541, name: '差行的訣竅◎', value: 60},
             status: ['wisdom'],
             styleLimit: [3],
             check: function () {
@@ -278,8 +278,8 @@ export default {
             }
           },
           {
-            normal: {id: 201552, name: '後追的訣竅○', value: 40},
-            rare: {id: 201551, name: '後追的訣竅◎', value: 60},
+            normal: {id: 201552, name: '追逐的訣竅○', value: 40},
+            rare: {id: 201551, name: '追逐的訣竅◎', value: 60},
             status: ['wisdom'],
             styleLimit: [4],
             check: function () {
@@ -377,14 +377,14 @@ export default {
             }
           },
           {
-            rare: {id: 200194, name: '初嵐(中文尚未實裝)', value: 60},
+            rare: {id: 200194, name: '秋風', value: 60},
             status: ['speed', 'power'],
             check: function () {
               return thiz.season === 2
             }
           },
           {
-            rare: {id: 200174, name: '春一番(中文尚未實裝)', value: 60},
+            rare: {id: 200174, name: '春風起', value: 60},
             status: ['speed', 'power'],
             check: function () {
               return thiz.season === 1
@@ -431,7 +431,7 @@ export default {
             }
           },
           {
-            normal: {id: 201621, name: '使盡全力', value: 150},
+            normal: {id: 201621, name: '竭盡全力', value: 150},
             check: function () {
               return thiz.skillTriggerCount[2] + thiz.skillTriggerCount[3] >= 3
             }
@@ -490,8 +490,8 @@ export default {
             }
           },
           {
-            normal: {id: 201222, name: '持久力吞噬者', value: 150},
-            rare: {id: 201221, name: '持久力貪食者', value: 350},
+            normal: {id: 201222, name: '耐力獵手', value: 150},
+            rare: {id: 201221, name: '耐力食取', value: 350},
             styleLimit: [2, 3, 4],
             distanceLimit: [4],
             tooltip: '5番手かそれ以降満たしていると見なす',
@@ -528,7 +528,7 @@ export default {
             }
           },
           {
-            rare: {id: 201201, name: 'VIP顔パス(中文尚未實裝)', value: 550},
+            rare: {id: 201201, name: '	VIP特權通行', value: 550},
             normal: {id: 201202, name: '熟練超越', value: 150},
             distanceLimit: [4],
             tooltip: '「序盤か中盤のどこかで発動」として扱う。適当実装注意。',
@@ -546,7 +546,7 @@ export default {
           },
           {
             normal: {id: 201142, name: '輕快步伐', value: 150},
-            rare: {id: 201141, name: '神技步伐', value: 550},
+            rare: {id: 201141, name: '神賜步伐', value: 550},
             distanceLimit: [3],
             tooltip: '「スタート後20秒で発動」として扱う。大体そこら辺で内コースを取り始めるため。多分（ガバ）',
             check: function () {
@@ -581,7 +581,7 @@ export default {
             }
           },
           {
-            normal: {id: 201422, name: '稍微休息', value: 150},
+            normal: {id: 201422, name: '小休息', value: 150},
             rare: {id: 201421, name: '放鬆', value: 550},
             styleLimit: [3],
             init: function () {
@@ -600,7 +600,7 @@ export default {
             }
           },
           {
-            normal: {id: 201492, name: '冷靜', value: 150},
+            normal: {id: 201492, name: '冷静', value: 150},
             styleLimit: [4],
             tooltip: '「中盤のどこかで発動」として扱う。適当実装注意。',
             init: function () {
@@ -613,7 +613,7 @@ export default {
           },
           {
             normal: {id: 200472, name: '維持步調', value: 150},
-            rare: {id: 200471, name: '不屈的心', value: 550},
+            rare: {id: 200471, name: '不屈之心', value: 550},
             tooltip: '「中盤のどこか」として扱う。実戦で発動できるかどうかは各自判断すべし。',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -634,16 +634,16 @@ export default {
             }
           },
           {
-            normal: {id: 200762, name: '第二能量條', value: 150},
-            rare: {id: 200761, name: '火場爆發力', value: 550},
+            normal: {id: 200762, name: '第二體力條', value: 150},
+            rare: {id: 200761, name: '腎上腺素爆發', value: 550},
             distanceLimit: [4],
             check: function () {
               return thiz.isDistanceType(4) && thiz.sp <= 0
             }
           },
           {
-            normal: {id: 0, name: 'アオハル点火・体(中文尚未實裝)', value: 165},
-            rare: {id: 0, name: 'アオハル燃焼・体(中文尚未實裝)', value: 605},
+            normal: {id: 0, name: '燃燒青春・耐', value: 165},
+            rare: {id: 0, name: '點燃青春・耐', value: 605},
             tooltip: '効果1.1倍として扱う',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -653,8 +653,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '静かな呼吸(中文尚未實裝)', value: 150},
-            rare: {id: 0, name: '潜伏態勢(中文尚未實裝)', value: 550},
+            normal: {id: 0, name: '安静的呼吸', value: 150},
+            rare: {id: 0, name: '潛伏姿態', value: 550},
             styleLimit: StyleLimit.Sasi,
             init: function () {
               this.randoms = thiz.initPhaseRandom(0, {startRate: 0.5})
@@ -664,7 +664,7 @@ export default {
             }
           },
           {
-            normal: {id: 202002, name: '砂塵慣れ(中文尚未實裝)', heal: 150},
+            normal: {id: 202002, name: '習慣沙塵', heal: 150},
             styleLimit: StyleLimit.Behind,
             surfaceLimit: SurfaceLimit.Dirt,
             init: function () {
@@ -787,7 +787,7 @@ export default {
           },
           {
             normal: {id: 200362, name: '直線靈巧', value: 0.15},
-            rare: {id: 200361, name: '疾風一文字', value: 0.35},
+            rare: {id: 200361, name: '	疾風一文字', value: 0.35},
             duration: 0.9,
             cd: 30,
             init: function () {
@@ -919,7 +919,7 @@ export default {
             }
           },
           {
-            normal: {id: 201272, name: '領先的榮耀', value: 0.15},
+            normal: {id: 201272, name: '領者的自尊心', value: 0.15},
             duration: 3,
             styleLimit: [1],
             tooltip: '「序盤のどこかで発動」として扱う',
@@ -958,8 +958,8 @@ export default {
             }
           },
           {
-            normal: {id: 201412, name: '十萬馬力', value: 0.15},
-            rare: {id: 201411, name: '百萬馬力', value: 0.35},
+            normal: {id: 201412, name: '十萬衝勁', value: 0.15},
+            rare: {id: 201411, name: '百萬衝勁', value: 0.35},
             duration: 1.8,
             styleLimit: [3],
             check: function () {
@@ -1022,7 +1022,7 @@ export default {
           },
           {
             normal: {id: 201072, name: '不服輸', value: 0.15},
-            rare: {id: 201071, name: '姐姐氣質', value: 0.35},
+            rare: {id: 201071, name: '御姐氣質', value: 0.35},
             duration: 1.8,
             distanceLimit: [2],
             tooltip: '「中盤のどこか」として扱う。',
@@ -1035,7 +1035,7 @@ export default {
             }
           },
           {
-            normal: {id: 200722, name: '節奏加快', value: 0.15},
+            normal: {id: 200722, name: '加快節奏', value: 0.15},
             rare: {id: 200721, name: '致勝曲調', value: 0.35},
             duration: 0.9,
             distanceLimit: [3],
@@ -1075,7 +1075,7 @@ export default {
             }
           },
           {
-            normal: {id: 201192, name: '維持領先', value: 0.15},
+            normal: {id: 201192, name: '保持領先', value: 0.15},
             rare: {id: 201191, name: '前鋒的心得', value: 0.35},
             duration: 3,
             distanceLimit: [4],
@@ -1123,7 +1123,7 @@ export default {
             }
           },
           {
-            normal: {id: 201212, name: '後來居上', value: 0.15},
+            normal: {id: 201212, name: '怒濤的後來居上', value: 0.15},
             duration: 3,
             distanceLimit: [4],
             tooltip: '「終盤のどこか」として扱う。実際は加速中に消化されるのが大半。',
@@ -1135,7 +1135,7 @@ export default {
             }
           },
           {
-            normal: {id: 201082, name: '速度吞噬者', value: 0.15},
+            normal: {id: 201082, name: '速度獵手', value: 0.15},
             duration: 3,
             styleLimit: [1],
             distanceLimit: [2],
@@ -1160,8 +1160,8 @@ export default {
             }
           },
           {
-            normal: {id: 201672, name: 'レコメンド(中文尚未實裝)', value: 0.15},
-            rare: {id: 201671, name: 'チャート急上昇！(中文尚未實裝)', value: 0.35},
+            normal: {id: 201672, name: '安利', value: 0.15},
+            rare: {id: 201671, name: '排名急上升！', value: 0.35},
             duration: 1.8,
             surfaceLimit: SurfaceLimit.Dirt,
             tooltip: '「中盤のどこか」として扱う。',
@@ -1185,15 +1185,15 @@ export default {
           },
           {
             normal: {id: 201611, name: '豎起尾巴', value: 0.15},
-            rare: {id: 201612, name: '尻尾の滝登り(中文尚未實裝)', value: 0.35},
+            rare: {id: 201612, name: '後起之秀', value: 0.35},
             duration: 3,
             check: function () {
               return thiz.skillTriggerCount[1] >= 3
             }
           },
           {
-            normal: {id: 0, name: 'アオハル点火・速(中文尚未實裝)', value: 0.1725},
-            rare: {id: 0, name: 'アオハル燃焼・速(中文尚未實裝)', value: 0.4025},
+            normal: {id: 0, name: '點燃青春・速', value: 0.1725},
+            rare: {id: 0, name: '燃燒青春・速', value: 0.4025},
             duration: 1.8,
             tooltip: '効果1.15倍として扱う',
             init: function () {
@@ -1204,16 +1204,16 @@ export default {
             }
           },
           {
-            normal: {id: 201702, name: 'ありったけ(中文尚未實裝)', value: 0.15},
-            rare: {id: 201701, name: '決死の覚悟(中文尚未實裝)', value: 0.35},
+            normal: {id: 201702, name: '傾其所有', value: 0.15},
+            rare: {id: 201701, name: '決死之心', value: 0.35},
             duration: 2.4,
             check: function () {
               return thiz.isInStraight() && thiz.isInSpurt
             }
           },
           {
-            normal: {id: 202012, name: '影打ち(中文尚未實裝)', value: 0.15},
-            rare: {id: 202011, name: '真打ち(中文尚未實裝)', value: 0.35},
+            normal: {id: 202012, name: '熱場好戲', value: 0.15},
+            rare: {id: 202011, name: '壓台好戲', value: 0.35},
             duration: 2.4,
             distanceLimit: DistanceLimit.Long,
             init: function () {
@@ -1228,8 +1228,8 @@ export default {
             }
           },
           {
-            normal: {id: 202021, name: '早仕掛け(中文尚未實裝)', value: 0.05},
-            rare: {id: 202022, name: '強攻策(中文尚未實裝)', value: 0.25},
+            normal: {id: 202021, name: '提早發力', value: 0.05},
+            rare: {id: 202022, name: '強硬之策', value: 0.25},
             duration: 4,
             styleLimit: StyleLimit.Oi,
             init: function () {
@@ -1241,7 +1241,7 @@ export default {
             }
           },
           {
-            rare: {id: 201103, name: '光芒一閃(中文尚未實裝)', value: 0.35},
+            rare: {id: 201103, name: '光芒一閃', value: 0.35},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -1399,7 +1399,7 @@ export default {
           },
           {
             normal: {id: 201342, name: '直線滑下', value: 0.2},
-            rare: {id: 201341, name: '決心的直線滑下', value: 0.3},
+            rare: {id: 201341, name: '決心的速降', value: 0.3},
             duration: 3,
             styleLimit: [2],
             check: function () {
@@ -1414,7 +1414,7 @@ export default {
             }
           },
           {
-            normal: {id: 201362, name: '重新來過', value: 0.2},
+            normal: {id: 201362, name: '重振旗鼓', value: 0.2},
             duration: 3,
             styleLimit: [2],
             tooltip: '順位>50%は満たしていると見なす',
@@ -1427,7 +1427,7 @@ export default {
           },
           {
             normal: {id: 201402, name: '努力不懈', value: 0.2},
-            rare: {id: 201401, name: '奮發圖強', value: 0.3},
+            rare: {id: 201401, name: '努力家', value: 0.3},
             duration: 3,
             styleLimit: [3],
             tooltip: '「中盤のどこか」として扱う。はいはいガバ実装ガバ実装。',
@@ -1451,7 +1451,7 @@ export default {
             }
           },
           {
-            normal: {id: 201601, name: '鞏固地基', value: 0.2},
+            normal: {id: 201601, name: '打好基礎', value: 0.2},
             duration: 3,
             tooltip: '「緑スキルや集中力系でスタートと同時に発動」として扱う',
             check: function () {
@@ -1459,8 +1459,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: 'アオハル点火・力(中文尚未實裝)', value: 0.22},
-            rare: {id: 0, name: 'アオハル燃焼・力(中文尚未實裝)', value: 0.44},
+            normal: {id: 0, name: '點燃青春・力', value: 0.22},
+            rare: {id: 0, name: '燃燒青春・力', value: 0.44},
             duration: 1.2,
             tooltip: '効果1.1倍として扱う',
             init: function () {
@@ -1471,8 +1471,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '前列狙い(中文尚未實裝)', value: 0.2},
-            rare: {id: 0, name: '狙うは最前列！(中文尚未實裝)', value: 0.3},
+            normal: {id: 0, name: '前行', value: 0.2},
+            rare: {id: 0, name: '奮勇向前！', value: 0.3},
             duration: 3,
             surfaceLimit: SurfaceLimit.Dirt,
             init: function () {
@@ -1483,7 +1483,7 @@ export default {
             }
           },
           {
-            normal: {id: 201902, name: '真っ向勝負(中文尚未實裝)', value: 0.2},
+            normal: {id: 201902, name: '正面決鬥', value: 0.2},
             styleLimit: [2],
             duration: 1.8,
             init: function () {
@@ -1497,8 +1497,8 @@ export default {
         // End of acc skills
         boost: [
           {
-            normal: {id: 0, name: 'アオハル点火・根(中文尚未實裝)', value: {targetSpeed: 0.055, acceleration: 0.11}},
-            rare: {id: 0, name: 'アオハル燃焼・根(中文尚未實裝)', value: {targetSpeed: 0.275, acceleration: 0.33}},
+            normal: {id: 0, name: '点燃青春・毅', value: {targetSpeed: 0.055, acceleration: 0.11}},
+            rare: {id: 0, name: '燃烧青春・毅', value: {targetSpeed: 0.275, acceleration: 0.33}},
             duration: 1.8,
             tooltip: '効果1.1倍として扱う',
             init: function () {
@@ -1514,7 +1514,7 @@ export default {
           {
             normal: {id: 200432, name: '集中力', value: 0.9},
             rare: {id: 200431, name: '全神貫注', value: 0.4},
-            inherit: {id: 200433, name: '閘門障礙', value: 1.5},
+            inherit: {id: 200433, name: 'ゲート難', value: 1.5},
           }
         ],
         speed: [
@@ -1623,7 +1623,7 @@ export default {
             }
           },
           {
-            all: {name: '魅惑術', value: -0.25},
+            all: {name: '無腦術', value: -0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -1635,7 +1635,7 @@ export default {
             }
           },
           {
-            all: {name: '速度吞噬者', value: -0.15},
+            all: {name: '速度獵手', value: -0.15},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -1668,7 +1668,7 @@ export default {
             }
           },
           {
-            all: {name: '凝視', value: -0.15},
+            all: {name: '視線', value: -0.15},
             duration: 3,
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -1678,14 +1678,14 @@ export default {
             }
           },
           {
-            all: {name: 'アナタヲ・オイカケテ(中文尚未實裝)', value: -0.05},
+            all: {name: '逐君之形', value: -0.05},
             duration: 6,
             check: function () {
               return thiz.position >= thiz.courseLength * 0.5
             }
           },
           {
-            all: {name: 'アナタヲ・オイカケテ(継承)(中文尚未實裝)', value: -0.025},
+            all: {name: '逐君之形(継承)', value: -0.025},
             duration: 3.6,
             check: function () {
               return thiz.position >= thiz.courseLength * 0.5
@@ -1694,7 +1694,7 @@ export default {
         ],
         fatigue: [
           {
-            all: {name: '持久力吞噬者', value: 50},
+            all: {name: '耐力獵手', value: 50},
             distanceLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1704,7 +1704,7 @@ export default {
             }
           },
           {
-            all: {name: '持久力吞噬者x2', value: 100},
+            all: {name: '耐力獵手x2', value: 100},
             distanceLimit: [4],
             tooltip: '2回同時に喰らう。通常のと加算できる。',
             init: function () {
@@ -1934,7 +1934,7 @@ export default {
             }
           },
           {
-            all: {name: '銳利眼光', value: 100},
+            all: {name: '銳利目光', value: 100},
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1943,7 +1943,7 @@ export default {
             }
           },
           {
-            all: {name: '銳利眼光x2', value: 200},
+            all: {name: '銳利目光x2', value: 200},
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1970,7 +1970,7 @@ export default {
             }
           },
           {
-            all: {name: '持久力貪食者', value: 100},
+            all: {name: '耐力食取', value: 100},
             distanceLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1983,7 +1983,7 @@ export default {
       },
       uniqueSkillData: [
         {
-          name: '無／不發動',
+          name: 'なし／発動しない',//billi找不到
           noInherit: true,
           check: function () {
             return false
@@ -2047,7 +2047,7 @@ export default {
           }
         },
         {
-          id: 110111, name: 'ゲインヒール・スペリアー(中文尚未實裝)',
+          id: 110111, name: '上級增愈術Gainheal·Superior',
           heal: 550,
           tooltip: '中盤のどこかで発動として見なす。',
           init: function () {
@@ -2058,14 +2058,14 @@ export default {
           }
         },
         {
-          id: 110011, name: 'わやかわ♪マリンダイヴ(中文尚未實裝)',
+          id: 110011, name: '超級可愛♪飛身入海',
           heal: 550,
           check: function () {
             return thiz.skillTriggerCount[1] >= 2
           }
         },
         {
-          id: 0, name: 'Drain for rose(中文尚未實裝)',
+          id: 0, name: '玫瑰之吻',
           heal: 550,
           tooltip: '50%地点で即発動として扱う。',
           check: function (startPosition) {
@@ -2162,7 +2162,7 @@ export default {
           }
         },
         {
-          id: 10181, name: '女帝的榮耀',
+          id: 10181, name: '女帝的自尊',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
@@ -2175,7 +2175,7 @@ export default {
           }
         },
         {
-          id: 100181, name: '榮耀之火',
+          id: 100181, name: '自尊之炎',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
@@ -2333,7 +2333,7 @@ export default {
           }
         },
         {
-          id: 100011, name: '噴射之星',
+          id: 100011, name: '逐夢之星',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「終盤のどこかで発動する」として扱う。',
@@ -2374,7 +2374,7 @@ export default {
           }
         },
         {
-          id: 100161, name: 'Shadow Break(中文尚未實裝)',
+          id: 100161, name: 'Shadow Break打破陰影',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2386,7 +2386,7 @@ export default {
           }
         },
         {
-          id: 100231, name: '∴win Q.E.D.',
+          id: 100231, name: '∴win QED',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2410,7 +2410,7 @@ export default {
           }
         },
         {
-          id: 100501, name: 'Nemesis(中文尚未實裝)',
+          id: 100501, name: 'Nemesis復仇女神',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2434,7 +2434,7 @@ export default {
           }
         },
         {
-          id: 110241, name: 'フラワリー☆マニューバ(前)(中文尚未實裝)',
+          id: 110241, name: '花絢機動Flowery☆Maneuver(前)',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
@@ -2446,7 +2446,7 @@ export default {
           }
         },
         {
-          id: 110181, name: '薫風、永遠なる瞬間を(中文尚未實裝)',
+          id: 110181, name: '和暖微風，瞬間亦永恆',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
@@ -2458,7 +2458,7 @@ export default {
           }
         },
         {
-          id: 100121, name: 'タイマン！デッドヒート！(中文尚未實裝)',
+          id: 100121, name: '單挑！白熱化！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動」として扱う。',
@@ -2470,7 +2470,7 @@ export default {
           }
         },
         {
-          id: 110041, name: 'グッときて♪Chu(中文尚未實裝)',
+          id: 110041, name: '一鼓作氣♪啾',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2478,7 +2478,7 @@ export default {
           }
         },
         {
-          id: 100371, name: 'Schwarze Schwert(中文尚未實裝)',
+          id: 100371, name: '漆黑之劍',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2487,7 +2487,7 @@ export default {
           }
         },
         {
-          id: 0, name: '禾スナハチ登ル(中文尚未實裝)',
+          id: 0, name: '禾乃登',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '50%-60%地点のどこかで発動として扱う',
@@ -2499,7 +2499,7 @@ export default {
           }
         },
         {
-          id: 0, name: '尊み☆ﾗｽﾄｽﾊﾟ━━(ﾟ∀ﾟ)━━ﾄ!(中文尚未實裝)',
+          id: 0, name: '尊之☆最终冲刺—(ﾟ∀ﾟ)—ﾄ!',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: 'フェイズ2のどこか発動として扱う',
@@ -2511,7 +2511,7 @@ export default {
           }
         },
         {
-          id: 0, name: '姫たるもの、勝利をこの手に(中文尚未實裝)',
+          id: 0, name: '以姬之名，手握勝利',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '最終直線に入ってすぐ発動として扱う',
@@ -2520,7 +2520,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'アナタヲ・オイカケテ(中文尚未實裝)',
+          id: 0, name: '逐君之形',
           targetSpeed: 0.25,
           duration: 6,
           tooltip: '順位条件は満たしていると見なす',
@@ -2529,7 +2529,7 @@ export default {
           }
         },
         {
-          id: 100171, name: '翳り退く、さざめきの矢(中文尚未實裝)',
+          id: 100171, name: '喧囂之箭，擊退晦冥',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2537,7 +2537,7 @@ export default {
           }
         },
         {
-          id: 100481, name: 'YEAH☆VIVID TIME!(中文尚未實裝)',
+          id: 100481, name: '耶☆生動時光！',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2545,7 +2545,7 @@ export default {
           }
         },
         {
-          id: 100231, name: 'Presents from X(中文尚未實裝)',
+          id: 100231, name: '來自X的禮物',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2553,7 +2553,7 @@ export default {
           }
         },
         {
-          id: 100041, name: '紅焰推進/LP1211-M',
+          id: 100041, name: '紅焰檔位/LP1211-M',
           acceleration: 0.4,
           duration: 4,
           tooltip: '順位<=5及び<=50%は満たしていると見なす。どの脚質でも最速発動扱い。',
@@ -2592,7 +2592,7 @@ export default {
           }
         },
         {
-          id: 100201, name: 'アングリング×スキーミング(中文尚未實裝)',
+          id: 100201, name: 'angling×scheming',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [1, 2],
@@ -2602,7 +2602,7 @@ export default {
           }
         },
         {
-          id: 110241, name: 'フラワリー☆マニューバ(後)(中文尚未實裝)',
+          id: 110241, name: '花絢機動Flowery☆Maneuver(後)',
           acceleration: 0.4,
           duration: 4,
           tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
@@ -2614,7 +2614,7 @@ export default {
           }
         },
         {
-          id: 100131, name: 'コンドル猛撃波(中文尚未實裝)',
+          id: 100131, name: '神鷹猛擊波',
           acceleration: 0.4,
           duration: 4,
           init: function () {
@@ -2625,7 +2625,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'KEEP IT REAL.(中文尚未實裝)',
+          id: 0, name: '保持真我',
           acceleration: 0.3,
           duration: 6,
           tooltip: '50%地点で即発動として扱う',
@@ -2634,7 +2634,7 @@ export default {
           }
         },
         {
-          id: 100591, name: '彼方、その先へ…(中文尚未實裝)',
+          id: 100591, name: '超越彼方',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [3, 4],
@@ -2715,7 +2715,7 @@ export default {
           }
         },
         {
-          id: 100241, name: '閃耀☆著陸',
+          id: 100241, name: '	閃耀☆著陸',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2727,7 +2727,7 @@ export default {
           }
         },
         {
-          id: 100381, name: '#LookatCurren',
+          id: 100381, name: '＃LookatCurren',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2742,7 +2742,7 @@ export default {
           }
         },
         {
-          id: 100461, name: 'キラキラ☆STARDOM(中文尚未實裝)',
+          id: 100461, name: '閃耀☆明星',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2754,7 +2754,7 @@ export default {
           }
         },
         {
-          id: 100581, name: 'I Never Goof Up!(中文尚未實裝)',
+          id: 100581, name: '永不言敗',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2769,7 +2769,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'I\'M☆FULL☆SPEED!!(中文尚未實裝)',
+          id: 0, name: '全速☆前進!!',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2781,7 +2781,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'ぐるぐるマミートリック♡(中文尚未實裝)',
+          id: 0, name: '媽咪惡作劇團團轉♡',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2793,7 +2793,7 @@ export default {
           }
         },
         {
-          id: 110401, name: 'GET DOWN(中文尚未實裝)',
+          id: 110401, name: 'GET DOWN',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2805,7 +2805,7 @@ export default {
           }
         },
         {
-          id: 110061, name: '聖夜のミラクルラン！(中文尚未實裝)',
+          id: 110061, name: '聖誕夜的奇蹟奔跑！',
           targetSpeed: 0.25,
           acceleration: 0.3,
           heal: 350,
@@ -2815,7 +2815,7 @@ export default {
           }
         },
         {
-          id: 100221, name: 'Fairy tale(中文尚未實裝)',
+          id: 100221, name: '童話故事',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2823,7 +2823,7 @@ export default {
           }
         },
         {
-          id: 100211, name: '白い稲妻、見せたるで！(中文尚未實裝)',
+          id: 100211, name: '白色閃電，見識一下吧！',
           targetSpeed: 0.35,
           acceleration: 0.1,
           duration: 5,
@@ -2832,7 +2832,7 @@ export default {
           }
         },
         {
-          id: 110521, name: '113転び114起き(中文尚未實裝)',
+          id: 110521, name: '跌倒113次爬起114次',
           targetSpeed: 0.25,
           duration: 6,
           tooltip: '6秒持続として扱う',
@@ -2841,7 +2841,7 @@ export default {
           }
         },
         {
-          id: 110151, name: '恵福バルカローレ(中文尚未實裝)',
+          id: 110151, name: '惠福船歌',
           targetSpeed: 0.45,
           duration: 4,
           tooltip: '7回発動したとして扱う。じゃないと弱すぎる。',
@@ -2851,7 +2851,7 @@ export default {
           }
         },
         {
-          id: 100691, hid: 900691, name: '憧れは桜を越える！(中文尚未實裝)',
+          id: 100691, hid: 900691, name: '憧憬著跨越櫻花！',
           targetSpeed: 0.35,
           duration: 5,
           check: function (startPosition) {
@@ -2860,7 +2860,7 @@ export default {
           }
         },
         {
-          id: 110261, name: 'オペレーション・Cacao(中文尚未實裝)',
+          id: 110261, name: '可可行動',
           targetSpeed: 0.35,
           heal: 150,
           duration: 5,
@@ -2869,7 +2869,7 @@ export default {
           }
         },
         {
-          id: 110371, name: 'Guten Appetit♪(中文尚未實裝)',
+          id: 110371, name: '祝您胃口好♪',
           targetSpeed: 0.35,
           duration: 6,
           tooltip: '最終コーナー以降で3人追い抜きは満たしたと見なす',
