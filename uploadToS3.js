@@ -6,7 +6,7 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-console.log('Uploading to S3...');
+console.log('Uploading to S3(ZH)...');
 uploadDir('./dist')
 
 function uploadDir(dir) {

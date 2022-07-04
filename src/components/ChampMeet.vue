@@ -73,10 +73,10 @@
       <br>
       <el-form-item :label="$t('message.style')">
         <el-select v-model="umaStatus.style" style="width: 100px;">
-          <el-option label="逃げ" value="1"></el-option>
-          <el-option label="先行" value="2"></el-option>
-          <el-option label="差し" value="3"></el-option>
-          <el-option label="追込" value="4"></el-option>
+          <el-option label="領頭" value="1"></el-option>
+          <el-option label="前列" value="2"></el-option>
+          <el-option label="居中" value="3"></el-option>
+          <el-option label="後追" value="4"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.distanceFit')">
@@ -249,7 +249,7 @@
       <li>{{ $t("message.remark6") }}</li>
       <li>{{ $t("message.remark7") }}</li>
       <li>{{ $t("message.remark8") }}</li>
-      <li><a href="https://twitter.com/urakagi">{{ $t("message.contact") }}</a></li>
+      <li><a href="https://www.youtube.com/channel/UCREuKsCXNckuIeU_Ep5e5Cw">{{ $t("message.contact") }}</a></li>
     </ol>
   </div>
 </template>

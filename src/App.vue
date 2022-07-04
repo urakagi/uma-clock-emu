@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <el-menu :default-active="defaultActive" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="0">チーム競技場</el-menu-item>
-      <el-menu-item index="1">チャンピオンズミーティング</el-menu-item>
+      <el-menu-item index="0">競技場</el-menu-item>
+      <el-menu-item index="1">星座杯</el-menu-item>
     </el-menu>
     <router-view></router-view>
 
@@ -35,14 +35,16 @@ export default {
   },
   computed: {
     defaultActive() {
-      const p = this.$router.currentRoute.path.split('/')
-      const path = '/' + p[p.length - 1]
-      for (const i in this.navLink) {
-        if (path === this.navLink[i]) {
-          return i
-        }
-      }
       return 0
+      //
+      // const p = this.$router.currentRoute.path.split('/')
+      // const path = '/' + p[p.length - 1]
+      // for (const i in this.navLink) {
+      //   if (path === this.navLink[i]) {
+      //     return i
+      //   }
+      // }
+      // return 0
     }
   },
   mounted() {

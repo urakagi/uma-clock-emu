@@ -86,8 +86,16 @@
 		"remark7": "因為適性並不會直接影響素質、故補正後的素質並不會顯示在下方。",
 		"remark8": "作者：砂井裏鍵。解包哥，永遠的神。",
 
-		"contact": "推特在↑這↓",
-		"emulating": "模擬中、請稍候……"
+		"contact": "Youtube頻道在此，請多賞光",
+		"emulating": "模擬中、請稍候……",
+
+		"randomPosition": "隨機區間",
+		"randomPosition0": "隨機",
+		"randomPosition1": "最前",
+		"randomPosition2": "1/4",
+		"randomPosition3": "中間",
+		"randomPosition4": "3/4",
+		"randomPosition5": "最後"
 
 	},
 	"emulatorType": {

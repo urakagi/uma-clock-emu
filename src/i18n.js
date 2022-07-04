@@ -7,11 +7,11 @@ import en from './locales/en.json'
 
 Vue.use(VueI18n)
 
-const lang_array = ['ja', 'zhTW', 'en']
+const lang_array = ['zhTW', 'en', 'ja']
 const messages = {
-	ja,
 	zhTW,
-	en
+	en,
+	ja
 }
 
 let lang
