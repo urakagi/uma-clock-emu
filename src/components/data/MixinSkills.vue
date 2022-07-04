@@ -255,12 +255,12 @@ export default {
             if (skill.check()) {
               if ('triggerRate' in skill) {
                 if (Math.random() < skill.triggerRate) {
-                  skill.trigger()
+                  skill.trigger(skill)
                   this.skillTriggerCount[0]++
                   this.frames[0].skills.push({data: skill})
                 }
               } else {
-                skill.trigger()
+                skill.trigger(skill)
                 this.skillTriggerCount[0]++
                 this.frames[0].skills.push({data: skill})
               }
@@ -288,7 +288,7 @@ export default {
         if (skill.check(startPosition)) {
           let skillDetail = null
           if (skill.trigger) {
-            skillDetail = skill.trigger()
+            skillDetail = skill.trigger(skill)
           }
           if (skill.duration) {
             this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
