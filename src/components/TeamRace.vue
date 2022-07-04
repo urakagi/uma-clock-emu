@@ -242,7 +242,7 @@
       <li>{{ $t("message.remark6") }}</li>
       <li>{{ $t("message.remark7") }}</li>
       <li>{{ $t("message.remark8") }}</li>
-      <li><a href="https://twitter.com/urakagi">{{ $t("message.contact") }}</a></li>
+      <li><a href="https://www.youtube.com/channel/UCREuKsCXNckuIeU_Ep5e5Cw">{{ $t("message.contact") }}</a></li>
     </ol>
   </div>
 </template>
