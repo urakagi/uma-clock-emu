@@ -859,19 +859,19 @@ export default {
       return ret
     },
     saveUma() {
-      this.$prompt('ウマ名を入力して下さい', '', {
+      this.$prompt('請輸入馬娘名稱', '', {
         inputValue: this.umaToLoad,
-        confirmButtonText: 'セーブ',
-        cancelButtonText: 'キャンセル',
+        confirmButtonText: '儲存',
+        cancelButtonText: '取消',
         inputPattern: /.+/,
-        inputErrorMessage: '名前を入力して下さい。'
+        inputErrorMessage: '請輸入馬娘名稱。'
       }).then(({value}) => {
         const umas = JSON.parse(localStorage.getItem('umas') || '{}')
         umas[value] = this.saveUmaToObject()
         localStorage.setItem('umas', JSON.stringify(umas))
         this.$message({
           type: 'success',
-          message: `${value}をセーブしました。`
+          message: `已儲存${value}。`
         })
         this.updateSavedUmas()
         this.umaToLoad = value
@@ -893,7 +893,7 @@ export default {
       this.loadUmaFromObject(umas[this.umaToLoad])
       this.$message({
         type: 'success',
-        message: `${this.umaToLoad}をロードしました。`
+        message: `已載入${this.umaToLoad}。`
       })
     },
     loadUmaFromObject(u) {
@@ -962,7 +962,7 @@ export default {
 
         const skills = raceHorseData['skill_array']
 
-        this.selectedUnique = 'なし／発動しない' // Reset it to unselected first
+        this.selectedUnique = '無／不發動' // Reset it to unselected first
         const uniqueSkills = skills.filter(s => s['skill_id'] < 200000)
         if (uniqueSkills.length === 1) {
           const uniqueSkill = uniqueSkills[0]
@@ -1003,7 +1003,7 @@ export default {
       localStorage.setItem('umas', JSON.stringify(umas))
       this.$message({
         type: 'success',
-        message: `${this.umaToLoad}を削除しました。`
+        message: `已刪除${this.umaToLoad}。`
       })
       this.updateSavedUmas()
     },

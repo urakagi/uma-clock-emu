@@ -14,9 +14,9 @@
 		"importUmaFromTool": "從本工具",
 		"importUmaFromGame": "從遊戲通訊封包",
 		"speed": "速度",
-		"stamina": "耐力",
+		"stamina": "持久力",
 		"power": "力量",
-		"guts": "根性",
+		"guts": "意志力",
 		"wisdom": "智慧",
 		"style": "腳質",
 		"mood": "調子",
@@ -117,11 +117,11 @@
 		"selectedUnique": "無／不發動"
 	},
 	"chart": {
-		"phase1": "←序盤|中盤→",
-		"phase2": "←中盤|終盤→",
+		"phase1": "←初期|中期→",
+		"phase2": "←中期|後期→",
 		"phase3": "p3→",
 		"start": "起跑",
-		"lateStart": " 出遲 ",
+		"lateStart": " 慢起跑 ",
 		"positionKeepEnd": "位置意識結束",
 		"upSlope": "上坡",
 		"downSlope": "下坡",
@@ -130,11 +130,11 @@
 		"speed": "速度",
 		"position": "位置",
 		"hintBackground": "背景色意義：",
-		"corner": "彎角",
+		"corner": "彎道",
 		"straight": "直線",
-		"temptation": "焦躁",
+		"temptation": "爆衝",
 		"none": "無",
-		"phaseSeparators": "中盤開始：{0}m | 終盤開始：{1}m",
+		"phaseSeparators": "中期開始：{0}m | 後期開始：{1}m",
 		"firstSlopes": "最初爬坡：{0} | 下坡：{1}"
 	}
 }
