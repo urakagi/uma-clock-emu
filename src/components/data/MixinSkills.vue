@@ -1135,7 +1135,7 @@ export default {
             }
           },
           {
-            normal: {id: 201082, name: '速度獵手', value: 0.15},
+            normal: {id: 201082, name: '速度吞噬者', value: 0.15},
             duration: 3,
             styleLimit: [1],
             distanceLimit: [2],
@@ -3013,7 +3013,7 @@ export default {
         }
         if (skill.heal) {
           copy.type = 'heal'
-          copy.heal = skill.heal * (1 + this.uniqueLevel * 0.02)
+          copy.heal = skill.heal * (1 + (this.uniqueLevel - 1) * 0.02)
           copy.triggers.push(function () {
             return thiz.doHeal(copy.heal)
           })
@@ -3021,12 +3021,14 @@ export default {
         }
         if (skill.targetSpeed) {
           copy.type = 'targetSpeed'
-          copy.targetSpeed = skill.targetSpeed * (1 + this.uniqueLevel * 0.03)
+          let modification = 0.01 + (this.uniqueLevel - 2) * 0.03;
+          if (modification < 0) modification = 0;
+          copy.targetSpeed = skill.targetSpeed * (1 + modification)
           effectCount++
         }
         if (skill.acceleration) {
           copy.type = 'acceleration'
-          copy.acceleration = skill.acceleration * (1 + this.uniqueLevel * 0.02)
+          copy.acceleration = skill.acceleration * (1 + (this.uniqueLevel - 1) * 0.02)
           effectCount++
         }
         if (effectCount > 1) {
