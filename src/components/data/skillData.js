@@ -1253,6 +1253,17 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 201453, name: '月影一閃', value: 0.35},
+                duration: 3,
+                styleLimit: StyleLimit.Oi,
+                init: function () {
+                    this.randoms = thiz.initStraightRandom()
+                },
+                check: function (startPosition) {
+                    return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
                 rare: {id: 202061, name: '日本一のウマ娘', value: 0.35},
                 duration: 3,
                 distanceLimit: [4],
@@ -3257,6 +3268,15 @@ const uniqueSkillData = (thiz) =>
                 return thiz.position >= thiz.courseLength * 0.6 &&
                     thiz.courseLength * thiz.position >= 500 &&
                     thiz.isInSlope('down');
+            }
+        },
+        {
+            id: 100361, name: 'trigger:BEAT',
+            targetSpeed: 0.35,
+            duration: 5,
+            tooltip: '4～7位。',
+            check: function (startPosition) {
+                return thiz.isInFinalStraight(startPosition);
             }
         },
 
