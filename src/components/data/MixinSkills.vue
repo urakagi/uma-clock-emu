@@ -1155,7 +1155,7 @@ export default {
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
-            check: function す(startPosition) {
+            check: function (startPosition) {
               return thiz.isInRandom(this.randoms, startPosition)
             }
           },
