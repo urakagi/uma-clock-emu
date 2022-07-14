@@ -1123,7 +1123,7 @@ export default {
             }
           },
           {
-            normal: {id: 201212, name: '怒濤的後來居上', value: 0.15},
+            normal: {id: 201212, name: '後來居上', value: 0.15},
             duration: 3,
             distanceLimit: [4],
             tooltip: '「終盤のどこか」として扱う。実際は加速中に消化されるのが大半。',
