@@ -30,7 +30,7 @@ if (localStorage.getItem('lang') !== null) {
 	if (lang_array.includes(lang)) {
 		locale = lang
 	} else {
-		locale = 'ja'
+		locale = 'zh-TW'
 	}
 
 }

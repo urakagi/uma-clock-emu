@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <el-menu :default-active="defaultActive" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="0">競技場</el-menu-item>
-      <el-menu-item index="1">星座杯</el-menu-item>
+      <el-menu-item index="0">星座杯/傳奇賽</el-menu-item>
+      <el-menu-item index="1">競技場</el-menu-item>
     </el-menu>
     <router-view></router-view>
 
@@ -10,7 +10,6 @@
       <el-dropdown split-button @command="handleCommand">
         語言
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="ja">日文</el-dropdown-item>
           <el-dropdown-item command="zhTW">繁體中文</el-dropdown-item>
           <el-dropdown-item command="en">English</el-dropdown-item>
         </el-dropdown-menu>
@@ -28,8 +27,8 @@ export default {
   data() {
     return {
       navLink: [
-          '/team-race',
-          '/champions-meeting'
+        '/champions-meeting',
+        '/team-race',
       ]
     }
   },
