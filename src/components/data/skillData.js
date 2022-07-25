@@ -1348,8 +1348,8 @@ function normalSkillData(thiz) {
                 init: function () {
                     this.randoms = thiz.initPhaseRandom(1, {startRate: 0.5})
                 },
-                check: function () {
-                    return thiz.isDistanceType(1)
+                check: function (startPosition) {
+                    return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
         ],
