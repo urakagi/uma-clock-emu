@@ -1339,6 +1339,19 @@ function normalSkillData(thiz) {
                     down_slope_random: 1
                 }
             },
+            {
+                rare: {id: 202041, name: '意気衝天', value: 0.35},
+                normal: {id: 202042, name: '軽い足取り', value: 0.15},
+                duration: 2.4,
+                distanceLimit: [1],
+                tooltip: '1～5位',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1, {startRate: 0.5})
+                },
+                check: function () {
+                    return thiz.isDistanceType(1)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [

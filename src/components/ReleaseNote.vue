@@ -111,6 +111,10 @@ export default {
           content: 'スキルを新データに更新',
           timestamp: '2022-03-05'
         },
+        {
+          content: 'グラフの可視性を向上',
+          timestamp: '2022-07-25'
+        },
       ]
     }
   }
