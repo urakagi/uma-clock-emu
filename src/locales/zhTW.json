@@ -128,6 +128,7 @@
 		"temptation": "焦躁",
 		"none": "無",
 		"phaseSeparators": "中盤開始：{0}m | 終盤開始：{1}m",
-		"firstSlopes": "最初爬坡：{0} | 下坡：{1}"
+		"firstSlopes": "最初爬坡：{0} | 下坡：{1}",
+		"finalCorner": "最終彎道"
 	}
 }

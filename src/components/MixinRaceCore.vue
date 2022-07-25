@@ -429,6 +429,9 @@ export default {
     },
     production() {
       return process.env.NODE_ENV === 'production'
+    },
+    chartMiddle() {
+      return this.courseLength * 0.45;
     }
   },
   methods: {
@@ -1199,9 +1202,10 @@ export default {
               type: 'box',
               xMin: cornerStart,
               xMax: index,
-              yMin: 0,
-              yMax: 100,
+              yMin: this.courseLength * -0.1,
+              yMax: this.chartMiddle,
               xScaleID: 'x-axis-0',
+              yScaleID: 'position',
               backgroundColor: 'rgba(225, 190, 255, 0.2)',
               drawTime: 'beforeDatasetsDraw',
             })
@@ -1221,9 +1225,10 @@ export default {
             type: 'box',
             xMin: straightStart,
             xMax: index,
-            yMin: 0,
-            yMax: 100,
+            yMin: this.courseLength * -0.1,
+            yMax: this.chartMiddle,
             xScaleID: 'x-axis-0',
+            yScaleID: 'position',
             backgroundColor: 'rgba(210, 235, 255, 0.2)',
             drawTime: 'beforeDatasetsDraw',
           })
@@ -1238,9 +1243,10 @@ export default {
             type: 'box',
             xMin: upSlopeStart,
             xMax: index,
-            yMin: 0,
-            yMax: 100,
+            yMin: this.chartMiddle,
+            yMax: this.courseLength,
             xScaleID: 'x-axis-0',
+            yScaleID: 'position',
             backgroundColor: 'rgba(240, 235, 105, 0.2)',
             drawTime: 'beforeDatasetsDraw',
           })
@@ -1255,9 +1261,10 @@ export default {
             type: 'box',
             xMin: downSlopeStart,
             xMax: index,
-            yMin: 0,
-            yMax: 100,
+            yMin: this.chartMiddle,
+            yMax: this.courseLength,
             xScaleID: 'x-axis-0',
+            yScaleID: 'position',
             backgroundColor: 'rgba(125, 255, 190, 0.15)',
             drawTime: 'beforeDatasetsDraw',
           })
@@ -1301,12 +1308,12 @@ export default {
               }
             })
           }
-          const upSlope = this.isInSlope('up', this.frames[index + step].startPosition)
-          if (upSlope && !this.isInSlope('up', frame.startPosition)) {
+          const isInFinalCorner = this.isInFinalCorner(this.frames[index + step].startPosition);
+          if (isInFinalCorner && !this.isInFinalCorner(frame.startPosition)) {
             annotations.push({
               type: 'line',
               label: {
-                content: this.$t("chart.upSlope"),
+                content: this.$t("chart.finalCorner"),
                 position: 'top',
                 enabled: true,
                 yAdjust: skillYAdjust
@@ -1314,32 +1321,8 @@ export default {
               mode: 'vertical',
               scaleID: 'x-axis-0',
               value: label,
-              borderColor: 'pink',
+              borderColor: 'maroon',
               borderWidth: 2,
-              onClick: function () {
-                  thiz.$message(`${(thiz.courseLength - frame.startPosition).toFixed(0)}m地点`)
-              }
-            })
-            nextSkillYAdjust(skillYAdjust)
-          }
-          const downSlope = this.isInSlope('down', this.frames[index + step].startPosition)
-          if (downSlope && !this.isInSlope('down', frame.startPosition)) {
-            annotations.push({
-              type: 'line',
-              label: {
-                content: this.$t("chart.downSlope"),
-                position: 'top',
-                enabled: true,
-                yAdjust: skillYAdjust
-              },
-              mode: 'vertical',
-              scaleID: 'x-axis-0',
-              value: label,
-              borderColor: 'silver',
-              borderWidth: 2,
-              onClick: function () {
-                thiz.$message(`${(thiz.courseLength - frame.startPosition).toFixed(0)}m地点`)
-              }
             })
             nextSkillYAdjust(skillYAdjust)
           }

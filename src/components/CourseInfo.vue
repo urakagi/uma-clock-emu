@@ -1,6 +1,12 @@
 <template>
   <div>
     <div>
+      {{ $t("chart.slope") }}：
+      <span v-for="slope in this.slopes" :key="slope" :class="'box ' + slopeClass(slope)">
+      {{ slope }}
+    </span>
+    </div>
+    <div>
       {{ $t("chart.corner") }}：
       <span v-for="corner in this.corners" :key="corner" class="box corner">
       {{ corner }}
@@ -10,12 +16,6 @@
       {{ $t("chart.straight") }}：
       <span v-for="straight in this.straights" :key="straight" class="box straight">
       {{ straight }}
-    </span>
-    </div>
-    <div>
-      {{ $t("chart.slope") }}：
-      <span v-for="slope in this.slopes" :key="slope" :class="'box ' + slopeClass(slope)">
-      {{ slope }}
     </span>
     </div>
     <div>
