@@ -682,6 +682,19 @@ function normalSkillData(thiz) {
                         thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202191, name: '一意専心', heal: 750},
+                normal: {id: 202192, name: '抜かりなし', heal: 350},
+                styleLimit: StyleLimit.Sen,
+                distanceLimit: DistanceLimit.Long,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1, {endRate: 0.5})
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(DISTANCE.LONG) && thiz.isRunningStyle(2) &&
+                        thiz.isInRandom(this.randoms, startPosition) && thiz.startDelay < 0.08
+                }
+            },
             // End of heal skills
         ],
         targetSpeed: [
@@ -3290,6 +3303,35 @@ const uniqueSkillData = (thiz) =>
             tooltip: '4～7位。',
             check: function (startPosition) {
                 return thiz.isInFinalStraight(startPosition);
+            }
+        },
+        {
+            id: 120131, name: 'きらめくは海、まばゆきは君',
+            targetSpeed: 0.15,
+            duration: 5,
+            tooltip: '1～4位',
+            conditions: {
+                distance_rate: '>=50'
+            },
+            trigger: function(skill) {
+                const map = {
+                    2000: 1,
+                    2400: 1.5,
+                    2600: 2,
+                    2800: 2.2,
+                    3000: 2.5,
+                    3200: 3,
+                    3500: 3.5,
+                    99999999: 4,
+                }
+                for (const key in map) {
+                    if (thiz.sp < key) {
+                        skill.duration *= map[key]
+                        return {
+                            extended: map[key].toString()
+                        }
+                    }
+                }
             }
         },
 
