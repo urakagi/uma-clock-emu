@@ -381,8 +381,13 @@ function normalSkillData(thiz) {
                     return thiz.track.surfaceCondition === '0'
                 }
             },
-            // End of passive skills
+            {
+                normal: {id: 202161, name: '自制心', passiveBonus: { wisdom: 60, temptationRate: -3 }},
+                tooltip: '掛かり率は固定で-3%として処理',
+                check: () => true,
+            },
         ],
+        // End of passive skills
         heal: [
             {
                 normal: {id: 200352, name: 'コーナー回復○', value: 150},

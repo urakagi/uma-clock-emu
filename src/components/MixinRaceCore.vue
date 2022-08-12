@@ -155,6 +155,7 @@ export default {
         return 0
       } else {
         return Math.pow(6.5 / (Math.log10(0.1 * this.modifiedWisdom + 1)), 2)
+            + this.passiveBonus.temptationRate;
       }
     },
     currentPhase() {
@@ -493,7 +494,6 @@ export default {
       if (this.emulatorType === 'team') {
         this.initCourse()
       }
-      this.initTemptation()
       this.initializeSkills(this.skillActivateAdjustment)
       if (this.fixRandom) {
         this.startDelay = 0
@@ -501,6 +501,7 @@ export default {
         this.startDelay = Math.random() * 0.1
       }
       this.triggerStartSkills();
+      this.initTemptation()
       this.isStartDash = true;
       this.delayTime = this.startDelay;
       this.sp = this.spMax
@@ -512,12 +513,9 @@ export default {
       this.sp = 0
       this.position = 0
       this.currentSpeed = this.startSpeed
-      this.passiveBonus = {
-        speed: 0,
-        stamina: 0,
-        power: 0,
-        guts: 0,
-        wisdom: 0
+      this.passiveBonus = {};
+      for (const bonus of this.passiveBonusKeys) {
+        this.passiveBonus[bonus] = 0;
       }
       this.operatingSkills = []
       delete this.frames

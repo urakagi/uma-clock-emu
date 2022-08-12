@@ -22,6 +22,7 @@ export default {
       skills: {},
       skillData: SkillData.normalSkillData(this),
       uniqueSkillData: SkillData.uniqueSkillData(this),
+      passiveBonusKeys: ['speed', 'stamina', 'power', 'guts', 'wisdom', 'temptationRate'],
     }
   },
   computed: {
@@ -343,7 +344,7 @@ export default {
       return ret
     },
     initAllCornerRandom() {
-      const corners = this.trackDetail.corners.map(c => ({ start: c.start, length: c.length }))
+      const corners = this.trackDetail.corners.map(c => ({start: c.start, length: c.length}))
       const triggers = []
 
       function logTrigger(min, max) {
@@ -668,7 +669,7 @@ export default {
         this.skillData[skillType].push(copy)
       }
 
-      const EFFECTS = ['heal', 'targetSpeed', 'acceleration', 'speed', 'fatigue']
+      const EFFECTS = ['heal', 'targetSpeed', 'acceleration', 'speed', 'fatigue', 'passiveBonus']
       // Then fill fields, this.skillData must already been fulfill
       for (const type in this.skillData) {
         const o = {}
@@ -703,12 +704,23 @@ export default {
                 copy.duration = skill[rarity].duration
               }
               copy.type = type
+              if (!copy.cd) copy.cd = 500
               if (copy.value) {
+                // Simple values
                 this.fillCommonFields(copy, type)
                 if (!copy.tooltip) copy.tooltip = ''
                 copy.tooltip += ` | ${type}: ${Math.round(copy.value * 100) / 100}`
               }
-              if (!copy.cd) copy.cd = 500
+              if (type === 'passive' && !copy.value) {
+                // Complicated values
+                copy.trigger = function (skill) {
+                  for (const status of thiz.passiveBonusKeys) {
+                    if (skill.passiveBonus[status]) {
+                      thiz.passiveBonus[status] += skill.passiveBonus[status];
+                    }
+                  }
+                }
+              }
               if (copy.heal) {
                 copy.trigger = function () {
                   return thiz.doHeal(copy.heal)
