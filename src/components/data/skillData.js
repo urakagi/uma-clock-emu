@@ -3297,7 +3297,7 @@ const uniqueSkillData = (thiz) =>
             }
         },
         {
-            id: 100361, name: 'trigger:BEAT',
+            id: 100361, hid: 900361, name: 'trigger:BEAT',
             targetSpeed: 0.35,
             duration: 5,
             tooltip: '4～7位。',
@@ -3306,7 +3306,7 @@ const uniqueSkillData = (thiz) =>
             }
         },
         {
-            id: 120131, name: 'きらめくは海、まばゆきは君',
+            id: 120131, hid: 920131, name: 'きらめくは海、まばゆきは君',
             targetSpeed: 0.15,
             duration: 5,
             tooltip: '1～4位',
@@ -3332,6 +3332,16 @@ const uniqueSkillData = (thiz) =>
                         }
                     }
                 }
+            }
+        },
+        {
+            id: 100441, hid: 900441, name: 'いただき☆ストレリチア！',
+            targetSpeed: 0.35,
+            duration: 6,
+            check: function (startPosition) {
+                return startPosition <= thiz.toPosition(300)
+                    && thiz.position >= thiz.toPosition(300)
+                    && thiz.temptationModeStart == null;
             }
         },
 
