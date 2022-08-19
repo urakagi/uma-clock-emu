@@ -3349,6 +3349,23 @@ const uniqueSkillData = (thiz) =>
                     && thiz.temptationModeStart == null;
             }
         },
+        {
+            id: 100981, hid: 900981, name: '理運開かりて翔る',
+            targetSpeed: 0.25,
+            acceleration: 0,
+            duration: 5,
+            init: function () {
+                this.randoms = thiz.initPhaseRandom(1, { startRate: 0.5 })
+            },
+            check: function (startPosition) {
+                return thiz.isInRandom(this.randoms, startPosition)
+            },
+            trigger: function (skill) {
+                const rate = [0, 0, 0, 1, 1, 2];
+                skill.targetSpeed = 0.25 + (thiz.passiveTriggered > 5 ? 3 : rate[thiz.passiveTriggered]) * 0.05;
+                skill.acceleration = (thiz.passiveTriggered > 5 ? 3 : rate[thiz.passiveTriggered]) * 0.05;
+            },
+        },
 
 // End of unique skills
     ].sort((a, b) => {

@@ -23,6 +23,7 @@ export default {
         styleFit: 'A',
       },
       passiveBonus: {},
+      passiveTriggered: 0,
       track: {
         location: '',
         course: '',
@@ -517,6 +518,7 @@ export default {
       for (const bonus of this.passiveBonusKeys) {
         this.passiveBonus[bonus] = 0;
       }
+      this.passiveTriggered = 0;
       this.operatingSkills = []
       delete this.frames
       this.frames = [{skills: []}]

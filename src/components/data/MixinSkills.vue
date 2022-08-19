@@ -719,6 +719,7 @@ export default {
                       thiz.passiveBonus[status] += skill.passiveBonus[status];
                     }
                   }
+                  thiz.passiveTriggered += 1;
                 }
               }
               if (copy.heal) {
@@ -777,6 +778,7 @@ export default {
             for (const status of copy.status) {
               thiz.passiveBonus[status] += copy.value
             }
+            thiz.passiveTriggered += 1;
           }
           if (copy.courseLimit) {
             copy.check = function () {

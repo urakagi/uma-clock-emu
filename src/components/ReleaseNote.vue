@@ -115,6 +115,10 @@ export default {
           content: 'グラフの可視性を向上',
           timestamp: '2022-07-25'
         },
+        {
+          content: '新規レース場を追加',
+          timestamp: '2022-08-19'
+        },
       ]
     }
   }
