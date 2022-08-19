@@ -382,7 +382,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 202161, name: '自制心', passiveBonus: { wisdom: 60, temptationRate: -3 }},
+                normal: {id: 202161, name: '自制心', passiveBonus: {wisdom: 60, temptationRate: -3}},
                 tooltip: '掛かり率は固定で-3%として処理',
                 check: () => true,
             },
@@ -402,7 +402,7 @@ function normalSkillData(thiz) {
                 check: function () {
                     return thiz.isSurfaceType(SURFACE.DIRT);
                 },
-                trigger: function(skill) {
+                trigger: function (skill) {
                     if (skill.id === 202331) {
                         if (thiz.umaStatus.power >= 1200) {
                             thiz.passiveBonus.speed += 80;
@@ -416,6 +416,62 @@ function normalSkillData(thiz) {
                             thiz.passiveBonus.speed += 20;
                         }
                     }
+                }
+            },
+            {
+                rare: {id: 202201, name: '川崎レース場◎', value: 60},
+                normal: {id: 202202, name: '川崎レース場○', value: 40},
+                status: ['stamina'],
+                courseLimit: {
+                    'raceTrackId': [10103]
+                },
+            },
+            {
+                rare: {id: 202211, name: '船橋レース場◎', value: 60},
+                normal: {id: 202212, name: '船橋レース場○', value: 40},
+                status: ['stamina'],
+                courseLimit: {
+                    'raceTrackId': [10104]
+                },
+            },
+            {
+                rare: {id: 202221, name: '盛岡レース場◎', value: 60},
+                normal: {id: 202222, name: '盛岡レース場○', value: 40},
+                status: ['stamina'],
+                courseLimit: {
+                    'raceTrackId': [10105]
+                },
+            },
+            {
+                rare: {id: 202231, name: 'ナイター◎', value: 60},
+                normal: {id: 202232, name: 'ナイター○', value: 40},
+                status: ['wisdom'],
+            },
+            {
+                rare: {id: 202241, name: '小回り◎', value: 60},
+                normal: {id: 202242, name: '小回り○', value: 40},
+                status: ['wisdom'],
+                courseLimit: {
+                    'raceTrackId': [10001, 10002, 10004, 10010, 10103, 10104]
+                },
+            },
+            {
+                rare: {id: 202342, name: '泥遊び◎', value: 60},
+                normal: {id: 202343, name: '泥遊び○', value: 40},
+                surfaceLimit: SurfaceLimit.Dirt,
+                surfaceConditionLimit: ['2', '3'],
+                status: ['speed'],
+                check: function () {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.track.surfaceCondition === '2' || thiz.track.surfaceCondition === '3';
+                }
+            },
+            {
+                rare: {id: 202341, name: '泥んこマイスター', value: 60},
+                surfaceLimit: SurfaceLimit.Dirt,
+                surfaceConditionLimit: ['2', '3'],
+                status: ['speed', 'power'],
+                check: function () {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.track.surfaceCondition === '2' || thiz.track.surfaceCondition === '3';
                 }
             },
         ],
@@ -621,7 +677,7 @@ function normalSkillData(thiz) {
             {
                 normal: {id: 200442, name: '隠れ蓑', value: 150},
                 rare: {id: 200441, name: '鋼の意志', value: 550},
-                init: function() {
+                init: function () {
                     this.randoms = thiz.initIntervalRandom(0, 0.666)
                 },
                 check: function (startPosition) {
@@ -1017,8 +1073,8 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200672, name: '詰め寄り', targetSpeed: 0.15, acceleration: 0.05 },
-                rare: {id: 200671, name: '電撃の煌めき', targetSpeed: 0.35, acceleration: 0.1 },
+                normal: {id: 200672, name: '詰め寄り', targetSpeed: 0.15, acceleration: 0.05},
+                rare: {id: 200671, name: '電撃の煌めき', targetSpeed: 0.35, acceleration: 0.1},
                 duration: 3,
                 distanceLimit: [1],
                 styleLimit: [3, 4],
@@ -1415,6 +1471,54 @@ function normalSkillData(thiz) {
                     return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202271, name: '捲土重来', value: 0.35},
+                normal: {id: 202272, name: '盛り返し', value: 0.15},
+                duration: 2.4,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '6～9位。',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function (startPosition) {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202281, name: '全速前進！', value: 0.35},
+                normal: {id: 202282, name: 'まっしぐら', value: 0.15},
+                duration: 3,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '1～5位。',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(3)
+                },
+                check: function (startPosition) {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
+                        && thiz.isInSpurt;
+                }
+            },
+            {
+                rare: {id: 202291, name: '明鏡止水', value: 0.35},
+                normal: {id: 202292, name: '冴える思考', value: 0.15},
+                duration: 1.8,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '6～9位。',
+                check: function () {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isPhase(1)
+                        && thiz.healTriggerCount > 0 && thiz.isInDistanceRate(0, 0.42);
+                }
+            },
+            {
+                rare: {id: 202301, name: '優雅な砂浴び', value: 0.35},
+                normal: {id: 202302, name: '砂浴び○', value: 0.15},
+                duration: 3,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '開始5秒で即発動扱い。逃げで使う場合は自己責任で。',
+                check: function () {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.accTimePassed(5)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1667,6 +1771,32 @@ function normalSkillData(thiz) {
                 check: function (startPosition) {
                     return thiz.isDistanceType(DISTANCE.MIDDLE) &&
                         thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202311, name: '目指せセンター！', value: 0.4},
+                normal: {id: 202312, name: '意気込み十分', value: 0.2},
+                duration: 3,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '1～5位。',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(2)
+                },
+                check: function (startPosition) {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202321, name: '爆走モード！', value: 0.4},
+                normal: {id: 202322, name: '急浮上', value: 0.2},
+                duration: 3,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '5～9位。',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(2)
+                },
+                check: function (startPosition) {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
         ],
@@ -3149,7 +3279,7 @@ const uniqueSkillData = (thiz) =>
             heal: 350,
             duration: 5,
             tooltip: '3～6位(<=70%)',
-            check: function() {
+            check: function () {
                 return thiz.isInInterval(0.5, 1) && thiz.isPhase(1)
             }
         },
@@ -3159,7 +3289,7 @@ const uniqueSkillData = (thiz) =>
             heal: 550,
             duration: 5,
             tooltip: '3～6位(<=70%)',
-            check: function() {
+            check: function () {
                 return thiz.isInInterval(0.5, 1) && thiz.isPhase(1)
             }
         },
@@ -3197,7 +3327,7 @@ const uniqueSkillData = (thiz) =>
             conditions: {
                 distance_rate: '>=50'
             },
-            trigger: function(skill) {
+            trigger: function (skill) {
                 const map = {
                     2000: 1,
                     2400: 1.5,
@@ -3363,7 +3493,7 @@ const uniqueSkillData = (thiz) =>
             conditions: {
                 distance_rate: '>=50'
             },
-            trigger: function(skill) {
+            trigger: function (skill) {
                 const map = {
                     2000: 1,
                     2400: 1.5,
@@ -3400,7 +3530,7 @@ const uniqueSkillData = (thiz) =>
             acceleration: 0,
             duration: 5,
             init: function () {
-                this.randoms = thiz.initPhaseRandom(1, { startRate: 0.5 })
+                this.randoms = thiz.initPhaseRandom(1, {startRate: 0.5})
             },
             check: function (startPosition) {
                 return thiz.isInRandom(this.randoms, startPosition)
@@ -3413,10 +3543,10 @@ const uniqueSkillData = (thiz) =>
         },
 
 // End of unique skills
-    ].sort((a, b) => {
-        if (a.name < b.name) return -1
-        if (a.name > b.name) return 1
-        return 0
-    })
+].sort((a, b) => {
+    if (a.name < b.name) return -1
+    if (a.name > b.name) return 1
+    return 0
+})
 
 export {normalSkillData, uniqueSkillData}
