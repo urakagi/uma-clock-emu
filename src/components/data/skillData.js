@@ -3536,6 +3536,11 @@ const uniqueSkillData = (thiz) =>
                 return thiz.isInRandom(this.randoms, startPosition)
             },
             trigger: function (skill) {
+                if (skill.id === 900981) {
+                    skill.targetSpeed = 0.05;
+                    skill.acceleration = 0;
+                    return;
+                }
                 const rate = [0, 0, 0, 1, 1, 2];
                 skill.targetSpeed = 0.25 + (thiz.passiveTriggered > 5 ? 3 : rate[thiz.passiveTriggered]) * 0.05;
                 skill.acceleration = (thiz.passiveTriggered > 5 ? 3 : rate[thiz.passiveTriggered]) * 0.05;
