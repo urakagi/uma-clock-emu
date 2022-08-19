@@ -260,11 +260,13 @@ export default {
                 if (Math.random() < skill.triggerRate) {
                   skill.trigger(skill)
                   this.skillTriggerCount[0]++
+                  this.passiveTriggered += 1;
                   this.frames[0].skills.push({data: skill})
                 }
               } else {
                 skill.trigger(skill)
                 this.skillTriggerCount[0]++
+                this.passiveTriggered += 1;
                 this.frames[0].skills.push({data: skill})
               }
             }
@@ -713,13 +715,14 @@ export default {
               }
               if (type === 'passive' && !copy.value) {
                 // Complicated values
-                copy.trigger = function (skill) {
-                  for (const status of thiz.passiveBonusKeys) {
-                    if (skill.passiveBonus[status]) {
-                      thiz.passiveBonus[status] += skill.passiveBonus[status];
+                if (!copy.trigger) {
+                  copy.trigger = function (skill) {
+                    for (const status of thiz.passiveBonusKeys) {
+                      if (skill.passiveBonus[status]) {
+                        thiz.passiveBonus[status] += skill.passiveBonus[status];
+                      }
                     }
                   }
-                  thiz.passiveTriggered += 1;
                 }
               }
               if (copy.heal) {
@@ -774,11 +777,12 @@ export default {
           }
           break
         case 'passive':
-          copy.trigger = function () {
-            for (const status of copy.status) {
-              thiz.passiveBonus[status] += copy.value
+          if (!copy.trigger) {
+            copy.trigger = function () {
+              for (const status of copy.status) {
+                thiz.passiveBonus[status] += copy.value
+              }
             }
-            thiz.passiveTriggered += 1;
           }
           if (copy.courseLimit) {
             copy.check = function () {

@@ -386,6 +386,38 @@ function normalSkillData(thiz) {
                 tooltip: '掛かり率は固定で-3%として処理',
                 check: () => true,
             },
+            {
+                rare: {id: 202251, name: '交流重賞◎', value: 60},
+                normal: {id: 202252, name: '交流重賞○', value: 40},
+                status: ['speed'],
+                courseLimit: {
+                    'surface': [SURFACE.DIRT],
+                },
+            },
+            {
+                rare: {id: 202331, name: '抜群の踏み込み', value: 80},
+                normal: {id: 202332, name: '踏み込み上手', value: 60},
+                surfaceLimit: SurfaceLimit.Dirt,
+                status: ['speed'],
+                check: function () {
+                    return thiz.isSurfaceType(SURFACE.DIRT);
+                },
+                trigger: function(skill) {
+                    if (skill.id === 202331) {
+                        if (thiz.umaStatus.power >= 1200) {
+                            thiz.passiveBonus.speed += 80;
+                        } else if (thiz.umaStatus.power >= 1000) {
+                            thiz.passiveBonus.speed += 60;
+                        }
+                    } else {
+                        if (thiz.umaStatus.power >= 1200) {
+                            thiz.passiveBonus.speed += 40;
+                        } else if (thiz.umaStatus.power >= 1000) {
+                            thiz.passiveBonus.speed += 20;
+                        }
+                    }
+                }
+            },
         ],
         // End of passive skills
         heal: [
@@ -1368,6 +1400,19 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202261, name: '勝利の機運', value: 0.35},
+                normal: {id: 202262, name: '明るい兆し', value: 0.15},
+                duration: 2.4,
+                surfaceLimit: SurfaceLimit.Dirt,
+                tooltip: '1～5位',
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1, {startRate: 0.5})
+                },
+                check: function (startPosition) {
+                    return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
         ],
