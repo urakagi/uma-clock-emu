@@ -1519,6 +1519,18 @@ function normalSkillData(thiz) {
                     return thiz.isSurfaceType(SURFACE.DIRT) && thiz.accTimePassed(5)
                 }
             },
+            {
+                rare: {id: 200591, name: 'アンストッパブル', value: 0.35},
+                normal: {id: 200592, name: '攻めの姿勢', value: 0.15},
+                duration: 2.4,
+                styleLimit: StyleLimit.Sen,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function (startPosition) {
+                    return thiz.isRunningStyle(STYLE.SEN) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1859,6 +1871,15 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isRunningStyle(3) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 210071, name: 'キミと勝ちたい', targetSpeed: 0.42, acceleration: 0.24},
+                normal: {id: 210072, name: '夢の途中', targetSpeed: 0.18, acceleration: 0.084},
+                duration: 1.2,
+                tooltip: '1～6位。ファン数16万以上の場合。',
+                conditions: {
+                    distance_rate_after_random: 50
                 }
             },
         ],
@@ -2960,7 +2981,6 @@ const uniqueSkillData = (thiz) =>
             id: 100271, name: 'レッツ・アナボリック！',
             acceleration: 0.4,
             duration: 4,
-            styleLimit: [3, 4],
             tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
             check: function () {
                 return thiz.currentPhase >= 2 && thiz.isInCorner()
@@ -3012,7 +3032,6 @@ const uniqueSkillData = (thiz) =>
             id: 100591, name: '彼方、その先へ…',
             acceleration: 0.4,
             duration: 4,
-            styleLimit: [3, 4],
             tooltip: '常に順位>=50%及び<=70%は満たしていると見なす。',
             check: function () {
                 return thiz.temptationModeStart == null &&
@@ -3545,6 +3564,17 @@ const uniqueSkillData = (thiz) =>
                 skill.targetSpeed = 0.25 + (thiz.passiveTriggered > 5 ? 3 : rate[thiz.passiveTriggered]) * 0.05;
                 skill.acceleration = (thiz.passiveTriggered > 5 ? 3 : rate[thiz.passiveTriggered]) * 0.05;
             },
+        },
+        {
+            id: 110461, name: 'α-star*',
+            surfaceLimit: SurfaceLimit.Dirt,
+            targetSpeed: 0.25,
+            heal: 350,
+            duration: 6,
+            tooltip: 'MAX発動時',
+            check: function () {
+                return thiz.position >= thiz.courseLength * 0.4 && thiz.position <= thiz.courseLength * 0.5
+            }
         },
 
 // End of unique skills
