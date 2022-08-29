@@ -11,6 +11,7 @@
         語言
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="zhTW">繁體中文</el-dropdown-item>
+          <el-dropdown-item command="ko">한국어</el-dropdown-item>
           <el-dropdown-item command="en">English</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

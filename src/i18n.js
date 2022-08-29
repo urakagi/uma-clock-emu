@@ -4,14 +4,16 @@ import VueI18n from 'vue-i18n'
 import ja from './locales/ja.json'
 import zhTW from './locales/zhTW.json'
 import en from './locales/en.json'
+import kr from './locales/ko.json'
 
 Vue.use(VueI18n)
 
-const lang_array = ['zhTW', 'en', 'ja']
+const lang_array = ['zhTW', 'en', 'ja', 'ko']
 const messages = {
 	zhTW,
 	en,
-	ja
+	ja,
+	ko
 }
 
 let lang
