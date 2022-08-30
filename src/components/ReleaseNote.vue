@@ -24,7 +24,7 @@ export default {
       releaseNote: '',
       releases: [
         {
-          content: '繁中版分離',
+          content: 'Korean separated',
           timestamp: '2022-07-17'
         },
       ]

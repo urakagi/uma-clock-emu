@@ -28,24 +28,24 @@ export default {
       skillData: {
         passive: [
           {
-            normal: {id: 200022, name: '逆時針○', value: 40},
-            rare: {id: 200021, name: '逆時針◎', value: 60},
+            normal: {id: 200022, name: '반시계(좌) 방향○', value: 40},
+            rare: {id: 200021, name: '반시계(좌) 방향◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [2]
             },
           },
           {
-            normal: {id: 200012, name: '順時針○', value: 40},
-            rare: {id: 200011, name: '順時針◎', value: 60},
+            normal: {id: 200012, name: '시계(우) 방향○', value: 40},
+            rare: {id: 200011, name: '시계(우) 방향◎', value: 60},
             status: ['speed'],
             courseLimit: {
               'turn': [1]
             },
           },
           {
-            normal: {name: '季節賽馬娘○', value: 40},
-            rare: {name: '季節賽馬娘◎', value: 60},
+            normal: {name: '계절 우마무스메○', value: 40},
+            rare: {name: '계절 우마무스메◎', value: 60},
             status: ['speed'],
             emulatorTypeLimit: ['cm'],
             check: function () {
@@ -53,144 +53,144 @@ export default {
             }
           },
           {
-            normal: {id: 200272, name: '喜歡獨處○', value: 40},
-            rare: {id: 200271, name: '喜歡獨處◎', value: 60},
+            normal: {id: 200272, name: '단독○', value: 40},
+            rare: {id: 200271, name: '단독◎', value: 60},
             status: ['speed'],
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 200302, name: '伏兵○', value: 40},
-            rare: {id: 200301, name: '伏兵◎', value: 60},
+            normal: {id: 200302, name: '복병○', value: 40},
+            rare: {id: 200301, name: '복병◎', value: 60},
             status: ['speed'],
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 200262, name: '擅長外側閘位○', value: 40},
-            rare: {id: 200261, name: '擅長外側閘位◎', value: 60},
+            normal: {id: 200262, name: '바깥쪽 그룹 능숙○', value: 40},
+            rare: {id: 200261, name: '바깥쪽 그룹 능숙◎', value: 60},
             status: ['speed'],
-            tooltip: '発動率44%として扱う(チャンピオンズミーティング基準)',
+            tooltip: '발동률 44% 계산 (챔피언스미팅 기준)',
             triggerRate: 4.0 / 9,
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 201631, name: '同理心', value: 40},
+            normal: {id: 201631, name: '심퍼시', value: 40},
             status: ['speed'],
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 201641, name: '獨行俠', value: 40},
+            normal: {id: 201641, name: '고독한 늑대', value: 40},
             status: ['speed'],
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 200082, name: '札幌賽場○', value: 40},
-            rare: {id: 200081, name: '札幌賽場◎', value: 60},
+            normal: {id: 200082, name: '삿포로 경기장○', value: 40},
+            rare: {id: 200081, name: '삿포로 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10001]
             },
           },
           {
-            normal: {id: 200092, name: '函館賽場○', value: 40},
-            rare: {id: 200091, name: '函館賽場◎', value: 60},
+            normal: {id: 200092, name: '하코다테 경기장○', value: 40},
+            rare: {id: 200091, name: '하코다테 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10002]
             },
           },
           {
-            normal: {id: 200112, name: '新潟賽場○', value: 40},
-            rare: {id: 200111, name: '新潟賽場◎', value: 60},
+            normal: {id: 200112, name: '니이가타 경기장○', value: 40},
+            rare: {id: 200111, name: '니이가타 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10003]
             },
           },
           {
-            normal: {id: 200102, name: '福島賽場○', value: 40},
-            rare: {id: 200101, name: '福島賽場◎', value: 60},
+            normal: {id: 200102, name: '후쿠시마 경기장○', value: 40},
+            rare: {id: 200101, name: '후쿠시마 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10004]
             },
           },
           {
-            normal: {id: 200042, name: '中山賽場○', value: 40},
-            rare: {id: 200041, name: '中山賽場◎', value: 60},
+            normal: {id: 200042, name: '나카야마 경기장○', value: 40},
+            rare: {id: 200041, name: '나카야마 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10005]
             },
           },
           {
-            normal: {id: 200032, name: '東京賽場○', value: 40},
-            rare: {id: 200031, name: '東京賽場◎', value: 60},
+            normal: {id: 200032, name: '도쿄 경기장○', value: 40},
+            rare: {id: 200031, name: '도쿄 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10006]
             },
           },
           {
-            normal: {id: 200072, name: '中京賽場○', value: 40},
-            rare: {id: 200071, name: '中京賽場◎', value: 60},
+            normal: {id: 200072, name: '츄쿄 경기장○', value: 40},
+            rare: {id: 200071, name: '츄쿄 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10007]
             },
           },
           {
-            normal: {id: 200062, name: '京都賽場○', value: 40},
-            rare: {id: 200061, name: '京都賽場◎', value: 60},
+            normal: {id: 200062, name: '교토 경기장○', value: 40},
+            rare: {id: 200061, name: '교토 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10008]
             },
           },
           {
-            normal: {id: 200052, name: '阪神賽場○', value: 40},
-            rare: {id: 200051, name: '阪神賽場◎', value: 60},
+            normal: {id: 200052, name: '한신 경기장○', value: 40},
+            rare: {id: 200051, name: '한신 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10009]
             },
           },
           {
-            normal: {id: 200122, name: '小倉賽場○', value: 40},
-            rare: {id: 200121, name: '小倉賽場◎', value: 60},
+            normal: {id: 200122, name: '코쿠라 경기장○', value: 40},
+            rare: {id: 200121, name: '코쿠라 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10010]
             },
           },
           {
-            normal: {id: 200952, name: '大井賽場○', value: 40},
-            rare: {id: 200951, name: '大井賽場◎', value: 60},
+            normal: {id: 200952, name: '오이 경기장○', value: 40},
+            rare: {id: 200951, name: '오이 경기장◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'raceTrackId': [10101]
             },
           },
           {
-            normal: {id: 200132, name: '主要距離○', value: 40},
-            rare: {id: 200131, name: '主要距離◎', value: 60},
+            normal: {id: 200132, name: '근간거리○', value: 40},
+            rare: {id: 200131, name: '근간거리◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'distance': [1200, 1600, 2000, 2400, 2800, 3200, 3600]
             },
           },
           {
-            normal: {id: 200142, name: '非主要距離○', value: 40},
-            rare: {id: 200141, name: '非主要距離◎', value: 60},
+            normal: {id: 200142, name: '비근간거리○', value: 40},
+            rare: {id: 200141, name: '비근간거리◎', value: 60},
             status: ['stamina'],
             courseLimit: {
               'distance': [1000, 1100, 1300, 1400, 1500, 1700, 1800, 1900, 2100, 2200
@@ -198,8 +198,8 @@ export default {
             },
           },
           {
-            normal: {id: 200152, name: '良好場地○', value: 40},
-            rare: {id: 200151, name: '良好場地◎', value: 60},
+            normal: {id: 200152, name: '양호한 경기장○', value: 40},
+            rare: {id: 200151, name: '양호한 경기장◎', value: 60},
             surfaceConditionLimit: ['0'],
             status: ['power'],
             check: function () {
@@ -207,8 +207,8 @@ export default {
             }
           },
           {
-            normal: {id: 200162, name: '路況差勁○', value: 40},
-            rare: {id: 200161, name: '路況差勁◎', value: 60},
+            normal: {id: 200162, name: '진창길○', value: 40},
+            rare: {id: 200161, name: '진창길◎', value: 60},
             surfaceConditionLimit: ['1', '2', '3'],
             status: ['power'],
             check: function () {
@@ -216,16 +216,16 @@ export default {
             }
           },
           {
-            normal: {id: 200282, name: '對抗意識○', value: 40},
-            rare: {id: 200281, name: '對抗意識◎', value: 60},
+            normal: {id: 200282, name: '대항 의식○', value: 40},
+            rare: {id: 200281, name: '대항 의식◎', value: 60},
             status: ['power'],
             check: function () {
               return true
             }
           },
           {
-            normal: {name: '天気の日○', value: 40},
-            rare: {name: '天気の日◎', value: 60},
+            normal: {name: '날씨○', value: 40},
+            rare: {name: '날씨◎', value: 60},
             status: ['guts'],
             emulatorTypeLimit: ['cm'],
             check: function () {
@@ -233,26 +233,26 @@ export default {
             }
           },
           {
-            normal: {id: 200292, name: '徹底鎖定○', value: 40},
-            rare: {id: 200291, name: '徹底鎖定◎', value: 60},
+            normal: {id: 200292, name: '집중 마크○', value: 40},
+            rare: {id: 200291, name: '집중 마크◎', value: 60},
             status: ['guts'],
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 200252, name: '擅長內側閘位○', value: 40},
-            rare: {id: 200251, name: '擅長內側閘位◎', value: 60},
+            normal: {id: 200252, name: '안쪽 그룹 능숙○', value: 40},
+            rare: {id: 200251, name: '안쪽 그룹 능숙◎', value: 60},
             status: ['wisdom'],
-            tooltip: '発動率33%として扱う(チャンピオンズミーティング基準)',
+            tooltip: '발동률 33% 계산 (챔피언스 미팅 기준)',
             triggerRate: 3.0 / 9,
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 201522, name: '領放的訣竅○', value: 40},
-            rare: {id: 201521, name: '領放的訣竅◎', value: 60},
+            normal: {id: 201522, name: '도주의 요령○', value: 40},
+            rare: {id: 201521, name: '도주의 요령◎', value: 60},
             status: ['wisdom'],
             styleLimit: [1],
             check: function () {
@@ -260,8 +260,8 @@ export default {
             }
           },
           {
-            normal: {id: 201532, name: '先行的訣竅○', value: 40},
-            rare: {id: 201531, name: '先行的訣竅◎', value: 60},
+            normal: {id: 201532, name: '선행의 요령○', value: 40},
+            rare: {id: 201531, name: '선행의 요령◎', value: 60},
             status: ['wisdom'],
             styleLimit: [2],
             check: function () {
@@ -269,8 +269,8 @@ export default {
             }
           },
           {
-            normal: {id: 201542, name: '差行的訣竅○', value: 40},
-            rare: {id: 201541, name: '差行的訣竅◎', value: 60},
+            normal: {id: 201542, name: '선입의 요령○', value: 40},
+            rare: {id: 201541, name: '선입의 요령◎', value: 60},
             status: ['wisdom'],
             styleLimit: [3],
             check: function () {
@@ -278,8 +278,8 @@ export default {
             }
           },
           {
-            normal: {id: 201552, name: '追逐的訣竅○', value: 40},
-            rare: {id: 201551, name: '追逐的訣竅◎', value: 60},
+            normal: {id: 201552, name: '추입의 요령○', value: 40},
+            rare: {id: 201551, name: '추입의 요령◎', value: 60},
             status: ['wisdom'],
             styleLimit: [4],
             check: function () {
@@ -287,104 +287,104 @@ export default {
             }
           },
           {
-            normal: {id: 201562, name: '幸運7', value: 40},
-            rare: {id: 201561, name: '超級幸運7', value: 60},
+            normal: {id: 201562, name: '럭키 세븐', value: 40},
+            rare: {id: 201561, name: '슈퍼 럭키 세븐', value: 60},
             status: ['speed', 'stamina', 'power'],
-            tooltip: '発動率1/18として扱う(チャンピオンズミーティング基準)',
+            tooltip: '발동률 1/18 계산 (챔피언스 미팅 기준)',
             triggerRate: 1.0 / 18,
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 200172, name: '春賽馬娘○', value: 40},
-            rare: {id: 200171, name: '春賽馬娘◎', value: 60},
+            normal: {id: 200172, name: '봄 우마무스메○', value: 40},
+            rare: {id: 200171, name: '봄 우마무스메◎', value: 60},
             status: ['speed'],
-            tooltip: '発動率40%として扱う。',
+            tooltip: '발동률 40% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.season === 0
             }
           },
           {
-            normal: {id: 200182, name: '夏賽馬娘○', value: 40},
-            rare: {id: 200181, name: '夏賽馬娘◎', value: 60},
+            normal: {id: 200182, name: '여름 우마무스메○', value: 40},
+            rare: {id: 200181, name: '여름 우마무스메◎', value: 60},
             status: ['speed'],
-            tooltip: '発動率20%として扱う。',
+            tooltip: '발동률 20% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.season === 1
             }
           },
           {
-            normal: {id: 200192, name: '秋賽馬娘○', value: 40},
-            rare: {id: 200191, name: '秋賽馬娘◎', value: 60},
+            normal: {id: 200192, name: '가을 우마무스메○', value: 40},
+            rare: {id: 200191, name: '가을 우마무스메◎', value: 60},
             status: ['speed'],
-            tooltip: '発動率20%として扱う。',
+            tooltip: '발동률 20% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.season === 2
             }
           },
           {
-            normal: {id: 200202, name: '冬賽馬娘○', value: 40},
-            rare: {id: 200201, name: '冬賽馬娘◎', value: 60},
+            normal: {id: 200202, name: '겨울 우마무스메○', value: 40},
+            rare: {id: 200201, name: '겨울 우마무스메◎', value: 60},
             status: ['speed'],
-            tooltip: '発動率20%として扱う。',
+            tooltip: '발동률 20% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.season === 3
             }
           },
           {
-            normal: {id: 200212, name: '晴天○', value: 40},
-            rare: {id: 200211, name: '晴天◎', value: 60},
+            normal: {id: 200212, name: '맑은 날○', value: 40},
+            rare: {id: 200211, name: '맑은 날◎', value: 60},
             status: ['guts'],
-            tooltip: '発動率57.5%として扱う。',
+            tooltip: '발동률 57.5% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.weather === 0
             }
           },
           {
-            normal: {id: 200222, name: '陰天○', value: 40},
-            rare: {id: 200221, name: '陰天◎', value: 60},
+            normal: {id: 200222, name: '흐린 날○', value: 40},
+            rare: {id: 200221, name: '흐린 날◎', value: 60},
             status: ['guts'],
-            tooltip: '発動率30%として扱う。',
+            tooltip: '발동률 30% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.weather === 1
             }
           },
           {
-            normal: {id: 200232, name: '下雨天○', value: 40},
-            rare: {id: 200231, name: '下雨天◎', value: 60},
+            normal: {id: 200232, name: '비 오는 날○', value: 40},
+            rare: {id: 200231, name: '비 오는 날◎', value: 60},
             status: ['guts'],
-            tooltip: '発動率11%として扱う。',
+            tooltip: '발동률 11% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.weather === 2
             }
           },
           {
-            normal: {id: 200242, name: '下雪天○', value: 40},
-            rare: {id: 200241, name: '下雪天◎', value: 60},
+            normal: {id: 200242, name: '눈오는 날○', value: 40},
+            rare: {id: 200241, name: '눈오는 날◎', value: 60},
             status: ['guts'],
-            tooltip: '発動率1.5%として扱う。',
+            tooltip: '발동률 1.5% 계산',
             emulatorTypeLimit: ['team'],
             check: function () {
               return thiz.weather === 3
             }
           },
           {
-            rare: {id: 200194, name: '秋風', value: 60},
+            rare: {id: 200194, name: '초가을 강풍', value: 60},
             status: ['speed', 'power'],
             check: function () {
               return thiz.season === 2
             }
           },
           {
-            rare: {id: 200174, name: '春風起', value: 60},
+            rare: {id: 200174, name: '첫 봄바람', value: 60},
             status: ['speed', 'power'],
             check: function () {
               return thiz.season === 1
@@ -394,8 +394,8 @@ export default {
         ],
         heal: [
           {
-            normal: {id: 200352, name: '彎道回復○', value: 150},
-            rare: {id: 200351, name: '圓弧的藝術家', value: 550},
+            normal: {id: 200352, name: '코너 회복○', value: 150},
+            rare: {id: 200351, name: '원호의 마에스트로', value: 550},
             init: function () {
               this.randoms = thiz.initCornerRandom()
             },
@@ -404,8 +404,8 @@ export default {
             }
           },
           {
-            normal: {id: 200382, name: '直線回復', value: 150},
-            rare: {id: 200381, name: '好轉歇息', value: 550},
+            normal: {id: 200382, name: '직선 회복', value: 150},
+            rare: {id: 200381, name: '호전일식', value: 550},
             init: function () {
               this.randoms = thiz.initStraightRandom()
             },
@@ -414,8 +414,8 @@ export default {
             }
           },
           {
-            normal: {id: 200742, name: '深呼吸', value: 150},
-            rare: {id: 200741, name: '冷卻', value: 550},
+            normal: {id: 200742, name: '심호흡', value: 150},
+            rare: {id: 200741, name: '쿨다운', value: 550},
             distanceLimit: DistanceLimit.Long,
             init: function () {
               this.randoms = thiz.initStraightRandom()
@@ -425,20 +425,20 @@ export default {
             }
           },
           {
-            normal: {id: 201571, name: '777', value: 150},
+            normal: {id: 201571, name: '스리 세븐', value: 150},
             check: function (startPosition) {
               return thiz.isContainsRemainingDistance(777, startPosition)
             }
           },
           {
-            normal: {id: 201621, name: '竭盡全力', value: 150},
+            normal: {id: 201621, name: '쥐어짜기', value: 150},
             check: function () {
               return thiz.skillTriggerCount[2] + thiz.skillTriggerCount[3] >= 3
             }
           },
           {
-            normal: {id: 201482, name: '放學的樂趣', value: 150},
-            rare: {id: 201481, name: '放學後的專家', value: 550},
+            normal: {id: 201482, name: '하굣길의 즐거움', value: 150},
+            rare: {id: 201481, name: '하교 후의 스페셜리스트', value: 550},
             styleLimit: [4],
             check: function () {
               return thiz.accTimePassed(10) && thiz.isRunningStyle(4)
@@ -446,8 +446,8 @@ export default {
             }
           },
           {
-            normal: {id: 201282, name: '隨勢而動', value: 150},
-            rare: {id: 201281, name: '強悍賽馬娘', value: 550},
+            normal: {id: 201282, name: '기세에 맡기기', value: 150},
+            rare: {id: 201281, name: '말괄량이 우마무스메', value: 550},
             styleLimit: [1],
             check: function () {
               return thiz.accTimePassed(10) && thiz.isRunningStyle(1)
@@ -455,8 +455,8 @@ export default {
             }
           },
           {
-            normal: {id: 201352, name: '補充營養', value: 150},
-            rare: {id: 201351, name: '貪吃鬼', value: 550},
+            normal: {id: 201352, name: '영양 보급', value: 150},
+            rare: {id: 201351, name: '먹보', value: 550},
             styleLimit: [2],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -466,10 +466,10 @@ export default {
             }
           },
           {
-            normal: {id: 200572, name: '好位追趕', value: 150},
-            rare: {id: 200571, name: '賽場規劃師', value: 550},
+            normal: {id: 200572, name: '좋은 위치 뒤따르기', value: 150},
+            rare: {id: 200571, name: '레이스 플래너', value: 550},
             styleLimit: [2],
-            tooltip: '順位<=50%は満たしていると見なす',
+            tooltip: '순위<=50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -478,10 +478,10 @@ export default {
             }
           },
           {
-            normal: {id: 200662, name: '靜觀其變', value: 150},
+            normal: {id: 200662, name: '상황 파악', value: 150},
             styleLimit: [3, 4],
             distanceLimit: [1],
-            tooltip: '順位>50%は満たしていると見なす',
+            tooltip: '순위>50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -490,11 +490,11 @@ export default {
             }
           },
           {
-            normal: {id: 201222, name: '耐力獵手', value: 150},
-            rare: {id: 201221, name: '耐力食取', value: 350},
+            normal: {id: 201222, name: '스태미나 이터', value: 150},
+            rare: {id: 201221, name: '스태미나 그리드', value: 350},
             styleLimit: [2, 3, 4],
             distanceLimit: [4],
-            tooltip: '5番手かそれ以降満たしていると見なす',
+            tooltip: '순위 5위 이하 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -503,11 +503,11 @@ export default {
             }
           },
           {
-            normal: {id: 200712, name: '前途無量', value: 150},
-            rare: {id: 200711, name: '突破者', value: 550},
+            normal: {id: 200712, name: '전도유망', value: 150},
+            rare: {id: 200711, name: '개척자', value: 550},
             styleLimit: [1, 2],
             distanceLimit: [3],
-            tooltip: 'ランダム発動地点で1番手限定なので見た目以上に発動が厳しい。これを満たしていると見なす',
+            tooltip: '랜덤 발동 지점에서 ‘선두’ 한정으로 발동이 어려움. 여기선 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -516,10 +516,10 @@ export default {
             }
           },
           {
-            normal: {id: 200622, name: '後方待機', value: 150},
-            rare: {id: 200621, name: '沉睡的獅子', value: 550},
+            normal: {id: 200622, name: '후방 대기', value: 150},
+            rare: {id: 200621, name: '잠자는 사자', value: 550},
             styleLimit: [4],
-            tooltip: '位置>=75%は満たしていると見なす。先行勢より条件が難しいので注意すべし。特にゴルシ。',
+            tooltip: '위치>=75% 조건 충족으로 간주. 순위보다 조건이 까다로우니 주의, 특히 고루시.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -528,10 +528,10 @@ export default {
             }
           },
           {
-            rare: {id: 201201, name: '	VIP特權通行', value: 550},
-            normal: {id: 201202, name: '熟練超越', value: 150},
+            rare: {id: 201201, name: 'VIP 안면 패스', value: 550},
+            normal: {id: 201202, name: '능숙한 패스', value: 150},
             distanceLimit: [4],
-            tooltip: '「序盤か中盤のどこかで発動」として扱う。適当実装注意。',
+            tooltip: '「초반에서 중반 어딘가에서」 발동하는 걸로 간주.',
             init: function () {
               if (Math.random() < 0.333) {
                 this.randoms = thiz.initPhaseRandom(0)
@@ -545,19 +545,19 @@ export default {
             }
           },
           {
-            normal: {id: 201142, name: '輕快步伐', value: 150},
-            rare: {id: 201141, name: '神賜步伐', value: 550},
+            normal: {id: 201142, name: '경쾌한 스텝', value: 150},
+            rare: {id: 201141, name: '신들린 스텝', value: 550},
             distanceLimit: [3],
-            tooltip: '「スタート後20秒で発動」として扱う。大体そこら辺で内コースを取り始めるため。多分（ガバ）',
+            tooltip: '「스타트 후 20초 때」 발동으로 간주. 대체적으로 그때 쯤 안쪽 레인으로 이동하기 시작. 아마도?',
             check: function () {
               return thiz.isDistanceType(3) && thiz.accTimePassed(20)
             }
           },
           {
-            normal: {id: 200562, name: '維持持久力', value: 150},
-            rare: {id: 200561, name: '綽綽有餘', value: 550},
+            normal: {id: 200562, name: '스태미나 킵', value: 150},
+            rare: {id: 200561, name: '여유만만', value: 550},
             styleLimit: [2],
-            tooltip: '順位<=50%は満たしていると見なす',
+            tooltip: '순위<=50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -567,11 +567,11 @@ export default {
             }
           },
           {
-            normal: {id: 200692, name: '觀察情勢', value: 150},
-            rare: {id: 200691, name: '慧眼', value: 550},
+            normal: {id: 200692, name: '전개 살피기', value: 150},
+            rare: {id: 200691, name: '혜안', value: 550},
             distanceLimit: [2],
             styleLimit: [3, 4],
-            tooltip: '順位>50%は満たしていると見なす。実質差し追込限定。',
+            tooltip: '순위>50% 조건 충족으로 간주. 실질적으로 선입, 추입 한정.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -581,8 +581,8 @@ export default {
             }
           },
           {
-            normal: {id: 201422, name: '小休息', value: 150},
-            rare: {id: 201421, name: '放鬆', value: 550},
+            normal: {id: 201422, name: '짧은 휴식', value: 150},
+            rare: {id: 201421, name: '릴랙스', value: 550},
             styleLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -592,17 +592,17 @@ export default {
             }
           },
           {
-            normal: {id: 200442, name: '隱藏身影', value: 150},
-            rare: {id: 200441, name: '鋼鐵意志', value: 550},
-            tooltip: '「上り坂で発動」として扱う（一番現実的な発動方法なため）。実戦でやろうとしたら自前の低パワー逃げ馬が必要で先行馬限定とか色々厳しそうだけど適当実装なので自己判断＆自己責任で。',
+            normal: {id: 200442, name: '방패막이', value: 150},
+            rare: {id: 200441, name: '강철 같은 의지', value: 550},
+            tooltip: '「오르막에서 발동」으로 간주(가장 현실적인 방안). 실전에서는 저 파워의 도주마 뒤에 걸린 선행마 한정 등 조건이 굉장히 까다롭기 때문에 스킬 선택은 각자 판단에 맡김.',
             check: function () {
               return thiz.accTimePassed(5) && thiz.isInSlope('up')
             }
           },
           {
-            normal: {id: 201492, name: '冷静', value: 150},
+            normal: {id: 201492, name: '냉정', value: 150},
             styleLimit: [4],
-            tooltip: '「中盤のどこかで発動」として扱う。適当実装注意。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 실전성 여부는 불확실함.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -612,9 +612,9 @@ export default {
             }
           },
           {
-            normal: {id: 200472, name: '維持步調', value: 150},
-            rare: {id: 200471, name: '不屈之心', value: 550},
-            tooltip: '「中盤のどこか」として扱う。実戦で発動できるかどうかは各自判断すべし。',
+            normal: {id: 200472, name: '페이스 킵', value: 150},
+            rare: {id: 200471, name: '꺾이지 않는 마음', value: 550},
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 실전에서의 발동 여부는 각자 판단에 맡김.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -623,9 +623,9 @@ export default {
             }
           },
           {
-            normal: {id: 200482, name: '混戰冷靜', value: 150},
-            rare: {id: 200481, name: '充耳不聞', value: 550},
-            tooltip: '「中盤のどこか」として扱う。実戦で発動できるかどうかは各自判断すべし。ていうかあまり発動しないんじゃね？',
+            normal: {id: 200482, name: '마군 속 냉정', value: 150},
+            rare: {id: 200481, name: '마이동풍', value: 550},
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 실전에서의 발동 여부는 각자 판단에 맡김. 역시나 잘 발동하지 않으려나?',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -634,17 +634,17 @@ export default {
             }
           },
           {
-            normal: {id: 200762, name: '第二體力條', value: 150},
-            rare: {id: 200761, name: '腎上腺素爆發', value: 550},
+            normal: {id: 200762, name: '외장 탱크', value: 150},
+            rare: {id: 200761, name: '위기 앞의 저력', value: 550},
             distanceLimit: [4],
             check: function () {
               return thiz.isDistanceType(4) && thiz.sp <= 0
             }
           },
           {
-            normal: {id: 0, name: '燃燒青春・耐', value: 165},
-            rare: {id: 0, name: '點燃青春・耐', value: 605},
-            tooltip: '効果1.1倍として扱う',
+            normal: {id: 0, name: '아오하루 점화・체력', value: 165},
+            rare: {id: 0, name: '아오하루 연소・체력', value: 605},
+            tooltip: '1.1배 효과로 적용.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -653,8 +653,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '安静的呼吸', value: 150},
-            rare: {id: 0, name: '潛伏姿態', value: 550},
+            normal: {id: 0, name: '고요한 호흡', value: 150},
+            rare: {id: 0, name: '잠복태세', value: 550},
             styleLimit: StyleLimit.Sasi,
             init: function () {
               this.randoms = thiz.initPhaseRandom(0, {startRate: 0.5})
@@ -664,7 +664,7 @@ export default {
             }
           },
           {
-            normal: {id: 202002, name: '習慣沙塵', heal: 150},
+            normal: {id: 202002, name: '모래 먼지 익숙해지기', heal: 150},
             styleLimit: StyleLimit.Behind,
             surfaceLimit: SurfaceLimit.Dirt,
             init: function () {
@@ -678,8 +678,8 @@ export default {
         ],
         targetSpeed: [
           {
-            normal: {id: 200332, name: '彎道靈巧○', value: 0.15},
-            rare: {id: 200331, name: '弧線的教授', value: 0.35},
+            normal: {id: 200332, name: '코너 달인○', value: 0.15},
+            rare: {id: 200331, name: '호선의 프로페서', value: 0.35},
             duration: 1.8,
             cd: 30,
             init: function () {
@@ -690,8 +690,8 @@ export default {
             }
           },
           {
-            normal: {id: 200972, name: '短距離彎道○', value: 0.15},
-            rare: {id: 200971, name: '短距離彎道◎', value: 0.25},
+            normal: {id: 200972, name: '단거리 코너○', value: 0.15},
+            rare: {id: 200971, name: '단거리 코너◎', value: 0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -702,8 +702,8 @@ export default {
             }
           },
           {
-            normal: {id: 201042, name: '一哩彎道○', value: 0.15},
-            rare: {id: 201041, name: '一哩彎道◎', value: 0.25},
+            normal: {id: 201042, name: '마일 코너○', value: 0.15},
+            rare: {id: 201041, name: '마일 코너◎', value: 0.25},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -714,8 +714,8 @@ export default {
             }
           },
           {
-            normal: {id: 201112, name: '中距離彎道○', value: 0.15},
-            rare: {id: 201111, name: '中距離彎道◎', value: 0.25},
+            normal: {id: 201112, name: '중거리 코너○', value: 0.15},
+            rare: {id: 201111, name: '중거리 코너◎', value: 0.25},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -726,8 +726,8 @@ export default {
             }
           },
           {
-            normal: {id: 201182, name: '長距離彎道○', value: 0.15},
-            rare: {id: 201181, name: '長距離彎道◎', value: 0.25},
+            normal: {id: 201182, name: '장거리 코너○', value: 0.15},
+            rare: {id: 201181, name: '장거리 코너◎', value: 0.25},
             duration: 3,
             distanceLimit: [4],
             init: function () {
@@ -738,8 +738,8 @@ export default {
             }
           },
           {
-            normal: {id: 201252, name: '領頭彎道○', value: 0.15},
-            rare: {id: 201251, name: '領頭彎道◎', value: 0.25},
+            normal: {id: 201252, name: '도주 코너○', value: 0.15},
+            rare: {id: 201251, name: '도주 코너◎', value: 0.25},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -750,8 +750,8 @@ export default {
             }
           },
           {
-            normal: {id: 201322, name: '前列彎道○', value: 0.15},
-            rare: {id: 201321, name: '前列彎道◎', value: 0.25},
+            normal: {id: 201322, name: '선행 코너○', value: 0.15},
+            rare: {id: 201321, name: '선행 코너◎', value: 0.25},
             duration: 3,
             styleLimit: [2],
             init: function () {
@@ -762,8 +762,8 @@ export default {
             }
           },
           {
-            normal: {id: 201392, name: '居中彎道○', value: 0.15},
-            rare: {id: 201391, name: '居中彎道◎', value: 0.25},
+            normal: {id: 201392, name: '선입 코너○', value: 0.15},
+            rare: {id: 201391, name: '선입 코너◎', value: 0.25},
             duration: 3,
             styleLimit: [3],
             init: function () {
@@ -774,8 +774,8 @@ export default {
             }
           },
           {
-            normal: {id: 201462, name: '後追彎道○', value: 0.15},
-            rare: {id: 201461, name: '後追彎道◎', value: 0.25},
+            normal: {id: 201462, name: '추입 코너○', value: 0.15},
+            rare: {id: 201461, name: '추입 코너◎', value: 0.25},
             duration: 3,
             styleLimit: [4],
             init: function () {
@@ -786,8 +786,8 @@ export default {
             }
           },
           {
-            normal: {id: 200362, name: '直線靈巧', value: 0.15},
-            rare: {id: 200361, name: '	疾風一文字', value: 0.35},
+            normal: {id: 200362, name: '직선 달인', value: 0.15},
+            rare: {id: 200361, name: '한줄기 질풍', value: 0.35},
             duration: 0.9,
             cd: 30,
             init: function () {
@@ -798,8 +798,8 @@ export default {
             }
           },
           {
-            normal: {id: 200962, name: '短距離直線○', value: 0.15},
-            rare: {id: 200961, name: '短距離直線◎', value: 0.25},
+            normal: {id: 200962, name: '단거리 직선○', value: 0.15},
+            rare: {id: 200961, name: '단거리 직선◎', value: 0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -810,8 +810,8 @@ export default {
             }
           },
           {
-            normal: {id: 201032, name: '一哩直線○', value: 0.15},
-            rare: {id: 201031, name: '一哩直線◎', value: 0.25},
+            normal: {id: 201032, name: '마일 직선○', value: 0.15},
+            rare: {id: 201031, name: '마일 직선◎', value: 0.25},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -822,8 +822,8 @@ export default {
             }
           },
           {
-            normal: {id: 201102, name: '中距離直線○', value: 0.15},
-            rare: {id: 201101, name: '中距離直線◎', value: 0.25},
+            normal: {id: 201102, name: '중거리 직선○', value: 0.15},
+            rare: {id: 201101, name: '중거리 직선◎', value: 0.25},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -834,8 +834,8 @@ export default {
             }
           },
           {
-            normal: {id: 201172, name: '長距離直線○', value: 0.15},
-            rare: {id: 201171, name: '長距離直線◎', value: 0.25},
+            normal: {id: 201172, name: '장거리 직선○', value: 0.15},
+            rare: {id: 201171, name: '장거리 직선◎', value: 0.25},
             duration: 3,
             distanceLimit: [4],
             init: function () {
@@ -846,8 +846,8 @@ export default {
             }
           },
           {
-            normal: {id: 201242, name: '領頭直線○', value: 0.15},
-            rare: {id: 201241, name: '領頭直線◎', value: 0.25},
+            normal: {id: 201242, name: '도주 직선○', value: 0.15},
+            rare: {id: 201241, name: '도주 직선◎', value: 0.25},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -858,8 +858,8 @@ export default {
             }
           },
           {
-            normal: {id: 201312, name: '前列直線○', value: 0.15},
-            rare: {id: 201311, name: '前列直線◎', value: 0.25},
+            normal: {id: 201312, name: '선행 직선○', value: 0.15},
+            rare: {id: 201311, name: '선행 직선◎', value: 0.25},
             duration: 3,
             styleLimit: [2],
             init: function () {
@@ -870,8 +870,8 @@ export default {
             }
           },
           {
-            normal: {id: 201382, name: '居中直線○', value: 0.15},
-            rare: {id: 201381, name: '居中直線◎', value: 0.25},
+            normal: {id: 201382, name: '선입 직선○', value: 0.15},
+            rare: {id: 201381, name: '선입 직선◎', value: 0.25},
             duration: 3,
             styleLimit: [3],
             init: function () {
@@ -882,8 +882,8 @@ export default {
             }
           },
           {
-            normal: {id: 201452, name: '後追直線○', value: 0.15},
-            rare: {id: 201451, name: '後追直線◎', value: 0.25},
+            normal: {id: 201452, name: '추입 직선○', value: 0.15},
+            rare: {id: 201451, name: '추입 직선◎', value: 0.25},
             duration: 3,
             styleLimit: [4],
             init: function () {
@@ -894,8 +894,8 @@ export default {
             }
           },
           {
-            normal: {id: 200542, name: '疾行', value: 0.15},
-            rare: {id: 200541, name: '逃脫術', value: 0.35},
+            normal: {id: 200542, name: '빠른 걸음', value: 0.15},
+            rare: {id: 200541, name: '탈출술', value: 0.35},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -906,11 +906,11 @@ export default {
             }
           },
           {
-            normal: {id: 200592, name: '前驅取位', value: 0.15},
-            rare: {id: 200591, name: '迅速果斷', value: 0.35},
+            normal: {id: 200592, name: '위치 선정 밀어붙이기', value: 0.15},
+            rare: {id: 200591, name: '신속 과감', value: 0.35},
             duration: 1.8,
             styleLimit: [3],
-            tooltip: '順位>50%を満たしたと見なす',
+            tooltip: '순위>50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -919,10 +919,10 @@ export default {
             }
           },
           {
-            normal: {id: 201272, name: '領者的自尊心', value: 0.15},
+            normal: {id: 201272, name: '선두 프라이드', value: 0.15},
             duration: 3,
             styleLimit: [1],
-            tooltip: '「序盤のどこかで発動」として扱う',
+            tooltip: '「초반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -932,11 +932,11 @@ export default {
             }
           },
           {
-            normal: {id: 200582, name: '準備突圍', value: 0.15},
-            rare: {id: 200581, name: '速度之星', value: 0.35},
+            normal: {id: 200582, name: '빠져나갈 준비', value: 0.15},
+            rare: {id: 200581, name: '스피드스터', value: 0.35},
             duration: 1.2,
             styleLimit: [2],
-            tooltip: '順位条件の<=50%は満たしていると見なす',
+            tooltip: '순위<=50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initFinalCornerRandom()
             },
@@ -945,11 +945,11 @@ export default {
             }
           },
           {
-            normal: {id: 200612, name: '準備外側超前', value: 0.15},
-            rare: {id: 200611, name: '昇龍', value: 0.35},
+            normal: {id: 200612, name: '외곽 추월 준비', value: 0.15},
+            rare: {id: 200611, name: '승천하는 용', value: 0.35},
             duration: 3,
             styleLimit: [3],
-            tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
+            tooltip: '「최종 코너 어딘가에서 발동」으로 간주. 불확실함.',
             init: function () {
               this.randoms = thiz.initFinalCornerRandom()
             },
@@ -958,8 +958,8 @@ export default {
             }
           },
           {
-            normal: {id: 201412, name: '十萬衝勁', value: 0.15},
-            rare: {id: 201411, name: '百萬衝勁', value: 0.35},
+            normal: {id: 201412, name: '십만 마력', value: 0.15},
+            rare: {id: 201411, name: '백만 마력', value: 0.35},
             duration: 1.8,
             styleLimit: [3],
             check: function () {
@@ -967,23 +967,23 @@ export default {
             }
           },
           {
-            normal: {id: 200982, name: '大幅領先', value: 0.15},
-            rare: {id: 200981, name: '壓倒性領先', value: 0.35},
+            normal: {id: 200982, name: '큰 리드', value: 0.15},
+            rare: {id: 200981, name: '압도적 리드', value: 0.35},
             duration: 1.2,
             distanceLimit: [1],
             styleLimit: [1],
-            tooltip: '中盤に入った瞬間に1位で5馬身リードしていると見なす。見なすな。',
+            tooltip: '중반에 접어든 순간에 선두로 5마신 리드하고 있는 걸로 간주. 그런 가정은 필요 없다고.',
             check: function () {
               return thiz.isDistanceType(1) && thiz.curretPhase === 1
             }
           },
           {
-            normal: {id: 200672, name: '窮追不捨', value: 0.15},
-            rare: {id: 200671, name: '電擊光輝', value: 0.35},
+            normal: {id: 200672, name: '바짝 붙기', value: 0.15},
+            rare: {id: 200671, name: '번갯불의 번뜩임', value: 0.35},
             duration: 3,
             distanceLimit: [1],
             styleLimit: [3, 4],
-            tooltip: '順位>50%を満たしたと見なす',
+            tooltip: '순위>50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -992,12 +992,12 @@ export default {
             }
           },
           {
-            normal: {id: 200682, name: '積極應對', value: 0.15},
-            rare: {id: 200681, name: '一哩支配者', value: 0.35},
+            normal: {id: 200682, name: '적극책', value: 0.15},
+            rare: {id: 200681, name: '마일의 지배자', value: 0.35},
             duration: 3,
             distanceLimit: [2],
             styleLimit: [1, 2],
-            tooltip: '順位1位を満たしたと見なす',
+            tooltip: '선두 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -1007,12 +1007,12 @@ export default {
             }
           },
           {
-            normal: {id: 201052, name: '變速', value: 0.15},
-            rare: {id: 201051, name: '換檔', value: 0.35},
+            normal: {id: 201052, name: '기어 시프트', value: 0.15},
+            rare: {id: 201051, name: '기어 체인지', value: 0.35},
             duration: 1.2,
             distanceLimit: [2],
             styleLimit: [1, 2],
-            tooltip: '順位<=50%を満たしたと見なす',
+            tooltip: '순위<=50% 조건 충족으로 간주',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1021,11 +1021,11 @@ export default {
             }
           },
           {
-            normal: {id: 201072, name: '不服輸', value: 0.15},
-            rare: {id: 201071, name: '御姐氣質', value: 0.35},
+            normal: {id: 201072, name: '오기', value: 0.15},
+            rare: {id: 201071, name: '여장부 기질', value: 0.35},
             duration: 1.8,
             distanceLimit: [2],
-            tooltip: '「中盤のどこか」として扱う。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1035,12 +1035,12 @@ export default {
             }
           },
           {
-            normal: {id: 200722, name: '加快節奏', value: 0.15},
-            rare: {id: 200721, name: '致勝曲調', value: 0.35},
+            normal: {id: 200722, name: '템포 업', value: 0.15},
+            rare: {id: 200721, name: '킬러 튠', value: 0.35},
             duration: 0.9,
             distanceLimit: [3],
             styleLimit: [1, 2],
-            tooltip: '順位<=50%を満たしたと見なす',
+            tooltip: '순위<=50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1049,11 +1049,11 @@ export default {
             }
           },
           {
-            normal: {id: 200732, name: '緊咬不放', value: 0.15},
-            rare: {id: 200731, name: '對勝利的執著', value: 0.35},
+            normal: {id: 200732, name: '물고 늘어지기', value: 0.15},
+            rare: {id: 200731, name: '승리를 향한 집념', value: 0.35},
             duration: 3,
             distanceLimit: [3],
-            tooltip: '「最終コーナーのどこか」として扱う。当てにならない。',
+            tooltip: '「최종 코너 어딘가에서 발동」으로 간주. 불확실함.',
             init: function () {
               this.randoms = thiz.initFinalCornerRandom()
             },
@@ -1062,11 +1062,11 @@ export default {
             }
           },
           {
-            normal: {id: 200752, name: '內側強者', value: 0.15},
-            rare: {id: 200751, name: '內在體驗', value: 0.35},
+            normal: {id: 200752, name: '안쪽 코너 여포', value: 0.15},
+            rare: {id: 200751, name: '내적 체험', value: 0.35},
             duration: 3,
             distanceLimit: [4],
-            tooltip: '内ラチ側にいると見なす。実質逃げ馬用かな？知らないけど。',
+            tooltip: '안쪽 레인에 있는 걸로 간주. 실질적으론 도주마 전용이려나? 몰?루',
             init: function () {
               this.randoms = thiz.initFinalCornerRandom()
             },
@@ -1075,11 +1075,11 @@ export default {
             }
           },
           {
-            normal: {id: 201192, name: '保持領先', value: 0.15},
-            rare: {id: 201191, name: '前鋒的心得', value: 0.35},
+            normal: {id: 201192, name: '리드 킵', value: 0.15},
+            rare: {id: 201191, name: '선봉의 마음가짐', value: 0.35},
             duration: 3,
             distanceLimit: [4],
-            tooltip: '「中盤のどこか」の時に3馬身リードしていると見なす。普通は単独逃げ馬以外では夢物語。',
+            tooltip: '「중반 어딘가에서 발동」할 때 3마신 리드하고 있는 걸로 간주. 일반적으로 단독 도주 외에는 꿈만 같은 이야기..',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1088,9 +1088,9 @@ export default {
             }
           },
           {
-            normal: {id: 201661, name: '遊戲到此為止了！', value: 0.15},
+            normal: {id: 201661, name: '장난은 끝이야!', value: 0.15},
             duration: 3,
-            tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1099,9 +1099,9 @@ export default {
             }
           },
           {
-            normal: {id: 201651, name: '滑流', value: 0.15},
+            normal: {id: 201651, name: '슬립스트림', value: 0.15},
             duration: 3,
-            tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1110,11 +1110,11 @@ export default {
             }
           },
           {
-            normal: {id: 200632, name: '進攻時機超群', value: 0.15},
-            rare: {id: 0, name: '疾風怒濤', value: 0.35},
+            normal: {id: 200632, name: '뛰어난 작전', value: 0.15},
+            rare: {id: 0, name: '질풍노도', value: 0.35},
             duration: 3,
             styleLimit: [4],
-            tooltip: '位置>75%を満たしたと見なす。実戦は条件を注意すべし。',
+            tooltip: '위치>75% 조건 만족으로 간주. 실전성 여부는 불확실함.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1123,10 +1123,10 @@ export default {
             }
           },
           {
-            normal: {id: 201212, name: '後來居上', value: 0.15},
+            normal: {id: 201212, name: '추격', value: 0.15},
             duration: 3,
             distanceLimit: [4],
-            tooltip: '「終盤のどこか」として扱う。実際は加速中に消化されるのが大半。',
+            tooltip: '「종반 어딘가에서 발동」으로 간주. 실전에서는 가속 중 발동하는 경우가 대부분.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1135,11 +1135,11 @@ export default {
             }
           },
           {
-            normal: {id: 201082, name: '速度吞噬者', value: 0.15},
+            normal: {id: 201082, name: '스피드 이터', value: 0.15},
             duration: 3,
             styleLimit: [1],
             distanceLimit: [2],
-            tooltip: '1位条件は満たしていると見なす。どこか発動で1位要求なので実戦は安定しない。',
+            tooltip: '선두 조건 충족으로 간주. 실전성 여부는 불확실함.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1148,10 +1148,10 @@ export default {
             }
           },
           {
-            normal: {id: 200462, name: '加速步調', value: 0.15},
-            rare: {id: 200461, name: '追上去！', value: 0.35},
+            normal: {id: 200462, name: '페이스 업', value: 0.15},
+            rare: {id: 200461, name: '텐션 오르는데!', value: 0.35},
             duration: 1.8,
-            tooltip: '「中盤のどこかで発動」として扱う。ガバガバ実装。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1160,11 +1160,11 @@ export default {
             }
           },
           {
-            normal: {id: 201672, name: '安利', value: 0.15},
-            rare: {id: 201671, name: '排名急上升！', value: 0.35},
+            normal: {id: 201672, name: '리커멘드', value: 0.15},
+            rare: {id: 201671, name: '차트 급상승!', value: 0.35},
             duration: 1.8,
             surfaceLimit: SurfaceLimit.Dirt,
-            tooltip: '「中盤のどこか」として扱う。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1173,8 +1173,8 @@ export default {
             }
           },
           {
-            normal: {id: 200512, name: '尾段加速', value: 0.15},
-            rare: {id: 200511, name: '全心全力', value: 0.35},
+            normal: {id: 200512, name: '뒷심', value: 0.15},
+            rare: {id: 200511, name: '전심전력', value: 0.35},
             duration: 1.8,
             init: function () {
               this.randoms = thiz.initPhaseRandom(3)
@@ -1184,18 +1184,18 @@ export default {
             }
           },
           {
-            normal: {id: 201611, name: '豎起尾巴', value: 0.15},
-            rare: {id: 201612, name: '後起之秀', value: 0.35},
+            normal: {id: 201611, name: '꼬리 올리기', value: 0.15},
+            rare: {id: 201612, name: '꼬리의 폭포오르기', value: 0.35},
             duration: 3,
             check: function () {
               return thiz.skillTriggerCount[1] >= 3
             }
           },
           {
-            normal: {id: 0, name: '點燃青春・速', value: 0.1725},
-            rare: {id: 0, name: '燃燒青春・速', value: 0.4025},
+            normal: {id: 0, name: '아오하루 점화・속도', value: 0.1725},
+            rare: {id: 0, name: '아오하루 연소・속도', value: 0.4025},
             duration: 1.8,
-            tooltip: '効果1.15倍として扱う',
+            tooltip: '1.15배 효과로 적용.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1204,16 +1204,16 @@ export default {
             }
           },
           {
-            normal: {id: 201702, name: '傾其所有', value: 0.15},
-            rare: {id: 201701, name: '決死之心', value: 0.35},
+            normal: {id: 201702, name: '있는 대로 모두', value: 0.15},
+            rare: {id: 201701, name: '결사의 각오', value: 0.35},
             duration: 2.4,
             check: function () {
               return thiz.isInStraight() && thiz.isInSpurt
             }
           },
           {
-            normal: {id: 202012, name: '熱場好戲', value: 0.15},
-            rare: {id: 202011, name: '壓台好戲', value: 0.35},
+            normal: {id: 202012, name: '거짓 주역', value: 0.15},
+            rare: {id: 202011, name: '진 주역', value: 0.35},
             duration: 2.4,
             distanceLimit: DistanceLimit.Long,
             init: function () {
@@ -1228,8 +1228,8 @@ export default {
             }
           },
           {
-            normal: {id: 202021, name: '提早發力', value: 0.05},
-            rare: {id: 202022, name: '強硬之策', value: 0.25},
+            normal: {id: 202021, name: '이른 작전', value: 0.05},
+            rare: {id: 202022, name: '강공책', value: 0.25},
             duration: 4,
             styleLimit: StyleLimit.Oi,
             init: function () {
@@ -1241,7 +1241,7 @@ export default {
             }
           },
           {
-            rare: {id: 201103, name: '光芒一閃', value: 0.35},
+            rare: {id: 201103, name: '광망일섬', value: 0.35},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -1255,8 +1255,8 @@ export default {
         ],
         acceleration: [
           {
-            normal: {id: 200342, name: '彎道加速○', value: 0.2},
-            rare: {id: 200341, name: '曲線的侍酒師', value: 0.4},
+            normal: {id: 200342, name: '코너 가속○', value: 0.2},
+            rare: {id: 200341, name: '곡선의 소믈리에', value: 0.4},
             duration: 1.8,
             cd: 30,
             init: function () {
@@ -1267,8 +1267,8 @@ export default {
             }
           },
           {
-            normal: {id: 200372, name: '直線加速', value: 0.2},
-            rare: {id: 200371, name: '快如陣風', value: 0.4},
+            normal: {id: 200372, name: '직선 가속', value: 0.2},
+            rare: {id: 200371, name: '일진광풍', value: 0.4},
             duration: 1.8,
             cd: 30,
             init: function () {
@@ -1279,8 +1279,8 @@ export default {
             }
           },
           {
-            normal: {id: 200532, name: '先鋒', value: 0.2},
-            rare: {id: 200531, name: '先發必勝', value: 0.4},
+            normal: {id: 200532, name: '앞장서기', value: 0.2},
+            rare: {id: 200531, name: '선수 필승', value: 0.4},
             styleLimit: [1],
             duration: 1.2,
             check: function () {
@@ -1288,11 +1288,11 @@ export default {
             }
           },
           {
-            normal: {id: 200552, name: '準備強行衝線', value: 0.2},
-            rare: {id: 200551, name: '逃亡者', value: 0.4},
+            normal: {id: 200552, name: '굳히기 준비', value: 0.2},
+            rare: {id: 200551, name: '도망자', value: 0.4},
             styleLimit: [1],
             duration: 3,
-            tooltip: '1位は満たしていると見なす',
+            tooltip: '선두 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initFinalCornerRandom()
             },
@@ -1301,11 +1301,11 @@ export default {
             }
           },
           {
-            normal: {id: 200602, name: '居中超前姿勢', value: 0.2},
-            rare: {id: 200601, name: '熟練轉換', value: 0.4},
+            normal: {id: 200602, name: '추월 확정 태세', value: 0.2},
+            rare: {id: 200601, name: '능숙한 환승', value: 0.4},
             styleLimit: [3],
             duration: 1.8,
-            tooltip: '順位>=50%は満たしていると見なす',
+            tooltip: '순위>=50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1314,8 +1314,8 @@ export default {
             }
           },
           {
-            normal: {id: 200642, name: '直線一口氣', value: 0.2},
-            rare: {id: 200641, name: '逼近的身影', value: 0.4},
+            normal: {id: 200642, name: '직선 주파', value: 0.2},
+            rare: {id: 200641, name: '육박하는 그림자', value: 0.4},
             duration: 0.9,
             styleLimit: [4],
             check: function () {
@@ -1323,8 +1323,8 @@ export default {
             }
           },
           {
-            normal: {id: 200652, name: '短途檔位', value: 0.2},
-            rare: {id: 200651, name: '短途渦輪', value: 0.4},
+            normal: {id: 200652, name: '스프린트 기어', value: 0.2},
+            rare: {id: 200651, name: '스프린트 터보', value: 0.4},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -1335,12 +1335,12 @@ export default {
             }
           },
           {
-            normal: {id: 200702, name: '上昇氣流', value: 0.2},
-            rare: {id: 200701, name: '強勁腳力', value: 0.4},
+            normal: {id: 200702, name: '상승기류', value: 0.2},
+            rare: {id: 200701, name: '강인한 다리', value: 0.4},
             duration: 3,
             styleLimit: StyleLimit.Behind,
             distanceLimit: DistanceLimit.Mile,
-            tooltip: '順位>50%は満たしていると見なす',
+            tooltip: '순위>50% 조건 충족으로 간주',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1349,12 +1349,12 @@ export default {
             }
           },
           {
-            normal: {id: 200992, name: '善後策略', value: 0.2},
-            rare: {id: 200991, name: 'X計劃', value: 0.4},
+            normal: {id: 200992, name: '선후책', value: 0.2},
+            rare: {id: 200991, name: '플랜X', value: 0.4},
             duration: 3,
             styleLimit: [1, 2],
             distanceLimit: [1],
-            tooltip: '順位>=2及び<=50%は満たしていると見なす。いや中盤どこか発動とか意味なさすぎね？',
+            tooltip: '순위>=2 및 순위<=50% 조건 충족으로 간주. 중반 어딘가 발동이라던가 너무의미 없지 않나?',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1363,11 +1363,11 @@ export default {
             }
           },
           {
-            normal: {id: 201062, name: '加速度', value: 0.2},
-            rare: {id: 201061, name: '油門全開！', value: 0.4},
+            normal: {id: 201062, name: '액셀러레이션', value: 0.2},
+            rare: {id: 201061, name: '액셀 전개!', value: 0.4},
             duration: 1.2,
             distanceLimit: [2],
-            tooltip: '「中盤のどこかで発動」として扱う。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1376,10 +1376,10 @@ export default {
             }
           },
           {
-            normal: {id: 201292, name: '第二對策', value: 0.2},
+            normal: {id: 201292, name: '두 번째 화살', value: 0.2},
             duration: 3,
             styleLimit: [1],
-            tooltip: '「中盤のどこかで発動」として扱う。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1388,18 +1388,18 @@ export default {
             }
           },
           {
-            normal: {id: 201332, name: '靈巧步伐', value: 0.2},
-            rare: {id: 201331, name: '技巧派', value: 0.3},
+            normal: {id: 201332, name: '교묘한 스텝', value: 0.2},
+            rare: {id: 201331, name: '기교파', value: 0.3},
             duration: 1.8,
             styleLimit: [2],
-            tooltip: '「スタート後20秒で発動」として扱う。ガバガバ実装。',
+            tooltip: '「스타트 후 20초에 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
             check: function () {
               return thiz.isRunningStyle(2) && thiz.accTimePassed(20)
             }
           },
           {
-            normal: {id: 201342, name: '直線滑下', value: 0.2},
-            rare: {id: 201341, name: '決心的速降', value: 0.3},
+            normal: {id: 201342, name: '직활강', value: 0.2},
+            rare: {id: 201341, name: '결의의 직활강', value: 0.3},
             duration: 3,
             styleLimit: [2],
             check: function () {
@@ -1407,17 +1407,17 @@ export default {
             }
           },
           {
-            normal: {id: 201581, name: '登山家', value: 0.2},
+            normal: {id: 201581, name: '등산가', value: 0.2},
             duration: 3,
             check: function () {
               return thiz.isInSlope('up')
             }
           },
           {
-            normal: {id: 201362, name: '重振旗鼓', value: 0.2},
+            normal: {id: 201362, name: '만회하기', value: 0.2},
             duration: 3,
             styleLimit: [2],
-            tooltip: '順位>50%は満たしていると見なす',
+            tooltip: '순위>50% 조건 충족으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1426,11 +1426,11 @@ export default {
             }
           },
           {
-            normal: {id: 201402, name: '努力不懈', value: 0.2},
-            rare: {id: 201401, name: '努力家', value: 0.3},
+            normal: {id: 201402, name: '근면한 태도', value: 0.2},
+            rare: {id: 201401, name: '노력가', value: 0.3},
             duration: 3,
             styleLimit: [3],
-            tooltip: '「中盤のどこか」として扱う。はいはいガバ実装ガバ実装。',
+            tooltip: '「중반 어딘가에서 발동」으로 간주. 메챠쿠챠 메챠쿠챠 배우자.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1439,10 +1439,10 @@ export default {
             }
           },
           {
-            normal: {id: 200492, name: '避開力竭賽馬娘', value: 0.2},
-            rare: {id: 200491, name: '不停頓女孩', value: 0.4},
+            normal: {id: 200492, name: '뒤처지기 방지', value: 0.2},
+            rare: {id: 200491, name: '논스톱 걸', value: 0.4},
             duration: 3,
-            tooltip: '「終盤のどこか」として扱う。実際に発動するかどうかは自己判断で。',
+            tooltip: '「종반 어딘가에서 발동」으로 간주. 실전에서의 발동 여부는 각자 판단에 맡김.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1451,18 +1451,18 @@ export default {
             }
           },
           {
-            normal: {id: 201601, name: '打好基礎', value: 0.2},
+            normal: {id: 201601, name: '터다지기', value: 0.2},
             duration: 3,
-            tooltip: '「緑スキルや集中力系でスタートと同時に発動」として扱う',
+            tooltip: '「패시브 스킬이나 게이트 스킬과 함께 스타트에 발동」으로 간주.',
             check: function () {
               return true
             }
           },
           {
-            normal: {id: 0, name: '點燃青春・力', value: 0.22},
-            rare: {id: 0, name: '燃燒青春・力', value: 0.44},
+            normal: {id: 0, name: '아오하루 점화・힘', value: 0.22},
+            rare: {id: 0, name: '아오하루 연소・힘', value: 0.44},
             duration: 1.2,
-            tooltip: '効果1.1倍として扱う',
+            tooltip: '1.1배 효과로 적용.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1471,8 +1471,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '前行', value: 0.2},
-            rare: {id: 0, name: '奮勇向前！', value: 0.3},
+            normal: {id: 0, name: '앞줄 겨냥', value: 0.2},
+            rare: {id: 0, name: '노리는 건 맨 앞줄!', value: 0.3},
             duration: 3,
             surfaceLimit: SurfaceLimit.Dirt,
             init: function () {
@@ -1483,7 +1483,7 @@ export default {
             }
           },
           {
-            normal: {id: 201902, name: '正面決鬥', value: 0.2},
+            normal: {id: 201902, name: '정면승부', value: 0.2},
             styleLimit: [2],
             duration: 1.8,
             init: function () {
@@ -1497,10 +1497,10 @@ export default {
         // End of acc skills
         boost: [
           {
-            normal: {id: 0, name: '点燃青春・毅', value: {targetSpeed: 0.055, acceleration: 0.11}},
-            rare: {id: 0, name: '燃烧青春・毅', value: {targetSpeed: 0.275, acceleration: 0.33}},
+            normal: {id: 0, name: '아오하루 점화・근성', value: {targetSpeed: 0.055, acceleration: 0.11}},
+            rare: {id: 0, name: '아오하루 연소・근성', value: {targetSpeed: 0.275, acceleration: 0.33}},
             duration: 1.8,
-            tooltip: '効果1.1倍として扱う',
+            tooltip: '1.1배 효과로 적용',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1512,14 +1512,14 @@ export default {
         // End of boost skills
         gate: [
           {
-            normal: {id: 200432, name: '集中力', value: 0.9},
-            rare: {id: 200431, name: '全神貫注', value: 0.4},
-            inherit: {id: 200433, name: 'ゲート難', value: 1.5},
+            normal: {id: 200432, name: '집중력', value: 0.9},
+            rare: {id: 200431, name: '컨센트레이션', value: 0.4},
+            inherit: {id: 200433, name: '게이트 난동', value: 1.5},
           }
         ],
         speed: [
           {
-            all: {name: '使領頭遲疑', value: -0.15},
+            all: {name: '도주 주저', value: -0.15},
             duration: 3,
             styleLimit: [1],
             init: function () {
@@ -1530,10 +1530,10 @@ export default {
             }
           },
           {
-            all: {name: '使領頭遲疑x2', value: -0.3},
+            all: {name: '도주 주저x2', value: -0.3},
             duration: 3,
             styleLimit: [1],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1542,7 +1542,7 @@ export default {
             }
           },
           {
-            all: {name: '使前列遲疑', value: -0.15},
+            all: {name: '선행 주저', value: -0.15},
             duration: 3,
             styleLimit: [2],
             init: function () {
@@ -1553,10 +1553,10 @@ export default {
             }
           },
           {
-            all: {name: '使前列遲疑x2', value: -0.3},
+            all: {name: '선행 주저x2', value: -0.3},
             duration: 3,
             styleLimit: [2],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1565,7 +1565,7 @@ export default {
             }
           },
           {
-            all: {name: '使居中遲疑', value: -0.15},
+            all: {name: '선입 주저', value: -0.15},
             duration: 3,
             styleLimit: [3],
             init: function () {
@@ -1576,10 +1576,10 @@ export default {
             }
           },
           {
-            all: {name: '使居中遲疑x2', value: -0.3},
+            all: {name: '선입 주저x2', value: -0.3},
             duration: 3,
             styleLimit: [3],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1588,7 +1588,7 @@ export default {
             }
           },
           {
-            all: {name: '使後追遲疑', value: -0.15},
+            all: {name: '추입 주저', value: -0.15},
             duration: 3,
             styleLimit: [4],
             init: function () {
@@ -1599,10 +1599,10 @@ export default {
             }
           },
           {
-            all: {name: '使後追遲疑x2', value: -0.3},
+            all: {name: '추입 주저x2', value: -0.3},
             duration: 3,
             styleLimit: [4],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1611,7 +1611,7 @@ export default {
             }
           },
           {
-            all: {name: '緊盯後方', value: -0.2},
+            all: {name: '후방 못박기', value: -0.2},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -1623,7 +1623,7 @@ export default {
             }
           },
           {
-            all: {name: '無腦術', value: -0.25},
+            all: {name: '뇌쇄술', value: -0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -1635,7 +1635,7 @@ export default {
             }
           },
           {
-            all: {name: '速度獵手', value: -0.15},
+            all: {name: '스피드 이터', value: -0.15},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -1646,7 +1646,7 @@ export default {
             }
           },
           {
-            all: {name: '束縛', value: -0.15},
+            all: {name: '속박', value: -0.15},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -1657,7 +1657,7 @@ export default {
             }
           },
           {
-            all: {name: '獨佔力', value: -0.25},
+            all: {name: '독점력', value: -0.25},
             duration: 3,
             distanceLimit: [3],
             init: function () {
@@ -1668,7 +1668,7 @@ export default {
             }
           },
           {
-            all: {name: '視線', value: -0.15},
+            all: {name: '시선', value: -0.15},
             duration: 3,
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
@@ -1678,14 +1678,14 @@ export default {
             }
           },
           {
-            all: {name: '逐君之形', value: -0.05},
+            all: {name: '당신을 뒤쫓아서', value: -0.05},
             duration: 6,
             check: function () {
               return thiz.position >= thiz.courseLength * 0.5
             }
           },
           {
-            all: {name: '逐君之形(継承)', value: -0.025},
+            all: {name: '당신을 뒤쫓아서(계승)', value: -0.025},
             duration: 3.6,
             check: function () {
               return thiz.position >= thiz.courseLength * 0.5
@@ -1694,7 +1694,7 @@ export default {
         ],
         fatigue: [
           {
-            all: {name: '耐力獵手', value: 50},
+            all: {name: '스태미나 이터', value: 50},
             distanceLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1704,9 +1704,9 @@ export default {
             }
           },
           {
-            all: {name: '耐力獵手x2', value: 100},
+            all: {name: '스태미나 이터x2', value: 100},
             distanceLimit: [4],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1715,7 +1715,7 @@ export default {
             }
           },
           {
-            all: {name: '牽制領頭', value: 100},
+            all: {name: '도주 견제', value: 100},
             styleLimit: [1],
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
@@ -1725,9 +1725,9 @@ export default {
             }
           },
           {
-            all: {name: '牽制領頭x2', value: 200},
+            all: {name: '도주 견제x2', value: 200},
             styleLimit: [1],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -1736,7 +1736,7 @@ export default {
             }
           },
           {
-            all: {name: '牽制前列', value: 100},
+            all: {name: '선행 견제', value: 100},
             styleLimit: [2],
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
@@ -1746,9 +1746,9 @@ export default {
             }
           },
           {
-            all: {name: '牽制前列x2', value: 200},
+            all: {name: '선행 견제x2', value: 200},
             styleLimit: [2],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -1757,7 +1757,7 @@ export default {
             }
           },
           {
-            all: {name: '牽制居中', value: 100},
+            all: {name: '선입 견제', value: 100},
             styleLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
@@ -1767,9 +1767,9 @@ export default {
             }
           },
           {
-            all: {name: '牽制居中x2', value: 200},
+            all: {name: '선입 견제x2', value: 200},
             styleLimit: [3],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -1778,7 +1778,7 @@ export default {
             }
           },
           {
-            all: {name: '牽制後追', value: 100},
+            all: {name: '추입 견제', value: 100},
             styleLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
@@ -1788,9 +1788,9 @@ export default {
             }
           },
           {
-            all: {name: '牽制後追x2', value: 200},
+            all: {name: '추입 견제x2', value: 200},
             styleLimit: [4],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
             },
@@ -1799,7 +1799,7 @@ export default {
             }
           },
           {
-            all: {name: '使領頭焦躁', value: 100},
+            all: {name: '도주 긴장', value: 100},
             styleLimit: [1],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1809,9 +1809,9 @@ export default {
             }
           },
           {
-            all: {name: '使領頭焦躁x2', value: 200},
+            all: {name: '도주 긴장x2', value: 200},
             styleLimit: [1],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1820,7 +1820,7 @@ export default {
             }
           },
           {
-            all: {name: '使前列焦躁', value: 100},
+            all: {name: '선행 긴장', value: 100},
             styleLimit: [2],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1830,9 +1830,9 @@ export default {
             }
           },
           {
-            all: {name: '使前列焦躁x2', value: 200},
+            all: {name: '선행 긴장x2', value: 200},
             styleLimit: [2],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1841,7 +1841,7 @@ export default {
             }
           },
           {
-            all: {name: '使居中焦躁', value: 100},
+            all: {name: '선입 긴장', value: 100},
             styleLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1851,9 +1851,9 @@ export default {
             }
           },
           {
-            all: {name: '使居中焦躁x2', value: 200},
+            all: {name: '선입 긴장x2', value: 200},
             styleLimit: [3],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1862,7 +1862,7 @@ export default {
             }
           },
           {
-            all: {name: '使後追焦躁', value: 100},
+            all: {name: '추입 긴장', value: 100},
             styleLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1872,9 +1872,9 @@ export default {
             }
           },
           {
-            all: {name: '使後追焦躁x2', value: 200},
+            all: {name: '추입 긴장x2', value: 200},
             styleLimit: [4],
-            tooltip: '2回同時に喰らう。通常のと加算できる。',
+            tooltip: '2번 동시에 맞음. 1번 맞은 것과 가산 가능.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1883,7 +1883,7 @@ export default {
             }
           },
           {
-            all: {name: '禁止搶先', value: 100},
+            all: {name: '앞지르기 금지', value: 100},
             distanceLimit: [1],
             init: function () {
               this.randoms = thiz.initPhaseRandom(0)
@@ -1894,7 +1894,7 @@ export default {
             }
           },
           {
-            all: {name: '細語', value: 100},
+            all: {name: '속삭임', value: 100},
             distanceLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1904,7 +1904,7 @@ export default {
             }
           },
           {
-            all: {name: '細語x2', value: 200},
+            all: {name: '속삭임x2', value: 200},
             distanceLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1914,7 +1914,7 @@ export default {
             }
           },
           {
-            all: {name: '魅惑的細語', value: 300},
+            all: {name: '매혹적인 속삭임', value: 300},
             distanceLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1924,7 +1924,7 @@ export default {
             }
           },
           {
-            all: {name: '魅惑的細語x2', value: 600},
+            all: {name: '매혹적인 속삭임x2', value: 600},
             distanceLimit: [3],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1934,7 +1934,7 @@ export default {
             }
           },
           {
-            all: {name: '銳利目光', value: 100},
+            all: {name: '날카로운 눈빛', value: 100},
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1943,7 +1943,7 @@ export default {
             }
           },
           {
-            all: {name: '銳利目光x2', value: 200},
+            all: {name: '날카로운 눈빛x2', value: 200},
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1952,7 +1952,7 @@ export default {
             }
           },
           {
-            all: {name: '緊盯八方', value: 300},
+            all: {name: '사방팔방 째려보기', value: 300},
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1961,7 +1961,7 @@ export default {
             }
           },
           {
-            all: {name: '緊盯八方x2', value: 600},
+            all: {name: '사방팔방 째려보기x2', value: 600},
             init: function () {
               this.randoms = thiz.initPhaseRandom(2)
             },
@@ -1970,7 +1970,7 @@ export default {
             }
           },
           {
-            all: {name: '耐力食取', value: 100},
+            all: {name: '스태미나 그리드', value: 100},
             distanceLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1983,7 +1983,7 @@ export default {
       },
       uniqueSkillData: [
         {
-          name: 'なし／発動しない',//billi找不到
+          name: '없음／발동 안 함',//billi
           noInherit: true,
           check: function () {
             return false
@@ -1993,7 +1993,7 @@ export default {
           id: 10321, name: 'introduction：My body',
           noInherit: true,
           heal: 350,
-          tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
+          tooltip: '순위>=3 및 순위<=40% 조건 충족으로 간주.',
           check: function () {
             return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
           }
@@ -2001,16 +2001,16 @@ export default {
         {
           id: 100321, name: 'U=ma2',
           heal: 550,
-          tooltip: '順位条件の>=3＆<=40%は満たしていると見なす',
+          tooltip: '순위>=3 및 순위<=40% 조건 충족으로 간주.',
           check: function () {
             return thiz.position >= thiz.courseLength / 2.0 && thiz.isInCorner(thiz.position)
           }
         },
         {
-          id: 10451, name: '清澈之心',
+          id: 10451, name: '클리어 하트',
           noInherit: true,
           heal: 350,
-          tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
+          tooltip: '순위>=2 및 순위<=40% 조건 충족으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(1)
           },
@@ -2019,9 +2019,9 @@ export default {
           }
         },
         {
-          id: 100451, name: '純潔之心',
+          id: 100451, name: '퓨리티 오브 하트',
           heal: 550,
-          tooltip: '順位条件の>=2＆<=40%は満たしていると見なす',
+          tooltip: '순위>=2 및 순위<=40% 조건 충족으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(1)
           },
@@ -2030,26 +2030,26 @@ export default {
           }
         },
         {
-          id: 10521, name: '雀躍不已預備～跑！',
+          id: 10521, name: '두근두근 준비 땅!',
           noInherit: true,
           heal: 350,
-          tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
+          tooltip: '인접한 우마무스메가 있음&순위<=50% 조건 충족으로 간주',
           check: function () {
             return thiz.isInFinalCorner()
           }
         },
         {
-          id: 100521, name: '雀躍不已的精彩時刻',
+          id: 100521, name: '두근두근 클라이맥스',
           heal: 550,
-          tooltip: '近くにウマ娘がいる＆順位<=50%は満たしていると見なす',
+          tooltip: '인접한 우마무스메가 있음&순위<=50% 조건 충족으로 간주',
           check: function () {
             return thiz.isInFinalCorner()
           }
         },
         {
-          id: 110111, name: '上級增愈術Gainheal·Superior',
+          id: 110111, name: '게인힐 슈피리어',
           heal: 550,
-          tooltip: '中盤のどこかで発動として見なす。',
+          tooltip: '「중반 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(1)
           },
@@ -2058,44 +2058,44 @@ export default {
           }
         },
         {
-          id: 110011, name: '超級可愛♪飛身入海',
+          id: 110011, name: '참말로 귀엽네♪ 머린 다이브',
           heal: 550,
           check: function () {
             return thiz.skillTriggerCount[1] >= 2
           }
         },
         {
-          id: 0, name: '玫瑰之吻',
+          id: 0, name: 'Drain for rose',
           heal: 550,
-          tooltip: '50%地点で即発動として扱う。',
+          tooltip: '50% 지점에서 즉시 발동으로 간주.',
           check: function (startPosition) {
             return thiz.isContainsRemainingDistance(thiz.courseLength * 0.5, startPosition)
           }
         },
         {
-          id: 10071, name: '波瀾注意砲！',
+          id: 10071, name: '파란주의포!',
           noInherit: true,
           targetSpeed: 0.15,
           duration: 6,
-          tooltip: '順位条件の<=50%は満たしていると見なす',
+          tooltip: '순위<50% 조건 충족으로 간주.',
           check: function () {
             return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
           }
         },
         {
-          id: 100071, name: '不沉戰艦起錨！',
+          id: 100071, name: '불침함, 출항!!',
           targetSpeed: 0.25,
           duration: 6,
-          tooltip: '順位条件の<=50%は満たしていると見なす',
+          tooltip: '순위<50% 조건 충족으로 간주.',
           check: function () {
             return thiz.position >= thiz.courseLength * 0.5 && thiz.position <= thiz.courseLength * 0.6
           }
         },
         {
-          id: 100131, name: '必須貫徹高貴的使命',
+          id: 100131, name: '존귀한 사명을 완수하기 위하여',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '位置<=30%は満たしていると見なす。',
+          tooltip: '위치<30% 조건 충족으로 간주.',
           check: function () {
             return thiz.isInFinalCorner() || thiz.isInFinalStraight()
           }
@@ -2110,10 +2110,10 @@ export default {
           }
         },
         {
-          id: 110131, name: '賭上最強之名',
+          id: 110131, name: '최강의 이름을 걸고',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終直線のどこか」として扱う。',
+          tooltip: '「최종 직선 어딘가에서 발동」으로 간주',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2122,51 +2122,51 @@ export default {
           }
         },
         {
-          id: 10081, name: '加速X',
+          id: 10081, name: '엑셀X',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
+          tooltip: '「다른 조건 전부 충족 후 200m 지점에서 발동」으로 간주.',
           check: function (startPosition) {
             return startPosition <= thiz.toPosition(200)
                 && thiz.position >= thiz.toPosition(200)
           }
         },
         {
-          id: 100081, name: 'CUTTING×DRIVE！',
+          id: 100081, name: '커팅×DRIVE!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「他面倒くさいの全部満たしたと見なして200mで発動する」として扱う。',
+          tooltip: '「다른 조건 전부 충족 후 200m 지점에서 발동」으로 간주.',
           check: function (startPosition) {
             return startPosition <= thiz.toPosition(200)
                 && thiz.position >= thiz.toPosition(200)
           }
         },
         {
-          id: 100061, name: '勝利的躍動',
+          id: 100061, name: '승리의 고동',
           targetSpeed: 0.45,
           duration: 5,
-          tooltip: '順位条件は満たしてると見なす',
+          tooltip: '순위 조건 충족으로 간주.',
           check: function (startPosition) {
             return startPosition <= thiz.toPosition(200)
                 && thiz.position >= thiz.toPosition(200)
           }
         },
         {
-          id: 100171, name: '讓你見識皇帝的威勢吧',
+          id: 100171, name: '그대, 황제의 신위를 보라',
           targetSpeed: 0.45,
           duration: 5,
-          tooltip: '最終コーナーで3人追い抜きは満たしたと見なす',
+          tooltip: '최종 코너에서 3회 추월한 걸로 간주.',
           check: function () {
             return thiz.isInFinalStraight()
           }
         },
         {
-          id: 10181, name: '女帝的自尊',
+          id: 10181, name: '엠프리스 프라이드',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
+          tooltip: '「다른 조건 전부 충족 후 최종 코너 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2175,10 +2175,10 @@ export default {
           }
         },
         {
-          id: 100181, name: '自尊之炎',
+          id: 100181, name: '블레이즈 오브 프라이드',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。',
+          tooltip: '「다른 조건 전부 충족 후 최종 코너 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2187,11 +2187,11 @@ export default {
           }
         },
         {
-          id: 10351, name: '全力V字手勢！',
+          id: 10351, name: '전력 V 사인!',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
+          tooltip: '「다른 조건 전부 충족 후 최종 직선 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2200,10 +2200,10 @@ export default {
           }
         },
         {
-          id: 100351, name: '將勝利的獎券獻給你！',
+          id: 100351, name: '승리의 티켓을 너에게!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。',
+          tooltip: '「다른 조건 전부 충족 후 최종 직선 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2212,11 +2212,11 @@ export default {
           }
         },
         {
-          id: 10411, name: '班長＋快速＝驀進',
+          id: 10411, name: '반장+스피드=돌진',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
+          tooltip: '「레이스1/2~5/6의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
@@ -2225,10 +2225,10 @@ export default {
           }
         },
         {
-          id: 100411, name: '模範生×驀進＝大獲全勝',
+          id: 100411, name: '우등생×돌진=대승리!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
+          tooltip: '「레이스1/2~5/6의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
@@ -2237,11 +2237,11 @@ export default {
           }
         },
         {
-          id: 10561, name: '請顯靈吧請顯靈吧！',
+          id: 10561, name: '와주세요 와주세요!',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '「終盤のどこかで発動する」として扱う。',
+          tooltip: '「종반의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(2)
           },
@@ -2250,10 +2250,10 @@ export default {
           }
         },
         {
-          id: 100561, name: '顯靈了要顯靈了請顯靈吧！',
+          id: 100561, name: '옵니다 오고 있습니다 오게 할 겁니다!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「終盤のどこかで発動する」として扱う。',
+          tooltip: '「종반의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(2)
           },
@@ -2262,11 +2262,11 @@ export default {
           }
         },
         {
-          id: 10601, name: '我偶爾也能辦到的對吧？',
+          id: 10601, name: '나도 가끔은 해야지, 안 그래?',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '「ラストスパートのどこかで発動する」として扱う。',
+          tooltip: '「라스트 스퍼트 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(3)
           },
@@ -2275,10 +2275,10 @@ export default {
           }
         },
         {
-          id: 100601, name: '一定能抵達前方……！',
+          id: 100601, name: '반드시 그 너머로…!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「ラストスパートのどこかで発動する」として扱う。',
+          tooltip: '「라스트 스퍼트 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(3)
           },
@@ -2287,11 +2287,11 @@ export default {
           }
         },
         {
-          id: 10111, name: '精誠所至',
+          id: 10111, name: '정신일도',
           noInherit: true,
           targetSpeed: 0.25,
           duration: 5,
-          tooltip: '「最終直線のどこかで発動する」として扱う。',
+          tooltip: '「최종 직선 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2300,10 +2300,10 @@ export default {
           }
         },
         {
-          id: 100111, name: '精誠所至金石為開',
+          id: 100111, name: '정신일도 하사불성',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終直線のどこかで発動する」として扱う。',
+          tooltip: '「최종 직선 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2333,10 +2333,10 @@ export default {
           }
         },
         {
-          id: 100011, name: '逐夢之星',
+          id: 100011, name: '슈팅 스타',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「終盤のどこかで発動する」として扱う。',
+          tooltip: '「종반 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(2)
           },
@@ -2345,7 +2345,7 @@ export default {
           }
         },
         {
-          id: 100021, name: '不會讓出領先的景色……！',
+          id: 100021, name: '선두의 경치는 양보할 수 없어…!',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2353,19 +2353,19 @@ export default {
           }
         },
         {
-          id: 100031, name: '終極帝皇舞步',
+          id: 100031, name: '궁극 테이오 스텝',
           targetSpeed: 0.45,
           duration: 5,
-          tooltip: '他の条件は無視して「最終直線であれば発動する」として扱う',
+          tooltip: '「다른 조건 전부 충족 후 최종 직선에서 발동」으로 간주.',
           check: function () {
             return thiz.isInFinalStraight()
           }
         },
         {
-          id: 100151, name: '獻給勝利女神的舞蹈',
+          id: 100151, name: '빅토리아에게 바치는 무도',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終コーナーのどこかで発動」として扱う。まぁ発動しないけど。',
+          tooltip: '「최종 코너 어딘가에서 발동」으로 간주. 발동 안 하겠지만.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2374,10 +2374,10 @@ export default {
           }
         },
         {
-          id: 100161, name: 'Shadow Break打破陰影',
+          id: 100161, name: 'Shadow Break',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終コーナーのどこかで発動」として扱う',
+          tooltip: '「최종 코너 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2386,10 +2386,10 @@ export default {
           }
         },
         {
-          id: 100231, name: '∴win QED',
+          id: 100231, name: '∴win Q.E.D.',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終コーナーのどこかで発動」として扱う',
+          tooltip: '「최종 코너 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2398,10 +2398,10 @@ export default {
           }
         },
         {
-          id: 100301, name: '藍薔薇追擊者',
+          id: 100301, name: '블루 로즈 체이서',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終直線のどこかで発動」として扱う',
+          tooltip: '「최종 직선 어딘가에서」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2410,10 +2410,10 @@ export default {
           }
         },
         {
-          id: 100501, name: 'Nemesis復仇女神',
+          id: 100501, name: 'Nemesis',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終コーナーのどこかで発動」として扱う',
+          tooltip: '「최종 코너 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2422,10 +2422,10 @@ export default {
           }
         },
         {
-          id: 110031, name: '絕對是我',
+          id: 110031, name: '절대는, 나야',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終直線のどこかで発動」として扱う',
+          tooltip: '「최종 직선 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2434,10 +2434,10 @@ export default {
           }
         },
         {
-          id: 110241, name: '花絢機動Flowery☆Maneuver(前)',
+          id: 110241, name: '플라워리☆머누버(전방)',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
+          tooltip: '「최종 코너 어딘가에서 발동」으로 간주. 전방(속도)으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2446,10 +2446,10 @@ export default {
           }
         },
         {
-          id: 110181, name: '和暖微風，瞬間亦永恆',
+          id: 110181, name: '훈풍, 영원한 순간을',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
+          tooltip: '「중반 어딘가에서 발동」으로 간주. 실제로는 발동 안 함.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(1)
           },
@@ -2458,10 +2458,10 @@ export default {
           }
         },
         {
-          id: 100121, name: '單挑！白熱化！',
+          id: 100121, name: '결투! 데드히트!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '「最終直線のどこかで発動」として扱う。',
+          tooltip: '「최종 직선 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalStraightRandom()
           },
@@ -2470,7 +2470,7 @@ export default {
           }
         },
         {
-          id: 110041, name: '一鼓作氣♪啾',
+          id: 110041, name: '뭉클하게♪ Chu',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2478,7 +2478,7 @@ export default {
           }
         },
         {
-          id: 100371, name: '漆黑之劍',
+          id: 100371, name: 'Schwarzes Schwert',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2487,10 +2487,10 @@ export default {
           }
         },
         {
-          id: 0, name: '禾乃登',
+          id: 0, name: '벼가 곧 무르익는다',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '50%-60%地点のどこかで発動として扱う',
+          tooltip: '「50%~60% 지점 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initIntervalRandom(0.5, 0.6)
           },
@@ -2499,10 +2499,10 @@ export default {
           }
         },
         {
-          id: 0, name: '尊之☆最终冲刺—(ﾟ∀ﾟ)—ﾄ!',
+          id: 0, name: '존귀☆라스트 스퍼—(ﾟ∀ﾟ)—트!',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: 'フェイズ2のどこか発動として扱う',
+          tooltip: '「페이즈2 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhaseRandom(2)
           },
@@ -2511,25 +2511,25 @@ export default {
           }
         },
         {
-          id: 0, name: '以姬之名，手握勝利',
+          id: 0, name: '공주다운 자, 승리를 이 손에',
           targetSpeed: 0.35,
           duration: 5,
-          tooltip: '最終直線に入ってすぐ発動として扱う',
+          tooltip: '「최종 직선 진입 시 발동」으로 간주.',
           check: function () {
             return thiz.isInFinalStraight()
           }
         },
         {
-          id: 0, name: '逐君之形',
+          id: 0, name: '당신을 뒤쫓아서',
           targetSpeed: 0.25,
           duration: 6,
-          tooltip: '順位条件は満たしていると見なす',
+          tooltip: '순위 조건 충족으로 간주.',
           check: function () {
             return thiz.position >= thiz.courseLength * 0.5
           }
         },
         {
-          id: 100171, name: '喧囂之箭，擊退晦冥',
+          id: 100171, name: '어스름은 물렀거라, 떠들썩함의 화살',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2537,7 +2537,7 @@ export default {
           }
         },
         {
-          id: 100481, name: '耶☆生動時光！',
+          id: 100481, name: 'YEAH☆VIVID TIME!',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2545,7 +2545,7 @@ export default {
           }
         },
         {
-          id: 100231, name: '來自X的禮物',
+          id: 100231, name: 'Presents from X',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2553,59 +2553,59 @@ export default {
           }
         },
         {
-          id: 100041, name: '紅焰檔位/LP1211-M',
+          id: 100041, name: '홍염 기어/LP1211-M',
           acceleration: 0.4,
           duration: 4,
-          tooltip: '順位<=5及び<=50%は満たしていると見なす。どの脚質でも最速発動扱い。',
+          tooltip: '순위<=5 및 <=50% 조건 충족으로 간주. 어떤 각질에서도 즉발로 간주.',
           check: function () {
             return thiz.isInFinalCorner() || thiz.isInFinalStraight()
           }
         },
         {
-          id: 100101, name: 'VICTORY SHOT！',
+          id: 100101, name: '빅토리 샷!',
           acceleration: 0.4,
           duration: 4,
-          tooltip: '順位>=3及び<=50%は満たしていると見なす',
+          tooltip: '순위>=3 및 <=50% 조건 충족으로 간주.',
           check: function () {
             return thiz.isInFinalCorner()
           }
         },
         {
-          id: 10271, name: '燃燒吧肌肉！',
+          id: 10271, name: '타올라라 근육!',
           noInherit: true,
           acceleration: 0.3,
           duration: 4,
           styleLimit: [3, 4],
-          tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
+          tooltip: '순위>=65% 및 순위<=70% 조건 충족으로 간주. 실제로는 발동 안 할 수도.',
           check: function () {
             return thiz.currentPhase >= 2 && thiz.isInCorner()
           }
         },
         {
-          id: 100271, name: '合成代謝開始！',
+          id: 100271, name: '레츠 아나볼릭!',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [3, 4],
-          tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
+          tooltip: '순위>=65% 및 순위<=70% 조건 충족으로 간주. 실제로는 발동 안 할 수도.',
           check: function () {
             return thiz.currentPhase >= 2 && thiz.isInCorner()
           }
         },
         {
-          id: 100201, name: 'angling×scheming',
+          id: 100201, name: '앵글링×스키밍',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [1, 2],
-          tooltip: '順位1位は満たしたと見なす',
+          tooltip: '선두 조건 충족으로 간주.',
           check: function () {
             return thiz.currentPhase >= 2 && thiz.isInCorner()
           }
         },
         {
-          id: 110241, name: '花絢機動Flowery☆Maneuver(後)',
+          id: 110241, name: ' 플라워리☆머누버(후방)',
           acceleration: 0.4,
           duration: 4,
-          tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
+          tooltip: '「최종 코너 어딘가에서 발동」으로 간주. 후방(가속도)으로 간주.',
           init: function () {
             this.randoms = thiz.initFinalCornerRandom()
           },
@@ -2614,7 +2614,7 @@ export default {
           }
         },
         {
-          id: 100131, name: '神鷹猛擊波',
+          id: 100131, name: '콘도르 맹격파',
           acceleration: 0.4,
           duration: 4,
           init: function () {
@@ -2625,20 +2625,20 @@ export default {
           }
         },
         {
-          id: 0, name: '保持真我',
+          id: 0, name: 'KEEP IT REAL.',
           acceleration: 0.3,
           duration: 6,
-          tooltip: '50%地点で即発動として扱う',
+          tooltip: '「50% 지점 즉발」로 간주.',
           check: function () {
             return thiz.position >= thiz.courseLength / 2.0
           }
         },
         {
-          id: 100591, name: '超越彼方',
+          id: 100591, name: '저곳, 그 너머로…',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [3, 4],
-          tooltip: '常に順位>=50%及び<=70%は満たしていると見なす。',
+          tooltip: '순위>50% 및 순위<70% 조건 충족으로 간주.',
           check: function () {
             return thiz.temptationModeStart == null &&
                 ((thiz.currentPhase >= 2 && !thiz.isInFinalCorner() && thiz.isInCorner()) ||
@@ -2646,14 +2646,14 @@ export default {
           }
         },
         {
-          id: 10091, name: '赤色王牌',
+          id: 10091, name: '레드 에이스',
           noInherit: true,
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
           },
           duration: 5,
-          tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
+          tooltip: '「레이스1/2~5/6의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
@@ -2662,13 +2662,13 @@ export default {
           }
         },
         {
-          id: 100091, name: '燦爛．赤色王牌',
+          id: 100091, name: '브릴리언트 레드 에이스',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '「レース1/2～5/6のどこかで発動する」として扱う。',
+          tooltip: '「레이스1/2~5/6의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6)
           },
@@ -2677,63 +2677,63 @@ export default {
           }
         },
         {
-          id: 10141, name: '熱血☆AMIGO',
+          id: 10141, name: '열혈☆아미고',
           noInherit: true,
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
           },
           duration: 5,
-          tooltip: '順位2位以内は満たしていると見なす',
+          tooltip: '순위 2위 이하 조건 충족으로 간주.',
           check: function () {
             return thiz.isInFinalStraight() && thiz.sp >= 0.3 * thiz.spMax
           }
         },
         {
-          id: 100141, name: '勝利者☆飛身撲',
+          id: 100141, name: '플란차☆가나도르',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '順位2位以内は満たしていると見なす。最終直線に入った瞬間に発動として扱う。',
+          tooltip: '순위 2위 이하 조건 충족으로 간주. 최종 직선 진입 시 즉발로 간주.',
           check: function () {
             return thiz.isInFinalStraight() && thiz.sp >= 0.3 * thiz.spMax
           }
         },
         {
-          id: 10241, name: '勝利之吻☆',
+          id: 10241, name: '승리의 키스☆',
           noInherit: true,
           boost: {
             targetSpeed: 0.15,
             acceleration: 0.2
           },
           duration: 5,
-          tooltip: '条件を満たして最終直線入ったときに発動するとして扱う',
+          tooltip: '「다른 조건 전부 충족 후 최종 직선 진입 시 발동」으로 간주.',
           check: function () {
             return thiz.isInFinalStraight()
           }
         },
         {
-          id: 100241, name: '	閃耀☆著陸',
+          id: 100241, name: '번뜩임☆랜딩',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '最終コーナーで発動として扱う',
+          tooltip: '「최종 코너 진입 시 발동」으로 간주.',
           check: function () {
             return thiz.isInFinalCorner()
           }
         },
         {
-          id: 100381, name: '＃LookatCurren',
+          id: 100381, name: '#LookatCurren',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '「レース50%-65%のどこかで発動する」として扱う',
+          tooltip: '「레이스 50%~65%의 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initIntervalRandom(0.5, 0.65)
           },
@@ -2742,25 +2742,25 @@ export default {
           }
         },
         {
-          id: 100461, name: '閃耀☆明星',
+          id: 100461, name: '반짝반짝☆STARDOM',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '中盤のコーナーではない地点と即発動としてみなす',
+          tooltip: '「중반의 코너가 아닌 지점에서 발동」으로 간주.',
           check: function (startPosition) {
             return !thiz.isInCorner(startPosition) && thiz.getPhase(startPosition) === 1
           }
         },
         {
-          id: 100581, name: '永不言敗',
+          id: 100581, name: 'I Never Goof Up!',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '「終盤のコーナーのどこかで発動」として扱う',
+          tooltip: '「종반 코너 어딘가에서 발동」으로 간주.',
           init: function () {
             this.randoms = thiz.initPhase2CornerRandom()
           },
@@ -2769,117 +2769,117 @@ export default {
           }
         },
         {
-          id: 0, name: '全速☆前進!!',
-          boost: {
-            targetSpeed: 0.25,
-            acceleration: 0.3
-          },
-          duration: 5,
-          tooltip: '順位条件は満たしてると見なす',
-          check: function () {
-            return thiz.isInDistanceRate(0.45, 0.6) && thiz.isSPInRange(0, 0.7)
-          }
-        },
-        {
-          id: 0, name: '媽咪惡作劇團團轉♡',
-          boost: {
-            targetSpeed: 0.25,
-            acceleration: 0.3
-          },
-          duration: 5,
-          tooltip: '最終直線に入った瞬間に発動として扱う。順位条件は満たしてると見なす。',
-          check: function () {
-            return thiz.isInFinalStraight()
-          }
-        },
-        {
-          id: 110401, name: 'GET DOWN',
-          boost: {
-            targetSpeed: 0.25,
-            acceleration: 0.3
-          },
-          duration: 5,
-          tooltip: '最終コーナーに入った瞬間に発動として扱う。順位条件は満たしてると見なす。',
-          check: function () {
-            return thiz.isInFinalCorner();
-          }
-        },
-        {
-          id: 110061, name: '聖誕夜的奇蹟奔跑！',
-          targetSpeed: 0.25,
-          acceleration: 0.3,
-          heal: 350,
-          duration: 5,
-          check: function () {
-            return thiz.position >= thiz.courseLength * 0.5 && thiz.healTriggerCount >= 3
-          }
-        },
-        {
-          id: 100221, name: '童話故事',
-          targetSpeed: 0.35,
-          duration: 5,
-          check: function () {
-            return thiz.position >= thiz.courseLength * 0.52
-          }
-        },
-        {
-          id: 100211, name: '白色閃電，見識一下吧！',
-          targetSpeed: 0.35,
-          acceleration: 0.1,
-          duration: 5,
-          check: function () {
-            return thiz.isInStraight() && thiz.position >= thiz.courseLength * 0.5
-          }
-        },
-        {
-          id: 110521, name: '跌倒113次爬起114次',
-          targetSpeed: 0.25,
-          duration: 6,
-          tooltip: '6秒持続として扱う',
-          check: function () {
-            return thiz.isInFinalCorner()
-          }
-        },
-        {
-          id: 110151, name: '惠福船歌',
-          targetSpeed: 0.45,
-          duration: 4,
-          tooltip: '7回発動したとして扱う。じゃないと弱すぎる。',
-          check: function (startPosition) {
-            return startPosition <= thiz.toPosition(400)
-                && thiz.position >= thiz.toPosition(400)
-          }
-        },
-        {
-          id: 100691, hid: 900691, name: '憧憬著跨越櫻花！',
-          targetSpeed: 0.35,
-          duration: 5,
-          check: function (startPosition) {
-            return startPosition <= thiz.toPosition(300)
-                && thiz.position >= thiz.toPosition(300)
-          }
-        },
-        {
-          id: 110261, name: '可可行動',
-          targetSpeed: 0.35,
-          heal: 150,
-          duration: 5,
-          check: function () {
-            return thiz.currentPhase === 1 && thiz.isInCorner()
-          }
-        },
-        {
-          id: 110371, name: '祝您胃口好♪',
-          targetSpeed: 0.35,
-          duration: 6,
-          tooltip: '最終コーナー以降で3人追い抜きは満たしたと見なす',
-          check: function () {
-            return thiz.isInFinalStraight()
-          }
-        },
-        // End of unique skills
-      ],
+          id: 0, name: 'I'M☆FULL☆SPEED!!',
+    boost: {
+      targetSpeed: 0.25,
+          acceleration: 0.3
+    },
+    duration: 5,
+        tooltip: '순위 조건 충족으로 간주.',
+        check: function () {
+      return thiz.isInDistanceRate(0.45, 0.6) && thiz.isSPInRange(0, 0.7)
     }
+  },
+    {
+      id: 0, name: '빙글빙글 마미트릭♡',
+        boost: {
+      targetSpeed: 0.25,
+          acceleration: 0.3
+    },
+      duration: 5,
+          tooltip: '순위 조건 충족, 「최종 직선 진입 시 발동」으로 간주.',
+        check: function () {
+      return thiz.isInFinalStraight()
+    }
+    },
+    {
+      id: 110401, name: 'GET DOWN',
+        boost: {
+      targetSpeed: 0.25,
+          acceleration: 0.3
+    },
+      duration: 5,
+          tooltip: '순위 조건 충족, 「최종 코너 진입 시 발동」으로 간주.',
+        check: function () {
+      return thiz.isInFinalCorner();
+    }
+    },
+    {
+      id: 110061, name: '성야의 미라클 런!',
+        targetSpeed: 0.25,
+        acceleration: 0.3,
+        heal: 350,
+        duration: 5,
+        check: function () {
+      return thiz.position >= thiz.courseLength * 0.5 && thiz.healTriggerCount >= 3
+    }
+    },
+    {
+      id: 100221, name: 'Fairy tale',
+        targetSpeed: 0.35,
+        duration: 5,
+        check: function () {
+      return thiz.position >= thiz.courseLength * 0.52
+    }
+    },
+    {
+      id: 100211, name: '하얀 번개, 보여줄끼다!',
+        targetSpeed: 0.35,
+        acceleration: 0.1,
+        duration: 5,
+        check: function () {
+      return thiz.isInStraight() && thiz.position >= thiz.courseLength * 0.5
+    }
+    },
+    {
+      id: 110521, name: '113전 114기',
+        targetSpeed: 0.25,
+        duration: 6,
+        tooltip: '6초 지속으로 간주',
+        check: function () {
+      return thiz.isInFinalCorner()
+    }
+    },
+    {
+      id: 110151, name: '복 주는 바르카롤',
+        targetSpeed: 0.45,
+        duration: 4,
+        tooltip: '7회 발동으로 간주. 아니면 너무 약함.',
+        check: function (startPosition) {
+      return startPosition <= thiz.toPosition(400)
+          && thiz.position >= thiz.toPosition(400)
+    }
+    },
+    {
+      id: 100691, hid: 900691, name: '동경은 벚꽃을 넘는다!',
+        targetSpeed: 0.35,
+        duration: 5,
+        check: function (startPosition) {
+      return startPosition <= thiz.toPosition(300)
+          && thiz.position >= thiz.toPosition(300)
+    }
+    },
+    {
+      id: 110261, name: '오퍼레이션 Cacao',
+        targetSpeed: 0.35,
+        heal: 150,
+        duration: 5,
+        check: function () {
+      return thiz.currentPhase === 1 && thiz.isInCorner()
+    }
+    },
+    {
+      id: 110371, name: 'Guten Appetit♪',
+        targetSpeed: 0.35,
+        duration: 6,
+        tooltip: '「최종 코너 이후 3회 추월」 조건 충족으로 간주.',
+        check: function () {
+      return thiz.isInFinalStraight()
+    }
+    },
+    // End of unique skills
+  ],
+  }
   },
   computed: {
     availableSkills() {

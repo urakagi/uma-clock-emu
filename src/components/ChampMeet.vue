@@ -73,10 +73,10 @@
       <br>
       <el-form-item :label="$t('message.style')">
         <el-select v-model="umaStatus.style" style="width: 100px;">
-          <el-option label="領頭" value="1"></el-option>
-          <el-option label="前列" value="2"></el-option>
-          <el-option label="居中" value="3"></el-option>
-          <el-option label="後追" value="4"></el-option>
+          <el-option label="도주" value="1"></el-option>
+          <el-option label="선행" value="2"></el-option>
+          <el-option label="선입" value="3"></el-option>
+          <el-option label="추입" value="4"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.distanceFit')">
@@ -96,13 +96,13 @@
       </el-form-item>
       <el-form-item :label="$t('message.mood')">
         <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
-          <el-option label="絶好調" value="0"></el-option>
-          <el-option label="好調" value="1"></el-option>
-          <el-option label="普通" value="2"></el-option>
-          <el-option label="不調" value="3"></el-option>
-          <el-option label="絶不調" value="4"></el-option>
+          <el-option label="최상" value="0"></el-option>
+          <el-option label="양호" value="1"></el-option>
+          <el-option label="보통" value="2"></el-option>
+          <el-option label="저조" value="3"></el-option>
+          <el-option label="최악" value="4"></el-option>
           <el-option :label="$t('message.random')" value="5"></el-option>
-          <el-option :label="$t('message.random') + '(3種)'" value="6"></el-option>
+          <el-option :label="$t('message.random') + '(3종)'" value="6"></el-option>
         </el-select>
       </el-form-item>
       <br>
@@ -127,10 +127,10 @@
       </el-form-item>
       <el-form-item :label="$t('message.surfaceCondition')">
         <el-select v-model="track.surfaceCondition" style="width: 90px;">
-          <el-option label="良" value="0"></el-option>
-          <el-option label="稍重" value="1"></el-option>
-          <el-option label="重" value="2"></el-option>
-          <el-option label="不良" value="3"></el-option>
+          <el-option label="양호" value="0"></el-option>
+          <el-option label="다습" value="1"></el-option>
+          <el-option label="포화" value="2"></el-option>
+          <el-option label="불량" value="3"></el-option>
         </el-select>
       </el-form-item>
       <br>
@@ -226,7 +226,7 @@
         <tr>
           <td>{{ maxSpurtRate }}%</td>
           <td>{{ maxSpurtSPLeft }}</td>
-           <td>{{ nonMaxSpurtSPLack }}</td>
+          <td>{{ nonMaxSpurtSPLack }}</td>
         </tr>
       </table>
     </div>
@@ -239,7 +239,7 @@
     <calculated-values/>
     <el-divider/>
     <release-note/>
-    <h3>注意事項</h3>
+    <h3>주의사항</h3>
     <ol>
       <li>{{ $t("message.remark1") }}</li>
       <li>{{ $t("message.remark2") }}</li>

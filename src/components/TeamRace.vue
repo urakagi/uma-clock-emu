@@ -96,23 +96,23 @@
       </el-form-item>
       <el-form-item :label="$t('message.mood')">
         <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
-          <el-option label="絶好調" value="0"></el-option>
-          <el-option label="好調" value="1"></el-option>
-          <el-option label="普通" value="2"></el-option>
-          <el-option label="不調" value="3"></el-option>
-          <el-option label="絶不調" value="4"></el-option>
+          <el-option label="최상" value="0"></el-option>
+          <el-option label="양호" value="1"></el-option>
+          <el-option label="보통" value="2"></el-option>
+          <el-option label="저조" value="3"></el-option>
+          <el-option label="최악" value="4"></el-option>
           <el-option :label="$t('message.random')" value="5"></el-option>
-          <el-option :label="$t('message.random') + '(3種)'" value="6"></el-option>
+          <el-option :label="$t('message.random') + '(3종)'" value="6"></el-option>
         </el-select>
       </el-form-item>
       <br>
       <el-form-item :label="$t('message.raceType')">
         <el-select v-model="raceType" style="width: 130px;">
-          <el-option label="短距離" value="0"></el-option>
-          <el-option label="一英里" value="1"></el-option>
-          <el-option label="中距離" value="2"></el-option>
-          <el-option label="長距離" value="3"></el-option>
-          <el-option label="沙地" value="4"></el-option>
+          <el-option label="단거리" value="0"></el-option>
+          <el-option label="마일" value="1"></el-option>
+          <el-option label="중거리" value="2"></el-option>
+          <el-option label="장거리" value="3"></el-option>
+          <el-option label="더트" value="4"></el-option>
         </el-select>
       </el-form-item>
       <br>
@@ -232,7 +232,7 @@
     <calculated-values/>
     <el-divider/>
     <release-note/>
-    <h3>注意事項</h3>
+    <h3>주의사항</h3>
     <ol>
       <li>{{ $t("message.remark1") }}</li>
       <li>{{ $t("message.remark2") }}</li>

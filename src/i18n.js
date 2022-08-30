@@ -1,19 +1,15 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-import ja from './locales/ja.json'
-import zhTW from './locales/zhTW.json'
 import en from './locales/en.json'
 import ko from './locales/ko.json'
 
 Vue.use(VueI18n)
 
-const lang_array = ['zhTW', 'en', 'ja', 'ko']
+const lang_array = [ 'ko', 'en' ]
 const messages = {
-	zhTW,
+	ko,
 	en,
-	ja,
-	ko
 }
 
 let lang
@@ -23,7 +19,6 @@ let locale;
 if (localStorage.getItem('lang') !== null) {
 	locale = localStorage.getItem('lang')
 } else {
-
 	// get locale language
 	locale_lang = (window.navigator.userLanguage || window.navigator.language)
 	lang = locale_lang.replace('-', '')
@@ -32,7 +27,7 @@ if (localStorage.getItem('lang') !== null) {
 	if (lang_array.includes(lang)) {
 		locale = lang
 	} else {
-		locale = 'zh-TW'
+		locale = 'ko'
 	}
 
 }
