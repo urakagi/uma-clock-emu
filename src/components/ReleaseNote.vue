@@ -25,7 +25,7 @@ export default {
       releases: [
         {
           content: 'Korean separated',
-          timestamp: '2022-07-17'
+          timestamp: '2022-08-30'
         },
       ]
     }

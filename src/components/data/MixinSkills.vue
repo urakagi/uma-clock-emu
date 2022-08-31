@@ -2769,7 +2769,7 @@ export default {
           }
         },
         {
-          id: 0, name: 'I'M☆FULL☆SPEED!!',
+          id: 0, name: 'I\'M☆FULL☆SPEED!!',
     boost: {
       targetSpeed: 0.25,
           acceleration: 0.3
