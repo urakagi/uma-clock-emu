@@ -121,25 +121,30 @@ export default {
           statusCheckModifier += bonus
         }
       }
-      const ret =  this.umaStatus.speed * statusCheckModifier * this.condCoef[this.modifiedCondition]
+      const ret = this.calcExceedStatus(this.umaStatus.speed)
+          * statusCheckModifier * this.condCoef[this.modifiedCondition]
           + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]
           + this.passiveBonus.speed
       return ret > 0 ? ret : 1
     },
     modifiedStamina() {
-      return this.umaStatus.stamina * this.condCoef[this.modifiedCondition] + this.passiveBonus.stamina
+      return this.calcExceedStatus(this.umaStatus.stamina)
+          * this.condCoef[this.modifiedCondition] + this.passiveBonus.stamina
     },
     modifiedPower() {
-      const ret = this.umaStatus.power * this.condCoef[this.modifiedCondition]
+      const ret = this.calcExceedStatus(this.umaStatus.power)
+          * this.condCoef[this.modifiedCondition]
           + this.surfacePowerModify[this.trackDetail.surface][this.track.surfaceCondition]
           + this.passiveBonus.power
       return ret > 0 ? ret : 1
     },
     modifiedGuts() {
-      return this.umaStatus.guts * this.condCoef[this.modifiedCondition] + this.passiveBonus.guts
+      return this.calcExceedStatus(this.umaStatus.guts)
+          * this.condCoef[this.modifiedCondition] + this.passiveBonus.guts
     },
     modifiedWisdom() {
-      return this.umaStatus.wisdom * this.condCoef[this.modifiedCondition]
+      return this.calcExceedStatus(this.umaStatus.wisdom)
+          * this.condCoef[this.modifiedCondition]
           * this.styleFitCoef[this.umaStatus.styleFit] + this.passiveBonus.wisdom
     },
     spMax() {
@@ -437,6 +442,9 @@ export default {
     }
   },
   methods: {
+    calcExceedStatus(status) {
+      return status > 1200 ? 1200 + (status - 1200) / 2 : status;
+    },
     locationChanged(location) {
       this.courseList = this.trackData[location].courses
       this.track.course = Object.keys(this.courseList)[0]

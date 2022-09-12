@@ -119,6 +119,10 @@ export default {
           content: '新規レース場を追加',
           timestamp: '2022-08-19'
         },
+        {
+          content: '1200+のステータス超過分を1/2で実装',
+          timestamp: '2022-09-01'
+        },
       ]
     }
   }

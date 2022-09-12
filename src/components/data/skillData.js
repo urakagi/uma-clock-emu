@@ -1531,6 +1531,18 @@ function normalSkillData(thiz) {
                     return thiz.isRunningStyle(STYLE.SEN) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202381, name: 'ブレイクスルー', value: 0.35},
+                normal: {id: 202382, name: '打開策', value: 0.15},
+                duration: 2.4,
+                styleLimit: StyleLimit.Oi,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1)
+                },
+                check: function (startPosition) {
+                    return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1880,6 +1892,18 @@ function normalSkillData(thiz) {
                 tooltip: '1～6位。ファン数16万以上の場合。',
                 conditions: {
                     distance_rate_after_random: 50
+                }
+            },
+            {
+                rare: {id: 202391, name: '出力1000％！', targetSpeed: 0.45, heal: -400},
+                normal: {id: 202392, name: 'しゃかりき', targetSpeed: 0.25, heal: -400},
+                duration: 2.7,
+                styleLimit: StyleLimit.Nige,
+                init: function () {
+                    this.randoms = thiz.initPhaseRandom(1, {startRate: 0.5})
+                },
+                check: function (startPosition) {
+                    return thiz.isRunningStyle(STYLE.NIGE) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
         ],
@@ -3566,7 +3590,7 @@ const uniqueSkillData = (thiz) =>
             },
         },
         {
-            id: 110461, name: 'α-star*',
+            id: 110461, hid: 910461, name: 'α-star*',
             surfaceLimit: SurfaceLimit.Dirt,
             targetSpeed: 0.25,
             heal: 350,
@@ -3574,6 +3598,34 @@ const uniqueSkillData = (thiz) =>
             tooltip: 'MAX発動時',
             check: function () {
                 return thiz.position >= thiz.courseLength * 0.4 && thiz.position <= thiz.courseLength * 0.5
+            }
+        },
+        {
+            id: 110351, hid: 910351, name: '夢の先へ、届け！',
+            targetSpeed: 0.35,
+            duration: 6,
+            tooltip: '面倒なので0.35として計算。',
+            check: function () {
+                return thiz.isInFinalStraight();
+            }
+        },
+        {
+            id: 110501, hid: 910501, name: 'Hephaistos',
+            targetSpeed: 0.35,
+            duration: 5,
+            check: function () {
+                return thiz.isInFinalCorner(thiz.position, {start: 0.5, end: 1})
+                    && (thiz.isPhase(2) || thiz.isPhase(3))
+            }
+        },
+        {
+            id: 100291, hid: 900291, name: 'ゆきあかり、おいかけて',
+            targetSpeed: 0.35,
+            duration: 5,
+            tooltip: '300m即発動として扱う。実際は先頭か先頭と5m以内の差で1～4位。',
+            check: function (startPosition) {
+                return startPosition <= thiz.toPosition(300)
+                    && thiz.position >= thiz.toPosition(300)
             }
         },
 
