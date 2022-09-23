@@ -859,19 +859,19 @@ export default {
       return ret
     },
     saveUma() {
-      this.$prompt('請輸入馬娘名稱', '', {
+      this.$prompt('저장할 우마무스메의 이름을 입력해주세요.', '', {
         inputValue: this.umaToLoad,
-        confirmButtonText: '儲存',
-        cancelButtonText: '取消',
+        confirmButtonText: '저장',
+        cancelButtonText: '취소',
         inputPattern: /.+/,
-        inputErrorMessage: '請輸入馬娘名稱。'
+        inputErrorMessage: '우마무스메의 이름을 입력해주세요.'
       }).then(({value}) => {
         const umas = JSON.parse(localStorage.getItem('umas') || '{}')
         umas[value] = this.saveUmaToObject()
         localStorage.setItem('umas', JSON.stringify(umas))
         this.$message({
           type: 'success',
-          message: `已儲存${value}。`
+          message: `${value} 저장 완료.`
         })
         this.updateSavedUmas()
         this.umaToLoad = value
@@ -893,7 +893,7 @@ export default {
       this.loadUmaFromObject(umas[this.umaToLoad])
       this.$message({
         type: 'success',
-        message: `已載入${this.umaToLoad}。`
+        message: `${this.umaToLoad} 불러오기 완료.`
       })
     },
     loadUmaFromObject(u) {
@@ -931,23 +931,23 @@ export default {
       }
     },
     importUmaFromTool() {
-      this.$prompt('データをここに貼り付けてください', '', {
-        confirmButtonText: 'インポート',
-        cancelButtonText: 'キャンセル',
+      this.$prompt('데이터를 여기에 입력해주세요', '', {
+        confirmButtonText: '가져오기',
+        cancelButtonText: '취소',
         inputPattern: /.+/,
         inputErrorMessage: ''
       }).then(({value}) => {
         this.loadUmaFromObject(JSON.parse(value))
         this.$message({
           type: 'success',
-          message: `インポートに成功しました。`
+          message: `가져오기 성공.`
         })
       })
     },
     importUmaFromGame() {
       this.$prompt('race_horse_data もしくは trained_chara (の JSON) をここに貼り付けてください', '', {
-        confirmButtonText: 'インポート',
-        cancelButtonText: 'キャンセル',
+        confirmButtonText: '가져오기',
+        cancelButtonText: '취소',
         inputPattern: /.+/,
         inputErrorMessage: ''
       }).then(({value}) => {
@@ -962,7 +962,7 @@ export default {
 
         const skills = raceHorseData['skill_array']
 
-        this.selectedUnique = '無／不發動' // Reset it to unselected first
+        this.selectedUnique = '없음/발동 안 함' // Reset it to unselected first
         const uniqueSkills = skills.filter(s => s['skill_id'] < 200000)
         if (uniqueSkills.length === 1) {
           const uniqueSkill = uniqueSkills[0]
@@ -1003,7 +1003,7 @@ export default {
       localStorage.setItem('umas', JSON.stringify(umas))
       this.$message({
         type: 'success',
-        message: `已刪除${this.umaToLoad}。`
+        message: `${this.umaToLoad} 삭제 완료.`
       })
       this.updateSavedUmas()
     },
@@ -1115,7 +1115,7 @@ export default {
           yMax: 100,
           xScaleID: 'x-axis-0',
           onClick: function () {
-            thiz.$message(`掛かり：${((thiz.temptationModeEnd - thiz.temptationModeStart) * thiz.frameLength)}秒、余分耐力消耗：${thiz.temptationWaste.toFixed(1)}`)
+            thiz.$message(`흥분상태: ${((thiz.temptationModeEnd - thiz.temptationModeStart) * thiz.frameLength)}초, 여분 스태미나 소모: ${thiz.temptationWaste.toFixed(1)}`)
           }
         })
       }
