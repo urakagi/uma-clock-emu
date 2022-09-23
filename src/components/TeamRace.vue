@@ -73,10 +73,10 @@
       <br>
       <el-form-item :label="$t('message.style')">
         <el-select v-model="umaStatus.style" style="width: 100px;">
-          <el-option label="領頭" value="1"></el-option>
-          <el-option label="前列" value="2"></el-option>
-          <el-option label="居中" value="3"></el-option>
-          <el-option label="後追" value="4"></el-option>
+          <el-option label="도주" value="1"></el-option>
+          <el-option label="선행" value="2"></el-option>
+          <el-option label="선입" value="3"></el-option>
+          <el-option label="추입" value="4"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.distanceFit')">
