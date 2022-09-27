@@ -123,6 +123,10 @@ export default {
           content: '1200+のステータス超過分を1/2で実装',
           timestamp: '2022-09-01'
         },
+        {
+          content: '大逃げを実装',
+          timestamp: '2022-09-28'
+        },
       ]
     }
   }
