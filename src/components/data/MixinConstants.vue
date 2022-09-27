@@ -1,4 +1,6 @@
 <script>
+import { STYLE } from "./constants";
+
 export default {
   name: "MixinConstants",
   data() {
@@ -85,7 +87,8 @@ export default {
         1: 0.95,
         2: 0.89,
         3: 1,
-        4: 0.995
+        4: 0.995,
+        [STYLE.OONIGE]: 0.86
       },
       styleSpeedCoef: {
         1: {
@@ -107,6 +110,11 @@ export default {
           0: 0.931,
           1: 1,
           2: 1
+        },
+        [STYLE.OONIGE]: {
+          0: 1.063,
+          1: 0.962,
+          2: 0.95
         }
       },
       styleAccelerateCoef: {
@@ -133,6 +141,12 @@ export default {
           1: 1,
           2: 0.997,
           3: 0.997
+        },
+        [STYLE.OONIGE]: {
+          0: 1.17,
+          1: 0.94,
+          2: 0.956,
+          3: 0.956
         }
       },
       spConsumptionCoef: {

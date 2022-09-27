@@ -37,7 +37,7 @@ export default {
             if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
               continue
             }
-            if (skill.styleLimit && skill.styleLimit.indexOf(this.runningStyle) < 0) {
+            if (skill.styleLimit && skill.styleLimit.indexOf(this.basicRunningStyle) < 0) {
               continue
             }
             if (skill.distanceLimit && skill.distanceLimit.indexOf(this.distanceType) < 0) {
@@ -588,7 +588,7 @@ export default {
       return detail
     },
     isRunningStyle(style) {
-      return this.runningStyle === style
+      return this.basicRunningStyle === style
     },
     isDistanceType(distanceType) {
       return this.distanceType === distanceType
@@ -734,7 +734,7 @@ export default {
               delete copy.rare
               delete copy.inherit
               delete copy.all
-              if (copy.tooltip.startsWith(' | ')) {
+              if (copy.tooltip?.startsWith(' | ')) {
                 copy.tooltip = copy.tooltip.substring(3)
               }
               this.skills[type][rarity].push(copy)

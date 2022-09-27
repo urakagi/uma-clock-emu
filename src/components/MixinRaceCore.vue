@@ -3,6 +3,7 @@ import RaceGraph from "@/components/RaceGraph";
 import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
+import { STYLE } from "./data/constants";
 
 export default {
   name: "MixinRaceCore",
@@ -61,7 +62,9 @@ export default {
       chartData: {},
       chartOptions: {},
       // Constants
-      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
+      fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      // Special cases
+      oonige: false,
     }
   },
   mounted() {
@@ -86,7 +89,10 @@ export default {
       return this.$refs.executeBlock.randomPosition
     },
     runningStyle() {
-      return parseInt(this.umaStatus.style)
+      return this.oonige ? STYLE.OONIGE : +this.umaStatus.style;
+    },
+    basicRunningStyle() {
+      return +this.umaStatus.style;
     },
     locationName() {
       if (!this.track.location) {
@@ -148,7 +154,7 @@ export default {
           * this.styleFitCoef[this.umaStatus.styleFit] + this.passiveBonus.wisdom
     },
     spMax() {
-      return this.trackDetail.distance + 0.8 * this.modifiedStamina * this.styleSpCoef[this.umaStatus.style]
+      return this.trackDetail.distance + 0.8 * this.modifiedStamina * this.styleSpCoef[this.runningStyle]
     },
     spurtSpCoef() {
       return 1 + 200 / Math.sqrt(600 * this.modifiedGuts)
@@ -183,7 +189,7 @@ export default {
       if (this.currentSpeed < this.v0) {
         return this.v0
       }
-      let baseTargetSpeed
+      let baseTargetSpeed;
       // スパート中
       if (this.spurtParameters
           && (this.position + this.spurtParameters.distance >= this.courseLength)) {
@@ -192,12 +198,12 @@ export default {
         switch (this.currentPhase) {
           case 0:
           case 1:
-            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][this.currentPhase]
+            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.runningStyle][this.currentPhase]
             break
           case 2:
           case 3:
           default:
-            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.umaStatus.style][2] +
+            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.runningStyle][2] +
                 Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
             baseTargetSpeed += Math.pow(this.modifiedGuts * 450, 0.597) * 0.0001
             break
@@ -234,7 +240,7 @@ export default {
     acceleration() {
       const c = this.isInSlope('up') ? 0.0004 : 0.0006
       let ret = c * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.umaStatus.style][this.currentPhase]
+          * this.styleAccelerateCoef[this.runningStyle][this.currentPhase]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
       // スタート時加算
@@ -263,7 +269,7 @@ export default {
       }
     },
     maxSpurtSpeed() {
-      return (this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][2] + 0.01) +
+      return (this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][2] + 0.01) +
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
           1.05 + Math.sqrt(500 * this.modifiedSpeed) *
           this.distanceFitSpeedCoef[this.umaStatus.distanceFit] * 0.002
@@ -282,15 +288,15 @@ export default {
       return 0.85 * this.baseSpeed
     },
     v1() {
-      return this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][0] +
+      return this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][0] +
           (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325)
     },
     v2() {
-      return this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][1] +
+      return this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][1] +
           (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325)
     },
     v3() {
-      return this.baseSpeed * (this.styleSpeedCoef[this.umaStatus.style][2] +
+      return this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][2] +
           (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325) +
           Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
     },
@@ -302,13 +308,13 @@ export default {
     },
     a0() {
       return 24 + 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.umaStatus.style][0]
+          * this.styleAccelerateCoef[this.runningStyle][0]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
     },
     a1() {
       return 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.umaStatus.style][0]
+          * this.styleAccelerateCoef[this.runningStyle][0]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
     },
@@ -317,13 +323,13 @@ export default {
         return -0.8
       }
       return 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.umaStatus.style][1]
+          * this.styleAccelerateCoef[this.runningStyle][1]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
     },
     a3() {
       return 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.umaStatus.style][2]
+          * this.styleAccelerateCoef[this.runningStyle][2]
           * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
           * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
     },
@@ -439,7 +445,7 @@ export default {
     },
     chartMiddle() {
       return this.courseLength * 0.45;
-    }
+    },
   },
   methods: {
     calcExceedStatus(status) {
@@ -540,6 +546,7 @@ export default {
       this.temptationSection = -1
       this.season = -1
       this.weather = -1
+      this.oonige = false;
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {

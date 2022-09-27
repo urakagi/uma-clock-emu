@@ -9,7 +9,8 @@ export const STYLE = {
     NIGE: 1,
     SEN: 2,
     SASI: 3,
-    OI: 4
+    OI: 4,
+    OONIGE: 10,
 }
 
 export const SURFACE = {
@@ -22,6 +23,7 @@ export const DistanceLimit = {
     Mile: [DISTANCE.MILE],
     Middle: [DISTANCE.MIDDLE],
     Long: [DISTANCE.LONG],
+    ShortAndMile: [DISTANCE.SHORT, DISTANCE.MILE],
 }
 
 export const StyleLimit = {

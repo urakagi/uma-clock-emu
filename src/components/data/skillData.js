@@ -7,6 +7,17 @@ function normalSkillData(thiz) {
     return {
         passive: [
             {
+                rare: {id: 202051, name: '大逃げ', value: 0},
+                status: [],
+                styleLimit: StyleLimit.Nige,
+                check: function () {
+                    return thiz.isRunningStyle(STYLE.NIGE)
+                },
+                trigger: function() {
+                    thiz.oonige = true;
+                }
+            },
+            {
                 normal: {id: 200022, name: '左回り○', value: 40},
                 rare: {id: 200021, name: '左回り◎', value: 60},
                 status: ['speed'],
@@ -1370,6 +1381,17 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 200963, name: '紫電一閃', value: 0.35},
+                duration: 3,
+                distanceLimit: [1],
+                init: function () {
+                    this.randoms = thiz.initStraightRandom()
+                },
+                check: function (startPosition) {
+                    return thiz.isDistanceType(1) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
                 rare: {id: 202061, name: '日本一のウマ娘', value: 0.35},
                 duration: 3,
                 distanceLimit: [4],
@@ -1823,6 +1845,17 @@ function normalSkillData(thiz) {
                     return thiz.isSurfaceType(SURFACE.DIRT) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202401, name: '電光石火', value: 0.4},
+                normal: {id: 202402, name: '一足飛び', value: 0.2},
+                duration: 2,
+                distanceLimit: DistanceLimit.ShortAndMile,
+                tooltip: '5～9位、即発動扱い',
+                check: function () {
+                    return (thiz.isDistanceType(1) || thiz.isDistanceType(2)) &&
+                        thiz.currentPhase >= 2;
+                }
+            },
         ],
         // End of acc skills
         boost: [
@@ -1917,7 +1950,7 @@ function normalSkillData(thiz) {
         ],
         speed: [
             {
-                all: {name: '逃げためらい', value: -1.5},
+                all: {name: '逃げためらい', value: -0.15},
                 duration: 3,
                 styleLimit: [1],
                 init: function () {
@@ -3626,6 +3659,16 @@ const uniqueSkillData = (thiz) =>
             check: function (startPosition) {
                 return startPosition <= thiz.toPosition(300)
                     && thiz.position >= thiz.toPosition(300)
+            }
+        },
+        {
+            id: 100421, hid: 900421, name: '『I\'m possible』',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '2～9位、先頭と5m以内扱い',
+            check: function (startPosition) {
+                return startPosition <= thiz.toPosition(200)
+                    && thiz.position >= thiz.toPosition(200)
             }
         },
 
