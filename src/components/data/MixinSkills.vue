@@ -1090,7 +1090,7 @@ export default {
           {
             normal: {id: 201661, name: '장난은 끝이야!', value: 0.15},
             duration: 3,
-            tooltip: '「중반 어딘가에서 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1101,7 +1101,7 @@ export default {
           {
             normal: {id: 201651, name: '슬립스트림', value: 0.15},
             duration: 3,
-            tooltip: '「중반 어딘가에서 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1151,7 +1151,7 @@ export default {
             normal: {id: 200462, name: '페이스 업', value: 0.15},
             rare: {id: 200461, name: '텐션 오르는데!', value: 0.35},
             duration: 1.8,
-            tooltip: '「중반 어딘가에서 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -1191,6 +1191,15 @@ export default {
               return thiz.skillTriggerCount[1] >= 3
             }
           },
+          {
+                normal: {id: 201591, name: '우마무스메 애호가', value: 0.15},
+                rare: {id: 201592, name: '우마무스메 마니아', value: 0.35},
+                duration: 3,
+                tooltip: '스타트 후 5초 이후 발동으로 간주.(일섭 패치 기준)',
+                check: function () {
+                    return thiz.accTimePassed(5)
+                }
+            },
           {
             normal: {id: 0, name: '아오하루 점화・속도', value: 0.1725},
             rare: {id: 0, name: '아오하루 연소・속도', value: 0.4025},
@@ -1392,7 +1401,7 @@ export default {
             rare: {id: 201331, name: '기교파', value: 0.3},
             duration: 1.8,
             styleLimit: [2],
-            tooltip: '「스타트 후 20초에 발동」으로 간주. 뜨면 메챠쿠챠 배우자.',
+            tooltip: '「스타트 후 20초에 발동」으로 간주.',
             check: function () {
               return thiz.isRunningStyle(2) && thiz.accTimePassed(20)
             }
@@ -1414,7 +1423,7 @@ export default {
             }
           },
           {
-            normal: {id: 201362, name: '만회하기', value: 0.2},
+            normal: {id: 201362, name: '새 출발', value: 0.2},
             duration: 3,
             styleLimit: [2],
             tooltip: '순위>50% 조건 충족으로 간주.',
@@ -1430,7 +1439,7 @@ export default {
             rare: {id: 201401, name: '노력가', value: 0.3},
             duration: 3,
             styleLimit: [3],
-            tooltip: '「중반 어딘가에서 발동」으로 간주. 메챠쿠챠 메챠쿠챠 배우자.',
+            tooltip: '「중반 어딘가에서 발동」으로 간주.',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
             },
@@ -2456,6 +2465,15 @@ export default {
           check: function (startPosition) {
             return thiz.isInRandom(this.randoms, startPosition)
           }
+        },
+        {
+            id: 100051, name: '빛나는 별의 보드빌',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '인접 조건 충족으로 간주.',
+            check: function () {
+                return thiz.isInFinalStraight()
+            }
         },
         {
           id: 100121, name: '결투! 데드히트!',
