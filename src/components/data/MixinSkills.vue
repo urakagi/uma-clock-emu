@@ -255,7 +255,7 @@ export default {
       for (const skill of this.invokedSkills) {
         switch (skill.type) {
           case 'passive':
-            if (skill.check()) {
+            if (skill.check && skill.check()) {
               if ('triggerRate' in skill) {
                 if (Math.random() < skill.triggerRate) {
                   skill.trigger(skill)
