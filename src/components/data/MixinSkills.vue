@@ -1623,7 +1623,7 @@ export default {
             }
           },
           {
-            all: {name: '無腦術', value: -0.25},
+            all: {name: '惱殺術', value: -0.25},
             duration: 3,
             distanceLimit: [1],
             init: function () {
@@ -1635,7 +1635,7 @@ export default {
             }
           },
           {
-            all: {name: '速度獵手', value: -0.15},
+            all: {name: '速度吞噬者', value: -0.15},
             duration: 3,
             distanceLimit: [2],
             init: function () {
@@ -1694,7 +1694,7 @@ export default {
         ],
         fatigue: [
           {
-            all: {name: '耐力獵手', value: 50},
+            all: {name: '持久力吞噬者', value: 50},
             distanceLimit: [4],
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1704,7 +1704,7 @@ export default {
             }
           },
           {
-            all: {name: '耐力獵手x2', value: 100},
+            all: {name: '持久力吞噬者x2', value: 100},
             distanceLimit: [4],
             tooltip: '2回同時に喰らう。通常のと加算できる。',
             init: function () {
@@ -2374,7 +2374,7 @@ export default {
           }
         },
         {
-          id: 100161, name: 'Shadow Break打破陰影',
+          id: 100161, name: 'Shadow Break',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2386,7 +2386,7 @@ export default {
           }
         },
         {
-          id: 100231, name: '∴win QED',
+          id: 100231, name: '∴win Q.E.D.',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2410,7 +2410,7 @@ export default {
           }
         },
         {
-          id: 100501, name: 'Nemesis復仇女神',
+          id: 100501, name: 'Nemesis',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う',
@@ -2434,7 +2434,7 @@ export default {
           }
         },
         {
-          id: 110241, name: '花絢機動Flowery☆Maneuver(前)',
+          id: 110241, name: '花樣繽紛☆飛行演習(前)',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは前の方。',
@@ -2446,7 +2446,7 @@ export default {
           }
         },
         {
-          id: 110181, name: '和暖微風，瞬間亦永恆',
+          id: 110181, name: '暖風吹向永恆的瞬間',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「中盤のどこかで発動」として扱うが、基本的には発動しない。',
@@ -2592,7 +2592,7 @@ export default {
           }
         },
         {
-          id: 100201, name: 'angling×scheming',
+          id: 100201, name: '釣魚×計謀',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [1, 2],
@@ -2602,7 +2602,7 @@ export default {
           }
         },
         {
-          id: 110241, name: '花絢機動Flowery☆Maneuver(後)',
+          id: 110241, name: '花樣繽紛☆飛行演習(後)',
           acceleration: 0.4,
           duration: 4,
           tooltip: '「最終コーナーのどこかで発動」として扱う。こちらは後の方。',
@@ -2715,7 +2715,7 @@ export default {
           }
         },
         {
-          id: 100241, name: '	閃耀☆著陸',
+          id: 100241, name: '閃耀☆著陸',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2742,7 +2742,7 @@ export default {
           }
         },
         {
-          id: 100461, name: '閃耀☆明星',
+          id: 100461, name: '閃耀奪目☆STARDOM',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
