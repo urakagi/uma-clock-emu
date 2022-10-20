@@ -1565,6 +1565,18 @@ function normalSkillData(thiz) {
                     return thiz.isRunningStyle(4) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 202411, name: '風雲の志', value: 0.25},
+                normal: {id: 202412, name: '向上心', value: 0.05},
+                duration: 4,
+                tooltip: '60%～66%のランダム区間発動扱い',
+                init: function () {
+                    this.randoms = thiz.initIntervalRandom(0.6, 5.0 / 6)
+                },
+                check: function (startPosition) {
+                    return thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1625,8 +1637,8 @@ function normalSkillData(thiz) {
                 }
             },
             {
-                normal: {id: 200642, name: '直線一気', value: 0.2},
                 rare: {id: 200641, name: '迫る影', value: 0.4},
+                normal: {id: 200642, name: '直線一気', value: 0.2},
                 duration: 0.9,
                 styleLimit: [4],
                 check: function () {
@@ -1937,6 +1949,17 @@ function normalSkillData(thiz) {
                 },
                 check: function (startPosition) {
                     return thiz.isRunningStyle(STYLE.NIGE) && thiz.isInRandom(this.randoms, startPosition)
+                }
+            },
+            {
+                rare: {id: 202421, name: '無我夢中', acceleration: 0.4, heal: -200},
+                normal: {id: 202422, name: 'がむしゃら', acceleration: 0.2, heal: -200},
+                duration: 1.5,
+                distanceLimit: DistanceLimit.Long,
+                styleLimit: StyleLimit.Sasi,
+                check: function () {
+                    return thiz.isRunningStyle(STYLE.SASI) && thiz.isDistanceType(4)
+                        && thiz.isInSpurt;
                 }
             },
         ],
@@ -3669,6 +3692,42 @@ const uniqueSkillData = (thiz) =>
             check: function (startPosition) {
                 return startPosition <= thiz.toPosition(200)
                     && thiz.position >= thiz.toPosition(200)
+            }
+        },
+        {
+            id: 110191, hid: 900441, name: '萌到讓我活過來了！',
+            targetSpeed: 0.35,
+            duration: 5,
+            check: function () {
+                return thiz.isInCorner() && thiz.curretPhase === 1;
+            }
+        },
+        {
+            id: 110581, hid: 910581, name: 'Spooky-Scary-Happy',
+            targetSpeed: 0.35,
+            duration: 5,
+            check: function () {
+                return thiz.isInFinalStraight();
+            }
+        },
+        {
+            id: 100871, hid: 900781, name: 'silent letter',
+            targetSpeed: 0.25,
+            acceleration: 0.3,
+            duration: 5,
+            tooltip: '400m即発動として扱う',
+            check: function (startPosition) {
+                return startPosition <= thiz.toPosition(200)
+                    && thiz.position >= thiz.toPosition(200)
+            }
+        },
+        {
+            id: 100781, hid: 900781, name: '風光る',
+            acceleration: 0.2,
+            duration: 8,
+            tooltip: '2位時',
+            check: function () {
+                return thiz.isInFinalCorner(thiz.position, {start: 0.5, end: 1})
             }
         },
 
