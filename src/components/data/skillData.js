@@ -485,6 +485,16 @@ function normalSkillData(thiz) {
                     return thiz.isSurfaceType(SURFACE.DIRT) && thiz.track.surfaceCondition === '2' || thiz.track.surfaceCondition === '3';
                 }
             },
+            {
+                rare: {id: 202441, name: '勝負師', value: 80},
+                normal: {id: 202442, name: 'やまっけ', value: 40},
+                status: ['speed', 'guts', 'power'],
+                tooltip: '発動率60%として扱う',
+                triggerRate: 0.6,
+                check: function () {
+                    return true
+                }
+            },
         ],
         // End of passive skills
         heal: [
@@ -1577,6 +1587,15 @@ function normalSkillData(thiz) {
                     return thiz.isInRandom(this.randoms, startPosition)
                 }
             },
+            {
+                rare: {id: 201383, name: '鋭脚一閃', value: 0.35},
+                duration: 3,
+                styleLimit: StyleLimit.Sasi,
+                conditions: {
+                    running_style: 3,
+                    straight_random: 1,
+                },
+            },
         ],
         // End of target speed skills
         acceleration: [
@@ -1961,6 +1980,19 @@ function normalSkillData(thiz) {
                     return thiz.isRunningStyle(STYLE.SASI) && thiz.isDistanceType(4)
                         && thiz.isInSpurt;
                 }
+            },
+            {
+                rare: {id: 202431, name: '快進撃', targetSpeed: 0.25, acceleration: 0.3},
+                normal: {id: 202432, name: '確かな足取り', targetSpeed: 0.05, acceleration: 0.1},
+                duration: 3,
+                tooltip: '発動地点に先頭から４馬身以内にいる必要がある',
+                distanceLimit: DistanceLimit.Middle,
+                styleLimit: StyleLimit.Sen,
+                conditions: {
+                    distance_type: 3,
+                    running_style: 2,
+                    phase_laterhalf_random: 1,
+                },
             },
         ],
         // End of boost skills
@@ -3113,10 +3145,10 @@ const uniqueSkillData = (thiz) =>
             acceleration: 0.4,
             duration: 4,
             tooltip: '常に順位>=50%及び<=70%は満たしていると見なす。',
-            check: function () {
+            check: function (startPosition) {
                 return thiz.temptationModeStart == null &&
-                    ((thiz.currentPhase >= 2 && !thiz.isInFinalCorner() && thiz.isInCorner()) ||
-                        (thiz.currentPhase === 1 && thiz.isInFinalCorner() && thiz.isInCorner()))
+                    ((thiz.currentPhase >= 2 && !thiz.isInFinalCorner(startPosition)) ||
+                        (thiz.currentPhase === 1 && thiz.isInFinalCorner(startPosition)))
             }
         },
         {
@@ -3729,6 +3761,56 @@ const uniqueSkillData = (thiz) =>
             check: function () {
                 return thiz.isInFinalCorner(thiz.position, {start: 0.5, end: 1})
             }
+        },
+        {
+            id: 110211, hid: 910211, name: '火神鳴',
+            targetSpeed: 0.3,
+            duration: 6,
+            tooltip: '2スキルで発動の即0.3として扱う',
+            check: function () {
+                return thiz.skillTriggerCount[1] >= 2
+            }
+        },
+        {
+            id: 110341, hid: 910341, name: '灯穂',
+            targetSpeed: 0.385,
+            duration: 5,
+            tooltip: '0.35として扱う',
+            check: function () {
+                return thiz.currentPhase >= 2 && thiz.isInCorner()
+            }
+        },
+        {
+            id: 100491, hid: 900491, name: '剣ヶ峰より、狂気に嗤え',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '0.45として扱う',
+            check: function () {
+                return thiz.remainDistance <= 400
+            }
+        },
+        {
+            id: 101001, hid: 901001, name: 'Never Say Never',
+            speed: 0.25,
+            duration: 5,
+            check: function () {
+                return thiz.remainDistance <= 301 && thiz.remainDistance >= 299 && thiz.groundType === 2
+            }
+        },
+        {
+            id: 120011, hid: 920011, name: '威風堂々、夢錦！',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '中山の0.45として扱う',
+            courseLimit: {
+                'raceTrackId': [10005]
+            },
+            conditions: {
+                phase: '>=2',
+                is_finalcorner: 1,
+                corner: 1,
+                is_activate_any_skill: 1,
+            },
         },
 
 // End of unique skills

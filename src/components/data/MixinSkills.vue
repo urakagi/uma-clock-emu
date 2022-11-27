@@ -1,5 +1,6 @@
 <script>
 const SkillData = require('./skillData')
+const SKILL_TRIGGER_COUNT_YUMENISIKI = 4;
 
 export default {
   name: "MixinSkills",
@@ -82,6 +83,13 @@ export default {
       }
       return this.spurtParameters.distance + this.position >= this.courseLength
     },
+    // Functions to use the same name in the skill description
+    remainDistance() {
+      return this.courseLength - this.position;
+    },
+    groundType() {
+      return this.surfaceType;
+    },
   },
   created() {
     this.fillSkillData()
@@ -91,7 +99,7 @@ export default {
     initializeSkills(skillActivateAdjustment) {
       this.invokedSkills = []
       this.coolDownMap = {}
-      this.skillTriggerCount = [0, 0, 0, 0]
+      this.skillTriggerCount = [0, 0, 0, 0, 0]
       this.healTriggerCount = 0
       for (const type in this.hasSkills) {
         for (const rarity of Object.keys(this.hasSkills[type])) {
@@ -194,13 +202,14 @@ export default {
       if (!skill.conditions) {
         return
       }
-      const thiz = this
+      const thiz = this;
       if (!skill.checks) {
         skill.checks = []
       }
       skill.randoms = []
       for (const cond in skill.conditions) {
         const value = skill.conditions[cond]
+        // Skill conditions
         switch (cond) {
           case 'distance_rate_after_random':
             skill.randoms = this.initIntervalRandom(value * 0.01, 1)
@@ -227,10 +236,10 @@ export default {
             })
             break
           case 'running_style':
-            skill.checks.push(() => thiz.isRunningStyle(value))
+            skill.checks.push(() => thiz.isRunningStyle(value));
             break
           case 'distance_type':
-            skill.checks.push(() => thiz.isDistanceType(value))
+            skill.checks.push(() => thiz.isDistanceType(value));
             break
           case 'distance_rate':
             skill.checks.push(() => {
@@ -240,7 +249,45 @@ export default {
                 return thiz.IsInInterval(0, parseInt(value.substring(2)) * 0.01)
               }
             })
-            break
+            break;
+          case 'phase_laterhalf_random':
+            skill.randoms = this.initPhaseRandom(1, {startRate: 0.5});
+            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
+            break;
+          case 'straight_random':
+            skill.randoms = this.initStraightRandom();
+            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
+            break;
+          case 'phase':
+            skill.checks.push(() => {
+              if (typeof value === 'string') {
+                if (value.startsWith('>=')) {
+                  return thiz.currentPhase >= parseInt(value.substring(2));
+                } else if (value.startsWith('>')) {
+                  return thiz.currentPhase > parseInt(value.substring(1));
+                } else if (value.startsWith('<=')) {
+                  return thiz.currentPhase <= parseInt(value.substring(2));
+                } else if (value.startsWith('<')) {
+                  return thiz.currentPhase < parseInt(value.substring(1));
+                }
+              } else {
+                return thiz.currentPhase == value;
+              }
+            });
+            break;
+          case 'is_finalcorner':
+            skill.checks.push(() => thiz.isInFinalStraight() || thiz.isInFinalCorner());
+            break;
+          case 'corner':
+            if (value == 0) {
+              skill.checks.push(() => !thiz.isInCorner());
+            } else {
+              skill.checks.push(() => thiz.isInCorner());
+            }
+            break;
+          case 'is_activate_any_skill':
+            skill.checks.push(() => thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1);
+            break;
         }
       }
       skill.check = function (startPosition) {
@@ -302,6 +349,10 @@ export default {
             skillTriggered.push({data: skill, detail: skillDetail})
           }
           this.skillTriggerCount[this.currentPhase]++
+          // 特殊スキル誘発カウント
+          if (this.isInFinalCorner() && this.currentPhase >= 2) {
+            this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
+          }
           this.coolDownMap[skill.name] = this.frameElapsed
         }
       }
@@ -644,7 +695,7 @@ export default {
           skillType = 'heal'
           effectCount++
         }
-        if (skill.targetSpeed) {
+        if (skill.targetSpeed || (skill.speed > 0)) {
           if (skill.targetSpeed == 0.15) {
             copy.inherit.targetSpeed = 0.035
           } else {
@@ -668,6 +719,7 @@ export default {
         }
         delete copy.id
         delete copy.name
+        // console.log(JSON.stringify(copy))
         this.skillData[skillType].push(copy)
       }
 
