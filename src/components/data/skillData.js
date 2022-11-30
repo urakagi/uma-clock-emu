@@ -1596,8 +1596,40 @@ function normalSkillData(thiz) {
                     straight_random: 1,
                 },
             },
+            {
+                rare: {id: 202461, name: '踏ませぬ影', value: 0.45},
+                normal: {id: 202462, name: '粘り腰', value: 0.25},
+                duration: 2.4,
+                styleLimit: StyleLimit.Nige,
+                conditions: {
+                    running_style: 1,
+                    is_finalcorner: 1,
+                    corner: 0,
+                },
+            },
+            {
+                rare: {id: 202451, name: 'トップギア', value: 0.45},
+                normal: {id: 202452, name: 'キレる脚', value: 0.25},
+                duration: 2.4,
+                styleLimit: StyleLimit.Sasi,
+                conditions: {
+                    running_style: 3,
+                    is_finalcorner: 1,
+                    corner: 0,
+                },
+            },
+            {
+                rare: {id: 202471, name: '猛追', value: 0.35},
+                normal: {id: 202472, name: '食らいつき', value: 0.15},
+                duration: 2.4,
+                styleLimit: [2, 3],
+                conditions: {
+                    running_style: [2, 3],
+                    distance_rate: '>=50',
+                },
+            },
+            // End of target speed skills
         ],
-        // End of target speed skills
         acceleration: [
             {
                 normal: {id: 200342, name: 'コーナー加速○', value: 0.2},
@@ -1885,6 +1917,17 @@ function normalSkillData(thiz) {
                 check: function () {
                     return (thiz.isDistanceType(1) || thiz.isDistanceType(2)) &&
                         thiz.currentPhase >= 2;
+                }
+            },
+            {
+                normal: {id: 202482, name: '本領発揮', value: 0.2},
+                duration: 1.2,
+                distanceLimit: DistanceLimit.Long,
+                styleLimit: StyleLimit.Sen,
+                conditions: {
+                    distance_type: 4,
+                    running_style: 2,
+                    phase: 2,
                 }
             },
         ],
@@ -3811,6 +3854,26 @@ const uniqueSkillData = (thiz) =>
                 corner: 1,
                 is_activate_any_skill: 1,
             },
+        },
+        {
+            id: 110091, hid: 910091, name: 'Queen\'s Lumination',
+            targetSpeed: 0.35,
+            duration: 6,
+            tooltip: '0.35のみ',
+            conditions: {
+                distance_rate: '>=50',
+                corner: 0,
+            },
+        },
+        {
+            id: 110081, hid: 910081, name: 'Into High Gear!',
+            targetSpeed: 0.35,
+            acceleration: 0.1,
+            duration: 5,
+            tooltip: '常に東京として扱う。分ける実装面倒すぎぃ！',
+            check: function (startPosition) {
+                return thiz.isInSlope('down', startPosition) && !thiz.isInSlope('down') && thiz.phase >= 1;
+            }
         },
 
 // End of unique skills

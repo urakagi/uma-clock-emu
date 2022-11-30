@@ -90,6 +90,9 @@ export default {
     groundType() {
       return this.surfaceType;
     },
+    phase() {
+      return this.currentPhase;
+    }
   },
   created() {
     this.fillSkillData()
@@ -236,7 +239,11 @@ export default {
             })
             break
           case 'running_style':
-            skill.checks.push(() => thiz.isRunningStyle(value));
+            if (typeof value === 'number') {
+              skill.checks.push(() => thiz.isRunningStyle(value));
+            } else if (Array.isArray(value)) {
+              skill.checks.push(() => value.includes(this.basicRunningStyle));
+            }
             break
           case 'distance_type':
             skill.checks.push(() => thiz.isDistanceType(value));
