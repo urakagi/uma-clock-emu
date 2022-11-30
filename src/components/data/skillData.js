@@ -3147,7 +3147,7 @@ const uniqueSkillData = (thiz) =>
             tooltip: '常に順位>=50%及び<=70%は満たしていると見なす。',
             check: function (startPosition) {
                 return thiz.temptationModeStart == null &&
-                    ((thiz.currentPhase >= 2 && !thiz.isInFinalCorner(startPosition)) ||
+                    ((thiz.currentPhase >= 2 && !thiz.isInFinalCorner(startPosition) && thiz.isInCorner(startPosition)) ||
                         (thiz.currentPhase === 1 && thiz.isInFinalCorner(startPosition)))
             }
         },
