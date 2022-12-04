@@ -224,8 +224,8 @@ export default {
             }
           },
           {
-            normal: {name: '天気の日○', value: 40},
-            rare: {name: '天気の日◎', value: 60},
+            normal: {name: '天氣○', value: 40},
+            rare: {name: '天氣◎', value: 60},
             status: ['guts'],
             emulatorTypeLimit: ['cm'],
             check: function () {
@@ -2047,7 +2047,7 @@ export default {
           }
         },
         {
-          id: 110111, name: '上級增愈術Gainheal·Superior',
+          id: 110111, name: '卓越治癒術',
           heal: 550,
           tooltip: '中盤のどこかで発動として見なす。',
           init: function () {
@@ -2058,7 +2058,7 @@ export default {
           }
         },
         {
-          id: 110011, name: '超級可愛♪飛身入海',
+          id: 110011, name: '超級可愛♪海洋潛水',
           heal: 550,
           check: function () {
             return thiz.skillTriggerCount[1] >= 2
@@ -2458,7 +2458,7 @@ export default {
           }
         },
         {
-          id: 100121, name: '單挑！白熱化！',
+          id: 100121, name: '一較高下！激烈對決！',
           targetSpeed: 0.35,
           duration: 5,
           tooltip: '「最終直線のどこかで発動」として扱う。',
@@ -2470,7 +2470,7 @@ export default {
           }
         },
         {
-          id: 110041, name: '一鼓作氣♪啾',
+          id: 110041, name: '一鼓作氣♪Chu',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2575,7 +2575,7 @@ export default {
           noInherit: true,
           acceleration: 0.3,
           duration: 4,
-          styleLimit: [3, 4],
+          styleLimit: [2, 3, 4],
           tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
           check: function () {
             return thiz.currentPhase >= 2 && thiz.isInCorner()
@@ -2585,8 +2585,7 @@ export default {
           id: 100271, name: '合成代謝開始！',
           acceleration: 0.4,
           duration: 4,
-          styleLimit: [3, 4],
-          tooltip: '常に順位>=65%及び<=70%は満たしていると見なす。実戦は発動がより遅くなる。',
+          styleLimit: [2, 3, 4],
           check: function () {
             return thiz.currentPhase >= 2 && thiz.isInCorner()
           }
@@ -2614,7 +2613,7 @@ export default {
           }
         },
         {
-          id: 100131, name: '神鷹猛擊波',
+          id: 100131, name: '兀鷹猛擊波',
           acceleration: 0.4,
           duration: 4,
           init: function () {
@@ -2625,7 +2624,7 @@ export default {
           }
         },
         {
-          id: 0, name: '保持真我',
+          id: 0, name: 'KEEP IT REAL.',
           acceleration: 0.3,
           duration: 6,
           tooltip: '50%地点で即発動として扱う',
