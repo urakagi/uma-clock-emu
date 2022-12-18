@@ -2753,13 +2753,13 @@ export default {
           }
         },
         {
-          id: 100581, name: '永不言敗',
+          id: 100581, name: 'I Never Goof Up!',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '「終盤のコーナーのどこかで発動」として扱う',
+          tooltip: '於終盤彎道隨機位置發動',
           init: function () {
             this.randoms = thiz.initPhase2CornerRandom()
           },
