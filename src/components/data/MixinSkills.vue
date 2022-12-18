@@ -214,6 +214,11 @@ export default {
         const value = skill.conditions[cond]
         // Skill conditions
         switch (cond) {
+          case 'remain_distance':
+            skill.checks.push(function (startPosition) {
+              return thiz.isContainsRemainingDistance(value, startPosition)
+            })
+            break;
           case 'distance_rate_after_random':
             skill.randoms = this.initIntervalRandom(value * 0.01, 1)
             skill.checks.push(function (startPosition) {

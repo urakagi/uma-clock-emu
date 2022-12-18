@@ -3792,8 +3792,8 @@ const uniqueSkillData = (thiz) =>
             duration: 5,
             tooltip: '400m即発動として扱う',
             check: function (startPosition) {
-                return startPosition <= thiz.toPosition(200)
-                    && thiz.position >= thiz.toPosition(200)
+                return startPosition <= thiz.toPosition(400)
+                    && thiz.position >= thiz.toPosition(400)
             }
         },
         {
@@ -3874,6 +3874,15 @@ const uniqueSkillData = (thiz) =>
             check: function (startPosition) {
                 return thiz.isInSlope('down', startPosition) && !thiz.isInSlope('down') && thiz.phase >= 1;
             }
+        },
+        {
+            id: 100471, hid: 900471, name: '掲げよ、己が魂の剣を！',
+            targetSpeed: 0.45,
+            duration: 5,
+            tooltip: '0.45のみ',
+            conditions: {
+                remain_distance: 400,
+            },
         },
 
 // End of unique skills
