@@ -290,6 +290,9 @@ export default {
           case 'is_finalcorner':
             skill.checks.push(() => thiz.isInFinalStraight() || thiz.isInFinalCorner());
             break;
+          case 'is_finalcorner_laterhalf':
+            skill.checks.push(() => thiz.isInFinalCorner(null, { start: 0.5, end: 1 }));
+            break;
           case 'corner':
             if (value == 0) {
               skill.checks.push(() => !thiz.isInCorner());

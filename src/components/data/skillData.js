@@ -1920,6 +1920,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 202481, name: '怪物', value: 0.4},
                 normal: {id: 202482, name: '本領発揮', value: 0.2},
                 duration: 1.2,
                 distanceLimit: DistanceLimit.Long,
@@ -3881,6 +3882,18 @@ const uniqueSkillData = (thiz) =>
             duration: 5,
             tooltip: '0.45のみ',
             conditions: {
+                remain_distance: 400,
+            },
+        },
+        {
+            id: 110161, hid: 910161, name: '灰色の臨界点',
+            targetSpeed: 0.55,
+            duration: 5,
+            tooltip: '0.55のみ',
+            conditions: {
+                distance_type: 4,
+                phase: '>=2',
+                is_finalcorner_laterhalf: 1,
                 remain_distance: 400,
             },
         },
