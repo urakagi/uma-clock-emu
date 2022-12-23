@@ -525,7 +525,7 @@ function normalSkillData(thiz) {
                 init: function () {
                     this.randoms = thiz.initStraightRandom()
                 },
-                check: function (startPosition) {
+                check: function (startPositioとｋn) {
                     return thiz.isDistanceType(DISTANCE.LONG) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
@@ -3646,7 +3646,7 @@ const uniqueSkillData = (thiz) =>
             tooltip: '4～7位。',
             check: function () {
                 return thiz.position >= thiz.courseLength * 0.6 &&
-                    thiz.courseLength * thiz.position >= 500 &&
+                    thiz.courseLength - thiz.position >= 500 &&
                     thiz.isInSlope('down');
             }
         },
