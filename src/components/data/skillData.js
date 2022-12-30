@@ -525,7 +525,7 @@ function normalSkillData(thiz) {
                 init: function () {
                     this.randoms = thiz.initStraightRandom()
                 },
-                check: function (startPositioとｋn) {
+                check: function (startPosition) {
                     return thiz.isDistanceType(DISTANCE.LONG) && thiz.isInRandom(this.randoms, startPosition)
                 }
             },
@@ -1929,6 +1929,16 @@ function normalSkillData(thiz) {
                     distance_type: 4,
                     running_style: 2,
                     phase: 2,
+                }
+            },
+            {
+                rare: {id: 202491, name: '抜群の切れ味', value: 0.4},
+                normal: {id: 202492, name: '切れ味', value: 0.2},
+                duration: 1.2,
+                styleLimit: StyleLimit.Oi,
+                conditions: {
+                    running_style: 4,
+                    phase_firsthalf_random: 2,
                 }
             },
         ],
@@ -3895,6 +3905,28 @@ const uniqueSkillData = (thiz) =>
                 phase: '>=2',
                 is_finalcorner_laterhalf: 1,
                 remain_distance: 400,
+            },
+        },
+        {
+            id: 110671, hid: 910671, name: '玄雲散らす、黄金甲矢',
+            targetSpeed: 0.35,
+            heal: 350,
+            duration: 5,
+            conditions: {
+                distance_rate: ['>=40', '<=50'],
+            },
+        },
+        {
+            id: 110681, hid: 910681, name: 'あっぱれ大盤振る舞い！',
+            acceleration: 0.1,
+            duration: 4,
+            conditions: {
+                phase: '>=2',
+                corner: 1,
+                remain_distance: '>=600',
+            },
+            trigger: function() {
+                thiz.currentSpeed += 0.35;
             },
         },
 

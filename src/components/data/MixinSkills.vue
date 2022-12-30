@@ -215,9 +215,21 @@ export default {
         // Skill conditions
         switch (cond) {
           case 'remain_distance':
-            skill.checks.push(function (startPosition) {
-              return thiz.isContainsRemainingDistance(value, startPosition)
-            })
+            if (typeof value === 'number') {
+              skill.checks.push(function (startPosition) {
+                return thiz.isContainsRemainingDistance(value, startPosition)
+              })
+            } else {
+              if (value.startsWith('>=')) {
+                skill.checks.push(function (startPosition) {
+                  return startPosition <= thiz.toPosition(parseInt(value.toString().substring(2)));
+                });
+              } else if(value.startsWith('<=')) {
+                skill.checks.push(function (startPosition) {
+                  return startPosition >= thiz.toPosition(parseInt(value.toString().substring(2)));
+                });
+              }
+            }
             break;
           case 'distance_rate_after_random':
             skill.randoms = this.initIntervalRandom(value * 0.01, 1)
@@ -253,14 +265,27 @@ export default {
           case 'distance_type':
             skill.checks.push(() => thiz.isDistanceType(value));
             break
-          case 'distance_rate':
-            skill.checks.push(() => {
-              if (value.startsWith('>=')) {
-                return thiz.isInInterval(parseInt(value.substring(2)) * 0.01, 1)
-              } else if (value.startsWith('<=')) {
-                return thiz.IsInInterval(0, parseInt(value.substring(2)) * 0.01)
-              }
-            })
+          case 'distance_rate': {
+            let values;
+            if (Array.isArray(value)) {
+              values = value;
+            } else {
+              values = [value];
+            }
+            for (const v of values) {
+              skill.checks.push(() => {
+                if (v.startsWith('>=')) {
+                  return thiz.isInInterval(parseInt(v.substring(2)) * 0.01, 1)
+                } else if (v.startsWith('<=')) {
+                  return thiz.isInInterval(0, parseInt(v.substring(2)) * 0.01)
+                }
+              })
+            }
+            break;
+          }
+          case 'phase_firsthalf_random':
+            skill.randoms = this.initPhaseRandom(1, {endRate: 0.5});
+            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
             break;
           case 'phase_laterhalf_random':
             skill.randoms = this.initPhaseRandom(1, {startRate: 0.5});
