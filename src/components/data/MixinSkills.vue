@@ -284,11 +284,11 @@ export default {
             break;
           }
           case 'phase_firsthalf_random':
-            skill.randoms = this.initPhaseRandom(1, {endRate: 0.5});
+            skill.randoms = this.initPhaseRandom(value, {endRate: 0.5});
             skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
             break;
           case 'phase_laterhalf_random':
-            skill.randoms = this.initPhaseRandom(1, {startRate: 0.5});
+            skill.randoms = this.initPhaseRandom(value, {startRate: 0.5});
             skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
             break;
           case 'straight_random':
