@@ -1581,7 +1581,7 @@ function normalSkillData(thiz) {
                 duration: 4,
                 tooltip: '60%～66%のランダム区間発動扱い',
                 init: function () {
-                    this.randoms = thiz.initIntervalRandom(0.6, 5.0 / 6)
+                    this.randoms = thiz.initIntervalRandom(0.6, 2.0 / 3)
                 },
                 check: function (startPosition) {
                     return thiz.isInRandom(this.randoms, startPosition)
