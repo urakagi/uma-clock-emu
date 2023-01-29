@@ -271,11 +271,7 @@ export default {
             skill.checks.push(() => thiz.isSurfaceType(value));
             break;
           case 'distance_type':
-            if (Array.isArray(value)) {
-              skill.checks.push(() => value.indexOf(thiz.distanceType) >= 0);
-            } else {
-              skill.checks.push(() => thiz.isDistanceType(value));
-            }
+            skill.checks.push(() => thiz.isDistanceType(value));
             break
           case 'distance_rate': {
             let values;
