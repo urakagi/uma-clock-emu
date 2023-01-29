@@ -42,7 +42,12 @@ export default {
               continue
             }
             if (skill.distanceLimit && skill.distanceLimit.indexOf(this.distanceType) < 0) {
-              continue
+              continue;
+            }
+            if (skill.conditions?.distance_type) {
+              if (!this.isDistanceType(skill.conditions.distance_type)) {
+                continue;
+              }
             }
             if (skill.surfaceLimit && skill.surfaceLimit.indexOf(this.surfaceType) < 0) {
               continue
@@ -262,8 +267,15 @@ export default {
               skill.checks.push(() => value.includes(this.basicRunningStyle));
             }
             break
+          case 'ground_type':
+            skill.checks.push(() => thiz.isSurfaceType(value));
+            break;
           case 'distance_type':
-            skill.checks.push(() => thiz.isDistanceType(value));
+            if (Array.isArray(value)) {
+              skill.checks.push(() => value.indexOf(thiz.distanceType) >= 0);
+            } else {
+              skill.checks.push(() => thiz.isDistanceType(value));
+            }
             break
           case 'distance_rate': {
             let values;
@@ -327,6 +339,20 @@ export default {
             break;
           case 'is_activate_any_skill':
             skill.checks.push(() => thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1);
+            break;
+          case 'is_lastspurt':
+            if (value == 0) {
+              skill.checks.push(() => !thiz.isInSpurt);
+            } else {
+              skill.checks.push(() => thiz.isInSpurt);
+            }
+            break;
+          case 'lastspurt':
+            switch (value) {
+              case 2:
+                skill.checks.push(() => thiz.spurtParameters?.speed == thiz.maxSpurtSpeed);
+                break;
+            }
             break;
         }
       }
@@ -682,7 +708,11 @@ export default {
       return this.basicRunningStyle === style
     },
     isDistanceType(distanceType) {
-      return this.distanceType === distanceType
+      if (Array.isArray(distanceType)) {
+        return distanceType.indexOf(this.distanceType) >= 0;
+      } else {
+        return this.distanceType === distanceType;
+      }
     },
     isSurfaceType(surfaceType) {
       return this.surfaceType === surfaceType

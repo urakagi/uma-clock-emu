@@ -1628,6 +1628,16 @@ function normalSkillData(thiz) {
                     distance_rate: '>=50',
                 },
             },
+            {
+                rare: {id: 202501, name: '遮二無二', value: 0.35},
+                normal: {id: 202502, name: '向こう見ず', value: 0.15},
+                duration: 2.4,
+                tooltip: '順位<=50%',
+                conditions: {
+                    distance_type: 2,
+                    phase_laterhalf_random: 1,
+                },
+            },
             // End of target speed skills
         ],
         acceleration: [
@@ -3927,6 +3937,28 @@ const uniqueSkillData = (thiz) =>
             },
             trigger: function() {
                 thiz.currentSpeed += 0.35;
+            },
+        },
+        {
+            id: 100991, hid: 900991, name: 'かがやけ☆とまこまい',
+            acceleration: 0.4,
+            duration: 4,
+            styleLimit: [1, 2],
+            tooltip: '最大スパート時のみ、3～4位＆中盤コーナーで競り合い',
+            conditions: {
+                ground_type: 2,
+                lastspurt: 2,
+                is_lastspurt: 1,
+            },
+        },
+        {
+            id: 100651, hid: 900651, name: 'アゲてアゲてぷちょへんざ！',
+            targetSpeed: 0.25,
+            duration: 6,
+            tooltip: '短距離/マイルのみ、順位<=50%',
+            conditions: {
+                distance_type: [1, 2],
+                phase_laterhalf_random: 1,
             },
         },
 
