@@ -248,6 +248,11 @@ export default {
               return thiz.isInRandom(skill.randoms, startPosition)
             })
             break
+          case 'slope':
+            skill.checks.push(function () {
+              return thiz.isInSlope(['', 'up', 'down'][value]);
+            })
+            break;
           case 'up_slope_random':
             skill.randoms = this.initSlopeRandom('up')
             skill.checks.push(function (startPosition) {
@@ -349,6 +354,10 @@ export default {
                 skill.checks.push(() => thiz.spurtParameters?.speed == thiz.maxSpurtSpeed);
                 break;
             }
+            break;
+          default:
+            alert(`Unknown condition ${cond}`);
+            console.error(`Unknown condition ${cond}`);
             break;
         }
       }

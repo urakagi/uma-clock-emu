@@ -1471,6 +1471,7 @@ function normalSkillData(thiz) {
                 }
             },
             {
+                rare: {id: 202171, name: '至高のダウンヒラー', value: 0.35},
                 normal: {id: 202172, name: '下り坂巧者', value: 0.15},
                 duration: 2.4,
                 conditions: {
@@ -1637,6 +1638,22 @@ function normalSkillData(thiz) {
                     distance_type: 2,
                     phase_laterhalf_random: 1,
                 },
+            },
+            {
+                rare: {id: 201253, name: '陣風円刃', value: 0.35},
+                duration: 3,
+                conditions: {
+                    all_corner_random: 1,
+                    running_style: 1
+                }
+            },
+            {
+                rare: {id: 201393, name: '鋭脚円刃', value: 0.35},
+                duration: 3,
+                conditions: {
+                    all_corner_random: 1,
+                    running_style: 3
+                }
             },
             // End of target speed skills
         ],
@@ -3959,6 +3976,29 @@ const uniqueSkillData = (thiz) =>
             conditions: {
                 distance_type: [1, 2],
                 phase_laterhalf_random: 1,
+            },
+        },
+        {
+            id: 110271, hid: 910271, name: 'あなたに捧げるフリーポア',
+            targetSpeed: 0.35,
+            acceleration: 0.1,
+            duration: 4,
+            tooltip: '中距離のみ、>=2位',
+            conditions: {
+                distance_rate: '>=60',
+                slope: 2,
+                phase: 1,
+                distance_type: 3,
+            },
+        },
+        {
+            id: 110311, hid: 910311, name: 'フレッシュ☆パーラー',
+            targetSpeed: 0.25,
+            heal: 350,
+            duration: 6,
+            tooltip: '順位<=30%',
+            conditions: {
+                phase_firsthalf_random: 1,
             },
         },
 
