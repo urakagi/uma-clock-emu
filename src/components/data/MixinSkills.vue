@@ -1,4 +1,5 @@
 <script>
+
 const SkillData = require('./skillData')
 const SKILL_TRIGGER_COUNT_YUMENISIKI = 4;
 
@@ -21,12 +22,40 @@ export default {
       skillTriggerCount: [0, 0, 0, 0],
       healTriggerCount: 0,
       skills: {},
-      skillData: SkillData.normalSkillData(this),
-      uniqueSkillData: SkillData.uniqueSkillData(this),
       passiveBonusKeys: ['speed', 'stamina', 'power', 'guts', 'wisdom', 'temptationRate'],
     }
   },
   computed: {
+    skillData() {
+      const origin = SkillData.normalSkillData(this);
+      for (const type in origin) {
+        for (const skillWrapper of origin[type]) {
+          for (const rarity of this.rarities) {
+            const skill = skillWrapper[rarity];
+            if (!skill) continue;
+            // i18n name
+            const jaName = skill.name;
+            const localName = this.$t(`skill.${jaName}`);
+            skill.name = localName ? localName : jaName;
+          }
+        }
+      }
+      return origin;
+    },
+    uniqueSkillData() {
+      const origin = SkillData.uniqueSkillData(this);
+      for (const skill of origin) {
+        // i18n name
+        const jaName = skill.name;
+        const localName = this.$t(`skill.${jaName}`);
+        skill.name = localName ? localName : jaName;
+      }
+      return origin.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
+    },
     availableSkills() {
       const ret = {}
       for (const type in this.skills) {
@@ -148,7 +177,7 @@ export default {
           continue
         }
         const copy = {...skill}
-        copy.name = skill.name
+        copy.name = skill.name;
         copy.cd = 500
         copy.triggers = []
         if (skill.trigger) {
@@ -817,7 +846,8 @@ export default {
               if (skill[rarity].id) {
                 copy.id = skill[rarity].id
               }
-              copy.name = skill[rarity].name
+
+              copy.name = skill[rarity].name;
               if (skill[rarity].value) {
                 copy.value = skill[rarity].value
               } else {

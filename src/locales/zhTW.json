@@ -19,10 +19,10 @@
 		"guts": "根性",
 		"wisdom": "智慧",
 		"style": "腳質",
-		"mood": "調子",
+		"mood": "幹勁",
 
 		"distanceFit": "距離適性",
-		"surfaceFit": "馬場適性",
+		"surfaceFit": "場地適性",
 		"styleFit": "腳質適性",
 		"random": "隨機",
 		"course": "場地",
@@ -87,19 +87,31 @@
 		"remark8": "作者：砂井裏鍵。解包哥，永遠的神。",
 
 		"contact": "推特在↑這↓",
-		"emulating": "模擬中、請稍候……"
+		"emulating": "模擬中、請稍候……",
 
+		"randomPosition": "亂數區間",
+		"randomPosition0": "隨機",
+		"randomPosition1": "最速",
+		"randomPosition2": "1/4",
+		"randomPosition3": "1/2",
+		"randomPosition4": "3/4",
+		"randomPosition5": "最遲",
+
+		"runningStyle1": "領頭",
+		"runningStyle2": "前列",
+		"runningStyle3": "居中",
+		"runningStyle4": "後追"
 	},
 	"emulatorType": {
 		"teamRace": "競技場",
-		"champMeet": "冠軍會議"
+		"champMeet": "冠軍集會"
 	},
 	"skills": {
 		"passive": "被動技能",
 		"heal": "回復技能",
 		"targetSpeed": "速度技能",
 		"acceleration": "加速度技能",
-		"boost": "雙效技能（速度和加速度同時上升）",
+		"boost": "複合技能",
 		"gate": "出閘技能",
 		"speed": "受到的減速技能",
 		"fatigue": "受到的疲勞技能",

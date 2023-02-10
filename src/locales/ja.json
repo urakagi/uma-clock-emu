@@ -94,7 +94,12 @@
 		"randomPosition2": "1/4",
 		"randomPosition3": "中間",
 		"randomPosition4": "3/4",
-		"randomPosition5": "最遅"
+		"randomPosition5": "最遅",
+
+		"runningStyle1": "逃げ",
+		"runningStyle2": "先行",
+		"runningStyle3": "差し",
+		"runningStyle4": "追込"
 	},
 	"emulatorType": {
 		"teamRace": "チーム競技場",

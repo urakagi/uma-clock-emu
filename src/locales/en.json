@@ -86,7 +86,20 @@
 		"remark8": "Created by: 砂井裏鍵. Various other sources helped greatly.",
 
 		"contact": "Twitter Link",
-		"emulating": "Simulating, please wait......"
+		"emulating": "Simulating, please wait......",
+
+		"randomPosition": "Random block",
+		"randomPosition0": "Random",
+		"randomPosition1": "Soon",
+		"randomPosition2": "1/4",
+		"randomPosition3": "Middle",
+		"randomPosition4": "3/4",
+		"randomPosition5": "Latest",
+
+		"runningStyle1": "Runner",
+		"runningStyle2": "Leader",
+		"runningStyle3": "Betweener",
+		"runningStyle4": "Chaser"
 	},
 	"emulatorType": {
 		"teamRace": "Team Race",
