@@ -28,6 +28,9 @@ export default {
   computed: {
     skillData() {
       const origin = SkillData.normalSkillData(this);
+      if (this.$i18n.locale === 'ja') {
+        return origin;
+      }
       for (const type in origin) {
         for (const skillWrapper of origin[type]) {
           for (const rarity of this.rarities) {
@@ -44,6 +47,13 @@ export default {
     },
     uniqueSkillData() {
       const origin = SkillData.uniqueSkillData(this);
+      if (this.$i18n.locale === 'ja') {
+        return origin.sort((a, b) => {
+          if (a.name < b.name) return -1;
+          if (a.name > b.name) return 1;
+          return 0;
+        });
+      }
       for (const skill of origin) {
         // i18n name
         const jaName = skill.name;

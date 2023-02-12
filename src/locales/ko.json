@@ -135,6 +135,7 @@
     "hintBackground": "배경색 의미:",
     "corner": "코너",
     "straight": "직선",
+    "slope": "파도",
     "temptation": "흥분 상태",
     "none": "해당없음",
     "phaseSeparators": "중반 진입: {0}m | 종반 진입: {1}m",
