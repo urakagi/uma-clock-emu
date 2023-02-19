@@ -96,11 +96,11 @@
       </el-form-item>
       <el-form-item :label="$t('message.mood')">
         <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
-          <el-option label="絶好調" value="0"></el-option>
-          <el-option label="好調" value="1"></el-option>
-          <el-option label="普通" value="2"></el-option>
-          <el-option label="不調" value="3"></el-option>
-          <el-option label="絶不調" value="4"></el-option>
+          <el-option :label="$t('message.mood0')" value="0"></el-option>
+          <el-option :label="$t('message.mood1')" value="1"></el-option>
+          <el-option :label="$t('message.mood2')" value="2"></el-option>
+          <el-option :label="$t('message.mood3')" value="3"></el-option>
+          <el-option :label="$t('message.mood4')" value="4"></el-option>
           <el-option :label="$t('message.random')" value="5"></el-option>
         </el-select>
       </el-form-item>
