@@ -4725,6 +4725,20 @@ const uniqueSkillData = (thiz) => [
       phase_firsthalf_random: 1,
     },
   },
+  {
+    id: 199901, // ID不明
+    hid: 999901, // ID不明
+    name: "Ding Dong Boo",
+    targetSpeed: 0.25,
+    acceleration: 0.4,
+    duration: 5,
+    tooltip: "ダートのみ、最終直線ランダム発動として扱う",
+    conditions: {
+      ground_type: 2,
+      is_finalcorner: 1,
+      corner: 0,
+    },
+  },
 
   // End of unique skills
 ];
