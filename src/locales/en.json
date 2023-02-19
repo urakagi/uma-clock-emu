@@ -99,7 +99,18 @@
 		"runningStyle1": "Runner",
 		"runningStyle2": "Leader",
 		"runningStyle3": "Betweener",
-		"runningStyle4": "Chaser"
+		"runningStyle4": "Chaser",
+
+		"surfaceCondition1": "Good",
+		"surfaceCondition2": "Slightly Heavy",
+		"surfaceCondition3": "Heavy",
+		"surfaceCondition4": "Bad",
+
+		"mood0": "Best",
+		"mood1": "Good",
+		"mood2": "Normal",
+		"mood3": "Bad",
+		"mood4": "Worst"
 	},
 	"emulatorType": {
 		"teamRace": "Team Race",

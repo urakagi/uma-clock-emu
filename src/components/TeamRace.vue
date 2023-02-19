@@ -102,7 +102,6 @@
           <el-option label="不調" value="3"></el-option>
           <el-option label="絶不調" value="4"></el-option>
           <el-option :label="$t('message.random')" value="5"></el-option>
-          <el-option :label="$t('message.random') + '(3種)'" value="6"></el-option>
         </el-select>
       </el-form-item>
       <br>

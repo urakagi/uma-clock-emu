@@ -100,7 +100,18 @@
 		"runningStyle1": "領頭",
 		"runningStyle2": "前列",
 		"runningStyle3": "居中",
-		"runningStyle4": "後追"
+		"runningStyle4": "後追",
+
+		"surfaceCondition1": "良好",
+		"surfaceCondition2": "略差",
+		"surfaceCondition3": "差",
+		"surfaceCondition4": "極差",
+
+		"mood0": "絕佳",
+		"mood1": "良好",
+		"mood2": "普通",
+		"mood3": "不佳",
+		"mood4": "極差"
 	},
 	"emulatorType": {
 		"teamRace": "競技場",

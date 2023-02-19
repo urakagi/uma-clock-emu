@@ -99,7 +99,18 @@
     "runningStyle1": "도주",
     "runningStyle2": "선행",
     "runningStyle3": "선입",
-    "runningStyle4": "추입"
+    "runningStyle4": "추입",
+
+    "surfaceCondition1": "양호",
+    "surfaceCondition2": "다습",
+    "surfaceCondition3": "포화",
+    "surfaceCondition4": "불량",
+
+    "mood0": "최상",
+    "mood1": "양호",
+    "mood2": "보통",
+    "mood3": "저조",
+    "mood4": "최악"
   },
   "emulatorType": {
     "teamRace": "팀 레이스",

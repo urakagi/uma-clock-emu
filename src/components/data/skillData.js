@@ -4726,8 +4726,8 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 199901, // ID不明
-    hid: 999901, // ID不明
+    id: 100431,
+    hid: 900431,
     name: "Ding Dong Boo",
     targetSpeed: 0.25,
     acceleration: 0.4,

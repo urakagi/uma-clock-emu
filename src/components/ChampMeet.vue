@@ -102,7 +102,6 @@
           <el-option label="不調" value="3"></el-option>
           <el-option label="絶不調" value="4"></el-option>
           <el-option :label="$t('message.random')" value="5"></el-option>
-          <el-option :label="$t('message.random') + '(3種)'" value="6"></el-option>
         </el-select>
       </el-form-item>
       <br>
@@ -127,10 +126,10 @@
       </el-form-item>
       <el-form-item :label="$t('message.surfaceCondition')">
         <el-select v-model="track.surfaceCondition" style="width: 90px;">
-          <el-option label="良" value="0"></el-option>
-          <el-option label="稍重" value="1"></el-option>
-          <el-option label="重" value="2"></el-option>
-          <el-option label="不良" value="3"></el-option>
+          <el-option :label="$t('message.surfaceCondition1')" value="1"></el-option>
+          <el-option :label="$t('message.surfaceCondition2')" value="2"></el-option>
+          <el-option :label="$t('message.surfaceCondition3')" value="3"></el-option>
+          <el-option :label="$t('message.surfaceCondition4')" value="4"></el-option>
         </el-select>
       </el-form-item>
       <br>
@@ -226,7 +225,7 @@
         <tr>
           <td>{{ maxSpurtRate }}%</td>
           <td>{{ maxSpurtSPLeft }}</td>
-           <td>{{ nonMaxSpurtSPLack }}</td>
+          <td>{{ nonMaxSpurtSPLack }}</td>
         </tr>
       </table>
     </div>
