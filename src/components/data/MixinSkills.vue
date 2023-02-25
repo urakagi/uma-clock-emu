@@ -170,12 +170,23 @@ export default {
                 invokeRate = Math.max(100000 - 9000.0 / this.umaStatus.wisdom, 20)
               }
             }
-            if (Math.random() * 100 < invokeRate) {
-              if (skill.init) {
-                skill.init()
+            const { invokes: skillInvokes, ...rest } = skill;
+            const invokes = [];
+            if (skillInvokes) {
+              for (const invoke of skillInvokes) {
+                invokes.push({ ...rest, ...invoke });
               }
-              this.initSkillConditions(skill)
-              this.invokedSkills.push(skill)
+            } else {
+              invokes.push(skill);
+            }
+            for (const invoke of invokes) {
+              if (Math.random() * 100 < invokeRate) {
+                if (invoke.init) {
+                  invoke.init();
+                }
+                this.initSkillConditions(invoke);
+                this.invokedSkills.push(invoke);
+              }
             }
           }
         }
@@ -237,12 +248,26 @@ export default {
         if (effectCount > 1) {
           copy.type = 'boost'
         }
-        if (copy.init) {
-          copy.init()
+
+        const { invokes: skillInvokes, ...rest } = copy;
+        const invokes = [];
+        if (skillInvokes) {
+          copy.type = 'boost';
+          for (let i = 0; i < skillInvokes.length; i++) {
+            const invoke = skillInvokes[i];
+            invokes.push({ ...rest, ...invoke, id: `${invoke.id}-${i}` });
+          }
+        } else {
+          invokes.push(copy);
         }
-        this.initSkillConditions(copy)
-        this.invokedSkills.push(copy)
-        break
+        for (const invoke of invokes) {
+          if (invoke.init) {
+            invoke.init();
+          }
+          this.initSkillConditions(invoke);
+          this.invokedSkills.push(invoke);
+        }
+        break;
       }
     },
     initSkillConditions(skill) {
@@ -463,7 +488,7 @@ export default {
           if (this.isInFinalCorner() && this.currentPhase >= 2) {
             this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
           }
-          this.coolDownMap[skill.name] = this.frameElapsed
+          this.coolDownMap[skill.id] = this.frameElapsed
         }
       }
       return skillTriggered
@@ -720,10 +745,10 @@ export default {
           && this.position <= this.courseLength * end
     },
     isInCoolDown(skill) {
-      if (!(skill.name in this.coolDownMap)) {
+      if (!(skill.id in this.coolDownMap)) {
         return false
       }
-      return (this.frameElapsed - this.coolDownMap[skill.name]) / 15.0 <
+      return (this.frameElapsed - this.coolDownMap[skill.id]) / 15.0 <
           skill.cd * this.timeCoef
     },
     doHeal(value) {
@@ -828,7 +853,7 @@ export default {
           skillType = 'acceleration'
           effectCount++
         }
-        if (effectCount > 1) {
+        if (effectCount > 1 || skill.invokes) {
           skillType = 'boost'
         }
         delete copy.id

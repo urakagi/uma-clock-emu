@@ -28,7 +28,7 @@ export default {
       track: {
         location: '',
         course: '',
-        surfaceCondition: '0',
+        surfaceCondition: '1',
       },
       courseList: [],
       // Results
@@ -127,6 +127,7 @@ export default {
           statusCheckModifier += bonus
         }
       }
+
       const ret = this.calcExceedStatus(this.umaStatus.speed)
           * statusCheckModifier * this.condCoef[this.modifiedCondition]
           + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]

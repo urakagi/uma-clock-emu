@@ -4739,6 +4739,39 @@ const uniqueSkillData = (thiz) => [
       corner: 0,
     },
   },
+  {
+    id: 100571,
+    hid: 900571,
+    name: "叙情、旅路の果てに",
+    targetSpeed: 0.35,
+    duration: 6,
+    tooltip: "強化版のみ。6～9位で先頭から8馬身差。",
+    conditions: {
+      distance_type: [3, 4],
+      phase_laterhalf_random: 1,
+    },
+  },
+  {
+    id: 100661,
+    hid: 900661,
+    name: "エンジン全開！大噴射！",
+    invokes: [
+      {
+        targetSpeed: 0.15,
+        duration: 13,
+        conditions: {
+          distance_rate: [">=34", "<=36"],
+        },
+      },
+      {
+        targetSpeed: -0.05,
+        duration: 500,
+        conditions: {
+          phase: 3,
+        },
+      },
+    ],
+  },
 
   // End of unique skills
 ];
