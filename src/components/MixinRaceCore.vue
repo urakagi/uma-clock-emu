@@ -5,6 +5,8 @@ import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 import { STYLE } from "./data/constants";
 
+const UMA_OBJ_VERSION = 2;
+
 export default {
   name: "MixinRaceCore",
   components: {RaceGraph},
@@ -338,21 +340,21 @@ export default {
       const TITLE_TYPE = {
         passive: `${this.$t("skills.passive")}`,
         heal: `${this.$t("skills.heal")}`,
-        targetSpeed: `${this.$t("skills.targetSpeed")}`,
-        acceleration: `${this.$t("skills.acceleration")}`,
-        boost: `${this.$t("skills.boost")}`,
-        gate: `${this.$t("skills.gate")}`,
         speed: `${this.$t("skills.speed")}`,
+        acceleration: `${this.$t("skills.acceleration")}`,
+        composite: `${this.$t("skills.composite")}`,
+        gate: `${this.$t("skills.gate")}`,
+        decel: `${this.$t("skills.decel")}`,
         fatigue: `${this.$t("skills.fatigue")}`,
       }
       const ret = []
-      for (const type in this.skills) {
+      for (const type of this.types) {
         ret.push({
           title: TITLE_TYPE[type],
-          type
-        })
+          type,
+        });
       }
-      return ret
+      return ret;
     },
     latestRaceTime() {
       if (this.emulations.length === 0) {
@@ -510,7 +512,7 @@ export default {
       if (this.emulatorType === 'team') {
         this.initCourse()
       }
-      this.initializeSkills(this.skillActivateAdjustment)
+      this.invokeSkills(this.skillActivateAdjustment)
       if (this.fixRandom) {
         this.startDelay = 0
       } else {
@@ -587,6 +589,9 @@ export default {
     },
     progressRace() {
       while (this.position < this.courseLength) {
+        if (this.frameElapsed > 5000) {
+          break;
+        }
         const startPosition = this.position
         const startSp = this.sp
         const startPhase = this.currentPhase
@@ -920,39 +925,65 @@ export default {
       })
     },
     saveUmaToObject() {
+      const hasSkillIds = [];
+      for (const type of this.types) {
+        for (const section of this.raritySections) {
+          for (const id of this.hasSkills[type][section]) {
+            hasSkillIds.push(id);
+          }
+        }
+      }
       return {
+        version: UMA_OBJ_VERSION,
         status: this.umaStatus,
         track: this.track,
-        hasSkills: this.hasSkills,
+        hasSkillIds,
         selectedUnique: this.selectedUnique,
         uniqueLevel: this.uniqueLevel,
         raceType: this.raceType,
-        emulations: this.emulations
+        emulations: this.emulations,
       }
     },
     loadUma() {
-      const umas = JSON.parse(localStorage.getItem('umas') || '{}')
-      this.loadUmaFromObject(umas[this.umaToLoad])
-      this.$message({
-        type: 'success',
-        message: `${this.umaToLoad}をロードしました。`
-      })
+      const umas = JSON.parse(localStorage.getItem('umas') || '{}');
+      if (this.loadUmaFromObject(umas[this.umaToLoad])) {
+        this.$message({
+          type: 'success',
+          message: `${this.umaToLoad}をロードしました。`
+        });
+      } else {
+        this.$message({
+          type: 'failed',
+          message: `${this.umaToLoad}は旧データで読み込めませんでした。`
+        });
+      }
     },
     loadUmaFromObject(u) {
-      this.umaStatus = u.status
-      this.locationChanged(u.track.location)
-      this.track = u.track
-      this.hasSkills = u.hasSkills
+      if (u.version == null || u.version < UMA_OBJ_VERSION) {
+        return false;
+      }
+      this.umaStatus = u.status;
+      this.locationChanged(u.track.location);
+      this.track = u.track;
+      this.resetHasSkills();
+
+      const idMap = this.skills.map(x => x.id);
+      for (const id of u.hasSkillIds ?? []) {
+        const skill = this.skills[idMap.indexOf(id)];
+        const section = this.toRaritySection(skill.rarity);
+        this.hasSkills[skill.type][section].push(id);
+      }
+
       if (u.selectedUnique) {
-        this.selectedUnique = u.selectedUnique
-        this.uniqueLevel = u.uniqueLevel
+        this.selectedUnique = u.selectedUnique;
+        this.uniqueLevel = u.uniqueLevel;
       }
-      this.raceType = u.raceType
+      this.raceType = u.raceType;
       if (u.emulations) {
-        this.emulations = u.emulations
+        this.emulations = u.emulations;
       }
-      this.fixOldSavedUma()
-      this.initCondition()
+      this.initCondition();
+      return true;
     },
     exportUma() {
       navigator.clipboard.writeText(JSON.stringify(this.saveUmaToObject())).then(() => {
@@ -1072,20 +1103,6 @@ export default {
     resetTrack() {
       // Do nothing
     },
-    fixOldSavedUma() {
-      const o = {...this.hasSkills}
-      let old = false
-      const NEW_TYPES = ['boost', 'gate', 'passive']
-      for (const nt of NEW_TYPES) {
-        if (!(nt in this.hasSkills)) {
-          o[nt] = {normal: [], rare: [], inherit: []}
-        }
-        old = true
-      }
-      if (old) {
-        this.hasSkills = o
-      }
-    },
     initSectionTargetSpeedRandoms() {
       const ret = []
       for (let i = 0; i < 24; i++) {
@@ -1119,10 +1136,10 @@ export default {
       const PHASE_NAMES = [this.$t("chart.phase1"), this.$t("chart.phase2"), this.$t("chart.phase3")]
       const SKILL_COLORS = {
         heal: 'cyan',
-        speed: 'darkred',
-        targetSpeed: 'gold',
+        decel: 'darkred',
+        speed: 'gold',
         acceleration: 'orange',
-        boost: 'DarkOliveGreen',
+        composite: 'DarkOliveGreen',
         fatigue: 'darkred',
         gate: 'green',
         passive: 'green',

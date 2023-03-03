@@ -136,16 +136,16 @@
             :name="menu.type"
             :key="menu.title"
         >
-          <div v-for="rarity in rarities" :key="menu.type + rarity">
+          <div v-for="rarity in raritySections" :key="menu.type + rarity">
             <h3 v-if="availableSkills[menu.type][rarity].length > 0">{{ $t(rarityString[rarity]) }}</h3>
-            <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
+            <el-checkbox-group v-model="hasSkills">
               <el-tooltip
                   v-for="skill in availableSkills[menu.type][rarity]"
                   :key="skill.name"
                   :content="skill.tooltip"
                   :disabled="!('tooltip' in skill)"
               >
-                <el-checkbox-button :label="skill.index">
+                <el-checkbox-button :label="skill.id">
                   {{ skill.name }}
                 </el-checkbox-button>
               </el-tooltip>

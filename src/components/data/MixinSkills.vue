@@ -7,9 +7,9 @@ export default {
   name: "MixinSkills",
   data() {
     return {
-      rarities: ['rare', 'double', 'normal', 'inherit', 'all'],
-      raritySections: ['rare', 'normal', 'inherit', 'all'],
+      raritySections: ['evo', 'rare', 'normal', 'inherit', 'all'],
       rarityString: {
+        evo: 'skills.evo',
         rare: 'skills.rare',
         normal: 'skills.normal',
         inherit: 'skills.inherit',
@@ -25,31 +25,35 @@ export default {
       skills: {},
       passiveBonusKeys: ['speed', 'stamina', 'power', 'guts', 'wisdom', 'temptationRate'],
       types: ['passive', 'heal', 'speed', 'acceleration', 'composite', 'gate', 'decel', 'fatigue'],
-      effects: ['heal', 'targetSpeed', 'acceleration', 'speed', 'speedDecel', 'fatigue',
-        'passiveSpeed', 'passiveStamina', 'passivePower', 'passiveGuts', 'passiveWisdom' ],
+      effects: ['heal', 'targetSpeed', 'acceleration', 'speed', 'speedWithDecel', 'fatigue',
+        'passiveSpeed', 'passiveStamina', 'passivePower', 'passiveGuts', 'passiveWisdom',
+        'temptationRate', 'startDelay'],
     }
   },
   computed: {
-    skillData() {
+    normalSkillData() {
+      const ids = {}; // FIXME
       const origin = SkillData.normalSkillData(this);
       if (this.$i18n.locale === 'ja') {
         return origin;
       }
-      for (const type in origin) {
-        for (const skillWrapper of origin[type]) {
-          for (const rarity of this.rarities) {
-            const skill = skillWrapper[rarity];
-            if (!skill) continue;
-            // i18n name
-            const jaName = skill.name;
-            const localName = this.$t(`skill.${jaName}`);
-            skill.name = localName ? localName : jaName;
+      for (const skillWrapper of origin) {
+        for (const variant of skillWrapper.variants) {
+          // i18n name
+          const jaName = variant.name;
+          const localName = this.$t(`skill.${jaName}`);
+          variant.name = localName ? localName : jaName;
+          // FIXME
+          if (variant.id in ids) {
+            console.error('Duplicated id', variant.id);
           }
+          ids[variant.id] = 1;
         }
       }
       return origin;
     },
     uniqueSkillData() {
+      const ids = {}; // FIXME
       const origin = SkillData.uniqueSkillData(this);
       if (this.$i18n.locale === 'ja') {
         return origin.sort((a, b) => {
@@ -63,6 +67,11 @@ export default {
         const jaName = skill.name;
         const localName = this.$t(`skill.${jaName}`);
         skill.name = localName ? localName : jaName;
+        // FIXME
+        if (skill.id in ids) {
+          console.error('Duplicated id', skill.id);
+        }
+        ids[skill.id] = 1;
       }
       return origin.sort((a, b) => {
         if (a.name < b.name) return -1;
@@ -78,62 +87,61 @@ export default {
           ret[type][section] = [];
         }
       }
-      for (const skillBox of this.skills) {
-        for (const rarity of this.rarities) {
-          if (skillBox[rarity] == null) continue;
-          for (const skill of skillBox[rarity]) {
-            const skill = this.skills[type][rarity][i]
-            if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
-              continue
-            }
-            if (!this.isDistanceType(skill.conditions?.distance_type)) {
-              continue;
-            }
-            if (!this.isRunningStyle(skill.conditions?.running_style)) {
-              continue;
-            }
-            if (!this.isGroundType(skill.conditions?.ground_type)) {
-              continue;
-            }
-            if (!this.isRotation(skill.conditions?.rotation)) {
-              continue;
-            }
-            if (!this.isTrackId(skill.conditions?.track_id)) {
-              continue;
-            }
-            if (!this.isBasisDistance(skill.conditions?.is_basis_distance)) {
-              continue;
-            }
-            if (!this.isGroundCondition(skill.conditions?.ground_condition)) {
-              continue;
-            }
-            // コースと馬場状態指定はチャンミのみ
-            if (this.emulatorType === 'cm') {
-              if (skill.courseLimit) {
-                let notMatch = true
-                for (const limit in skill.courseLimit) {
-                  if (skill.courseLimit[limit].indexOf(this.trackDetail[limit]) >= 0) {
-                    notMatch = false
-                    break
-                  }
-                }
-                if (notMatch) {
-                  continue
-                }
-              }
-              if (skill.surfaceConditionLimit) {
-                if (skill.surfaceConditionLimit.indexOf(this.track.surfaceCondition) < 0) {
-                  continue
-                }
+      for (const skill of this.skills) {
+        if (skill.type === 'unique') {
+          continue;
+        }
+        if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
+          continue;
+        }
+        if (!this.isDistanceType(skill.conditions?.distance_type)) {
+          continue;
+        }
+        if (!this.isRunningStyle(skill.conditions?.running_style)) {
+          continue;
+        }
+        if (!this.isGroundType(skill.conditions?.ground_type)) {
+          continue;
+        }
+        if (!this.isRotation(skill.conditions?.rotation)) {
+          continue;
+        }
+        if (!this.isTrackId(skill.conditions?.track_id)) {
+          continue;
+        }
+        if (!this.isBasisDistance(skill.conditions?.is_basis_distance)) {
+          continue;
+        }
+        if (!this.isGroundCondition(skill.conditions?.ground_condition)) {
+          continue;
+        }
+        // コースと馬場状態指定はチャンミのみ
+        if (this.emulatorType === 'cm') {
+          if (skill.courseLimit) {
+            let notMatch = true
+            for (const limit in skill.courseLimit) {
+              if (skill.courseLimit[limit].indexOf(this.trackDetail[limit]) >= 0) {
+                notMatch = false
+                break;
               }
             }
-            let section = rarity;
-            if (section === 'double') {
-              section = 'rare';
+            if (notMatch) {
+              continue;
             }
-            ret[skill.type][section].push(skill);
+          }
+          if (skill.surfaceConditionLimit) {
+            if (skill.surfaceConditionLimit.indexOf(this.track.surfaceCondition) < 0) {
+              continue;
+            }
           }
         }
+
+        const section = this.toRaritySection(skill.rarity);
+
+        if (!skill.type) {
+          console.error('No type:', JSON.stringify(skill))
+        }
+        ret[skill.type][section].push(skill);
       }
       return ret;
     },
@@ -158,306 +166,275 @@ export default {
     }
   },
   created() {
-    this.fillSkillData()
-    this.resetHasSkills()
+    this.buildSkillData();
+    this.resetHasSkills();
   },
   methods: {
-    initializeSkills(skillActivateAdjustment) {
+    invokeSkills(skillActivateAdjustment) {
       this.invokedSkills = []
       this.coolDownMap = {}
       this.skillTriggerCount = [0, 0, 0, 0, 0]
       this.healTriggerCount = 0
-      for (const type in this.hasSkills) {
-        for (const rarity of Object.keys(this.hasSkills[type])) {
-          for (const index of this.hasSkills[type][rarity]) {
-            const skill = this.skills[type][rarity][index]
-            // Corrupted saved uma
-            if (!skill) {
-              continue
-            }
-            let invokeRate
-            if (type === 'fatigue' || type === 'speed') {
-              invokeRate = 90
-            } else if (type === 'passive' || skillActivateAdjustment === "1" ||
-                skillActivateAdjustment === "2") {
-              invokeRate = 100
-            } else {
-              // FIXME: for debug, always pass wisdom check
-              if (this.production) {
-                invokeRate = Math.max(100 - 9000.0 / this.umaStatus.wisdom, 20)
-              } else {
-                invokeRate = Math.max(100000 - 9000.0 / this.umaStatus.wisdom, 20)
-              }
-            }
-            const { invokes: skillInvokes, ...rest } = skill;
-            const invokes = [];
-            if (skillInvokes) {
-              for (const invoke of skillInvokes) {
-                invokes.push({ ...rest, ...invoke });
-              }
-            } else {
-              invokes.push(skill);
-            }
-            for (const invoke of invokes) {
-              if (Math.random() * 100 < invokeRate) {
-                if (invoke.init) {
-                  invoke.init();
-                }
-                this.initSkillConditions(invoke);
-                this.invokedSkills.push(invoke);
-              }
-            }
+
+      const hasSkills = [];
+      const idMap = this.skills.map(x => x.id);
+      for (const type of this.types) {
+        for (const section of this.raritySections) {
+          for (const id of this.hasSkills[type][section]) {
+            hasSkills.push(this.skills[idMap.indexOf(id)]);
           }
         }
       }
-      // 固有スキルは絶対invokeし、処理して振り分ける
-      const thiz = this
-      for (const skill of this.uniqueSkillData) {
-        if (skill.name !== this.selectedUnique) {
-          continue
+      if (this.selectedUnique) {
+        const uq = this.skills[idMap.indexOf(this.selectedUnique)];
+        if (uq) {
+          hasSkills.push(uq);
         }
-        const copy = {...skill}
-        copy.name = skill.name;
-        copy.cd = 500
-        copy.triggers = []
-        if (skill.trigger) {
-          copy.triggers.push(skill.trigger);
-        }
-        copy.trigger = function () {
-          let ret = null
-          for (const tri of this.triggers) {
-            const r = tri(skill)
-            if (r) {
-              ret = r
-            }
-          }
-          return ret
-        }
-        if (skill.duration) {
-          copy.duration = skill.duration
-        } else {
-          copy.duration = 0
-        }
-        // New logic, so you see many backward compatibility
-        let effectCount = 0
-        if (skill.boost) {
-          skill.targetSpeed = skill.boost.targetSpeed
-          skill.acceleration = skill.boost.acceleration
-        }
-        if (skill.heal) {
-          copy.type = 'heal'
-          copy.heal = skill.heal * (1 + (this.uniqueLevel - 1) * 0.02)
-          copy.triggers.push(function () {
-            return thiz.doHeal(copy.heal)
-          })
-          effectCount++
-        }
-        if (skill.targetSpeed) {
-          copy.type = 'targetSpeed'
-          let modification = 0.01 + (this.uniqueLevel - 2) * 0.03;
-          if (modification < 0) modification = 0;
-          copy.targetSpeed = skill.targetSpeed * (1 + modification)
-          effectCount++
-        }
-        if (skill.acceleration) {
-          copy.type = 'acceleration'
-          copy.acceleration = skill.acceleration * (1 + (this.uniqueLevel - 1) * 0.02)
-          effectCount++
-        }
-        if (effectCount > 1) {
-          copy.type = 'boost'
-        }
+      }
 
-        const { invokes: skillInvokes, ...rest } = copy;
+      for (const skill of hasSkills) {
+        let invokeRate;
+        if (skill.type === 'fatigue' || skill.type === 'decel') {
+          invokeRate = 90;
+        } else if (
+            skill.type === 'passive'
+            || skill.type === 'unique'
+            || skillActivateAdjustment === "1"
+            || skillActivateAdjustment === "2"
+        ) {
+          invokeRate = 100;
+        } else {
+          if (this.production) {
+            invokeRate = Math.max(100 - 9000.0 / this.umaStatus.wisdom, 20);
+          } else {
+            // For debug, always pass wisdom check
+            invokeRate = 100;
+          }
+        }
+        const {invokes: skillInvokes, ...rest} = skill;
         const invokes = [];
         if (skillInvokes) {
-          copy.type = 'boost';
-          for (let i = 0; i < skillInvokes.length; i++) {
-            const invoke = skillInvokes[i];
-            invokes.push({ ...rest, ...invoke, id: `${invoke.id}-${i}` });
+          for (const invoke of skillInvokes) {
+            invokes.push({...rest, ...invoke});
           }
         } else {
-          invokes.push(copy);
+          invokes.push(skill);
         }
         for (const invoke of invokes) {
-          if (invoke.init) {
-            invoke.init();
+          if (Math.random() * 100 < invokeRate) {
+            if (invoke.init) {
+              invoke.init();
+            }
+            this.initSkillConditions(invoke);
+            this.invokedSkills.push(invoke);
           }
-          this.initSkillConditions(invoke);
-          this.invokedSkills.push(invoke);
         }
-        break;
+      }
+    },
+    /**
+     * @returns {(function(): boolean)|(function(*): void)|(function(*): boolean)}
+     * check or randoms.
+     */
+    checkCondition(skill, cond, value) {
+      const thiz = this;
+      switch (cond) {
+        case 'hp_per':
+          if (value.startsWith('>=')) {
+            return () => thiz.sp >= parseInt(value.substring(2)) * 0.01 * thiz.spMax;
+          } else if (value.startsWith('<=')) {
+            return () => thiz.sp <= parseInt(value.substring(2)) * 0.01 * thiz.spMax;
+          } else {
+            console.error('Unknown hp_per value', value);
+            return null;
+          }
+        case 'activate_count_heal':
+          return () => thiz.healTriggerCount >= value;
+        case 'accumulatetime':
+          return () => thiz.accTimePassed(value);
+        case 'straight_front_type':
+          return () => thiz.getStraightFrontType() == value;
+        case 'is_badstart':
+          if (value == 0) {
+            return () => thiz.startDelay < 0.08;
+          } else {
+            return null;
+          }
+        case 'temptation_count':
+          return () => thiz.temptationSection < 0;
+        case 'remain_distance':
+          if (typeof value === 'number') {
+            return (startPosition) => thiz.isContainsRemainingDistance(value, startPosition)
+          } else if (typeof value === 'string') {
+            if (value.startsWith('>=')) {
+              return (startPosition) =>
+                  startPosition <= thiz.toPosition(parseInt(value.toString().substring(2)));
+            } else if (value.startsWith('<=')) {
+              return (startPosition) =>
+                  startPosition >= thiz.toPosition(parseInt(value.toString().substring(2)));
+            } else {
+              console.error('Unknown remain_distance value', value);
+              return null;
+            }
+          } else if (Array.isArray(value)) {
+            return (startPosition) =>
+                startPosition >= thiz.toPosition(value[0])
+                && startPosition <= thiz.toPosition(value[1]);
+          } else {
+            console.error('Unknown remain_distance value', value);
+            return null;
+          }
+        case 'distance_rate_after_random':
+          return this.initIntervalRandom(value * 0.01, 1);
+        case 'distance_rate_random':
+          return thiz.initIntervalRandom(value[0] * 0.01, value[1] * 0.01);
+        case 'corner_random':
+          return this.initCornerRandom(value);
+        case 'all_corner_random':
+          return this.initAllCornerRandom();
+        case 'slope':
+          return () => thiz.isInSlope(['', 'up', 'down'][value]);
+        case 'up_slope_random':
+          return this.initSlopeRandom('up')
+        case 'down_slope_random':
+          return this.initSlopeRandom('down')
+        case 'running_style':
+          if (typeof value === 'number') {
+            return () => thiz.isRunningStyle(value);
+          } else if (Array.isArray(value)) {
+            return () => value.includes(thiz.basicRunningStyle);
+          } else {
+            console.error('Unknown running_style value', value);
+            return null;
+          }
+        case 'rotation':
+          return () => thiz.isRotation(value);
+        case 'ground_type':
+          return () => thiz.isGroundType(value);
+        case 'ground_condition':
+          return () => thiz.isGroundCondition(value);
+        case 'distance_type':
+          return () => thiz.isDistanceType(value);
+        case 'track_id':
+          return () => thiz.isTrackId(value);
+        case 'is_basis_distance':
+          return () => thiz.isBasisDistance(value);
+        case 'distance_rate': {
+          let values;
+          if (Array.isArray(value)) {
+            values = value;
+          } else {
+            values = [value];
+          }
+          const ret = [];
+          for (const v of values) {
+            ret.push(() => {
+              if (v.startsWith('>=')) {
+                return thiz.isInInterval(parseInt(v.substring(2)) * 0.01, 1)
+              } else if (v.startsWith('<=')) {
+                return thiz.isInInterval(0, parseInt(v.substring(2)) * 0.01)
+              }
+            })
+          }
+          return ret;
+        }
+        case 'phase_random':
+          return this.initPhaseRandom(value);
+        case 'phase_firsthalf_random':
+          return this.initPhaseRandom(value, {endRate: 0.5});
+        case 'phase_laterhalf_random':
+          return this.initPhaseRandom(value, {startRate: 0.5});
+        case 'is_finalcorner_random':
+          return thiz.initFinalCornerRandom();
+        case 'straight_random':
+          return this.initStraightRandom();
+        case 'phase':
+          if (typeof value === 'string') {
+            if (value.startsWith('>=')) {
+              return () => thiz.currentPhase >= parseInt(value.substring(2));
+            } else if (value.startsWith('>')) {
+              return () => thiz.currentPhase > parseInt(value.substring(1));
+            } else if (value.startsWith('<=')) {
+              return () => thiz.currentPhase <= parseInt(value.substring(2));
+            } else if (value.startsWith('<')) {
+              return () => thiz.currentPhase < parseInt(value.substring(1));
+            } else {
+              console.error('Unknown phase value', value);
+              return null;
+            }
+          } else {
+            return () => thiz.currentPhase == value;
+          }
+        case 'is_finalcorner':
+          return () => thiz.isInFinalStraight() || thiz.isInFinalCorner();
+        case 'is_finalcorner_laterhalf':
+          return () => thiz.isInFinalCorner(null, {start: 0.5, end: 1});
+        case 'corner':
+          if (value == 0) {
+            return () => !thiz.isInCorner();
+          } else {
+            return () => thiz.isInCorner();
+          }
+        case 'is_activate_any_skill':
+          return () => thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1;
+        case 'is_lastspurt':
+          if (value == 0) {
+            return () => !thiz.isInSpurt;
+          } else {
+            return () => thiz.isInSpurt;
+          }
+        case 'lastspurt':
+          switch (value) {
+            case 1:
+              return () => thiz.isInSpurt && thiz.spurtParameters.speed < thiz.maxSpurtSpeed;
+            case 2:
+              return () => thiz.spurtParameters?.speed == thiz.maxSpurtSpeed;
+          }
+          break;
+        default:
+          alert(`Unknown condition ${cond}`);
+          console.error(`Unknown condition ${cond}`);
+          break;
       }
     },
     initSkillConditions(skill) {
       if (!skill.conditions) {
-        return
+        if (!skill.check) {
+          skill.check = () => true;
+        }
+        return;
       }
       const thiz = this;
-      if (!skill.checks) {
-        skill.checks = []
-      }
+      const checks = skill.check ? [skill.check] : [];
       skill.randoms = []
       for (const cond in skill.conditions) {
-        const value = skill.conditions[cond]
-        // Skill conditions
-        switch (cond) {
-          case 'remain_distance':
-            if (typeof value === 'number') {
-              skill.checks.push(function (startPosition) {
-                return thiz.isContainsRemainingDistance(value, startPosition)
-              })
+        const value = skill.conditions[cond];
+        const res = this.checkCondition(skill, cond, value);
+        if (res == null) {
+          // Do nothing
+        } else if (res instanceof Function) {
+          checks.push(res);
+        } else if (Array.isArray(res)) {
+          if (res.length > 0) {
+            if (res[0].start) {
+              // Randoms
+              skill.randoms = res;
+              checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
+            } else if (res[0] instanceof Function) {
+              // Multiple conditions
+              checks.push(...res);
             } else {
-              if (value.startsWith('>=')) {
-                skill.checks.push(function (startPosition) {
-                  return startPosition <= thiz.toPosition(parseInt(value.toString().substring(2)));
-                });
-              } else if(value.startsWith('<=')) {
-                skill.checks.push(function (startPosition) {
-                  return startPosition >= thiz.toPosition(parseInt(value.toString().substring(2)));
-                });
-              }
+              console.error('Unknown res array', cond, res);
             }
-            break;
-          case 'distance_rate_after_random':
-            skill.randoms = this.initIntervalRandom(value * 0.01, 1)
-            skill.checks.push(function (startPosition) {
-              return thiz.isInRandom(skill.randoms, startPosition)
-            })
-            break
-          case 'all_corner_random':
-            skill.randoms = this.initAllCornerRandom()
-            skill.checks.push(function (startPosition) {
-              return thiz.isInRandom(skill.randoms, startPosition)
-            })
-            break
-          case 'slope':
-            skill.checks.push(function () {
-              return thiz.isInSlope(['', 'up', 'down'][value]);
-            })
-            break;
-          case 'up_slope_random':
-            skill.randoms = this.initSlopeRandom('up')
-            skill.checks.push(function (startPosition) {
-              return thiz.isInRandom(skill.randoms, startPosition)
-            })
-            break
-          case 'down_slope_random':
-            skill.randoms = this.initSlopeRandom('down')
-            skill.checks.push(function (startPosition) {
-              return thiz.isInRandom(skill.randoms, startPosition)
-            })
-            break
-          case 'running_style':
-            if (typeof value === 'number') {
-              skill.checks.push(() => thiz.isRunningStyle(value));
-            } else if (Array.isArray(value)) {
-              skill.checks.push(() => value.includes(this.basicRunningStyle));
-            }
-            break;
-          case 'rotation':
-            skill.checks.push(() => thiz.isRotation(value));
-            break;
-          case 'ground_type':
-            skill.checks.push(() => thiz.isGroundType(value));
-            break;
-          case 'distance_type':
-            skill.checks.push(() => thiz.isDistanceType(value));
-            break
-          case 'track_id':
-            skill.checks.push(() => thiz.isTrackId(value));
-            break;
-          case 'is_basis_distance':
-            skill.checks.push(() => thiz.isBasisDistance(value));
-            break
-          case 'distance_rate': {
-            let values;
-            if (Array.isArray(value)) {
-              values = value;
-            } else {
-              values = [value];
-            }
-            for (const v of values) {
-              skill.checks.push(() => {
-                if (v.startsWith('>=')) {
-                  return thiz.isInInterval(parseInt(v.substring(2)) * 0.01, 1)
-                } else if (v.startsWith('<=')) {
-                  return thiz.isInInterval(0, parseInt(v.substring(2)) * 0.01)
-                }
-              })
-            }
-            break;
           }
-          case 'phase_firsthalf_random':
-            skill.randoms = this.initPhaseRandom(value, {endRate: 0.5});
-            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
-            break;
-          case 'phase_laterhalf_random':
-            skill.randoms = this.initPhaseRandom(value, {startRate: 0.5});
-            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
-            break;
-          case 'straight_random':
-            skill.randoms = this.initStraightRandom();
-            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
-            break;
-          case 'phase':
-            skill.checks.push(() => {
-              if (typeof value === 'string') {
-                if (value.startsWith('>=')) {
-                  return thiz.currentPhase >= parseInt(value.substring(2));
-                } else if (value.startsWith('>')) {
-                  return thiz.currentPhase > parseInt(value.substring(1));
-                } else if (value.startsWith('<=')) {
-                  return thiz.currentPhase <= parseInt(value.substring(2));
-                } else if (value.startsWith('<')) {
-                  return thiz.currentPhase < parseInt(value.substring(1));
-                }
-              } else {
-                return thiz.currentPhase == value;
-              }
-            });
-            break;
-          case 'is_finalcorner':
-            skill.checks.push(() => thiz.isInFinalStraight() || thiz.isInFinalCorner());
-            break;
-          case 'is_finalcorner_laterhalf':
-            skill.checks.push(() => thiz.isInFinalCorner(null, { start: 0.5, end: 1 }));
-            break;
-          case 'corner':
-            if (value == 0) {
-              skill.checks.push(() => !thiz.isInCorner());
-            } else {
-              skill.checks.push(() => thiz.isInCorner());
-            }
-            break;
-          case 'is_activate_any_skill':
-            skill.checks.push(() => thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1);
-            break;
-          case 'is_lastspurt':
-            if (value == 0) {
-              skill.checks.push(() => !thiz.isInSpurt);
-            } else {
-              skill.checks.push(() => thiz.isInSpurt);
-            }
-            break;
-          case 'lastspurt':
-            switch (value) {
-              case 2:
-                skill.checks.push(() => thiz.spurtParameters?.speed == thiz.maxSpurtSpeed);
-                break;
-            }
-            break;
-          default:
-            alert(`Unknown condition ${cond}`);
-            console.error(`Unknown condition ${cond}`);
-            break;
+        } else {
+          console.error('Unknown res type', cond, res);
         }
       }
       skill.check = function (startPosition) {
-        for (const c of this.checks) {
-          if (!c(startPosition)) return false
+        for (const check of checks) {
+          if (!check(startPosition)) return false;
         }
-        return true
+        return true;
       }
     },
     triggerStartSkills() {
@@ -468,26 +445,26 @@ export default {
             if (skill.check && skill.check()) {
               if ('triggerRate' in skill) {
                 if (Math.random() < skill.triggerRate) {
-                  skill.trigger(skill)
-                  this.skillTriggerCount[0]++
+                  skill.trigger(skill);
+                  this.skillTriggerCount[0]++;
                   this.passiveTriggered += 1;
-                  this.frames[0].skills.push({data: skill})
+                  this.frames[0].skills.push({data: skill});
                 }
               } else {
-                skill.trigger(skill)
-                this.skillTriggerCount[0]++
+                skill.trigger(skill);
+                this.skillTriggerCount[0]++;
                 this.passiveTriggered += 1;
-                this.frames[0].skills.push({data: skill})
+                this.frames[0].skills.push({data: skill});
               }
             }
             break
           case 'gate':
-            this.startDelay *= skill.value
-            this.skillTriggerCount[0]++
-            this.frames[0].skills.push({data: skill})
+            this.startDelay *= skill.startDelay;
+            this.skillTriggerCount[0]++;
+            this.frames[0].skills.push({data: skill});
             break
           default:
-            nonStartSkills.push(skill)
+            nonStartSkills.push(skill);
             break
         }
       }
@@ -498,7 +475,7 @@ export default {
       // 通常スキル
       for (const skill of this.invokedSkills) {
         if (this.isInCoolDown(skill)) {
-          continue
+          continue;
         }
         if (skill.check(startPosition)) {
           let skillDetail = null
@@ -552,12 +529,22 @@ export default {
       }
       return {start, end}
     },
-    initCornerRandom() {
+    initCornerRandom(values) {
       const ret = []
-      for (const corner of this.trackDetail.corners.slice(-4)) {
-        ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
+      const corners = this.trackDetail.corners.slice(-4);
+      for (let i = 0; i < 4 - corners.length; i++) {
+        corners.unshift(null);
       }
-      return ret
+      const targetCorners = [];
+      for (const value of values) {
+        if (corners[value - 1]) {
+          targetCorners.push(corners[value - 1]);
+        }
+      }
+      for (const corner of targetCorners) {
+        ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)));
+      }
+      return ret;
     },
     initAllCornerRandom() {
       const corners = this.trackDetail.corners.map(c => ({start: c.start, length: c.length}))
@@ -706,6 +693,23 @@ export default {
       }
       return false
     },
+    /**
+     * @returns {number}
+     * 0: Not in straight
+     * 1: In front of stand
+     * 2: Opposite of stand
+     */
+    getStraightFrontType(position) {
+      if (!position) position = this.position;
+      for (const straight of this.trackDetail.straights) {
+        if (position >= straight.start && position <= straight.end) {
+          const rIndex = this.trackDetail.straights.length
+              - this.trackDetail.straights.index(straight);
+          return rIndex % 2 == 1 ? 1 : 2;
+        }
+      }
+      return 0;
+    },
     isInStraight(position) {
       if (!position) {
         position = this.position
@@ -803,7 +807,8 @@ export default {
     },
     isRunningStyle(value) {
       if (value == null) return true;
-      return this.basicRunningStyle == value;
+      const values = Array.isArray(value) ? value : [value];
+      return values.includes(this.basicRunningStyle);
     },
     isGroundType(value) {
       if (value == null) return true;
@@ -815,7 +820,11 @@ export default {
     },
     isTrackId(value) {
       if (value == null) return true;
-      return this.trackDetail.raceTrackId == value;
+      if (Array.isArray(value)) {
+        return value.includes(this.trackDetail.raceTrackId);
+      } else {
+        return this.trackDetail.raceTrackId === value;
+      }
     },
     isBasisDistance(value) {
       if (value == null) return true;
@@ -831,7 +840,7 @@ export default {
       if (Array.isArray(value)) {
         return value.includes(this.distanceType);
       } else {
-        return this.distanceType === value;
+        return this.distanceType == value;
       }
     },
     isGroundCondition(value) {
@@ -839,245 +848,211 @@ export default {
       if (Array.isArray(value)) {
         return value.indexOf(this.track.surfaceCondition) >= 0;
       } else {
-        return this.track.surfaceCondition === value;
+        return this.track.surfaceCondition == value;
       }
     },
     accTimePassed(second) {
       return this.frameElapsed >= 15 * second
     },
-    fillSkillData() {
+    reshapeSkill(copy) {
       const thiz = this;
-      // First build up inherit skills
-      for (const skill of this.uniqueSkillData) {
-        if (skill.noInherit) {
-          continue
+
+      if (copy.duration) {
+        if (!copy.tooltip) copy.tooltip = ''
+        copy.tooltip += ` | ${Math.round(copy.duration * 10) / 10}s`
+      }
+      for (const effect of this.effects) {
+        if (copy[effect]) {
+          if (!copy.tooltip) copy.tooltip = '';
+          copy.tooltip += ` | ${effect}: ${Math.round(copy[effect] * 100) / 100}`;
         }
-        let skillType = null
-        let effectCount = 0
-        const copy = {...skill}
-        copy.inherit = {
+      }
+
+      if (!copy.cd) copy.cd = 500
+      const triggers = copy.trigger ? [copy.trigger] : [];
+
+      let type = copy.type;
+      let effectCount = 0;
+      if (copy.passiveSpeed || copy.passiveStamina || copy.passivePower
+          || copy.passiveGuts || copy.passiveWisdom || copy.temptationRate) {
+        type = 'passive';
+        effectCount++;
+      }
+      if (copy.heal) {
+        type = 'heal';
+        effectCount++;
+        triggers.push(() => {
+          return thiz.doHeal(copy.heal);
+        });
+      }
+      if (copy.targetSpeed || copy.speedWithDecel) {
+        type = 'speed';
+        effectCount++;
+      }
+      if (copy.acceleration) {
+        type = 'acceleration';
+        effectCount++;
+      }
+      if (copy.speed && copy.speed < 0) {
+        type = 'decel';
+        effectCount++;
+      }
+      if (copy.fatigue) {
+        type = 'fatigue';
+        effectCount++;
+        triggers.push(() => {
+          return thiz.doHeal(-copy.fatigue);
+        });
+      }
+      const passiveStatus = [
+        'passiveSpeed', 'passiveStamina', 'passivePower', 'passiveGuts', 'passiveWisdom'
+      ];
+      for (const status of passiveStatus) {
+        if (copy[status]) {
+          triggers.push(() => {
+            thiz.passiveBonus[status.substring(7).toLowerCase()] += copy[status];
+          });
+        }
+      }
+      if (copy.startDelay) {
+        type = 'gate';
+        effectCount++;
+      }
+
+      if (effectCount > 1) {
+        type = 'composite';
+      }
+
+      copy.type = type;
+      copy.trigger = function (skill) {
+        let ret;
+        for (const trigger of triggers) {
+          let res = trigger(skill);
+          if (res) ret = res;
+        }
+        return ret;
+      };
+
+      if (copy.tooltip?.startsWith(' | ')) {
+        copy.tooltip = copy.tooltip.substring(3)
+      }
+
+      return copy;
+    },
+    buildSkillData() {
+      const normalSkillData = this.normalSkillData;
+      const uniqueSkillData = this.uniqueSkillData;
+      const skills = [];
+
+      const healMap = {
+        750: 350,
+        550: 150,
+        350: 50,
+        150: 35,
+        '-100': -100,
+      };
+      const speedMap = {
+        0.55: 0.15,
+        0.45: 0.25,
+        0.385: 0.15,
+        0.35: 0.15,
+        0.3: 0.075,
+        0.25: 0.05,
+        0.15: 0.035,
+      };
+      const accelerationMap = {
+        0.4: 0.2,
+        0.3: 0.1,
+        0.2: 0.05,
+        0.1: 0.05,
+      };
+
+      for (const skill of uniqueSkillData) {
+        // Push unique skills
+        const copy = {...skill};
+        this.reshapeSkill(copy);
+        copy.type = 'unique';
+        skills.push(copy);
+
+        // Build up inherit skills
+        if (skill.noInherit) {
+          continue;
+        }
+        const inherit = {...skill};
+        const variant = {
           id: skill.id + 800000,
           name: skill.name,
-        }
-        copy.cd = 500
+          rarity: 'inherit',
+        };
+        inherit.cd = inherit.cd ?? 500;
         if (skill.duration) {
-          copy.duration = skill.duration * 0.6
-        } else {
-          copy.duration = 0
-        }
-        if (skill.boost) {
-          skill.targetSpeed = skill.boost.targetSpeed
-          skill.acceleration = skill.boost.acceleration
+          inherit.duration = skill.duration * 0.6
         }
         if (skill.heal) {
-          let healValue
-          switch (skill.heal) {
-            case 750:
-              healValue = 350
-              break
-            case 550:
-              healValue = 150
-              break
-            case 350:
-              healValue = 50
-              break
+          variant.heal = healMap[skill.heal];
+          if (variant.heal == null) {
+            console.error(JSON.stringify(skill));
           }
-          copy.inherit.heal = healValue
-          const thiz = this
-          copy.trigger = function () {
-            return thiz.doHeal(this.heal)
-          }
-          skillType = 'heal'
-          effectCount++
+          delete inherit.heal;
         }
-        if (skill.targetSpeed || (skill.speed > 0)) {
-          if (skill.targetSpeed == 0.15) {
-            copy.inherit.targetSpeed = 0.035
-          } else {
-            copy.inherit.targetSpeed = skill.targetSpeed - 0.2
+        if (skill.targetSpeed) {
+          variant.targetSpeed = speedMap[skill.targetSpeed];
+          if (variant.targetSpeed == null) {
+            console.error(JSON.stringify(skill));
           }
-          skillType = 'targetSpeed'
-          effectCount++
+          delete inherit.targetSpeed;
+        }
+        if (skill.speedWithDecel) {
+          variant.speedWithDecel = speedMap[skill.speedWithDecel];
+          if (variant.speedWithDecel == null) {
+            console.error(JSON.stringify(skill));
+          }
+          delete inherit.speedWithDecel;
         }
         if (skill.acceleration) {
-          const value = skill.acceleration
-          if (value > 0.1) {
-            copy.inherit.acceleration = value - 0.2
-          } else {
-            copy.inherit.acceleration = 0.05
+          variant.acceleration = accelerationMap[skill.acceleration];
+          // FIXME: For debug
+          if (variant.acceleration == null) {
+            console.error(JSON.stringify(skill));
           }
-          skillType = 'acceleration'
-          effectCount++
+          delete inherit.acceleration;
         }
-        if (skill.speedDecel) {
-          if (skill.speedDecel == 0.15) {
-            copy.inherit.speedDecel = 0.035;
-          } else {
-            copy.inherit.speedDecel = skill.speedDecel - 0.2;
-          }
-          skillType = 'targetSpeed';
-          effectCount++;
-        }
-        if (effectCount > 1 || skill.invokes) {
-          skillType = 'boost'
-        }
-        delete copy.id
-        delete copy.name
-        // console.log(JSON.stringify(copy))
-        this.skillData[skillType].push(copy)
+
+        delete inherit.id;
+        delete inherit.name;
+        inherit.variants = [variant];
+        normalSkillData.push(inherit);
       }
 
-      const EFFECTS = ['heal', 'targetSpeed', 'acceleration', 'speed', 'fatigue', 'passiveBonus', 'speedDecel']
-      // Then fill fields, this.skillData must already been fulfill
-      for (const type in this.skillData) {
-        const o = {}
-        for (const rarity of this.rarities) {
-          o[rarity] = []
+      // Flatten rarity wrapper
+      for (const skillWrapper of normalSkillData) {
+        const {variants, ...commonPart} = skillWrapper;
+        for (const variant of variants) {
+          const copy = {...variant, ...commonPart};
+          skills.push(this.reshapeSkill(copy));
         }
-        this.skills[type] = o
-        for (const skill of this.skillData[type]) {
-          for (const rarity of this.rarities) {
-            if (rarity in skill) {
-              const copy = {...skill}
-              if (copy.duration) {
-                if (!copy.tooltip) copy.tooltip = ''
-                copy.tooltip += ` | ${Math.round(copy.duration * 10) / 10}s`
-              }
-              if (skill[rarity].id) {
-                copy.id = skill[rarity].id
-              }
+      }
 
-              copy.name = skill[rarity].name;
-              if (skill[rarity].value) {
-                copy.value = skill[rarity].value
-              } else {
-                for (const effect of EFFECTS) {
-                  if (skill[rarity][effect]) {
-                    copy[effect] = skill[rarity][effect]
-                    if (!copy.tooltip) copy.tooltip = ''
-                    copy.tooltip += ` | ${effect}: ${Math.round(copy[effect] * 100) / 100}`
-                  }
-                }
-              }
-              if (skill[rarity].duration) {
-                copy.duration = skill[rarity].duration
-              }
-              copy.type = type
-              if (!copy.cd) copy.cd = 500
-              if (copy.value) {
-                // Simple values
-                this.fillCommonFields(copy, type)
-                if (!copy.tooltip) copy.tooltip = ''
-                copy.tooltip += ` | ${type}: ${Math.round(copy.value * 100) / 100}`
-              }
-              if (type === 'passive' && !copy.value) {
-                // Complicated values
-                if (!copy.trigger) {
-                  copy.trigger = function (skill) {
-                    for (const status of thiz.passiveBonusKeys) {
-                      if (skill.passiveBonus[status]) {
-                        thiz.passiveBonus[status] += skill.passiveBonus[status];
-                      }
-                    }
-                  }
-                }
-              }
-              if (copy.heal) {
-                copy.trigger = function () {
-                  return thiz.doHeal(copy.heal)
-                }
-              }
-              delete copy.normal
-              delete copy.rare
-              delete copy.inherit
-              delete copy.all
-              if (copy.tooltip?.startsWith(' | ')) {
-                copy.tooltip = copy.tooltip.substring(3)
-              }
-              this.skills[type][rarity].push(copy)
-            }
-          }
-        }
-      }
-    },
-    fillCommonFields(copy, type) {
-      const thiz = this // thiz = Vue component instance
-      if (!copy.cd) {
-        copy.cd = 500
-      }
-      switch (type) {
-        case 'heal':
-          copy.duration = 0
-          copy.heal = copy.value
-          if (!copy.trigger) {
-            copy.trigger = function () {
-              return thiz.doHeal(this.heal)
-            }
-          }
-          break
-        case 'speed':
-          copy.speed = copy.value
-          break
-        case 'targetSpeed':
-          copy.targetSpeed = copy.value
-          break
-        case 'speedDecel':
-          copy.speedDecel = copy.value;
-          break;
-        case 'acceleration':
-          copy.acceleration = copy.value
-          break
-        case 'fatigue':
-          copy.duration = 0
-          copy.fatigue = copy.value
-          if (!copy.trigger) {
-            copy.trigger = function () {
-              return thiz.doHeal(-this.fatigue)
-            }
-          }
-          break
-        case 'passive':
-          if (!copy.trigger) {
-            copy.trigger = function () {
-              for (const status of copy.status) {
-                thiz.passiveBonus[status] += copy.value
-              }
-            }
-          }
-          if (copy.courseLimit) {
-            copy.check = function () {
-              let notTrigger = false
-              for (const limit in copy.courseLimit) {
-                if (copy.courseLimit[limit].indexOf(thiz.trackDetail[limit]) < 0) {
-                  notTrigger = true
-                  break
-                }
-              }
-              return !notTrigger
-            }
-          }
-          break
-      }
+      this.skills = skills;
     },
     resetHasSkills() {
-      const o = {}
-      const ENEMY_KEYS = ['fatigue', 'speed']
-      for (const key of ENEMY_KEYS) {
-        o[key] = {
-          all: []
+      const o = {};
+      for (const type of this.types) {
+        o[type] = {};
+        for (const section of this.raritySections) {
+          o[type][section] = [];
         }
       }
-      const SELF_KEYS = ['passive', 'heal', 'targetSpeed', 'acceleration', 'boost', 'gate']
-      for (const key of SELF_KEYS) {
-        o[key] = {
-          rare: [],
-          normal: [],
-          inherit: []
-        }
+      this.hasSkills = o;
+    },
+    toRaritySection(rarity) {
+      if (rarity === 'double') {
+        return 'rare';
+      } else {
+        return rarity;
       }
-      this.hasSkills = o
-    }
-  }
+    },
+  },
 }
 </script>
 

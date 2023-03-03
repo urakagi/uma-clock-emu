@@ -21,7 +21,7 @@ export default {
       return this.trackDetail.distance - distanceLeft
     },
     cornerEnd(corner) {
-      return corner.start + corner.length
+      return corner.start + corner.length;
     },
     slopeEnd(slope) {
       return slope.start + slope.length
