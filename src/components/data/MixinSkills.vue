@@ -7,7 +7,8 @@ export default {
   name: "MixinSkills",
   data() {
     return {
-      rarities: ['rare', 'normal', 'inherit', 'all'],
+      rarities: ['rare', 'double', 'normal', 'inherit', 'all'],
+      raritySections: ['rare', 'normal', 'inherit', 'all'],
       rarityString: {
         rare: 'skills.rare',
         normal: 'skills.normal',
@@ -23,6 +24,9 @@ export default {
       healTriggerCount: 0,
       skills: {},
       passiveBonusKeys: ['speed', 'stamina', 'power', 'guts', 'wisdom', 'temptationRate'],
+      types: ['passive', 'heal', 'speed', 'acceleration', 'composite', 'gate', 'decel', 'fatigue'],
+      effects: ['heal', 'targetSpeed', 'acceleration', 'speed', 'speedDecel', 'fatigue',
+        'passiveSpeed', 'passiveStamina', 'passivePower', 'passiveGuts', 'passiveWisdom' ],
     }
   },
   computed: {
@@ -68,28 +72,40 @@ export default {
     },
     availableSkills() {
       const ret = {}
-      for (const type in this.skills) {
-        ret[type] = {}
-        for (const rarity in this.skills[type]) {
-          ret[type][rarity] = []
-          for (const i in this.skills[type][rarity]) {
+      for (const type of this.types) {
+        ret[type] = {};
+        for (const section of this.raritySections) {
+          ret[type][section] = [];
+        }
+      }
+      for (const skillBox of this.skills) {
+        for (const rarity of this.rarities) {
+          if (skillBox[rarity] == null) continue;
+          for (const skill of skillBox[rarity]) {
             const skill = this.skills[type][rarity][i]
             if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
               continue
             }
-            if (skill.styleLimit && skill.styleLimit.indexOf(this.basicRunningStyle) < 0) {
-              continue
-            }
-            if (skill.distanceLimit && skill.distanceLimit.indexOf(this.distanceType) < 0) {
+            if (!this.isDistanceType(skill.conditions?.distance_type)) {
               continue;
             }
-            if (skill.conditions?.distance_type) {
-              if (!this.isDistanceType(skill.conditions.distance_type)) {
-                continue;
-              }
+            if (!this.isRunningStyle(skill.conditions?.running_style)) {
+              continue;
             }
-            if (skill.surfaceLimit && skill.surfaceLimit.indexOf(this.surfaceType) < 0) {
-              continue
+            if (!this.isGroundType(skill.conditions?.ground_type)) {
+              continue;
+            }
+            if (!this.isRotation(skill.conditions?.rotation)) {
+              continue;
+            }
+            if (!this.isTrackId(skill.conditions?.track_id)) {
+              continue;
+            }
+            if (!this.isBasisDistance(skill.conditions?.is_basis_distance)) {
+              continue;
+            }
+            if (!this.isGroundCondition(skill.conditions?.ground_condition)) {
+              continue;
             }
             // コースと馬場状態指定はチャンミのみ
             if (this.emulatorType === 'cm') {
@@ -111,12 +127,15 @@ export default {
                 }
               }
             }
-            skill.index = parseInt(i)
-            ret[type][rarity].push(skill)
+            let section = rarity;
+            if (section === 'double') {
+              section = 'rare';
+            }
+            ret[skill.type][section].push(skill);
           }
         }
       }
-      return ret
+      return ret;
     },
     timeCoef() {
       return this.trackDetail.distance / 1000.0
@@ -335,12 +354,21 @@ export default {
             } else if (Array.isArray(value)) {
               skill.checks.push(() => value.includes(this.basicRunningStyle));
             }
-            break
+            break;
+          case 'rotation':
+            skill.checks.push(() => thiz.isRotation(value));
+            break;
           case 'ground_type':
-            skill.checks.push(() => thiz.isSurfaceType(value));
+            skill.checks.push(() => thiz.isGroundType(value));
             break;
           case 'distance_type':
             skill.checks.push(() => thiz.isDistanceType(value));
+            break
+          case 'track_id':
+            skill.checks.push(() => thiz.isTrackId(value));
+            break;
+          case 'is_basis_distance':
+            skill.checks.push(() => thiz.isBasisDistance(value));
             break
           case 'distance_rate': {
             let values;
@@ -773,24 +801,52 @@ export default {
       }
       return detail
     },
-    isRunningStyle(style) {
-      return this.basicRunningStyle === style
+    isRunningStyle(value) {
+      if (value == null) return true;
+      return this.basicRunningStyle == value;
     },
-    isDistanceType(distanceType) {
-      if (Array.isArray(distanceType)) {
-        return distanceType.indexOf(this.distanceType) >= 0;
+    isGroundType(value) {
+      if (value == null) return true;
+      return this.trackDetail.surface == value;
+    },
+    isRotation(value) {
+      if (value == null) return true;
+      return this.trackDetail.turn == value;
+    },
+    isTrackId(value) {
+      if (value == null) return true;
+      return this.trackDetail.raceTrackId == value;
+    },
+    isBasisDistance(value) {
+      if (value == null) return true;
+      else if (value === 1) {
+        return this.trackDetail.distance % 400 == 0;
+      } else if (value === 0) {
+        return this.trackDetail.distance % 400 != 0;
+      }
+      return false;
+    },
+    isDistanceType(value) {
+      if (value == null) return true;
+      if (Array.isArray(value)) {
+        return value.includes(this.distanceType);
       } else {
-        return this.distanceType === distanceType;
+        return this.distanceType === value;
       }
     },
-    isSurfaceType(surfaceType) {
-      return this.surfaceType === surfaceType
+    isGroundCondition(value) {
+      if (value == null) return true;
+      if (Array.isArray(value)) {
+        return value.indexOf(this.track.surfaceCondition) >= 0;
+      } else {
+        return this.track.surfaceCondition === value;
+      }
     },
     accTimePassed(second) {
       return this.frameElapsed >= 15 * second
     },
     fillSkillData() {
-      const thiz = this
+      const thiz = this;
       // First build up inherit skills
       for (const skill of this.uniqueSkillData) {
         if (skill.noInherit) {
@@ -853,6 +909,15 @@ export default {
           skillType = 'acceleration'
           effectCount++
         }
+        if (skill.speedDecel) {
+          if (skill.speedDecel == 0.15) {
+            copy.inherit.speedDecel = 0.035;
+          } else {
+            copy.inherit.speedDecel = skill.speedDecel - 0.2;
+          }
+          skillType = 'targetSpeed';
+          effectCount++;
+        }
         if (effectCount > 1 || skill.invokes) {
           skillType = 'boost'
         }
@@ -862,7 +927,7 @@ export default {
         this.skillData[skillType].push(copy)
       }
 
-      const EFFECTS = ['heal', 'targetSpeed', 'acceleration', 'speed', 'fatigue', 'passiveBonus']
+      const EFFECTS = ['heal', 'targetSpeed', 'acceleration', 'speed', 'fatigue', 'passiveBonus', 'speedDecel']
       // Then fill fields, this.skillData must already been fulfill
       for (const type in this.skillData) {
         const o = {}
@@ -956,6 +1021,9 @@ export default {
         case 'targetSpeed':
           copy.targetSpeed = copy.value
           break
+        case 'speedDecel':
+          copy.speedDecel = copy.value;
+          break;
         case 'acceleration':
           copy.acceleration = copy.value
           break

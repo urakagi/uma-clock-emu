@@ -46,8 +46,8 @@ export default {
     trackDetail() {
       if (!this.track.location) {
         return {
-          distance: 0, surface: 1, courseSetStatus: [],
-          corners: [], straights: [], slopes: []
+          distance: 0, surface: 1, turn: 1, distanceType: 1,
+          courseSetStatus: [], corners: [], straights: [], slopes: [],
         }
       }
       return this.trackData[this.track.location].courses[this.track.course]
