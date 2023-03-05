@@ -20,6 +20,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 106701211,
+          name: "右回りの輪舞曲",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
           rarity: "rare",
           id: 200014,
           name: "右回りの鬼",
@@ -39,9 +46,16 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: -106102211,
+          name: "春風吹きて、桜舞う | けふ九重に満開です | 風霜高潔",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
           rarity: "rare",
-          id: 200174,
-          name: "春一番/初嵐",
+          id: -200174,
+          name: "春一番 | 初嵐",
           passiveSpeed: 60,
           passivePower: 60,
         },
@@ -236,6 +250,14 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 105901211,
+          name: "淀の女王",
+          passiveSpeed: 80,
+          passiveStamina: 80,
+          passiveWisdom: 80,
+        },
         {
           rarity: "rare",
           id: 200064,
@@ -510,6 +532,34 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 105601211,
+          name: "七福即生",
+          passiveSpeed: 80,
+          passivePower: 80,
+          passiveStamina: 80,
+        },
+      ],
+      tooltip: "発動率2/9として扱う(チャンピオンズミーティング基準)",
+      triggerRate: 0.2222222,
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 106102211,
+          name: "春風吹きて、桜舞う",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
+          rarity: "evo",
+          id: 106901211,
+          name: "けふ九重に満開です",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
           rarity: "rare",
           id: 200174,
           name: "春一番",
@@ -548,6 +598,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101702211,
+          name: "風霜高潔",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
         {
           rarity: "rare",
           id: 200194,
@@ -674,6 +731,18 @@ function normalSkillData(thiz) {
       conditions: { ground_type: 2 },
     },
     {
+      variants: [{ rarity: "evo", id: 109801211, name: "龍脈の波濤" }],
+      type: "passive",
+      conditions: { ground_type: 2 },
+      trigger: function () {
+        if (thiz.umaStatus.power >= 1200) {
+          thiz.passiveBonus.speed += 100;
+        } else if (thiz.umaStatus.power >= 1000) {
+          thiz.passiveBonus.speed += 80;
+        }
+      },
+    },
+    {
       variants: [{ rarity: "rare", id: 202331, name: "抜群の踏み込み" }],
       type: "passive",
       conditions: { ground_type: 2 },
@@ -774,6 +843,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 104301211,
+          name: "いたずらマイスター",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
           rarity: "rare",
           id: 202341,
           name: "泥んこマイスター",
@@ -792,6 +868,14 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104901211,
+          name: "鉄火のギャンブラー",
+          passiveSpeed: 100,
+          passiveGuts: 100,
+          passivePower: 100,
+        },
         {
           rarity: "rare",
           id: 202441,
@@ -814,6 +898,21 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 105802211,
+          name: "魂の導き手",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 104501211,
+          name: "癒しのマエストロ",
+          heal: 750,
+        },
+        { rarity: "evo", id: 102402211, name: "バレルロール", heal: 750 },
+        { rarity: "evo", id: 101502111, name: "円舞曲のマエストロ", heal: 750 },
         { rarity: "rare", id: 200351, name: "円弧のマエストロ", heal: 550 },
         {
           rarity: "normal",
@@ -822,11 +921,31 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { corner_random: [1, 2, 3, 4] },
     },
     {
       variants: [
-        { rarity: "rare", id: 200381, name: "好転一息", heal: 550 },
+        {
+          rarity: "evo",
+          id: 102401111,
+          name: "You copy?",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 100801111,
+          name: "スキットルブレイク",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "rare",
+          id: 200381,
+          name: "好転一息",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 200382,
@@ -838,7 +957,39 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "rare", id: 200741, name: "クールダウン", heal: 550 },
+        {
+          rarity: "evo",
+          id: 103001211,
+          name: "黒の刺客",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 102301211,
+          name: "計画的クールダウン",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 101302111,
+          name: "アクティブレスト",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 101102111,
+          name: "キュアリーヒール",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "rare",
+          id: 200741,
+          name: "クールダウン",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 200742,
@@ -846,6 +997,8 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { distance_type: 4, phase_random: 1 },
     },
     {
@@ -868,6 +1021,20 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 104401111,
+          name: "放課後魔法少女",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 100701211,
+          name: "エクストリーム下校術",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
           rarity: "rare",
           id: 201481,
           name: "下校後のスペシャリスト",
@@ -875,10 +1042,31 @@ function normalSkillData(thiz) {
         },
         { rarity: "normal", id: 201482, name: "下校の楽しみ", heal: 150 },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 4, slope: 2, accumulatetime: 10 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103101111,
+          name: "じゃじゃウマお姉ちゃん",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 100902111,
+          name: "おてんば女王",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 100402111,
+          name: "ドキッ☆じゃじゃウマ娘！",
+          heal: 750,
+        },
         { rarity: "rare", id: 201281, name: "じゃじゃウマ娘", heal: 550 },
         {
           rarity: "normal",
@@ -887,11 +1075,44 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 1, slope: 1, accumulatetime: 10 },
     },
     {
       variants: [
-        { rarity: "rare", id: 201351, name: "食いしん坊", heal: 550 },
+        {
+          rarity: "evo",
+          id: 102801211,
+          name: "ボーノな健啖家",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 100601111,
+          name: "笠松の食いしん坊",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 100602111,
+          name: "ドカ食い養生",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 100101111,
+          name: "はらぺこ大将",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "rare",
+          id: 201351,
+          name: "食いしん坊",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 201352,
@@ -899,11 +1120,66 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 2, phase_random: 1 },
     },
     {
       variants: [
-        { rarity: "rare", id: 200571, name: "レースプランナー", heal: 550 },
+        {
+          rarity: "evo",
+          id: 107101111,
+          name: "永遠の輝き",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 104801211,
+          name: "トレンドプランナー",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 104701111,
+          name: "英雄への道標",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 103201211,
+          name: "効率的休息法",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 100901211,
+          name: "アタシが勝つんだから！",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 100501211,
+          name: "エンターテイナー",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 100302111,
+          name: "レースの天才",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "rare",
+          id: 200571,
+          name: "レースプランナー",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 200572,
@@ -911,6 +1187,8 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 2, phase_random: 1 },
     },
     {
@@ -947,6 +1225,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102601211,
+          name: "困難を乗り越える者",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 200711, name: "切り開く者", heal: 550 },
         {
           rarity: "normal",
@@ -955,6 +1240,8 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: {
         distance_type: 3,
         phase_random: 1,
@@ -963,6 +1250,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 105001111,
+          name: "鬼気森然",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 200621, name: "眠れる獅子", heal: 550 },
         {
           rarity: "normal",
@@ -971,6 +1265,8 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: {
         running_style: 4,
         phase_random: 1,
@@ -978,6 +1274,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "evo", id: 102302111, name: "VIPな後ろ姿", heal: 750 },
         { rarity: "rare", id: 201201, name: "VIP顔パス", heal: 550 },
         {
           rarity: "normal",
@@ -995,6 +1292,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100302211,
+          name: "地平の彼方まで",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 201141, name: "神業ステップ", heal: 550 },
         {
           rarity: "normal",
@@ -1003,12 +1307,54 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { distance_type: 3, accumulatetime: 20 },
       tooltip:
         "「スタート後20秒で発動」として扱う。大体そこら辺で内コースを取り始めるため。多分（ガバ）",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 109901111,
+          name: "苫小牧グルメで舌鼓！",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 103002111,
+          name: "がんばるぞー…おー！",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 102301111,
+          name: "想定通り、余裕十分",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 101702111,
+          name: "神色自若",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 101401211,
+          name: "余裕のパフォーマンス",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 101301211,
+          name: "名優の余裕",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 200561, name: "余裕綽々", heal: 550 },
         {
           rarity: "normal",
@@ -1017,10 +1363,19 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 2, phase_laterhalf_random: 0 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104001111,
+          name: "先見の明",
+          heal: 550,
+          targetSpeed: 0.25,
+        },
         { rarity: "rare", id: 200691, name: "慧眼", heal: 550 },
         {
           rarity: "normal",
@@ -1029,6 +1384,8 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: {
         distance_type: 2,
         phase_laterhalf_random: 0,
@@ -1036,6 +1393,20 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102501111,
+          name: "コーヒーブレイク",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 101102211,
+          name: "勇気の魔法",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 201421, name: "リラックス", heal: 550 },
         {
           rarity: "normal",
@@ -1044,10 +1415,13 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 3, phase_random: 1 },
     },
     {
       variants: [
+        { rarity: "evo", id: 105201111, name: "まだまだだよ！", heal: 750 },
         { rarity: "rare", id: 200441, name: "鋼の意志", heal: 550 },
         {
           rarity: "normal",
@@ -1061,6 +1435,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103301111,
+          name: "静かな誓い",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 201491, name: "冷静沈着", heal: 550 },
         {
           rarity: "normal",
@@ -1069,11 +1450,33 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       tooltip: "「中盤のどこかで発動」として扱う。",
       conditions: { running_style: 4, accumulatetime: 10, phase_random: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 107401111,
+          name: "不屈のお嬢様",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 105801211,
+          name: "諦めない、ですぅ～！",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 105201211,
+          name: "まけないからね！",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 200471, name: "不屈の心", heal: 550 },
         {
           rarity: "normal",
@@ -1082,11 +1485,20 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { phase_random: 1 },
       tooltip: "「中盤のどこか」として扱う。",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 106201111,
+          name: "ゴーイングマイウェイ",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 200481, name: "どこ吹く風", heal: 550 },
         {
           rarity: "normal",
@@ -1095,6 +1507,8 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { phase_random: 1 },
       tooltip: "「中盤のどこか」として扱う。",
     },
@@ -1127,6 +1541,20 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 106701111,
+          name: "金剛不壊",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 104002211,
+          name: "虎視眈々",
+          heal: 550,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 201691, name: "潜伏態勢", heal: 550 },
         {
           rarity: "normal",
@@ -1135,10 +1563,19 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 3,
       conditions: { running_style: 3, phase_laterhalf_random: 0 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103401211,
+          name: "熟練の砂塵使い",
+          heal: 750,
+          targetSpeed: 0.35,
+        },
         { rarity: "rare", id: 202001, name: "砂の玄人", heal: 550 },
         {
           rarity: "normal",
@@ -1147,10 +1584,19 @@ function normalSkillData(thiz) {
           heal: 150,
         },
       ],
+      type: "heal",
+      duration: 1.8,
       conditions: { ground_type: 2, phase_random: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 107401211,
+          name: "動かざること羊蹄山の若し",
+          heal: 950,
+          speed: -0.15,
+        },
         {
           rarity: "rare",
           id: 202071,
@@ -1166,12 +1612,19 @@ function normalSkillData(thiz) {
           speed: -0.15,
         },
       ],
+      type: "heal",
       duration: 1.2,
       conditions: { distance_type: 4, phase_firsthalf_random: 1 },
       tooltip: "4-7位",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101303211,
+          name: "一意専心にリフレッシュ！",
+          heal: 950,
+        },
         { rarity: "rare", id: 202191, name: "一意専心", heal: 750 },
         {
           rarity: "normal",
@@ -1190,6 +1643,20 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 104502111,
+          name: "お世話のプロフェッショナル",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 101701211,
+          name: "鎧袖一触",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 200331,
           name: "弧線のプロフェッサー",
@@ -1202,6 +1669,7 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       cd: 30,
       conditions: { all_corner_random: 1 },
@@ -1241,6 +1709,18 @@ function normalSkillData(thiz) {
       ],
       duration: 3,
       conditions: { all_corner_random: 1, distance_type: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104701211,
+          name: "光輝く剣",
+          targetSpeed: 0.45,
+        },
+      ],
+      duration: 3,
+      conditions: { all_corner_random: 1, distance_type: [3, 4] },
     },
     {
       variants: [
@@ -1287,6 +1767,19 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 103102211,
+          name: "華麗なサーブ",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+        },
+        {
+          rarity: "rare",
+          id: 201253,
+          name: "陣風円刃",
+          targetSpeed: 0.35,
+        },
+        {
           rarity: "double",
           id: 201251,
           name: "逃げコーナー◎",
@@ -1323,6 +1816,12 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "rare",
+          id: 201393,
+          name: "鋭脚円刃",
+          targetSpeed: 0.35,
+        },
+        {
           rarity: "double",
           id: 201391,
           name: "差しコーナー◎",
@@ -1358,6 +1857,25 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101601111,
+          name: "一刀両断",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101302211,
+          name: "空の果てまで",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 105101111,
+          name: "風花疾走",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
         { rarity: "rare", id: 200361, name: "ハヤテ一文字", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1366,9 +1884,23 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 3,
       cd: 30,
       conditions: { straight_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104201111,
+          name: "世界を貫く至高の輝き",
+          targetSpeed: 0.35,
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_type: [1, 2], straight_random: 1 },
     },
     {
       variants: [
@@ -1409,6 +1941,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "evo", id: 103702211, name: "黒い閃光", targetSpeed: 0.45 },
         { rarity: "rare", id: 201103, name: "光芒一閃", targetSpeed: 0.35 },
         {
           rarity: "double",
@@ -1428,6 +1961,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "evo", id: 106801211, name: "爆風一閃！", targetSpeed: 0.45 },
         { rarity: "rare", id: 201173, name: "烈風一閃", targetSpeed: 0.35 },
         {
           rarity: "double",
@@ -1487,6 +2021,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103601211,
+          name: "Lose Myself",
+          targetSpeed: 0.35,
+          speedWithDecel: 0.15,
+        },
         { rarity: "rare", id: 201453, name: "月影一閃", targetSpeed: 0.35 },
         {
           rarity: "double",
@@ -1501,6 +2042,34 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102002111,
+          name: "完璧なエラー対処術",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 102002111,
+          name: "逃げろ～♪",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 102001211,
+          name: "脱出大作戦",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 106802111,
+          name: "未来へ飛び立ちましょう！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 200541, name: "脱出術", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1509,11 +2078,32 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 3,
       conditions: { running_style: 1, phase_random: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103501211,
+          name: "ウイニングロード",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 102101111,
+          name: "雷騰雲奔",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 100102111,
+          name: "真夏の思い切り",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 200591, name: "迅速果断", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1522,11 +2112,19 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       conditions: { running_style: 3, phase_random: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102002211,
+          name: "レコードランナー",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
         {
           rarity: "rare",
           id: 201271,
@@ -1540,6 +2138,7 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 3,
       conditions: {
         running_style: 1,
@@ -1550,6 +2149,40 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102201111,
+          name: "ロイヤルスター",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 101501111,
+          name: "降臨！世紀末覇王！",
+          targetSpeed: 0.45,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 100502211,
+          name: "煌めきのトップスタァ",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 105801111,
+          name: "怒涛のスピード",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 106901111,
+          name: "お花見当たり年！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         {
           rarity: "rare",
           id: 200581,
@@ -1563,11 +2196,46 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 1.8,
       conditions: { running_style: 2, is_finalcorner_random: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103901211,
+          name: "暴れ龍",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+        },
+        {
+          rarity: "evo",
+          id: 102701211,
+          name: "ライジングバルクアップ",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101402211,
+          name: "昇りコンドル",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 105301111,
+          name: "風紀の登龍門",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+        },
+        {
+          rarity: "evo",
+          id: 106102111,
+          name: "竜の雲を得る如し",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 200611, name: "昇り龍", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1582,6 +2250,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103502111,
+          name: "千万バリキ！！！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 201411, name: "百万バリキ", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1595,6 +2270,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104101211,
+          name: "バクシン的リード！",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 200981, name: "圧倒的リード", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1609,6 +2290,14 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 106101111,
+          name: "電撃の撫で切り",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+          duration: 4,
+        },
         {
           rarity: "rare",
           id: 200671,
@@ -1629,6 +2318,24 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101002111,
+          name: "アドベンチャーの先導者",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101001211,
+          name: "Frontier Spirit",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 100402211,
+          name: "お立ち台の支配者",
+          targetSpeed: 0.45,
+        },
         {
           rarity: "rare",
           id: 200681,
@@ -1651,6 +2358,38 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102202111,
+          name: "思い出を力に変えて",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101001111,
+          name: "狙い撃ちデス！",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 100401111,
+          name: "かっ飛ばすわよ！",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 106501111,
+          name: "マジ爆上げっしょ！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 107801111,
+          name: "ウインドシアー",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 201051, name: "ギアチェンジ", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1668,6 +2407,33 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104201211,
+          name: "パール流ダンスバトル",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 100501111,
+          name: "女帝の矜持",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 100501111,
+          name: "輝くトップスタァ",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 110001111,
+          name: "闘魂注入",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 201071, name: "姉御肌", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1680,11 +2446,37 @@ function normalSkillData(thiz) {
       conditions: {
         distance_type: 2,
         phase_random: 1,
+        accumulatetime: 5,
       },
       tooltip: "「中盤のどこか」として扱う。",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102701111,
+          name: "マッスルアンセム",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 102102111,
+          name: "先達に献ぐ祈りの頌",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101501211,
+          name: "歌劇王の行進",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 100901111,
+          name: "パーフェクトチューン",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
         {
           rarity: "rare",
           id: 200721,
@@ -1698,6 +2490,7 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       conditions: {
         distance_type: 3,
@@ -1707,6 +2500,20 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101201111,
+          name: "勝利への咆哮",
+          targetSpeed: 0.45,
+          acceleration: 0.1,
+        },
+        {
+          rarity: "evo",
+          id: 107201211,
+          name: "八重の向こう意気",
+          targetSpeed: 0.45,
+          acceleration: 0.1,
+        },
         {
           rarity: "rare",
           id: 200731,
@@ -1723,11 +2530,38 @@ function normalSkillData(thiz) {
         },
       ],
       duration: 3,
-      conditions: { distance_type: 3, is_finalcorner: 1 },
+      conditions: { distance_type: 3, is_finalcorner: 1, corner: 1 },
       tooltip: "「最終コーナー即発動」として扱う",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103402111,
+          name: "扇ノ舞",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 100702111,
+          name: "神秘体験！ゴルシワープ",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 100602211,
+          name: "クリスマスの奇跡体験",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 105602211,
+          name: "ばっちり開運体験！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 200751, name: "内的体験", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1736,6 +2570,7 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 3,
       conditions: {
         distance_type: 4,
@@ -1745,6 +2580,26 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102001111,
+          name: "ファストリトリーブ",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 101301111,
+          name: "メジロの心得",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 106401211,
+          name: "神逃げの心得",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 201191, name: "先陣の心得", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1762,6 +2617,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 106401111,
+          name: "パないっしょ？",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 201662,
           name: "お先に失礼っ！",
@@ -1775,6 +2637,7 @@ function normalSkillData(thiz) {
         },
       ],
       duration: 3,
+      cd: 30,
       conditions: {
         phase_random: 1,
         accumulatetime: 10,
@@ -1799,6 +2662,18 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103301211,
+          name: "己身焦がすほうき星",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101201211,
+          name: "怒濤のポロロッカ",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 200631, name: "疾風怒濤", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1816,6 +2691,30 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100103111,
+          name: "怒涛の出陣",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+          heal: 0.015,
+        },
+        {
+          rarity: "evo",
+          id: 105602111,
+          name: "怒涛の超幸運パワー！",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 106201211,
+          name: "えい！えい！むん！",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+          heal: 150,
+        },
         {
           rarity: "rare",
           id: 201211,
@@ -1860,6 +2759,33 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 102102211,
+          name: "さあ、ウチとやろうや！",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101902111,
+          name: "超特急入稿！",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 100102211,
+          name: "真夏の総大将",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 107201111,
+          name: "昂る焔",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 200461,
           name: "アガッてきた！",
@@ -1872,12 +2798,34 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 1.8,
+      cd: 30,
       tooltip: "「中盤のどこかで発動」として扱う。",
       conditions: { phase_random: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104602111,
+          name: "夢に向かって急上昇！",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 104601211,
+          name: "ウマドルパワー急上昇↑↑",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 109901211,
+          name: "観光大使の面目躍如！",
+          targetSpeed: 0.45,
+        },
         {
           rarity: "rare",
           id: 201671,
@@ -1891,12 +2839,37 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       conditions: { ground_type: 2, phase_random: 1 },
       tooltip: "「中盤のどこか」として扱う。",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103701211,
+          name: "誇りを懸けて",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 102302211,
+          name: "全力サンタクロース",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101601211,
+          name: "餓狼牙",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 100101211,
+          name: "夢叶える末脚",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 200511, name: "全身全霊", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1906,10 +2879,22 @@ function normalSkillData(thiz) {
         },
       ],
       duration: 2.4,
-      conditions: { phase_firsthalf_random: 3 },
+      conditions: { phase_firsthalf_random: 3, is_lastspurt: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103401111,
+          name: "火消の梯子登り",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 102101211,
+          name: "尻尾の有頂天",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 201612, name: "尻尾の滝登り", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1944,6 +2929,19 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103502211,
+          name: "きっと飛べる！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 107101211,
+          name: "刹那への覚悟",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 201701, name: "決死の覚悟", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1957,6 +2955,19 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101502211,
+          name: "ボクは遅れずにやってくる！",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 101303111,
+          name: "夏の名優",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 202011, name: "真打", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -1984,6 +2995,12 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 100103211,
+          name: "日之本一のド根性",
+          targetSpeed: 0.45,
+        },
+        {
           rarity: "rare",
           id: 202061,
           name: "日本一のウマ娘",
@@ -1995,6 +3012,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101901111,
+          name: "限界ウママニア",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
         { rarity: "rare", id: 201592, name: "ウママニア", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2003,12 +3027,27 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 3,
       conditions: { accumulatetime: 5 },
       tooltip: "開始5秒で即発動扱い",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103601111,
+          name: "アップリフティング",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 100702211,
+          name: "イカ揚げ、いかがですか！？",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 202101, name: "高揚感", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2017,12 +3056,20 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       conditions: { distance_type: 3, phase_random: 1 },
       tooltip: ">=50%(5～9位)",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 105301211,
+          name: "押忍ッ！気合十分ッス！",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+        },
         { rarity: "rare", id: 202111, name: "破竹の勢い", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2037,6 +3084,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103101211,
+          name: "荒ぶる風神",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 202131, name: "荒ぶる旋風", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2051,6 +3105,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102702211,
+          name: "至高の勝利を召し上がれ",
+          targetSpeed: 0.45,
+        },
         {
           rarity: "rare",
           id: 202171,
@@ -2069,6 +3129,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 108701211,
+          name: "記憶に刻む足取り",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+        },
         { rarity: "rare", id: 202041, name: "意気衝天", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2083,6 +3150,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 109801111,
+          name: "コパッと開運！",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 202261, name: "勝利の機運", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2097,6 +3170,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101902211,
+          name: "尊みを求めてふっかーーつ！",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
         { rarity: "rare", id: 202271, name: "捲土重来", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2105,12 +3185,19 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       conditions: { ground_type: 2, phase_random: 1 },
       tooltip: "6～9位。",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104301111,
+          name: "全速前進なのだ！",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 202281, name: "全速前進！", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2144,6 +3231,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 110001211,
+          name: "女神の砂浴び",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 202301, name: "優雅な砂浴び", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2177,6 +3271,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 105002111,
+          name: "見せつけてやる！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 202381,
           name: "ブレイクスルー",
@@ -2194,6 +3295,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "evo", id: 107801211, name: "神渡し", targetSpeed: 0.35 },
         { rarity: "rare", id: 202411, name: "風雲の志", targetSpeed: 0.25 },
         {
           rarity: "normal",
@@ -2212,6 +3314,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100902211,
+          name: "開かれる夢の扉",
+          targetSpeed: 0.55,
+        },
         { rarity: "rare", id: 202461, name: "踏ませぬ影", targetSpeed: 0.45 },
         {
           rarity: "normal",
@@ -2225,6 +3333,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100802211,
+          name: "最速のトップギア",
+          targetSpeed: 0.55,
+        },
         { rarity: "rare", id: 202451, name: "トップギア", targetSpeed: 0.45 },
         {
           rarity: "normal",
@@ -2234,10 +3348,18 @@ function normalSkillData(thiz) {
         },
       ],
       duration: 2.4,
+      tooltip: "先頭から4バ身以内にいる必要がある",
       conditions: { running_style: 3, is_finalcorner: 1, corner: 0 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101602111,
+          name: "BLAZING WOLF",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 202471, name: "猛追", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2251,6 +3373,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 106501211,
+          name: "とりまやったれ～！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
         { rarity: "rare", id: 202501, name: "遮二無二", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -2265,20 +3394,21 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "rare", id: 201253, name: "陣風円刃", targetSpeed: 0.35 },
-      ],
-      duration: 3,
-      conditions: { all_corner_random: 1, running_style: 1 },
-    },
-    {
-      variants: [
-        { rarity: "rare", id: 201393, name: "鋭脚円刃", targetSpeed: 0.35 },
-      ],
-      duration: 3,
-      conditions: { all_corner_random: 1, running_style: 3 },
-    },
-    {
-      variants: [
+        {
+          rarity: "evo",
+          id: 101802211,
+          name: "上弦のソムリエール",
+          acceleration: 0.4,
+          speedWithDecel: 0.15,
+          type: "composite",
+        },
+        {
+          rarity: "evo",
+          id: 100601211,
+          name: "怪物的コーナリング",
+          acceleration: 0.4,
+          heal: 150,
+        },
         {
           rarity: "rare",
           id: 200341,
@@ -2292,6 +3422,7 @@ function normalSkillData(thiz) {
           acceleration: 0.2,
         },
       ],
+      type: "acceleration",
       duration: 3,
       cd: 30,
       conditions: { all_corner_random: 1 },
@@ -2313,6 +3444,37 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102601111,
+          name: "クロックアップ",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "evo",
+          id: 106601211,
+          name: "ターボについてこーい！",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "evo",
+          id: 106801111,
+          name: "祭りだワッショイ！",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "evo",
+          id: 106802211,
+          name: "必勝の前口上！",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "evo",
+          id: 108701111,
+          name: "必勝のピッチアップ",
+          acceleration: 0.4,
+          duration: 4,
+        },
         { rarity: "rare", id: 200531, name: "先手必勝", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2329,6 +3491,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100201211,
+          name: "異次元の逃亡者",
+          acceleration: 0.4,
+          speedWithDecel: 0.15,
+        },
         { rarity: "rare", id: 200551, name: "逃亡者", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2342,6 +3511,25 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101101211,
+          name: "不退転の意思",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 104001211,
+          name: "ランウェイの主役",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 104001211,
+          name: "ノってこ！",
+          acceleration: 0.4,
+          heal: 150,
+        },
         { rarity: "rare", id: 200601, name: "乗り換え上手", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2355,6 +3543,19 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "evo", id: 103402211, name: "大見得切り", acceleration: 0.4 },
+        {
+          rarity: "evo",
+          id: 105001211,
+          name: "駆り立てる想い",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 105701211,
+          name: "弾む大地",
+          acceleration: 0.4,
+        },
         { rarity: "rare", id: 200641, name: "迫る影", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2368,6 +3569,19 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103802211,
+          name: "#ビューティースプリント",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 104101111,
+          name: "バクシン的スプリント！",
+          acceleration: 0.4,
+          targetSpeed: 0.15,
+        },
         {
           rarity: "rare",
           id: 200651,
@@ -2386,6 +3600,8 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "evo", id: 101402111, name: "豪勇無双", acceleration: 0.5 },
+        { rarity: "evo", id: 100801211, name: "抜群の豪脚", acceleration: 0.5 },
         { rarity: "rare", id: 200701, name: "豪脚", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2416,6 +3632,22 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 100401211,
+          name: "紅蓮のオーバーレブ",
+          targetSpeed: 0.45,
+        },
+      ],
+      duration: 3,
+      tooltip: "50%突入時1位の即発動扱い。",
+      conditions: {
+        distance_type: 2,
+        distance_rate: ">=50",
+      },
+    },
+    {
+      variants: [
+        {
           rarity: "rare",
           id: 201061,
           name: "アクセル全開！",
@@ -2434,6 +3666,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100301211,
+          name: "帝王ステップ",
+          acceleration: 0.3,
+          targetSpeed: 0.25,
+        },
         {
           rarity: "rare",
           id: 201131,
@@ -2472,6 +3711,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100301111,
+          name: "天才的技巧",
+          acceleration: 0.3,
+          targetSpeed: 0.25,
+        },
         { rarity: "rare", id: 201331, name: "技巧派", acceleration: 0.3 },
         {
           rarity: "normal",
@@ -2480,12 +3726,44 @@ function normalSkillData(thiz) {
           acceleration: 0.2,
         },
       ],
-      duration: 1.8,
+      duration: 3,
       conditions: { running_style: 2, accumulatetime: 20 },
       tooltip: "「スタート後20秒で発動」として扱う。",
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102201211,
+          name: "天空落とし",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 102702111,
+          name: "夢叶える決意を授けましょう",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 102901211,
+          name: "雪国仕込みの直滑降",
+          acceleration: 0.3,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 103001111,
+          name: "決意のヒーロー",
+          acceleration: 0.3,
+          speedWithDecel: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 105101211,
+          name: "大輪の決意",
+          acceleration: 0.4,
+        },
         { rarity: "rare", id: 201341, name: "決意の直滑降", acceleration: 0.3 },
         {
           rarity: "normal",
@@ -2516,6 +3794,20 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103501111,
+          name: "たゆまぬ努力",
+          acceleration: 0.3,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 105202211,
+          name: "たゆまぬ努力",
+          acceleration: 0.3,
+          targetSpeed: 0.15,
+        },
         { rarity: "rare", id: 201401, name: "努力家", acceleration: 0.3 },
         {
           rarity: "normal",
@@ -2534,6 +3826,40 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 100802111,
+          name: "ぶっ差してやるぜ！",
+          acceleration: 0.4,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 102401211,
+          name: "I copy!",
+          acceleration: 0.4,
+          heal: 150,
+        },
+        {
+          rarity: "evo",
+          id: 102901111,
+          name: "憧れのシチーガール",
+          acceleration: 0.4,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 103901111,
+          name: "ノンストッププリンセス",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "evo",
+          id: 106002211,
+          name: "ノンストップエール",
+          acceleration: 0.4,
+          heal: 150,
+        },
+        {
           rarity: "rare",
           id: 200491,
           name: "ノンストップガール",
@@ -2546,6 +3872,7 @@ function normalSkillData(thiz) {
           acceleration: 0.2,
         },
       ],
+      type: "acceleration",
       duration: 3,
       conditions: { is_lastspurt: 1 },
       tooltip: "スパート即発動として扱う。実際に発動するかどうかは自己判断で。",
@@ -2579,6 +3906,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 101901211,
+          name: "最前列は譲れない！",
+          acceleration: 0.3,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 201681,
           name: "狙うは最前列！",
@@ -2596,6 +3930,25 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 102202211,
+          name: "モリガンの矛戟",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 101002211,
+          name: "真剣勝負デス！",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 105802111,
+          name: "ライバルがいるから！",
+          acceleration: 0.4,
+          heal: 150,
+        },
         { rarity: "rare", id: 201901, name: "鍔迫り合い", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2604,11 +3957,26 @@ function normalSkillData(thiz) {
           acceleration: 0.2,
         },
       ],
+      type: "acceleration",
       duration: 1.8,
       conditions: { running_style: 2, phase_firsthalf_random: 2 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 105002211,
+          name: "起死回生の出力",
+          acceleration: 0.4,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 105902211,
+          name: "起死回生の一歩",
+          acceleration: 0.4,
+          duration: 4,
+        },
         { rarity: "rare", id: 202081, name: "起死回生", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2622,6 +3990,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 104602211,
+          name: "絶対的センター！",
+          acceleration: 0.5,
+        },
         {
           rarity: "rare",
           id: 202311,
@@ -2669,6 +4043,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 101602211,
+          name: "渇望する怪物",
+          acceleration: 0.5,
+        },
         { rarity: "rare", id: 202481, name: "怪物", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -2679,7 +4059,7 @@ function normalSkillData(thiz) {
       ],
       duration: 1.2,
       conditions: { distance_type: 4, running_style: 2, phase: 2 },
-      tooltip: "即発動扱い",
+      tooltip: "先頭から4バ身以内の即発動扱い",
     },
     {
       variants: [
@@ -2762,6 +4142,14 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 105902111,
+          name: "もっと冒険してみたい！",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 202121,
           name: "大胆不敵",
@@ -2824,6 +4212,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 106601111,
+          name: "出力1000万%！！",
+          targetSpeed: 0.55,
+          heal: -400,
+        },
+        {
           rarity: "rare",
           id: 202391,
           name: "出力1000％！",
@@ -2838,11 +4233,19 @@ function normalSkillData(thiz) {
           heal: -400,
         },
       ],
+      type: "speed",
       duration: 2.7,
       conditions: { phase_firsthalf_random: 1, running_style: 1 },
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 106702111,
+          name: "無我の境地",
+          acceleration: 0.4,
+          heal: -50,
+        },
         {
           rarity: "rare",
           id: 202421,
@@ -2858,6 +4261,7 @@ function normalSkillData(thiz) {
           heal: -200,
         },
       ],
+      type: "acceleration",
       duration: 1.5,
       conditions: { distance_type: 4, running_style: 3, is_lastspurt: 1 },
       tooltip: "4-9位",
@@ -2890,6 +4294,36 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 100201111,
+          name: "最大集中",
+          startDelay: 0.4,
+          acceleration: 0.2,
+          duration: 3,
+        },
+        {
+          rarity: "evo",
+          id: 102602211,
+          name: "パーフェクトブート",
+          startDelay: 0.4,
+          passiveSpeed: 10,
+          passivePower: 10,
+          passiveStamina: 10,
+          passiveGuts: 10,
+          passiveWisdom: 10,
+        },
+        {
+          rarity: "evo",
+          id: 103102111,
+          name: "オーダーはバッチリ！",
+          startDelay: 0.4,
+          passiveSpeed: 10,
+          passivePower: 10,
+          passiveStamina: 10,
+          passiveGuts: 10,
+          passiveWisdom: 10,
+        },
+        {
           rarity: "rare",
           id: 200431,
           name: "コンセントレーション",
@@ -2901,227 +4335,681 @@ function normalSkillData(thiz) {
           name: "集中力",
           startDelay: 0.9,
         },
-        { rarity: "inherit", id: 200433, name: "ゲート難", startDelay: 1.5 },
+        {
+          rarity: "inherit",
+          id: 200433,
+          name: "ゲート難",
+          startDelay: 1.5,
+        },
       ],
+      type: "gate",
     },
     {
-      variants: [{ rarity: "all", name: "逃げためらい", speed: -0.15 }],
+      variants: [
+        { id: 200851, rarity: "all", name: "逃げためらい", speed: -0.15 },
+      ],
       duration: 3,
-      conditions: { running_style: 1 },
+      conditions: { running_style: 1, phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "逃げためらいx2", speed: -0.3 }],
+      variants: [
+        { rarity: "all", id: -200851, name: "逃げためらいx2", speed: -0.3 },
+      ],
       duration: 3,
-      conditions: { running_style: 1 },
+      conditions: { running_style: 1, phase_random: 2 },
       tooltip: "2回同時に喰らう。通常のと加算できる。",
     },
     {
-      variants: [{ rarity: "all", name: "先行ためらい", speed: -0.15 }],
+      variants: [
+        { rarity: "all", id: 200881, name: "先行ためらい", speed: -0.15 },
+      ],
       duration: 3,
-      conditions: { running_style: 2 },
+      conditions: { running_style: 2, phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "先行ためらいx2", speed: -0.3 }],
+      variants: [
+        { rarity: "all", id: -200881, name: "先行ためらいx2", speed: -0.3 },
+      ],
       duration: 3,
-      conditions: { running_style: 2 },
+      conditions: { running_style: 2, phase_random: 2 },
       tooltip: "2回同時に喰らう。通常のと加算できる。",
     },
     {
-      variants: [{ rarity: "all", name: "差しためらい", speed: -0.15 }],
+      variants: [
+        { rarity: "all", id: 200911, name: "差しためらい", speed: -0.15 },
+      ],
       duration: 3,
-      conditions: { running_style: 3 },
+      conditions: { running_style: 3, phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "差しためらいx2", speed: -0.3 }],
+      variants: [
+        { rarity: "all", id: -200911, name: "差しためらいx2", speed: -0.3 },
+      ],
       duration: 3,
-      conditions: { running_style: 3 },
+      conditions: { running_style: 3, phase_random: 2 },
       tooltip: "2回同時に喰らう。通常のと加算できる。",
     },
     {
-      variants: [{ rarity: "all", name: "追込ためらい", speed: -0.15 }],
+      variants: [
+        { rarity: "all", id: 200941, name: "追込ためらい", speed: -0.15 },
+      ],
       duration: 3,
-      conditions: { running_style: 4 },
+      conditions: { running_style: 4, phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "追込ためらいx2", speed: -0.3 }],
+      variants: [
+        { rarity: "all", id: -200941, name: "追込ためらいx2", speed: -0.3 },
+      ],
       duration: 3,
-      conditions: { running_style: 4 },
+      conditions: { running_style: 4, phase_random: 2 },
       tooltip: "2回同時に喰らう。通常のと加算できる。",
     },
     {
-      variants: [{ rarity: "all", name: "後方釘付", speed: -0.2 }],
+      variants: [{ rarity: "all", id: 201012, name: "後方釘付", speed: -0.2 }],
       duration: 3,
-      conditions: { distance_type: 1 },
+      conditions: { distance_type: 1, phase_random: 0 },
     },
     {
-      variants: [{ rarity: "all", name: "悩殺術", speed: -0.25 }],
+      variants: [{ rarity: "all", id: 201011, name: "悩殺術", speed: -0.25 }],
       duration: 3,
-      conditions: { distance_type: 1 },
+      conditions: { distance_type: 1, phase_random: 0 },
     },
     {
-      variants: [{ rarity: "all", name: "スピードイーター", speed: -0.15 }],
+      variants: [
+        { rarity: "all", id: -201082, name: "スピードイーター", speed: -0.15 },
+      ],
       duration: 3,
-      conditions: { distance_type: 2 },
+      conditions: { distance_type: 2, phase_random: 1 },
     },
     {
-      variants: [{ rarity: "all", name: "束縛", speed: -0.15 }],
+      variants: [{ rarity: "all", id: 201152, name: "束縛", speed: -0.15 }],
       duration: 3,
-      conditions: { distance_type: 3 },
+      conditions: { distance_type: 3, phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "独占力", speed: -0.25 }],
+      variants: [{ rarity: "all", id: 201151, name: "独占力", speed: -0.25 }],
       duration: 3,
-      conditions: { distance_type: 3 },
+      conditions: { distance_type: 3, phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "まなざし", speed: -0.15 }],
+      variants: [
+        { rarity: "all", id: 201511, name: "熱いまなざし", speed: -0.25 },
+      ],
       duration: 3,
+      conditions: { phase_random: 2 },
+    },
+    {
+      variants: [{ rarity: "all", id: 201512, name: "まなざし", speed: -0.15 }],
+      duration: 3,
+      conditions: { phase_random: 2 },
     },
     {
       variants: [
         {
           rarity: "all",
+          id: -900251,
           name: "アナタヲ・オイカケテ",
           speed: -0.05,
         },
       ],
       duration: 6,
+      conditions: { distance_rate_after_random: 50 },
     },
-    {
-      variants: [
-        { rarity: "all", name: "アナタヲ・オイカケテ(継承)", speed: -0.025 },
-      ],
-      duration: 3.6,
-    },
-    {
-      variants: [{ rarity: "all", name: "スタミナイーター", fatigue: 50 }],
-      conditions: { distance_type: 4 },
-    },
-    {
-      variants: [{ rarity: "all", name: "スタミナイーターx2", fatigue: 100 }],
-      conditions: { distance_type: 4 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "逃げけん制", fatigue: 100 }],
-      conditions: { running_style: 1 },
-    },
-    {
-      variants: [{ rarity: "all", name: "逃げけん制x2", fatigue: 200 }],
-      conditions: { running_style: 1 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "先行けん制", fatigue: 100 }],
-      conditions: { running_style: 2 },
-    },
-    {
-      variants: [{ rarity: "all", name: "先行けん制x2", fatigue: 200 }],
-      conditions: { running_style: 2 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "差しけん制", fatigue: 100 }],
-      conditions: { running_style: 3 },
-    },
-    {
-      variants: [{ rarity: "all", name: "差しけん制x2", fatigue: 200 }],
-      conditions: { running_style: 3 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "追込けん制", fatigue: 100 }],
-      conditions: { running_style: 4 },
-    },
-    {
-      variants: [{ rarity: "all", name: "追込けん制x2", fatigue: 200 }],
-      conditions: { running_style: 4 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "逃げ焦り", fatigue: 100 }],
-      conditions: { running_style: 1 },
-    },
-    {
-      variants: [{ rarity: "all", name: "逃げ焦りx2", fatigue: 200 }],
-      conditions: { running_style: 1 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "先行焦り", fatigue: 100 }],
-      conditions: { running_style: 2 },
-    },
-    {
-      variants: [{ rarity: "all", name: "先行焦りx2", fatigue: 200 }],
-      conditions: { running_style: 2 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "差し焦り", fatigue: 100 }],
-      conditions: { running_style: 3 },
-    },
-    {
-      variants: [{ rarity: "all", name: "差し焦りx2", fatigue: 200 }],
-      conditions: { running_style: 3 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "追込焦り", fatigue: 100 }],
-      conditions: { running_style: 4 },
-    },
-    {
-      variants: [{ rarity: "all", name: "追込焦りx2", fatigue: 200 }],
-      conditions: { running_style: 4 },
-      tooltip: "2回同時に喰らう。通常のと加算できる。",
-    },
-    {
-      variants: [{ rarity: "all", name: "逃亡禁止令", fatigue: 300 }],
-      conditions: { distance_type: 1 },
-    },
-    {
-      variants: [{ rarity: "all", name: "抜け駆け禁止", fatigue: 100 }],
-      conditions: { distance_type: 1 },
-    },
-    {
-      variants: [{ rarity: "all", name: "ささやき", fatigue: 100 }],
-      conditions: { distance_type: 3 },
-    },
-    {
-      variants: [{ rarity: "all", name: "ささやきx2", fatigue: 200 }],
-      conditions: { distance_type: 3 },
-    },
-    {
-      variants: [{ rarity: "all", name: "魅惑のささやき", fatigue: 300 }],
-      conditions: { distance_type: 3 },
-    },
-    {
-      variants: [{ rarity: "all", name: "魅惑のささやきx2", fatigue: 600 }],
-      conditions: { distance_type: 3 },
-    },
-    { variants: [{ rarity: "all", name: "鋭い眼光", fatigue: 100 }] },
     {
       variants: [
         {
           rarity: "all",
+          id: -9002512,
+          name: "アナタヲ・オイカケテ(継承)",
+          speed: -0.025,
+        },
+      ],
+      duration: 3.6,
+      conditions: { distance_rate_after_random: 50 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: 201222, name: "スタミナイーター", fatigue: 50 },
+      ],
+      conditions: { distance_type: 4, phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "all",
+          id: -201222,
+          name: "スタミナイーターx2",
+          fatigue: 100,
+        },
+      ],
+      conditions: { distance_type: 4, phase_random: 1 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [
+        { rarity: "all", id: 200831, name: "逃げけん制", fatigue: 100 },
+      ],
+      conditions: { running_style: 1, phase_random: 0, accumulatetime: 5 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200831, name: "逃げけん制x2", fatigue: 200 },
+      ],
+      conditions: { running_style: 1, phase_random: 0, accumulatetime: 5 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [
+        { rarity: "all", id: 200861, name: "先行けん制", fatigue: 100 },
+      ],
+      conditions: { running_style: 2, phase_random: 0, accumulatetime: 5 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200861, name: "先行けん制x2", fatigue: 200 },
+      ],
+      conditions: { running_style: 2, phase_random: 0, accumulatetime: 5 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [
+        { rarity: "all", id: 200891, name: "差しけん制", fatigue: 100 },
+      ],
+      conditions: { running_style: 3, phase_random: 0, accumulatetime: 5 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200891, name: "差しけん制x2", fatigue: 200 },
+      ],
+      conditions: { running_style: 3, phase_random: 0, accumulatetime: 5 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [
+        { rarity: "all", id: 200921, name: "追込けん制", fatigue: 100 },
+      ],
+      conditions: { running_style: 4, phase_random: 0, accumulatetime: 5 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200921, name: "追込けん制x2", fatigue: 200 },
+      ],
+      conditions: { running_style: 4, phase_random: 0, accumulatetime: 5 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [{ rarity: "all", id: 200841, name: "逃げ焦り", fatigue: 100 }],
+      conditions: { running_style: 1, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200841, name: "逃げ焦りx2", fatigue: 200 },
+      ],
+      conditions: { running_style: 1, phase_random: 1 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [{ rarity: "all", id: 200861, name: "先行焦り", fatigue: 100 }],
+      conditions: { running_style: 2, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200861, name: "先行焦りx2", fatigue: 200 },
+      ],
+      conditions: { running_style: 2, phase_random: 1 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [{ rarity: "all", id: 200901, name: "差し焦り", fatigue: 100 }],
+      conditions: { running_style: 3, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200901, name: "差し焦りx2", fatigue: 200 },
+      ],
+      conditions: { running_style: 3, phase_random: 1 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [{ rarity: "all", id: 200931, name: "追込焦り", fatigue: 100 }],
+      conditions: { running_style: 4, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -200931, name: "追込焦りx2", fatigue: 200 },
+      ],
+      conditions: { running_style: 4, phase_random: 1 },
+      tooltip: "2回同時に喰らう。通常のと加算できる。",
+    },
+    {
+      variants: [
+        { rarity: "all", id: 201021, name: "逃亡禁止令", fatigue: 300 },
+      ],
+      conditions: { distance_type: 1, phase_random: 0 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: 201022, name: "抜け駆け禁止", fatigue: 100 },
+      ],
+      conditions: { distance_type: 1, phase_random: 0 },
+    },
+    {
+      variants: [{ rarity: "all", id: 201162, name: "ささやき", fatigue: 100 }],
+      conditions: { distance_type: 3, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -201162, name: "ささやきx2", fatigue: 200 },
+      ],
+      conditions: { distance_type: 3, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: 201161, name: "魅惑のささやき", fatigue: 300 },
+      ],
+      conditions: { distance_type: 3, phase_random: 1 },
+    },
+    {
+      variants: [
+        { rarity: "all", id: -201161, name: "魅惑のささやきx2", fatigue: 600 },
+      ],
+      conditions: { distance_type: 3, phase_random: 1 },
+    },
+    {
+      variants: [{ rarity: "all", id: 201442, name: "鋭い眼光", fatigue: 100 }],
+      conditions: { phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "all",
+          id: -201442,
           name: "鋭い眼光x2",
           fatigue: 200,
         },
       ],
+      conditions: { phase_random: 2 },
     },
-    { variants: [{ rarity: "all", name: "八方にらみ", fatigue: 300 }] },
+    {
+      variants: [
+        { rarity: "all", id: 201441, name: "八方にらみ", fatigue: 300 },
+      ],
+    },
     {
       variants: [
         {
           rarity: "all",
+          id: -201441,
           name: "八方にらみx2",
           fatigue: 600,
         },
       ],
+      conditions: { phase_random: 2 },
     },
     {
-      variants: [{ rarity: "all", name: "スタミナグリード", fatigue: 100 }],
-      conditions: { distance_type: 4 },
+      variants: [
+        { rarity: "all", id: 201221, name: "スタミナグリード", fatigue: 100 },
+      ],
+      conditions: { distance_type: 4, phase_random: 1 },
     },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 103201111,
+          name: "可能性の徒",
+          speedWithDecel: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 103702111,
+          name: "勝利のレシピ",
+          speedWithDecel: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 101701111,
+          name: "皇帝の眼差し",
+          speedWithDecel: 0.45,
+        },
+        {
+          rarity: "evo",
+          id: 106002111,
+          name: "頑張るしかないよね",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 101101111,
+          name: "大和撫子",
+          targetSpeed: 0.45,
+        },
+      ],
+      duration: 3,
+      conditions: {
+        distance_type: 3,
+        phase_random: 2,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104501111,
+          name: "あま～い幻惑",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "evo",
+          id: 101801111,
+          name: "女帝の権謀",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "evo",
+          id: 103801111,
+          name: "#カワイイかく乱♪",
+          speedWithDecel: 0.15,
+          duration: 3,
+        },
+      ],
+      duration: 4,
+      conditions: { running_style: 2, phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 106001211,
+          name: "目指せ！主人公！",
+          targetSpeed: 0.35,
+        },
+      ],
+      duration: 4,
+      conditions: { running_style: 3, phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104901111,
+          name: "乾坤一擲の大博打",
+          targetSpeed: 0.55,
+        },
+        {
+          rarity: "rare",
+          id: 200481,
+          name: "あやしげな作戦",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "normal",
+          id: 200482,
+          name: "博打うち",
+          targetSpeed: 0.25,
+        },
+      ],
+      type: "speed",
+      duration: 1.8,
+      conditions: { distance_rate_after_random: 50 },
+      trigger: function () {
+        const dice = Math.random();
+        if (dice < 0.1) {
+          thiz.sp -= 0.04 * thiz.spMax;
+        } else if (dice < 0.4) {
+          thiz.sp -= 0.02 * thiz.spMax;
+        }
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 105701111,
+          name: "天翔る足取り",
+          speedWithDecel: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 202521,
+          name: "天衣無縫",
+          speedWithDecel: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202522,
+          name: "型破り",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_type: [3, 4], corner_random: [3] },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 102801111,
+          name: "下ごしらえ万全！",
+          acceleration: 0.3,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "rare",
+          id: 201001,
+          name: "準備万全！",
+          acceleration: 0.3,
+        },
+        {
+          rarity: "normal",
+          id: 201002,
+          name: "仕掛け準備",
+          acceleration: 0.2,
+        },
+      ],
+      duration: 4,
+      conditions: { distance_type: 1, phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 105601111,
+          name: "吉兆です！",
+          targetSpeed: 0.35,
+        },
+      ],
+      duration: 4,
+      conditions: { distance_type: 4, phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 106001111,
+          name: "魅惑のシニカルガール",
+          acceleration: 0.4,
+        },
+      ],
+      duration: 4,
+      conditions: { distance_type: 3, phase_random: 2 },
+      tooltip:
+        "終盤前半ランダム位置として扱うが、要するに昔のノンストなのでゴミだよこれ",
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 102402111,
+          name: "純白のささやき",
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 104502211,
+          name: "魅惑のマミーウィスパー",
+          heal: 150,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_type: 3, phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 102501211,
+          name: "オイテイカナイデ",
+          heal: 350,
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 106702211,
+          name: "明けぬ夜はない！",
+          heal: 350,
+          targetSpeed: 0.15,
+        },
+      ],
+      type: "heal",
+      duration: 3,
+      conditions: { distance_type: 4, phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 103701111,
+          name: "閃光のマギア",
+          speedWithDecel: 0.25,
+        },
+        {
+          rarity: "evo",
+          id: 101801211,
+          name: "水月鏡花",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 100701111,
+          name: "564アイズで視界クッキリ！",
+          heal: 150,
+        },
+      ],
+      conditions: { phase_random: 0 },
+      tooltip: "序盤のどこかで発動として扱う",
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 101401111,
+          name: "鷹ノ目",
+          targetSpeed: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_type: 3, phase_random: 0 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 106101211,
+          name: "王の大局観",
+          targetSpeed: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { running_style: 3, phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 103801211,
+          name: "#夢中になっちゃえ♪",
+          targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 103802111,
+          name: "#カレンに染まってみる？",
+          targetSpeed: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_type: 1, phase_random: 0, accumulatetime: 5 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104401211,
+          name: "チャームマジック",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { running_style: 4, phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 105901111,
+          name: "クールな視線",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { running_style: 3, phase_random: 2 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104002111,
+          name: "鮮やかな布陣",
+          heal: 150,
+        },
+      ],
+      conditions: {
+        distance_type: 2,
+        phase_random: 0,
+        accumulatetime: 3,
+        running_style: [3, 4],
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 100502111,
+          name: "圧巻のトリック",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "evo",
+          id: 103002211,
+          name: "トリック&トリート",
+          targetSpeed: 0.35,
+        },
+      ],
+      duration: 3,
+      conditions: {
+        phase_random: 1,
+      },
+    },
+    // End of normal skills
   ];
 }
 

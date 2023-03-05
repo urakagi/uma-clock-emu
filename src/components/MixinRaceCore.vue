@@ -231,11 +231,14 @@ export default {
       // 持続中スキル
       for (const skill of this.operatingSkills) {
         if (skill.data.targetSpeed) {
-          ret += skill.data.targetSpeed
+          ret += skill.data.targetSpeed;
+        }
+        if (skill.data.speedWithDecel) {
+          ret += skill.data.speedWithDecel;
         }
         // 減速スキルの目標速度低下分
         if (skill.data.speed) {
-          ret += skill.data.speed
+          ret += skill.data.speed;
         }
       }
       return ret
@@ -519,12 +522,12 @@ export default {
         this.startDelay = Math.random() * 0.1
       }
       this.triggerStartSkills();
-      this.initTemptation()
+      this.initTemptation();
       this.isStartDash = true;
       this.delayTime = this.startDelay;
-      this.sp = this.spMax
-      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
-      this.progressRace()
+      this.sp = this.spMax;
+      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms();
+      this.progressRace();
     },
     resetRace() {
       this.frameElapsed = 0

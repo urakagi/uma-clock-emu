@@ -460,6 +460,7 @@ export default {
             break
           case 'gate':
             this.startDelay *= skill.startDelay;
+            skill.trigger(skill);
             this.skillTriggerCount[0]++;
             this.frames[0].skills.push({data: skill});
             break
@@ -888,6 +889,11 @@ export default {
       if (copy.targetSpeed || copy.speedWithDecel) {
         type = 'speed';
         effectCount++;
+        if (copy.speedWithDecel) {
+          triggers.push(() => {
+            thiz.currentSpeed += copy.speedWithDecel;
+          });
+        }
       }
       if (copy.acceleration) {
         type = 'acceleration';
@@ -918,12 +924,13 @@ export default {
         type = 'gate';
         effectCount++;
       }
-
       if (effectCount > 1) {
         type = 'composite';
       }
+      if (!copy.type) {
+        copy.type = type;
+      }
 
-      copy.type = type;
       copy.trigger = function (skill) {
         let ret;
         for (const trigger of triggers) {
@@ -1028,7 +1035,7 @@ export default {
       for (const skillWrapper of normalSkillData) {
         const {variants, ...commonPart} = skillWrapper;
         for (const variant of variants) {
-          const copy = {...variant, ...commonPart};
+          const copy = { ...commonPart, ...variant };
           skills.push(this.reshapeSkill(copy));
         }
       }
