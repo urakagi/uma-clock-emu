@@ -277,8 +277,8 @@ export default {
             }
           } else if (Array.isArray(value)) {
             return (startPosition) =>
-                startPosition >= thiz.toPosition(value[0])
-                && startPosition <= thiz.toPosition(value[1]);
+                startPosition >= thiz.toPosition(value[1])
+                && startPosition <= thiz.toPosition(value[0]);
           } else {
             console.error('Unknown remain_distance value', value);
             return null;

@@ -981,7 +981,9 @@ export default {
         this.selectedUnique = u.selectedUnique;
         this.uniqueLevel = u.uniqueLevel;
       }
-      this.raceType = u.raceType;
+      if (u.raceType) {
+        this.raceType = u.raceType;
+      }
       if (u.emulations) {
         this.emulations = u.emulations;
       }

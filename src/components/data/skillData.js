@@ -1,7 +1,7 @@
 function normalSkillData(thiz) {
   return [
     {
-      variants: [{ rarity: "rare", id: 202051, name: "大逃げ", value: 0 }],
+      variants: [{ rarity: "rare", id: 202051, name: "大逃げ" }],
       type: "passive",
       conditions: { running_style: 1 },
     },
@@ -644,12 +644,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "double", id: 200211, name: "晴れの日◎", value: 60 },
+        { rarity: "double", id: 200211, name: "晴れの日◎", passiveGuts: 60 },
         {
           rarity: "normal",
           id: 200212,
           name: "晴れの日○",
-          value: 40,
+          passiveGuts: 40,
         },
       ],
       tooltip: "発動率57.5%として扱う。",
@@ -660,12 +660,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "double", id: 200221, name: "曇りの日◎", value: 60 },
+        { rarity: "double", id: 200221, name: "曇りの日◎", passiveGuts: 60 },
         {
           rarity: "normal",
           id: 200222,
           name: "曇りの日○",
-          value: 40,
+          passiveGuts: 40,
         },
       ],
       tooltip: "発動率30%として扱う。",
@@ -676,12 +676,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "double", id: 200231, name: "雨の日◎", value: 60 },
+        { rarity: "double", id: 200231, name: "雨の日◎", passiveGuts: 60 },
         {
           rarity: "normal",
           id: 200232,
           name: "雨の日○",
-          value: 40,
+          passiveGuts: 40,
         },
       ],
       tooltip: "発動率11%として扱う。",
@@ -692,12 +692,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "double", id: 200241, name: "雪の日◎", value: 60 },
+        { rarity: "double", id: 200241, name: "雪の日◎", passiveGuts: 60 },
         {
           rarity: "normal",
           id: 200242,
           name: "雪の日○",
-          value: 40,
+          passiveGuts: 40,
         },
       ],
       tooltip: "発動率1.5%として扱う。",
@@ -4947,7 +4947,12 @@ function normalSkillData(thiz) {
         },
       ],
       duration: 3,
-      conditions: { distance_type: 1, phase_random: 0, accumulatetime: 5 },
+      conditions: {
+        distance_type: 1,
+        phase_random: 0,
+        accumulatetime: 5,
+        running_style: [1, 2],
+      },
     },
     {
       variants: [
