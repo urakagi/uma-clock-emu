@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     normalSkillData() {
-      const ids = {}; // FIXME
+      const newSkillNames = {};
       const origin = SkillData.normalSkillData(this);
       if (this.$i18n.locale === 'ja') {
         return origin;
@@ -42,18 +42,19 @@ export default {
           // i18n name
           const jaName = variant.name;
           const localName = this.$t(`skill.${jaName}`);
-          variant.name = localName ? localName : jaName;
-          // FIXME
-          if (variant.id in ids) {
-            console.error('Duplicated id', variant.id);
+          if (localName.startsWith('skill.')) {
+            newSkillNames[jaName] = '';
           }
-          ids[variant.id] = 1;
+          variant.name = localName && !localName.startsWith('skill.') ? localName : jaName;
         }
+      }
+      if (Object.keys(newSkillNames).length > 0) {
+        console.log(JSON.stringify(newSkillNames));
       }
       return origin;
     },
     uniqueSkillData() {
-      const ids = {}; // FIXME
+      const newSkillNames = {};
       const origin = SkillData.uniqueSkillData(this);
       if (this.$i18n.locale === 'ja') {
         return origin.sort((a, b) => {
@@ -66,12 +67,13 @@ export default {
         // i18n name
         const jaName = skill.name;
         const localName = this.$t(`skill.${jaName}`);
-        skill.name = localName ? localName : jaName;
-        // FIXME
-        if (skill.id in ids) {
-          console.error('Duplicated id', skill.id);
+        if (localName.startsWith('skill.')) {
+          newSkillNames[jaName] = '';
         }
-        ids[skill.id] = 1;
+        skill.name = localName && !localName.startsWith('skill.') ? localName : jaName;
+      }
+      if (Object.keys(newSkillNames).length > 0) {
+        console.log(JSON.stringify(newSkillNames));
       }
       return origin.sort((a, b) => {
         if (a.name < b.name) return -1;

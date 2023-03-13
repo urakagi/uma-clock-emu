@@ -7,6 +7,12 @@ import { STYLE } from "./data/constants";
 
 const UMA_OBJ_VERSION = 2;
 
+// let timer = 0;
+// function pf(memo) {
+//   console.log(memo, `${Date.now() - timer} ms.`);
+//   timer = Date.now();
+// }
+
 export default {
   name: "MixinRaceCore",
   components: {RaceGraph},
@@ -475,10 +481,10 @@ export default {
       }))
     },
     exec(maxEpoch) {
-      this.fullFillStatus()
-      this.emulations = []
-      this.maxEpoch = maxEpoch
-      this.progressEpoch()
+      this.fullFillStatus();
+      this.emulations = [];
+      this.maxEpoch = maxEpoch;
+      this.progressEpoch();
     },
     fullFillStatus() {
       if (this.umaStatus.speed === '') {
@@ -499,14 +505,17 @@ export default {
     },
     progressEpoch() {
       setTimeout(() => {
-        this.start()
-        this.$refs.executeBlock.epoch++
-        if (this.$refs.executeBlock.epoch < this.maxEpoch) {
-          this.progressEpoch()
-        } else {
-          this.$refs.executeBlock.emulating = false
+        for (const target = this.$refs.executeBlock.epoch + this.maxEpoch / 5;
+             this.$refs.executeBlock.epoch < Math.min(target, this.maxEpoch);
+             this.$refs.executeBlock.epoch++) {
+          this.start();
         }
-      }, 70)
+        if (this.$refs.executeBlock.epoch < this.maxEpoch) {
+          this.progressEpoch();
+        } else {
+          this.$refs.executeBlock.emulating = false;
+        }
+      }, 1);
     },
     start: function () {
       this.resetRace()

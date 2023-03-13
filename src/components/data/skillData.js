@@ -4029,7 +4029,20 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "rare", id: 202401, name: "電光石火", acceleration: 0.4 },
+        {
+          rarity: "evo",
+          id: 108501211,
+          holder: 108501,
+          name: "常に最たる輝きを",
+          acceleration: 0.4,
+          tooltip: "速度デバフは-0.15。",
+        },
+        {
+          rarity: "rare",
+          id: 202401,
+          name: "電光石火",
+          acceleration: 0.4,
+        },
         {
           rarity: "normal",
           id: 202402,
@@ -5013,6 +5026,52 @@ function normalSkillData(thiz) {
       conditions: {
         phase_random: 1,
       },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202531,
+          name: "優位形成",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202532,
+          name: "しとやかな足取り",
+          targetSpeed: 0.15,
+        },
+      ],
+      duration: 2.4,
+      conditions: { distance_type: [2, 3], phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 108501111,
+          holder: 108501,
+          name: "華麗であれ",
+          targetSpeed: 0.45,
+          tooltip: "デバフは前後各３人で、-0.15。",
+        },
+        {
+          rarity: "rare",
+          id: 202541,
+          name: "威風堂々",
+          targetSpeed: 0.35,
+          tooltip: "デバフは前後各３人で、-0.15。",
+        },
+        {
+          rarity: "normal",
+          id: 202542,
+          name: "プレッシャー",
+          targetSpeed: 0.15,
+          tooltip: "デバフは前後各３人で、-0.035。",
+        },
+      ],
+      duration: 1.8,
+      conditions: { running_style: 3, is_finalcorner_random: 1 },
     },
     // End of normal skills
   ];
@@ -6618,6 +6677,17 @@ const uniqueSkillData = (thiz) => [
         },
       },
     ],
+  },
+  {
+    id: 100851,
+    holder: 108501,
+    name: "至上であれ",
+    type: "speed",
+    speedWithDecel: 0.25,
+    conditions: {
+      distance_rate: [66, 68],
+      temptation_count: 0,
+    },
   },
 
   // End of unique skills
