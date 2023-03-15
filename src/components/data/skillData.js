@@ -5394,15 +5394,17 @@ function normalSkillData(thiz) {
           id: 104601111,
           holder: 104601,
           name: "大注目のウマドル参上★",
+          tooltip: "エミュでは意味無し",
         },
         {
           rarity: "evo",
           id: 105202111,
           holder: 105202,
           name: "見てて見てて！",
+          targetSpeed: 0.15,
+          duration: 3,
         },
       ],
-      tooltip: "エミュでは意味無し",
       conditions: { phase_random: 0 },
     },
     // End of normal skills
