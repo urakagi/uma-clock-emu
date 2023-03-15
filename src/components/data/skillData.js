@@ -22,6 +22,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106701211,
+          holder: 106701,
           name: "右回りの輪舞曲",
           passiveSpeed: 80,
           passivePower: 80,
@@ -47,8 +48,25 @@ function normalSkillData(thiz) {
       variants: [
         {
           rarity: "evo",
-          id: -106102211,
-          name: "春風吹きて、桜舞う | けふ九重に満開です | 風霜高潔",
+          id: 106102211,
+          holder: 106102,
+          name: "春風吹きて、桜舞う",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
+          rarity: "evo",
+          id: 106901211,
+          holder: 106901,
+          name: "けふ九重に満開です",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
+          rarity: "evo",
+          id: 101702211,
+          holder: 101702,
+          name: "風霜高潔",
           passiveSpeed: 80,
           passivePower: 80,
         },
@@ -253,6 +271,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105901211,
+          holder: 105901,
           name: "淀の女王",
           passiveSpeed: 80,
           passiveStamina: 80,
@@ -534,6 +553,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105601211,
+          holder: 105601,
           name: "七福即生",
           passiveSpeed: 80,
           passivePower: 80,
@@ -548,6 +568,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106102211,
+          holder: 106102,
           name: "春風吹きて、桜舞う",
           passiveSpeed: 80,
           passivePower: 80,
@@ -555,6 +576,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106901211,
+          holder: 106901,
           name: "けふ九重に満開です",
           passiveSpeed: 80,
           passivePower: 80,
@@ -601,6 +623,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101702211,
+          holder: 101702,
           name: "風霜高潔",
           passiveSpeed: 80,
           passivePower: 80,
@@ -731,7 +754,14 @@ function normalSkillData(thiz) {
       conditions: { ground_type: 2 },
     },
     {
-      variants: [{ rarity: "evo", id: 109801211, name: "龍脈の波濤" }],
+      variants: [
+        {
+          rarity: "evo",
+          id: 109801211,
+          holder: 109801,
+          name: "龍脈の波濤",
+        },
+      ],
       type: "passive",
       conditions: { ground_type: 2 },
       trigger: function () {
@@ -845,6 +875,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104301211,
+          holder: 104301,
           name: "いたずらマイスター",
           passiveSpeed: 80,
           passivePower: 80,
@@ -871,6 +902,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104901211,
+          holder: 104901,
           name: "鉄火のギャンブラー",
           passiveSpeed: 100,
           passiveGuts: 100,
@@ -901,6 +933,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105802211,
+          holder: 105802,
           name: "魂の導き手",
           heal: 550,
           targetSpeed: 0.15,
@@ -908,12 +941,30 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104501211,
+          holder: 104501,
           name: "癒しのマエストロ",
           heal: 750,
         },
-        { rarity: "evo", id: 102402211, name: "バレルロール", heal: 750 },
-        { rarity: "evo", id: 101502111, name: "円舞曲のマエストロ", heal: 750 },
-        { rarity: "rare", id: 200351, name: "円弧のマエストロ", heal: 550 },
+        {
+          rarity: "evo",
+          id: 102402211,
+          holder: 102402,
+          name: "バレルロール",
+          heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 101502111,
+          holder: 101502,
+          name: "円舞曲のマエストロ",
+          heal: 750,
+        },
+        {
+          rarity: "rare",
+          id: 200351,
+          name: "円弧のマエストロ",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 200352,
@@ -930,12 +981,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102401111,
+          holder: 102401,
           name: "You copy?",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 100801111,
+          holder: 100801,
           name: "スキットルブレイク",
           heal: 550,
           targetSpeed: 0.15,
@@ -960,6 +1013,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103001211,
+          holder: 103001,
           name: "黒の刺客",
           heal: 550,
           targetSpeed: 0.15,
@@ -967,12 +1021,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102301211,
+          holder: 102301,
           name: "計画的クールダウン",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 101302111,
+          holder: 101302,
           name: "アクティブレスト",
           heal: 550,
           targetSpeed: 0.15,
@@ -980,6 +1036,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101102111,
+          holder: 101102,
           name: "キュアリーヒール",
           heal: 550,
           targetSpeed: 0.15,
@@ -1023,6 +1080,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104401111,
+          holder: 104401,
           name: "放課後魔法少女",
           heal: 550,
           targetSpeed: 0.15,
@@ -1030,6 +1088,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100701211,
+          holder: 100701,
           name: "エクストリーム下校術",
           heal: 550,
           targetSpeed: 0.15,
@@ -1051,6 +1110,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103101111,
+          holder: 103101,
           name: "じゃじゃウマお姉ちゃん",
           heal: 550,
           targetSpeed: 0.15,
@@ -1058,12 +1118,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100902111,
+          holder: 100902,
           name: "おてんば女王",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 100402111,
+          holder: 100402,
           name: "ドキッ☆じゃじゃウマ娘！",
           heal: 750,
         },
@@ -1084,6 +1146,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102801211,
+          holder: 102801,
           name: "ボーノな健啖家",
           heal: 550,
           targetSpeed: 0.15,
@@ -1091,18 +1154,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100601111,
+          holder: 100601,
           name: "笠松の食いしん坊",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 100602111,
+          holder: 100602,
           name: "ドカ食い養生",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 100101111,
+          holder: 100101,
           name: "はらぺこ大将",
           heal: 550,
           targetSpeed: 0.15,
@@ -1129,6 +1195,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107101111,
+          holder: 107101,
           name: "永遠の輝き",
           heal: 550,
           targetSpeed: 0.15,
@@ -1136,19 +1203,23 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104801211,
+          holder: 104801,
           name: "トレンドプランナー",
           heal: 550,
           targetSpeed: 0.15,
+          conditions: { running_style: [2, 3], phase_random: 1 },
         },
         {
           rarity: "evo",
           id: 104701111,
+          holder: 104701,
           name: "英雄への道標",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 103201211,
+          holder: 103201,
           name: "効率的休息法",
           heal: 550,
           targetSpeed: 0.15,
@@ -1156,6 +1227,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100901211,
+          holder: 100901,
           name: "アタシが勝つんだから！",
           heal: 550,
           targetSpeed: 0.15,
@@ -1163,6 +1235,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100501211,
+          holder: 100501,
           name: "エンターテイナー",
           heal: 550,
           targetSpeed: 0.15,
@@ -1170,6 +1243,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100302111,
+          holder: 100302,
           name: "レースの天才",
           heal: 550,
           targetSpeed: 0.15,
@@ -1228,6 +1302,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102601211,
+          holder: 102601,
           name: "困難を乗り越える者",
           heal: 550,
           targetSpeed: 0.15,
@@ -1253,6 +1328,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105001111,
+          holder: 105001,
           name: "鬼気森然",
           heal: 550,
           targetSpeed: 0.15,
@@ -1274,7 +1350,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 102302111, name: "VIPな後ろ姿", heal: 750 },
+        {
+          rarity: "evo",
+          id: 102302111,
+          holder: 102302,
+          name: "VIPな後ろ姿",
+          heal: 750,
+        },
         { rarity: "rare", id: 201201, name: "VIP顔パス", heal: 550 },
         {
           rarity: "normal",
@@ -1295,6 +1377,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100302211,
+          holder: 100302,
           name: "地平の彼方まで",
           heal: 550,
           targetSpeed: 0.15,
@@ -1318,6 +1401,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 109901111,
+          holder: 109901,
           name: "苫小牧グルメで舌鼓！",
           heal: 550,
           targetSpeed: 0.15,
@@ -1325,6 +1409,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103002111,
+          holder: 103002,
           name: "がんばるぞー…おー！",
           heal: 550,
           targetSpeed: 0.15,
@@ -1332,18 +1417,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102301111,
+          holder: 102301,
           name: "想定通り、余裕十分",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 101702111,
+          holder: 101702,
           name: "神色自若",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 101401211,
+          holder: 101401,
           name: "余裕のパフォーマンス",
           heal: 550,
           targetSpeed: 0.15,
@@ -1351,6 +1439,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101301211,
+          holder: 101301,
           name: "名優の余裕",
           heal: 550,
           targetSpeed: 0.15,
@@ -1372,6 +1461,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104001111,
+          holder: 104001,
           name: "先見の明",
           heal: 550,
           targetSpeed: 0.25,
@@ -1396,6 +1486,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102501111,
+          holder: 102501,
           name: "コーヒーブレイク",
           heal: 550,
           targetSpeed: 0.15,
@@ -1403,6 +1494,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101102211,
+          holder: 101102,
           name: "勇気の魔法",
           heal: 550,
           targetSpeed: 0.15,
@@ -1421,7 +1513,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 105201111, name: "まだまだだよ！", heal: 750 },
+        {
+          rarity: "evo",
+          id: 105201111,
+          holder: 105201,
+          name: "まだまだだよ！",
+          heal: 750,
+        },
         { rarity: "rare", id: 200441, name: "鋼の意志", heal: 550 },
         {
           rarity: "normal",
@@ -1438,6 +1536,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103301111,
+          holder: 103301,
           name: "静かな誓い",
           heal: 550,
           targetSpeed: 0.15,
@@ -1460,12 +1559,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107401111,
+          holder: 107401,
           name: "不屈のお嬢様",
           heal: 750,
         },
         {
           rarity: "evo",
           id: 105801211,
+          holder: 105801,
           name: "諦めない、ですぅ～！",
           heal: 550,
           targetSpeed: 0.15,
@@ -1473,6 +1574,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105201211,
+          holder: 105201,
           name: "まけないからね！",
           heal: 550,
           targetSpeed: 0.15,
@@ -1495,6 +1597,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106201111,
+          holder: 106201,
           name: "ゴーイングマイウェイ",
           heal: 550,
           targetSpeed: 0.15,
@@ -1544,6 +1647,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106701111,
+          holder: 106701,
           name: "金剛不壊",
           heal: 550,
           targetSpeed: 0.15,
@@ -1551,6 +1655,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104002211,
+          holder: 104002,
           name: "虎視眈々",
           heal: 550,
           targetSpeed: 0.15,
@@ -1572,6 +1677,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103401211,
+          holder: 103401,
           name: "熟練の砂塵使い",
           heal: 750,
           targetSpeed: 0.35,
@@ -1593,6 +1699,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107401211,
+          holder: 107401,
           name: "動かざること羊蹄山の若し",
           heal: 950,
           speed: -0.15,
@@ -1622,6 +1729,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101303211,
+          holder: 101303,
           name: "一意専心にリフレッシュ！",
           heal: 950,
         },
@@ -1645,6 +1753,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104502111,
+          holder: 104502,
           name: "お世話のプロフェッショナル",
           targetSpeed: 0.35,
           heal: 150,
@@ -1652,6 +1761,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101701211,
+          holder: 101701,
           name: "鎧袖一触",
           targetSpeed: 0.35,
           duration: 4,
@@ -1715,6 +1825,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104701211,
+          holder: 104701,
           name: "光輝く剣",
           targetSpeed: 0.45,
         },
@@ -1769,6 +1880,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103102211,
+          holder: 103102,
           name: "華麗なサーブ",
           targetSpeed: 0.35,
           acceleration: 0.2,
@@ -1860,18 +1972,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101601111,
+          holder: 101601,
           name: "一刀両断",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101302211,
+          holder: 101302,
           name: "空の果てまで",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 105101111,
+          holder: 105101,
           name: "風花疾走",
           targetSpeed: 0.35,
           heal: 150,
@@ -1894,6 +2009,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104201111,
+          holder: 104201,
           name: "世界を貫く至高の輝き",
           targetSpeed: 0.35,
           speedWithDecel: 0.15,
@@ -1941,7 +2057,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 103702211, name: "黒い閃光", targetSpeed: 0.45 },
+        {
+          rarity: "evo",
+          id: 103702211,
+          holder: 103702,
+          name: "黒い閃光",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 201103, name: "光芒一閃", targetSpeed: 0.35 },
         {
           rarity: "double",
@@ -1961,7 +2083,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 106801211, name: "爆風一閃！", targetSpeed: 0.45 },
+        {
+          rarity: "evo",
+          id: 106801211,
+          holder: 106801,
+          name: "爆風一閃！",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 201173, name: "烈風一閃", targetSpeed: 0.35 },
         {
           rarity: "double",
@@ -2024,6 +2152,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103601211,
+          holder: 103601,
           name: "Lose Myself",
           targetSpeed: 0.35,
           speedWithDecel: 0.15,
@@ -2044,7 +2173,8 @@ function normalSkillData(thiz) {
       variants: [
         {
           rarity: "evo",
-          id: 102002111,
+          id: 102602111,
+          holder: 102602,
           name: "完璧なエラー対処術",
           targetSpeed: 0.35,
           heal: 150,
@@ -2052,6 +2182,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102002111,
+          holder: 102002,
           name: "逃げろ～♪",
           targetSpeed: 0.35,
           heal: 150,
@@ -2059,6 +2190,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102001211,
+          holder: 102001,
           name: "脱出大作戦",
           targetSpeed: 0.35,
           duration: 4,
@@ -2066,6 +2198,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106802111,
+          holder: 106802,
           name: "未来へ飛び立ちましょう！",
           targetSpeed: 0.35,
           duration: 4,
@@ -2087,6 +2220,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103501211,
+          holder: 103501,
           name: "ウイニングロード",
           targetSpeed: 0.35,
           heal: 150,
@@ -2094,12 +2228,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102101111,
+          holder: 102101,
           name: "雷騰雲奔",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 100102111,
+          holder: 100102,
           name: "真夏の思い切り",
           targetSpeed: 0.35,
           duration: 4,
@@ -2121,6 +2257,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102002211,
+          holder: 102002,
           name: "レコードランナー",
           targetSpeed: 0.35,
           heal: 150,
@@ -2152,6 +2289,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102201111,
+          holder: 102201,
           name: "ロイヤルスター",
           targetSpeed: 0.35,
           heal: 150,
@@ -2159,6 +2297,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101501111,
+          holder: 101501,
           name: "降臨！世紀末覇王！",
           targetSpeed: 0.45,
           duration: 4,
@@ -2166,12 +2305,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100502211,
+          holder: 100502,
           name: "煌めきのトップスタァ",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 105801111,
+          holder: 105801,
           name: "怒涛のスピード",
           targetSpeed: 0.35,
           duration: 4,
@@ -2179,6 +2320,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106901111,
+          holder: 106901,
           name: "お花見当たり年！",
           targetSpeed: 0.35,
           duration: 4,
@@ -2205,6 +2347,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103901211,
+          holder: 103901,
           name: "暴れ龍",
           targetSpeed: 0.35,
           acceleration: 0.2,
@@ -2212,12 +2355,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102701211,
+          holder: 102701,
           name: "ライジングバルクアップ",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101402211,
+          holder: 101402,
           name: "昇りコンドル",
           targetSpeed: 0.35,
           duration: 4,
@@ -2225,6 +2370,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105301111,
+          holder: 105301,
           name: "風紀の登龍門",
           targetSpeed: 0.35,
           acceleration: 0.2,
@@ -2232,6 +2378,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106102111,
+          holder: 106102,
           name: "竜の雲を得る如し",
           targetSpeed: 0.35,
           duration: 4,
@@ -2253,6 +2400,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103502111,
+          holder: 103502,
           name: "千万バリキ！！！",
           targetSpeed: 0.35,
           duration: 4,
@@ -2273,6 +2421,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104101211,
+          holder: 104101,
           name: "バクシン的リード！",
           targetSpeed: 0.45,
         },
@@ -2293,6 +2442,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106101111,
+          holder: 106101,
           name: "電撃の撫で切り",
           targetSpeed: 0.35,
           acceleration: 0.1,
@@ -2321,18 +2471,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101002111,
+          holder: 101002,
           name: "アドベンチャーの先導者",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101001211,
+          holder: 101001,
           name: "Frontier Spirit",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 100402211,
+          holder: 100402,
           name: "お立ち台の支配者",
           targetSpeed: 0.45,
         },
@@ -2361,24 +2514,28 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102202111,
+          holder: 102202,
           name: "思い出を力に変えて",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101001111,
+          holder: 101001,
           name: "狙い撃ちデス！",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 100401111,
+          holder: 100401,
           name: "かっ飛ばすわよ！",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 106501111,
+          holder: 106501,
           name: "マジ爆上げっしょ！",
           targetSpeed: 0.35,
           duration: 4,
@@ -2386,6 +2543,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107801111,
+          holder: 107801,
           name: "ウインドシアー",
           targetSpeed: 0.35,
           duration: 4,
@@ -2410,13 +2568,15 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104201211,
+          holder: 104201,
           name: "パール流ダンスバトル",
           targetSpeed: 0.35,
           duration: 4,
         },
         {
           rarity: "evo",
-          id: 100501111,
+          id: 101802111,
+          holder: 101802,
           name: "女帝の矜持",
           targetSpeed: 0.35,
           duration: 4,
@@ -2424,12 +2584,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100501111,
+          holder: 100501,
           name: "輝くトップスタァ",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 110001111,
+          holder: 110001,
           name: "闘魂注入",
           targetSpeed: 0.35,
           duration: 4,
@@ -2455,24 +2617,28 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102701111,
+          holder: 102701,
           name: "マッスルアンセム",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 102102111,
+          holder: 102102,
           name: "先達に献ぐ祈りの頌",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101501211,
+          holder: 101501,
           name: "歌劇王の行進",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 100901111,
+          holder: 100901,
           name: "パーフェクトチューン",
           targetSpeed: 0.35,
           heal: 150,
@@ -2503,6 +2669,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101201111,
+          holder: 101201,
           name: "勝利への咆哮",
           targetSpeed: 0.45,
           acceleration: 0.1,
@@ -2510,6 +2677,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107201211,
+          holder: 107201,
           name: "八重の向こう意気",
           targetSpeed: 0.45,
           acceleration: 0.1,
@@ -2538,12 +2706,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103402111,
+          holder: 103402,
           name: "扇ノ舞",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 100702111,
+          holder: 100702,
           name: "神秘体験！ゴルシワープ",
           targetSpeed: 0.35,
           duration: 4,
@@ -2551,6 +2721,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100602211,
+          holder: 100602,
           name: "クリスマスの奇跡体験",
           targetSpeed: 0.35,
           heal: 150,
@@ -2558,6 +2729,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105602211,
+          holder: 105602,
           name: "ばっちり開運体験！",
           targetSpeed: 0.35,
           duration: 4,
@@ -2583,6 +2755,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102001111,
+          holder: 102001,
           name: "ファストリトリーブ",
           targetSpeed: 0.35,
           duration: 4,
@@ -2590,12 +2763,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101301111,
+          holder: 101301,
           name: "メジロの心得",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 106401211,
+          holder: 106401,
           name: "神逃げの心得",
           targetSpeed: 0.35,
           duration: 4,
@@ -2619,6 +2794,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106401111,
+          holder: 106401,
           name: "パないっしょ？",
           targetSpeed: 0.35,
           duration: 4,
@@ -2665,12 +2841,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103301211,
+          holder: 103301,
           name: "己身焦がすほうき星",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101201211,
+          holder: 101201,
           name: "怒濤のポロロッカ",
           targetSpeed: 0.45,
         },
@@ -2694,6 +2872,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100103111,
+          holder: 100103,
           name: "怒涛の出陣",
           targetSpeed: 0.35,
           acceleration: 0.1,
@@ -2702,6 +2881,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105602111,
+          holder: 105602,
           name: "怒涛の超幸運パワー！",
           targetSpeed: 0.35,
           acceleration: 0.1,
@@ -2710,6 +2890,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106201211,
+          holder: 106201,
           name: "えい！えい！むん！",
           targetSpeed: 0.35,
           acceleration: 0.1,
@@ -2761,12 +2942,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102102211,
+          holder: 102102,
           name: "さあ、ウチとやろうや！",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101902111,
+          holder: 101902,
           name: "超特急入稿！",
           targetSpeed: 0.35,
           heal: 150,
@@ -2774,6 +2957,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100102211,
+          holder: 100102,
           name: "真夏の総大将",
           targetSpeed: 0.35,
           duration: 4,
@@ -2781,6 +2965,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107201111,
+          holder: 107201,
           name: "昂る焔",
           targetSpeed: 0.35,
           duration: 4,
@@ -2809,6 +2994,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104602111,
+          holder: 104602,
           name: "夢に向かって急上昇！",
           targetSpeed: 0.35,
           heal: 150,
@@ -2816,6 +3002,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104601211,
+          holder: 104601,
           name: "ウマドルパワー急上昇↑↑",
           targetSpeed: 0.35,
           heal: 150,
@@ -2823,6 +3010,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 109901211,
+          holder: 109901,
           name: "観光大使の面目躍如！",
           targetSpeed: 0.45,
         },
@@ -2849,24 +3037,28 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103701211,
+          holder: 103701,
           name: "誇りを懸けて",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 102302211,
+          holder: 102302,
           name: "全力サンタクロース",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101601211,
+          holder: 101601,
           name: "餓狼牙",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 100101211,
+          holder: 100101,
           name: "夢叶える末脚",
           targetSpeed: 0.45,
         },
@@ -2886,12 +3078,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103401111,
+          holder: 103401,
           name: "火消の梯子登り",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 102101211,
+          holder: 102101,
           name: "尻尾の有頂天",
           targetSpeed: 0.45,
         },
@@ -2932,6 +3126,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103502211,
+          holder: 103502,
           name: "きっと飛べる！",
           targetSpeed: 0.35,
           duration: 4,
@@ -2939,6 +3134,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 107101211,
+          holder: 107101,
           name: "刹那への覚悟",
           targetSpeed: 0.45,
         },
@@ -2958,12 +3154,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101502211,
+          holder: 101502,
           name: "ボクは遅れずにやってくる！",
           targetSpeed: 0.45,
         },
         {
           rarity: "evo",
           id: 101303111,
+          holder: 101303,
           name: "夏の名優",
           targetSpeed: 0.35,
           duration: 4,
@@ -2997,6 +3195,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100103211,
+          holder: 100103,
           name: "日之本一のド根性",
           targetSpeed: 0.45,
         },
@@ -3015,6 +3214,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101901111,
+          holder: 101901,
           name: "限界ウママニア",
           targetSpeed: 0.35,
           heal: 150,
@@ -3037,6 +3237,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103601111,
+          holder: 103601,
           name: "アップリフティング",
           targetSpeed: 0.35,
           heal: 150,
@@ -3044,6 +3245,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100702211,
+          holder: 100702,
           name: "イカ揚げ、いかがですか！？",
           targetSpeed: 0.35,
           duration: 4,
@@ -3066,6 +3268,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105301211,
+          holder: 105301,
           name: "押忍ッ！気合十分ッス！",
           targetSpeed: 0.35,
           acceleration: 0.2,
@@ -3087,6 +3290,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103101211,
+          holder: 103101,
           name: "荒ぶる風神",
           targetSpeed: 0.35,
           duration: 4,
@@ -3108,6 +3312,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102702211,
+          holder: 102702,
           name: "至高の勝利を召し上がれ",
           targetSpeed: 0.45,
         },
@@ -3132,6 +3337,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 108701211,
+          holder: 108701,
           name: "記憶に刻む足取り",
           targetSpeed: 0.35,
           acceleration: 0.2,
@@ -3153,6 +3359,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 109801111,
+          holder: 109801,
           name: "コパッと開運！",
           targetSpeed: 0.45,
         },
@@ -3173,6 +3380,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101902211,
+          holder: 101902,
           name: "尊みを求めてふっかーーつ！",
           targetSpeed: 0.35,
           heal: 150,
@@ -3195,6 +3403,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104301111,
+          holder: 104301,
           name: "全速前進なのだ！",
           targetSpeed: 0.45,
         },
@@ -3234,6 +3443,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 110001211,
+          holder: 110001,
           name: "女神の砂浴び",
           targetSpeed: 0.35,
           duration: 4,
@@ -3273,6 +3483,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105002111,
+          holder: 105002,
           name: "見せつけてやる！",
           targetSpeed: 0.35,
           duration: 4,
@@ -3295,7 +3506,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 107801211, name: "神渡し", targetSpeed: 0.35 },
+        {
+          rarity: "evo",
+          id: 107801211,
+          holder: 107801,
+          name: "神渡し",
+          targetSpeed: 0.35,
+        },
         { rarity: "rare", id: 202411, name: "風雲の志", targetSpeed: 0.25 },
         {
           rarity: "normal",
@@ -3317,6 +3534,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100902211,
+          holder: 100902,
           name: "開かれる夢の扉",
           targetSpeed: 0.55,
         },
@@ -3336,6 +3554,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100802211,
+          holder: 100802,
           name: "最速のトップギア",
           targetSpeed: 0.55,
         },
@@ -3356,6 +3575,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101602111,
+          holder: 101602,
           name: "BLAZING WOLF",
           targetSpeed: 0.35,
           duration: 4,
@@ -3376,6 +3596,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106501211,
+          holder: 106501,
           name: "とりまやったれ～！",
           targetSpeed: 0.35,
           duration: 4,
@@ -3397,6 +3618,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101802211,
+          holder: 101802,
           name: "上弦のソムリエール",
           acceleration: 0.4,
           speedWithDecel: 0.15,
@@ -3405,6 +3627,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100601211,
+          holder: 100601,
           name: "怪物的コーナリング",
           acceleration: 0.4,
           heal: 150,
@@ -3447,30 +3670,35 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102601111,
+          holder: 102601,
           name: "クロックアップ",
           acceleration: 0.5,
         },
         {
           rarity: "evo",
           id: 106601211,
+          holder: 106601,
           name: "ターボについてこーい！",
           acceleration: 0.5,
         },
         {
           rarity: "evo",
           id: 106801111,
+          holder: 106801,
           name: "祭りだワッショイ！",
           acceleration: 0.5,
         },
         {
           rarity: "evo",
           id: 106802211,
+          holder: 106802,
           name: "必勝の前口上！",
           acceleration: 0.5,
         },
         {
           rarity: "evo",
           id: 108701111,
+          holder: 108701,
           name: "必勝のピッチアップ",
           acceleration: 0.4,
           duration: 4,
@@ -3494,6 +3722,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100201211,
+          holder: 100201,
           name: "異次元の逃亡者",
           acceleration: 0.4,
           speedWithDecel: 0.15,
@@ -3514,21 +3743,25 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101101211,
+          holder: 101101,
           name: "不退転の意思",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 104001211,
+          holder: 104001,
           name: "ランウェイの主役",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
-          id: 104001211,
+          id: 104801111,
+          holder: 104801,
           name: "ノってこ！",
           acceleration: 0.4,
           heal: 150,
+          conditions: { running_style: [2, 3], phase_firsthalf_random: 2 },
         },
         { rarity: "rare", id: 200601, name: "乗り換え上手", acceleration: 0.4 },
         {
@@ -3543,16 +3776,24 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 103402211, name: "大見得切り", acceleration: 0.4 },
+        {
+          rarity: "evo",
+          id: 103402211,
+          holder: 103402,
+          name: "大見得切り",
+          acceleration: 0.4,
+        },
         {
           rarity: "evo",
           id: 105001211,
+          holder: 105001,
           name: "駆り立てる想い",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 105701211,
+          holder: 105701,
           name: "弾む大地",
           acceleration: 0.4,
         },
@@ -3572,12 +3813,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103802211,
+          holder: 103802,
           name: "#ビューティースプリント",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 104101111,
+          holder: 104101,
           name: "バクシン的スプリント！",
           acceleration: 0.4,
           targetSpeed: 0.15,
@@ -3600,8 +3843,20 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "evo", id: 101402111, name: "豪勇無双", acceleration: 0.5 },
-        { rarity: "evo", id: 100801211, name: "抜群の豪脚", acceleration: 0.5 },
+        {
+          rarity: "evo",
+          id: 101402111,
+          holder: 101402,
+          name: "豪勇無双",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "evo",
+          id: 100801211,
+          holder: 100801,
+          name: "抜群の豪脚",
+          acceleration: 0.5,
+        },
         { rarity: "rare", id: 200701, name: "豪脚", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -3634,6 +3889,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100401211,
+          holder: 100401,
           name: "紅蓮のオーバーレブ",
           targetSpeed: 0.45,
         },
@@ -3669,6 +3925,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100301211,
+          holder: 100301,
           name: "帝王ステップ",
           acceleration: 0.3,
           targetSpeed: 0.25,
@@ -3714,6 +3971,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100301111,
+          holder: 100301,
           name: "天才的技巧",
           acceleration: 0.3,
           targetSpeed: 0.25,
@@ -3735,18 +3993,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102201211,
+          holder: 102201,
           name: "天空落とし",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 102702111,
+          holder: 102702,
           name: "夢叶える決意を授けましょう",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 102901211,
+          holder: 102901,
           name: "雪国仕込みの直滑降",
           acceleration: 0.3,
           duration: 4,
@@ -3754,6 +4015,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103001111,
+          holder: 103001,
           name: "決意のヒーロー",
           acceleration: 0.3,
           speedWithDecel: 0.15,
@@ -3761,6 +4023,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105101211,
+          holder: 105101,
           name: "大輪の決意",
           acceleration: 0.4,
         },
@@ -3797,6 +4060,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103501111,
+          holder: 103501,
           name: "たゆまぬ努力",
           acceleration: 0.3,
           targetSpeed: 0.15,
@@ -3804,7 +4068,8 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105202211,
-          name: "たゆまぬ努力",
+          holder: 105202,
+          name: "がんばるもん！",
           acceleration: 0.3,
           targetSpeed: 0.15,
         },
@@ -3828,6 +4093,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100802111,
+          holder: 100802,
           name: "ぶっ差してやるぜ！",
           acceleration: 0.4,
           heal: 150,
@@ -3835,6 +4101,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102401211,
+          holder: 102401,
           name: "I copy!",
           acceleration: 0.4,
           heal: 150,
@@ -3842,6 +4109,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102901111,
+          holder: 102901,
           name: "憧れのシチーガール",
           acceleration: 0.4,
           duration: 4,
@@ -3849,12 +4117,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103901111,
+          holder: 103901,
           name: "ノンストッププリンセス",
           acceleration: 0.5,
         },
         {
           rarity: "evo",
           id: 106002211,
+          holder: 106002,
           name: "ノンストップエール",
           acceleration: 0.4,
           heal: 150,
@@ -3908,6 +4178,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101901211,
+          holder: 101901,
           name: "最前列は譲れない！",
           acceleration: 0.3,
           duration: 4,
@@ -3933,18 +4204,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102202211,
+          holder: 102202,
           name: "モリガンの矛戟",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 101002211,
+          holder: 101002,
           name: "真剣勝負デス！",
           acceleration: 0.4,
         },
         {
           rarity: "evo",
           id: 105802111,
+          holder: 105802,
           name: "ライバルがいるから！",
           acceleration: 0.4,
           heal: 150,
@@ -3966,6 +4240,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105002211,
+          holder: 105002,
           name: "起死回生の出力",
           acceleration: 0.4,
           duration: 4,
@@ -3973,6 +4248,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105902211,
+          holder: 105902,
           name: "起死回生の一歩",
           acceleration: 0.4,
           duration: 4,
@@ -3993,6 +4269,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104602211,
+          holder: 104602,
           name: "絶対的センター！",
           acceleration: 0.5,
         },
@@ -4059,6 +4336,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101602211,
+          holder: 101602,
           name: "渇望する怪物",
           acceleration: 0.5,
         },
@@ -4157,6 +4435,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105902111,
+          holder: 105902,
           name: "もっと冒険してみたい！",
           targetSpeed: 0.35,
           acceleration: 0.1,
@@ -4227,6 +4506,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106601111,
+          holder: 106601,
           name: "出力1000万%！！",
           targetSpeed: 0.55,
           heal: -400,
@@ -4255,6 +4535,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106702111,
+          holder: 106702,
           name: "無我の境地",
           acceleration: 0.4,
           heal: -50,
@@ -4309,6 +4590,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100201111,
+          holder: 100201,
           name: "最大集中",
           startDelay: 0.4,
           acceleration: 0.2,
@@ -4317,6 +4599,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102602211,
+          holder: 102602,
           name: "パーフェクトブート",
           startDelay: 0.4,
           passiveSpeed: 10,
@@ -4328,6 +4611,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103102111,
+          holder: 103102,
           name: "オーダーはバッチリ！",
           startDelay: 0.4,
           passiveSpeed: 10,
@@ -4670,12 +4954,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103201111,
+          holder: 103201,
           name: "可能性の徒",
           speedWithDecel: 0.45,
         },
         {
           rarity: "evo",
           id: 103702111,
+          holder: 103702,
           name: "勝利のレシピ",
           speedWithDecel: 0.35,
           duration: 4,
@@ -4683,12 +4969,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101701111,
+          holder: 101701,
           name: "皇帝の眼差し",
           speedWithDecel: 0.45,
         },
         {
           rarity: "evo",
           id: 106002111,
+          holder: 106002,
           name: "頑張るしかないよね",
           targetSpeed: 0.35,
           duration: 4,
@@ -4696,6 +4984,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101101111,
+          holder: 101101,
           name: "大和撫子",
           targetSpeed: 0.45,
         },
@@ -4711,18 +5000,21 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104501111,
+          holder: 104501,
           name: "あま～い幻惑",
           targetSpeed: 0.35,
         },
         {
           rarity: "evo",
           id: 101801111,
+          holder: 101801,
           name: "女帝の権謀",
           targetSpeed: 0.35,
         },
         {
           rarity: "evo",
           id: 103801111,
+          holder: 103801,
           name: "#カワイイかく乱♪",
           speedWithDecel: 0.15,
           duration: 3,
@@ -4736,6 +5028,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106001211,
+          holder: 106001,
           name: "目指せ！主人公！",
           targetSpeed: 0.35,
         },
@@ -4748,6 +5041,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104901111,
+          holder: 104901,
           name: "乾坤一擲の大博打",
           targetSpeed: 0.55,
         },
@@ -4781,6 +5075,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105701111,
+          holder: 105701,
           name: "天翔る足取り",
           speedWithDecel: 0.45,
         },
@@ -4805,6 +5100,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102801111,
+          holder: 102801,
           name: "下ごしらえ万全！",
           acceleration: 0.3,
           targetSpeed: 0.15,
@@ -4830,6 +5126,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105601111,
+          holder: 105601,
           name: "吉兆です！",
           targetSpeed: 0.35,
         },
@@ -4842,6 +5139,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106001111,
+          holder: 106001,
           name: "魅惑のシニカルガール",
           acceleration: 0.4,
         },
@@ -4856,12 +5154,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102402111,
+          holder: 102402,
           name: "純白のささやき",
           targetSpeed: 0.15,
         },
         {
           rarity: "evo",
           id: 104502211,
+          holder: 104502,
           name: "魅惑のマミーウィスパー",
           heal: 150,
         },
@@ -4874,6 +5174,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 102501211,
+          holder: 102501,
           name: "オイテイカナイデ",
           heal: 350,
           targetSpeed: 0.15,
@@ -4881,6 +5182,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106702211,
+          holder: 106702,
           name: "明けぬ夜はない！",
           heal: 350,
           targetSpeed: 0.15,
@@ -4895,12 +5197,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103701111,
+          holder: 103701,
           name: "閃光のマギア",
           speedWithDecel: 0.25,
         },
         {
           rarity: "evo",
           id: 101801211,
+          holder: 101801,
           name: "水月鏡花",
           speedWithDecel: 0.15,
         },
@@ -4913,6 +5217,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100701111,
+          holder: 100701,
           name: "564アイズで視界クッキリ！",
           heal: 150,
         },
@@ -4925,6 +5230,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 101401111,
+          holder: 101401,
           name: "鷹ノ目",
           targetSpeed: 0.15,
         },
@@ -4937,6 +5243,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 106101211,
+          holder: 106101,
           name: "王の大局観",
           targetSpeed: 0.15,
         },
@@ -4949,12 +5256,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 103801211,
+          holder: 103801,
           name: "#夢中になっちゃえ♪",
           targetSpeed: 0.15,
         },
         {
           rarity: "evo",
           id: 103802111,
+          holder: 103802,
           name: "#カレンに染まってみる？",
           targetSpeed: 0.15,
         },
@@ -4972,6 +5281,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104401211,
+          holder: 104401,
           name: "チャームマジック",
           speedWithDecel: 0.15,
         },
@@ -4984,6 +5294,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 105901111,
+          holder: 105901,
           name: "クールな視線",
           speedWithDecel: 0.15,
         },
@@ -4996,6 +5307,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 104002111,
+          holder: 104002,
           name: "鮮やかな布陣",
           heal: 150,
         },
@@ -5012,12 +5324,14 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           id: 100502111,
+          holder: 100502,
           name: "圧巻のトリック",
           targetSpeed: 0.35,
         },
         {
           rarity: "evo",
           id: 103002211,
+          holder: 103002,
           name: "トリック&トリート",
           targetSpeed: 0.35,
         },
@@ -5073,6 +5387,24 @@ function normalSkillData(thiz) {
       duration: 1.8,
       conditions: { running_style: 3, is_finalcorner_random: 1 },
     },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 104601111,
+          holder: 104601,
+          name: "大注目のウマドル参上★",
+        },
+        {
+          rarity: "evo",
+          id: 105202111,
+          holder: 105202,
+          name: "見てて見てて！",
+        },
+      ],
+      tooltip: "エミュでは意味無し",
+      conditions: { phase_random: 0 },
+    },
     // End of normal skills
   ];
 }
@@ -5087,6 +5419,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100321,
+    holder: 103201,
     name: "U=ma2",
     heal: 550,
     duration: 4,
@@ -5101,6 +5434,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100451,
+    holder: 104501,
     name: "ピュリティオブハート",
     heal: 750,
     tooltip: "2～4位(<=40%)",
@@ -5123,6 +5457,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100521,
+    holder: 105201,
     name: "ワクワククライマックス",
     heal: 550,
     tooltip: "近くにウマ娘がいる＆順位<=50%は満たしていると見なす",
@@ -5132,6 +5467,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110111,
+    holder: 101102,
     name: "ゲインヒール・スペリアー",
     heal: 750,
     tooltip: "中盤のどこかで発動として見なす。",
@@ -5144,6 +5480,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110011,
+    holder: 100102,
     name: "わやかわ♪マリンダイヴ",
     heal: 550,
     check: function () {
@@ -5152,6 +5489,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110301,
+    holder: 103002,
     name: "Drain for rose",
     heal: 550,
     targetSpeed: 0.25,
@@ -5176,6 +5514,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100071,
+    holder: 100701,
     name: "不沈艦、抜錨ォッ！",
     targetSpeed: 0.25,
     duration: 6,
@@ -5189,6 +5528,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100131,
+    holder: 101301,
     name: "貴顕の使命を果たすべく",
     duration: 5,
     type: "speed",
@@ -5213,6 +5553,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100261,
+    holder: 102601,
     name: "G00 1st．F∞;",
     targetSpeed: 0.45,
     duration: 5,
@@ -5224,6 +5565,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110131,
+    holder: 101302,
     name: "最強の名を懸けて",
     targetSpeed: 0.35,
     duration: 6,
@@ -5256,6 +5598,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100081,
+    holder: 100801,
     name: "カッティング×DRIVE！",
     targetSpeed: 0.35,
     duration: 5,
@@ -5270,6 +5613,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100061,
+    holder: 100601,
     name: "勝利の鼓動",
     targetSpeed: 0.45,
     duration: 5,
@@ -5283,6 +5627,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100171,
+    holder: 101701,
     name: "汝、皇帝の神威を見よ",
     targetSpeed: 0.45,
     duration: 5,
@@ -5308,6 +5653,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100181,
+    holder: 101801,
     name: "ブレイズ・オブ・プライド",
     targetSpeed: 0.35,
     duration: 5,
@@ -5337,6 +5683,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100351,
+    holder: 103501,
     name: "勝利のチケットを、君にッ！",
     targetSpeed: 0.35,
     duration: 5,
@@ -5365,6 +5712,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100411,
+    holder: 104101,
     name: "優等生×バクシン＝大勝利ッ",
     targetSpeed: 0.35,
     duration: 5,
@@ -5393,6 +5741,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100561,
+    holder: 105601,
     name: "来ます来てます来させます！",
     targetSpeed: 0.35,
     acceleration: 0.1,
@@ -5421,6 +5770,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100601,
+    holder: 106001,
     name: "きっとその先へ…！",
     targetSpeed: 0.35,
     duration: 5,
@@ -5448,6 +5798,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100111,
+    holder: 101101,
     name: "精神一到何事か成らざらん",
     targetSpeed: 0.35,
     duration: 5,
@@ -5477,6 +5828,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100611,
+    holder: 106101,
     name: "Pride of KING",
     targetSpeed: 0.45,
     duration: 5,
@@ -5492,6 +5844,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100011,
+    holder: 100101,
     name: "シューティングスター",
     speedWithDecel: 0.35,
     duration: 5,
@@ -5503,6 +5856,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100021,
+    holder: 100201,
     name: "先頭の景色は譲らない…！",
     targetSpeed: 0.35,
     duration: 5,
@@ -5512,6 +5866,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100031,
+    holder: 100301,
     name: "究極テイオーステップ",
     targetSpeed: 0.45,
     duration: 5,
@@ -5522,6 +5877,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100151,
+    holder: 101501,
     name: "ヴィットーリアに捧ぐ舞踏",
     targetSpeed: 0.35,
     duration: 5,
@@ -5535,6 +5891,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100161,
+    holder: 101601,
     name: "Shadow Break",
     targetSpeed: 0.45,
     duration: 5,
@@ -5548,6 +5905,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100231,
+    holder: 102301,
     name: "∴win Q．E．D．",
     duration: 5,
     type: "speed",
@@ -5571,6 +5929,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100301,
+    holder: 103001,
     name: "ブルーローズチェイサー",
     targetSpeed: 0.35,
     duration: 5,
@@ -5582,6 +5941,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100501,
+    holder: 105001,
     name: "Nemesis",
     targetSpeed: 0.35,
     duration: 5,
@@ -5595,6 +5955,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110031,
+    holder: 100302,
     name: "絶対は、ボクだ",
     targetSpeed: 0.35,
     duration: 5,
@@ -5608,6 +5969,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110241.1,
+    holder: 102402,
     name: "フラワリー☆マニューバ(前)",
     targetSpeed: 0.35,
     duration: 5,
@@ -5621,6 +5983,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110181,
+    holder: 101802,
     name: "薫風、永遠なる瞬間を",
     targetSpeed: 0.35,
     duration: 5,
@@ -5634,6 +5997,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100121,
+    holder: 101201,
     name: "タイマン！デッドヒート！",
     targetSpeed: 0.35,
     duration: 5,
@@ -5647,6 +6011,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110041,
+    holder: 100402,
     name: "グッときて♪Chu",
     targetSpeed: 0.35,
     duration: 5,
@@ -5658,6 +6023,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100371,
+    holder: 103701,
     name: "Schwarze Schwert",
     targetSpeed: 0.45,
     duration: 5,
@@ -5669,6 +6035,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110561,
+    holder: 105602,
     name: "禾スナハチ登ル",
     targetSpeed: 0.35,
     duration: 5,
@@ -5682,6 +6049,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100191,
+    holder: 101901,
     name: "尊み☆ﾗｽﾄｽﾊﾟ━━(ﾟ∀ﾟ)━━ﾄ!",
     targetSpeed: 0.35,
     duration: 5,
@@ -5695,6 +6063,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100391,
+    holder: 103901,
     name: "姫たるもの、勝利をこの手に",
     targetSpeed: 0.35,
     duration: 5,
@@ -5705,6 +6074,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100251,
+    holder: 102501,
     name: "アナタヲ・オイカケテ",
     targetSpeed: 0.25,
     duration: 6,
@@ -5715,6 +6085,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110171,
+    holder: 101702,
     name: "翳り退く、さざめきの矢",
     targetSpeed: 0.35,
     duration: 6,
@@ -5725,6 +6096,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100481,
+    holder: 104801,
     name: "YEAH☆VIVID TIME!",
     targetSpeed: 0.35,
     duration: 5,
@@ -5736,6 +6108,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110231,
+    holder: 102302,
     name: "Presents from X",
     targetSpeed: 0.35,
     duration: 5,
@@ -5746,6 +6119,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100041,
+    holder: 100401,
     name: "紅焔ギア/LP1211-M",
     acceleration: 0.4,
     duration: 4,
@@ -5757,6 +6131,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100101,
+    holder: 101001,
     name: "ヴィクトリーショット！",
     acceleration: 0.4,
     duration: 4,
@@ -5767,6 +6142,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100271,
+    holder: 102701,
     name: "レッツ・アナボリック！",
     acceleration: 0.4,
     duration: 4,
@@ -5774,6 +6150,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100201,
+    holder: 102001,
     name: "アングリング×スキーミング",
     acceleration: 0.4,
     duration: 4,
@@ -5781,6 +6158,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110241.2,
+    holder: 102402,
     name: "フラワリー☆マニューバ(後)",
     acceleration: 0.4,
     duration: 4,
@@ -5794,6 +6172,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110141,
+    holder: 101402,
     name: "コンドル猛撃波",
     acceleration: 0.4,
     duration: 4,
@@ -5806,6 +6185,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100401,
+    holder: 104001,
     name: "KEEP IT REAL．",
     acceleration: 0.3,
     duration: 6,
@@ -5816,6 +6196,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100591,
+    holder: 105901,
     name: "彼方、その先へ…",
     acceleration: 0.4,
     duration: 4,
@@ -5832,6 +6213,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100091,
+    holder: 100901,
     name: "ブリリアント・レッドエース",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5843,6 +6225,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100141,
+    holder: 101401,
     name: "プランチャ☆ガナドール",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5856,6 +6239,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100241,
+    holder: 102401,
     name: "ひらめき☆ランディング",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5867,6 +6251,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100381,
+    holder: 103801,
     name: "#LookatCurren",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5878,6 +6263,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100461,
+    holder: 104601,
     name: "キラキラ☆STARDOM",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5890,6 +6276,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100581,
+    holder: 105801,
     name: "I Never Goof Up!",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5901,6 +6288,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100281,
+    holder: 102801,
     name: "I’M☆FULL☆SPEED!!",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5912,6 +6300,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110451,
+    holder: 104502,
     name: "ぐるぐるマミートリック♡",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5924,6 +6313,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110401,
+    holder: 104002,
     name: "GET DOWN",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5936,6 +6326,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110061,
+    holder: 100602,
     name: "聖夜のミラクルラン！",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -5949,6 +6340,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100221,
+    holder: 102201,
     name: "Fairy tale",
     targetSpeed: 0.35,
     duration: 5,
@@ -5958,6 +6350,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100211,
+    holder: 102101,
     name: "白い稲妻、見せたるで！",
     targetSpeed: 0.35,
     acceleration: 0.1,
@@ -5968,6 +6361,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110521,
+    holder: 105202,
     name: "113転び114起き",
     targetSpeed: 0.25,
     duration: 6,
@@ -5978,6 +6372,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110151,
+    holder: 101502,
     name: "恵福バルカローレ",
     targetSpeed: 0.45,
     duration: 5,
@@ -5991,6 +6386,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100691,
+    holder: 106901,
     name: "憧れは桜を越える！",
     targetSpeed: 0.35,
     duration: 5,
@@ -6003,6 +6399,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110261,
+    holder: 102602,
     name: "オペレーション・Cacao",
     targetSpeed: 0.35,
     heal: 150,
@@ -6013,6 +6410,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110371,
+    holder: 103702,
     name: "Guten Appetit♪",
     targetSpeed: 0.35,
     duration: 6,
@@ -6023,6 +6421,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100331,
+    holder: 103301,
     name: "ディオスクロイの流星",
     targetSpeed: 0.45,
     duration: 5,
@@ -6034,6 +6433,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100681,
+    holder: 106801,
     name: "勝ち鬨ワッショイ！",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -6060,6 +6460,7 @@ const uniqueSkillData = (thiz) => [
   // },
   {
     id: 100621,
+    holder: 106201,
     name: "どんっ、パッ、むんっ",
     targetSpeed: 0.25,
     heal: 550,
@@ -6071,6 +6472,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100051,
+    holder: 100501,
     name: "煌星のヴォードヴィル",
     targetSpeed: 0.45,
     duration: 5,
@@ -6080,6 +6482,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100671,
+    holder: 106701,
     name: "晦冥を照らせ永遠の耀き",
     targetSpeed: 0.45,
     duration: 5,
@@ -6090,6 +6493,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100711,
+    holder: 107101,
     name: "一期の夢、刹那の飛翔",
     targetSpeed: 0.45,
     heal: -100,
@@ -6100,6 +6504,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100741,
+    holder: 107401,
     name: "麗しき花信風",
     targetSpeed: 0.15,
     duration: 5,
@@ -6130,6 +6535,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110051,
+    holder: 100502,
     name: "Ravissant",
     targetSpeed: 0.45,
     duration: 4,
@@ -6139,6 +6545,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110201,
+    holder: 102002,
     name: "Do Ya Breakin!",
     targetSpeed: 0.35,
     acceleration: 0.2,
@@ -6150,7 +6557,8 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 110511,
+    id: 100511,
+    holder: 105101,
     name: "つぼみ、ほころぶ時",
     acceleration: 0.4,
     duration: 4,
@@ -6164,6 +6572,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100721,
+    holder: 107201,
     name: "烈火繚乱、無敵之舞",
     targetSpeed: 0.35,
     duration: 5,
@@ -6177,6 +6586,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110601,
+    holder: 106002,
     name: "Go☆Go☆for it!",
     targetSpeed: 0.35,
     duration: 6,
@@ -6187,6 +6597,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110611,
+    holder: 106102,
     name: "轟！トレセン応援団！！",
     acceleration: 0.4,
     duration: 4,
@@ -6197,6 +6608,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100311,
+    holder: 103101,
     name: "チャージ完了！全速前進！",
     targetSpeed: 0.45,
     duration: 5,
@@ -6210,6 +6622,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100641,
+    holder: 106401,
     name: "ぶっちぎりロード",
     heal: 550,
     targetSpeed: 0.25,
@@ -6221,6 +6634,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110221,
+    holder: 102202,
     name: "Best day ever",
     targetSpeed: 0.35,
     acceleration: 0.1,
@@ -6232,6 +6646,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110381,
+    holder: 103802,
     name: "One True Color",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -6243,6 +6658,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100341,
+    holder: 103401,
     name: "快走かな、快走かな！",
     targetSpeed: 0.45,
     duration: 5,
@@ -6256,6 +6672,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110101,
+    holder: 101002,
     name: "Joyful Voyage!",
     targetSpeed: 0.35,
     speedWithDecel: 0.15,
@@ -6267,6 +6684,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110591,
+    holder: 105902,
     name: "ときめきが呼ぶほうへ",
     targetSpeed: 0.35,
     duration: 5,
@@ -6281,6 +6699,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100361,
+    holder: 103601,
     name: "trigger:BEAT",
     targetSpeed: 0.35,
     duration: 5,
@@ -6291,6 +6710,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 120131,
+    holder: 101303,
     name: "きらめくは海、まばゆきは君",
     targetSpeed: 0.15,
     duration: 5,
@@ -6321,6 +6741,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100441,
+    holder: 104401,
     name: "いただき☆ストレリチア！",
     targetSpeed: 0.35,
     duration: 6,
@@ -6334,6 +6755,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100981,
+    holder: 109801,
     name: "理運開かりて翔る",
     targetSpeed: 0.25,
     acceleration: 0,
@@ -6360,6 +6782,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110461,
+    holder: 104602,
     name: "α-star*",
     targetSpeed: 0.25,
     heal: 350,
@@ -6372,6 +6795,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110351,
+    holder: 103502,
     name: "夢の先へ、届け！",
     targetSpeed: 0.35,
     duration: 6,
@@ -6382,6 +6806,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110501,
+    holder: 105002,
     name: "Hephaistos",
     targetSpeed: 0.35,
     duration: 5,
@@ -6394,6 +6819,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100291,
+    holder: 102901,
     name: "ゆきあかり、おいかけて",
     targetSpeed: 0.35,
     duration: 5,
@@ -6407,6 +6833,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100421,
+    holder: 104201,
     name: "『I’m possible』",
     targetSpeed: 0.45,
     duration: 5,
@@ -6420,6 +6847,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110191,
+    holder: 101902,
     name: "萌到讓我活過來了！",
     targetSpeed: 0.35,
     duration: 5,
@@ -6429,6 +6857,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110581,
+    holder: 105802,
     name: "Spooky-Scary-Happy",
     targetSpeed: 0.35,
     duration: 5,
@@ -6438,6 +6867,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100871,
+    holder: 108701,
     name: "silent letter",
     targetSpeed: 0.25,
     acceleration: 0.3,
@@ -6452,6 +6882,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100781,
+    holder: 107801,
     name: "風光る",
     acceleration: 0.2,
     duration: 8,
@@ -6462,6 +6893,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110211,
+    holder: 102102,
     name: "火神鳴",
     targetSpeed: 0.3,
     duration: 6,
@@ -6472,6 +6904,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110341,
+    holder: 103402,
     name: "灯穂",
     targetSpeed: 0.385,
     duration: 5,
@@ -6482,6 +6915,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100491,
+    holder: 104901,
     name: "剣ヶ峰より、狂気に嗤え",
     targetSpeed: 0.45,
     duration: 5,
@@ -6492,6 +6926,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 101001,
+    holder: 110001,
     name: "Never Say Never",
     speedWithDecel: 0.25,
     duration: 5,
@@ -6502,6 +6937,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 120011,
+    holder: 100103,
     name: "威風堂々、夢錦！",
     targetSpeed: 0.45,
     duration: 5,
@@ -6516,6 +6952,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110091,
+    holder: 100902,
     name: "Queen’s Lumination",
     targetSpeed: 0.35,
     duration: 6,
@@ -6527,6 +6964,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110081,
+    holder: 100802,
     name: "Into High Gear!",
     targetSpeed: 0.35,
     acceleration: 0.1,
@@ -6542,6 +6980,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100471,
+    holder: 104701,
     name: "掲げよ、己が魂の剣を！",
     targetSpeed: 0.45,
     duration: 5,
@@ -6552,6 +6991,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110161,
+    holder: 101602,
     name: "灰色の臨界点",
     targetSpeed: 0.55,
     duration: 5,
@@ -6565,6 +7005,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110671,
+    holder: 106702,
     name: "玄雲散らす、黄金甲矢",
     targetSpeed: 0.35,
     heal: 350,
@@ -6575,6 +7016,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110681,
+    holder: 106802,
     name: "あっぱれ大盤振る舞い！",
     speedWithDecel: 0.35,
     acceleration: 0.1,
@@ -6587,6 +7029,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100991,
+    holder: 109901,
     name: "かがやけ☆とまこまい",
     acceleration: 0.4,
     duration: 4,
@@ -6599,6 +7042,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100651,
+    holder: 106501,
     name: "アゲてアゲてぷちょへんざ！",
     targetSpeed: 0.25,
     duration: 6,
@@ -6610,6 +7054,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110271,
+    holder: 102702,
     name: "あなたに捧げるフリーポア",
     targetSpeed: 0.35,
     acceleration: 0.1,
@@ -6624,6 +7069,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 110311,
+    holder: 103102,
     name: "フレッシュ☆パーラー",
     targetSpeed: 0.25,
     heal: 350,
@@ -6635,6 +7081,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100431,
+    holder: 104301,
     name: "Ding Dong Boo",
     targetSpeed: 0.25,
     acceleration: 0.4,
@@ -6648,6 +7095,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100571,
+    holder: 105701,
     name: "叙情、旅路の果てに",
     targetSpeed: 0.35,
     duration: 6,
@@ -6659,6 +7107,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100661,
+    holder: 106601,
     name: "エンジン全開！大噴射！",
     type: "speed",
     invokes: [
@@ -6684,9 +7133,53 @@ const uniqueSkillData = (thiz) => [
     name: "至上であれ",
     type: "speed",
     speedWithDecel: 0.25,
+    duration: 5,
     conditions: {
       distance_rate: [66, 68],
       temptation_count: 0,
+    },
+  },
+  {
+    id: 100531,
+    holder: 105301,
+    name: "熱血！！風紀アタック",
+    acceleration: 0.3,
+    duration: 5,
+    conditions: {
+      phase: ">=2",
+      is_finalcorner: 1,
+    },
+    tooltip: "MAXっぽい5秒の0.3加速として扱う",
+  },
+  {
+    id: 110071,
+    holder: 100702,
+    name: "Adventure of 564",
+    targetSpeed: 0.15,
+    duration: 5,
+    conditions: {
+      distance_rate_random: [50, 100],
+    },
+    trigger: function (thisSkill) {
+      const candidates = [];
+      for (const skill of thiz.invokedSkills) {
+        if (
+          !thiz.isInCoolDown(skill) &&
+          ["rare", "evo"].includes(skill.rarity)
+        ) {
+          candidates.push(skill);
+        }
+      }
+      console.log(JSON.stringify(thisSkill));
+      console.log(candidates.map((x) => x.name));
+      const chainTriggered = [];
+      const num = thisSkill.type === "unique" ? 2 : 1;
+      for (let i = 0; i < num && candidates.length > 0; i++) {
+        const index = Math.floor(Math.random() * candidates.length);
+        chainTriggered.push(candidates[index]);
+        candidates.splice(index, 1);
+      }
+      return { chainTriggered };
     },
   },
 

@@ -663,7 +663,7 @@ export default {
         }
 
         if (this.position >= this.courseLength) {
-          break
+          break;
         }
         // Calculate target speed of next frame and do heal/fatigue
         const skillTriggered = this.checkSkillTrigger(startPosition)
@@ -671,8 +671,8 @@ export default {
             this.position + this.spurtParameters.distance >= this.courseLength
         this.frames.push({
           skills: skillTriggered,
-          spurting
-        })
+          spurting,
+        });
 
         // Remove overtime skills
         for (let i = 0; i < this.operatingSkills.length; i++) {
@@ -680,7 +680,7 @@ export default {
               > this.operatingSkills[i].data.duration * this.timeCoef) {
             this.operatingSkills.splice(i, 1)
             i-- // Without this line, the original next element will be skipped
-            break
+            break;
           }
         }
       }
@@ -945,6 +945,7 @@ export default {
           }
         }
       }
+      hasSkillIds.push(...this.hasEvoSkills);
       return {
         version: UMA_OBJ_VERSION,
         status: this.umaStatus,
@@ -982,8 +983,12 @@ export default {
       const idMap = this.skills.map(x => x.id);
       for (const id of u.hasSkillIds ?? []) {
         const skill = this.skills[idMap.indexOf(id)];
-        const section = this.toRaritySection(skill.rarity);
-        this.hasSkills[skill.type][section].push(id);
+        if (skill.rarity === 'evo') {
+          this.hasEvoSkills.push(id);
+        } else {
+          const section = this.toRaritySection(skill.rarity);
+          this.hasSkills[skill.type][section].push(id);
+        }
       }
 
       if (u.selectedUnique) {

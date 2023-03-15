@@ -110,7 +110,11 @@
 		"mood1": "Good",
 		"mood2": "Normal",
 		"mood3": "Bad",
-		"mood4": "Worst"
+		"mood4": "Worst",
+
+		"uniqueLv0Hint": "(Set Lv0 to deactivate)",
+		"evoSkill": "Evolved Skills",
+		"evoHint": "(Choose unique skill to display)"
 	},
 	"emulatorType": {
 		"teamRace": "Team Race",

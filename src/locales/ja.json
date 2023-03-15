@@ -110,7 +110,11 @@
 		"mood1": "好調",
 		"mood2": "普通",
 		"mood3": "不調",
-		"mood4": "絶不調"
+		"mood4": "絶不調",
+
+		"uniqueLv0Hint": "（Lv0で不発扱い）",
+		"evoSkill": "進化スキル",
+		"evoHint": "(固有選択で対応する進化スキルを表示)"
 	},
 	"emulatorType": {
 		"teamRace": "チーム競技場",
@@ -125,7 +129,6 @@
 		"gate": "ゲートスキル",
 		"decel": "喰らう減速スキル",
 		"fatigue": "喰らう疲労スキル",
-		"evo": "進化",
 		"rare": "レア",
 		"normal": "ノーマル",
 		"inherit": "固有(継承)",

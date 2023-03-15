@@ -110,7 +110,11 @@
     "mood1": "양호",
     "mood2": "보통",
     "mood3": "저조",
-    "mood4": "최악"
+    "mood4": "최악",
+
+    "uniqueLv0Hint": "(Lv0에서 불발 취급해)",
+    "evoSkill": "진화 스킬",
+    "evoHint": "(고유 선택으로 대응하는 진화 스킬을 표시)"
   },
   "emulatorType": {
     "teamRace": "팀 레이스",

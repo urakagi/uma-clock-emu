@@ -144,7 +144,24 @@
         </el-select>
       </el-form-item>
       <el-form-item label="Lv">
-        <el-input-number :max="6" :min="1" v-model="uniqueLevel"></el-input-number>
+        <el-input-number :max="6" :min="0" v-model="uniqueLevel"></el-input-number>
+        &emsp;{{ $t('message.uniqueLv0Hint') }}
+      </el-form-item>
+      <br>
+      <el-form-item :label="$t('message.evoSkill')">
+        <div v-if="availableSkills.evo.length === 0">{{ $t('message.evoHint') }}</div>
+        <el-checkbox-group v-model="hasEvoSkills">
+          <el-tooltip
+              v-for="skill in availableSkills.evo"
+              :key="skill.name"
+              :content="skill.tooltip"
+              :disabled="!('tooltip' in skill)"
+          >
+            <el-checkbox-button :label="skill.id">
+              {{ skill.name }}
+            </el-checkbox-button>
+          </el-tooltip>
+        </el-checkbox-group>
       </el-form-item>
       <br>
       <el-collapse v-model="skillGroups">

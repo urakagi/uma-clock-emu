@@ -7,7 +7,7 @@ export default {
   name: "MixinSkills",
   data() {
     return {
-      raritySections: ['evo', 'rare', 'normal', 'inherit', 'all'],
+      raritySections: ['rare', 'normal', 'inherit', 'all'],
       rarityString: {
         evo: 'skills.evo',
         rare: 'skills.rare',
@@ -19,6 +19,7 @@ export default {
       coolDownMap: {},
       hasSkills: {},
       selectedUnique: this.$t("skills.selectedUnique"),
+      hasEvoSkills: [],
       uniqueLevel: 4,
       skillTriggerCount: [0, 0, 0, 0],
       healTriggerCount: 0,
@@ -89,6 +90,11 @@ export default {
           ret[type][section] = [];
         }
       }
+
+      ret.evo = [];
+      const idMap = this.skills.map(x => x.id);
+      const uq = this.skills[idMap.indexOf(this.selectedUnique)];
+      const uqHolder = uq?.holder;
       for (const skill of this.skills) {
         if (skill.type === 'unique') {
           continue;
@@ -96,6 +102,18 @@ export default {
         if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
           continue;
         }
+
+        // 進化スキルはエミュ種類以外では無条件で表示
+        if (skill.rarity === 'evo') {
+          if (skill.holder == null) {
+            console.error(`No holder in ${JSON.stringify(skill)}`);
+          }
+          if (skill.holder === uqHolder) {
+            ret.evo.push(skill);
+          }
+          continue;
+        }
+
         if (!this.isDistanceType(skill.conditions?.distance_type)) {
           continue;
         }
@@ -187,10 +205,17 @@ export default {
           }
         }
       }
+      let uq;
       if (this.selectedUnique) {
-        const uq = this.skills[idMap.indexOf(this.selectedUnique)];
-        if (uq) {
+        uq = this.skills[idMap.indexOf(this.selectedUnique)];
+        if (uq && this.uniqueLevel > 0) {
           hasSkills.push(uq);
+        }
+      }
+      for (const evoSkillId of this.hasEvoSkills) {
+        const evoSkill = this.skills[idMap.indexOf(evoSkillId)];
+        if (uq && evoSkill.holder === uq.holder) {
+          hasSkills.push(evoSkill);
         }
       }
 
@@ -475,31 +500,36 @@ export default {
     },
     checkSkillTrigger(startPosition) {
       const skillTriggered = []
-      // 通常スキル
       for (const skill of this.invokedSkills) {
         if (this.isInCoolDown(skill)) {
           continue;
         }
         if (skill.check(startPosition)) {
-          let skillDetail = null
-          if (skill.trigger) {
-            skillDetail = skill.trigger(skill)
+          const skillDetail = this.triggerSkill(skill);
+          for (const chained of skillDetail?.chainTriggered ?? []) {
+            const chainDetail = this.triggerSkill(chained);
+            skillTriggered.push({data: chained, detail: chainDetail});
           }
-          if (skill.duration) {
-            this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
-            skillTriggered.push({data: skill, detail: skillDetail})
-          } else {
-            skillTriggered.push({data: skill, detail: skillDetail})
-          }
-          this.skillTriggerCount[this.currentPhase]++
-          // 特殊スキル誘発カウント
-          if (this.isInFinalCorner() && this.currentPhase >= 2) {
-            this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
-          }
-          this.coolDownMap[skill.id] = this.frameElapsed
+          skillTriggered.push({data: skill, detail: skillDetail});
         }
       }
-      return skillTriggered
+      return skillTriggered;
+    },
+    triggerSkill(skill) {
+      let skillDetail = null;
+      if (skill.trigger) {
+        skillDetail = skill.trigger(skill)
+      }
+      if (skill.duration) {
+        this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
+      }
+      this.skillTriggerCount[this.currentPhase]++
+      // 特殊スキル誘発カウント
+      if (this.isInFinalCorner() && this.currentPhase >= 2) {
+        this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
+      }
+      this.coolDownMap[skill.id] = this.frameElapsed
+      return skillDetail;
     },
     chooseRandom(zoneStart, zoneEnd) {
       let rate
@@ -1053,6 +1083,7 @@ export default {
         }
       }
       this.hasSkills = o;
+      this.hasEvoSkills = [];
     },
     toRaritySection(rarity) {
       if (rarity === 'double') {
