@@ -737,7 +737,7 @@ export default {
       for (const straight of this.trackDetail.straights) {
         if (position >= straight.start && position <= straight.end) {
           const rIndex = this.trackDetail.straights.length
-              - this.trackDetail.straights.index(straight);
+              - this.trackDetail.straights.indexOf(straight);
           return rIndex % 2 == 1 ? 1 : 2;
         }
       }
