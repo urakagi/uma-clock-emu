@@ -6910,9 +6910,10 @@ const uniqueSkillData = (thiz) => [
     name: "灯穂",
     targetSpeed: 0.385,
     duration: 5,
-    tooltip: "0.35として扱う",
-    check: function () {
-      return thiz.currentPhase >= 2 && thiz.isInCorner();
+    tooltip: "0.385として扱う",
+    conditions: {
+      is_finalcorner: 1,
+      corner: 0,
     },
   },
   {
