@@ -1627,7 +1627,7 @@ function normalSkillData(thiz) {
         { rarity: "normal", id: 200762, name: "別腹タンク", heal: 150 },
       ],
       duration: 1.8,
-      conditions: { distance_type: 4 },
+      conditions: { distance_type: 4, hp_per: "<=30" },
     },
     {
       variants: [
