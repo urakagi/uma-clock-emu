@@ -490,7 +490,7 @@ export default {
             }
           },
           {
-            normal: {id: 201222, name: '耐力獵手', value: 150},
+            normal: {id: 201222, name: '持久力吞噬者', value: 150},
             rare: {id: 201221, name: '耐力食取', value: 350},
             styleLimit: [2, 3, 4],
             distanceLimit: [4],
@@ -2633,7 +2633,7 @@ export default {
           }
         },
         {
-          id: 100591, name: '超越彼方',
+          id: 100591, name: '彼端就在那前方……',
           acceleration: 0.4,
           duration: 4,
           styleLimit: [3, 4],
