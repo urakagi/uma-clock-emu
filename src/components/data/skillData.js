@@ -5407,6 +5407,27 @@ function normalSkillData(thiz) {
       ],
       conditions: { phase_random: 0 },
     },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202551,
+          name: "神速",
+          speedWithDecel: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "normal",
+          id: 202552,
+          name: "快速",
+          targetSpeed: 0.15,
+          heal: 35,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_rate_after_random: 50 },
+    },
+
     // End of normal skills
   ];
 }
