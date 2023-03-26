@@ -348,7 +348,11 @@ export default {
         case 'distance_rate': {
           let values;
           if (Array.isArray(value)) {
-            values = value;
+            if (typeof value[0] === 'number') {
+              values = [`>=${value[0]}`, `<=${value[1]}`];
+            } else {
+              values = value;
+            }
           } else {
             values = [value];
           }
