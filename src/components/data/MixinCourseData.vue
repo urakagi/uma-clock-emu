@@ -2,10 +2,10 @@
 import TrackData from './course_data.json'
 
 export default {
-  name: "MixinCourseData",
+  name: 'MixinCourseData',
   data: function () {
     return {
-      'trackData': TrackData
+      trackData: TrackData,
     }
   },
   computed: {
@@ -14,14 +14,14 @@ export default {
     },
     currentSlope() {
       return this.getSlope(this.position)
-    }
+    },
   },
   methods: {
     toPosition(distanceLeft) {
       return this.trackDetail.distance - distanceLeft
     },
     cornerEnd(corner) {
-      return corner.start + corner.length;
+      return corner.start + corner.length
     },
     slopeEnd(slope) {
       return slope.start + slope.length
@@ -48,11 +48,7 @@ export default {
         track = this.trackDetail
       }
       return track.slopes
-    }
-  }
+    },
+  },
 }
 </script>
-
-<style scoped>
-
-</style>

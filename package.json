@@ -2,35 +2,40 @@
   "name": "uma-clock-emu",
   "version": "1.1.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production && node uploadToS3.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "aws-sdk": "^2.996.0",
-    "chart.js": "2.9.3",
-    "chartjs-plugin-annotation": "^0.5.7",
-    "core-js": "^3.6.5",
-    "element-ui": "^2.15.2",
-    "mime-types": "^2.1.32",
-    "vue": "^2.6.11",
-    "vue-chartjs": "^3.5.1",
-    "vue-google-adsense": "^1.9.3",
-    "vue-gtag": "^1.16.1",
-    "vue-i18n": "^8.24.4",
-    "vue-router": "^3.5.1",
-    "vue-script2": "^2.1.0"
+    "@element-plus/icons-vue": "^2.1.0",
+    "@element-plus/theme-chalk": "^2.2.16",
+    "aws-sdk": "^2.1343.0",
+    "chart.js": "^4.2.1",
+    "chartjs-plugin-annotation": "^2.2.1",
+    "core-js": "^3.29.1",
+    "element-plus": "^2.3.1",
+    "mime-types": "^2.1.35",
+    "vue": "^3.2.47",
+    "vue-chartjs": "^5.2.0",
+    "vue-compat": "^0.0.1",
+    "vue-gtag": "^2.0.1",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.0.13",
+    "vue-script2": "^2.1.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^2.8.4",
-    "vue-template-compiler": "^2.6.11"
+    "@babel/eslint-parser": "^7.21.3",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "eslint": "^8.36.0",
+    "eslint-plugin-vue": "^9.10.0",
+    "gogocode-cli": "^0.2.28",
+    "prettier": "^2.8.7",
+    "vue-template-compiler": "^2.7.14"
   },
   "eslintConfig": {
     "root": true,
@@ -42,7 +47,7 @@
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     },
     "rules": {}
   },

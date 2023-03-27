@@ -1,11 +1,12 @@
 <script>
-import RaceGraph from "@/components/RaceGraph";
-import MixinCourseData from "@/components/data/MixinCourseData";
-import MixinConstants from "@/components/data/MixinConstants";
-import MixinSkills from "@/components/data/MixinSkills";
-import { STYLE } from "./data/constants";
+import RaceGraph from '@/components/RaceGraph'
+import MixinCourseData from '@/components/data/MixinCourseData'
+import MixinConstants from '@/components/data/MixinConstants'
+import MixinSkills from '@/components/data/MixinSkills'
+import { STYLE } from './data/constants'
+import MixinVuexStore from "@/components/MixinVuexStore";
 
-const UMA_OBJ_VERSION = 2;
+const UMA_OBJ_VERSION = 2
 
 // let timer = 0;
 // function pf(memo) {
@@ -14,9 +15,9 @@ const UMA_OBJ_VERSION = 2;
 // }
 
 export default {
-  name: "MixinRaceCore",
-  components: {RaceGraph},
-  mixins: [MixinCourseData, MixinConstants, MixinSkills],
+  name: 'MixinRaceCore',
+  components: { RaceGraph },
+  mixins: [MixinCourseData, MixinConstants, MixinSkills, MixinVuexStore],
   data() {
     return {
       umaStatus: {
@@ -48,7 +49,7 @@ export default {
       modifiedCondition: -1,
       temptationSection: -1,
       sectionTargetSpeedRandoms: [],
-      frameElapsed: 0,  // 15 frames per second
+      frameElapsed: 0, // 15 frames per second
       position: 0,
       currentSpeed: null,
       sp: 0,
@@ -81,26 +82,26 @@ export default {
     if (!this.production) {
       this.umaToLoad = 'test'
       this.loadUma()
-      if (this.$refs.executeBlock.indicatedMaxEpoch === 1) {
+      if (this.indicatedMaxEpoch === 1) {
         this.exec()
       }
     }
   },
   computed: {
     skillActivateAdjustment() {
-      return this.$refs.executeBlock.skillActivateAdjustment
+      return this.skillActivateAdjustment
     },
     fixRandom() {
       return this.skillActivateAdjustment === '2'
     },
     randomPosition() {
-      return this.$refs.executeBlock.randomPosition
+      return this.randomPosition
     },
     runningStyle() {
-      return this.oonige ? STYLE.OONIGE : +this.umaStatus.style;
+      return this.oonige ? STYLE.OONIGE : +this.umaStatus.style
     },
     basicRunningStyle() {
-      return +this.umaStatus.style;
+      return +this.umaStatus.style
     },
     locationName() {
       if (!this.track.location) {
@@ -110,7 +111,7 @@ export default {
     },
     trackDetail() {
       if (!this.track.location) {
-        return {distance: 0, surface: 1, courseSetStatus: []}
+        return { distance: 0, surface: 1, courseSetStatus: [] }
       }
       return this.trackData[this.track.location].courses[this.track.course]
     },
@@ -121,7 +122,9 @@ export default {
         const CHECK_KEYS = ['', 'speed', 'stamina', 'power', 'guts', 'wisdom']
         for (const c of check) {
           let bonus
-          const status = this.umaStatus[CHECK_KEYS[c]] * this.condCoef[this.modifiedCondition]
+          const status =
+            this.umaStatus[CHECK_KEYS[c]] *
+            this.condCoef[this.modifiedCondition]
           if (status <= 300) {
             bonus = 0.05
           } else if (status <= 600) {
@@ -136,34 +139,53 @@ export default {
         }
       }
 
-      const ret = this.calcExceedStatus(this.umaStatus.speed)
-          * statusCheckModifier * this.condCoef[this.modifiedCondition]
-          + this.surfaceSpeedModify[this.trackDetail.surface][this.track.surfaceCondition]
-          + this.passiveBonus.speed
+      const ret =
+        this.calcExceedStatus(this.umaStatus.speed) *
+          statusCheckModifier *
+          this.condCoef[this.modifiedCondition] +
+        this.surfaceSpeedModify[this.trackDetail.surface][
+          this.track.surfaceCondition
+        ] +
+        this.passiveBonus.speed
       return ret > 0 ? ret : 1
     },
     modifiedStamina() {
-      return this.calcExceedStatus(this.umaStatus.stamina)
-          * this.condCoef[this.modifiedCondition] + this.passiveBonus.stamina
+      return (
+        this.calcExceedStatus(this.umaStatus.stamina) *
+          this.condCoef[this.modifiedCondition] +
+        this.passiveBonus.stamina
+      )
     },
     modifiedPower() {
-      const ret = this.calcExceedStatus(this.umaStatus.power)
-          * this.condCoef[this.modifiedCondition]
-          + this.surfacePowerModify[this.trackDetail.surface][this.track.surfaceCondition]
-          + this.passiveBonus.power
+      const ret =
+        this.calcExceedStatus(this.umaStatus.power) *
+          this.condCoef[this.modifiedCondition] +
+        this.surfacePowerModify[this.trackDetail.surface][
+          this.track.surfaceCondition
+        ] +
+        this.passiveBonus.power
       return ret > 0 ? ret : 1
     },
     modifiedGuts() {
-      return this.calcExceedStatus(this.umaStatus.guts)
-          * this.condCoef[this.modifiedCondition] + this.passiveBonus.guts
+      return (
+        this.calcExceedStatus(this.umaStatus.guts) *
+          this.condCoef[this.modifiedCondition] +
+        this.passiveBonus.guts
+      )
     },
     modifiedWisdom() {
-      return this.calcExceedStatus(this.umaStatus.wisdom)
-          * this.condCoef[this.modifiedCondition]
-          * this.styleFitCoef[this.umaStatus.styleFit] + this.passiveBonus.wisdom
+      return (
+        this.calcExceedStatus(this.umaStatus.wisdom) *
+          this.condCoef[this.modifiedCondition] *
+          this.styleFitCoef[this.umaStatus.styleFit] +
+        this.passiveBonus.wisdom
+      )
     },
     spMax() {
-      return this.trackDetail.distance + 0.8 * this.modifiedStamina * this.styleSpCoef[this.runningStyle]
+      return (
+        this.trackDetail.distance +
+        0.8 * this.modifiedStamina * this.styleSpCoef[this.runningStyle]
+      )
     },
     spurtSpCoef() {
       return 1 + 200 / Math.sqrt(600 * this.modifiedGuts)
@@ -175,8 +197,10 @@ export default {
       if (this.fixRandom) {
         return 0
       } else {
-        return Math.pow(6.5 / (Math.log10(0.1 * this.modifiedWisdom + 1)), 2)
-            + this.passiveBonus.temptationRate;
+        return (
+          Math.pow(6.5 / Math.log10(0.1 * this.modifiedWisdom + 1), 2) +
+          this.passiveBonus.temptationRate
+        )
       }
     },
     currentPhase() {
@@ -198,26 +222,33 @@ export default {
       if (this.currentSpeed < this.v0) {
         return this.v0
       }
-      let baseTargetSpeed;
+      let baseTargetSpeed
       // スパート中
-      if (this.spurtParameters
-          && (this.position + this.spurtParameters.distance >= this.courseLength)) {
+      if (
+        this.spurtParameters &&
+        this.position + this.spurtParameters.distance >= this.courseLength
+      ) {
         baseTargetSpeed = this.spurtParameters.speed
       } else {
         switch (this.currentPhase) {
           case 0:
           case 1:
-            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.runningStyle][this.currentPhase]
+            baseTargetSpeed =
+              this.baseSpeed *
+              this.styleSpeedCoef[this.runningStyle][this.currentPhase]
             break
           case 2:
           case 3:
           default:
-            baseTargetSpeed = this.baseSpeed * this.styleSpeedCoef[this.runningStyle][2] +
-                Math.sqrt(this.modifiedSpeed / 500.0) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
+            baseTargetSpeed =
+              this.baseSpeed * this.styleSpeedCoef[this.runningStyle][2] +
+              Math.sqrt(this.modifiedSpeed / 500.0) *
+                this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
             baseTargetSpeed += Math.pow(this.modifiedGuts * 450, 0.597) * 0.0001
             break
         }
-        baseTargetSpeed += this.baseSpeed * this.sectionTargetSpeedRandoms[this.currentSection]
+        baseTargetSpeed +=
+          this.baseSpeed * this.sectionTargetSpeedRandoms[this.currentSection]
       }
       // 根性補正
       let ret = baseTargetSpeed
@@ -225,7 +256,7 @@ export default {
       // 坂
       const upSlope = this.isInSlope('up')
       if (upSlope) {
-        ret -= Math.abs(this.currentSlope) * 200.0 / this.modifiedPower
+        ret -= (Math.abs(this.currentSlope) * 200.0) / this.modifiedPower
       }
       const downSlope = this.isInSlope('down')
       if (downSlope) {
@@ -237,24 +268,26 @@ export default {
       // 持続中スキル
       for (const skill of this.operatingSkills) {
         if (skill.data.targetSpeed) {
-          ret += skill.data.targetSpeed;
+          ret += skill.data.targetSpeed
         }
         if (skill.data.speedWithDecel) {
-          ret += skill.data.speedWithDecel;
+          ret += skill.data.speedWithDecel
         }
         // 減速スキルの目標速度低下分
         if (skill.data.speed) {
-          ret += skill.data.speed;
+          ret += skill.data.speed
         }
       }
       return ret
     },
     acceleration() {
       const c = this.isInSlope('up') ? 0.0004 : 0.0006
-      let ret = c * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.runningStyle][this.currentPhase]
-          * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
-          * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      let ret =
+        c *
+        Math.sqrt(500 * this.modifiedPower) *
+        this.styleAccelerateCoef[this.runningStyle][this.currentPhase] *
+        this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit] *
+        this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
       // スタート時加算
       if (this.isStartDash) {
         ret += 24
@@ -281,14 +314,22 @@ export default {
       }
     },
     maxSpurtSpeed() {
-      return (this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][2] + 0.01) +
-          Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
-          1.05 + Math.sqrt(500 * this.modifiedSpeed) *
-          this.distanceFitSpeedCoef[this.umaStatus.distanceFit] * 0.002
-          + Math.pow(450 * this.modifiedGuts, 0.597) * 0.0001
+      return (
+        (this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][2] + 0.01) +
+          Math.sqrt(this.modifiedSpeed / 500) *
+            this.distanceFitSpeedCoef[this.umaStatus.distanceFit]) *
+          1.05 +
+        Math.sqrt(500 * this.modifiedSpeed) *
+          this.distanceFitSpeedCoef[this.umaStatus.distanceFit] *
+          0.002 +
+        Math.pow(450 * this.modifiedGuts, 0.597) * 0.0001
+      )
     },
     isInTemptation() {
-      if (this.temptationModeStart == null || this.frameElapsed < this.temptationModeStart) {
+      if (
+        this.temptationModeStart == null ||
+        this.frameElapsed < this.temptationModeStart
+      ) {
         return false
       }
       if (this.temptationModeEnd == null) {
@@ -300,17 +341,33 @@ export default {
       return 0.85 * this.baseSpeed
     },
     v1() {
-      return this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][0] +
-          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325)
+      return (
+        this.baseSpeed *
+        (this.styleSpeedCoef[this.runningStyle][0] +
+          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) /
+            550000 -
+          0.00325)
+      )
     },
     v2() {
-      return this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][1] +
-          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325)
+      return (
+        this.baseSpeed *
+        (this.styleSpeedCoef[this.runningStyle][1] +
+          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) /
+            550000 -
+          0.00325)
+      )
     },
     v3() {
-      return this.baseSpeed * (this.styleSpeedCoef[this.runningStyle][2] +
-          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) / 550000 - 0.00325) +
-          Math.sqrt(this.modifiedSpeed / 500) * this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
+      return (
+        this.baseSpeed *
+          (this.styleSpeedCoef[this.runningStyle][2] +
+            (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) /
+              550000 -
+            0.00325) +
+        Math.sqrt(this.modifiedSpeed / 500) *
+          this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
+      )
     },
     vMin() {
       if (this.isStartDash) {
@@ -319,51 +376,64 @@ export default {
       return 0.85 * this.baseSpeed + 0.001 * Math.sqrt(this.modifiedGuts * 200)
     },
     a0() {
-      return 24 + 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.runningStyle][0]
-          * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
-          * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      return (
+        24 +
+        0.0006 *
+          Math.sqrt(500 * this.modifiedPower) *
+          this.styleAccelerateCoef[this.runningStyle][0] *
+          this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit] *
+          this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      )
     },
     a1() {
-      return 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.runningStyle][0]
-          * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
-          * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      return (
+        0.0006 *
+        Math.sqrt(500 * this.modifiedPower) *
+        this.styleAccelerateCoef[this.runningStyle][0] *
+        this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit] *
+        this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      )
     },
     a2() {
       if (this.v2 < this.v1) {
         return -0.8
       }
-      return 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.runningStyle][1]
-          * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
-          * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      return (
+        0.0006 *
+        Math.sqrt(500 * this.modifiedPower) *
+        this.styleAccelerateCoef[this.runningStyle][1] *
+        this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit] *
+        this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      )
     },
     a3() {
-      return 0.0006 * Math.sqrt(500 * this.modifiedPower)
-          * this.styleAccelerateCoef[this.runningStyle][2]
-          * this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit]
-          * this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      return (
+        0.0006 *
+        Math.sqrt(500 * this.modifiedPower) *
+        this.styleAccelerateCoef[this.runningStyle][2] *
+        this.surfaceFitAccelerateCoef[this.umaStatus.surfaceFit] *
+        this.distanceFitAccelerateCoef[this.umaStatus.distanceFit]
+      )
     },
     skillMenu() {
       const TITLE_TYPE = {
-        passive: `${this.$t("skills.passive")}`,
-        heal: `${this.$t("skills.heal")}`,
-        speed: `${this.$t("skills.speed")}`,
-        acceleration: `${this.$t("skills.acceleration")}`,
-        composite: `${this.$t("skills.composite")}`,
-        gate: `${this.$t("skills.gate")}`,
-        decel: `${this.$t("skills.decel")}`,
-        fatigue: `${this.$t("skills.fatigue")}`,
+        passive: `${this.$t('skills.passive')}`,
+        heal: `${this.$t('skills.heal')}`,
+        speed: `${this.$t('skills.speed')}`,
+        acceleration: `${this.$t('skills.acceleration')}`,
+        composite: `${this.$t('skills.composite')}`,
+        gate: `${this.$t('skills.gate')}`,
+        decel: `${this.$t('skills.decel')}`,
+        fatigue: `${this.$t('skills.fatigue')}`,
       }
       const ret = []
       for (const type of this.types) {
         ret.push({
           title: TITLE_TYPE[type],
           type,
-        });
+        })
       }
-      return ret;
+      return ret
     },
     latestRaceTime() {
       if (this.emulations.length === 0) {
@@ -372,96 +442,16 @@ export default {
         return this.emulations[this.emulations.length - 1].raceTime
       }
     },
-    avgRaceTime() {
-      return this.calcAvg('all', 'raceTime')
-    },
-    avgRaceTimeMaxSpurt() {
-      return this.calcAvg('max', 'raceTime')
-    },
-    avgRaceTimeNotMaxSpurt() {
-      return this.calcAvg('notMax', 'raceTime')
-    },
-    bestTime() {
-      return this.pickEdge('all', 'raceTime', 'best')
-    },
-    worstTime() {
-      return this.pickEdge('all', 'raceTime', 'worst')
-    },
-    bestTimeMaxSpurt() {
-      return this.pickEdge('max', 'raceTime', 'best')
-    },
-    worstTimeMaxSpurt() {
-      return this.pickEdge('max', 'raceTime', 'worst')
-    },
-    bestTimeNotMaxSpurt() {
-      return this.pickEdge('notMax', 'raceTime', 'best')
-    },
-    worstTimeNotMaxSpurt() {
-      return this.pickEdge('notMax', 'raceTime', 'worst')
-    },
-    timeStandardDeviation() {
-      return this.calcStdDev('all', 'raceTime')
-    },
-    timeStandardDeviationMaxSpurt() {
-      return this.calcStdDev('max', 'raceTime')
-    },
-    timeStandardDeviationNotMaxSpurt() {
-      return this.calcStdDev('notMax', 'raceTime')
-    },
-    maxSpurtRate() {
-      if (this.emulations.length === 0) {
-        return '-'
-      }
-      let maxSpurt = 0
-      for (const e of this.emulations) {
-        if (e.maxSpurt) maxSpurt++
-      }
-      return (100.0 * maxSpurt / this.emulations.length).toFixed(1)
-    },
-    maxSpurtSPLeft() {
-      if (this.emulations.length === 0) {
-        return '-'
-      }
-      let sum = 0.0
-      let count = 0
-      for (const e of this.emulations) {
-        if (e.maxSpurt) {
-          sum += e.spDiff
-          count++
-        }
-      }
-      if (count === 0) {
-        return '-'
-      }
-      return (sum / count).toFixed(1)
-    },
-    nonMaxSpurtSPLack() {
-      if (this.emulations.length === 0) {
-        return '-'
-      }
-      let sum = 0.0
-      let count = 0
-      for (const e of this.emulations) {
-        if (!e.maxSpurt) {
-          sum += e.spDiff
-          count++
-        }
-      }
-      if (count === 0) {
-        return '-'
-      }
-      return (-sum / count).toFixed(1)
-    },
     production() {
       return process.env.NODE_ENV === 'production'
     },
     chartMiddle() {
-      return this.courseLength * 0.45;
+      return this.courseLength * 0.45
     },
   },
   methods: {
     calcExceedStatus(status) {
-      return status > 1200 ? 1200 + (status - 1200) / 2 : status;
+      return status > 1200 ? 1200 + (status - 1200) / 2 : status
     },
     locationChanged(location) {
       this.courseList = this.trackData[location].courses
@@ -475,16 +465,19 @@ export default {
       if (!this.track.location) {
         return
       }
-      localStorage.setItem('selectedCourse', JSON.stringify({
-        location: this.track.location,
-        course: this.track.course
-      }))
+      localStorage.setItem(
+        'selectedCourse',
+        JSON.stringify({
+          location: this.track.location,
+          course: this.track.course,
+        })
+      )
     },
     exec(maxEpoch) {
-      this.fullFillStatus();
-      this.emulations = [];
-      this.maxEpoch = maxEpoch;
-      this.progressEpoch();
+      this.fullFillStatus()
+      this.emulations = []
+      this.maxEpoch = maxEpoch
+      this.progressEpoch()
     },
     fullFillStatus() {
       if (this.umaStatus.speed === '') {
@@ -505,17 +498,19 @@ export default {
     },
     progressEpoch() {
       setTimeout(() => {
-        for (const target = this.$refs.executeBlock.epoch + this.maxEpoch / 5;
-             this.$refs.executeBlock.epoch < Math.min(target, this.maxEpoch);
-             this.$refs.executeBlock.epoch++) {
-          this.start();
+        for (
+          const target = this.epoch + this.maxEpoch / 5;
+          this.epoch < Math.min(target, this.maxEpoch);
+          this.epoch++
+        ) {
+          this.start()
         }
-        if (this.$refs.executeBlock.epoch < this.maxEpoch) {
-          this.progressEpoch();
+        if (this.epoch < this.maxEpoch) {
+          this.progressEpoch()
         } else {
-          this.$refs.executeBlock.emulating = false;
+          this.emulating = false
         }
-      }, 1);
+      }, 1)
     },
     start: function () {
       this.resetRace()
@@ -530,27 +525,27 @@ export default {
       } else {
         this.startDelay = Math.random() * 0.1
       }
-      this.triggerStartSkills();
-      this.initTemptation();
-      this.isStartDash = true;
-      this.delayTime = this.startDelay;
-      this.sp = this.spMax;
-      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms();
-      this.progressRace();
+      this.triggerStartSkills()
+      this.initTemptation()
+      this.isStartDash = true
+      this.delayTime = this.startDelay
+      this.sp = this.spMax
+      this.sectionTargetSpeedRandoms = this.initSectionTargetSpeedRandoms()
+      this.progressRace()
     },
     resetRace() {
       this.frameElapsed = 0
       this.sp = 0
       this.position = 0
       this.currentSpeed = this.startSpeed
-      this.passiveBonus = {};
+      this.passiveBonus = {}
       for (const bonus of this.passiveBonusKeys) {
-        this.passiveBonus[bonus] = 0;
+        this.passiveBonus[bonus] = 0
       }
-      this.passiveTriggered = 0;
+      this.passiveTriggered = 0
       this.operatingSkills = []
       delete this.frames
-      this.frames = [{skills: []}]
+      this.frames = [{ skills: [] }]
       this.spurtParameters = null
       this.maxSpurt = false
       this.downSlopeModeStart = null
@@ -561,7 +556,7 @@ export default {
       this.temptationSection = -1
       this.season = -1
       this.weather = -1
-      this.oonige = false;
+      this.oonige = false
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {
@@ -602,7 +597,7 @@ export default {
     progressRace() {
       while (this.position < this.courseLength) {
         if (this.frameElapsed > 5000) {
-          break;
+          break
         }
         const startPosition = this.position
         const startSp = this.sp
@@ -614,8 +609,10 @@ export default {
         // 下り坂モードに入るか・終わるかどうかの判定
         if (this.isInSlope('down') && !this.fixRandom) {
           // 1秒置きなので、このフレームは整数秒を含むかどうかのチェック
-          if (Math.floor(this.frameElapsed * this.frameLength) !==
-              Math.floor((this.frameElapsed + 1) * this.frameLength)) {
+          if (
+            Math.floor(this.frameElapsed * this.frameLength) !==
+            Math.floor((this.frameElapsed + 1) * this.frameLength)
+          ) {
             if (this.downSlopeModeStart == null) {
               if (Math.random() < this.modifiedWisdom * 0.0004) {
                 this.downSlopeModeStart = this.frameElapsed
@@ -633,8 +630,11 @@ export default {
         // 掛かり処理
         if (this.isInTemptation) {
           // 掛かり終了判定
-          const temptationDuration = (this.frameElapsed - this.temptationModeStart) * this.frameLength
-          const prevTemptationDuration = (this.frameElapsed - 1 - this.temptationModeStart) * this.frameLength
+          const temptationDuration =
+            (this.frameElapsed - this.temptationModeStart) * this.frameLength
+          const prevTemptationDuration =
+            (this.frameElapsed - 1 - this.temptationModeStart) *
+            this.frameLength
           for (let j = 3; j < 12; j += 3) {
             if (prevTemptationDuration < j && temptationDuration >= j) {
               if (Math.random() < 0.55) {
@@ -647,7 +647,10 @@ export default {
           }
         }
         // 掛かり開始
-        if (this.temptationSection > 0 && this.currentSection === this.temptationSection) {
+        if (
+          this.temptationSection > 0 &&
+          this.currentSection === this.temptationSection
+        ) {
           this.temptationModeStart = this.frameElapsed
           this.temptationSection = -1
         }
@@ -663,24 +666,28 @@ export default {
         }
 
         if (this.position >= this.courseLength) {
-          break;
+          break
         }
         // Calculate target speed of next frame and do heal/fatigue
         const skillTriggered = this.checkSkillTrigger(startPosition)
-        const spurting = this.spurtParameters != null &&
-            this.position + this.spurtParameters.distance >= this.courseLength
+        const spurting =
+          this.spurtParameters != null &&
+          this.position + this.spurtParameters.distance >= this.courseLength
         this.frames.push({
           skills: skillTriggered,
           spurting,
-        });
+        })
 
         // Remove overtime skills
         for (let i = 0; i < this.operatingSkills.length; i++) {
-          if ((this.frameElapsed - this.operatingSkills[i].startFrame) * this.frameLength
-              > this.operatingSkills[i].data.duration * this.timeCoef) {
+          if (
+            (this.frameElapsed - this.operatingSkills[i].startFrame) *
+              this.frameLength >
+            this.operatingSkills[i].data.duration * this.timeCoef
+          ) {
             this.operatingSkills.splice(i, 1)
             i-- // Without this line, the original next element will be skipped
-            break;
+            break
           }
         }
       }
@@ -703,7 +710,12 @@ export default {
         // 移動距離及び耐力消耗を算出
         this.position += actualSpeed * timeAfterDelay
         const baseSpeed = this.isStartDash ? this.currentSpeed : this.baseSpeed
-        let consume = this.consumePerSecond(baseSpeed, this.currentSpeed, this.currentPhase) * elapsedTime
+        let consume =
+          this.consumePerSecond(
+            baseSpeed,
+            this.currentSpeed,
+            this.currentPhase
+          ) * elapsedTime
         if (this.downSlopeModeStart != null) {
           consume *= 0.4
         }
@@ -713,37 +725,43 @@ export default {
         }
         this.sp -= consume
 
-        this.updateStartDash();
+        this.updateStartDash()
       }
     },
     updateSelfSpeed(elapsedTime) {
-      let newSpeed;
+      let newSpeed
       if (this.currentSpeed < this.targetSpeed) {
-        newSpeed = Math.min(this.currentSpeed + elapsedTime * this.acceleration, this.targetSpeed)
+        newSpeed = Math.min(
+          this.currentSpeed + elapsedTime * this.acceleration,
+          this.targetSpeed
+        )
       } else {
-        newSpeed = Math.max(this.currentSpeed + elapsedTime * this.deceleration, this.targetSpeed)
+        newSpeed = Math.max(
+          this.currentSpeed + elapsedTime * this.deceleration,
+          this.targetSpeed
+        )
       }
       if (this.isStartDash && newSpeed > this.v0) {
         newSpeed = this.v0
       }
       newSpeed = Math.max(Math.min(newSpeed, this.maxSpeed), this.vMin)
       if (this.speedDebuff) {
-        newSpeed -= this.speedDebuff;
+        newSpeed -= this.speedDebuff
       }
-      let speedModification = 0;
+      let speedModification = 0
       for (const skill of this.operatingSkills) {
         // 減速スキルの現在速度低下分
         if (skill.data.speed) {
-          speedModification += skill.data.speed;
+          speedModification += skill.data.speed
         }
       }
-      this.speedDebuff = speedModification;
-      newSpeed += speedModification;
+      this.speedDebuff = speedModification
+      newSpeed += speedModification
       this.currentSpeed = newSpeed
     },
     updateStartDash() {
       if (this.isStartDash && this.currentSpeed >= this.v0) {
-        this.isStartDash = false;
+        this.isStartDash = false
       }
     },
     calcSpurtParameter(isReCalc) {
@@ -751,7 +769,7 @@ export default {
       const spurtDistance = this.calcSpurtDistance(this.maxSpurtSpeed)
       const totalConsume = this.calcRequiredSp(this.maxSpurtSpeed)
       if (spurtDistance >= maxDistance) {
-        if (this.position <= this.courseLength * 2.0 / 3 + 5) {
+        if (this.position <= (this.courseLength * 2.0) / 3 + 5) {
           if (!isReCalc) {
             this.maxSpurt = true
           }
@@ -759,7 +777,9 @@ export default {
         return {
           distance: maxDistance,
           speed: this.maxSpurtSpeed,
-          spDiff: isReCalc ? this.spurtParameters.spDiff : this.sp - totalConsume
+          spDiff: isReCalc
+            ? this.spurtParameters.spDiff
+            : this.sp - totalConsume,
         }
       }
       // SPが足りない場合の処理
@@ -770,7 +790,9 @@ export default {
         return {
           distance: 0,
           speed: this.v3,
-          spDiff: isReCalc ? this.spurtParameters.spDiff : this.sp - totalConsume
+          spDiff: isReCalc
+            ? this.spurtParameters.spDiff
+            : this.sp - totalConsume,
         }
       }
       for (let v = this.maxSpurtSpeed - 0.1; v >= this.v3; v -= 0.1) {
@@ -782,7 +804,9 @@ export default {
           distance: distanceV,
           speed: v,
           time: distanceV / v + (maxDistance - distanceV) / this.v3,
-          spDiff: isReCalc ? this.spurtParameters.spDiff : this.sp - totalConsume
+          spDiff: isReCalc
+            ? this.spurtParameters.spDiff
+            : this.sp - totalConsume,
         })
       }
       candidates.sort((a, b) => {
@@ -801,27 +825,56 @@ export default {
       return candidates[candidates.length - 1]
     },
     calcSpurtDistance(v) {
-      return (this.sp - (this.courseLength - this.position - 60) * 20 *
-          this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3) / (
-          20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          this.spurtSpCoef * (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
-          Math.pow(this.v3 - this.baseSpeed + 12, 2) /
-          144 / this.v3)) + 60
+      return (
+        (this.sp -
+          ((this.courseLength - this.position - 60) *
+            20 *
+            this.spConsumptionCoef[this.trackDetail.surface][
+              this.track.surfaceCondition
+            ] *
+            this.spurtSpCoef *
+            Math.pow(this.v3 - this.baseSpeed + 12, 2)) /
+            144 /
+            this.v3) /
+          (20 *
+            this.spConsumptionCoef[this.trackDetail.surface][
+              this.track.surfaceCondition
+            ] *
+            this.spurtSpCoef *
+            (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
+              Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3)) +
+        60
+      )
     },
     calcRequiredSp(v) {
-      return (this.courseLength - this.position - 60) * 20 *
-          this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          this.spurtSpCoef * Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3 + (
-              this.courseLength - this.position- 60) * (
-              20 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-              this.spurtSpCoef * (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
-              Math.pow(this.v3 - this.baseSpeed + 12, 2) /
-              144 / this.v3))
+      return (
+        ((this.courseLength - this.position - 60) *
+          20 *
+          this.spConsumptionCoef[this.trackDetail.surface][
+            this.track.surfaceCondition
+          ] *
+          this.spurtSpCoef *
+          Math.pow(this.v3 - this.baseSpeed + 12, 2)) /
+          144 /
+          this.v3 +
+        (this.courseLength - this.position - 60) *
+          (20 *
+            this.spConsumptionCoef[this.trackDetail.surface][
+              this.track.surfaceCondition
+            ] *
+            this.spurtSpCoef *
+            (Math.pow(v - this.baseSpeed + 12, 2) / 144 / v -
+              Math.pow(this.v3 - this.baseSpeed + 12, 2) / 144 / this.v3))
+      )
     },
     consumePerSecond(baseSpeed, v, phase) {
-      let ret = 20.0 * this.spConsumptionCoef[this.trackDetail.surface][this.track.surfaceCondition] *
-          Math.pow(v - baseSpeed + 12, 2) / 144
+      let ret =
+        (20.0 *
+          this.spConsumptionCoef[this.trackDetail.surface][
+            this.track.surfaceCondition
+          ] *
+          Math.pow(v - baseSpeed + 12, 2)) /
+        144
       if (phase >= 2) {
         ret *= this.spurtSpCoef
       }
@@ -831,91 +884,27 @@ export default {
       if (!position) {
         position = this.position
       }
-      return (direction === 'up' && this.getSlope(position) >= 1)
-          || (direction === 'down' && this.getSlope(position) <= -1)
+      return (
+        (direction === 'up' && this.getSlope(position) >= 1) ||
+        (direction === 'down' && this.getSlope(position) <= -1)
+      )
     },
     goal() {
       const excessTime = (this.position - this.courseLength) / this.currentSpeed
       const raceTime = this.frameElapsed * this.frameLength - excessTime
       const raceTimeDelta = raceTime - this.trackDetail.finishTimeMax / 1.18
 
-      if (this.$refs.executeBlock.epoch === this.maxEpoch - 1) {
-        this.updateChart()
+      if (this.epoch === this.maxEpoch - 1) {
+        this.updateChart();
       }
 
       const emu = {
         raceTime,
         raceTimeDelta,
         maxSpurt: this.maxSpurt,
-        spDiff: this.spurtParameters.spDiff
+        spDiff: this.spurtParameters.spDiff,
       }
       this.emulations.push(emu)
-    },
-    toDisplayTime(time) {
-      let ret = time * 1.18
-      const min = this.trackDetail.finishTimeMin
-      const max = this.trackDetail.finishTimeMax
-      if (ret < min) {
-        ret = min - 1 + 2 * Math.random()
-      } else if (ret > max) {
-        ret = max - 1 + 2 * Math.random()
-      }
-      return ret
-    },
-    calcAvg(scope, field) {
-      let sum = 0
-      let count = 0
-      for (const e of this.emulations) {
-        if (scope === 'max' && !e.maxSpurt) {
-          continue
-        } else if (scope === 'notMax' && e.maxSpurt) {
-          continue
-        }
-        sum += e[field]
-        count++
-      }
-      if (count === 0) {
-        return 0
-      }
-      return sum / count
-    },
-    calcStdDev(scope, field) {
-      if (!field) {
-        field = 'raceTime'
-      }
-      const avg = this.calcAvg(scope, field)
-      let sum = 0
-      let count = 0
-      for (const e of this.emulations) {
-        if (scope === 'max' && !e.maxSpurt) {
-          continue
-        } else if (scope === 'notMax' && e.maxSpurt) {
-          continue
-        }
-        sum += Math.pow(e[field] - avg, 2)
-        count++
-      }
-      if (count === 0) {
-        return 0
-      }
-      return Math.sqrt(sum / count)
-    },
-    pickEdge(scope, field, dir) {
-      let ret = dir === 'best' ? 999999 : -999999
-      for (const e of this.emulations) {
-        if (scope === 'max' && !e.maxSpurt) {
-          continue
-        } else if (scope === 'notMax' && e.maxSpurt) {
-          continue
-        }
-        if ((dir === 'best' && e[field] < ret) || (dir === 'worst' && e[field] > ret)) {
-          ret = e[field]
-        }
-      }
-      if (ret === 999999 || ret === -999999) {
-        return 0
-      }
-      return ret
     },
     saveUma() {
       this.$prompt('ウマ名を入力して下さい', '', {
@@ -923,29 +912,29 @@ export default {
         confirmButtonText: 'セーブ',
         cancelButtonText: 'キャンセル',
         inputPattern: /.+/,
-        inputErrorMessage: '名前を入力して下さい。'
-      }).then(({value}) => {
+        inputErrorMessage: '名前を入力して下さい。',
+      }).then(({ value }) => {
         const umas = JSON.parse(localStorage.getItem('umas') || '{}')
         umas[value] = this.saveUmaToObject()
         localStorage.setItem('umas', JSON.stringify(umas))
         this.$message({
           type: 'success',
-          message: `${value}をセーブしました。`
+          message: `${value}をセーブしました。`,
         })
         this.updateSavedUmas()
         this.umaToLoad = value
       })
     },
     saveUmaToObject() {
-      const hasSkillIds = [];
+      const hasSkillIds = []
       for (const type of this.types) {
         for (const section of this.raritySections) {
           for (const id of this.hasSkills[type][section]) {
-            hasSkillIds.push(id);
+            hasSkillIds.push(id)
           }
         }
       }
-      hasSkillIds.push(...this.hasEvoSkills);
+      hasSkillIds.push(...this.hasEvoSkills)
       return {
         version: UMA_OBJ_VERSION,
         status: this.umaStatus,
@@ -958,59 +947,61 @@ export default {
       }
     },
     loadUma() {
-      const umas = JSON.parse(localStorage.getItem('umas') || '{}');
+      const umas = JSON.parse(localStorage.getItem('umas') || '{}')
       if (this.loadUmaFromObject(umas[this.umaToLoad])) {
         this.$message({
           type: 'success',
-          message: `${this.umaToLoad}をロードしました。`
-        });
+          message: `${this.umaToLoad}をロードしました。`,
+        })
       } else {
         this.$message({
           type: 'failed',
-          message: `${this.umaToLoad}は旧データで読み込めませんでした。`
-        });
+          message: `${this.umaToLoad}は旧データで読み込めませんでした。`,
+        })
       }
     },
     loadUmaFromObject(u) {
       if (u.version == null || u.version < UMA_OBJ_VERSION) {
-        return false;
+        return false
       }
-      this.umaStatus = u.status;
-      this.locationChanged(u.track.location);
-      this.track = u.track;
-      this.resetHasSkills();
+      this.umaStatus = u.status
+      this.locationChanged(u.track.location)
+      this.track = u.track
+      this.resetHasSkills()
 
-      const idMap = this.skills.map(x => x.id);
+      const idMap = this.skills.map((x) => x.id)
       for (const id of u.hasSkillIds ?? []) {
-        const skill = this.skills[idMap.indexOf(id)];
+        const skill = this.skills[idMap.indexOf(id)]
         if (skill.rarity === 'evo') {
-          this.hasEvoSkills.push(id);
+          this.hasEvoSkills.push(id)
         } else {
-          const section = this.toRaritySection(skill.rarity);
-          this.hasSkills[skill.type][section].push(id);
+          const section = this.toRaritySection(skill.rarity)
+          this.hasSkills[skill.type][section].push(id)
         }
       }
 
       if (u.selectedUnique) {
-        this.selectedUnique = u.selectedUnique;
-        this.uniqueLevel = u.uniqueLevel;
+        this.selectedUnique = u.selectedUnique
+        this.uniqueLevel = u.uniqueLevel
       }
       if (u.raceType) {
-        this.raceType = u.raceType;
+        this.raceType = u.raceType
       }
       if (u.emulations) {
-        this.emulations = u.emulations;
+        this.emulations = u.emulations
       }
-      this.initCondition();
-      return true;
+      this.initCondition()
+      return true
     },
     exportUma() {
-      navigator.clipboard.writeText(JSON.stringify(this.saveUmaToObject())).then(() => {
-        this.$message({
-          type: 'success',
-          message: `クリップボードへのエクスポートに成功しました。`
+      navigator.clipboard
+        .writeText(JSON.stringify(this.saveUmaToObject()))
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: `クリップボードへのエクスポートに成功しました。`,
+          })
         })
-      })
     },
     importUma(command) {
       switch (command) {
@@ -1027,50 +1018,63 @@ export default {
         confirmButtonText: 'インポート',
         cancelButtonText: 'キャンセル',
         inputPattern: /.+/,
-        inputErrorMessage: ''
-      }).then(({value}) => {
+        inputErrorMessage: '',
+      }).then(({ value }) => {
         this.loadUmaFromObject(JSON.parse(value))
         this.$message({
           type: 'success',
-          message: `インポートに成功しました。`
+          message: `インポートに成功しました。`,
         })
       })
     },
     importUmaFromGame() {
-      this.$prompt('race_horse_data もしくは trained_chara (の JSON) をここに貼り付けてください', '', {
-        confirmButtonText: 'インポート',
-        cancelButtonText: 'キャンセル',
-        inputPattern: /.+/,
-        inputErrorMessage: ''
-      }).then(({value}) => {
+      this.$prompt(
+        'race_horse_data もしくは trained_chara (の JSON) をここに貼り付けてください',
+        '',
+        {
+          confirmButtonText: 'インポート',
+          cancelButtonText: 'キャンセル',
+          inputPattern: /.+/,
+          inputErrorMessage: '',
+        }
+      ).then(({ value }) => {
         const raceHorseData = JSON.parse(value)
 
         this.umaStatus.stamina = raceHorseData['stamina']
         this.umaStatus.speed = raceHorseData['speed']
-        this.umaStatus.power =
-            raceHorseData['pow'] || raceHorseData['power'] // 'pow' in race_horse_data, 'power' in trained_chara
+        this.umaStatus.power = raceHorseData['pow'] || raceHorseData['power'] // 'pow' in race_horse_data, 'power' in trained_chara
         this.umaStatus.guts = raceHorseData['guts']
         this.umaStatus.wisdom = raceHorseData['wiz']
 
         const skills = raceHorseData['skill_array']
 
         this.selectedUnique = 'なし／発動しない' // Reset it to unselected first
-        const uniqueSkills = skills.filter(s => s['skill_id'] < 200000)
+        const uniqueSkills = skills.filter((s) => s['skill_id'] < 200000)
         if (uniqueSkills.length === 1) {
           const uniqueSkill = uniqueSkills[0]
-          const matchedSkill = this.uniqueSkillData.filter(skill => skill.id === uniqueSkill['skill_id'])[0]
+          const matchedSkill = this.uniqueSkillData.filter(
+            (skill) => skill.id === uniqueSkill['skill_id']
+          )[0]
           if (matchedSkill !== undefined) {
             this.selectedUnique = matchedSkill.name
             this.uniqueLevel = uniqueSkill['level']
           }
         }
 
-        const nonUniqueSkillIds = new Set(skills.filter(s => s['skill_id'] >= 200000).map(s => s['skill_id']))
+        const nonUniqueSkillIds = new Set(
+          skills
+            .filter((s) => s['skill_id'] >= 200000)
+            .map((s) => s['skill_id'])
+        )
         this.resetHasSkills()
 
         for (const type in this.skills) {
           for (const rarity in this.skills[type]) {
-            for (let skillIdx = 0; skillIdx < this.skills[type][rarity].length; skillIdx++) {
+            for (
+              let skillIdx = 0;
+              skillIdx < this.skills[type][rarity].length;
+              skillIdx++
+            ) {
               const skill = this.skills[type][rarity][skillIdx]
               if (skill.id !== undefined) {
                 if (nonUniqueSkillIds.has(skill.id)) {
@@ -1085,7 +1089,7 @@ export default {
         this.initCondition()
         this.$message({
           type: 'success',
-          message: `インポートに成功しました。脚質と適性を調整してください。`
+          message: `インポートに成功しました。脚質と適性を調整してください。`,
         })
       })
     },
@@ -1095,7 +1099,7 @@ export default {
       localStorage.setItem('umas', JSON.stringify(umas))
       this.$message({
         type: 'success',
-        message: `${this.umaToLoad}を削除しました。`
+        message: `${this.umaToLoad}を削除しました。`,
       })
       this.updateSavedUmas()
     },
@@ -1116,7 +1120,7 @@ export default {
         style: '1',
         distanceFit: 'A',
         surfaceFit: 'A',
-        styleFit: 'A'
+        styleFit: 'A',
       }
     },
     resetTrack() {
@@ -1125,7 +1129,10 @@ export default {
     initSectionTargetSpeedRandoms() {
       const ret = []
       for (let i = 0; i < 24; i++) {
-        const max = (this.modifiedWisdom / 5500.0) * Math.log10(this.modifiedWisdom * 0.1) * 0.01
+        const max =
+          (this.modifiedWisdom / 5500.0) *
+          Math.log10(this.modifiedWisdom * 0.1) *
+          0.01
         if (this.fixRandom) {
           ret.push(max - 0.00325)
         } else {
@@ -1152,7 +1159,11 @@ export default {
           skillYAdjust = 0
         }
       }
-      const PHASE_NAMES = [this.$t("chart.phase1"), this.$t("chart.phase2"), this.$t("chart.phase3")]
+      const PHASE_NAMES = [
+        this.$t('chart.phase1'),
+        this.$t('chart.phase2'),
+        this.$t('chart.phase3'),
+      ]
       const SKILL_COLORS = {
         heal: 'cyan',
         decel: 'darkred',
@@ -1168,10 +1179,13 @@ export default {
       annotations.push({
         type: 'line',
         label: {
-          content: this.startDelay >= 0.08 ? this.$t("chart.lateStart") : this.$t("chart.start"),
+          content:
+            this.startDelay >= 0.08
+              ? this.$t('chart.lateStart')
+              : this.$t('chart.start'),
           position: 'bottom',
           enabled: true,
-          xAdjust: -30
+          xAdjust: -30,
         },
         mode: 'vertical',
         scaleID: 'x-axis-0',
@@ -1180,7 +1194,7 @@ export default {
         borderWidth: 2,
         onClick: function () {
           thiz.$message(`スタートディレイ：${thiz.startDelay.toFixed(3)}秒`)
-        }
+        },
       })
 
       // 掛かり区間
@@ -1193,8 +1207,13 @@ export default {
           yMax: 100,
           xScaleID: 'x-axis-0',
           onClick: function () {
-            thiz.$message(`掛かり：${((thiz.temptationModeEnd - thiz.temptationModeStart) * thiz.frameLength)}秒、余分耐力消耗：${thiz.temptationWaste.toFixed(1)}`)
-          }
+            thiz.$message(
+              `掛かり：${
+                (thiz.temptationModeEnd - thiz.temptationModeStart) *
+                thiz.frameLength
+              }秒、余分耐力消耗：${thiz.temptationWaste.toFixed(1)}`
+            )
+          },
         })
       }
 
@@ -1212,7 +1231,11 @@ export default {
         dataSpeed.push(frame.speed)
         dataSp.push(frame.sp)
         dataPosition.push(frame.startPosition.toFixed(2))
-        for (let mi = index; mi < index + step && mi < this.frames.length; mi++) {
+        for (
+          let mi = index;
+          mi < index + step && mi < this.frames.length;
+          mi++
+        ) {
           // Skill annotations
           for (const skill of this.frames[mi].skills) {
             annotations.push({
@@ -1221,7 +1244,7 @@ export default {
                 content: skill.data.name,
                 position: 'top',
                 enabled: true,
-                yAdjust: skillYAdjust
+                yAdjust: skillYAdjust,
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
@@ -1232,24 +1255,36 @@ export default {
                 if (skill.detail) {
                   if ('waste' in skill.detail) {
                     if (skill.detail.waste > 0) {
-                      thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復(${(skill.detail.waste).toFixed(1)}が溢れた)`)
+                      thiz.$message(
+                        `耐力${skill.detail.heal.toFixed(
+                          1
+                        )}回復(${skill.detail.waste.toFixed(1)}が溢れた)`
+                      )
                     } else {
-                      thiz.$message(`耐力${(skill.detail.heal).toFixed(1)}回復`)
+                      thiz.$message(`耐力${skill.detail.heal.toFixed(1)}回復`)
                     }
                   } else if ('extended' in skill.detail) {
                     thiz.$message(`x${skill.detail.extended}`)
                   }
                 }
-              }
+              },
             })
             nextSkillYAdjust(skillYAdjust)
           }
           // コーナー
-          if (!this.isInCorner(this.frames[index].startPosition)
-              && this.isInCorner(this.frames[index].startPosition + this.frames[index].movement)) {
+          if (
+            !this.isInCorner(this.frames[index].startPosition) &&
+            this.isInCorner(
+              this.frames[index].startPosition + this.frames[index].movement
+            )
+          ) {
             cornerStart = index
-          } else if (this.isInCorner(this.frames[index].startPosition)
-              && !this.isInCorner(this.frames[index].startPosition + this.frames[index].movement)) {
+          } else if (
+            this.isInCorner(this.frames[index].startPosition) &&
+            !this.isInCorner(
+              this.frames[index].startPosition + this.frames[index].movement
+            )
+          ) {
             annotations.push({
               type: 'box',
               xMin: cornerStart,
@@ -1268,11 +1303,19 @@ export default {
           }
         }
         // 直線
-        if (!this.isInStraight(this.frames[index].startPosition)
-            && this.isInStraight(this.frames[index].startPosition + this.frames[index].movement)) {
+        if (
+          !this.isInStraight(this.frames[index].startPosition) &&
+          this.isInStraight(
+            this.frames[index].startPosition + this.frames[index].movement
+          )
+        ) {
           straightStart = index
-        } else if (this.isInStraight(this.frames[index].startPosition)
-            && !this.isInStraight(this.frames[index].startPosition + this.frames[index].movement)) {
+        } else if (
+          this.isInStraight(this.frames[index].startPosition) &&
+          !this.isInStraight(
+            this.frames[index].startPosition + this.frames[index].movement
+          )
+        ) {
           annotations.push({
             type: 'box',
             xMin: straightStart,
@@ -1286,11 +1329,21 @@ export default {
           })
         }
         // 上り坂
-        if (!this.isInSlope('up', this.frames[index].startPosition)
-            && this.isInSlope('up', this.frames[index].startPosition + this.frames[index].movement)) {
+        if (
+          !this.isInSlope('up', this.frames[index].startPosition) &&
+          this.isInSlope(
+            'up',
+            this.frames[index].startPosition + this.frames[index].movement
+          )
+        ) {
           upSlopeStart = index
-        } else if (this.isInSlope('up', this.frames[index].startPosition)
-            && !this.isInSlope('up', this.frames[index].startPosition + this.frames[index].movement)) {
+        } else if (
+          this.isInSlope('up', this.frames[index].startPosition) &&
+          !this.isInSlope(
+            'up',
+            this.frames[index].startPosition + this.frames[index].movement
+          )
+        ) {
           annotations.push({
             type: 'box',
             xMin: upSlopeStart,
@@ -1304,11 +1357,21 @@ export default {
           })
         }
         // 下り坂
-        if (!this.isInSlope('down', this.frames[index].startPosition)
-            && this.isInSlope('down', this.frames[index].startPosition + this.frames[index].movement)) {
+        if (
+          !this.isInSlope('down', this.frames[index].startPosition) &&
+          this.isInSlope(
+            'down',
+            this.frames[index].startPosition + this.frames[index].movement
+          )
+        ) {
           downSlopeStart = index
-        } else if (this.isInSlope('down', this.frames[index].startPosition)
-            && !this.isInSlope('down', this.frames[index].startPosition + this.frames[index].movement)) {
+        } else if (
+          this.isInSlope('down', this.frames[index].startPosition) &&
+          !this.isInSlope(
+            'down',
+            this.frames[index].startPosition + this.frames[index].movement
+          )
+        ) {
           annotations.push({
             type: 'box',
             xMin: downSlopeStart,
@@ -1331,44 +1394,46 @@ export default {
               label: {
                 content: PHASE_NAMES[phase],
                 position: 'bottom',
-                enabled: true
+                enabled: true,
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'black',
               borderWidth: 2,
-              onClick: function () {
-              }
+              onClick: function () {},
             })
           }
-          if (this.getSection(this.frames[index + step].startPosition) === 10 &&
-              this.getSection(frame.startPosition) === 9) {
+          if (
+            this.getSection(this.frames[index + step].startPosition) === 10 &&
+            this.getSection(frame.startPosition) === 9
+          ) {
             annotations.push({
               type: 'line',
               label: {
-                content: this.$t("chart.positionKeepEnd"),
+                content: this.$t('chart.positionKeepEnd'),
                 position: 'bottom',
-                enabled: true
+                enabled: true,
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'darkgreen',
               borderWidth: 2,
-              onClick: function () {
-              }
+              onClick: function () {},
             })
           }
-          const isInFinalCorner = this.isInFinalCorner(this.frames[index + step].startPosition);
+          const isInFinalCorner = this.isInFinalCorner(
+            this.frames[index + step].startPosition
+          )
           if (isInFinalCorner && !this.isInFinalCorner(frame.startPosition)) {
             annotations.push({
               type: 'line',
               label: {
-                content: this.$t("chart.finalCorner"),
+                content: this.$t('chart.finalCorner'),
                 position: 'top',
                 enabled: true,
-                yAdjust: skillYAdjust
+                yAdjust: skillYAdjust,
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
@@ -1382,18 +1447,17 @@ export default {
             annotations.push({
               type: 'line',
               label: {
-                content: this.$t("chart.spurt"),
+                content: this.$t('chart.spurt'),
                 position: 'bottom',
                 enabled: true,
-                yAdjust: 30
+                yAdjust: 30,
               },
               mode: 'vertical',
               scaleID: 'x-axis-0',
               value: label,
               borderColor: 'red',
               borderWidth: 2,
-              onClick: function () {
-              }
+              onClick: function () {},
             })
           }
         }
@@ -1403,80 +1467,87 @@ export default {
         annotation: {
           drawTime: 'afterDatasetsDraw',
           events: ['click'],
-          annotations
+          annotations,
         },
         elements: {
           point: {
-            radius: 0
-          }
+            radius: 0,
+          },
         },
         scales: {
-          yAxes: [{
-            id: 'sp',
-            type: 'linear',
-            position: 'left',
-            ticks: {
-              min: 0
-            }
-          }, {
-            id: 'speed',
-            type: 'linear',
-            position: 'right',
-            ticks: {
-              min: 15,
-              max: 27
-            }
-          }, {
-            id: 'position',
-            type: 'linear',
-            position: 'right',
-            ticks: {
-              min: -this.courseLength / 10,
-            }
-          }]
+          yAxes: [
+            {
+              id: 'sp',
+              type: 'linear',
+              position: 'left',
+              ticks: {
+                min: 0,
+              },
+            },
+            {
+              id: 'speed',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                min: 15,
+                max: 27,
+              },
+            },
+            {
+              id: 'position',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                min: -this.courseLength / 10,
+              },
+            },
+          ],
         },
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       }
       this.chartData = {
         labels: labels,
-        datasets: [{
-          fill: false,
-          label: this.$t("chart.hp"),
-          yAxisID: 'sp',
-          borderColor: 'rgb(255, 132, 99)',
-          data: dataSp
-        }, {
-          fill: false,
-          label: this.$t("chart.speed"),
-          yAxisID: 'speed',
-          borderColor: 'rgb(30, 21, 155)',
-          data: dataSpeed
-        }, {
-          fill: false,
-          label: this.$t("chart.position"),
-          yAxisID: 'position',
-          borderColor: 'rgb(215, 255, 215)',
-          data: dataPosition
-        }]
+        datasets: [
+          {
+            fill: false,
+            label: this.$t('chart.hp'),
+            yAxisID: 'sp',
+            borderColor: 'rgb(255, 132, 99)',
+            data: dataSp,
+          },
+          {
+            fill: false,
+            label: this.$t('chart.speed'),
+            yAxisID: 'speed',
+            borderColor: 'rgb(30, 21, 155)',
+            data: dataSpeed,
+          },
+          {
+            fill: false,
+            label: this.$t('chart.position'),
+            yAxisID: 'position',
+            borderColor: 'rgb(215, 255, 215)',
+            data: dataPosition,
+          },
+        ],
       }
     },
     getPhase(position) {
       if (position < this.trackDetail.distance / 6.0) {
         return 0
-      } else if (position < this.trackDetail.distance * 2.0 / 3) {
+      } else if (position < (this.trackDetail.distance * 2.0) / 3) {
         return 1
-      } else if (position < this.trackDetail.distance * 5.0 / 6) {
+      } else if (position < (this.trackDetail.distance * 5.0) / 6) {
         return 2
       } else {
         return 3
       }
     },
     getSection(position) {
-      return Math.floor(position * 24.0 / this.courseLength)
+      return Math.floor((position * 24.0) / this.courseLength)
     },
-    test() {
-    }
-  }
+    test() {},
+  },
 }
 </script>
 
