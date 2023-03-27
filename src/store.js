@@ -6,10 +6,15 @@ export default createStore({
     indicatedMaxEpoch: 50,
     runMaxEpoch: 50,
     epoch: 0,
-    skillActivateAdjustment: "0",
-    randomPosition: false,
+    skillActivateAdjustment: 0,
+    randomPosition: 0,
     emulating: false,
-    production: false,
+    production: process.env.NODE_ENV === "production",
+    track: {
+      location: "",
+      course: "",
+      surfaceCondition: "1",
+    },
   },
   mutations: {
     setEmulations(state, emulations) {
@@ -35,6 +40,9 @@ export default createStore({
     },
     setRunMaxEpoch(state, runMaxEpoch) {
       state.runMaxEpoch = runMaxEpoch;
+    },
+    setTrack(state, track) {
+      state.track = track;
     },
   },
   actions: {
@@ -62,6 +70,9 @@ export default createStore({
     updateRunMaxEpoch({ commit }, runMaxEpoch) {
       commit("setRunMaxEpoch", runMaxEpoch);
     },
+    updateTrack({ commit }, track) {
+      commit("setTrack", track);
+    },
   },
   getters: {
     emulations: (state) => state.emulations,
@@ -72,5 +83,6 @@ export default createStore({
     production: (state) => state.production,
     epoch: (state) => state.epoch,
     runMaxEpoch: (state) => state.runMaxEpoch,
+    track: (state) => state.track,
   },
 });

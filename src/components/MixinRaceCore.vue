@@ -34,14 +34,7 @@ export default {
       },
       passiveBonus: {},
       passiveTriggered: 0,
-      track: {
-        location: '',
-        course: '',
-        surfaceCondition: '1',
-      },
       courseList: [],
-      // Results
-      emulations: [],
       // Race variables
       maxEpoch: 0,
       season: -1,
@@ -441,9 +434,6 @@ export default {
       } else {
         return this.emulations[this.emulations.length - 1].raceTime
       }
-    },
-    production() {
-      return process.env.NODE_ENV === 'production'
     },
     chartMiddle() {
       return this.courseLength * 0.45
@@ -1554,14 +1544,6 @@ export default {
 <style scoped>
 .main-frame {
   text-align: left;
-}
-
-.input-status {
-  width: 90px;
-}
-
-.emulation-result {
-  text-align: center;
 }
 
 .emulation-result th {

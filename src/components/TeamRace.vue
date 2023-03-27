@@ -1,5 +1,5 @@
 <template>
-  <main-container ref="mainContainer">
+  <main-container emulatorType="cm">
     <template v-slot:course>
       <el-form-item :label="$t('message.raceType')">
         <el-select v-model="raceType" style="width: 130px">

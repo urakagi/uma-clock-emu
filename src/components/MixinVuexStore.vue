@@ -65,6 +65,14 @@ export default {
       set(value) {
         this.$store.dispatch('updateRunMaxEpoch', value)
       }
+    },
+    track: {
+      get() {
+        return this.$store.getters.track
+      },
+      set(value) {
+        this.$store.dispatch('updateTrack', value)
+      }
     }
   }
 }

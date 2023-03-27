@@ -302,8 +302,11 @@ import CalculatedValues from '@/components/CalculatedValues'
 import ChartHint from './ChartHint'
 import ExecuteBlock from './ExecuteBlock'
 import GoogleAdsense from "./GoogleAdsense";
+import MixinVuexStore from "./MixinVuexStore.vue";
 
 export default {
+  name: 'MainContainer',
+  props: ['emulatorType'],
   components: {
     ExecuteBlock,
     ChartHint,
@@ -313,14 +316,57 @@ export default {
     ElIconArrowDown,
     GoogleAdsense,
   },
-  name: 'MainContainer',
-  mixins: [MixinRaceCore],
+  mixins: [MixinRaceCore, MixinVuexStore],
   computed: {
     distanceType() {
       return this.trackDetail.distanceType
     },
     surfaceType() {
       return this.trackDetail.surface
+    },
+    maxSpurtRate() {
+      if (this.emulations.length === 0) {
+        return '-'
+      }
+      let maxSpurt = 0
+      for (const e of this.emulations) {
+        if (e.maxSpurt) maxSpurt++
+      }
+      return ((100.0 * maxSpurt) / this.emulations.length).toFixed(1)
+    },
+    maxSpurtSPLeft() {
+      if (this.emulations.length === 0) {
+        return '-'
+      }
+      let sum = 0.0
+      let count = 0
+      for (const e of this.emulations) {
+        if (e.maxSpurt) {
+          sum += e.spDiff
+          count++
+        }
+      }
+      if (count === 0) {
+        return '-'
+      }
+      return (sum / count).toFixed(1)
+    },
+    nonMaxSpurtSPLack() {
+      if (this.emulations.length === 0) {
+        return '-'
+      }
+      let sum = 0.0
+      let count = 0
+      for (const e of this.emulations) {
+        if (!e.maxSpurt) {
+          sum += e.spDiff
+          count++
+        }
+      }
+      if (count === 0) {
+        return '-'
+      }
+      return (-sum / count).toFixed(1)
     },
   },
   mounted() {
@@ -338,3 +384,18 @@ export default {
   },
 }
 </script>
+
+<style>
+.input-status {
+  width: 70px;
+}
+
+.emulation-result {
+  text-align: center;
+}
+
+.el-form-item {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+</style>

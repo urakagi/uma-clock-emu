@@ -7,7 +7,7 @@
     </el-form-item>
     <el-form-item :label="$t('message.testTime')">
       <el-input-number
-        model-value="20"
+        :model-value="20"
         v-model="indicatedMaxEpoch"
       ></el-input-number>
     </el-form-item>
@@ -21,27 +21,27 @@
       <el-select v-model="skillActivateAdjustment" style="width: 130px">
         <el-option
           :label="$t('message.skillActivateAdjustment0')"
-          value="0"
+          :value="0"
         ></el-option>
         <el-option
           :label="$t('message.skillActivateAdjustment1')"
-          value="1"
+          :value="1"
         ></el-option>
         <el-option
           :label="$t('message.skillActivateAdjustment2')"
-          value="2"
+          :value="2"
         ></el-option>
       </el-select>
     </el-form-item>
 
     <el-form-item :label="$t('message.randomPosition')">
       <el-select v-model="randomPosition" style="width: 130px">
-        <el-option :label="$t('message.randomPosition0')" value="0"></el-option>
-        <el-option :label="$t('message.randomPosition1')" value="1"></el-option>
-        <el-option :label="$t('message.randomPosition2')" value="2"></el-option>
-        <el-option :label="$t('message.randomPosition3')" value="3"></el-option>
-        <el-option :label="$t('message.randomPosition4')" value="4"></el-option>
-        <el-option :label="$t('message.randomPosition5')" value="5"></el-option>
+        <el-option :label="$t('message.randomPosition0')" :value="0"></el-option>
+        <el-option :label="$t('message.randomPosition1')" :value="1"></el-option>
+        <el-option :label="$t('message.randomPosition2')" :value="2"></el-option>
+        <el-option :label="$t('message.randomPosition3')" :value="3"></el-option>
+        <el-option :label="$t('message.randomPosition4')" :value="4"></el-option>
+        <el-option :label="$t('message.randomPosition5')" :value="5"></el-option>
       </el-select>
     </el-form-item>
 
@@ -51,12 +51,12 @@
         :percentage="Math.min(100, Math.floor((100 * epoch) / runMaxEpoch))"
       ></el-progress>
       <p>
-        <Adsense
+        <google-adsense
           v-if="$parent.production"
           data-ad-client="ca-pub-4611969396217909"
           data-ad-slot="6969023753"
         >
-        </Adsense>
+        </google-adsense>
       </p>
     </el-dialog>
   </div>
@@ -64,10 +64,12 @@
 
 <script>
 import MixinVuexStore from "./MixinVuexStore.vue";
+import GoogleAdsense from "./GoogleAdsense.vue";
 
 export default {
   name: 'ExecuteBlock',
   props: ['execFunction'],
+  components: {GoogleAdsense},
   mixins: [MixinVuexStore],
   created() {
     this.indicatedMaxEpoch = localStorage.getItem('maxEpoch')

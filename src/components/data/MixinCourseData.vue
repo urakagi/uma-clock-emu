@@ -1,8 +1,10 @@
 <script>
 import TrackData from './course_data.json'
+import MixinVuexStore from "../MixinVuexStore.vue";
 
 export default {
   name: 'MixinCourseData',
+  mixins: [MixinVuexStore],
   data: function () {
     return {
       trackData: TrackData,

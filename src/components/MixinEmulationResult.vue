@@ -5,9 +5,6 @@ export default {
   name: 'MixinEmulationResult',
   mixins: [MixinVuexStore],
   computed: {
-    emulationData() {
-      return this.emulations;
-    },
     avgRaceTime() {
       return this.calcAvg('all', 'raceTime')
     },
@@ -44,50 +41,6 @@ export default {
     timeStandardDeviationNotMaxSpurt() {
       return this.calcStdDev('notMax', 'raceTime')
     },
-    maxSpurtRate() {
-      if (this.emulationData.length === 0) {
-        return '-'
-      }
-      let maxSpurt = 0
-      for (const e of this.emulationData) {
-        if (e.maxSpurt) maxSpurt++
-      }
-      return ((100.0 * maxSpurt) / this.emulationData.length).toFixed(1)
-    },
-    maxSpurtSPLeft() {
-      if (this.emulationData.length === 0) {
-        return '-'
-      }
-      let sum = 0.0
-      let count = 0
-      for (const e of this.emulationData) {
-        if (e.maxSpurt) {
-          sum += e.spDiff
-          count++
-        }
-      }
-      if (count === 0) {
-        return '-'
-      }
-      return (sum / count).toFixed(1)
-    },
-    nonMaxSpurtSPLack() {
-      if (this.emulationData.length === 0) {
-        return '-'
-      }
-      let sum = 0.0
-      let count = 0
-      for (const e of this.emulationData) {
-        if (!e.maxSpurt) {
-          sum += e.spDiff
-          count++
-        }
-      }
-      if (count === 0) {
-        return '-'
-      }
-      return (-sum / count).toFixed(1)
-    },
   },
   methods: {
     toDisplayTime(time) {
@@ -104,7 +57,7 @@ export default {
     calcAvg(scope, field) {
       let sum = 0
       let count = 0
-      for (const e of this.emulationData) {
+      for (const e of this.emulations) {
         if (scope === 'max' && !e.maxSpurt) {
           continue
         } else if (scope === 'notMax' && e.maxSpurt) {
@@ -125,7 +78,7 @@ export default {
       const avg = this.calcAvg(scope, field)
       let sum = 0
       let count = 0
-      for (const e of this.emulationData) {
+      for (const e of this.emulations) {
         if (scope === 'max' && !e.maxSpurt) {
           continue
         } else if (scope === 'notMax' && e.maxSpurt) {
@@ -141,7 +94,7 @@ export default {
     },
     pickEdge(scope, field, dir) {
       let ret = dir === 'best' ? 999999 : -999999
-      for (const e of this.emulationData) {
+      for (const e of this.emulations) {
         if (scope === 'max' && !e.maxSpurt) {
           continue
         } else if (scope === 'notMax' && e.maxSpurt) {
