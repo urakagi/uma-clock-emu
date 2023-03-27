@@ -1,20 +1,25 @@
+<template>
+  <line-chart id="race-chart" :options="chartOptions" :data="chartStore" />
+</template>
+
 <script>
-import { Line } from 'vue-chartjs'
-import { Chart } from 'chart.js'
+import { Line as LineChart } from 'vue-chartjs';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import chartjsPluginAnnotation from 'chartjs-plugin-annotation'
+import MixinVuexStore from "./MixinVuexStore.vue";
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, chartjsPluginAnnotation);
 
 export default {
   name: 'RaceGraph',
-  extends: Line,
-  props: ['options'],
-  mounted() {
-    Chart.register(chartjsPluginAnnotation)
-    // this.renderChart(this.chartData, this.options)
-  },
-  watch: {
-    options() {
-      // this.renderChart(this.chartData, this.options)
-    },
+  props: ['chartDataProp', 'chartOptionsProp'],
+  components: { LineChart },
+  mixins: [MixinVuexStore],
+  data() {
+    return {
+      chartData: this.chartDataProp,
+      chartOptions: this.chartOptionsProp,
+    };
   },
 }
 </script>

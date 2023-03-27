@@ -270,7 +270,7 @@
       {{ $t('message.latestRaceTime') }}({{ formatTime(latestRaceTime, 2) }})
     </h3>
     <chart-hint />
-    <race-graph :chart-data="chartData" :options="chartOptions" />
+    <race-graph :chartDataProp="chartData" :chartOptionsProp="chartOptions" />
     <course-info :track="this.track" />
     <el-divider />
     <calculated-values />

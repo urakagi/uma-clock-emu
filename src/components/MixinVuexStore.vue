@@ -73,7 +73,15 @@ export default {
       set(value) {
         this.$store.dispatch('updateTrack', value)
       }
-    }
+    },
+    chartStore: {
+      get() {
+        return this.$store.getters.chartStore
+      },
+      set(value) {
+        this.$store.dispatch('updateChartStore', value)
+      }
+    },
   }
 }
 </script>

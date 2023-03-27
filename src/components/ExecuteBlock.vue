@@ -72,7 +72,7 @@ export default {
   components: {GoogleAdsense},
   mixins: [MixinVuexStore],
   created() {
-    this.indicatedMaxEpoch = localStorage.getItem('maxEpoch')
+    this.indicatedMaxEpoch = parseInt(localStorage.getItem('maxEpoch'));
     if (!this.indicatedMaxEpoch) {
       this.indicatedMaxEpoch = 50
     }

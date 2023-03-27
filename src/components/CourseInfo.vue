@@ -50,7 +50,6 @@ import MixinCourseData from './data/MixinCourseData'
 
 export default {
   name: 'CourseInfo',
-  props: ['track'],
   mixins: [MixinCourseData],
   computed: {
     trackDetail() {

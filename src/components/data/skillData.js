@@ -4541,6 +4541,32 @@ function normalSkillData(thiz) {
           heal: -50,
         },
         {
+          rarity: "evo",
+          id: 108301111,
+          holder: 108301,
+          name: "質実剛健",
+          acceleration: 0.4,
+          invokes: [
+            {
+              heal: 150,
+              conditions: {
+                distance_type: 4,
+                running_style: 3,
+                is_lastspurt: 1,
+                track_id: 10005,
+              },
+            },
+            {
+              heal: -200,
+              conditions: {
+                distance_type: 4,
+                running_style: 3,
+                is_lastspurt: 1,
+              },
+            },
+          ],
+        },
+        {
           rarity: "rare",
           id: 202421,
           name: "無我夢中",
@@ -4766,7 +4792,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "all", id: 201222, name: "スタミナイーター", fatigue: 50 },
+        { rarity: "all", id: -201222, name: "スタミナイーター", fatigue: 50 },
       ],
       conditions: { distance_type: 4, phase_random: 1 },
     },
@@ -4774,7 +4800,7 @@ function normalSkillData(thiz) {
       variants: [
         {
           rarity: "all",
-          id: -201222,
+          id: -2012222,
           name: "スタミナイーターx2",
           fatigue: 100,
         },
@@ -4931,6 +4957,7 @@ function normalSkillData(thiz) {
       variants: [
         { rarity: "all", id: 201441, name: "八方にらみ", fatigue: 300 },
       ],
+      conditions: { phase_random: 2 },
     },
     {
       variants: [
@@ -4945,7 +4972,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "all", id: 201221, name: "スタミナグリード", fatigue: 100 },
+        { rarity: "all", id: -201221, name: "スタミナグリード", fatigue: 100 },
       ],
       conditions: { distance_type: 4, phase_random: 1 },
     },
@@ -5426,6 +5453,91 @@ function normalSkillData(thiz) {
       ],
       duration: 3,
       conditions: { distance_rate_after_random: 50 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 108301211,
+          holder: 108301,
+          name: "革命をもたらす威容",
+          targetSpeed: 0.35,
+          heal: 150,
+        },
+        {
+          rarity: "rare",
+          id: 202561,
+          name: "一発必中",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202562,
+          name: "ロックオン",
+          targetSpeed: 0.15,
+          heal: 35,
+        },
+      ],
+      type: "speed",
+      duration: 2.4,
+      conditions: { distance_type: 4, phase_laterhalf_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 210261,
+          name: "太陽の叡智",
+          targetSpeed: 0.35 * 1.15,
+        },
+        {
+          rarity: "normal",
+          id: 210262,
+          name: "陽の加護",
+          targetSpeed: 0.15 * 1.15,
+        },
+      ],
+      duration: 1.8,
+      conditions: { phase_random: 1 },
+      tooltip: "1.15倍(スキル15個)、中盤ランダムとして扱う",
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 210281,
+          name: "大地の叡智",
+          targetSpeed: 0.35 * 1.15,
+        },
+        {
+          rarity: "normal",
+          id: 210282,
+          name: "地の加護",
+          targetSpeed: 0.15 * 1.15,
+        },
+      ],
+      duration: 2.4,
+      conditions: { phase_laterhalf_random: 2 },
+      tooltip: "1.15倍(スキル15個)として扱う",
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 210271,
+          name: "大海の叡智",
+          acceleration: 0.4 * 1.15,
+        },
+        {
+          rarity: "normal",
+          id: 210282,
+          name: "海の加護",
+          acceleration: 0.2 * 1.15,
+        },
+      ],
+      duration: 1.5,
+      conditions: { phase_firsthalf_random: 0 },
+      tooltip: "1.15倍(スキル15個)として扱う",
     },
 
     // End of normal skills
@@ -6813,7 +6925,7 @@ const uniqueSkillData = (thiz) => [
     duration: 6,
     conditions: {
       ground_type: 2,
-      distance_rate: [">=40%", "<=50"],
+      distance_rate: [">=40", "<=50"],
     },
     tooltip: "MAX発動時",
   },
@@ -7156,11 +7268,10 @@ const uniqueSkillData = (thiz) => [
     id: 100851,
     holder: 108501,
     name: "至上であれ",
-    type: "speed",
     speedWithDecel: 0.25,
     duration: 5,
     conditions: {
-      distance_rate: [66, 68],
+      distance_rate: [">=66", "<=68"],
       temptation_count: 0,
     },
   },
@@ -7195,8 +7306,6 @@ const uniqueSkillData = (thiz) => [
           candidates.push(skill);
         }
       }
-      console.log(JSON.stringify(thisSkill));
-      console.log(candidates.map((x) => x.name));
       const chainTriggered = [];
       const num = thisSkill.type === "unique" ? 2 : 1;
       for (let i = 0; i < num && candidates.length > 0; i++) {
@@ -7206,6 +7315,29 @@ const uniqueSkillData = (thiz) => [
       }
       return { chainTriggered };
     },
+  },
+  {
+    id: 100831,
+    holder: 108301,
+    name: "Mission: Triumph",
+    targetSpeed: 0.35,
+    invokes: [
+      {
+        duration: 6,
+        conditions: {
+          distance_rate: ">=40",
+          corner: 0,
+          slope: 2,
+        },
+      },
+      {
+        duration: 5,
+        conditions: {
+          distance_rate: ">=40",
+          corner: 0,
+        },
+      },
+    ],
   },
 
   // End of unique skills

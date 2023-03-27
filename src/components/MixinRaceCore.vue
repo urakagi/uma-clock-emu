@@ -59,10 +59,10 @@ export default {
       temptationWaste: 0,
       // UI
       skillGroups: '',
-      savedUmas: {},
-      umaToLoad: null,
       chartData: {},
       chartOptions: {},
+      savedUmas: {},
+      umaToLoad: null,
       // Constants
       fitRanks: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
       // Special cases

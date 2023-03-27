@@ -15,6 +15,10 @@ export default createStore({
       course: "",
       surfaceCondition: "1",
     },
+    chartStore: {
+      labels: [],
+      datasets: [],
+    },
   },
   mutations: {
     setEmulations(state, emulations) {
@@ -43,6 +47,9 @@ export default createStore({
     },
     setTrack(state, track) {
       state.track = track;
+    },
+    setChartStore(state, chartStore) {
+      state.chartStore = chartStore;
     },
   },
   actions: {
@@ -73,6 +80,9 @@ export default createStore({
     updateTrack({ commit }, track) {
       commit("setTrack", track);
     },
+    updateChartStore({ commit }, track) {
+      commit("setChartStore", track);
+    },
   },
   getters: {
     emulations: (state) => state.emulations,
@@ -84,5 +94,6 @@ export default createStore({
     epoch: (state) => state.epoch,
     runMaxEpoch: (state) => state.runMaxEpoch,
     track: (state) => state.track,
+    chartStore: (state) => state.chartStore,
   },
 });
