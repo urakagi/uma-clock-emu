@@ -522,7 +522,10 @@ export default {
     triggerSkill(skill) {
       let skillDetail = null;
       if (skill.trigger) {
-        skillDetail = skill.trigger(skill)
+        skillDetail = skill.trigger(skill);
+      }
+      if (skill.heal) {
+        skillDetail = this.doHeal(skill.heal);
       }
       if (skill.duration) {
         this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
@@ -918,9 +921,6 @@ export default {
       if (copy.heal) {
         type = 'heal';
         effectCount++;
-        triggers.push(() => {
-          return thiz.doHeal(copy.heal);
-        });
       }
       if (copy.targetSpeed || copy.speedWithDecel) {
         type = 'speed';
@@ -993,6 +993,7 @@ export default {
         350: 50,
         150: 35,
         '-100': -100,
+        '-300': -300,
       };
       const speedMap = {
         0.55: 0.15,
