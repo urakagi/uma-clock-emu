@@ -2867,6 +2867,12 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "rare",
+          id: 201652,
+          name: "いいとこ入った！",
+          targetSpeed: 0.35,
+        },
+        {
           rarity: "normal",
           id: 201651,
           name: "スリップストリーム",
@@ -4515,6 +4521,13 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          holder: 107601,
+          id: 202151,
+          name: "桜前線進行中！",
+          targetSpeed: 0.45,
+        },
+        {
           rarity: "rare",
           id: 202151,
           name: "勇往邁進",
@@ -5588,6 +5601,56 @@ function normalSkillData(thiz) {
       duration: 1.5,
       conditions: { phase_firsthalf_random: 0 },
       tooltip: "1.15倍(スキル15個)として扱う",
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202581,
+          name: "脱兎の先へ",
+          targetSpeed: 0.25,
+          heal: 550,
+        },
+        {
+          rarity: "normal",
+          id: 202582,
+          name: "脇目も振らず",
+          targetSpeed: 0.05,
+          heal: 150,
+        },
+      ],
+      duration: 2.4,
+      conditions: { distance_type: 4, phase_random: 1 },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          holder: 107601,
+          id: 107601211,
+          name: "一花咲かせましょう！",
+          speedWithDecel: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 202591,
+          name: "一気呵成",
+          speedWithDecel: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202592,
+          name: "大急ぎ",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: {
+        distance_type: 4,
+        running_style: 3,
+        phase_firsthalf_random: 2,
+        lastspurt: 2,
+      },
     },
 
     // End of normal skills
@@ -7414,6 +7477,28 @@ const uniqueSkillData = (thiz) => [
     conditions: {
       remain_distance: [649, 651],
     },
+  },
+  {
+    id: 100761,
+    holder: 107601,
+    name: "花開き、世界",
+    invokes: [
+      {
+        heal: 750,
+        conditions: {
+          distance_type: 4,
+          distance_rate: [50, 51],
+        },
+      },
+      {
+        conditions: {
+          distance_rate: [50, 51],
+        },
+      },
+    ],
+    targetSpeed: 0.25,
+    duration: 6,
+    tooltip: "順位>=30%,<=80%(3-7)",
   },
 
   // End of unique skills
