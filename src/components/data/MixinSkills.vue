@@ -642,8 +642,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '燃燒青春・耐', value: 165},
-            rare: {id: 0, name: '點燃青春・耐', value: 605},
+            normal: {id: 0, name: '青春燃燒・體能', value: 165},
+            rare: {id: 0, name: '青春點火・體能', value: 605},
             tooltip: '効果1.1倍として扱う',
             init: function () {
               this.randoms = thiz.initPhaseRandom(1)
@@ -1160,8 +1160,8 @@ export default {
             }
           },
           {
-            normal: {id: 201672, name: '安利', value: 0.15},
-            rare: {id: 201671, name: '排名急上升！', value: 0.35},
+            normal: {id: 201672, name: '精選推薦', value: 0.15},
+            rare: {id: 201671, name: '排行驟升！', value: 0.35},
             duration: 1.8,
             surfaceLimit: SurfaceLimit.Dirt,
             tooltip: '「中盤のどこか」として扱う。',
@@ -1185,15 +1185,15 @@ export default {
           },
           {
             normal: {id: 201611, name: '豎起尾巴', value: 0.15},
-            rare: {id: 201612, name: '後起之秀', value: 0.35},
+            rare: {id: 201612, name: '尾巴躍龍門', value: 0.35},
             duration: 3,
             check: function () {
               return thiz.skillTriggerCount[1] >= 3
             }
           },
           {
-            normal: {id: 0, name: '點燃青春・速', value: 0.1725},
-            rare: {id: 0, name: '燃燒青春・速', value: 0.4025},
+            normal: {id: 0, name: '青春點火・速度', value: 0.1725},
+            rare: {id: 0, name: '青春燃燒・速度', value: 0.4025},
             duration: 1.8,
             tooltip: '効果1.15倍として扱う',
             init: function () {
@@ -1212,8 +1212,8 @@ export default {
             }
           },
           {
-            normal: {id: 202012, name: '熱場好戲', value: 0.15},
-            rare: {id: 202011, name: '壓台好戲', value: 0.35},
+            normal: {id: 202012, name: '暖場好戲', value: 0.15},
+            rare: {id: 202011, name: '壓軸好戲', value: 0.35},
             duration: 2.4,
             distanceLimit: DistanceLimit.Long,
             init: function () {
@@ -1459,8 +1459,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '點燃青春・力', value: 0.22},
-            rare: {id: 0, name: '燃燒青春・力', value: 0.44},
+            normal: {id: 0, name: '青春點火・力量', value: 0.22},
+            rare: {id: 0, name: '青春燃燒・力量', value: 0.44},
             duration: 1.2,
             tooltip: '効果1.1倍として扱う',
             init: function () {
@@ -1471,8 +1471,8 @@ export default {
             }
           },
           {
-            normal: {id: 0, name: '前行', value: 0.2},
-            rare: {id: 0, name: '奮勇向前！', value: 0.3},
+            normal: {id: 0, name: '鎖定前排', value: 0.2},
+            rare: {id: 0, name: '目標是最前排！', value: 0.3},
             duration: 3,
             surfaceLimit: SurfaceLimit.Dirt,
             init: function () {
@@ -1483,7 +1483,7 @@ export default {
             }
           },
           {
-            normal: {id: 201902, name: '正面決鬥', value: 0.2},
+            normal: {id: 201902, name: '正面對決', value: 0.2},
             styleLimit: [2],
             duration: 1.8,
             init: function () {
@@ -1497,8 +1497,8 @@ export default {
         // End of acc skills
         boost: [
           {
-            normal: {id: 0, name: '点燃青春・毅', value: {targetSpeed: 0.055, acceleration: 0.11}},
-            rare: {id: 0, name: '燃烧青春・毅', value: {targetSpeed: 0.275, acceleration: 0.33}},
+            normal: {id: 0, name: '青春點火・意志', value: {targetSpeed: 0.055, acceleration: 0.11}},
+            rare: {id: 0, name: '青春燃燒・意志', value: {targetSpeed: 0.275, acceleration: 0.33}},
             duration: 1.8,
             tooltip: '効果1.1倍として扱う',
             init: function () {
@@ -2753,7 +2753,7 @@ export default {
           }
         },
         {
-          id: 100581, name: 'I Never Goof Up!',
+          id: 100581, name: 'I\'M☆FULL☆SPEED!!',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2780,7 +2780,7 @@ export default {
           }
         },
         {
-          id: 0, name: '媽咪惡作劇團團轉♡',
+          id: 0, name: '繃帶木乃伊的惡作劇♡',
           boost: {
             targetSpeed: 0.25,
             acceleration: 0.3
@@ -2804,7 +2804,7 @@ export default {
           }
         },
         {
-          id: 110061, name: '聖誕夜的奇蹟奔跑！',
+          id: 110061, name: '聖夜的奇蹟跑者！',
           targetSpeed: 0.25,
           acceleration: 0.3,
           heal: 350,
@@ -2814,7 +2814,7 @@ export default {
           }
         },
         {
-          id: 100221, name: '童話故事',
+          id: 100221, name: 'Fairy tale',
           targetSpeed: 0.35,
           duration: 5,
           check: function () {
@@ -2822,7 +2822,7 @@ export default {
           }
         },
         {
-          id: 100211, name: '白色閃電，見識一下吧！',
+          id: 100211, name: '見識一下白色閃電吧！',
           targetSpeed: 0.35,
           acceleration: 0.1,
           duration: 5,
