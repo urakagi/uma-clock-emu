@@ -276,6 +276,10 @@ export default {
           }
         case 'activate_count_heal':
           return () => thiz.healTriggerCount >= value;
+        case 'activate_count_all':
+          return () => thiz.skillTriggerCount.reduce((pre, cur) => pre + cur, 0) >= value;
+        case 'activate_count_start':
+          return () => thiz.skillTriggerCount[0] >= value;
         case 'accumulatetime':
           return () => thiz.accTimePassed(value);
         case 'straight_front_type':

@@ -1677,7 +1677,19 @@ function normalSkillData(thiz) {
           heal: 550,
           targetSpeed: 0.15,
         },
-        { rarity: "rare", id: 201691, name: "潜伏態勢", heal: 550 },
+        {
+          rarity: "evo",
+          id: 106202111,
+          holder: 106202,
+          name: "ポジティブスマイル",
+          heal: 750,
+        },
+        {
+          rarity: "rare",
+          id: 201691,
+          name: "潜伏態勢",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 201692,
@@ -2044,7 +2056,19 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "rare", id: 200963, name: "紫電一閃", targetSpeed: 0.35 },
+        {
+          rarity: "evo",
+          id: 104102211,
+          holder: 104102,
+          name: "驀進！爆進！バクシーン！",
+          duration: 4,
+        },
+        {
+          rarity: "rare",
+          id: 200963,
+          name: "紫電一閃",
+          targetSpeed: 0.35,
+        },
         {
           rarity: "double",
           id: 200961,
@@ -3188,7 +3212,19 @@ function normalSkillData(thiz) {
           name: "刹那への覚悟",
           targetSpeed: 0.45,
         },
-        { rarity: "rare", id: 201701, name: "決死の覚悟", targetSpeed: 0.35 },
+        {
+          rarity: "evo",
+          id: 110501111,
+          holder: 110501,
+          name: "銀河のその先へ、あなたと",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 201701,
+          name: "決死の覚悟",
+          targetSpeed: 0.35,
+        },
         {
           rarity: "normal",
           id: 201702,
@@ -3392,7 +3428,19 @@ function normalSkillData(thiz) {
           targetSpeed: 0.35,
           acceleration: 0.2,
         },
-        { rarity: "rare", id: 202041, name: "意気衝天", targetSpeed: 0.35 },
+        {
+          rarity: "evo",
+          id: 104102111,
+          holder: 104102,
+          name: "猪突猛進！バクシンロード！",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 202041,
+          name: "意気衝天",
+          targetSpeed: 0.35,
+        },
         {
           rarity: "normal",
           id: 202042,
@@ -3608,7 +3656,12 @@ function normalSkillData(thiz) {
           name: "最速のトップギア",
           targetSpeed: 0.55,
         },
-        { rarity: "rare", id: 202451, name: "トップギア", targetSpeed: 0.45 },
+        {
+          rarity: "rare",
+          id: 202451,
+          name: "トップギア",
+          targetSpeed: 0.45,
+        },
         {
           rarity: "normal",
           id: 202452,
@@ -4199,10 +4252,23 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "normal", id: 201601, name: "地固め", acceleration: 0.2 },
+        {
+          rarity: "rare",
+          id: 201602,
+          name: "盤石の構え",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "normal",
+          id: 201601,
+          name: "地固め",
+          acceleration: 0.2,
+        },
       ],
       duration: 3,
-      tooltip: "条件は満たしているとして扱う",
+      conditions: {
+        activate_count_start: 3,
+      },
     },
     {
       variants: [
@@ -4303,7 +4369,20 @@ function normalSkillData(thiz) {
           acceleration: 0.4,
           duration: 4,
         },
-        { rarity: "rare", id: 202081, name: "起死回生", acceleration: 0.4 },
+        {
+          rarity: "evo",
+          id: 106202211,
+          holder: 106202,
+          name: "大どんでんがえし",
+          acceleration: 0.4,
+          duration: 4,
+        },
+        {
+          rarity: "rare",
+          id: 202081,
+          name: "起死回生",
+          acceleration: 0.4,
+        },
         {
           rarity: "normal",
           id: 202082,
@@ -5650,6 +5729,50 @@ function normalSkillData(thiz) {
         running_style: 3,
         phase_firsthalf_random: 2,
         lastspurt: 2,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          holder: 107601,
+          id: 107601211,
+          name: "星の海を駆けて",
+          speedWithDecel: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "rare",
+          id: 202601,
+          name: "ルミネセンス",
+          speedWithDecel: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202602,
+          name: "イグニッション",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 2.4,
+      conditions: {
+        distance_type: 3,
+        activate_count_all: 13,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 202612,
+          name: "溢れる情熱",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 2.4,
+      conditions: {
+        running_style: 3,
+        phase_laterhalf_random: 0,
       },
     },
 
@@ -7499,6 +7622,65 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.25,
     duration: 6,
     tooltip: "順位>=30%,<=80%(3-7)",
+  },
+  {
+    id: 101051,
+    holder: 110501,
+    name: "アド・アストラ",
+    invokes: [
+      {
+        targetSpeed: 0.45,
+        conditions: {
+          distance_type: 3,
+          distance_rate: [50, 55],
+          activate_count_all: 7,
+        },
+      },
+      {
+        targetSpeed: 0.35,
+        conditions: {
+          distance_rate: [50, 55],
+        },
+      },
+    ],
+    duration: 5,
+    tooltip: "順位>=30%,<=80%(3-7)",
+  },
+  {
+    id: 110621,
+    holder: 106202,
+    name: "ごろりん！？パワードライブ",
+    invokes: [
+      {
+        targetSpeed: 0.25,
+        acceleration: 0.1,
+        conditions: {
+          distance_type: 3,
+          distance_rate: ">=50",
+          corner: 1,
+        },
+      },
+      {
+        targetSpeed: 0.25,
+        conditions: {
+          distance_rate: ">=50",
+          corner: 1,
+        },
+      },
+    ],
+    duration: 6,
+    tooltip: "6秒扱い",
+  },
+  {
+    id: 110411,
+    holder: 104102,
+    name: "CHERRY☆スクランブル",
+    acceleration: 0.4,
+    conditions: {
+      remain_distance: [399, 401],
+    },
+    duration: 4,
+    tooltip: "4秒扱い",
   },
 
   // End of unique skills
