@@ -7621,6 +7621,7 @@ const uniqueSkillData = (thiz) => [
     ],
     targetSpeed: 0.25,
     duration: 6,
+    type: "speed",
     tooltip: "順位>=30%,<=80%(3-7)",
   },
   {
@@ -7643,6 +7644,7 @@ const uniqueSkillData = (thiz) => [
         },
       },
     ],
+    type: "speed",
     duration: 5,
     tooltip: "順位>=30%,<=80%(3-7)",
   },
@@ -7670,6 +7672,7 @@ const uniqueSkillData = (thiz) => [
     ],
     duration: 6,
     tooltip: "6秒扱い",
+    type: "composite",
   },
   {
     id: 110411,
