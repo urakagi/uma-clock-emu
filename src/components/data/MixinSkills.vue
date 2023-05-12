@@ -477,7 +477,10 @@ export default {
       for (const skill of this.invokedSkills) {
         switch (skill.type) {
           case 'passive':
-            if (skill.check && skill.check()) {
+            if (skill.id === 202051) {
+              // 大逃げ
+              this.oonige = true;
+            } else if (skill.check && skill.check()) {
               if ('triggerRate' in skill) {
                 if (Math.random() < skill.triggerRate) {
                   skill.trigger(skill);
@@ -492,7 +495,7 @@ export default {
                 this.frames[0].skills.push({data: skill});
               }
             }
-            break
+            break;
           case 'gate':
             this.startDelay *= skill.startDelay;
             skill.trigger(skill);
