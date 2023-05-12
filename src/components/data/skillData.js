@@ -1499,7 +1499,19 @@ function normalSkillData(thiz) {
           heal: 550,
           targetSpeed: 0.15,
         },
-        { rarity: "rare", id: 201421, name: "リラックス", heal: 550 },
+        {
+          rarity: "evo",
+          id: 110601111,
+          holder: 110601,
+          name: "焦らず、気負わず",
+          heal: 750,
+        },
+        {
+          rarity: "rare",
+          id: 201421,
+          name: "リラックス",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 201422,
@@ -5775,6 +5787,34 @@ function normalSkillData(thiz) {
         phase_laterhalf_random: 0,
       },
     },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 110601211,
+          holder: 110601,
+          name: "ちょっといいこと、集めて",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202641,
+          name: "千里の道",
+          targetSpeed: 0.25,
+        },
+        {
+          rarity: "normal",
+          id: 202642,
+          name: "一歩から",
+          targetSpeed: 0.05,
+        },
+      ],
+      duration: 4,
+      conditions: {
+        running_style: 3,
+        phase_random: 1,
+      },
+    },
 
     // End of normal skills
   ];
@@ -7684,6 +7724,18 @@ const uniqueSkillData = (thiz) => [
     },
     duration: 4,
     tooltip: "4秒扱い",
+  },
+  {
+    id: 101061,
+    holder: 110601,
+    name: "Bang☆ミラクるわせ！",
+    targetSpeed: 0.45,
+    conditions: {
+      distance_type: 4,
+      is_finalcorner_laterhalf: 1,
+    },
+    duration: 6,
+    tooltip: "4番人気以下時。>=40%,<=70%",
   },
 
   // End of unique skills
