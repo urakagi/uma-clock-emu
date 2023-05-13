@@ -27,7 +27,7 @@
 		"random": "Random",
 		"course": "Course",
 		"raceType": "Race Type",
-		"surfaceCondition": "Condition",
+		"surfaceCondition": "Going",
 		"uniqueSkill": "Unique Skill",
 		"emulateStart": "Start Simulation",
 		"emulateOnce": "Once",
@@ -102,9 +102,9 @@
 		"runningStyle4": "Chaser",
 
 		"surfaceCondition1": "Good",
-		"surfaceCondition2": "Slightly Heavy",
-		"surfaceCondition3": "Heavy",
-		"surfaceCondition4": "Bad",
+		"surfaceCondition2": "Yielding",
+		"surfaceCondition3": "Soft",
+		"surfaceCondition4": "Heavy",
 
 		"mood0": "Best",
 		"mood1": "Good",
