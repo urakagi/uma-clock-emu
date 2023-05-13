@@ -8,9 +8,11 @@ import ko from './locales/ko.json';
 
 import skillZhTW from './locales/skill-zhTW.json'
 import skillKo from './locales/skill-ko.json'
+import skillEn from './locales/skill-en.json'
 
 Object.assign(zhTW, { skill: skillZhTW });
 Object.assign(ko, { skill: skillKo });
+Object.assign(en, { skill: skillEn });
 
 Vue.use(VueI18n)
 
