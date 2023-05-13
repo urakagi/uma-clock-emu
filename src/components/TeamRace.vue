@@ -120,8 +120,8 @@
           <el-option
               v-for="skill in this.uniqueSkillData"
               :label="skill.name"
-              :value="skill.name"
-              :key="skill.name"
+              :value="skill.id"
+              :key="skill.id"
           />
         </el-select>
       </el-form-item>
@@ -156,7 +156,7 @@
           <div v-for="rarity in raritySections" :key="menu.type + rarity">
 
             <el-collapse v-if="rarity === 'inherit' && ['speed', 'composite'].includes(menu.type)">
-              <el-collapse-item :title="$t(rarityString[rarity])">
+              <el-collapse-item :title="menu.title + '：' + $t(rarityString[rarity])">
                 <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
                   <el-tooltip
                       v-for="skill in availableSkills[menu.type][rarity]"
