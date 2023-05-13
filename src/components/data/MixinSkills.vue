@@ -2759,12 +2759,8 @@ export default {
             acceleration: 0.3
           },
           duration: 5,
-          tooltip: '於終盤彎道隨機位置發動',
-          init: function () {
-            this.randoms = thiz.initPhase2CornerRandom()
-          },
-          check: function (startPosition) {
-            return thiz.isInRandom(this.randoms, startPosition)
+          check: function () {
+            return thiz.isInDistanceRate(0.45, 0.6) && thiz.sp <= thiz.spMax * 0.7;
           }
         },
         {
