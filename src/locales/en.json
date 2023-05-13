@@ -88,13 +88,13 @@
 		"contact": "Twitter Link",
 		"emulating": "Simulating, please wait......",
 
-		"randomPosition": "Random block",
+		"randomPosition": "Section randomization",
 		"randomPosition0": "Random",
-		"randomPosition1": "Soon",
+		"randomPosition1": "Fastest",
 		"randomPosition2": "1/4",
-		"randomPosition3": "Middle",
+		"randomPosition3": "Half",
 		"randomPosition4": "3/4",
-		"randomPosition5": "Latest",
+		"randomPosition5": "Slowest",
 
 		"runningStyle1": "Runner",
 		"runningStyle2": "Leader",
