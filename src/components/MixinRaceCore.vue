@@ -28,7 +28,7 @@ export default {
       track: {
         location: '',
         course: '',
-        surfaceCondition: '0',
+        surfaceCondition: '1',
       },
       courseList: [],
       // Results
