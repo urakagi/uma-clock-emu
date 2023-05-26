@@ -507,7 +507,7 @@ export default {
       return ret
     },
     initAllCornerRandom() {
-      const corners = this.trackDetail.corners.map(c => ({start: c.start, length: c.length}))
+      const corners = this.trackDetail.corners.map(c => ({start: c.start, end: c.start + c.length}))
       const triggers = []
 
       function logTrigger(min, max) {
@@ -525,10 +525,9 @@ export default {
         }
         const i = Math.floor(Math.random() * corners.length)
         const corner = corners[i]
-        const trigger = logTrigger(corner.start, corner.start + corner.length)
-        if (corner.start + corner.length - trigger.end >= 10) {
+        const trigger = logTrigger(corner.start, corner.end)
+        if (corner.end - trigger.end >= 10) {
           corner.start = trigger.end
-          corner.length -= (trigger.end - corner.start)
         } else {
           corners.splice(i, 1)
         }
