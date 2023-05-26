@@ -242,7 +242,7 @@ export default {
         const invokes = [];
         if (skillInvokes) {
           for (const invoke of skillInvokes) {
-            invokes.push({...rest, ...invoke});
+            invokes.push(this.reshapeSkill({...rest, ...invoke}));
           }
         } else {
           invokes.push(skill);
@@ -425,6 +425,10 @@ export default {
               return () => thiz.spurtParameters?.speed == thiz.maxSpurtSpeed;
           }
           break;
+        case 'base_speed':
+          return () => thiz.umaStatus.speed >= value;
+        case 'base_power':
+          return () => thiz.umaStatus.power >= value;
         default:
           alert(`Unknown condition ${cond}`);
           console.error(`Unknown condition ${cond}`);

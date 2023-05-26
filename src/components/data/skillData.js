@@ -2938,7 +2938,19 @@ function normalSkillData(thiz) {
           name: "怒濤のポロロッカ",
           targetSpeed: 0.45,
         },
-        { rarity: "rare", id: 200631, name: "疾風怒濤", targetSpeed: 0.35 },
+        {
+          rarity: "evo",
+          id: 108401111,
+          holder: 108401,
+          name: "嵐を呼ぶ破壊神",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 200631,
+          name: "疾風怒濤",
+          targetSpeed: 0.35,
+        },
         {
           rarity: "normal",
           id: 200632,
@@ -5815,6 +5827,58 @@ function normalSkillData(thiz) {
         phase_random: 1,
       },
     },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202661,
+          name: "昂る鼓動",
+          speedWithDecel: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202662,
+          name: "込み上げる熱",
+          targetSpeed: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: {
+        distance_type: [3, 4],
+        phase_firsthalf_random: 2,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 108401211,
+          holder: 108401,
+          name: "酔い痴れよ、世界",
+          passiveSpeed: 80,
+          passivePower: 80,
+        },
+        {
+          rarity: "rare",
+          id: 202651,
+          name: "雲蒸竜変",
+          passiveSpeed: 60,
+          passivePower: 60,
+        },
+        {
+          rarity: "normal",
+          id: 202652,
+          name: "自信家",
+          passiveSpeed: 20,
+          passivePower: 20,
+        },
+      ],
+      conditions: {
+        distance_type: [2, 3],
+        base_speed: 1000,
+        base_power: 1000,
+      },
+    },
 
     // End of normal skills
   ];
@@ -7736,6 +7800,33 @@ const uniqueSkillData = (thiz) => [
     },
     duration: 6,
     tooltip: "4番人気以下時。>=40%,<=70%",
+  },
+  {
+    id: 100841,
+    holder: 108401,
+    name: "霹靂のアウフヘーベン",
+    invokes: [
+      {
+        speedWithDecel: 0.55,
+        conditions: {
+          phase: ">=2",
+          is_finalcorner: 1,
+          corner: 0,
+          distance_type: 3,
+          track_id: 10006,
+        },
+      },
+      {
+        speedWithDecel: 0.35,
+        conditions: {
+          phase: ">=2",
+          is_finalcorner: 1,
+          corner: 0,
+        },
+      },
+    ],
+    type: "speed",
+    duration: 5,
   },
 
   // End of unique skills
