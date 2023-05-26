@@ -157,5 +157,26 @@
 		"phaseSeparators": "Phase 1 starts at {0}m, phase 2 starts at {1}m",
 		"firstSlopes": "First up slope：{0} | down slope：{1}",
 		"finalCorner": "FinalCorner"
+	},
+	"course": {
+		"10001": "Sapporo",
+		"10002": "Hakodate",
+		"10003": "Nigata",
+		"10004": "Fukushima",
+		"10005": "Nakayama",
+		"10006": "Tokyo",
+		"10007": "Cyukyou",
+		"10008": "Kyoto",
+		"10009": "Hanshin",
+		"10010": "Kokura",
+		"10101": "Oi",
+		"10103": "Kawasaki",
+		"10104": "Funabashi",
+		"10105": "Morioka",
+		"10201": "Longchamp?"
+	},
+	"surface": {
+		"1": "Turf",
+		"2": "Dirt"
 	}
 }

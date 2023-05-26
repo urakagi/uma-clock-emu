@@ -108,8 +108,8 @@
       <el-form-item :label="$t('message.course')">
         <el-select v-model="track.location" @change="locationChanged" style="width: 120px;">
           <el-option
-              v-for="(raceTrack, trackId) in this.trackData"
-              :label="raceTrack.name"
+              v-for="(_, trackId) in this.trackData"
+              :label="$t(`course.${trackId}`)"
               :value="trackId"
               :key="trackId"
           ></el-option>
@@ -117,7 +117,7 @@
         <el-select v-model="track.course" @change="courseChanged" style="width: 170px;">
           <el-option
               v-for="(obj, key) in courseList"
-              :label="obj.name"
+              :label="`${$t('surface.' + obj.surface)}${obj.distance}m`"
               :value="key"
               :key="key"
           >
