@@ -127,6 +127,10 @@ export default {
           content: '大逃げを実装',
           timestamp: '2022-09-28'
         },
+        {
+          content: '中/韓版本2.0實裝',
+          timestamp: '2023-05-26'
+        },
       ]
     }
   }
