@@ -950,7 +950,6 @@ export default {
       if (u.emulations) {
         this.emulations = u.emulations
       }
-      this.fixOldSavedUma()
       this.initCondition()
     },
     exportUma() {
@@ -1070,20 +1069,6 @@ export default {
     },
     resetTrack() {
       // Do nothing
-    },
-    fixOldSavedUma() {
-      const o = {...this.hasSkills}
-      let old = false
-      const NEW_TYPES = ['boost', 'gate', 'passive']
-      for (const nt of NEW_TYPES) {
-        if (!(nt in this.hasSkills)) {
-          o[nt] = {normal: [], rare: [], inherit: []}
-        }
-        old = true
-      }
-      if (old) {
-        this.hasSkills = o
-      }
     },
     initSectionTargetSpeedRandoms() {
       const ret = []
