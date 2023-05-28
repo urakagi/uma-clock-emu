@@ -2442,7 +2442,7 @@ function normalSkillData(thiz) {
     ],
     speed: [
       {
-        all: { name: "逃げためらい", value: -0.15 },
+        all: { id: 200851, name: "逃げためらい", value: -0.15 },
         duration: 3,
         styleLimit: [1],
         init: function () {
@@ -2456,7 +2456,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "逃げためらいx2", value: -0.3 },
+        all: { id: -200851, name: "逃げためらいx2", value: -0.3 },
         duration: 3,
         styleLimit: [1],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
@@ -2471,7 +2471,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "先行ためらい", value: -0.15 },
+        all: { id: 200881, name: "先行ためらい", value: -0.15 },
         duration: 3,
         styleLimit: [2],
         init: function () {
@@ -2485,7 +2485,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "先行ためらいx2", value: -0.3 },
+        all: { id: -200881, name: "先行ためらいx2", value: -0.3 },
         duration: 3,
         styleLimit: [2],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
@@ -2500,7 +2500,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "差しためらい", value: -0.15 },
+        all: { id: 200911, name: "差しためらい", value: -0.15 },
         duration: 3,
         styleLimit: [3],
         init: function () {
@@ -2514,7 +2514,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "差しためらいx2", value: -0.3 },
+        all: { id: -200911, name: "差しためらいx2", value: -0.3 },
         duration: 3,
         styleLimit: [3],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
@@ -2529,7 +2529,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "追込ためらい", value: -0.15 },
+        all: { id: 200941, name: "追込ためらい", value: -0.15 },
         duration: 3,
         styleLimit: [4],
         init: function () {
@@ -2543,7 +2543,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "追込ためらいx2", value: -0.3 },
+        all: { id: -200941, name: "追込ためらいx2", value: -0.3 },
         duration: 3,
         styleLimit: [4],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
@@ -2558,7 +2558,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "後方釘付", value: -0.2 },
+        all: { id: 201012, name: "後方釘付", value: -0.2 },
         duration: 3,
         distanceLimit: [1],
         init: function () {
@@ -2573,7 +2573,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "悩殺術", value: -0.25 },
+        all: { d: 201011, name: "悩殺術", value: -0.25 },
         duration: 3,
         distanceLimit: [1],
         init: function () {
@@ -2588,7 +2588,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "スピードイーター", value: -0.15 },
+        all: { id: -201082, name: "スピードイーター", value: -0.15 },
         duration: 3,
         distanceLimit: [2],
         init: function () {
@@ -2602,7 +2602,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "束縛", value: -0.15 },
+        all: { id: 201152, name: "束縛", value: -0.15 },
         duration: 3,
         distanceLimit: [3],
         init: function () {
@@ -2616,7 +2616,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "独占力", value: -0.25 },
+        all: { id: 201151, name: "独占力", value: -0.25 },
         duration: 3,
         distanceLimit: [3],
         init: function () {
@@ -2630,7 +2630,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "まなざし", value: -0.15 },
+        all: { id: 201512, name: "まなざし", value: -0.15 },
         duration: 3,
         init: function () {
           this.randoms = thiz.initPhaseRandom(2);
@@ -2640,14 +2640,18 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "アナタヲ・オイカケテ", value: -0.05 },
+        all: { id: -900251, name: "アナタヲ・オイカケテ", value: -0.05 },
         duration: 6,
         check: function () {
           return thiz.position >= thiz.courseLength * 0.5;
         },
       },
       {
-        all: { name: "アナタヲ・オイカケテ(継承)", value: -0.025 },
+        all: {
+          id: -9002512,
+          name: "アナタヲ・オイカケテ(継承)",
+          value: -0.025,
+        },
         duration: 3.6,
         check: function () {
           return thiz.position >= thiz.courseLength * 0.5;
@@ -2656,7 +2660,7 @@ function normalSkillData(thiz) {
     ],
     fatigue: [
       {
-        all: { name: "スタミナイーター", value: 50 },
+        all: { d: -201222, name: "スタミナイーター", value: 50 },
         distanceLimit: [4],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2669,7 +2673,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "スタミナイーターx2", value: 100 },
+        all: { id: -2012222, name: "スタミナイーターx2", value: 100 },
         distanceLimit: [4],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2683,7 +2687,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "逃げけん制", value: 100 },
+        all: { id: 200831, name: "逃げけん制", value: 100 },
         styleLimit: [1],
         init: function () {
           this.randoms = thiz.initPhaseRandom(0);
@@ -2696,7 +2700,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "逃げけん制x2", value: 200 },
+        all: { id: -200831, name: "逃げけん制x2", value: 200 },
         styleLimit: [1],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2710,7 +2714,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "先行けん制", value: 100 },
+        all: { id: 200861, name: "先行けん制", value: 100 },
         styleLimit: [2],
         init: function () {
           this.randoms = thiz.initPhaseRandom(0);
@@ -2723,7 +2727,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "先行けん制x2", value: 200 },
+        all: { id: -200861, name: "先行けん制x2", value: 200 },
         styleLimit: [2],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2737,7 +2741,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "差しけん制", value: 100 },
+        all: { id: 200891, name: "差しけん制", value: 100 },
         styleLimit: [3],
         init: function () {
           this.randoms = thiz.initPhaseRandom(0);
@@ -2750,7 +2754,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "差しけん制x2", value: 200 },
+        all: { id: -200891, name: "差しけん制x2", value: 200 },
         styleLimit: [3],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2764,7 +2768,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "追込けん制", value: 100 },
+        all: { id: 200921, name: "追込けん制", value: 100 },
         styleLimit: [4],
         init: function () {
           this.randoms = thiz.initPhaseRandom(0);
@@ -2777,7 +2781,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "追込けん制x2", value: 200 },
+        all: { id: -200921, name: "追込けん制x2", value: 200 },
         styleLimit: [4],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2791,7 +2795,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "逃げ焦り", value: 100 },
+        all: { id: 200841, name: "逃げ焦り", value: 100 },
         styleLimit: [1],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2804,7 +2808,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "逃げ焦りx2", value: 200 },
+        all: { id: -200841, name: "逃げ焦りx2", value: 200 },
         styleLimit: [1],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2818,7 +2822,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "先行焦り", value: 100 },
+        all: { id: 200861, name: "先行焦り", value: 100 },
         styleLimit: [2],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2831,7 +2835,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "先行焦りx2", value: 200 },
+        all: { id: -200861, name: "先行焦りx2", value: 200 },
         styleLimit: [2],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2845,7 +2849,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "差し焦り", value: 100 },
+        all: { id: 200901, name: "差し焦り", value: 100 },
         styleLimit: [3],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2858,7 +2862,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "差し焦りx2", value: 200 },
+        all: { id: -200901, name: "差し焦りx2", value: 200 },
         styleLimit: [3],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2872,7 +2876,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "追込焦り", value: 100 },
+        all: { id: 200931, name: "追込焦り", value: 100 },
         styleLimit: [4],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2885,7 +2889,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "追込焦りx2", value: 200 },
+        all: { id: -200931, name: "追込焦りx2", value: 200 },
         styleLimit: [4],
         tooltip: "2回同時に喰らう。通常のと加算できる。",
         init: function () {
@@ -2899,7 +2903,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "逃亡禁止令", value: 300 },
+        all: { id: 201021, name: "逃亡禁止令", value: 300 },
         distanceLimit: [1],
         init: function () {
           this.randoms = thiz.initPhaseRandom(0);
@@ -2913,7 +2917,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "抜け駆け禁止", value: 100 },
+        all: { id: 201022, name: "抜け駆け禁止", value: 100 },
         distanceLimit: [1],
         init: function () {
           this.randoms = thiz.initPhaseRandom(0);
@@ -2927,7 +2931,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "ささやき", value: 100 },
+        all: { id: 201162, name: "ささやき", value: 100 },
         distanceLimit: [3],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2940,7 +2944,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "ささやきx2", value: 200 },
+        all: { id: -201162, name: "ささやきx2", value: 200 },
         distanceLimit: [3],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2953,7 +2957,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "魅惑のささやき", value: 300 },
+        all: { id: 201161, name: "魅惑のささやき", value: 300 },
         distanceLimit: [3],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2966,7 +2970,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "魅惑のささやきx2", value: 600 },
+        all: { id: -201161, name: "魅惑のささやきx2", value: 600 },
         distanceLimit: [3],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -2979,7 +2983,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "鋭い眼光", value: 100 },
+        all: { id: 201442, name: "鋭い眼光", value: 100 },
         init: function () {
           this.randoms = thiz.initPhaseRandom(2);
         },
@@ -2988,7 +2992,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "鋭い眼光x2", value: 200 },
+        all: { id: -201442, name: "鋭い眼光x2", value: 200 },
         init: function () {
           this.randoms = thiz.initPhaseRandom(2);
         },
@@ -2997,7 +3001,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "八方にらみ", value: 300 },
+        all: { id: 201441, name: "八方にらみ", value: 300 },
         init: function () {
           this.randoms = thiz.initPhaseRandom(2);
         },
@@ -3006,7 +3010,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "八方にらみx2", value: 600 },
+        all: { id: -201441, name: "八方にらみx2", value: 600 },
         init: function () {
           this.randoms = thiz.initPhaseRandom(2);
         },
@@ -3015,7 +3019,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        all: { name: "スタミナグリード", value: 100 },
+        all: { id: -201221, name: "スタミナグリード", value: 100 },
         distanceLimit: [4],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
