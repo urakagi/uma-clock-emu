@@ -40,13 +40,7 @@ export default {
       }
       for (const skillWrapper of origin) {
         for (const variant of skillWrapper.variants) {
-          // i18n name
-          const jaName = variant.name;
-          const localName = this.$t(`skill.${jaName}`);
-          if (localName.startsWith('skill.')) {
-            newSkillNames[jaName] = '';
-          }
-          variant.name = localName && !localName.startsWith('skill.') ? localName : jaName;
+          this.localizeSkill(variant, skillWrapper, newSkillNames);
         }
       }
       if (Object.keys(newSkillNames).length > 0) {
@@ -65,13 +59,7 @@ export default {
         });
       }
       for (const skill of origin) {
-        // i18n name
-        const jaName = skill.name;
-        const localName = this.$t(`skill.${jaName}`);
-        if (localName.startsWith('skill.')) {
-          newSkillNames[jaName] = '';
-        }
-        skill.name = localName && !localName.startsWith('skill.') ? localName : jaName;
+        this.localizeSkill(skill, undefined, newSkillNames);
       }
       if (Object.keys(newSkillNames).length > 0) {
         console.log(JSON.stringify(newSkillNames));
@@ -1108,6 +1096,25 @@ export default {
         return rarity;
       }
     },
+    localizeSkill(skill, wrapper, newSkillNames) {
+      const jaName = skill.name;
+      const localName = this.$t(`skill.${jaName}`);
+      if (localName.startsWith('skill.')) {
+        newSkillNames[jaName] = '';
+      }
+      skill.name = localName && !localName.startsWith('skill.') ? localName : jaName;
+
+      const tooltipKey = `tooltip.${skill.id}`;
+      if (this.$te(tooltipKey)) {
+        if (wrapper) {
+          wrapper.tooltip = this.$t(tooltipKey);
+        } else {
+          skill.tooltip = this.$t(tooltipKey);
+        }
+      }
+
+      return skill;
+    }
   },
 }
 </script>
