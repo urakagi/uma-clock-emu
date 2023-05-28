@@ -1128,7 +1128,6 @@ function normalSkillData(thiz) {
         rare: { id: 200591, name: "迅速果断", value: 0.35 },
         duration: 2.4,
         styleLimit: [3],
-        tooltip: "順位>50%を満たしたと見なす",
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
         },

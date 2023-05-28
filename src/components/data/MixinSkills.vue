@@ -36,10 +36,7 @@ export default {
           for (const rarity of this.rarities) {
             const skill = skillWrapper[rarity];
             if (!skill) continue;
-            // i18n name
-            const jaName = skill.name;
-            const localName = this.$t(`skill.${jaName}`);
-            skill.name = localName ? localName : jaName;
+            this.localizeSkill(skill, skillWrapper);
           }
         }
       }
@@ -55,10 +52,7 @@ export default {
         });
       }
       for (const skill of origin) {
-        // i18n name
-        const jaName = skill.name;
-        const localName = this.$t(`skill.${jaName}`);
-        skill.name = localName ? localName : jaName;
+        this.localizeSkill(skill);
       }
       return origin.sort((a, b) => {
         if (a.name < b.name) return -1;
@@ -982,6 +976,22 @@ export default {
         }
       }
       this.hasSkills = o
+    },
+    localizeSkill(skill, wrapper) {
+      const jaName = skill.name;
+      const localName = this.$t(`skill.${jaName}`);
+      skill.name = localName ? localName : jaName;
+
+      const tooltipKey = `tooltip.${skill.id}`;
+      if (this.$te(tooltipKey)) {
+        if (wrapper) {
+          wrapper.tooltip = this.$t(tooltipKey);
+        } else {
+          skill.tooltip = this.$t(tooltipKey);
+        }
+      }
+
+      return skill;
     }
   }
 }
