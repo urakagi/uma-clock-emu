@@ -107,11 +107,11 @@
       <br>
       <el-form-item :label="$t('message.raceType')">
         <el-select v-model="raceType" style="width: 130px;">
-          <el-option label="短距離" value="0"></el-option>
-          <el-option label="マイル" value="1"></el-option>
-          <el-option label="中距離" value="2"></el-option>
-          <el-option label="長距離" value="3"></el-option>
-          <el-option label="ダート" value="4"></el-option>
+          <el-option label="단거리" value="0"></el-option>
+          <el-option label="마일" value="1"></el-option>
+          <el-option label="중거리" value="2"></el-option>
+          <el-option label="장거리" value="3"></el-option>
+          <el-option label="더트" value="4"></el-option>
         </el-select>
       </el-form-item>
       <br>
