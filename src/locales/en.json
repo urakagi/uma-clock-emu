@@ -173,5 +173,12 @@
 	"surface": {
 		"1": "Turf",
 		"2": "Dirt"
+	},
+	"raceType": {
+		"0": "Sprint",
+		"1": "Mile",
+		"2": "Classic",
+		"3": "Extended",
+		"4": "Dirt"
 	}
 }
