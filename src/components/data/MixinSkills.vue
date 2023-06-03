@@ -1053,7 +1053,12 @@ export default {
           delete inherit.speedWithDecel;
         }
         if (skill.acceleration) {
-          variant.acceleration = accelerationMap[skill.acceleration];
+          // Special cases
+          if (skill.id === 110201) {
+            variant.acceleration = 0.07;
+          } else {
+            variant.acceleration = accelerationMap[skill.acceleration];
+          }
           // FIXME: For debug
           if (variant.acceleration == null) {
             console.error(JSON.stringify(skill));

@@ -1631,7 +1631,12 @@ function normalSkillData(thiz) {
           heal: 550,
           targetSpeed: 0.15,
         },
-        { rarity: "rare", id: 200481, name: "どこ吹く風", heal: 550 },
+        {
+          rarity: "rare",
+          id: 200481,
+          name: "どこ吹く風",
+          heal: 550,
+        },
         {
           rarity: "normal",
           id: 200482,
@@ -4045,7 +4050,7 @@ function normalSkillData(thiz) {
       ],
       duration: 3,
       tooltip: "「50％以降のどこかで発動」として扱う。",
-      conditions: { distance_type: 2, distance_rate_after_random: ">=50" },
+      conditions: { distance_type: 2, distance_rate_after_random: 50 },
     },
     {
       variants: [
@@ -4645,6 +4650,7 @@ function normalSkillData(thiz) {
           heal: -200,
         },
       ],
+      type: "speed",
       conditions: { running_style: 3, phase_random: 1 },
       duration: 2.4,
     },
@@ -5240,14 +5246,14 @@ function normalSkillData(thiz) {
         },
         {
           rarity: "rare",
-          id: 200481,
-          name: "あやしげな作戦",
+          id: 202031,
+          name: "博打うち",
           targetSpeed: 0.45,
         },
         {
           rarity: "normal",
-          id: 200482,
-          name: "博打うち",
+          id: 202032,
+          name: "あやしげな作戦",
           targetSpeed: 0.25,
         },
       ],
