@@ -375,17 +375,23 @@ function normalSkillData(thiz) {
       {
         rare: { id: 200194, name: "初嵐", value: 60 },
         status: ["speed", "power"],
+        check: function () {
+          return true;
+        },
       },
       {
         rare: { id: 200174, name: "春一番", value: 60 },
         status: ["speed", "power"],
+        check: function () {
+          return true;
+        },
       },
       {
         rare: { id: 200154, name: "良バ場の鬼", value: 60 },
-        surfaceConditionLimit: ["0"],
+        surfaceConditionLimit: ["1"],
         status: ["speed", "power"],
         check: function () {
-          return thiz.track.surfaceCondition === "0";
+          return thiz.track.surfaceCondition === "1";
         },
       },
       {
@@ -395,7 +401,7 @@ function normalSkillData(thiz) {
         },
         status: ["speed", "power"],
         check: function () {
-          return thiz.track.surfaceCondition === "0";
+          return thiz.track.turn === "1";
         },
       },
       {
@@ -467,6 +473,9 @@ function normalSkillData(thiz) {
         rare: { id: 202231, name: "ナイター◎", value: 60 },
         normal: { id: 202232, name: "ナイター○", value: 40 },
         status: ["wisdom"],
+        check: function () {
+          return true;
+        },
       },
       {
         rare: { id: 202241, name: "小回り◎", value: 60 },
@@ -1200,38 +1209,10 @@ function normalSkillData(thiz) {
         rare: { id: 200981, name: "圧倒的リード", value: 0.35 },
         duration: 3,
         distanceLimit: [1],
-        styleLimit: [1],
         tooltip:
           "中盤に入った瞬間に1位で5馬身リードしていると見なす。見なすな。",
         check: function () {
-          return thiz.isDistanceType(1) && thiz.curretPhase === 1;
-        },
-      },
-      {
-        normal: {
-          id: 200672,
-          name: "詰め寄り",
-          targetSpeed: 0.15,
-          acceleration: 0.05,
-        },
-        rare: {
-          id: 200671,
-          name: "電撃の煌めき",
-          targetSpeed: 0.35,
-          acceleration: 0.1,
-        },
-        duration: 3,
-        distanceLimit: [1],
-        styleLimit: [3, 4],
-        tooltip: "順位>50%を満たしたと見なす",
-        init: function () {
-          this.randoms = thiz.initPhaseRandom(2);
-        },
-        check: function (startPosition) {
-          return (
-            thiz.isDistanceType(1) &&
-            thiz.isInRandom(this.randoms, startPosition)
-          );
+          return thiz.isDistanceType(1) && thiz.isPhase(1);
         },
       },
       {
@@ -1304,32 +1285,6 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: {
-          id: 200732,
-          name: "食い下がり",
-          targetSpeed: 0.15,
-          acceleration: 0.05,
-        },
-        rare: {
-          id: 200731,
-          name: "勝利への執念",
-          targetSpeed: 0.35,
-          acceleration: 0.1,
-        },
-        duration: 3,
-        distanceLimit: [3],
-        tooltip: "「最終コーナーのどこか」として扱う。当てにならない。",
-        init: function () {
-          this.randoms = thiz.initFinalCornerRandom();
-        },
-        check: function (startPosition) {
-          return (
-            thiz.isDistanceType(3) &&
-            thiz.isInRandom(this.randoms, startPosition)
-          );
-        },
-      },
-      {
         normal: { id: 200752, name: "内弁慶", value: 0.15 },
         rare: { id: 200751, name: "内的体験", value: 0.35 },
         duration: 3,
@@ -1350,8 +1305,7 @@ function normalSkillData(thiz) {
         rare: { id: 201191, name: "先陣の心得", value: 0.35 },
         duration: 3,
         distanceLimit: [4],
-        tooltip:
-          "「中盤のどこか」の時に3馬身リードしていると見なす。普通は単独逃げ馬以外では夢物語。",
+        tooltip: "「中盤のどこか」の時に1馬身リードしていると見なす",
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
         },
@@ -1378,6 +1332,7 @@ function normalSkillData(thiz) {
         },
       },
       {
+        rare: { id: 201652, name: "いいとこ入った", value: 0.35 },
         normal: { id: 201651, name: "スリップストリーム", value: 0.15 },
         duration: 3,
         tooltip: "「中盤のどこかで発動」として扱う。ガバガバ実装。",
@@ -1622,9 +1577,12 @@ function normalSkillData(thiz) {
         rare: { id: 201271, name: "トップランナー", value: 0.35 },
         duration: 3,
         styleLimit: StyleLimit.Nige,
-        tooltip: "開始5秒で即発動扱い",
-        check: function () {
-          return thiz.accTimePassed(5) && thiz.isRunningStyle(STYLE.NIGE);
+        tooltip: "9%～25%の間のランダム位置で発動として扱う",
+        init: function () {
+          this.randoms = thiz.initIntervalRandom(0.09, 0.25);
+        },
+        check: function (startPosition) {
+          return thiz.isInRandom(this.randoms, startPosition);
         },
       },
       {
@@ -1669,8 +1627,11 @@ function normalSkillData(thiz) {
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
         },
-        check: function () {
-          return thiz.isDistanceType(3);
+        check: function (startPosition) {
+          return (
+            thiz.isDistanceType(3) &&
+            thiz.isInRandom(this.randoms, startPosition)
+          );
         },
       },
       {
@@ -1865,6 +1826,14 @@ function normalSkillData(thiz) {
         },
       },
       {
+        rare: { id: 201113, name: "光芒円刃", value: 0.35 },
+        duration: 3,
+        conditions: {
+          all_corner_random: 1,
+          distance_type: 3,
+        },
+      },
+      {
         rare: { id: 201253, name: "陣風円刃", value: 0.35 },
         duration: 3,
         conditions: {
@@ -1878,6 +1847,25 @@ function normalSkillData(thiz) {
         conditions: {
           all_corner_random: 1,
           running_style: 3,
+        },
+      },
+      {
+        rare: { id: 202031, name: "博打うち", value: 0.45 },
+        normal: { id: 202032, name: "あやしげな作戦", value: 0.25 },
+        duration: 1.8,
+        init: function () {
+          this.randoms = thiz.initIntervalRandom(0.5, 1);
+        },
+        check: function (startPosition) {
+          return thiz.isInRandom(this.randoms, startPosition);
+        },
+        trigger: function () {
+          const dice = Math.random();
+          if (dice < 0.1) {
+            thiz.sp -= 0.04 * thiz.spMax;
+          } else if (dice < 0.4) {
+            thiz.sp -= 0.02 * thiz.spMax;
+          }
         },
       },
       // End of target speed skills
@@ -1987,6 +1975,42 @@ function normalSkillData(thiz) {
         },
       },
       {
+        normal: { id: 201002, name: "仕掛け準備", value: 0.2 },
+        rare: { id: 201001, name: "準備万全！", value: 0.3 },
+        duration: 3,
+        distanceLimit: DistanceLimit.Short,
+        init: function () {
+          this.randoms = thiz.initPhaseRandom(1);
+        },
+        check: function (startPosition) {
+          return (
+            thiz.isDistanceType(1) &&
+            thiz.isInRandom(this.randoms, startPosition)
+          );
+        },
+        conditions: {
+          distance_type: 1,
+        },
+      },
+      {
+        normal: { id: 201132, name: "ライトニングステップ", value: 0.2 },
+        rare: { id: 201131, name: "イナズマステップ", value: 0.3 },
+        duration: 3,
+        distanceLimit: DistanceLimit.Middle,
+        init: function () {
+          this.randoms = thiz.initPhaseRandom(1);
+        },
+        check: function (startPosition) {
+          return (
+            thiz.isDistanceType(3) &&
+            thiz.isInRandom(this.randoms, startPosition)
+          );
+        },
+        conditions: {
+          distance_type: 3,
+        },
+      },
+      {
         normal: { id: 200992, name: "善後策", value: 0.2 },
         rare: { id: 200991, name: "プランX", value: 0.4 },
         duration: 3,
@@ -2036,7 +2060,7 @@ function normalSkillData(thiz) {
       {
         normal: { id: 201332, name: "巧みなステップ", value: 0.2 },
         rare: { id: 201331, name: "技巧派", value: 0.3 },
-        duration: 1.8,
+        duration: 3,
         styleLimit: [2],
         tooltip: "「スタート後20秒で発動」として扱う。ガバガバ実装。",
         check: function () {
@@ -2380,7 +2404,7 @@ function normalSkillData(thiz) {
         duration: 2.7,
         styleLimit: StyleLimit.Nige,
         init: function () {
-          this.randoms = thiz.initPhaseRandom(1, { startRate: 0.5 });
+          this.randoms = thiz.initPhaseRandom(1, { endRate: 0.5 });
         },
         check: function (startPosition) {
           return (
@@ -2429,6 +2453,59 @@ function normalSkillData(thiz) {
           distance_type: 3,
           running_style: 2,
           phase_laterhalf_random: 1,
+        },
+      },
+      {
+        normal: {
+          id: 200732,
+          name: "食い下がり",
+          targetSpeed: 0.15,
+          acceleration: 0.05,
+        },
+        rare: {
+          id: 200731,
+          name: "勝利への執念",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+        },
+        duration: 3,
+        distanceLimit: [3],
+        tooltip: "「最終コーナーのどこか」として扱う。当てにならない。",
+        init: function () {
+          this.randoms = thiz.initFinalCornerRandom();
+        },
+        check: function (startPosition) {
+          return (
+            thiz.isDistanceType(3) &&
+            thiz.isInRandom(this.randoms, startPosition)
+          );
+        },
+      },
+      {
+        normal: {
+          id: 200672,
+          name: "詰め寄り",
+          targetSpeed: 0.15,
+          acceleration: 0.05,
+        },
+        rare: {
+          id: 200671,
+          name: "電撃の煌めき",
+          targetSpeed: 0.35,
+          acceleration: 0.1,
+        },
+        duration: 3,
+        distanceLimit: [1],
+        styleLimit: [3, 4],
+        tooltip: "順位>50%を満たしたと見なす",
+        init: function () {
+          this.randoms = thiz.initPhaseRandom(2);
+        },
+        check: function (startPosition) {
+          return (
+            thiz.isDistanceType(1) &&
+            thiz.isInRandom(this.randoms, startPosition)
+          );
         },
       },
     ],
@@ -2631,6 +2708,16 @@ function normalSkillData(thiz) {
       },
       {
         all: { id: 201512, name: "まなざし", value: -0.15 },
+        duration: 3,
+        init: function () {
+          this.randoms = thiz.initPhaseRandom(2);
+        },
+        check: function (startPosition) {
+          return thiz.isInRandom(this.randoms, startPosition);
+        },
+      },
+      {
+        all: { id: 201511, name: "熱いまなざし", value: -0.25 },
         duration: 3,
         init: function () {
           this.randoms = thiz.initPhaseRandom(2);
@@ -4323,9 +4410,12 @@ const uniqueSkillData = (thiz) => [
     name: "Joyful Voyage!",
     targetSpeed: 0.35,
     duration: 5,
-    tooltip: "2～4位。現在速度が変わる仕様は無視。",
+    tooltip: "2～4位。",
     check: function (startPosition) {
       return thiz.isContainsRemainingDistance(200, startPosition);
+    },
+    trigger: function () {
+      thiz.currentSpeed += 0.35;
     },
   },
   {
@@ -4556,9 +4646,9 @@ const uniqueSkillData = (thiz) => [
     name: "灯穂",
     targetSpeed: 0.385,
     duration: 5,
-    tooltip: "0.35として扱う",
+    tooltip: "0.385として扱う",
     check: function () {
-      return thiz.currentPhase >= 2 && thiz.isInCorner();
+      return thiz.isInFinalStraight();
     },
   },
   {
@@ -4576,7 +4666,7 @@ const uniqueSkillData = (thiz) => [
     id: 101001,
     hid: 901001,
     name: "Never Say Never",
-    speed: 0.25,
+    targetSpeed: 0.25,
     duration: 5,
     check: function () {
       return (
@@ -4584,6 +4674,9 @@ const uniqueSkillData = (thiz) => [
         thiz.remainDistance >= 299 &&
         thiz.groundType === 2
       );
+    },
+    trigger: function () {
+      thiz.currentSpeed += 0.25;
     },
   },
   {
@@ -4689,7 +4782,6 @@ const uniqueSkillData = (thiz) => [
     name: "かがやけ☆とまこまい",
     acceleration: 0.4,
     duration: 4,
-    styleLimit: [1, 2],
     tooltip: "最大スパート時のみ、3～4位＆中盤コーナーで競り合い",
     conditions: {
       ground_type: 2,
@@ -4740,6 +4832,7 @@ const uniqueSkillData = (thiz) => [
     id: 100431,
     hid: 900431,
     name: "Ding Dong Boo",
+    surfaceLimit: SurfaceLimit.Dirt,
     targetSpeed: 0.25,
     acceleration: 0.4,
     duration: 5,

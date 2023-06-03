@@ -809,7 +809,11 @@ export default {
           if (skill.targetSpeed == 0.15) {
             copy.inherit.targetSpeed = 0.035
           } else {
-            copy.inherit.targetSpeed = skill.targetSpeed - 0.2
+            if (skill.id === 110161) {
+              copy.inherit.targetSpeed = 0.15
+            } else {
+              copy.inherit.targetSpeed = skill.targetSpeed - 0.2
+            }
           }
           skillType = 'targetSpeed'
           effectCount++
