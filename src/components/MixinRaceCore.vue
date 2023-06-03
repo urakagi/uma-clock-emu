@@ -658,8 +658,10 @@ export default {
 
         // Remove overtime skills
         for (let i = 0; i < this.operatingSkills.length; i++) {
-          if ((this.frameElapsed - this.operatingSkills[i].startFrame) * this.frameLength
-              > this.operatingSkills[i].data.duration * this.timeCoef) {
+          const operatingSkill = this.operatingSkills[i];
+          const duration = operatingSkill.data.durationOverwrite ?? operatingSkill.data.duration;
+          if ((this.frameElapsed - operatingSkill.startFrame) * this.frameLength
+              > duration * this.timeCoef) {
             this.operatingSkills.splice(i, 1)
             i-- // Without this line, the original next element will be skipped
             break

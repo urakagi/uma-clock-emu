@@ -1382,7 +1382,7 @@ function normalSkillData(thiz) {
       {
         normal: { id: 201082, name: "スピードイーター", value: 0.15 },
         duration: 3,
-        styleLimit: [1],
+        styleLimit: [1, 2],
         distanceLimit: [2],
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -1621,7 +1621,7 @@ function normalSkillData(thiz) {
         rare: { id: 202131, name: "荒ぶる旋風", value: 0.35 },
         normal: { id: 202132, name: "気迫を込めて", value: 0.15 },
         duration: 1.8,
-        styleLimit: [1],
+        styleLimit: [1, 2],
         distanceLimit: [3],
         tooltip: "1～3位。デバフは金0.15/白0.035。",
         init: function () {
@@ -2085,6 +2085,7 @@ function normalSkillData(thiz) {
         },
       },
       {
+        rare: { id: 201361, name: "くじけぬ精神", value: 0.3 },
         normal: { id: 201362, name: "まき直し", value: 0.2 },
         duration: 3,
         styleLimit: [2],
@@ -3649,7 +3650,7 @@ const uniqueSkillData = (thiz) => [
   {
     id: 110031,
     name: "絶対は、ボクだ",
-    targetSpeed: 0.35,
+    targetSpeed: 0.45,
     duration: 5,
     tooltip: "「最終直線のどこかで発動」として扱う",
     init: function () {
@@ -3711,7 +3712,7 @@ const uniqueSkillData = (thiz) => [
   },
   {
     id: 100371,
-    name: "Schwarze Schwert",
+    name: "Schwarzes Schwert",
     targetSpeed: 0.35,
     duration: 5,
     check: function () {
@@ -4272,7 +4273,7 @@ const uniqueSkillData = (thiz) => [
       };
       for (const key in map) {
         if (thiz.sp < key) {
-          skill.duration *= map[key];
+          skill.durationOverwrite = skill.duration * map[key];
           return {
             extended: map[key].toString(),
           };
@@ -4466,7 +4467,7 @@ const uniqueSkillData = (thiz) => [
       };
       for (const key in map) {
         if (thiz.sp < key) {
-          skill.duration *= map[key];
+          skill.durationOverwrite = skill.duration * map[key];
           return {
             extended: map[key].toString(),
           };
@@ -4590,7 +4591,7 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     check: function () {
-      return thiz.isInCorner() && thiz.curretPhase === 1;
+      return thiz.isInCorner() && thiz.isPhase(1);
     },
   },
   {
@@ -4746,7 +4747,6 @@ const uniqueSkillData = (thiz) => [
       distance_type: 4,
       phase: ">=2",
       is_finalcorner_laterhalf: 1,
-      remain_distance: 400,
     },
   },
   {

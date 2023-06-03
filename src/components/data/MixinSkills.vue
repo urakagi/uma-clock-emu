@@ -446,7 +446,7 @@ export default {
           if (skill.trigger) {
             skillDetail = skill.trigger(skill)
           }
-          if (skill.duration) {
+          if (skill.duration || skill.durationOverwrite) {
             this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
             skillTriggered.push({data: skill, detail: skillDetail})
           } else {
