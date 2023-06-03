@@ -3037,7 +3037,7 @@ function normalSkillData(thiz) {
       conditions: {
         distance_type: 2,
         phase_random: 1,
-        running_style: 1,
+        running_style: [1, 2],
       },
     },
     {
@@ -3419,7 +3419,7 @@ function normalSkillData(thiz) {
         },
       ],
       duration: 1.8,
-      conditions: { distance_type: 3, phase_random: 1, running_style: 1 },
+      conditions: { distance_type: 3, phase_random: 1, running_style: [1, 2] },
       tooltip: "1～3位。デバフは金0.15/白0.035。",
     },
     {
@@ -4179,6 +4179,7 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        { rarity: "rare", id: 201361, name: "くじけぬ精神", acceleration: 0.3 },
         { rarity: "normal", id: 201362, name: "まき直し", acceleration: 0.2 },
       ],
       duration: 3,
@@ -6439,7 +6440,7 @@ const uniqueSkillData = (thiz) => [
     id: 110031,
     holder: 100302,
     name: "絶対は、ボクだ",
-    targetSpeed: 0.35,
+    targetSpeed: 0.45,
     duration: 5,
     tooltip: "「最終直線のどこかで発動」として扱う",
     init: function () {
@@ -6506,7 +6507,7 @@ const uniqueSkillData = (thiz) => [
   {
     id: 100371,
     holder: 103701,
-    name: "Schwarze Schwert",
+    name: "Schwarzes Schwert",
     targetSpeed: 0.45,
     duration: 5,
     conditions: {
@@ -7007,7 +7008,7 @@ const uniqueSkillData = (thiz) => [
       };
       for (const key in map) {
         if (thiz.sp < key) {
-          skill.duration *= map[key];
+          skill.durationOverwrite = skill.duration * map[key];
           return {
             extended: map[key].toString(),
           };
@@ -7171,6 +7172,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "4～7位。",
+    conditions: {
+      distance_rate: ">=60",
+    },
     check: function () {
       return (
         thiz.position >= thiz.courseLength * 0.6 &&
@@ -7213,7 +7217,7 @@ const uniqueSkillData = (thiz) => [
       };
       for (const key in map) {
         if (thiz.sp < key) {
-          skill.duration *= map[key];
+          skill.durationOverwrite = skill.duration * map[key];
           return {
             extended: map[key].toString(),
           };
@@ -7333,8 +7337,9 @@ const uniqueSkillData = (thiz) => [
     name: "萌到讓我活過來了！",
     targetSpeed: 0.35,
     duration: 5,
-    check: function () {
-      return thiz.isInCorner() && thiz.curretPhase === 1;
+    conditions: {
+      phase: 1,
+      corner: 1,
     },
   },
   {
@@ -7483,7 +7488,6 @@ const uniqueSkillData = (thiz) => [
       distance_type: 4,
       phase: ">=2",
       is_finalcorner_laterhalf: 1,
-      remain_distance: 400,
     },
   },
   {
