@@ -3794,9 +3794,12 @@ const uniqueSkillData = (thiz) => [
     name: "KEEP IT REAL．",
     acceleration: 0.3,
     duration: 6,
-    tooltip: "50%地点で即発動として扱う",
-    check: function () {
-      return thiz.position >= thiz.courseLength / 2.0;
+    tooltip: "「最終コーナーのどこかで発動」として扱う",
+    init: function () {
+      this.randoms = thiz.initFinalCornerRandom();
+    },
+    check: function (startPosition) {
+      return thiz.isInRandom(this.randoms, startPosition);
     },
   },
   {
@@ -4009,8 +4012,12 @@ const uniqueSkillData = (thiz) => [
     name: "Fairy tale",
     targetSpeed: 0.35,
     duration: 5,
-    check: function () {
-      return thiz.position >= thiz.courseLength * 0.52;
+    tooltip: "「レース1/2～5/6のどこかで発動する」として扱う。",
+    init: function () {
+      this.randoms = thiz.initIntervalRandom(0.5, 5.0 / 6);
+    },
+    check: function (startPosition) {
+      return thiz.isInRandom(this.randoms, startPosition);
     },
   },
   {
@@ -4664,6 +4671,7 @@ const uniqueSkillData = (thiz) => [
     id: 110681,
     hid: 910681,
     name: "あっぱれ大盤振る舞い！",
+    targetSpeed: 0.35,
     acceleration: 0.1,
     duration: 4,
     conditions: {

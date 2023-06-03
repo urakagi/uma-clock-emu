@@ -541,6 +541,9 @@ export default {
       if (!this.getSlopes()) return [];
       const slopes = this.getSlopes().filter(
           s => (s.slope > 0 && dir == 'up') || (s.slope < 0 && dir == 'down'))
+      if (slopes.length === 0) {
+        return [];
+      }
       const chosen = Math.floor(Math.random() * slopes.length)
       ret = this.chooseRandom(slopes[chosen].start, slopes[chosen].start + slopes[chosen].length)
       return [ret]
