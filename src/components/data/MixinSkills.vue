@@ -368,6 +368,8 @@ export default {
           return this.initPhaseRandom(value, {startRate: 0.5});
         case 'is_finalcorner_random':
           return thiz.initFinalCornerRandom();
+        case 'is_finalstraight_random':
+          return thiz.initFinalStraightRandom();
         case 'straight_random':
           return this.initStraightRandom();
         case 'phase':
@@ -452,6 +454,9 @@ export default {
             } else {
               console.error('Unknown res array', cond, res);
             }
+          } else {
+            // Empty random array = won't trigger
+            checks.push(() => false);
           }
         } else {
           console.error('Unknown res type', cond, res);
