@@ -1148,21 +1148,6 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 201272, name: "先頭プライド", value: 0.15 },
-        duration: 3,
-        styleLimit: [1],
-        init: function () {
-          this.randoms = thiz.initIntervalRandom(0, 0.3);
-        },
-        check: function (startPosition) {
-          return (
-            thiz.accTimePassed(5) &&
-            thiz.isRunningStyle(1) &&
-            thiz.isInRandom(this.randoms, startPosition)
-          );
-        },
-      },
-      {
         normal: { id: 200582, name: "抜け出し準備", value: 0.15 },
         rare: { id: 200581, name: "スピードスター", value: 0.35 },
         duration: 1.8,
@@ -1332,7 +1317,7 @@ function normalSkillData(thiz) {
         },
       },
       {
-        rare: { id: 201652, name: "いいとこ入った", value: 0.35 },
+        rare: { id: 201652, name: "いいとこ入った！", value: 0.35 },
         normal: { id: 201651, name: "スリップストリーム", value: 0.15 },
         duration: 3,
         tooltip: "「中盤のどこかで発動」として扱う。ガバガバ実装。",
@@ -1575,6 +1560,7 @@ function normalSkillData(thiz) {
       },
       {
         rare: { id: 201271, name: "トップランナー", value: 0.35 },
+        normal: { id: 201272, name: "先頭プライド", value: 0.15 },
         duration: 3,
         styleLimit: StyleLimit.Nige,
         tooltip: "9%～25%の間のランダム位置で発動として扱う",
@@ -3882,12 +3868,9 @@ const uniqueSkillData = (thiz) => [
     name: "KEEP IT REAL．",
     acceleration: 0.3,
     duration: 6,
-    tooltip: "「最終コーナーのどこかで発動」として扱う",
-    init: function () {
-      this.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(this.randoms, startPosition);
+    tooltip: "50%地点で即発動として扱う",
+    check: function () {
+      return thiz.position >= thiz.courseLength / 2.0;
     },
   },
   {
@@ -4427,6 +4410,7 @@ const uniqueSkillData = (thiz) => [
     tooltip: "4～7位。",
     check: function () {
       return (
+        thiz.isPhase(1) &&
         thiz.position >= thiz.courseLength * 0.6 &&
         thiz.courseLength - thiz.position >= 500 &&
         thiz.isInSlope("down")
@@ -4781,6 +4765,7 @@ const uniqueSkillData = (thiz) => [
     hid: 900991,
     name: "かがやけ☆とまこまい",
     acceleration: 0.4,
+    surfaceLimit: SurfaceLimit.Dirt,
     duration: 4,
     tooltip: "最大スパート時のみ、3～4位＆中盤コーナーで競り合い",
     conditions: {
@@ -4839,8 +4824,7 @@ const uniqueSkillData = (thiz) => [
     tooltip: "ダートのみ、最終直線ランダム発動として扱う",
     conditions: {
       ground_type: 2,
-      is_finalcorner: 1,
-      corner: 0,
+      is_finalstraight_random: 1,
     },
   },
 

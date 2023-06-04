@@ -364,6 +364,14 @@ export default {
           case 'is_finalcorner_laterhalf':
             skill.checks.push(() => thiz.isInFinalCorner(null, { start: 0.5, end: 1 }));
             break;
+          case 'is_finalcorner_random':
+            skill.randoms = thiz.initFinalCornerRandom();
+            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
+            break;
+          case 'is_finalstraight_random':
+            skill.randoms = thiz.initFinalStraightRandom();
+            skill.checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
+            break;
           case 'corner':
             if (value == 0) {
               skill.checks.push(() => !thiz.isInCorner());
