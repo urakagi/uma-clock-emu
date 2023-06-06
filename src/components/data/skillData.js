@@ -821,8 +821,8 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 0, name: "アオハル点火・体", value: 165 },
-        rare: { id: 0, name: "アオハル燃焼・体", value: 605 },
+        normal: { id: 210022, name: "アオハル点火・体", value: 165 },
+        rare: { id: 210021, name: "アオハル燃焼・体", value: 605 },
         tooltip: "効果1.1倍として扱う",
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -832,8 +832,8 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 0, name: "静かな呼吸", value: 150 },
-        rare: { id: 0, name: "潜伏態勢", value: 550 },
+        normal: { id: 201692, name: "静かな呼吸", value: 150 },
+        rare: { id: 201691, name: "潜伏態勢", value: 550 },
         styleLimit: StyleLimit.Sasi,
         init: function () {
           this.randoms = thiz.initPhaseRandom(0, { startRate: 0.5 });
@@ -1333,7 +1333,7 @@ function normalSkillData(thiz) {
       },
       {
         normal: { id: 200632, name: "仕掛け抜群", value: 0.15 },
-        rare: { id: 0, name: "疾風怒濤", value: 0.35 },
+        rare: { id: 200631, name: "疾風怒濤", value: 0.35 },
         duration: 3,
         styleLimit: [4],
         tooltip: "位置>75%を満たしたと見なす。実戦は条件を注意すべし。",
@@ -1427,8 +1427,8 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 0, name: "アオハル点火・速", value: 0.1725 },
-        rare: { id: 0, name: "アオハル燃焼・速", value: 0.4025 },
+        normal: { id: 210012, name: "アオハル点火・速", value: 0.1725 },
+        rare: { id: 210011, name: "アオハル燃焼・速", value: 0.4025 },
         duration: 1.8,
         tooltip: "効果1.15倍として扱う",
         init: function () {
@@ -2124,8 +2124,8 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 0, name: "アオハル点火・力", value: 0.22 },
-        rare: { id: 0, name: "アオハル燃焼・力", value: 0.44 },
+        normal: { id: 210032, name: "アオハル点火・力", value: 0.22 },
+        rare: { id: 210031, name: "アオハル燃焼・力", value: 0.44 },
         duration: 1.2,
         tooltip: "効果1.1倍として扱う",
         init: function () {
@@ -2136,8 +2136,8 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 0, name: "前列狙い", value: 0.2 },
-        rare: { id: 0, name: "狙うは最前列！", value: 0.3 },
+        normal: { id: 201682, name: "前列狙い", value: 0.2 },
+        rare: { id: 201681, name: "狙うは最前列！", value: 0.3 },
         duration: 3,
         surfaceLimit: SurfaceLimit.Dirt,
         init: function () {
@@ -2253,13 +2253,13 @@ function normalSkillData(thiz) {
     boost: [
       {
         normal: {
-          id: 0,
+          id: 210042,
           name: "アオハル点火・根",
           targetSpeed: 0.055,
           acceleration: 0.11,
         },
         rare: {
-          id: 0,
+          id: 210041,
           name: "アオハル燃焼・根",
           targetSpeed: 0.275,
           acceleration: 0.33,
@@ -3211,7 +3211,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 110301,
     name: "Drain for rose",
     heal: 550,
     tooltip: "50%地点で即発動として扱う。",
@@ -3710,7 +3710,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 110561,
     name: "禾スナハチ登ル",
     targetSpeed: 0.35,
     duration: 5,
@@ -3723,7 +3723,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 100191,
     name: "尊み☆ﾗｽﾄｽﾊﾟ━━(ﾟ∀ﾟ)━━ﾄ!",
     targetSpeed: 0.35,
     duration: 5,
@@ -3736,7 +3736,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 100391,
     name: "姫たるもの、勝利をこの手に",
     targetSpeed: 0.35,
     duration: 5,
@@ -3746,7 +3746,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 100251,
     name: "アナタヲ・オイカケテ",
     targetSpeed: 0.25,
     duration: 6,
@@ -3864,7 +3864,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 100401,
     name: "KEEP IT REAL．",
     acceleration: 0.3,
     duration: 6,
@@ -4025,7 +4025,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 100281,
     name: "I’M☆FULL☆SPEED!!",
     boost: {
       targetSpeed: 0.25,
@@ -4038,7 +4038,7 @@ const uniqueSkillData = (thiz) => [
     },
   },
   {
-    id: 0,
+    id: 110451,
     name: "ぐるぐるマミートリック♡",
     boost: {
       targetSpeed: 0.25,
