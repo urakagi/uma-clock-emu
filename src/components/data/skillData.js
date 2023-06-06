@@ -4065,13 +4065,13 @@ function normalSkillData(thiz) {
         {
           rarity: "rare",
           id: 201131,
-          name: "イナズマステップ",
+          name: "ライトニングステップ",
           acceleration: 0.3,
         },
         {
           rarity: "normal",
           id: 201132,
-          name: "ライトニングステップ",
+          name: "イナズマステップ",
           acceleration: 0.2,
         },
       ],
