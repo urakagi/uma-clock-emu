@@ -893,7 +893,7 @@ export default {
     isGroundCondition(value) {
       if (value == null) return true;
       if (Array.isArray(value)) {
-        return value.indexOf(this.track.surfaceCondition) >= 0;
+        return value.indexOf(+this.track.surfaceCondition) >= 0;
       } else {
         return this.track.surfaceCondition == value;
       }
