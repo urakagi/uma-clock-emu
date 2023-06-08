@@ -1979,8 +1979,8 @@ function normalSkillData(thiz) {
         },
       },
       {
-        normal: { id: 201132, name: "ライトニングステップ", value: 0.2 },
-        rare: { id: 201131, name: "イナズマステップ", value: 0.3 },
+        normal: { id: 201132, name: "イナズマステップ", value: 0.2 },
+        rare: { id: 201131, name: "ライトニングステップ", value: 0.3 },
         duration: 3,
         distanceLimit: DistanceLimit.Middle,
         init: function () {
