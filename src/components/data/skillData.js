@@ -1851,6 +1851,20 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 105102111,
+          holder: 105102,
+          name: "祝福のフラワーガール",
+          targetSpeed: 0.35,
+          tooltip: "バフ効果は無視",
+        },
+        {
+          rarity: "rare",
+          id: 201043,
+          name: "豪風円刃",
+          targetSpeed: 0.35,
+        },
+        {
           rarity: "double",
           id: 201041,
           name: "マイルコーナー◎",
@@ -3294,7 +3308,19 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "rare", id: 202022, name: "強攻策", targetSpeed: 0.25 },
+        {
+          rarity: "evo",
+          id: 101202111,
+          holder: 101202,
+          name: "熱烈エンゲージ！",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "rare",
+          id: 202022,
+          name: "強攻策",
+          targetSpeed: 0.25,
+        },
         {
           rarity: "normal",
           id: 202021,
@@ -3432,6 +3458,18 @@ function normalSkillData(thiz) {
           targetSpeed: 0.45,
         },
         {
+          rarity: "evo",
+          id: 105102211,
+          holder: 105102,
+          name: "ヴェール揺らす春疾風",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+          conditions: {
+            distance_type: [1, 2],
+            down_slope_random: 1,
+          },
+        },
+        {
           rarity: "rare",
           id: 202171,
           name: "至高のダウンヒラー",
@@ -3444,6 +3482,7 @@ function normalSkillData(thiz) {
           targetSpeed: 0.15,
         },
       ],
+      type: "speed",
       duration: 2.4,
       conditions: { down_slope_random: 1 },
     },
@@ -4513,7 +4552,25 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "rare", id: 202491, name: "抜群の切れ味", acceleration: 0.4 },
+        {
+          rarity: "evo",
+          id: 101202211,
+          holder: 101202,
+          name: "闘魂入刀！",
+          acceleration: 0.4,
+          duration: 4,
+          conditions: {
+            running_style: 4,
+            distance_type: 3,
+            phase_firsthalf_random: 1,
+          },
+        },
+        {
+          rarity: "rare",
+          id: 202491,
+          name: "抜群の切れ味",
+          acceleration: 0.4,
+        },
         {
           rarity: "normal",
           id: 202492,
@@ -7778,6 +7835,32 @@ const uniqueSkillData = (thiz) => [
     ],
     type: "speed",
     duration: 5,
+  },
+  {
+    id: 110511,
+    holder: 105102,
+    name: "Flowering Dreams",
+    targetSpeed: 0.35,
+    speedWithDecel: 0.15,
+    conditions: {
+      remain_distance: [199, 201],
+    },
+    duration: 5,
+    tooltip: "2～<=70%。近くに3人条件は満たしているとみなす",
+  },
+  {
+    id: 110121,
+    holder: 101202,
+    name: "大盛り！ファーストバイト！",
+    targetSpeed: 0.35,
+    speedWithDecel: 0.1,
+    conditions: {
+      distance_rate: ">=60",
+      phase: 1,
+      slope: 2,
+    },
+    duration: 4,
+    tooltip: "中盤追い越し3回のあと、順位>=50%",
   },
 
   // End of unique skills
