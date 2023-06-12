@@ -1963,7 +1963,7 @@ function normalSkillData(thiz) {
       {
         normal: { id: 201002, name: "仕掛け準備", value: 0.2 },
         rare: { id: 201001, name: "準備万全！", value: 0.3 },
-        duration: 3,
+        duration: 4,
         distanceLimit: DistanceLimit.Short,
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -1973,9 +1973,6 @@ function normalSkillData(thiz) {
             thiz.isDistanceType(1) &&
             thiz.isInRandom(this.randoms, startPosition)
           );
-        },
-        conditions: {
-          distance_type: 1,
         },
       },
       {
