@@ -1989,9 +1989,6 @@ function normalSkillData(thiz) {
             thiz.isInRandom(this.randoms, startPosition)
           );
         },
-        conditions: {
-          distance_type: 3,
-        },
       },
       {
         normal: { id: 200992, name: "善後策", value: 0.2 },
