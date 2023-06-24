@@ -196,19 +196,19 @@ function normalSkillData(thiz) {
       {
         normal: { id: 200152, name: "良バ場○", value: 40 },
         rare: { id: 200151, name: "良バ場◎", value: 60 },
-        surfaceConditionLimit: ["0"],
+        surfaceConditionLimit: ["1"],
         status: ["power"],
         check: function () {
-          return thiz.track.surfaceCondition === "0";
+          return thiz.track.surfaceCondition === "1";
         },
       },
       {
         normal: { id: 200162, name: "道悪○", value: 40 },
         rare: { id: 200161, name: "道悪◎", value: 60 },
-        surfaceConditionLimit: ["1", "2", "3"],
+        surfaceConditionLimit: ["2", "3", "4"],
         status: ["power"],
         check: function () {
-          return thiz.track.surfaceCondition !== "0";
+          return thiz.track.surfaceCondition !== "1";
         },
       },
       {
@@ -489,26 +489,26 @@ function normalSkillData(thiz) {
         rare: { id: 202342, name: "泥遊び◎", value: 60 },
         normal: { id: 202343, name: "泥遊び○", value: 40 },
         surfaceLimit: SurfaceLimit.Dirt,
-        surfaceConditionLimit: ["2", "3"],
+        surfaceConditionLimit: ["3", "4"],
         status: ["speed"],
         check: function () {
           return (
             (thiz.isSurfaceType(SURFACE.DIRT) &&
-              thiz.track.surfaceCondition === "2") ||
-            thiz.track.surfaceCondition === "3"
+              thiz.track.surfaceCondition === "3") ||
+            thiz.track.surfaceCondition === "4"
           );
         },
       },
       {
         rare: { id: 202341, name: "泥んこマイスター", value: 60 },
         surfaceLimit: SurfaceLimit.Dirt,
-        surfaceConditionLimit: ["2", "3"],
+        surfaceConditionLimit: ["3", "4"],
         status: ["speed", "power"],
         check: function () {
           return (
             (thiz.isSurfaceType(SURFACE.DIRT) &&
-              thiz.track.surfaceCondition === "2") ||
-            thiz.track.surfaceCondition === "3"
+              thiz.track.surfaceCondition === "3") ||
+            thiz.track.surfaceCondition === "4"
           );
         },
       },
@@ -1387,7 +1387,7 @@ function normalSkillData(thiz) {
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
         },
-        check: function す(startPosition) {
+        check: function (startPosition) {
           return thiz.isInRandom(this.randoms, startPosition);
         },
       },
