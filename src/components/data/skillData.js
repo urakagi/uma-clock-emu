@@ -5760,7 +5760,7 @@ function normalSkillData(thiz) {
         },
         {
           rarity: "normal",
-          id: 210282,
+          id: 210272,
           name: "海の加護",
           acceleration: 0.2 * 1.15,
         },
@@ -7853,7 +7853,7 @@ const uniqueSkillData = (thiz) => [
     holder: 101202,
     name: "大盛り！ファーストバイト！",
     targetSpeed: 0.35,
-    speedWithDecel: 0.1,
+    acceleration: 0.1,
     conditions: {
       distance_rate: ">=60",
       phase: 1,
