@@ -356,7 +356,7 @@ export default {
       // 馬場状態
       const SURFACE_RATES = [0.77, 0.87, 0.95, 1]
       const s = Math.random()
-      for (let i = 0; i < SURFACE_RATES.length; i++) {
+      for (let i = 1; i <= SURFACE_RATES.length; i++) {
         if (s < SURFACE_RATES[i]) {
           this.track.surfaceCondition = i
           break

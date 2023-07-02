@@ -940,6 +940,11 @@ export default {
       })
     },
     loadUmaFromObject(u) {
+      if (u.version >= 2) {
+        // Future data format, can't load in this time
+        this.resetUma();
+        return;
+      }
       this.umaStatus = u.status
       this.locationChanged(u.track.location)
       this.track = u.track
