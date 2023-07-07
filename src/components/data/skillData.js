@@ -1359,7 +1359,7 @@ function normalSkillData(thiz) {
         },
         check: function (startPosition) {
           return (
-            thiz.isRunningStyle(4) &&
+            thiz.isDistanceType(4) &&
             thiz.isInRandom(this.randoms, startPosition)
           );
         },
