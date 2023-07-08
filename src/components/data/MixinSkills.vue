@@ -804,6 +804,9 @@ export default {
             case 350:
               healValue = 50
               break
+            case 150:
+              healValue = 35
+              break
           }
           copy.inherit.heal = healValue
           const thiz = this
