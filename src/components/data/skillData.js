@@ -1575,7 +1575,7 @@ function normalSkillData(thiz) {
         rare: { id: 202101, name: "高揚感", value: 0.35 },
         normal: { id: 202102, name: "前のめり", value: 0.15 },
         duration: 2.4,
-        styleLimit: StyleLimit.Behind,
+        styleLimit: [2, 3, 4],
         distanceLimit: DistanceLimit.Middle,
         init: function () {
           this.randoms = thiz.initPhaseRandom(1);
@@ -1947,7 +1947,7 @@ function normalSkillData(thiz) {
         normal: { id: 200702, name: "上昇気流", value: 0.2 },
         rare: { id: 200701, name: "豪脚", value: 0.4 },
         duration: 3,
-        styleLimit: StyleLimit.Behind,
+        styleLimit: [2, 3, 4],
         distanceLimit: DistanceLimit.Mile,
         tooltip: "順位>50%は満たしていると見なす",
         init: function () {
@@ -2165,7 +2165,7 @@ function normalSkillData(thiz) {
       {
         rare: { id: 202081, name: "起死回生", value: 0.4 },
         normal: { id: 202082, name: "ワンチャンス", value: 0.2 },
-        styleLimit: StyleLimit.Behind,
+        styleLimit: [2, 3, 4],
         distanceLimit: DistanceLimit.Middle,
         duration: 1.2,
         init: function () {
