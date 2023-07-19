@@ -1442,8 +1442,10 @@ function normalSkillData(thiz) {
         normal: { id: 201702, name: "ありったけ", value: 0.15 },
         rare: { id: 201701, name: "決死の覚悟", value: 0.35 },
         duration: 2.4,
+        distanceLimit: DistanceLimit.Middle,
         check: function () {
-          return thiz.isInStraight() && thiz.isInSpurt;
+          return thiz.isDistanceType(3) &&
+          thiz.isInStraight() && thiz.isInSpurt;
         },
       },
       {
