@@ -4714,6 +4714,7 @@ const uniqueSkillData = (thiz) => [
     tooltip: "0.45のみ",
     conditions: {
       remain_distance: 400,
+      phase: ">=2"
     },
   },
   {
