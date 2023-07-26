@@ -396,8 +396,10 @@ export default {
         case 'corner':
           if (value == 0) {
             return () => !thiz.isInCorner();
-          } else {
+          } else if (value == 1) {
             return () => thiz.isInCorner();
+          } else {
+            return () => thiz.isInCorner(thiz.position, value);
           }
         case 'is_activate_any_skill':
           return () => thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1;
@@ -419,6 +421,8 @@ export default {
           return () => thiz.umaStatus.speed >= value;
         case 'base_power':
           return () => thiz.umaStatus.power >= value;
+        case 'course_distance':
+          return () => thiz.courseLength == value;
         default:
           alert(`Unknown condition ${cond}`);
           console.error(`Unknown condition ${cond}`);

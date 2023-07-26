@@ -73,7 +73,7 @@ function normalSkillData(thiz) {
         {
           rarity: "rare",
           id: -200174,
-          name: "春一番 | 初嵐",
+          name: "春一番 | 青嵐 | 初嵐",
           passiveSpeed: 60,
           passivePower: 60,
         },
@@ -604,6 +604,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "rare",
+          id: 200184,
+          name: "青嵐",
+          passiveSpeed: 60,
+          passivePower: 60,
+        },
         { rarity: "double", id: 200181, name: "夏ウマ娘◎", passiveSpeed: 60 },
         {
           rarity: "normal",
@@ -2743,6 +2750,13 @@ function normalSkillData(thiz) {
           heal: 150,
         },
         {
+          rarity: "evo",
+          id: 107001211,
+          holder: 107001,
+          name: "一等星のアラベスク",
+          targetSpeed: 0.45,
+        },
+        {
           rarity: "rare",
           id: 200721,
           name: "キラーチューン",
@@ -3263,6 +3277,13 @@ function normalSkillData(thiz) {
           targetSpeed: 0.45,
         },
         {
+          rarity: "evo",
+          id: 107001111,
+          holder: 107001,
+          name: "揺るがぬアスター",
+          targetSpeed: 0.45,
+        },
+        {
           rarity: "rare",
           id: 201701,
           name: "決死の覚悟",
@@ -3391,7 +3412,19 @@ function normalSkillData(thiz) {
           targetSpeed: 0.35,
           duration: 4,
         },
-        { rarity: "rare", id: 202101, name: "高揚感", targetSpeed: 0.35 },
+        {
+          rarity: "evo",
+          id: 105501111,
+          holder: 105501,
+          name: "ワクワク☆マーベラスゾーン",
+          targetSpeed: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 202101,
+          name: "高揚感",
+          targetSpeed: 0.35,
+        },
         {
           rarity: "normal",
           id: 202102,
@@ -3704,6 +3737,19 @@ function normalSkillData(thiz) {
           name: "開かれる夢の扉",
           targetSpeed: 0.55,
         },
+        {
+          rarity: "evo",
+          id: 110401211,
+          holder: 110401,
+          name: "逃げっ切りの1人旅",
+          targetSpeed: 0.55,
+          conditions: {
+            running_style: 1,
+            is_finalcorner: 1,
+            corner: 0,
+            track_id: 10006,
+          },
+        },
         { rarity: "rare", id: 202461, name: "踏ませぬ影", targetSpeed: 0.45 },
         {
           rarity: "normal",
@@ -3874,6 +3920,13 @@ function normalSkillData(thiz) {
           acceleration: 0.4,
           duration: 4,
         },
+        {
+          rarity: "evo",
+          id: 110401111,
+          holder: 110401,
+          name: "してやったり！",
+          acceleration: 0.5,
+        },
         { rarity: "rare", id: 200531, name: "先手必勝", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -3934,7 +3987,29 @@ function normalSkillData(thiz) {
           heal: 150,
           conditions: { running_style: [2, 3], phase_firsthalf_random: 2 },
         },
-        { rarity: "rare", id: 200601, name: "乗り換え上手", acceleration: 0.4 },
+        {
+          rarity: "evo",
+          id: 105302111,
+          holder: 105302,
+          name: "熱血進化ライディング！",
+          variants: [
+            {
+              acceleration: 0.4,
+              duration: 1.8,
+              conditions: { running_style: 3, phase_firsthalf_random: 2 },
+            },
+            {
+              conditions: { running_style: 3, remain_distance: [199, 201] },
+              targetSpeed: 0.15,
+            },
+          ],
+        },
+        {
+          rarity: "rare",
+          id: 200601,
+          name: "乗り換え上手",
+          acceleration: 0.4,
+        },
         {
           rarity: "normal",
           id: 200602,
@@ -3995,6 +4070,22 @@ function normalSkillData(thiz) {
           name: "バクシン的スプリント！",
           acceleration: 0.4,
           targetSpeed: 0.15,
+        },
+        {
+          rarity: "evo",
+          id: 105302211,
+          holder: 105302,
+          name: "必殺！爆速スプリント！",
+          variants: [
+            {
+              acceleration: 0.4,
+              conditions: { distance_type: 1, phase_random: 2 },
+            },
+            {
+              conditions: { distance_type: 1, remain_distance: [199, 201] },
+              targetSpeed: 0.15,
+            },
+          ],
         },
         {
           rarity: "rare",
@@ -4302,6 +4393,14 @@ function normalSkillData(thiz) {
           heal: 150,
         },
         {
+          rarity: "evo",
+          id: 105501211,
+          holder: 105501,
+          name: "進め！世界マーベラス計画☆",
+          acceleration: 0.4,
+          targetSpeed: 0.15,
+        },
+        {
           rarity: "rare",
           id: 200491,
           name: "ノンストップガール",
@@ -4447,6 +4546,20 @@ function normalSkillData(thiz) {
           duration: 4,
         },
         {
+          rarity: "evo",
+          id: 104802111,
+          holder: 104802,
+          name: "ワンチャンまくったる！",
+          acceleration: 0.4,
+          targetSpeed: 0.25,
+          duration: 1.8,
+          conditions: {
+            distance_type: 3,
+            is_finalcorner_random: 1,
+            track_id: 10006,
+          },
+        },
+        {
           rarity: "rare",
           id: 202081,
           name: "起死回生",
@@ -4562,7 +4675,7 @@ function normalSkillData(thiz) {
           conditions: {
             running_style: 4,
             distance_type: 3,
-            phase_firsthalf_random: 1,
+            phase_firsthalf_random: 2,
           },
         },
         {
@@ -4664,6 +4777,21 @@ function normalSkillData(thiz) {
           targetSpeed: 0.35,
           acceleration: 0.1,
           duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 104802211,
+          holder: 104802,
+          name: "あたししか勝たん！",
+          targetSpeed: 0.35,
+          acceleration: 0.2,
+          duration: 2.4,
+          conditions: {
+            running_style: 3,
+            distance_type: 3,
+            is_finalcorner_random: 1,
+            track_id: 10006,
+          },
         },
         {
           rarity: "rare",
@@ -5941,6 +6069,50 @@ function normalSkillData(thiz) {
         distance_type: [2, 3],
         base_speed: 1000,
         base_power: 1000,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202681,
+          name: "ブチ☆アゲ↑バイブス",
+          targetSpeed: 0.35,
+          heal: 350,
+        },
+        {
+          rarity: "normal",
+          id: 202682,
+          name: "バイブス上昇",
+          targetSpeed: 0.15,
+          heal: 50,
+        },
+      ],
+      duration: 2.4,
+      conditions: {
+        distance_type: 4,
+        phase_random: 1,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202671,
+          name: "ハイボルテージ",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "normal",
+          id: 202672,
+          name: "心弾んで",
+          acceleration: 0.2,
+        },
+      ],
+      duration: 1.8,
+      conditions: {
+        distance_type: 2,
+        phase_firsthalf_random: 2,
       },
     },
 
@@ -7861,6 +8033,76 @@ const uniqueSkillData = (thiz) => [
     },
     duration: 4,
     tooltip: "中盤追い越し3回のあと、順位>=50%",
+  },
+  {
+    id: 100551,
+    holder: 105501,
+    name: "万彩☆マーベラス★世界",
+    targetSpeed: 0.4,
+    conditions: {
+      distance_rate: [40, 50],
+    },
+    duration: 5,
+    tooltip: "0.4扱い",
+  },
+  {
+    id: 110531,
+    holder: 105302,
+    name: "奥義・常夏バーニング！！",
+    targetSpeed: 0.45,
+    conditions: {
+      remain_distance: [199, 201],
+    },
+    duration: 5,
+    tooltip: "0.45扱い",
+  },
+  {
+    id: 110481,
+    holder: 104802,
+    name: "GALmem．ふぉーえば♪",
+    targetSpeed: 0.3,
+    conditions: {
+      distance_rate: [40, 50],
+    },
+    duration: 6,
+    tooltip: "0.3扱い",
+  },
+  {
+    id: 101041,
+    holder: 110401,
+    name: "暁の御旗『葛城栄主』！",
+    targetSpeed: 0.25,
+    heal: 350,
+    conditions: {
+      corner: 3,
+      distance_type: 3,
+      track_id: 10006,
+    },
+    duration: 6,
+    tooltip: "6秒扱い",
+  },
+  {
+    id: 100701,
+    holder: 107001,
+    name: "セイリオス",
+    variants: [
+      {
+        acceleration: 0.5,
+        duration: 4,
+        conditions: {
+          remain_distance: [799, 801],
+          course_distance: 2400,
+        },
+      },
+      {
+        acceleration: 0.2,
+        duration: 4,
+        conditions: {
+          remain_distance: [799, 801],
+        },
+      },
+    ],
+    tooltip: "3番人気以上前提",
   },
 
   // End of unique skills
