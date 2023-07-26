@@ -8085,7 +8085,7 @@ const uniqueSkillData = (thiz) => [
     id: 100701,
     holder: 107001,
     name: "セイリオス",
-    variants: [
+    invokes: [
       {
         acceleration: 0.5,
         duration: 4,
@@ -8102,6 +8102,7 @@ const uniqueSkillData = (thiz) => [
         },
       },
     ],
+    type: "acceleration",
     tooltip: "3番人気以上前提",
   },
 
