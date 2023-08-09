@@ -1,14 +1,17 @@
-const distance = 3200;
+const distance = 2000;
 
-const midSpeed = 18.64;
-const spurtSpeed = 22.97;
+const midSpeed = 19.85;
+const spurtSpeed = 24.34;
+const baseAcc = 0.463;
+
+const umaPos = 1200;
+
 const skillSpeed = 0.25;
+const skillAcc = 0.3;
 const duration = 5 * (distance / 1000);
 const midStart = distance / 6;
 const spurtStart = distance * (2 / 3);
 const midDistance = distance / 2;
-const baseAcc = 0.412;
-const skillAcc = 0.3;
 const originalAccTime = (spurtSpeed - midSpeed) / baseAcc;
 const originalAccEndAt =
   spurtStart + ((midSpeed + spurtSpeed) * originalAccTime) / 2;
@@ -18,14 +21,17 @@ const TRIAL = 100000;
 
 // exec(0, 3, 2, false, 800);
 
-console.log("wis 7 f r s * act mid con exp mid-only exp-con con-max con-min");
+// console.log("7 f r s * act mid con exp mid-only exp-con con-max con-min");
+console.log("7 f r U * act mid con exp mid-only exp-con con-max con-min");
 for (let f = 0; f <= 2; f++) {
-  for (let r = 3; r <= 4; r++) {
+  for (let r = 1; r <= 3; r++) {
     for (let s = 0; s <= 0; s++) {
-      for (const s777 of [false]) {
-        for (const star of [true, false]) {
-          for (const wis of [1000]) {
-            exec(f, r, s, s777, star, wis);
+      for (const s777 of [true]) {
+        for (const uma of [true, false]) {
+          for (const star of [true, false]) {
+            for (const wis of [1200]) {
+              exec(f, r, s, s777, uma, star, wis);
+            }
           }
         }
       }
@@ -33,7 +39,7 @@ for (let f = 0; f <= 2; f++) {
   }
 }
 
-function exec(f, r, s, s777, star, wis) {
+function exec(f, r, s, s777, uma, star, wis) {
   const prob = 90 / wis;
   let sum = 0;
   let connectedSum = 0;
@@ -71,6 +77,11 @@ function exec(f, r, s, s777, star, wis) {
     if (s777) {
       if (Math.random() > prob) {
         triggers.push(distance - 777);
+      }
+    }
+    if (uma) {
+      if (Math.random() > prob) {
+        triggers.push(umaPos);
       }
     }
     if (star) {
@@ -156,13 +167,14 @@ function exec(f, r, s, s777, star, wis) {
   }
   // console.log(`${f}F ${r}R ${s}S ${wis >= 1000 ? '' : ' '}${wis}|${(sum / connected).toFixed(2)}|${(connected * 100 / TRIAL).toFixed(2)}%|`);
   console.log(
-    `${f} ${r} ${star ? 1 : 0} ` +
-      // `${wis} ${s777 ? 1 : 0} ${f} ${r} ${s} ${star ? 1 : 0} ` +
+    // `${f} ${r} ${star ? 1 : 0} ` +
+    // `${s777 ? 1 : 0} ${f} ${r} ${s} ${star ? 1 : 0} ` +
+    `${s777 ? 1 : 0} ${f} ${r} ${uma ? 1 : 0} ${star ? 1 : 0} ` +
       `${((activated * 100) / TRIAL).toFixed(2)}% ` +
       `${((midActivated * 100) / TRIAL).toFixed(2)}% ` +
       `${((connected * 100) / TRIAL).toFixed(2)}% ` +
       `${(sum / 2.5 / TRIAL).toFixed(2)} ` +
-      `${(midSum / 2.5 / TRIAL).toFixed(2)} ` +
+      // `${(midSum / 2.5 / TRIAL).toFixed(2)} ` +
       `${connected === 0 ? 0 : (connectedSum / 2.5 / connected).toFixed(2)} `
     // `${(connectedMax / 2.5).toFixed(2)} ` +
     // `${connectedMin > 50 ? 0 : (connectedMin / 2.5).toFixed(2)} `
