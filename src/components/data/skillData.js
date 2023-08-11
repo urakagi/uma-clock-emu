@@ -1754,12 +1754,15 @@ function normalSkillData(thiz) {
         rare: { id: 202411, name: "風雲の志", value: 0.25 },
         normal: { id: 202412, name: "向上心", value: 0.05 },
         duration: 4,
+        styleLimit: StyleLimit.Sen,
         tooltip: "60%～66%のランダム区間発動扱い",
         init: function () {
           this.randoms = thiz.initIntervalRandom(0.6, 2.0 / 3);
         },
         check: function (startPosition) {
-          return thiz.isInRandom(this.randoms, startPosition);
+          return (
+            thiz.isRunningStyle(STYLE.SEN) &&
+            thiz.isInRandom(this.randoms, startPosition));
         },
       },
       {
@@ -4714,6 +4717,7 @@ const uniqueSkillData = (thiz) => [
     tooltip: "0.45のみ",
     conditions: {
       remain_distance: 400,
+      phase: ">=2"
     },
   },
   {
