@@ -1827,6 +1827,7 @@ function normalSkillData(thiz) {
       {
         rare: { id: 201253, name: "陣風円刃", value: 0.35 },
         duration: 3,
+        styleLimit: [1],
         conditions: {
           all_corner_random: 1,
           running_style: 1,
@@ -1835,6 +1836,7 @@ function normalSkillData(thiz) {
       {
         rare: { id: 201393, name: "鋭脚円刃", value: 0.35 },
         duration: 3,
+        styleLimit: [3],
         conditions: {
           all_corner_random: 1,
           running_style: 3,
