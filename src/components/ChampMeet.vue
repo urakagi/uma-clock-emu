@@ -1,9 +1,11 @@
 <template>
   <div class="main-frame">
     <p>
-      <Adsense v-if="production"
-               data-ad-client="ca-pub-4611969396217909"
-               data-ad-slot="6969023753">
+      <Adsense
+        v-if="production"
+        data-ad-client="ca-pub-4611969396217909"
+        data-ad-slot="6969023753"
+      >
       </Adsense>
     </p>
     <el-form class="input-form" :inline="true">
@@ -12,7 +14,12 @@
       </el-form-item>
       <el-form-item>
         <el-select v-model="umaToLoad" :placeholder="$t('message.umaToLoad')">
-          <el-option v-for="(_, key) in savedUmas" :label="key" :value="key" :key="key"></el-option>
+          <el-option
+            v-for="(_, key) in savedUmas"
+            :label="key"
+            :value="key"
+            :key="key"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -20,22 +27,22 @@
       </el-form-item>
       <el-form-item>
         <el-popconfirm
-            :confirm-button-text="$t('message.yes')"
-            :cancel-button-text="$t('message.no')"
-            :title="$t('message.deleteOrNot')"
-            trigger="click"
-            @confirm="removeUma"
+          :confirm-button-text="$t('message.yes')"
+          :cancel-button-text="$t('message.no')"
+          :title="$t('message.deleteOrNot')"
+          trigger="click"
+          @confirm="removeUma"
         >
           <el-button slot="reference">{{ $t("message.delete") }}</el-button>
         </el-popconfirm>
       </el-form-item>
       <el-form-item>
         <el-popconfirm
-            :confirm-button-text="$t('message.yes')"
-            :cancel-button-text="$t('message.no')"
-            :title="$t('message.resetOrNot')"
-            trigger="click"
-            @confirm="resetUma"
+          :confirm-button-text="$t('message.yes')"
+          :cancel-button-text="$t('message.no')"
+          :title="$t('message.resetOrNot')"
+          trigger="click"
+          @confirm="resetUma"
         >
           <el-button slot="reference">{{ $t("message.reset") }}</el-button>
         </el-popconfirm>
@@ -44,17 +51,22 @@
         <el-button @click="exportUma">{{ $t("message.exportUma") }}</el-button>
         <el-dropdown @command="importUma">
           <el-button>
-            {{ $t("message.importUma") }}<i class="el-icon-arrow-down el-icon--right"></i>
+            {{ $t("message.importUma")
+            }}<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="tool">{{ $t("message.importUmaFromTool") }}</el-dropdown-item>
+            <el-dropdown-item command="tool">{{
+              $t("message.importUmaFromTool")
+            }}</el-dropdown-item>
             <el-tooltip content="race_horse_data / trained_chara">
-              <el-dropdown-item command="game">{{ $t("message.importUmaFromGame") }}</el-dropdown-item>
+              <el-dropdown-item command="game">{{
+                $t("message.importUmaFromGame")
+              }}</el-dropdown-item>
             </el-tooltip>
           </el-dropdown-menu>
         </el-dropdown>
       </el-form-item>
-      <br>
+      <br />
       <el-form-item :label="$t('message.speed')">
         <el-input v-model="umaStatus.speed" class="input-status"></el-input>
       </el-form-item>
@@ -70,9 +82,9 @@
       <el-form-item :label="$t('message.wisdom')">
         <el-input v-model="umaStatus.wisdom" class="input-status"></el-input>
       </el-form-item>
-      <br>
+      <br />
       <el-form-item :label="$t('message.style')">
-        <el-select v-model="umaStatus.style" style="width: 100px;">
+        <el-select v-model="umaStatus.style" style="width: 100px">
           <el-option :label="$t('message.runningStyle1')" value="1"></el-option>
           <el-option :label="$t('message.runningStyle2')" value="2"></el-option>
           <el-option :label="$t('message.runningStyle3')" value="3"></el-option>
@@ -80,22 +92,41 @@
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.distanceFit')">
-        <el-select v-model="umaStatus.distanceFit" style="width: 70px;">
-          <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
+        <el-select v-model="umaStatus.distanceFit" style="width: 70px">
+          <el-option
+            v-for="rank in fitRanks"
+            :label="rank"
+            :value="rank"
+            :key="rank"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.surfaceFit')">
-        <el-select v-model="umaStatus.surfaceFit" style="width: 70px;">
-          <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
+        <el-select v-model="umaStatus.surfaceFit" style="width: 70px">
+          <el-option
+            v-for="rank in fitRanks"
+            :label="rank"
+            :value="rank"
+            :key="rank"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.styleFit')">
-        <el-select v-model="umaStatus.styleFit" style="width: 70px;">
-          <el-option v-for="rank in fitRanks" :label="rank" :value="rank" :key="rank"></el-option>
+        <el-select v-model="umaStatus.styleFit" style="width: 70px">
+          <el-option
+            v-for="rank in fitRanks"
+            :label="rank"
+            :value="rank"
+            :key="rank"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.mood')">
-        <el-select v-model="umaStatus.condition" @change="initCondition" style="width: 130px;">
+        <el-select
+          v-model="umaStatus.condition"
+          @change="initCondition"
+          style="width: 130px"
+        >
           <el-option :label="$t('message.mood0')" value="0"></el-option>
           <el-option :label="$t('message.mood1')" value="1"></el-option>
           <el-option :label="$t('message.mood2')" value="2"></el-option>
@@ -104,64 +135,91 @@
           <el-option :label="$t('message.random')" value="5"></el-option>
         </el-select>
       </el-form-item>
-      <br>
+      <br />
       <el-form-item :label="$t('message.course')">
-        <el-select v-model="track.location" @change="locationChanged" style="width: 120px;">
+        <el-select
+          v-model="track.location"
+          @change="locationChanged"
+          style="width: 120px"
+        >
           <el-option
-              v-for="(_, trackId) in this.trackData"
-              :label="$t(`course.${trackId}`)"
-              :value="trackId"
-              :key="trackId"
+            v-for="(_, trackId) in this.trackData"
+            :label="$t(`course.${trackId}`)"
+            :value="trackId"
+            :key="trackId"
           ></el-option>
         </el-select>
-        <el-select v-model="track.course" @change="courseChanged" style="width: 170px;">
+        <el-select
+          v-model="track.course"
+          @change="courseChanged"
+          style="width: 170px"
+        >
           <el-option
-              v-for="(obj, key) in courseList"
-              :label="`${$t('surface.' + obj.surface)}${obj.distance}m`"
-              :value="key"
-              :key="key"
+            v-for="(obj, key) in courseList"
+            :label="`${$t('surface.' + obj.surface)}${obj.distance}m`"
+            :value="key"
+            :key="key"
           >
           </el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('message.surfaceCondition')">
-        <el-select v-model="track.surfaceCondition" style="width: 90px;">
-          <el-option :label="$t('message.surfaceCondition1')" value="1"></el-option>
-          <el-option :label="$t('message.surfaceCondition2')" value="2"></el-option>
-          <el-option :label="$t('message.surfaceCondition3')" value="3"></el-option>
-          <el-option :label="$t('message.surfaceCondition4')" value="4"></el-option>
+        <el-select v-model="track.surfaceCondition" style="width: 90px">
+          <el-option
+            :label="$t('message.surfaceCondition1')"
+            value="1"
+          ></el-option>
+          <el-option
+            :label="$t('message.surfaceCondition2')"
+            value="2"
+          ></el-option>
+          <el-option
+            :label="$t('message.surfaceCondition3')"
+            value="3"
+          ></el-option>
+          <el-option
+            :label="$t('message.surfaceCondition4')"
+            value="4"
+          ></el-option>
         </el-select>
       </el-form-item>
-      <br>
+      <br />
       <el-form-item :label="$t('message.uniqueSkill')">
         <el-select v-model="selectedUnique">
           <el-option
-              v-for="skill in this.uniqueSkillData"
-              :label="skill.name"
-              :value="skill.name"
-              :key="skill.name"
+            v-for="skill in this.uniqueSkillData"
+            :label="skill.name"
+            :value="skill.name"
+            :key="skill.name"
           />
         </el-select>
       </el-form-item>
       <el-form-item label="Lv">
-        <el-input-number :max="6" :min="1" v-model="uniqueLevel"></el-input-number>
+        <el-input-number
+          :max="6"
+          :min="1"
+          v-model="uniqueLevel"
+        ></el-input-number>
       </el-form-item>
-      <br>
+      <br />
       <el-collapse v-model="skillGroups">
         <el-collapse-item
-            v-for="menu in skillMenu"
-            :title="menu.title"
-            :name="menu.type"
-            :key="menu.title"
+          v-for="menu in skillMenu"
+          :title="menu.title"
+          :name="menu.type"
+          :key="menu.title"
         >
           <div v-for="rarity in rarities" :key="menu.type + rarity">
-            <h3 v-if="availableSkills[menu.type][rarity].length > 0">{{ $t(rarityString[rarity]) }}</h3>
+            <h3 v-if="availableSkills[menu.type][rarity].length > 0">
+              {{ $t(rarityString[rarity]) }}
+            </h3>
             <el-checkbox-group v-model="hasSkills[menu.type][rarity]">
               <el-tooltip
-                  v-for="skill in availableSkills[menu.type][rarity]"
-                  :key="skill.name"
-                  :content="skill.tooltip"
-                  :disabled="!('tooltip' in skill)"
+                v-for="skill in availableSkills[menu.type][rarity]"
+                :key="skill.name"
+                :content="skill.tooltip"
+                :disabled="!('tooltip' in skill)"
+                :open-delay="500"
               >
                 <el-checkbox-button :label="skill.index">
                   {{ skill.name }}
@@ -171,13 +229,15 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      <br>
-      <ExecuteBlock ref="executeBlock" :exec-function="this.exec"/>
+      <br />
+      <ExecuteBlock ref="executeBlock" :exec-function="this.exec" />
     </el-form>
-    <el-divider/>
-    <Adsense v-if="production"
-             data-ad-client="ca-pub-4611969396217909"
-             data-ad-slot="6969023753">
+    <el-divider />
+    <Adsense
+      v-if="production"
+      data-ad-client="ca-pub-4611969396217909"
+      data-ad-slot="6969023753"
+    >
     </Adsense>
     <div>
       <h3>{{ $t("message.emulationResult") }}</h3>
@@ -229,15 +289,17 @@
         </tr>
       </table>
     </div>
-    <el-divider/>
-    <h3>{{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 3) }})</h3>
-    <chart-hint/>
-    <race-graph :chart-data="chartData" :options="chartOptions"/>
-    <course-info :track="this.track"/>
-    <el-divider/>
-    <calculated-values/>
-    <el-divider/>
-    <release-note/>
+    <el-divider />
+    <h3>
+      {{ $t("message.latestRaceTime") }}({{ formatTime(latestRaceTime, 3) }})
+    </h3>
+    <chart-hint />
+    <race-graph :chart-data="chartData" :options="chartOptions" />
+    <course-info :track="this.track" />
+    <el-divider />
+    <calculated-values />
+    <el-divider />
+    <release-note />
     <h3>注意事項</h3>
     <ol>
       <li>{{ $t("message.remark1") }}</li>
@@ -248,13 +310,14 @@
       <li>{{ $t("message.remark6") }}</li>
       <li>{{ $t("message.remark7") }}</li>
       <li>{{ $t("message.remark8") }}</li>
-      <li><a href="https://youtube.com/urakagi">{{ $t("message.contact") }}</a></li>
+      <li>
+        <a href="https://youtube.com/urakagi">{{ $t("message.contact") }}</a>
+      </li>
     </ol>
   </div>
 </template>
 
 <script>
-
 import MixinRaceCore from "@/components/MixinRaceCore";
 import CourseInfo from "@/components/CourseInfo";
 import ReleaseNote from "@/components/ReleaseNote";
@@ -263,34 +326,40 @@ import ChartHint from "./ChartHint";
 import ExecuteBlock from "./ExecuteBlock";
 
 export default {
-  name: 'ChampMeet',
-  components: {ExecuteBlock, ChartHint, CalculatedValues, ReleaseNote, CourseInfo},
+  name: "ChampMeet",
+  components: {
+    ExecuteBlock,
+    ChartHint,
+    CalculatedValues,
+    ReleaseNote,
+    CourseInfo,
+  },
   mixins: [MixinRaceCore],
   data() {
     return {
-      emulatorType: 'cm'
-    }
+      emulatorType: "cm",
+    };
   },
   computed: {
     distanceType() {
-      return this.trackDetail.distanceType
+      return this.trackDetail.distanceType;
     },
     surfaceType() {
-      return this.trackDetail.surface
-    }
+      return this.trackDetail.surface;
+    },
   },
   mounted() {
-    const sc = localStorage.getItem('selectedCourse')
+    const sc = localStorage.getItem("selectedCourse");
     if (sc) {
-      const j = JSON.parse(sc)
-      this.track.location = j.location
-      this.locationChanged(this.track.location)
-      this.track.course = j.course
+      const j = JSON.parse(sc);
+      this.track.location = j.location;
+      this.locationChanged(this.track.location);
+      this.track.course = j.course;
     } else {
-      this.track.location = Object.keys(this.trackData)[0]
-      this.locationChanged(this.track.location)
-      this.track.course = Object.keys(this.courseList)[0]
+      this.track.location = Object.keys(this.trackData)[0];
+      this.locationChanged(this.track.location);
+      this.track.course = Object.keys(this.courseList)[0];
     }
-  }
-}
+  },
+};
 </script>
