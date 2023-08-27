@@ -6296,7 +6296,7 @@
     }
   },
   "10201": {
-    "name": "ﾛﾝｼｬﾝ?",
+    "name": "ロンシャン",
     "courses": {
       "11201": {
         "raceTrackId": 10201,
@@ -6337,25 +6337,45 @@
         "finishTimeMax": 149,
         "corners": [
           {
-            "start": 800,
-            "length": 400
+            "start": 1000,
+            "length": 417
           },
           {
-            "start": 1200,
-            "length": 400
+            "start": 1417,
+            "length": 200
           }
         ],
         "straights": [
           {
             "start": 0,
-            "end": 798
+            "end": 1000
           },
           {
-            "start": 1600,
-            "end": 2399
+            "start": 1617,
+            "end": 1866
+          },
+          {
+            "start": 1867,
+            "end": 2400
           }
         ],
-        "slopes": []
+        "slopes": [
+          {
+            "start": 400,
+            "length": 600,
+            "slope": 20000
+          },
+          {
+            "start": 1017,
+            "length": 383,
+            "slope": -20000
+          },
+          {
+            "start": 1400,
+            "length": 217,
+            "slope": -15000
+          }
+        ]
       }
     }
   }
