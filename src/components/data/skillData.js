@@ -2309,6 +2309,13 @@ function normalSkillData(thiz) {
           targetSpeed: 0.35,
           duration: 4,
         },
+        {
+          rarity: "evo",
+          id: 100202111,
+          holder: 100202,
+          name: "瑠璃色エスケイプ",
+          targetSpeed: 0.45,
+        },
         { rarity: "rare", id: 200541, name: "脱出術", targetSpeed: 0.35 },
         {
           rarity: "normal",
@@ -3661,6 +3668,14 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103202211,
+          holder: 103202,
+          name: "眩耀のルクシオン",
+          targetSpeed: 0.45,
+          tooltip: "0.45扱い",
+        },
         {
           rarity: "rare",
           id: 202371,
@@ -6115,7 +6130,163 @@ function normalSkillData(thiz) {
         phase_firsthalf_random: 2,
       },
     },
-
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202621,
+          name: "突撃魂",
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202622,
+          name: "進出開始",
+          targetSpeed: 0.15,
+        },
+      ],
+      duration: 2.4,
+      conditions: {
+        running_style: 3,
+        phase_laterhalf_random: 1,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202711,
+          name: "王手",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "normal",
+          id: 202712,
+          name: "会心の一歩",
+          acceleration: 0.2,
+        },
+      ],
+      duration: 0.9,
+      conditions: {
+        running_style: [2, 3],
+        phase: ">=2",
+        is_finalcorner: 1,
+        corner: 1,
+        remain_distance: ">=600",
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202721,
+          name: "ネバーギブアップ",
+          targetSpeed: 0.25,
+        },
+        {
+          rarity: "normal",
+          id: 202722,
+          name: "折れない心",
+          acceleration: 0.05,
+        },
+      ],
+      duration: 4,
+      conditions: {
+        phase_corner_random: 1,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 210291,
+          name: "最高峰の夢",
+          targetSpeed: 0.42,
+        },
+        {
+          rarity: "normal",
+          id: 210292,
+          name: "想いを背負って",
+          acceleration: 0.15,
+        },
+      ],
+      duration: 2.4,
+      tooltip: "1.2倍として扱う",
+      conditions: {
+        is_last_straight: 1,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 103202111,
+          holder: 103202,
+          name: "ラプラスの悪魔",
+        },
+      ],
+      type: "passive",
+      conditions: { running_style: 2, distance_type: 3 },
+      trigger: function () {
+        if (thiz.umaStatus.speed >= 1200 && thiz.umaStatus.wisdom >= 1200) {
+          thiz.passiveBonus.speed += 100;
+        } else if (thiz.umaStatus.speed >= 1200) {
+          thiz.passiveBonus.speed += 80;
+        }
+      },
+    },
+    {
+      variants: [{ rarity: "rare", id: 202701, name: "シンギュラリティ" }],
+      type: "passive",
+      conditions: { running_style: 2, distance_type: 3 },
+      trigger: function () {
+        if (thiz.umaStatus.speed >= 1200 && thiz.umaStatus.wisdom >= 1200) {
+          thiz.passiveBonus.speed += 80;
+        } else if (thiz.umaStatus.speed >= 1200) {
+          thiz.passiveBonus.speed += 60;
+        }
+      },
+    },
+    {
+      variants: [{ rarity: "normal", id: 202702, name: "探求心" }],
+      type: "passive",
+      conditions: { running_style: 2, distance_type: 3 },
+      trigger: function () {
+        if (thiz.umaStatus.speed >= 1200 && thiz.umaStatus.wisdom >= 1200) {
+          thiz.passiveBonus.speed += 40;
+        } else if (thiz.umaStatus.speed >= 1200) {
+          thiz.passiveBonus.speed += 20;
+        }
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 100202211,
+          holder: 100202,
+          name: "蒼天を駆けるラーファガ",
+          acceleration: 0.5,
+        },
+        {
+          rarity: "rare",
+          id: 202691,
+          name: "誰より前へ！",
+          acceleration: 0.4,
+        },
+        {
+          rarity: "normal",
+          id: 202692,
+          name: "一番乗り",
+          acceleration: 0.2,
+        },
+      ],
+      duration: 1.5,
+      conditions: {
+        distance_type: 3,
+        phase: 0,
+      },
+    },
     // End of normal skills
   ];
 }
@@ -8105,7 +8276,42 @@ const uniqueSkillData = (thiz) => [
     type: "acceleration",
     tooltip: "3番人気以上前提",
   },
-
+  {
+    id: 110321,
+    holder: 103202,
+    name: "夏空ハレーション",
+    targetSpeed: 0.45,
+    duration: 4,
+    conditions: {
+      distance_rate: ">=50",
+      corner: 1,
+      track_id: 10005,
+    },
+    tooltip: "加速度なし扱い",
+  },
+  {
+    id: 110021,
+    holder: 100202,
+    name: "水平線のその先へ",
+    invokes: [
+      {
+        speedWithDecel: 0.45,
+        duration: 5,
+        conditions: {
+          distance_rate: [66, 68],
+          corner: 3,
+        },
+      },
+      {
+        speedWithDecel: 0.25,
+        duration: 5,
+        conditions: {
+          distance_rate: [66, 68],
+        },
+      },
+    ],
+    type: "speed",
+  },
   // End of unique skills
 ];
 

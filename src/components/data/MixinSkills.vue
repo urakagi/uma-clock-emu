@@ -1,19 +1,18 @@
 <script>
-
-const SkillData = require('./skillData')
+const SkillData = require("./skillData");
 const SKILL_TRIGGER_COUNT_YUMENISIKI = 4;
 
 export default {
   name: "MixinSkills",
   data() {
     return {
-      raritySections: ['rare', 'normal', 'inherit', 'all'],
+      raritySections: ["rare", "normal", "inherit", "all"],
       rarityString: {
-        evo: 'skills.evo',
-        rare: 'skills.rare',
-        normal: 'skills.normal',
-        inherit: 'skills.inherit',
-        all: '',
+        evo: "skills.evo",
+        rare: "skills.rare",
+        normal: "skills.normal",
+        inherit: "skills.inherit",
+        all: "",
       },
       invokedSkills: [],
       coolDownMap: {},
@@ -24,18 +23,46 @@ export default {
       skillTriggerCount: [0, 0, 0, 0],
       healTriggerCount: 0,
       skills: {},
-      passiveBonusKeys: ['speed', 'stamina', 'power', 'guts', 'wisdom', 'temptationRate'],
-      types: ['passive', 'heal', 'speed', 'acceleration', 'composite', 'gate', 'decel', 'fatigue'],
-      effects: ['heal', 'targetSpeed', 'acceleration', 'speed', 'speedWithDecel', 'fatigue',
-        'passiveSpeed', 'passiveStamina', 'passivePower', 'passiveGuts', 'passiveWisdom',
-        'temptationRate', 'startDelay'],
-    }
+      passiveBonusKeys: [
+        "speed",
+        "stamina",
+        "power",
+        "guts",
+        "wisdom",
+        "temptationRate",
+      ],
+      types: [
+        "passive",
+        "heal",
+        "speed",
+        "acceleration",
+        "composite",
+        "gate",
+        "decel",
+        "fatigue",
+      ],
+      effects: [
+        "heal",
+        "targetSpeed",
+        "acceleration",
+        "speed",
+        "speedWithDecel",
+        "fatigue",
+        "passiveSpeed",
+        "passiveStamina",
+        "passivePower",
+        "passiveGuts",
+        "passiveWisdom",
+        "temptationRate",
+        "startDelay",
+      ],
+    };
   },
   computed: {
     normalSkillData() {
       const newSkillNames = {};
       const origin = SkillData.normalSkillData(this);
-      if (this.$i18n.locale === 'ja') {
+      if (this.$i18n.locale === "ja") {
         return origin;
       }
       for (const skillWrapper of origin) {
@@ -51,7 +78,7 @@ export default {
     uniqueSkillData() {
       const newSkillNames = {};
       const origin = SkillData.uniqueSkillData(this);
-      if (this.$i18n.locale === 'ja') {
+      if (this.$i18n.locale === "ja") {
         return origin.sort((a, b) => {
           if (a.name < b.name) return -1;
           if (a.name > b.name) return 1;
@@ -71,7 +98,7 @@ export default {
       });
     },
     availableSkills() {
-      const ret = {}
+      const ret = {};
       for (const type of this.types) {
         ret[type] = {};
         for (const section of this.raritySections) {
@@ -80,19 +107,22 @@ export default {
       }
 
       ret.evo = [];
-      const idMap = this.skills.map(x => x.id);
+      const idMap = this.skills.map((x) => x.id);
       const uq = this.skills[idMap.indexOf(this.selectedUnique)];
       const uqHolder = uq?.holder;
       for (const skill of this.skills) {
-        if (skill.type === 'unique') {
+        if (skill.type === "unique") {
           continue;
         }
-        if (skill.emulatorTypeLimit && skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0) {
+        if (
+          skill.emulatorTypeLimit &&
+          skill.emulatorTypeLimit.indexOf(this.emulatorType) < 0
+        ) {
           continue;
         }
 
         // 進化スキルはエミュ種類以外では無条件で表示
-        if (skill.rarity === 'evo') {
+        if (skill.rarity === "evo") {
           if (skill.holder == null) {
             console.error(`No holder in ${JSON.stringify(skill)}`);
           }
@@ -124,12 +154,14 @@ export default {
           continue;
         }
         // コースと馬場状態指定はチャンミのみ
-        if (this.emulatorType === 'cm') {
+        if (this.emulatorType === "cm") {
           if (skill.courseLimit) {
-            let notMatch = true
+            let notMatch = true;
             for (const limit in skill.courseLimit) {
-              if (skill.courseLimit[limit].indexOf(this.trackDetail[limit]) >= 0) {
-                notMatch = false
+              if (
+                skill.courseLimit[limit].indexOf(this.trackDetail[limit]) >= 0
+              ) {
+                notMatch = false;
                 break;
               }
             }
@@ -138,7 +170,10 @@ export default {
             }
           }
           if (skill.surfaceConditionLimit) {
-            if (skill.surfaceConditionLimit.indexOf(this.track.surfaceCondition) < 0) {
+            if (
+              skill.surfaceConditionLimit.indexOf(this.track.surfaceCondition) <
+              0
+            ) {
               continue;
             }
           }
@@ -147,20 +182,20 @@ export default {
         const section = this.toRaritySection(skill.rarity);
 
         if (!skill.type) {
-          console.error('No type:', JSON.stringify(skill))
+          console.error("No type:", JSON.stringify(skill));
         }
         ret[skill.type][section].push(skill);
       }
       return ret;
     },
     timeCoef() {
-      return this.trackDetail.distance / 1000.0
+      return this.trackDetail.distance / 1000.0;
     },
     isInSpurt() {
       if (!this.spurtParameters) {
-        return false
+        return false;
       }
-      return this.spurtParameters.distance + this.position >= this.courseLength
+      return this.spurtParameters.distance + this.position >= this.courseLength;
     },
     // Functions to use the same name in the skill description
     remainDistance() {
@@ -171,7 +206,7 @@ export default {
     },
     phase() {
       return this.currentPhase;
-    }
+    },
   },
   created() {
     this.buildSkillData();
@@ -179,13 +214,13 @@ export default {
   },
   methods: {
     invokeSkills(skillActivateAdjustment) {
-      this.invokedSkills = []
-      this.coolDownMap = {}
-      this.skillTriggerCount = [0, 0, 0, 0, 0]
-      this.healTriggerCount = 0
+      this.invokedSkills = [];
+      this.coolDownMap = {};
+      this.skillTriggerCount = [0, 0, 0, 0, 0];
+      this.healTriggerCount = 0;
 
       const hasSkills = [];
-      const idMap = this.skills.map(x => x.id);
+      const idMap = this.skills.map((x) => x.id);
       for (const type of this.types) {
         for (const section of this.raritySections) {
           for (const id of this.hasSkills[type][section]) {
@@ -209,13 +244,13 @@ export default {
 
       for (const skill of hasSkills) {
         let invokeRate;
-        if (skill.type === 'fatigue' || skill.type === 'decel') {
+        if (skill.type === "fatigue" || skill.type === "decel") {
           invokeRate = 90;
         } else if (
-            skill.type === 'passive'
-            || skill.type === 'unique'
-            || skillActivateAdjustment === "1"
-            || skillActivateAdjustment === "2"
+          skill.type === "passive" ||
+          skill.type === "unique" ||
+          skillActivateAdjustment === "1" ||
+          skillActivateAdjustment === "2"
         ) {
           invokeRate = 100;
         } else {
@@ -226,11 +261,11 @@ export default {
             invokeRate = 100;
           }
         }
-        const {invokes: skillInvokes, ...rest} = skill;
+        const { invokes: skillInvokes, ...rest } = skill;
         const invokes = [];
         if (skillInvokes) {
           for (const invoke of skillInvokes) {
-            invokes.push(this.reshapeSkill({...rest, ...invoke}));
+            invokes.push(this.reshapeSkill({ ...rest, ...invoke }));
           }
         } else {
           invokes.push(skill);
@@ -253,94 +288,100 @@ export default {
     checkCondition(skill, cond, value) {
       const thiz = this;
       switch (cond) {
-        case 'hp_per':
-          if (value.startsWith('>=')) {
-            return () => thiz.sp >= parseInt(value.substring(2)) * 0.01 * thiz.spMax;
-          } else if (value.startsWith('<=')) {
-            return () => thiz.sp <= parseInt(value.substring(2)) * 0.01 * thiz.spMax;
+        case "hp_per":
+          if (value.startsWith(">=")) {
+            return () =>
+              thiz.sp >= parseInt(value.substring(2)) * 0.01 * thiz.spMax;
+          } else if (value.startsWith("<=")) {
+            return () =>
+              thiz.sp <= parseInt(value.substring(2)) * 0.01 * thiz.spMax;
           } else {
-            console.error('Unknown hp_per value', value);
+            console.error("Unknown hp_per value", value);
             return null;
           }
-        case 'activate_count_heal':
+        case "activate_count_heal":
           return () => thiz.healTriggerCount >= value;
-        case 'activate_count_all':
-          return () => thiz.skillTriggerCount.reduce((pre, cur) => pre + cur, 0) >= value;
-        case 'activate_count_start':
+        case "activate_count_all":
+          return () =>
+            thiz.skillTriggerCount.reduce((pre, cur) => pre + cur, 0) >= value;
+        case "activate_count_start":
           return () => thiz.skillTriggerCount[0] >= value;
-        case 'accumulatetime':
+        case "accumulatetime":
           return () => thiz.accTimePassed(value);
-        case 'straight_front_type':
+        case "straight_front_type":
           return () => thiz.getStraightFrontType() == value;
-        case 'is_badstart':
+        case "is_badstart":
           if (value == 0) {
             return () => thiz.startDelay < 0.08;
           } else {
             return null;
           }
-        case 'temptation_count':
+        case "temptation_count":
           return () => thiz.temptationSection < 0;
-        case 'remain_distance':
-          if (typeof value === 'number') {
-            return (startPosition) => thiz.isContainsRemainingDistance(value, startPosition)
-          } else if (typeof value === 'string') {
-            if (value.startsWith('>=')) {
+        case "remain_distance":
+          if (typeof value === "number") {
+            return (startPosition) =>
+              thiz.isContainsRemainingDistance(value, startPosition);
+          } else if (typeof value === "string") {
+            if (value.startsWith(">=")) {
               return (startPosition) =>
-                  startPosition <= thiz.toPosition(parseInt(value.toString().substring(2)));
-            } else if (value.startsWith('<=')) {
+                startPosition <=
+                thiz.toPosition(parseInt(value.toString().substring(2)));
+            } else if (value.startsWith("<=")) {
               return (startPosition) =>
-                  startPosition >= thiz.toPosition(parseInt(value.toString().substring(2)));
+                startPosition >=
+                thiz.toPosition(parseInt(value.toString().substring(2)));
             } else {
-              console.error('Unknown remain_distance value', value);
+              console.error("Unknown remain_distance value", value);
               return null;
             }
           } else if (Array.isArray(value)) {
             return (startPosition) =>
-                startPosition >= thiz.toPosition(value[1])
-                && startPosition <= thiz.toPosition(value[0]);
+              startPosition >= thiz.toPosition(value[1]) &&
+              startPosition <= thiz.toPosition(value[0]);
           } else {
-            console.error('Unknown remain_distance value', value);
+            console.error("Unknown remain_distance value", value);
             return null;
           }
-        case 'distance_rate_after_random':
+        case "distance_rate_after_random":
           return this.initIntervalRandom(value * 0.01, 1);
-        case 'distance_rate_random':
+        case "distance_rate_random":
           return thiz.initIntervalRandom(value[0] * 0.01, value[1] * 0.01);
-        case 'corner_random':
+        case "corner_random":
           return this.initCornerRandom(value);
-        case 'all_corner_random':
+        case "all_corner_random":
           return this.initAllCornerRandom();
-        case 'slope':
-          return () => thiz.isInSlope(['', 'up', 'down'][value]);
-        case 'up_slope_random':
-          return this.initSlopeRandom('up')
-        case 'down_slope_random':
-          return this.initSlopeRandom('down')
-        case 'running_style':
-          if (typeof value === 'number') {
+        case "slope":
+          return () => thiz.isInSlope(["", "up", "down"][value]);
+        case "up_slope_random":
+          return this.initSlopeRandom("up");
+        case "down_slope_random":
+          return this.initSlopeRandom("down");
+        case "running_style":
+          if (typeof value === "number") {
             return () => thiz.isRunningStyle(value);
           } else if (Array.isArray(value)) {
             return () => value.includes(thiz.basicRunningStyle);
           } else {
-            console.error('Unknown running_style value', value);
+            console.error("Unknown running_style value", value);
             return null;
           }
-        case 'rotation':
+        case "rotation":
           return () => thiz.isRotation(value);
-        case 'ground_type':
+        case "ground_type":
           return () => thiz.isGroundType(value);
-        case 'ground_condition':
+        case "ground_condition":
           return () => thiz.isGroundCondition(value);
-        case 'distance_type':
+        case "distance_type":
           return () => thiz.isDistanceType(value);
-        case 'track_id':
+        case "track_id":
           return () => thiz.isTrackId(value);
-        case 'is_basis_distance':
+        case "is_basis_distance":
           return () => thiz.isBasisDistance(value);
-        case 'distance_rate': {
+        case "distance_rate": {
           let values;
           if (Array.isArray(value)) {
-            if (typeof value[0] === 'number') {
+            if (typeof value[0] === "number") {
               values = [`>=${value[0]}`, `<=${value[1]}`];
             } else {
               values = value;
@@ -351,77 +392,87 @@ export default {
           const ret = [];
           for (const v of values) {
             ret.push(() => {
-              if (v.startsWith('>=')) {
-                return thiz.isInInterval(parseInt(v.substring(2)) * 0.01, 1)
-              } else if (v.startsWith('<=')) {
-                return thiz.isInInterval(0, parseInt(v.substring(2)) * 0.01)
+              if (v.startsWith(">=")) {
+                return thiz.isInInterval(parseInt(v.substring(2)) * 0.01, 1);
+              } else if (v.startsWith("<=")) {
+                return thiz.isInInterval(0, parseInt(v.substring(2)) * 0.01);
               }
-            })
+            });
           }
           return ret;
         }
-        case 'phase_random':
-          return this.initPhaseRandom(value);
-        case 'phase_firsthalf_random':
-          return this.initPhaseRandom(value, {endRate: 0.5});
-        case 'phase_laterhalf_random':
-          return this.initPhaseRandom(value, {startRate: 0.5});
-        case 'is_finalcorner_random':
-          return thiz.initFinalCornerRandom();
-        case 'is_finalstraight_random':
+        case "phase_random":
+          return thiz.initPhaseRandom(value);
+        case "phase_firsthalf_random":
+          return thiz.initPhaseRandom(value, { endRate: 0.5 });
+        case "phase_laterhalf_random":
+          return thiz.initPhaseRandom(value, { startRate: 0.5 });
+        case "phase_corner_random":
+          return thiz.initPhaseCornerRandom(value);
+        case "is_finalcorner_random":
+          return thiz.initFinalCornerRandom(value);
+        case "is_finalstraight_random":
           return thiz.initFinalStraightRandom();
-        case 'straight_random':
-          return this.initStraightRandom();
-        case 'phase':
-          if (typeof value === 'string') {
-            if (value.startsWith('>=')) {
+        case "straight_random":
+          return thiz.initStraightRandom();
+        case "is_last_straight":
+          return thiz.isInFinalStraight;
+        case "phase":
+          if (typeof value === "string") {
+            if (value.startsWith(">=")) {
               return () => thiz.currentPhase >= parseInt(value.substring(2));
-            } else if (value.startsWith('>')) {
+            } else if (value.startsWith(">")) {
               return () => thiz.currentPhase > parseInt(value.substring(1));
-            } else if (value.startsWith('<=')) {
+            } else if (value.startsWith("<=")) {
               return () => thiz.currentPhase <= parseInt(value.substring(2));
-            } else if (value.startsWith('<')) {
+            } else if (value.startsWith("<")) {
               return () => thiz.currentPhase < parseInt(value.substring(1));
             } else {
-              console.error('Unknown phase value', value);
+              console.error("Unknown phase value", value);
               return null;
             }
           } else {
             return () => thiz.currentPhase == value;
           }
-        case 'is_finalcorner':
+        case "is_finalcorner":
           return () => thiz.isInFinalStraight() || thiz.isInFinalCorner();
-        case 'is_finalcorner_laterhalf':
-          return () => thiz.isInFinalCorner(null, {start: 0.5, end: 1});
-        case 'corner':
+        case "is_finalcorner_laterhalf":
+          return () => thiz.isInFinalCorner(null, { start: 0.5, end: 1 });
+        case "corner":
           if (value == 0) {
             return () => !thiz.isInCorner();
-          } else if (value == 1) {
+          } else if (value === 1) {
+            // Use '1' over 1 if you want exact first corner
             return () => thiz.isInCorner();
           } else {
             return () => thiz.isInCorner(thiz.position, value);
           }
-        case 'is_activate_any_skill':
-          return () => thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1;
-        case 'is_lastspurt':
+        case "is_activate_any_skill":
+          return () =>
+            thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1;
+        case "is_lastspurt":
           if (value == 0) {
             return () => !thiz.isInSpurt;
           } else {
             return () => thiz.isInSpurt;
           }
-        case 'lastspurt':
+        case "lastspurt":
           switch (value) {
             case 1:
-              return () => thiz.isInSpurt && thiz.spurtParameters.speed < thiz.maxSpurtSpeed;
+              return () =>
+                thiz.isInSpurt &&
+                thiz.spurtParameters.speed < thiz.maxSpurtSpeed;
             case 2:
               return () => thiz.spurtParameters?.speed == thiz.maxSpurtSpeed;
           }
           break;
-        case 'base_speed':
+        case "base_speed":
           return () => thiz.umaStatus.speed >= value;
-        case 'base_power':
+        case "base_power":
           return () => thiz.umaStatus.power >= value;
-        case 'course_distance':
+        case "base_wiz":
+          return () => thiz.umaStatus.wisdom >= value;
+        case "course_distance":
           return () => thiz.courseLength == value;
         default:
           alert(`Unknown condition ${cond}`);
@@ -438,7 +489,7 @@ export default {
       }
       const thiz = this;
       const checks = skill.check ? [skill.check] : [];
-      skill.randoms = []
+      skill.randoms = [];
       for (const cond in skill.conditions) {
         const value = skill.conditions[cond];
         const res = this.checkCondition(skill, cond, value);
@@ -451,19 +502,21 @@ export default {
             if (res[0].start) {
               // Randoms
               skill.randoms = res;
-              checks.push((startPosition) => thiz.isInRandom(skill.randoms, startPosition));
+              checks.push((startPosition) =>
+                thiz.isInRandom(skill.randoms, startPosition)
+              );
             } else if (res[0] instanceof Function) {
               // Multiple conditions
               checks.push(...res);
             } else {
-              console.error('Unknown res array', cond, res);
+              console.error("Unknown res array", cond, res);
             }
           } else {
             // Empty random array = won't trigger
             checks.push(() => false);
           }
         } else {
-          console.error('Unknown res type', cond, res);
+          console.error("Unknown res type", cond, res);
         }
       }
       skill.check = function (startPosition) {
@@ -471,47 +524,47 @@ export default {
           if (!check(startPosition)) return false;
         }
         return true;
-      }
+      };
     },
     triggerStartSkills() {
-      const nonStartSkills = []
+      const nonStartSkills = [];
       for (const skill of this.invokedSkills) {
         switch (skill.type) {
-          case 'passive':
+          case "passive":
             if (skill.id === 202051) {
               // 大逃げ
               this.oonige = true;
             } else if (skill.check && skill.check()) {
-              if ('triggerRate' in skill) {
+              if ("triggerRate" in skill) {
                 if (Math.random() < skill.triggerRate) {
                   skill.trigger(skill);
                   this.skillTriggerCount[0]++;
                   this.passiveTriggered += 1;
-                  this.frames[0].skills.push({data: skill});
+                  this.frames[0].skills.push({ data: skill });
                 }
               } else {
                 skill.trigger(skill);
                 this.skillTriggerCount[0]++;
                 this.passiveTriggered += 1;
-                this.frames[0].skills.push({data: skill});
+                this.frames[0].skills.push({ data: skill });
               }
             }
             break;
-          case 'gate':
+          case "gate":
             this.startDelay *= skill.startDelay;
             skill.trigger(skill);
             this.skillTriggerCount[0]++;
-            this.frames[0].skills.push({data: skill});
-            break
+            this.frames[0].skills.push({ data: skill });
+            break;
           default:
             nonStartSkills.push(skill);
-            break
+            break;
         }
       }
-      this.invokedSkills = nonStartSkills
+      this.invokedSkills = nonStartSkills;
     },
     checkSkillTrigger(startPosition) {
-      const skillTriggered = []
+      const skillTriggered = [];
       for (const skill of this.invokedSkills) {
         if (this.isInCoolDown(skill)) {
           continue;
@@ -520,9 +573,9 @@ export default {
           const skillDetail = this.triggerSkill(skill);
           for (const chained of skillDetail?.chainTriggered ?? []) {
             const chainDetail = this.triggerSkill(chained);
-            skillTriggered.push({data: chained, detail: chainDetail});
+            skillTriggered.push({ data: chained, detail: chainDetail });
           }
-          skillTriggered.push({data: skill, detail: skillDetail});
+          skillTriggered.push({ data: skill, detail: skillDetail });
         }
       }
       return skillTriggered;
@@ -536,49 +589,52 @@ export default {
         skillDetail = this.doHeal(skill.heal);
       }
       if (skill.duration || skill.durationOverwrite) {
-        this.operatingSkills.push({data: skill, startFrame: this.frameElapsed})
+        this.operatingSkills.push({
+          data: skill,
+          startFrame: this.frameElapsed,
+        });
       }
-      this.skillTriggerCount[this.currentPhase]++
+      this.skillTriggerCount[this.currentPhase]++;
       // 特殊スキル誘発カウント
       if (this.isInFinalCorner() && this.currentPhase >= 2) {
         this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
       }
-      this.coolDownMap[skill.id] = this.frameElapsed
+      this.coolDownMap[skill.id] = this.frameElapsed;
       return skillDetail;
     },
     chooseRandom(zoneStart, zoneEnd) {
-      let rate
+      let rate;
       switch (this.randomPosition) {
-        case '0':
-          rate = Math.random()
-          break
-        case '1':
-          rate = 0
-          break
-        case '2':
-          rate = 0.25
-          break
-        case '3':
-          rate = 0.5
-          break
-        case '4':
-          rate = 0.75
-          break
-        case '5':
+        case "0":
+          rate = Math.random();
+          break;
+        case "1":
+          rate = 0;
+          break;
+        case "2":
+          rate = 0.25;
+          break;
+        case "3":
+          rate = 0.5;
+          break;
+        case "4":
+          rate = 0.75;
+          break;
+        case "5":
         default:
-          rate = 0.98
-          break
+          rate = 0.98;
+          break;
       }
 
-      const start = rate * (zoneEnd - zoneStart) + zoneStart
-      let end = start + 10
+      const start = rate * (zoneEnd - zoneStart) + zoneStart;
+      let end = start + 10;
       if (end > zoneEnd) {
-        end = zoneEnd
+        end = zoneEnd;
       }
-      return {start, end}
+      return { start, end };
     },
     initCornerRandom(values) {
-      const ret = []
+      const ret = [];
       const corners = this.trackDetail.corners.slice(-4);
       for (let i = 0; i < 4 - corners.length; i++) {
         corners.unshift(null);
@@ -595,154 +651,184 @@ export default {
       return ret;
     },
     initAllCornerRandom() {
-      const corners = this.trackDetail.corners.map(c => ({start: c.start, length: c.length}))
-      const triggers = []
+      const corners = this.trackDetail.corners.map((c) => ({
+        start: c.start,
+        length: c.length,
+      }));
+      const triggers = [];
 
       function logTrigger(min, max) {
-        max = Math.max(min, max - 10)
-        const start = min + Math.random() * (max - min)
-        const end = start + 10
-        triggers.push({start, end})
-        triggers.sort((a, b) => a.start - b.start)
-        return {start, end}
+        max = Math.max(min, max - 10);
+        const start = min + Math.random() * (max - min);
+        const end = start + 10;
+        triggers.push({ start, end });
+        triggers.sort((a, b) => a.start - b.start);
+        return { start, end };
       }
 
       for (let x = 0; x < 4; x++) {
         if (corners.length < 1) {
-          break
+          break;
         }
-        const i = Math.floor(Math.random() * corners.length)
-        const corner = corners[i]
-        const trigger = logTrigger(corner.start, corner.start + corner.length)
+        const i = Math.floor(Math.random() * corners.length);
+        const corner = corners[i];
+        const trigger = logTrigger(corner.start, corner.start + corner.length);
         if (corner.start + corner.length - trigger.end >= 10) {
-          corner.start = trigger.end
-          corner.length -= (trigger.end - corner.start)
+          corner.start = trigger.end;
+          corner.length -= trigger.end - corner.start;
         } else {
-          corners.splice(i, 1)
+          corners.splice(i, 1);
         }
-        corners.splice(0, i)
+        corners.splice(0, i);
       }
-      return triggers
+      return triggers;
     },
     initStraightRandom() {
-      let ret
-      const straights = this.getStraights()
-      const chosen = Math.floor(Math.random() * straights.length)
-      ret = this.chooseRandom(straights[chosen].start, straights[chosen].end)
-      return [ret]
+      let ret;
+      const straights = this.getStraights();
+      const chosen = Math.floor(Math.random() * straights.length);
+      ret = this.chooseRandom(straights[chosen].start, straights[chosen].end);
+      return [ret];
     },
     initSlopeRandom(dir) {
-      let ret
+      let ret;
       if (!this.getSlopes()) return [];
       const slopes = this.getSlopes().filter(
-          s => (s.slope > 0 && dir == 'up') || (s.slope < 0 && dir == 'down'))
+        (s) => (s.slope > 0 && dir == "up") || (s.slope < 0 && dir == "down")
+      );
       if (slopes.length === 0) {
         return [];
       }
-      const chosen = Math.floor(Math.random() * slopes.length)
-      ret = this.chooseRandom(slopes[chosen].start, slopes[chosen].start + slopes[chosen].length)
-      return [ret]
+      const chosen = Math.floor(Math.random() * slopes.length);
+      ret = this.chooseRandom(
+        slopes[chosen].start,
+        slopes[chosen].start + slopes[chosen].length
+      );
+      return [ret];
     },
     initPhaseRandom(phase, options) {
-      const startRate = (options && options.startRate) || 0
-      const endRate = (options && options.endRate) || 1
-      let zoneStart, zoneEnd
+      const startRate = (options && options.startRate) || 0;
+      const endRate = (options && options.endRate) || 1;
+      let zoneStart, zoneEnd;
       switch (phase) {
         case 0:
-          zoneStart = 0
-          zoneEnd = this.courseLength / 6.0
-          break
+          zoneStart = 0;
+          zoneEnd = this.courseLength / 6.0;
+          break;
         case 1:
-          zoneStart = this.courseLength / 6.0
-          zoneEnd = this.courseLength * 2.0 / 3
-          break
+          zoneStart = this.courseLength / 6.0;
+          zoneEnd = (this.courseLength * 2.0) / 3;
+          break;
         case 2:
-          zoneStart = this.courseLength * 2.0 / 3
-          zoneEnd = this.courseLength * 5.0 / 6
-          break
+          zoneStart = (this.courseLength * 2.0) / 3;
+          zoneEnd = (this.courseLength * 5.0) / 6;
+          break;
         case 3:
         default:
-          zoneStart = this.courseLength * 5.0 / 6
-          zoneEnd = this.courseLength
-          break
+          zoneStart = (this.courseLength * 5.0) / 6;
+          zoneEnd = this.courseLength;
+          break;
       }
-      const zoneLength = zoneEnd - zoneStart
-      zoneStart += zoneLength * startRate
-      zoneEnd -= zoneLength * (1 - endRate)
-      return [this.chooseRandom(zoneStart, zoneEnd)]
+      const zoneLength = zoneEnd - zoneStart;
+      zoneStart += zoneLength * startRate;
+      zoneEnd -= zoneLength * (1 - endRate);
+      return [this.chooseRandom(zoneStart, zoneEnd)];
     },
     initFinalCornerRandom() {
-      const ret = []
-      const corner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      const ret = [];
+      const corner =
+        this.trackDetail.corners[this.trackDetail.corners.length - 1];
       if (!corner) {
-        return []
+        return [];
       }
-      ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)))
-      return ret
+      ret.push(this.chooseRandom(corner.start, this.cornerEnd(corner)));
+      return ret;
     },
-    initPhase2CornerRandom() {
-      let start = -1
-      let end = -1
+    initPhaseCornerRandom(phase) {
+      const candidates = [];
+      let phaseStart, phaseEnd;
+      const courseLength = this.courseLength;
+      switch (phase) {
+        case 0:
+          phaseStart = 0;
+          phaseEnd = courseLength / 6;
+          break;
+        case 1:
+          phaseStart = courseLength / 6;
+          phaseEnd = (courseLength * 2) / 3;
+          break;
+        case 2:
+          phaseStart = (courseLength * 2) / 3;
+          phaseEnd = (courseLength * 5) / 6;
+          break;
+        case 3:
+        default:
+          phaseStart = (courseLength * 5) / 6;
+          phaseEnd = courseLength;
+          break;
+      }
       for (const corner of this.trackDetail.corners) {
-        if (corner.start >= this.courseLength * 2.0 / 3) {
-          if (start < 0) {
-            start = corner.start
-          }
+        const cornerStart = corner.start;
+        const cornerEnd = this.cornerEnd(corner);
+        if (cornerEnd < phaseStart || cornerStart > phaseEnd) {
+          continue;
         }
-        if (this.cornerEnd(corner) >= this.courseLength * 2.0 / 3) {
-          end = this.cornerEnd(corner)
-          if (start < 0) {
-            start = this.courseLength * 2.0 / 3
-          }
-        }
+        candidates.push({
+          start: Math.max(cornerStart, phaseStart),
+          end: Math.min(cornerEnd, phaseEnd),
+        });
       }
-      if (start < 0) {
-        return []
+      if (candidates.length === 0) {
+        return [];
       }
-      return [this.chooseRandom(start, end)]
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      return [this.chooseRandom(chosen.start, chosen.end)];
     },
     initFinalStraightRandom() {
-      const ret = []
-      const finalCorner = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      const ret = [];
+      const finalCorner =
+        this.trackDetail.corners[this.trackDetail.corners.length - 1];
       if (!finalCorner) {
-        return []
+        return [];
       }
-      ret.push(this.chooseRandom(this.cornerEnd(finalCorner), this.courseLength))
-      return ret
+      ret.push(
+        this.chooseRandom(this.cornerEnd(finalCorner), this.courseLength)
+      );
+      return ret;
     },
     initIntervalRandom(startRate, endRate) {
-      const start = this.courseLength * startRate
-      const end = this.courseLength * endRate
-      return [this.chooseRandom(start, end)]
+      const start = this.courseLength * startRate;
+      const end = this.courseLength * endRate;
+      return [this.chooseRandom(start, end)];
     },
     isInRandom(randoms) {
       for (const random of randoms) {
         if (this.position <= random.end && this.position >= random.start) {
-          return true
+          return true;
         }
       }
-      return false
+      return false;
     },
     isInCorner(position, cornerNumber, interval) {
       if (!position) {
-        position = this.position
+        position = this.position;
       }
       for (const i in this.trackDetail.corners) {
-        const corner = this.trackDetail.corners[i]
-        const start = interval ? interval.start * corner.start : corner.start
-        let end = this.cornerEnd(corner)
+        const corner = this.trackDetail.corners[i];
+        const start = interval ? interval.start * corner.start : corner.start;
+        let end = this.cornerEnd(corner);
         if (interval) {
-          end *= interval.end
+          end *= interval.end;
         }
         if (position >= start && position <= end) {
           if (cornerNumber) {
-            return i == this.trackDetail.corners.length + cornerNumber - 5
+            return i == this.trackDetail.corners.length + +cornerNumber - 5;
           } else {
-            return true
+            return true;
           }
         }
       }
-      return false
+      return false;
     },
     /**
      * @returns {number}
@@ -754,8 +840,9 @@ export default {
       if (!position) position = this.position;
       for (const straight of this.trackDetail.straights) {
         if (position >= straight.start && position <= straight.end) {
-          const rIndex = this.trackDetail.straights.length
-              - this.trackDetail.straights.indexOf(straight);
+          const rIndex =
+            this.trackDetail.straights.length -
+            this.trackDetail.straights.indexOf(straight);
           return rIndex % 2 == 1 ? 1 : 2;
         }
       }
@@ -763,98 +850,109 @@ export default {
     },
     isInStraight(position) {
       if (!position) {
-        position = this.position
+        position = this.position;
       }
       for (const straight of this.trackDetail.straights) {
         if (position >= straight.start && position <= straight.end) {
-          return true
+          return true;
         }
       }
-      return false
+      return false;
     },
     isInFinalCorner(position, interval) {
       if (!position) {
-        position = this.position
+        position = this.position;
       }
-      const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
+      const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1];
       if (!fc) {
-        return false
+        return false;
       }
-      const startRate = interval ? interval.start : 0
-      const endRate = interval ? interval.end : 1
-      const start = fc.start + startRate * fc.length
-      const end = fc.start + endRate * fc.length
-      return position >= start && position <= end
+      const startRate = interval ? interval.start : 0;
+      const endRate = interval ? interval.end : 1;
+      const start = fc.start + startRate * fc.length;
+      const end = fc.start + endRate * fc.length;
+      return position >= start && position <= end;
     },
     isInFinalStraight(position) {
       if (!position) {
-        position = this.position
+        position = this.position;
       }
-      const fc = this.trackDetail.corners[this.trackDetail.corners.length - 1]
-      if (!fc) {
-        // 千直、最終直線は仕様上存在しないことになっている
-        return false
+      const lastStraight =
+        this.trackDetail.straights[this.trackDetail.straights.length - 1];
+      if (!lastStraight) {
+        return false;
       }
-      return position > this.cornerEnd(fc)
+      return position >= lastStraight.start;
     },
     isContainsRemainingDistance(remain, startPosition) {
-      return startPosition <= this.toPosition(remain)
-          && this.position >= this.toPosition(remain)
+      return (
+        startPosition <= this.toPosition(remain) &&
+        this.position >= this.toPosition(remain)
+      );
     },
     isInDistanceRate(startRate, endRate) {
-      return this.position >= this.courseLength * startRate &&
-          this.position <= this.courseLength * endRate
+      return (
+        this.position >= this.courseLength * startRate &&
+        this.position <= this.courseLength * endRate
+      );
     },
     isSPInRange(minRate, maxRate) {
-      return this.sp >= this.spMax * minRate && this.sp <= this.spMax * maxRate
+      return this.sp >= this.spMax * minRate && this.sp <= this.spMax * maxRate;
     },
     isPhase(phase) {
-      return this.currentPhase === phase
+      return this.currentPhase === phase;
     },
     isStraightFrontType(type) {
       switch (type) {
         case 2:
           for (const i in this.trackDetail.straights) {
-            const straight = this.trackDetail.straights[i]
-            if (this.position >= straight.start && this.position <= straight.end) {
-              return i == this.trackDetail.straights.length - 2
+            const straight = this.trackDetail.straights[i];
+            if (
+              this.position >= straight.start &&
+              this.position <= straight.end
+            ) {
+              return i == this.trackDetail.straights.length - 2;
             }
           }
-          break
+          break;
       }
     },
     isInInterval(start, end) {
-      return this.position >= this.courseLength * start
-          && this.position <= this.courseLength * end
+      return (
+        this.position >= this.courseLength * start &&
+        this.position <= this.courseLength * end
+      );
     },
     isInCoolDown(skill) {
       if (!(skill.id in this.coolDownMap)) {
-        return false
+        return false;
       }
-      return (this.frameElapsed - this.coolDownMap[skill.id]) / 15.0 <
-          skill.cd * this.timeCoef
+      return (
+        (this.frameElapsed - this.coolDownMap[skill.id]) / 15.0 <
+        skill.cd * this.timeCoef
+      );
     },
     doHeal(value) {
-      let detail
-      const heal = this.spMax * value / 10000.0
-      this.sp += heal
-      let waste = 0
+      let detail;
+      const heal = (this.spMax * value) / 10000.0;
+      this.sp += heal;
+      let waste = 0;
       if (this.sp > this.spMax) {
-        waste = this.sp - this.spMax
-        this.sp = this.spMax
+        waste = this.sp - this.spMax;
+        this.sp = this.spMax;
       }
       if (waste > 0) {
-        detail = {heal, waste}
+        detail = { heal, waste };
       } else {
-        detail = {heal, waste: 0}
+        detail = { heal, waste: 0 };
       }
       if (value > 0) {
-        this.healTriggerCount++
+        this.healTriggerCount++;
       }
       if (this.currentPhase >= 2) {
-        this.spurtParameters = this.calcSpurtParameter(true)
+        this.spurtParameters = this.calcSpurtParameter(true);
       }
-      return detail
+      return detail;
     },
     isRunningStyle(value) {
       if (value == null) return true;
@@ -903,38 +1001,46 @@ export default {
       }
     },
     accTimePassed(second) {
-      return this.frameElapsed >= 15 * second
+      return this.frameElapsed >= 15 * second;
     },
     reshapeSkill(copy) {
       const thiz = this;
 
       if (copy.duration) {
-        if (!copy.tooltip) copy.tooltip = ''
-        copy.tooltip += ` | ${Math.round(copy.duration * 10) / 10}s`
+        if (!copy.tooltip) copy.tooltip = "";
+        copy.tooltip += ` | ${Math.round(copy.duration * 10) / 10}s`;
       }
       for (const effect of this.effects) {
         if (copy[effect]) {
-          if (!copy.tooltip) copy.tooltip = '';
-          copy.tooltip += ` | ${effect}: ${Math.round(copy[effect] * 100) / 100}`;
+          if (!copy.tooltip) copy.tooltip = "";
+          copy.tooltip += ` | ${effect}: ${
+            Math.round(copy[effect] * 100) / 100
+          }`;
         }
       }
 
-      if (!copy.cd) copy.cd = 500
+      if (!copy.cd) copy.cd = 500;
       const triggers = copy.trigger ? [copy.trigger] : [];
 
       let type = copy.type;
       let effectCount = 0;
-      if (copy.passiveSpeed || copy.passiveStamina || copy.passivePower
-          || copy.passiveGuts || copy.passiveWisdom || copy.temptationRate) {
-        type = 'passive';
+      if (
+        copy.passiveSpeed ||
+        copy.passiveStamina ||
+        copy.passivePower ||
+        copy.passiveGuts ||
+        copy.passiveWisdom ||
+        copy.temptationRate
+      ) {
+        type = "passive";
         effectCount++;
       }
       if (copy.heal) {
-        type = 'heal';
+        type = "heal";
         effectCount++;
       }
       if (copy.targetSpeed || copy.speedWithDecel) {
-        type = 'speed';
+        type = "speed";
         effectCount++;
         if (copy.speedWithDecel) {
           triggers.push(() => {
@@ -943,36 +1049,41 @@ export default {
         }
       }
       if (copy.acceleration) {
-        type = 'acceleration';
+        type = "acceleration";
         effectCount++;
       }
       if (copy.speed && copy.speed < 0) {
-        type = 'decel';
+        type = "decel";
         effectCount++;
       }
       if (copy.fatigue) {
-        type = 'fatigue';
+        type = "fatigue";
         effectCount++;
         triggers.push(() => {
           return thiz.doHeal(-copy.fatigue);
         });
       }
       const passiveStatus = [
-        'passiveSpeed', 'passiveStamina', 'passivePower', 'passiveGuts', 'passiveWisdom'
+        "passiveSpeed",
+        "passiveStamina",
+        "passivePower",
+        "passiveGuts",
+        "passiveWisdom",
       ];
       for (const status of passiveStatus) {
         if (copy[status]) {
           triggers.push(() => {
-            thiz.passiveBonus[status.substring(7).toLowerCase()] += copy[status];
+            thiz.passiveBonus[status.substring(7).toLowerCase()] +=
+              copy[status];
           });
         }
       }
       if (copy.startDelay) {
-        type = 'gate';
+        type = "gate";
         effectCount++;
       }
       if (effectCount > 1) {
-        type = 'composite';
+        type = "composite";
       }
       if (!copy.type) {
         copy.type = type;
@@ -987,8 +1098,8 @@ export default {
         return ret;
       };
 
-      if (copy.tooltip?.startsWith(' | ')) {
-        copy.tooltip = copy.tooltip.substring(3)
+      if (copy.tooltip?.startsWith(" | ")) {
+        copy.tooltip = copy.tooltip.substring(3);
       }
 
       return copy;
@@ -1003,8 +1114,8 @@ export default {
         550: 150,
         350: 50,
         150: 35,
-        '-100': -100,
-        '-300': -300,
+        "-100": -100,
+        "-300": -300,
       };
       const speedMap = {
         0.55: 0.15,
@@ -1025,24 +1136,24 @@ export default {
 
       for (const skill of uniqueSkillData) {
         // Push unique skills
-        const copy = {...skill};
+        const copy = { ...skill };
         this.reshapeSkill(copy);
-        copy.type = 'unique';
+        copy.type = "unique";
         skills.push(copy);
 
         // Build up inherit skills
         if (skill.noInherit) {
           continue;
         }
-        const inherit = {...skill};
+        const inherit = { ...skill };
         const variant = {
           id: skill.id + 800000,
           name: skill.name,
-          rarity: 'inherit',
+          rarity: "inherit",
         };
         inherit.cd = inherit.cd ?? 500;
         if (skill.duration) {
-          inherit.duration = skill.duration * 0.6
+          inherit.duration = skill.duration * 0.6;
         }
         if (skill.heal) {
           variant.heal = healMap[skill.heal];
@@ -1087,7 +1198,7 @@ export default {
 
       // Flatten rarity wrapper
       for (const skillWrapper of normalSkillData) {
-        const {variants, ...commonPart} = skillWrapper;
+        const { variants, ...commonPart } = skillWrapper;
         for (const variant of variants) {
           const copy = { ...commonPart, ...variant };
           skills.push(this.reshapeSkill(copy));
@@ -1108,8 +1219,8 @@ export default {
       this.hasEvoSkills = [];
     },
     toRaritySection(rarity) {
-      if (rarity === 'double') {
-        return 'rare';
+      if (rarity === "double") {
+        return "rare";
       } else {
         return rarity;
       }
@@ -1117,10 +1228,11 @@ export default {
     localizeSkill(skill, wrapper, newSkillNames) {
       const jaName = skill.name;
       const localName = this.$t(`skill.${jaName}`);
-      if (localName.startsWith('skill.')) {
-        newSkillNames[jaName] = '';
+      if (localName.startsWith("skill.")) {
+        newSkillNames[jaName] = "";
       }
-      skill.name = localName && !localName.startsWith('skill.') ? localName : jaName;
+      skill.name =
+        localName && !localName.startsWith("skill.") ? localName : jaName;
 
       const tooltipKey = `tooltip.${skill.id}`;
       if (this.$te(tooltipKey)) {
@@ -1132,8 +1244,7 @@ export default {
       }
 
       return skill;
-    }
+    },
   },
-}
+};
 </script>
-
