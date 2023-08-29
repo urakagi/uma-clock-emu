@@ -6958,7 +6958,7 @@ const uniqueSkillData = (thiz) => [
     holder: 101001,
     name: "ヴィクトリーショット！",
     acceleration: 0.4,
-    duration: 4,
+    duration: 5,
     tooltip: "順位>=3及び<=50%は満たしていると見なす",
     check: function () {
       return thiz.isInFinalCorner(thiz.position, { start: 0.5, end: 1 });
