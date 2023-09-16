@@ -6330,6 +6330,7 @@
         "surface": 1,
         "turn": 1,
         "courseSetStatus": [
+          2,
           3
         ],
         "laneMax": 12000,
