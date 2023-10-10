@@ -49,6 +49,15 @@ export default {
       }
       return track.slopes;
     },
+    courseNameSuffix(name) {
+      if (name.endsWith("外)")) {
+        return `(O)`;
+      } else if (name.endsWith("内)")) {
+        return `(I)`;
+      } else {
+        return "";
+      }
+    },
   },
 };
 </script>

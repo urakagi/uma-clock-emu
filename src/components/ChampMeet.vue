@@ -156,7 +156,9 @@
         >
           <el-option
             v-for="(obj, key) in courseList"
-            :label="`${$t('surface.' + obj.surface)}${obj.distance}m`"
+            :label="`${$t('surface.' + obj.surface)}${
+              obj.distance
+            }m${courseNameSuffix(obj.name)}`"
             :value="key"
             :key="key"
           >

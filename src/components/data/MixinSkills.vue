@@ -1178,7 +1178,7 @@ export default {
         }
         if (skill.acceleration) {
           // Special cases
-          if (skill.id === 110201) {
+          if ([110201, 100991, 100781].includes(skill.id)) {
             variant.acceleration = 0.07;
           } else {
             variant.acceleration = accelerationMap[skill.acceleration];
