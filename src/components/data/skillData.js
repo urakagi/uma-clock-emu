@@ -383,13 +383,36 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 200154,
+          holder: 107701,
+          name: "ターフの主人公",
+          invokes: [
+            {
+              passivePower: 80,
+              passiveSpeed: 80,
+              conditions: { ground_condition: 1 },
+            },
+            {
+              passivePower: 40,
+              passiveSpeed: 40,
+              conditions: { ground_condition: [2, 3, 4] },
+            },
+          ],
+        },
+        {
           rarity: "rare",
           id: 200154,
           name: "良バ場の鬼",
           passivePower: 60,
           passiveSpeed: 60,
         },
-        { rarity: "double", id: 200151, name: "良バ場◎", passivePower: 60 },
+        {
+          rarity: "double",
+          id: 200151,
+          name: "良バ場◎",
+          passivePower: 60,
+        },
         {
           rarity: "normal",
           id: 200152,
@@ -401,6 +424,24 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 100703211,
+          holder: 100703,
+          name: "荒磯好みの黄金船",
+          passivePower: 80,
+          passiveSpeed: 80,
+          trigger: function () {
+            thiz.startDelay += 0.1;
+          },
+        },
+        {
+          rarity: "rare",
+          id: 200164,
+          name: "道悪の鬼",
+          passivePower: 60,
+          passiveSpeed: 60,
+        },
         { rarity: "double", id: 200161, name: "道悪◎", passivePower: 60 },
         {
           rarity: "normal",
@@ -1290,6 +1331,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "evo",
+          id: 103602111,
+          holder: 103602,
+          name: "Gluttony’s Grip",
+          heal: 550,
+        },
         { rarity: "rare", id: 201221, name: "スタミナグリード", heal: 350 },
         {
           rarity: "normal",
@@ -1903,6 +1951,28 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 106703211,
+          holder: 106703,
+          name: "ダンス・デ・レぺ",
+          invokes: [
+            {
+              targetSpeed: 0.45,
+              duration: 4,
+              conditions: {
+                all_corner_random: 1,
+                distance_type: 3,
+                track_id: 10201,
+                motivation: 5,
+              },
+            },
+            {
+              targetSpeed: 0.45,
+            },
+          ],
+          type: "speed",
+        },
+        {
           rarity: "rare",
           id: 201113,
           name: "光芒円刃",
@@ -2018,6 +2088,12 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
+        {
+          rarity: "rare",
+          id: 201463,
+          name: "月影円刃",
+          targetSpeed: 0.35,
+        },
         {
           rarity: "double",
           id: 201461,
@@ -2439,6 +2515,26 @@ function normalSkillData(thiz) {
           duration: 4,
         },
         {
+          rarity: "evo",
+          id: 109301111,
+          holder: 109301,
+          name: "K.Speed",
+          invokes: [
+            {
+              targetSpeed: 0.35,
+              speedWithDecel: 0.15,
+              conditions: {
+                distance_type: 1,
+                running_style: 2,
+                is_finalcorner_random: 1,
+              },
+            },
+            {
+              targetSpeed: 0.35,
+            },
+          ],
+        },
+        {
           rarity: "rare",
           id: 200581,
           name: "スピードスター",
@@ -2851,6 +2947,14 @@ function normalSkillData(thiz) {
           id: 105602211,
           holder: 105602,
           name: "ばっちり開運体験！",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 103602211,
+          holder: 103602,
+          name: "刑苦",
           targetSpeed: 0.35,
           duration: 4,
         },
@@ -3326,6 +3430,32 @@ function normalSkillData(thiz) {
           name: "夏の名優",
           targetSpeed: 0.35,
           duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 107701211,
+          holder: 107701,
+          name: "正道",
+          invokes: [
+            {
+              invokeNo: 1,
+              targetSpeed: 0.35,
+              duration: 2.4,
+              conditions: {
+                distance_type: 4,
+                phase_laterhalf_random: 1,
+              },
+            },
+            {
+              invokeNo: 2,
+              acceleration: 0.2,
+              duration: 0.9,
+              conditions: {
+                distance_type: 4,
+                is_lastspurt: 1,
+              },
+            },
+          ],
         },
         { rarity: "rare", id: 202011, name: "真打", targetSpeed: 0.35 },
         {
@@ -4024,6 +4154,19 @@ function normalSkillData(thiz) {
           ],
         },
         {
+          rarity: "evo",
+          id: 108302211,
+          holder: 108302,
+          name: "Service: Transit",
+          acceleration: 0.4,
+          duration: 4,
+          conditions: {
+            distance_type: 3,
+            running_style: 3,
+            phase_firsthalf_random: 2,
+          },
+        },
+        {
           rarity: "rare",
           id: 200601,
           name: "乗り換え上手",
@@ -4061,6 +4204,25 @@ function normalSkillData(thiz) {
           holder: 105701,
           name: "弾む大地",
           acceleration: 0.4,
+        },
+        {
+          rarity: "evo",
+          id: 100703111,
+          holder: 100703,
+          name: "押し寄せるジュテーム",
+          invokes: [
+            {
+              invokeNo: 1,
+              acceleration: 0.4,
+              duration: 0.9,
+            },
+            {
+              invokeNo: 2,
+              targetSpeed: 0.15,
+              duration: 3,
+              conditions: { running_style: 4, is_last_straight: 1 },
+            },
+          ],
         },
         { rarity: "rare", id: 200641, name: "迫る影", acceleration: 0.4 },
         {
@@ -4526,6 +4688,27 @@ function normalSkillData(thiz) {
           acceleration: 0.4,
           heal: 150,
         },
+        {
+          rarity: "evo",
+          id: 109301211,
+          holder: 109301,
+          name: "命の火花",
+          invokes: [
+            {
+              invokeNo: 1,
+              acceleration: 0.4,
+            },
+            {
+              invokeNo: 2,
+              targetSpeed: 0.15,
+              duration: 3,
+              conditions: {
+                running_style: 2,
+                remain_distance: [199, 201],
+              },
+            },
+          ],
+        },
         { rarity: "rare", id: 201901, name: "鍔迫り合い", acceleration: 0.4 },
         {
           rarity: "normal",
@@ -4577,6 +4760,14 @@ function normalSkillData(thiz) {
             is_finalcorner_random: 1,
             track_id: 10006,
           },
+        },
+        {
+          rarity: "evo",
+          id: 106703111,
+          holder: 106703,
+          name: "蒼色革命",
+          acceleration: 0.4,
+          duration: 4,
         },
         {
           rarity: "rare",
@@ -4766,6 +4957,15 @@ function normalSkillData(thiz) {
           name: "負けたくない！",
           targetSpeed: 0.35,
           heal: 550,
+        },
+        {
+          rarity: "evo",
+          id: 108302111,
+          holder: 108302,
+          name: "Burn Down",
+          targetSpeed: 0.35,
+          heal: 350,
+          tooltip: "チームバフ効果は実装のしようがない",
         },
         {
           rarity: "rare",
@@ -7944,6 +8144,7 @@ const uniqueSkillData = (thiz) => [
     type: "speed",
     invokes: [
       {
+        invokeNo: 1,
         targetSpeed: 0.15,
         duration: 13,
         conditions: {
@@ -7951,6 +8152,7 @@ const uniqueSkillData = (thiz) => [
         },
       },
       {
+        invokeNo: 2,
         speedWithDecel: -0.05,
         duration: 500,
         conditions: {
@@ -8315,6 +8517,135 @@ const uniqueSkillData = (thiz) => [
       },
     ],
     type: "speed",
+  },
+  {
+    id: 100771,
+    holder: 107701,
+    name: "Road to Glory",
+    duration: 5,
+    invokes: [
+      {
+        targetSpeed: 0.55,
+        conditions: {
+          distance_type: 4,
+          remain_distance: [399, 401],
+        },
+      },
+      {
+        targetSpeed: 0.45,
+        conditions: {
+          remain_distance: [399, 401],
+        },
+      },
+    ],
+    type: "speed",
+    tooltip: "先頭と1馬身以内は満たしているとして扱う",
+  },
+  {
+    id: 120071,
+    holder: 100703,
+    name: "Vive la GOLD",
+    duration: 5,
+    invokes: [
+      {
+        targetSpeed: 0.45,
+        conditions: {
+          distance_type: [3, 4],
+          is_finalcorner: 1,
+          is_badstart: 1,
+        },
+      },
+      {
+        targetSpeed: 0.35,
+        conditions: {
+          distance_type: [3, 4],
+          is_finalcorner: 1,
+        },
+      },
+    ],
+    type: "speed",
+    tooltip: "先頭と1馬身以内は満たしているとして扱う",
+  },
+  {
+    id: 120671,
+    holder: 106703,
+    name: "ポンテ・デ・ディアマン",
+    duration: 5,
+    invokes: [
+      {
+        targetSpeed: 0.35,
+        conditions: {
+          phase_laterhalf_random: 1,
+          distance_type: 3,
+        },
+      },
+      {
+        targetSpeed: 0.25,
+        conditions: {
+          phase_laterhalf_random: 1,
+        },
+      },
+    ],
+    type: "speed",
+  },
+  {
+    id: 100931,
+    holder: 109301,
+    name: "幸せの青い光",
+    duration: 5,
+    invokes: [
+      {
+        speedWithDecel: 0.35,
+        conditions: {
+          phase_firsthalf_random: 2,
+          distance_type: [1, 2],
+        },
+      },
+      {
+        speedWithDecel: 0.25,
+        conditions: {
+          phase_firsthalf_random: 2,
+          distance_type: [3, 4],
+        },
+      },
+    ],
+    type: "speed",
+  },
+  {
+    id: 110831,
+    holder: 108302,
+    name: "Immortal Work",
+    duration: 5,
+    invokes: [
+      {
+        targetSpeed: 0.55,
+        conditions: {
+          is_last_straight: 1,
+          track_id: 10005,
+          distance_type: 3,
+        },
+      },
+      {
+        speedWithDecel: 0.35,
+        conditions: {
+          is_last_straight: 1,
+        },
+      },
+    ],
+    type: "speed",
+  },
+  {
+    id: 110361,
+    holder: 103602,
+    name: "…found you．",
+    duration: 5,
+    targetSpeed: 0.45,
+    conditions: {
+      phase: ">=2",
+      is_finalcorner: 1,
+      corner: 0,
+    },
+    tooltip: "0.45の即時発動扱い",
   },
   // End of unique skills
 ];

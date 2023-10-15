@@ -385,6 +385,8 @@ export default {
     checkCondition(skill, cond, value) {
       const thiz = this;
       switch (cond) {
+        case "motivation":
+          return parseInt(value) === 5 - parseInt(thiz.umaStatus.condition);
         case "hp_per":
           if (value.startsWith(">=")) {
             return () =>
@@ -410,6 +412,8 @@ export default {
         case "is_badstart":
           if (value == 0) {
             return () => thiz.startDelay < 0.08;
+          } else if (value == 1) {
+            return () => thiz.startDelay >= 0.08;
           } else {
             return null;
           }
@@ -696,7 +700,10 @@ export default {
       if (this.isInFinalCorner() && this.currentPhase >= 2) {
         this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
       }
-      this.coolDownMap[skill.id] = this.frameElapsed;
+      const coolDownId = skill.invokeNo
+        ? `${skill.id}-${skill.invokeNo}`
+        : skill.id;
+      this.coolDownMap[coolDownId] = this.frameElapsed;
       return skillDetail;
     },
     chooseRandom(zoneStart, zoneEnd) {
@@ -1021,11 +1028,14 @@ export default {
       );
     },
     isInCoolDown(skill) {
-      if (!(skill.id in this.coolDownMap)) {
+      const coolDownId = skill.invokeNo
+        ? `${skill.id}-${skill.invokeNo}`
+        : skill.id;
+      if (!(coolDownId in this.coolDownMap)) {
         return false;
       }
       return (
-        (this.frameElapsed - this.coolDownMap[skill.id]) / 15.0 <
+        (this.frameElapsed - this.coolDownMap[coolDownId]) / 15.0 <
         skill.cd * this.timeCoef
       );
     },
