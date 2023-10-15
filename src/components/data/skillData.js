@@ -7947,7 +7947,7 @@ const uniqueSkillData = (thiz) => [
         },
       },
       {
-        targetSpeed: -0.05,
+        speedWithDecel: -0.05,
         duration: 500,
         conditions: {
           phase: 3,

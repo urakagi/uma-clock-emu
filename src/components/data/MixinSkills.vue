@@ -2,6 +2,117 @@
 const SkillData = require("./skillData");
 const SKILL_TRIGGER_COUNT_YUMENISIKI = 4;
 
+const effects = [
+  "heal",
+  "targetSpeed",
+  "acceleration",
+  "speed",
+  "speedWithDecel",
+  "fatigue",
+  "passiveSpeed",
+  "passiveStamina",
+  "passivePower",
+  "passiveGuts",
+  "passiveWisdom",
+  "temptationRate",
+  "startDelay",
+];
+
+const inheritMap = {
+  heal: {
+    750: 350,
+    550: 150,
+    350: 50,
+    150: 35,
+    "-100": -100,
+    "-300": -300,
+  },
+  targetSpeed: {
+    0.55: 0.15,
+    0.45: 0.25,
+    0.4: 0.2,
+    0.385: 0.15,
+    0.35: 0.15,
+    0.3: 0.075,
+    0.25: 0.05,
+    0.15: 0.035,
+    "-0.05": -0.05,
+  },
+  speedWithDecel: {
+    0.55: 0.15,
+    0.45: 0.25,
+    0.4: 0.2,
+    0.385: 0.15,
+    0.35: 0.15,
+    0.3: 0.075,
+    0.25: 0.05,
+    0.15: 0.035,
+    "-0.05": -0.05,
+  },
+  acceleration: {
+    0.5: 0.3,
+    0.4: 0.2,
+    0.3: 0.1,
+    0.2: 0.05,
+    0.1: 0.05,
+  },
+};
+
+function toInheritValues(invoke) {
+  const ret = { ...invoke };
+  for (const effect of effects) {
+    if (invoke[effect] && inheritMap[effect]) {
+      const map = inheritMap[effect];
+      const value = invoke[effect];
+      let newValue = map[value];
+      if (newValue == null) {
+        console.error(
+          `Unknown ${effect} value ${value} in ${JSON.stringify(invoke)}`
+        );
+      }
+      ret[effect] = newValue;
+    }
+  }
+  return ret;
+}
+
+function rewriteInheritValues(inherit) {
+  const variant = {
+    id: inherit.id + 800000,
+    name: inherit.name,
+    rarity: "inherit",
+  };
+  if (inherit.duration) {
+    inherit.duration = inherit.duration * 0.6;
+  }
+  for (const effect of effects) {
+    if (inherit[effect] && inheritMap[effect]) {
+      const map = inheritMap[effect];
+      const value = inherit[effect];
+      let newValue = map[value];
+      if (newValue == null) {
+        console.error(
+          `Unknown ${effect} value ${value} in ${JSON.stringify(inherit)}`
+        );
+      }
+      variant[effect] = newValue;
+      delete inherit[effect];
+    }
+  }
+
+  if (inherit.invokes) {
+    variant.invokes = [];
+    for (let i in inherit.invokes) {
+      variant.invokes[i] = toInheritValues(inherit.invokes[i]);
+    }
+    delete inherit.invokes;
+  }
+
+  delete inherit.id;
+  delete inherit.name;
+  return variant;
+}
+
 export default {
   name: "MixinSkills",
   data() {
@@ -41,21 +152,7 @@ export default {
         "decel",
         "fatigue",
       ],
-      effects: [
-        "heal",
-        "targetSpeed",
-        "acceleration",
-        "speed",
-        "speedWithDecel",
-        "fatigue",
-        "passiveSpeed",
-        "passiveStamina",
-        "passivePower",
-        "passiveGuts",
-        "passiveWisdom",
-        "temptationRate",
-        "startDelay",
-      ],
+      effects,
     };
   },
   computed: {
@@ -1109,31 +1206,6 @@ export default {
       const uniqueSkillData = this.uniqueSkillData;
       const skills = [];
 
-      const healMap = {
-        750: 350,
-        550: 150,
-        350: 50,
-        150: 35,
-        "-100": -100,
-        "-300": -300,
-      };
-      const speedMap = {
-        0.55: 0.15,
-        0.45: 0.25,
-        0.4: 0.2,
-        0.385: 0.15,
-        0.35: 0.15,
-        0.3: 0.075,
-        0.25: 0.05,
-        0.15: 0.035,
-      };
-      const accelerationMap = {
-        0.4: 0.2,
-        0.3: 0.1,
-        0.2: 0.05,
-        0.1: 0.05,
-      };
-
       for (const skill of uniqueSkillData) {
         // Push unique skills
         const copy = { ...skill };
@@ -1146,52 +1218,7 @@ export default {
           continue;
         }
         const inherit = { ...skill };
-        const variant = {
-          id: skill.id + 800000,
-          name: skill.name,
-          rarity: "inherit",
-        };
-        inherit.cd = inherit.cd ?? 500;
-        if (skill.duration) {
-          inherit.duration = skill.duration * 0.6;
-        }
-        if (skill.heal) {
-          variant.heal = healMap[skill.heal];
-          if (variant.heal == null) {
-            console.error(JSON.stringify(skill));
-          }
-          delete inherit.heal;
-        }
-        if (skill.targetSpeed) {
-          variant.targetSpeed = speedMap[skill.targetSpeed];
-          if (variant.targetSpeed == null) {
-            console.error(JSON.stringify(skill));
-          }
-          delete inherit.targetSpeed;
-        }
-        if (skill.speedWithDecel) {
-          variant.speedWithDecel = speedMap[skill.speedWithDecel];
-          if (variant.speedWithDecel == null) {
-            console.error(JSON.stringify(skill));
-          }
-          delete inherit.speedWithDecel;
-        }
-        if (skill.acceleration) {
-          // Special cases
-          if ([110201, 100991, 100781].includes(skill.id)) {
-            variant.acceleration = 0.07;
-          } else {
-            variant.acceleration = accelerationMap[skill.acceleration];
-          }
-          // FIXME: For debug
-          if (variant.acceleration == null) {
-            console.error(JSON.stringify(skill));
-          }
-          delete inherit.acceleration;
-        }
-
-        delete inherit.id;
-        delete inherit.name;
+        const variant = rewriteInheritValues(inherit);
         inherit.variants = [variant];
         normalSkillData.push(inherit);
       }
