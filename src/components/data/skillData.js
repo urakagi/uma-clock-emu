@@ -5948,6 +5948,14 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "evo",
+          id: 108601211,
+          holder: 108601,
+          name: "高嶺の艶笑",
+          targetSpeed: 0.35,
+          duration: 4,
+        },
+        {
           rarity: "rare",
           id: 202531,
           name: "優位形成",
@@ -6490,6 +6498,31 @@ function normalSkillData(thiz) {
         distance_type: 3,
         phase: 0,
       },
+    },
+    {
+      variants: [
+        {
+          rarity: "evo",
+          id: 108601111,
+          holder: 108601,
+          name: "純愛",
+          speedWithDecel: 0.45,
+        },
+        {
+          rarity: "rare",
+          id: 202741,
+          name: "十全十美",
+          speedWithDecel: 0.35,
+        },
+        {
+          rarity: "normal",
+          id: 202742,
+          name: "品行方正",
+          speedWithDecel: 0.15,
+        },
+      ],
+      duration: 3,
+      conditions: { distance_type: [2, 3], corner_random: 3 },
     },
     // End of normal skills
   ];
@@ -8646,6 +8679,16 @@ const uniqueSkillData = (thiz) => [
       corner: 0,
     },
     tooltip: "0.45の即時発動扱い",
+  },
+  {
+    id: 100861,
+    holder: 108601,
+    name: "愛と熔けよただ熔けよ",
+    duration: 5,
+    targetSpeed: 0.35,
+    conditions: {
+      remain_distance: [999, 1001],
+    },
   },
   // End of unique skills
 ];
