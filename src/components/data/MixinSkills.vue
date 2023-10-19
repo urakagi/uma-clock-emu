@@ -738,6 +738,9 @@ export default {
       return { start, end };
     },
     initCornerRandom(values) {
+      if (typeof values === "number") {
+        values = [values];
+      }
       const ret = [];
       const corners = this.trackDetail.corners.slice(-4);
       for (let i = 0; i < 4 - corners.length; i++) {
