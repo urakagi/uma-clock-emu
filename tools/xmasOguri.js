@@ -1,4 +1,9 @@
-const distance = 2400;
+const distance = 2200;
+const straights = [
+  [0, 520],
+  [900, 1250],
+  [1850, 2200],
+];
 
 const midSpeed = 19.43;
 const spurtSpeed = 23.84;
@@ -22,9 +27,9 @@ const TRIAL = 100000;
 // exec(0, 3, 2, false, 800);
 
 // console.log("7 f r s * act mid con exp mid-only exp-con con-max con-min");
-console.log("7 f r U * act mid con exp mid-only exp-con con-max con-min");
-for (let f = 0; f <= 2; f++) {
-  for (let r = 0; r <= 3; r++) {
+console.log("7 f r s U * act mid con exp mid-only exp-con con-max con-min");
+for (let f = 0; f <= 0; f++) {
+  for (let r = 2; r <= 2; r++) {
     for (let s = 0; s <= 0; s++) {
       for (const s777 of [true]) {
         for (const uma of [false]) {
@@ -62,15 +67,18 @@ function exec(f, r, s, s777, uma, star, wis) {
         triggers.push(midStart + Math.random() * midDistance);
       }
     }
+    const straightCount = straights.length;
     for (let i = 0; i < s; i++) {
       if (Math.random() > prob) {
         const straight = Math.random();
-        if (straight < 1 / 3) {
-          triggers.push(1250);
-        } else if (straight < 2 / 3) {
-          triggers.push(1375 + Math.random() * 325);
-        } else {
-          triggers.push(2200 + Math.random() * 300);
+        for (let n = 0; n < straightCount; n++) {
+          if (straight < (n + 1) / straightCount) {
+            triggers.push(
+              straights[n][0] +
+                Math.random() * (straights[n][1] - straights[n][0])
+            );
+            break;
+          }
         }
       }
     }
@@ -169,7 +177,7 @@ function exec(f, r, s, s777, uma, star, wis) {
   console.log(
     // `${f} ${r} ${star ? 1 : 0} ` +
     // `${s777 ? 1 : 0} ${f} ${r} ${s} ${star ? 1 : 0} ` +
-    `${s777 ? 1 : 0} ${f} ${r} ${uma ? 1 : 0} ${star ? 1 : 0} ` +
+    `${s777 ? 1 : 0} ${f} ${r} ${s} ${uma ? 1 : 0} ${star ? 1 : 0} ` +
       `${((activated * 100) / TRIAL).toFixed(2)}% ` +
       `${((midActivated * 100) / TRIAL).toFixed(2)}% ` +
       `${((connected * 100) / TRIAL).toFixed(2)}% ` +
