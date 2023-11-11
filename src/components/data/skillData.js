@@ -1208,6 +1208,14 @@ function normalSkillData(thiz) {
         },
         {
           rarity: "evo",
+          id: 100601121,
+          holder: 100601,
+          name: "飢えた怪物",
+          heal: 150,
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "evo",
           id: 100602111,
           holder: 100602,
           name: "ドカ食い養生",
@@ -1263,6 +1271,14 @@ function normalSkillData(thiz) {
           holder: 104701,
           name: "英雄への道標",
           heal: 750,
+        },
+        {
+          rarity: "evo",
+          id: 104701121,
+          holder: 104701,
+          name: "物語を紡ぐ者",
+          heal: 150,
+          targetSpeed: 0.35,
         },
         {
           rarity: "evo",
@@ -1743,6 +1759,14 @@ function normalSkillData(thiz) {
         },
         {
           rarity: "evo",
+          id: 106701121,
+          holder: 106701,
+          name: "隠せぬ輝き",
+          heal: 150,
+          targetSpeed: 0.35,
+        },
+        {
+          rarity: "evo",
           id: 104002211,
           holder: 104002,
           name: "虎視眈々",
@@ -1782,6 +1806,18 @@ function normalSkillData(thiz) {
           name: "熟練の砂塵使い",
           heal: 750,
           targetSpeed: 0.35,
+        },
+        {
+          rarity: "evo",
+          id: 103401221,
+          holder: 103401,
+          name: "粋でいなせな達人技",
+          heal: 350,
+          targetSpeed: 0.45,
+          conditions: {
+            distance_type: 3,
+            phase_random: 1,
+          },
         },
         { rarity: "rare", id: 202001, name: "砂の玄人", heal: 550 },
         {
@@ -2983,6 +3019,17 @@ function normalSkillData(thiz) {
           name: "ファストリトリーブ",
           targetSpeed: 0.35,
           duration: 4,
+        },
+        {
+          rarity: "evo",
+          id: 102001121,
+          holder: 102001,
+          name: "大物狙いの心得",
+          heal: 750,
+          conditions: {
+            distance_type: 3,
+            phase_random: 1,
+          },
         },
         {
           rarity: "evo",
@@ -5572,6 +5619,17 @@ function normalSkillData(thiz) {
         },
         {
           rarity: "evo",
+          id: 103702121,
+          holder: 103702,
+          name: "仕込みは完璧",
+          heal: 750,
+          conditions: {
+            distance_type: 3,
+            phase_random: 1,
+          },
+        },
+        {
+          rarity: "evo",
           id: 101701111,
           holder: 101701,
           name: "皇帝の眼差し",
@@ -5889,6 +5947,13 @@ function normalSkillData(thiz) {
           name: "チャームマジック",
           speedWithDecel: 0.15,
         },
+        {
+          rarity: "evo",
+          id: 104401221,
+          holder: 104401,
+          name: "サルビア☆スプレンデンス",
+          speedWithDecel: 0.35,
+        },
       ],
       duration: 3,
       conditions: { running_style: 4, phase_random: 2 },
@@ -6007,6 +6072,15 @@ function normalSkillData(thiz) {
           holder: 104601,
           name: "大注目のウマドル参上★",
           tooltip: "エミュでは意味無し",
+        },
+        {
+          rarity: "evo",
+          id: 104601121,
+          holder: 104601,
+          name: "目を逸らしちゃダメだよ☆",
+          speedWithDecel: 0.25,
+          duration: 4,
+          conditions: { phase_random: 2 },
         },
         {
           rarity: "evo",
@@ -6523,6 +6597,43 @@ function normalSkillData(thiz) {
       ],
       duration: 3,
       conditions: { distance_type: [2, 3], corner_random: 3 },
+    },
+    {
+      variants: [
+        {
+          rarity: "rare",
+          id: 202761,
+          name: "かっとばせ！",
+          targetSpeed: 0.25,
+        },
+        {
+          rarity: "normal",
+          id: 202762,
+          name: "勝利に向かって",
+          targetSpeed: 0.05,
+        },
+      ],
+      duration: 4,
+      conditions: {
+        running_style: 2,
+        phase_random: 1,
+      },
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 202772,
+          name: "狙いを定めて",
+          acceleration: 0.2,
+        },
+      ],
+      duration: 1.2,
+      conditions: {
+        running_style: 2,
+        distance_type: 4,
+        phase_firstquarter_random: 2,
+      },
     },
     // End of normal skills
   ];

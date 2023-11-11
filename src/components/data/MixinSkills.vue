@@ -506,6 +506,8 @@ export default {
           return thiz.initPhaseRandom(value);
         case "phase_firsthalf_random":
           return thiz.initPhaseRandom(value, { endRate: 0.5 });
+        case "phase_firstquarter_random":
+          return thiz.initPhaseRandom(value, { endRate: 0.25 });
         case "phase_laterhalf_random":
           return thiz.initPhaseRandom(value, { startRate: 0.5 });
         case "phase_corner_random":
