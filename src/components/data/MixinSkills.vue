@@ -369,11 +369,12 @@ export default {
         }
         for (const invoke of invokes) {
           if (Math.random() * 100 < invokeRate) {
-            if (invoke.init) {
-              invoke.init();
+            const copy = {...invoke};
+            if (copy.init) {
+              copy.init();
             }
-            this.initSkillConditions(invoke);
-            this.invokedSkills.push(invoke);
+            this.initSkillConditions(copy);
+            this.invokedSkills.push(copy);
           }
         }
       }
