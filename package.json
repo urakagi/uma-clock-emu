@@ -1,21 +1,21 @@
 {
   "name": "uma-clock-emu",
   "version": "1.1.1",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production && node uploadToS3.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "uploadToS3": "node uploadToS3.js"
   },
   "dependencies": {
-    "16": "^0.0.2",
     "aws-sdk": "^2.996.0",
-    "chart.js": "2.9.3",
+    "chart.js": "2.9.4",
     "chartjs-plugin-annotation": "^0.5.7",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.2",
     "mime-types": "^2.1.32",
-    "vue": "^2.6.11",
+    "vue": "^2.7.16",
     "vue-chartjs": "^3.5.1",
     "vue-google-adsense": "^1.9.3",
     "vue-gtag": "^1.16.1",
