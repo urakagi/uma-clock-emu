@@ -4,7 +4,8 @@ import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
 import { STYLE } from "./data/constants";
-
+/*脚色十分常數引入*/
+import * as RCP from './data/release_conserve_power_constants';
 const UMA_OBJ_VERSION = 2;
 
 // let timer = 0;
@@ -74,6 +75,8 @@ export default {
       fitRanks: ["S", "A", "B", "C", "D", "E", "F", "G"],
       // Special cases
       oonige: false,
+      /**記錄進入phase2的時間**/
+      frame_enter_phase_2: 0,
     };
   },
   mounted() {
@@ -294,6 +297,7 @@ export default {
         ret += 24;
       }
       for (const skill of this.operatingSkills) {
+        /**debug**/
         if (skill.data.acceleration) {
           ret += skill.data.acceleration;
         }
@@ -672,6 +676,7 @@ export default {
         this.temptationSection = -1;
       }
     },
+
     progressRace() {
       while (this.position < this.courseLength) {
         if (this.frameElapsed > 5000) {
@@ -741,6 +746,31 @@ export default {
         // 終盤入り・ラストスパート計算
         if (startPhase === 1 && this.currentPhase === 2) {
           this.spurtParameters = this.calcSpurtParameter();
+          
+          /*增加進入終盤後添加脚色十分處理**/
+          if (this.modifiedPower > 1200)
+          {
+              /**脚質距離係數**/
+              const rcp_dis_style_coef = this.rcp_dis_running_style_coef();
+              /*加速度：√((實際力量-1200)×130)×0.001x脚質距離係數*/
+              const rcp_accel = Math.sqrt((this.modifiedPower - 1200) * RCP.RELEASE_CONSERVE_POWER_DECEL_COEF) * RCP.RELEASE_CONSERVE_POWER_ACCEL_COEF * rcp_dis_style_coef;
+              /**由於馬娘技能持續時間會按照場地距離做乘法計算,此處進行一次場地距離除法以確保各距離脚色十分維持時間一致**/
+              const rcp_dur = RCP.RELEASE_CONSERVE_POWER_INITIAL_DURATION_SEC * 1000 / this.trackDetail.distance;
+              this.operatingSkills.push({
+              data: {name:"脚力十足",acceleration: rcp_accel, duration: rcp_dur},
+              startFrame: this.frameElapsed,
+              
+            });
+            
+            console.log("modifiedPower :",this.modifiedPower);
+            console.log("rcp_accel :",rcp_accel);
+            console.log("del :",RCP.RELEASE_CONSERVE_POWER_DECEL_COEF);
+            console.log("acc :",RCP.RELEASE_CONSERVE_POWER_ACCEL_COEF);
+            console.log(rcp_dis_style_coef);
+            console.log(rcp_dur);
+          }
+          this.frame_enter_phase_2 = this.frameElapsed;
+          console.log(this.frame_enter_phase_2);
         }
 
         if (this.position >= this.courseLength) {
@@ -1387,6 +1417,27 @@ export default {
           mi < index + step && mi < this.frames.length;
           mi++
         ) {
+          /*rcp:脚色十分畫圖，通過記錄進入後期時間找到脚色十分生效幀*/
+          if(this.modifiedPower > 1200 && mi === this.frame_enter_phase_2)
+          {
+            annotations.push({
+              type: "line",
+              label: {
+                content: "脚色十分",
+                position: "top",
+                enabled: true,
+                yAdjust: skillYAdjust,
+              },
+              mode: "vertical",
+              scaleID: "x-axis-0",
+              value: label,
+              borderColor: SKILL_COLORS["acceleration"],
+              borderWidth: 2,
+              onClick: function () {
+              },
+            });
+            nextSkillYAdjust(skillYAdjust);
+          }
           // Skill annotations
           for (const skill of this.frames[mi].skills) {
             annotations.push({
@@ -1539,6 +1590,7 @@ export default {
         // Phase annotations
         if (index + step < this.frames.length) {
           const phase = this.getPhase(frame.startPosition);
+
           if (this.getPhase(this.frames[index + step].startPosition) > phase) {
             annotations.push({
               type: "line",
@@ -1693,6 +1745,106 @@ export default {
       } else {
         return 3;
       }
+    },
+    /**脚色十分專用函數,由於我找不到叫用距離種類的方法,這裏額外提供一種**/
+    getDistanceTypeByDis()
+    {
+      if (this.trackDetail.distance > 2450) {
+        return 4;
+      } else if (this.trackDetail.distance > 1850) {
+        return 3;
+      } else if (this.trackDetail.distance > 1450) {
+        return 2;
+      } else {
+        return 1;
+      }
+    },
+    /*回傳脚色十分脚質距離係數,我是懶狗先hardcode一個,有時間再改*/
+    rcp_dis_running_style_coef()
+    {
+      this.isDistanceType()
+      /**脚質是字串**/
+      console.log("style:" ,this.umaStatus.style);
+      /**距離是int**/
+      console.log("raceType:", this.getDistanceTypeByDis());
+
+      if(this.getDistanceTypeByDis() === 1)
+      {
+        if(this.umaStatus.style === "1")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.SHORT_NIGE;
+        }
+        if(this.umaStatus.style === "2")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.SHORT_SEN;
+        }
+        if(this.umaStatus.style === "3")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.SHORT_SASI;
+        }
+        if(this.umaStatus.style === "4")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.SHORT_OI;
+        }
+      }
+      if(this.getDistanceTypeByDis() === 2)
+      {
+        if(this.umaStatus.style === "1")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MILE_NIGE;
+        }
+        if(this.umaStatus.style === "2")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MILE_SEN;
+        }
+        if(this.umaStatus.style === "3")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MILE_SASI;
+        }
+        if(this.umaStatus.style === "4")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MILE_OI;
+        }
+      }
+      if(this.getDistanceTypeByDis() === 3)
+      {
+        if(this.umaStatus.style === "1")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MIDDLE_NIGE;
+        }
+        if(this.umaStatus.style === "2")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MIDDLE_SEN;
+        }
+        if(this.umaStatus.style === "3")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MIDDLE_SASI;
+        }
+        if(this.umaStatus.style === "4")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.MIDDLE_OI;
+        }        
+      }
+      if(this.getDistanceTypeByDis() === 4)
+      {
+        if(this.umaStatus.style === "1")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.LONG_NIGE;
+        }
+        if(this.umaStatus.style === "2")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.LONG_SEN;
+        }
+        if(this.umaStatus.style === "3")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.LONG_SASI;
+        }
+        if(this.umaStatus.style === "4")
+        {
+          return RCP.RELEASE_CONSERVE_POWER_RUNNING_STYLE_COEF_ARR.LONG_OI;
+        }    
+      }
+      return 1;
     },
     getSection(position) {
       return Math.floor((position * 24.0) / this.courseLength);
