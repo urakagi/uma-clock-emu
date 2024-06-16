@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "16": "^0.0.2",
     "aws-sdk": "^2.996.0",
     "chart.js": "2.9.3",
     "chartjs-plugin-annotation": "^0.5.7",
