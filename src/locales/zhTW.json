@@ -86,7 +86,7 @@
 		"remark7": "因為適性並不會直接影響素質、故補正後的素質並不會顯示在下方。",
 		"remark8": "作者：砂井裏鍵。解包哥，永遠的神。",
 
-		"contact": "推特在↑這↓",
+		"contact": "YouTube頻道在此，請多賞光",
 		"emulating": "模擬中、請稍候……",
 
 		"randomPosition": "亂數區間",
@@ -111,11 +111,7 @@
 		"mood1": "良好",
 		"mood2": "普通",
 		"mood3": "不佳",
-		"mood4": "極差",
-
-		"uniqueLv0Hint": "(設定為Lv0可不發動)",
-		"evoSkill": "進化技能",
-		"evoHint": "(選擇固有技能以顯示對應的進化技能)"
+		"mood4": "極差"
 	},
 	"emulatorType": {
 		"teamRace": "競技場",
@@ -124,13 +120,12 @@
 	"skills": {
 		"passive": "被動技能",
 		"heal": "回復技能",
-		"speed": "速度技能",
+		"targetSpeed": "速度技能",
 		"acceleration": "加速度技能",
-		"composite": "複合技能",
+		"boost": "複合技能",
 		"gate": "出閘技能",
-		"decel": "受到的減速技能",
+		"speed": "受到的減速技能",
 		"fatigue": "受到的疲勞技能",
-		"evo": "進化",
 		"rare": "金",
 		"normal": "白",
 		"inherit": "固有(繼承)",
@@ -179,5 +174,12 @@
 	"surface": {
 		"1": "草地",
 		"2": "沙地"
+	},
+	"raceType": {
+		"0": "短距離",
+		"1": "一英哩",
+		"2": "中距離",
+		"3": "長距離",
+		"4": "沙地"
 	}
 }
