@@ -122,7 +122,7 @@
 		"heal": "回復技能",
 		"targetSpeed": "速度技能",
 		"acceleration": "加速度技能",
-		"boost": "複合技能",
+		"composite": "複合技能",
 		"gate": "出閘技能",
 		"speed": "受到的減速技能",
 		"fatigue": "受到的疲勞技能",
