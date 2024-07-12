@@ -384,7 +384,7 @@ function normalSkillData(thiz) {
       variants: [
         {
           rarity: "evo",
-          id: 200154,
+          id: 107701111,
           holder: 107701,
           name: "ターフの主人公",
           invokes: [
