@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-# /dist 防止無法build的問題出現
+dist
 
 
 # local env files
