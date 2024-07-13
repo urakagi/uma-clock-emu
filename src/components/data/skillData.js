@@ -5449,13 +5449,13 @@ function normalSkillData(thiz) {
     },
     {
       variants: [
-        { rarity: "all", id: 200861, name: "先行けん制", fatigue: 100 },
+        { rarity: "all", id: 200871, name: "先行けん制", fatigue: 100 },
       ],
       conditions: { running_style: 2, phase_random: 0, accumulatetime: 5 },
     },
     {
       variants: [
-        { rarity: "all", id: -200861, name: "先行けん制x2", fatigue: 200 },
+        { rarity: "all", id: -200871, name: "先行けん制x2", fatigue: 200 },
       ],
       conditions: { running_style: 2, phase_random: 0, accumulatetime: 5 },
       tooltip: "2回同時に喰らう。通常のと加算できる。",
