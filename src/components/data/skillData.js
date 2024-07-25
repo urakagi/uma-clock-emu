@@ -6669,12 +6669,7 @@ const uniqueSkillData = (thiz) => [
     name: "ピュリティオブハート",
     heal: 750,
     tooltip: "2～4位(<=40%)",
-    init: function () {
-      thiz.randoms = thiz.initPhaseRandom(1);
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { phase_random: 1 },
   },
   // {
   //   id: 10521,
@@ -6702,12 +6697,7 @@ const uniqueSkillData = (thiz) => [
     name: "ゲインヒール・スペリアー",
     heal: 750,
     tooltip: "中盤のどこかで発動として見なす。",
-    init: function () {
-      thiz.randoms = thiz.initPhaseRandom(1);
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { phase_random: 1 },
   },
   {
     id: 110011,
@@ -6805,12 +6795,6 @@ const uniqueSkillData = (thiz) => [
       is_finalcorner: 1,
     },
     tooltip: "「最終直線のどこか」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initFinalStraightRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
   },
   // {
   //   id: 10081,
@@ -6873,14 +6857,12 @@ const uniqueSkillData = (thiz) => [
     name: "ブレイズ・オブ・プライド",
     targetSpeed: 0.35,
     duration: 5,
+    conditions: {
+      is_finalcorner: 1,
+      corner: 1,
+    },
     tooltip:
       "他面倒くさいの全部満たしたと見なし「最終コーナーのどこかで発動する」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
   },
   {
     id: 100351,
@@ -6890,11 +6872,9 @@ const uniqueSkillData = (thiz) => [
     duration: 5,
     tooltip:
       "他面倒くさいの全部満たしたと見なし「最終直線のどこかで発動する」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initFinalStraightRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 0,
     },
   },
   {
@@ -6919,12 +6899,7 @@ const uniqueSkillData = (thiz) => [
     acceleration: 0.1,
     duration: 5,
     tooltip: "「終盤のどこかで発動する」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initPhaseRandom(2);
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { phase_random: 2 },
   },
   // {
   //   id: 10601,
@@ -6947,12 +6922,7 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「ラストスパートのどこかで発動する」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initPhaseRandom(3);
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { phase_random: 3 },
   },
   // {
   //   id: 10111,
@@ -6975,11 +6945,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「最終直線のどこかで発動する」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initFinalStraightRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 0,
     },
   },
   // {
@@ -7054,11 +7022,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「最終コーナーのどこかで発動」として扱う。まぁ発動しないけど。",
-    init: function () {
-      thiz.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 1,
     },
   },
   {
@@ -7068,11 +7034,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.45,
     duration: 5,
     tooltip: "競合あり、2～7位(<=75%)",
-    init: function () {
-      thiz.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 1,
     },
   },
   {
@@ -7118,11 +7082,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「最終コーナーのどこかで発動」として扱う",
-    init: function () {
-      thiz.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 1,
     },
   },
   {
@@ -7132,11 +7094,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.45,
     duration: 5,
     tooltip: "「最終直線のどこかで発動」として扱う",
-    init: function () {
-      thiz.randoms = thiz.initFinalStraightRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 0,
     },
   },
   {
@@ -7146,11 +7106,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「最終コーナーのどこかで発動」として扱う。こちらは前の方。",
-    init: function () {
-      thiz.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 1,
     },
   },
   {
@@ -7160,12 +7118,7 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「中盤のどこかで発動」として扱うが、基本的には発動しない。",
-    init: function () {
-      thiz.randoms = thiz.initPhaseRandom(1);
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { phase_random: 1 },
   },
   {
     id: 100121,
@@ -7174,11 +7127,9 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "「最終直線のどこかで発動」として扱う。",
-    init: function () {
-      thiz.randoms = thiz.initFinalStraightRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
+    conditions: {
+      is_finalcorner: 1,
+      corner: 0,
     },
   },
   {
@@ -7226,12 +7177,7 @@ const uniqueSkillData = (thiz) => [
     targetSpeed: 0.35,
     duration: 5,
     tooltip: "フェイズ2のどこか発動として扱う",
-    init: function () {
-      thiz.randoms = thiz.initPhaseRandom(2);
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { phase_random: 2 },
   },
   {
     id: 100391,
@@ -7348,12 +7294,7 @@ const uniqueSkillData = (thiz) => [
     name: "コンドル猛撃波",
     acceleration: 0.4,
     duration: 4,
-    init: function () {
-      thiz.randoms = thiz.initFinalCornerRandom();
-    },
-    check: function (startPosition) {
-      return thiz.isInRandom(thiz.randoms, startPosition);
-    },
+    conditions: { is_finalcorner: 1, corner: 1 },
   },
   {
     id: 100401,
