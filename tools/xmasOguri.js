@@ -1,15 +1,16 @@
-const distance = 2200;
+const distance = 3200;
 const straights = [
-  [0, 520],
-  [900, 1250],
-  [1850, 2200],
+  [0, 485],
+  [958, 1450],
+  [1850, 2300],
+  [2797, 3200],
 ];
 
-const midSpeed = 19.43;
-const spurtSpeed = 23.84;
-const baseAcc = 0.423;
+const midSpeed = 18.77;
+const spurtSpeed = 23.56;
+const baseAcc = 0.387;
 
-const umaPos = 1350;
+const umaPos = 1600;
 
 const skillSpeed = 0.25;
 const skillAcc = 0.3;
@@ -28,13 +29,13 @@ const TRIAL = 100000;
 
 // console.log("7 f r s * act mid con exp mid-only exp-con con-max con-min");
 console.log("7 f r s U * act mid con exp mid-only exp-con con-max con-min");
-for (let f = 0; f <= 0; f++) {
-  for (let r = 2; r <= 2; r++) {
+for (let f = 0; f <= 2; f++) {
+  for (let r = 2; r <= 3; r++) {
     for (let s = 0; s <= 0; s++) {
-      for (const s777 of [true]) {
+      for (const s777 of [false]) {
         for (const uma of [false]) {
           for (const star of [true, false]) {
-            for (const wis of [1200]) {
+            for (const wis of [1100]) {
               exec(f, r, s, s777, uma, star, wis);
             }
           }
