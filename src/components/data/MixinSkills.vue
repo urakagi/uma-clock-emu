@@ -194,6 +194,22 @@ export default {
         return 0;
       });
     },
+    systematicSkills() {
+      return {
+        leadCompetition: {
+          id: "leadCompetition",
+          name: this.$t("systematicSkill.leadCompetition"),
+          targetSpeed: Math.pow(500 * this.modifiedGuts, 0.6) * 0.0001,
+          cd: 999999,
+          duration:
+            (Math.pow(700 * this.modifiedGuts, 0.5) * 0.012) /
+            (this.courseLength / 1000),
+          check: function (startPosition) {
+            return startPosition >= 150;
+          },
+        },
+      };
+    },
     availableSkills() {
       const ret = {};
       for (const type of this.types) {
@@ -369,7 +385,7 @@ export default {
         }
         for (const invoke of invokes) {
           if (Math.random() * 100 < invokeRate) {
-            const copy = {...invoke};
+            const copy = { ...invoke };
             if (copy.init) {
               copy.init();
             }
@@ -666,6 +682,11 @@ export default {
         }
       }
       this.invokedSkills = nonStartSkills;
+    },
+    initSystematicSkills() {
+      if (this.isRunningStyle(1)) {
+        this.invokedSkills.push(this.systematicSkills.leadCompetition);
+      }
     },
     checkSkillTrigger(startPosition) {
       const skillTriggered = [];

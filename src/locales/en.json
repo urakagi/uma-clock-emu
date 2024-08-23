@@ -114,7 +114,10 @@
 
 		"uniqueLv0Hint": "(Set Lv0 to deactivate)",
 		"evoSkill": "Evolved Skills",
-		"evoHint": "(Choose unique skill to display)"
+		"evoHint": "(Choose unique skill to display)",
+
+		"leadCompetitionSpeed": "Lead Competition Speed",
+		"leadCompetitionHP": "Lead Competition HP"
 	},
 	"emulatorType": {
 		"teamRace": "Team Race",
@@ -185,5 +188,8 @@
 		"2": "Classic",
 		"3": "Extended",
 		"4": "Dirt"
+	},
+	"systematicSkill": {
+		"leadCompetition": "Lead Competition"
 	}
 }

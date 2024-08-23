@@ -115,7 +115,10 @@
 
 		"uniqueLv0Hint": "（設定為 Lv0 則不會發動）",
 		"evoSkill": "進化技能",
-		"evoHint": "（選擇固有技能後顯示）"
+		"evoHint": "（選擇固有技能後顯示）",
+
+		"leadCompetitionSpeed": "取位爭奪增速",
+		"leadCompetitionHP": "取位爭奪耗耐"
 	},
 	"emulatorType": {
 		"teamRace": "競技場",
@@ -185,5 +188,8 @@
 		"2": "中距離",
 		"3": "長距離",
 		"4": "沙地"
+	},
+	"systematicSkill": {
+		"leadCompetition": "取位爭奪"
 	}
 }

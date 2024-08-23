@@ -114,7 +114,10 @@
 
 		"uniqueLv0Hint": "（Lv0で不発扱い）",
 		"evoSkill": "進化スキル",
-		"evoHint": "(固有選択で対応する進化スキルを表示)"
+		"evoHint": "(固有選択で対応する進化スキルを表示)",
+
+		"leadCompetitionSpeed": "取位爭奪增速",
+		"leadCompetitionHP": "取位爭奪耗耐"
 	},
 	"emulatorType": {
 		"teamRace": "チーム競技場",
@@ -184,5 +187,8 @@
 		"2": "中距離",
 		"3": "長距離",
 		"4": "ダート"
+	},
+	"systematicSkill": {
+		"leadCompetition": "位置取り争い"
 	}
 }

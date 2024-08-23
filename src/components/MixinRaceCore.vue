@@ -65,6 +65,7 @@ export default {
       temptationModeStart: null,
       temptationModeEnd: null,
       temptationWaste: 0,
+      leadCompetitionUsage: 0,
       // UI
       skillGroups: "",
       savedUmas: {},
@@ -611,6 +612,7 @@ export default {
         this.startDelay = Math.random() * 0.1;
       }
       this.triggerStartSkills();
+      this.initSystematicSkills();
       this.initTemptation();
       this.isStartDash = true;
       this.delayTime = this.startDelay;
@@ -642,6 +644,7 @@ export default {
       this.season = -1;
       this.weather = -1;
       this.oonige = false;
+      this.leadCompetitionUsage = 0;
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {
@@ -839,12 +842,37 @@ export default {
         if (this.downSlopeModeStart != null) {
           consume *= 0.4;
         }
-        if (this.isInTemptation) {
-          this.temptationWaste += consume * 0.6;
-          consume *= 1.6;
+        const inLeadCompetition = this.operatingSkills.some(
+          (s) => s.data.id === "leadCompetition"
+        );
+        if (inLeadCompetition) {
+          if (this.isInTemptation) {
+            if (this.oonige) {
+              consume *= 7.7;
+              this.temptationWaste += consume * 6.7;
+              this.leadCompetitionUsage += consume * 6.7;
+            } else {
+              consume *= 3.6;
+              this.temptationWaste += consume * 2.6;
+              this.leadCompetitionUsage += consume * 2.6;
+            }
+          } else {
+            if (this.oonige) {
+              consume *= 3.5;
+              this.leadCompetitionUsage += consume * 2.5;
+            } else {
+              consume *= 1.4;
+              this.leadCompetitionUsage += consume * 0.4;
+            }
+          }
+        } else {
+          if (this.isInTemptation) {
+            this.temptationWaste += consume * 0.6;
+            consume *= 1.6;
+          }
         }
-        this.sp -= consume;
 
+        this.sp -= consume;
         this.updateStartDash();
       }
     },
