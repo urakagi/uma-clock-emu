@@ -5083,7 +5083,7 @@ function normalSkillData(thiz) {
         {
           rarity: "evo",
           holder: 107601,
-          id: 202151,
+          id: 107601111,
           name: "桜前線進行中！",
           targetSpeed: 0.45,
         },
