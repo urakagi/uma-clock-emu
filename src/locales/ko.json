@@ -117,7 +117,9 @@
     "evoHint": "(고유 선택으로 대응하는 진화 스킬을 표시)",
 
     "leadCompetitionSpeed": "포지션 경쟁 속도",
-    "leadCompetitionHP": "포지션 경쟁 스태미나"
+    "leadCompetitionDuration": "초",
+    "leadCompetitionAdvantage": "장점",
+    "leadCompetitionHP": "스태미나"
   },
   "emulatorType": {
     "teamRace": "팀 레이스",

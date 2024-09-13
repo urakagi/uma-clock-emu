@@ -118,7 +118,9 @@
 		"evoHint": "（選擇固有技能後顯示）",
 
 		"leadCompetitionSpeed": "取位爭奪增速",
-		"leadCompetitionHP": "取位爭奪耗耐"
+		"leadCompetitionDuration": "秒數",
+		"leadCompetitionAdvantage": "身距收益",
+		"leadCompetitionHP": "耗耐"
 	},
 	"emulatorType": {
 		"teamRace": "競技場",

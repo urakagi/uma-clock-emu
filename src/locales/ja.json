@@ -116,8 +116,10 @@
 		"evoSkill": "進化スキル",
 		"evoHint": "(固有選択で対応する進化スキルを表示)",
 
-		"leadCompetitionSpeed": "取位爭奪增速",
-		"leadCompetitionHP": "取位爭奪耗耐"
+		"leadCompetitionSpeed": "位置取り争い速度",
+		"leadCompetitionDuration": "秒数",
+		"leadCompetitionAdvantage": "馬身",
+		"leadCompetitionHP": "消費HP"
 	},
 	"emulatorType": {
 		"teamRace": "チーム競技場",

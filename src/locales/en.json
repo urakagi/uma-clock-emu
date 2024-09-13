@@ -117,7 +117,9 @@
 		"evoHint": "(Choose unique skill to display)",
 
 		"leadCompetitionSpeed": "Lead Competition Speed",
-		"leadCompetitionHP": "Lead Competition HP"
+		"leadCompetitionDuration": "Seconds",
+		"leadCompetitionAdvantage": "Advantage",
+		"leadCompetitionHP": "HP Consumption"
 	},
 	"emulatorType": {
 		"teamRace": "Team Race",

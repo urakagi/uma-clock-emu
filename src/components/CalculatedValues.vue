@@ -47,6 +47,14 @@
     <div v-if="$parent.runningStyle == 1 || $parent.runningStyle == 10">
       {{ $t("message.leadCompetitionSpeed") }}：{{
         $parent.systematicSkills.leadCompetition.targetSpeed.toFixed(3)
+      }}／{{ $t("message.leadCompetitionDuration") }}：{{
+        $parent.systematicSkills.leadCompetition.duration.toFixed(1)
+      }}／{{ $t("message.leadCompetitionAdvantage") }}：{{
+        (
+          ($parent.systematicSkills.leadCompetition.duration *
+            $parent.systematicSkills.leadCompetition.targetSpeed) /
+          2.5
+        ).toFixed(2)
       }}／{{ $t("message.leadCompetitionHP") }}：{{
         $parent.leadCompetitionUsage.toFixed(1)
       }}
