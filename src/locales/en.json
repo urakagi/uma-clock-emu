@@ -192,6 +192,7 @@
 		"4": "Dirt"
 	},
 	"systematicSkill": {
-		"leadCompetition": "Lead Competition"
+		"leadCompetition": "Lead Competition",
+		"rcp": "Release Conserved Power"
 	}
 }

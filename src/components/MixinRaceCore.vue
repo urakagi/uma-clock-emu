@@ -76,8 +76,6 @@ export default {
       fitRanks: ["S", "A", "B", "C", "D", "E", "F", "G"],
       // Special cases
       oonige: false,
-      /**記錄進入phase2的時間**/
-      frame_enter_phase_2: 0,
     };
   },
   mounted() {
@@ -749,42 +747,6 @@ export default {
         // 終盤入り・ラストスパート計算
         if (startPhase === 1 && this.currentPhase === 2) {
           this.spurtParameters = this.calcSpurtParameter();
-
-          const rcp_umapower =
-            this.umaStatus.power * this.condCoef[this.modifiedCondition] +
-            this.passiveBonus.power;
-          /*增加進入終盤後添加脚色十分處理**/
-          if (rcp_umapower > 1200) {
-            /**脚質距離係數**/
-            const rcp_dis_style_coef = this.rcp_dis_running_style_coef();
-            /*加速度：√((實際力量-1200)×130)×0.001x脚質距離係數*/
-            const rcp_accel =
-              Math.sqrt(
-                (rcp_umapower - 1200) * RCP.RELEASE_CONSERVE_POWER_DECEL_COEF
-              ) *
-              RCP.RELEASE_CONSERVE_POWER_ACCEL_COEF *
-              rcp_dis_style_coef;
-            /**由於馬娘技能持續時間會按照場地距離做乘法計算,此處進行一次場地距離除法以確保各距離脚色十分維持時間一致**/
-            const rcp_dur =
-              (RCP.RELEASE_CONSERVE_POWER_INITIAL_DURATION_SEC * 1000) /
-              this.trackDetail.distance;
-            this.operatingSkills.push({
-              data: {
-                name: "脚力十足",
-                acceleration: rcp_accel,
-                duration: rcp_dur,
-              },
-              startFrame: this.frameElapsed,
-            });
-
-            console.log("modifiedPower :", rcp_umapower);
-            console.log("rcp_accel :", rcp_accel);
-            console.log("del :", RCP.RELEASE_CONSERVE_POWER_DECEL_COEF);
-            console.log("acc :", RCP.RELEASE_CONSERVE_POWER_ACCEL_COEF);
-            console.log(rcp_dis_style_coef);
-            console.log(rcp_dur);
-          }
-          this.frame_enter_phase_2 = this.frameElapsed;
         }
 
         if (this.position >= this.courseLength) {
@@ -1456,25 +1418,6 @@ export default {
           mi < index + step && mi < this.frames.length;
           mi++
         ) {
-          /*rcp:脚色十分畫圖，通過記錄進入後期時間找到脚色十分生效幀*/
-          if (this.modifiedPower > 1200 && mi === this.frame_enter_phase_2) {
-            annotations.push({
-              type: "line",
-              label: {
-                content: "脚色十分",
-                position: "top",
-                enabled: true,
-                yAdjust: skillYAdjust,
-              },
-              mode: "vertical",
-              scaleID: "x-axis-0",
-              value: label,
-              borderColor: SKILL_COLORS["acceleration"],
-              borderWidth: 2,
-              onClick: function () {},
-            });
-            nextSkillYAdjust(skillYAdjust);
-          }
           // Skill annotations
           for (const skill of this.frames[mi].skills) {
             annotations.push({
@@ -1798,10 +1741,6 @@ export default {
     /*回傳脚色十分脚質距離係數,我是懶狗先hardcode一個,有時間再改*/
     rcp_dis_running_style_coef() {
       this.isDistanceType();
-      /**脚質是字串**/
-      console.log("style:", this.umaStatus.style);
-      /**距離是int**/
-      console.log("raceType:", this.getDistanceTypeByDis());
 
       if (this.getDistanceTypeByDis() === 1) {
         if (this.umaStatus.style === "1") {

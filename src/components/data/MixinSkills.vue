@@ -1,4 +1,6 @@
 <script>
+import * as RCP from "@/components/data/release_conserve_power_constants";
+
 const SkillData = require("./skillData");
 const SKILL_TRIGGER_COUNT_YUMENISIKI = 4;
 
@@ -195,6 +197,7 @@ export default {
       });
     },
     systematicSkills() {
+      const thiz = this;
       return {
         leadCompetition: {
           id: "leadCompetition",
@@ -202,10 +205,26 @@ export default {
           targetSpeed: Math.pow(500 * this.modifiedGuts, 0.6) * 0.0001,
           cd: 999999,
           duration:
-            (Math.pow(700 * this.modifiedGuts, 0.5) * 0.012) /
-            (this.courseLength / 1000),
+            (Math.pow(700 * this.modifiedGuts, 0.5) * 0.012) / this.timeCoef,
           check: function (startPosition) {
             return startPosition >= 150;
+          },
+        },
+        rcp: {
+          id: "rcp",
+          name: this.$t("systematicSkill.rcp"),
+          cd: 999999,
+          acceleration:
+            Math.sqrt(
+              (this.rcpPower - 1200) * RCP.RELEASE_CONSERVE_POWER_DECEL_COEF
+            ) *
+            RCP.RELEASE_CONSERVE_POWER_ACCEL_COEF *
+            this.rcp_dis_running_style_coef(),
+          duration:
+            (RCP.RELEASE_CONSERVE_POWER_INITIAL_DURATION_SEC * 1000) /
+            this.timeCoef,
+          check: function () {
+            return thiz.phase >= 2;
           },
         },
       };
@@ -319,6 +338,12 @@ export default {
     },
     phase() {
       return this.currentPhase;
+    },
+    rcpPower() {
+      return (
+        this.umaStatus.power * this.condCoef[this.modifiedCondition] +
+        this.passiveBonus.power
+      );
     },
   },
   created() {
@@ -686,6 +711,9 @@ export default {
     initSystematicSkills() {
       if (this.isRunningStyle(1)) {
         this.invokedSkills.push(this.systematicSkills.leadCompetition);
+      }
+      if (this.rcpPower > 1200) {
+        this.invokedSkills.push(this.systematicSkills.rcp);
       }
     },
     checkSkillTrigger(startPosition) {

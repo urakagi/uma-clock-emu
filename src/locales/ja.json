@@ -191,6 +191,7 @@
 		"4": "ダート"
 	},
 	"systematicSkill": {
-		"leadCompetition": "位置取り争い"
+		"leadCompetition": "位置取り争い",
+		"rcp": "脚色十分"
 	}
 }
