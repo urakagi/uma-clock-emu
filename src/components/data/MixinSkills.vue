@@ -700,6 +700,12 @@ export default {
           case "gate":
             this.startDelay *= skill.startDelay;
             skill.trigger(skill);
+            if (skill.duration > 0) {
+              this.operatingSkills.push({
+                data: skill,
+                startFrame: this.frameElapsed,
+              });
+            }
             this.skillTriggerCount[0]++;
             this.frames[0].skills.push({ data: skill });
             break;
