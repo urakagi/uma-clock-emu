@@ -119,7 +119,16 @@
 		"leadCompetitionSpeed": "位置取り争い速度",
 		"leadCompetitionDuration": "秒数",
 		"leadCompetitionAdvantage": "馬身",
-		"leadCompetitionHP": "消費HP"
+		"leadCompetitionHP": "消費HP",
+
+		"simulateLeadCompetition": "位置取り争い",
+		"simulatePositionKeeping": "ポジションキープ",
+
+		"positionKeeping": {
+			"none": "なし",
+			"nige": "逃げ",
+			"oonige": "大逃げ"
+		}
 	},
 	"emulatorType": {
 		"teamRace": "チーム競技場",

@@ -709,7 +709,7 @@ export default {
       this.invokedSkills = nonStartSkills;
     },
     initSystematicSkills() {
-      if (this.isRunningStyle(1)) {
+      if (this.isRunningStyle(1) && this.leadCompetition === "yes") {
         this.invokedSkills.push(this.systematicSkills.leadCompetition);
       }
       if (this.rcpPower > 1200) {

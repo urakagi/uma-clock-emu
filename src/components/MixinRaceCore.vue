@@ -3,8 +3,8 @@ import RaceGraph from "@/components/RaceGraph";
 import MixinCourseData from "@/components/data/MixinCourseData";
 import MixinConstants from "@/components/data/MixinConstants";
 import MixinSkills from "@/components/data/MixinSkills";
+import MixinPositionKeeping from "@/components/MixinPositionKeeping.vue";
 import { STYLE } from "./data/constants";
-/*脚色十分常數引入*/
 import * as RCP from "./data/release_conserve_power_constants";
 const UMA_OBJ_VERSION = 2;
 
@@ -17,7 +17,7 @@ const UMA_OBJ_VERSION = 2;
 export default {
   name: "MixinRaceCore",
   components: { RaceGraph },
-  mixins: [MixinCourseData, MixinConstants, MixinSkills],
+  mixins: [MixinCourseData, MixinConstants, MixinSkills, MixinPositionKeeping],
   data() {
     return {
       umaStatus: {
@@ -98,6 +98,9 @@ export default {
     },
     randomPosition() {
       return this.$refs.executeBlock.randomPosition;
+    },
+    leadCompetition() {
+      return this.$refs.executeBlock.leadCompetition;
     },
     runningStyle() {
       return this.oonige ? STYLE.OONIGE : +this.umaStatus.style;

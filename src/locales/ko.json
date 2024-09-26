@@ -119,7 +119,16 @@
     "leadCompetitionSpeed": "포지션 경쟁 속도",
     "leadCompetitionDuration": "초",
     "leadCompetitionAdvantage": "장점",
-    "leadCompetitionHP": "스태미나"
+    "leadCompetitionHP": "스태미나",
+
+    "simulateLeadCompetition": "포지션 경쟁 시뮬레이션",
+    "simulatePositionKeeping": "포지션 킵 시뮬레이션",
+
+    "positionKeeping": {
+      "none": "없음",
+      "nige": "도주",
+      "oonige": "대도주"
+    }
   },
   "emulatorType": {
     "teamRace": "팀 레이스",

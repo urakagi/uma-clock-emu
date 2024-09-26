@@ -120,7 +120,16 @@
 		"leadCompetitionSpeed": "取位爭奪增速",
 		"leadCompetitionDuration": "秒數",
 		"leadCompetitionAdvantage": "身距收益",
-		"leadCompetitionHP": "耗耐"
+		"leadCompetitionHP": "耗耐",
+
+		"simulateLeadCompetition": "模擬取位爭奪",
+		"simulatePositionKeeping": "模擬位置意識",
+
+		"positionKeeping": {
+			"none": "不使用",
+			"nige": "一般領頭",
+			"oonige": "強勢領頭"
+		}
 	},
 	"emulatorType": {
 		"teamRace": "競技場",
