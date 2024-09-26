@@ -675,26 +675,28 @@ export default {
       const nonStartSkills = [];
       for (const skill of this.invokedSkills) {
         switch (skill.type) {
-          case "passive":
+          case "passive": {
+            let triggered = true;
             if (skill.id === 202051) {
               // 大逃げ
               this.oonige = true;
             } else if (skill.check && skill.check()) {
-              if ("triggerRate" in skill) {
-                if (Math.random() < skill.triggerRate) {
-                  skill.trigger(skill);
-                  this.skillTriggerCount[0]++;
-                  this.passiveTriggered += 1;
-                  this.frames[0].skills.push({ data: skill });
-                }
+              if (
+                "triggerRate" in skill &&
+                Math.random() >= skill.triggerRate
+              ) {
+                triggered = false;
               } else {
                 skill.trigger(skill);
-                this.skillTriggerCount[0]++;
-                this.passiveTriggered += 1;
-                this.frames[0].skills.push({ data: skill });
               }
             }
+            if (triggered) {
+              this.skillTriggerCount[0]++;
+              this.passiveTriggered += 1;
+              this.frames[0].skills.push({ data: skill });
+            }
             break;
+          }
           case "gate":
             this.startDelay *= skill.startDelay;
             skill.trigger(skill);
