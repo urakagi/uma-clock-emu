@@ -607,6 +607,23 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "normal",
+          id: 210141,
+          name: "レースの真髄・心",
+          passiveStamina: 40,
+          passiveGuts: 40,
+          passiveWisdom: 40,
+          conditions: {
+            motivation: ">=4",
+          },
+          tooltip: "発動率92%として扱う",
+          triggerRate: 0.92,
+        },
+      ],
+    },
+    {
+      variants: [
+        {
           rarity: "evo",
           id: 106102211,
           holder: 106102,
@@ -1746,6 +1763,80 @@ function normalSkillData(thiz) {
       ],
       conditions: { phase_random: 1 },
       tooltip: "効果1.1倍として扱う",
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 210091,
+          name: "レースの真髄・速",
+          targetSpeed: 0.15,
+          duration: 2,
+          conditions: {
+            phase_laterhalf_random: 1,
+          },
+        },
+      ],
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 210101,
+          name: "レースの真髄・体",
+          targetSpeed: 0.25,
+          heal: -200,
+          duration: 3,
+          conditions: {
+            phase_random: 3,
+            hp_per: ">=2",
+            is_lastspurt: 1,
+          },
+        },
+      ],
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 210111,
+          name: "レースの真髄・力",
+          targetSpeed: 0.15,
+          duration: 4,
+          conditions: {
+            phase: 3,
+            is_lastspurt: 1,
+          },
+        },
+      ],
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 210131,
+          name: "レースの真髄・賢",
+          targetSpeed: 0.15,
+          duration: 2,
+          conditions: {
+            activate_count_later_half: 2,
+          },
+        },
+      ],
+    },
+    {
+      variants: [
+        {
+          rarity: "normal",
+          id: 210121,
+          name: "レースの真髄・根",
+          acceleration: 0.2,
+          duration: 1.2,
+          conditions: {
+            compete_fight_count: 1,
+          },
+        },
+      ],
     },
     {
       variants: [

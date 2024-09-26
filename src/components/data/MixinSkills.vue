@@ -2,7 +2,6 @@
 import * as RCP from "@/components/data/release_conserve_power_constants";
 
 const SkillData = require("./skillData");
-const SKILL_TRIGGER_COUNT_YUMENISIKI = 4;
 
 const effects = [
   "heal",
@@ -133,7 +132,7 @@ export default {
       selectedUnique: this.$t("skills.selectedUnique"),
       hasEvoSkills: [],
       uniqueLevel: 4,
-      skillTriggerCount: [0, 0, 0, 0],
+      skillTriggerCount: {},
       healTriggerCount: 0,
       skills: {},
       passiveBonusKeys: [
@@ -201,6 +200,7 @@ export default {
       return {
         leadCompetition: {
           id: "leadCompetition",
+          systematic: true,
           name: this.$t("systematicSkill.leadCompetition"),
           targetSpeed: Math.pow(500 * this.modifiedGuts, 0.6) * 0.0001,
           cd: 999999,
@@ -212,6 +212,7 @@ export default {
         },
         rcp: {
           id: "rcp",
+          systematic: true,
           name: this.$t("systematicSkill.rcp"),
           cd: 999999,
           acceleration:
@@ -354,7 +355,14 @@ export default {
     invokeSkills(skillActivateAdjustment) {
       this.invokedSkills = [];
       this.coolDownMap = {};
-      this.skillTriggerCount = [0, 0, 0, 0, 0];
+      this.skillTriggerCount = {
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        phase2FinalCorner: 0,
+        laterHalf: 0,
+      };
       this.healTriggerCount = 0;
 
       const hasSkills = [];
@@ -428,7 +436,7 @@ export default {
       const thiz = this;
       switch (cond) {
         case "motivation":
-          return parseInt(value) === 5 - parseInt(thiz.umaStatus.condition);
+          return parseInt(value) === 5 - +thiz.umaStatus.condition;
         case "hp_per":
           if (value.startsWith(">=")) {
             return () =>
@@ -447,6 +455,8 @@ export default {
             thiz.skillTriggerCount.reduce((pre, cur) => pre + cur, 0) >= value;
         case "activate_count_start":
           return () => thiz.skillTriggerCount[0] >= value;
+        case "activate_count_later_half":
+          return () => thiz.skillTriggerCount.laterHalf >= value;
         case "accumulatetime":
           return () => thiz.accTimePassed(value);
         case "straight_front_type":
@@ -593,8 +603,7 @@ export default {
             return () => thiz.isInCorner(thiz.position, value);
           }
         case "is_activate_any_skill":
-          return () =>
-            thiz.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI] >= 1;
+          return () => thiz.skillTriggerCount.finalCorner >= 1;
         case "is_lastspurt":
           if (value == 0) {
             return () => !thiz.isInSpurt;
@@ -690,7 +699,7 @@ export default {
                 skill.trigger(skill);
               }
             }
-            if (triggered) {
+            if (triggered && skill.systematic !== true) {
               this.skillTriggerCount[0]++;
               this.passiveTriggered += 1;
               this.frames[0].skills.push({ data: skill });
@@ -706,7 +715,9 @@ export default {
                 startFrame: this.frameElapsed,
               });
             }
-            this.skillTriggerCount[0]++;
+            if (skill.systematic !== true) {
+              this.skillTriggerCount[0]++;
+            }
             this.frames[0].skills.push({ data: skill });
             break;
           default:
@@ -755,10 +766,15 @@ export default {
           startFrame: this.frameElapsed,
         });
       }
-      this.skillTriggerCount[this.currentPhase]++;
-      // 特殊スキル誘発カウント
-      if (this.isInFinalCorner() && this.currentPhase >= 2) {
-        this.skillTriggerCount[SKILL_TRIGGER_COUNT_YUMENISIKI]++;
+      if (skill.systematic !== true) {
+        this.skillTriggerCount[this.currentPhase]++;
+        // 特殊スキル誘発カウント
+        if (this.isInFinalCorner() && this.currentPhase >= 2) {
+          this.skillTriggerCount.phase2FinalCorner++;
+        }
+        if (this.isInLaterHalf()) {
+          this.skillTriggerCount.laterHalf++;
+        }
       }
       const coolDownId = skill.invokeNo
         ? `${skill.id}-${skill.invokeNo}`
@@ -1068,6 +1084,9 @@ export default {
     },
     isPhase(phase) {
       return this.currentPhase === phase;
+    },
+    isInLaterHalf() {
+      return this.position > this.courseLength / 2;
     },
     isStraightFrontType(type) {
       switch (type) {
