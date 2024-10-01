@@ -365,30 +365,14 @@ export default {
       return 0.85 * this.baseSpeed;
     },
     v1() {
-      return (
-        this.baseSpeed *
-        (this.styleSpeedCoef[this.runningStyle][0] +
-          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) /
-            550000 -
-          0.00325)
-      );
+      return this.baseSpeed * this.styleSpeedCoef[this.runningStyle][0];
     },
     v2() {
-      return (
-        this.baseSpeed *
-        (this.styleSpeedCoef[this.runningStyle][1] +
-          (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) /
-            550000 -
-          0.00325)
-      );
+      return this.baseSpeed * this.styleSpeedCoef[this.runningStyle][1];
     },
     v3() {
       return (
-        this.baseSpeed *
-          (this.styleSpeedCoef[this.runningStyle][2] +
-            (this.modifiedWisdom * Math.log10(this.modifiedWisdom / 10)) /
-              550000 -
-            0.00325) +
+        this.baseSpeed * this.styleSpeedCoef[this.runningStyle][2] +
         Math.sqrt(this.modifiedSpeed / 500) *
           this.distanceFitSpeedCoef[this.umaStatus.distanceFit]
       );
