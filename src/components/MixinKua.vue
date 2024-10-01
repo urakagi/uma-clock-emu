@@ -29,7 +29,8 @@ export default {
       this.updateChart();
       this.hasSkills[baseSkill.type][baseSkill.rarity].pop();
 
-      const ptBase = ((baseTime - skillTime) * 50) / +this.kua.baseSkillPt;
+      const ptBase =
+        (Math.abs(baseTime - skillTime) * 50) / +this.kua.baseSkillPt;
       const timeDiff = { "-1": {}, 1: {} };
       for (const status of ["speed", "stamina", "power", "guts", "wisdom"]) {
         for (const direction of ["-1", "1"]) {
