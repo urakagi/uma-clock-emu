@@ -396,7 +396,8 @@ export default {
           skill.type === "passive" ||
           skill.type === "unique" ||
           skillActivateAdjustment === "1" ||
-          skillActivateAdjustment === "2"
+          skillActivateAdjustment === "2" ||
+          skillActivateAdjustment === "expected"
         ) {
           invokeRate = 100;
         } else {
@@ -784,26 +785,30 @@ export default {
     },
     chooseRandom(zoneStart, zoneEnd) {
       let rate;
-      switch (this.randomPosition) {
-        case "0":
-          rate = Math.random();
-          break;
-        case "1":
-          rate = 0;
-          break;
-        case "2":
-          rate = 0.25;
-          break;
-        case "3":
-          rate = 0.5;
-          break;
-        case "4":
-          rate = 0.75;
-          break;
-        case "5":
-        default:
-          rate = 0.98;
-          break;
+      if (this.skillActivateAdjustment === "expected") {
+        rate = 0.5;
+      } else {
+        switch (this.randomPosition) {
+          case "0":
+            rate = Math.random();
+            break;
+          case "1":
+            rate = 0;
+            break;
+          case "2":
+            rate = 0.25;
+            break;
+          case "3":
+            rate = 0.5;
+            break;
+          case "4":
+            rate = 0.75;
+            break;
+          case "5":
+          default:
+            rate = 0.98;
+            break;
+        }
       }
 
       const start = rate * (zoneEnd - zoneStart) + zoneStart;

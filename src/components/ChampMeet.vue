@@ -66,6 +66,23 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-form-item>
+
+      <!-- Kua -->
+      <el-form-item>
+        <el-button @click="generateKuaWeights"> 大奶 </el-button>
+        <el-input v-model="kua.baseSkillName" class="input-status"></el-input>
+        <el-input v-model="kua.baseSkillPt" class="input-status"></el-input>
+      </el-form-item>
+      <el-dialog :visible.sync="kua.showKuaWeights" style="text-align: left">
+        <p><el-button @click="copyKuaWeights">Copy</el-button></p>
+        <p>
+          {{ kuaWeightsOutputLine1 }}<br />
+          {{ kuaWeightsOutputLine2 }}<br />
+          {{ kuaWeightsOutputLine3 }}<br />
+        </p>
+      </el-dialog>
+      <!-- Kua -->
+
       <br />
       <el-form-item :label="$t('message.speed')">
         <el-input v-model="umaStatus.speed" class="input-status"></el-input>

@@ -6,6 +6,7 @@ import MixinSkills from "@/components/data/MixinSkills";
 import MixinPositionKeeping from "@/components/MixinPositionKeeping.vue";
 import { STYLE } from "./data/constants";
 import * as RCP from "./data/release_conserve_power_constants";
+import MixinKua from "@/components/MixinKua.vue";
 const UMA_OBJ_VERSION = 2;
 
 // let timer = 0;
@@ -17,7 +18,13 @@ const UMA_OBJ_VERSION = 2;
 export default {
   name: "MixinRaceCore",
   components: { RaceGraph },
-  mixins: [MixinCourseData, MixinConstants, MixinSkills, MixinPositionKeeping],
+  mixins: [
+    MixinCourseData,
+    MixinConstants,
+    MixinSkills,
+    MixinPositionKeeping,
+    MixinKua,
+  ],
   data() {
     return {
       umaStatus: {
@@ -76,6 +83,13 @@ export default {
       fitRanks: ["S", "A", "B", "C", "D", "E", "F", "G"],
       // Special cases
       oonige: false,
+      kua: {
+        showKuaWeights: false,
+        baseSkillName: "變速",
+        baseSkillPt: 96,
+        downSlopeProbAccumulator: 0,
+        downSlopeEndProbAccumulator: 0,
+      },
     };
   },
   mounted() {
@@ -95,6 +109,9 @@ export default {
     },
     fixRandom() {
       return this.skillActivateAdjustment === "2";
+    },
+    useExpectedValue() {
+      return this.skillActivateAdjustment === "expected";
     },
     randomPosition() {
       return this.$refs.executeBlock.randomPosition;
@@ -199,7 +216,7 @@ export default {
       return 100 - 9000.0 / this.umaStatus.wisdom;
     },
     temptationRate() {
-      if (this.fixRandom) {
+      if (this.fixRandom || this.useExpectedValue) {
         return 0;
       } else {
         return (
@@ -609,6 +626,8 @@ export default {
       this.invokeSkills(this.skillActivateAdjustment);
       if (this.fixRandom) {
         this.startDelay = 0;
+      } else if (this.useExpectedValue) {
+        this.startDelay = 0.05;
       } else {
         this.startDelay = Math.random() * 0.1;
       }
@@ -646,6 +665,8 @@ export default {
       this.weather = -1;
       this.oonige = false;
       this.leadCompetitionUsage = 0;
+      this.kua.downSlopeProbAccumulator = 0;
+      this.kua.downSlopeEndProbAccumulator = 0;
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {
@@ -694,24 +715,37 @@ export default {
         this.frames[this.frameElapsed].startPosition = startPosition;
 
         // 下り坂モードに入るか・終わるかどうかの判定
-        if (this.isInSlope("down") && !this.fixRandom) {
-          // 1秒置きなので、このフレームは整数秒を含むかどうかのチェック
-          if (
-            Math.floor(this.frameElapsed * this.frameLength) !==
-            Math.floor((this.frameElapsed + 1) * this.frameLength)
-          ) {
-            if (this.downSlopeModeStart == null) {
-              if (Math.random() < this.modifiedWisdom * 0.0004) {
-                this.downSlopeModeStart = this.frameElapsed;
-              }
-            } else {
-              if (Math.random() < 0.2) {
-                this.downSlopeModeStart = null;
-              }
+        const enterDownSlopeModeProbability = this.modifiedWisdom * 0.0004;
+        // 1秒置きなので、このフレームは整数秒を含むかどうかのチェック
+        const frameContainsRoundSecond =
+          Math.floor(this.frameElapsed * this.frameLength) !==
+          Math.floor((this.frameElapsed + 1) * this.frameLength);
+        if (this.fixRandom || !this.isInSlope("down")) {
+          this.downSlopeModeStart = null;
+        } else if (this.useExpectedValue && frameContainsRoundSecond) {
+          if (this.downSlopeModeStart == null) {
+            this.kua.downSlopeProbAccumulator += enterDownSlopeModeProbability;
+            if (this.kua.downSlopeProbAccumulator >= 1) {
+              this.downSlopeModeStart = this.frameElapsed;
+              this.kua.downSlopeProbAccumulator -= 1;
+            }
+          } else {
+            this.kua.downSlopeEndProbAccumulator += 0.2;
+            if (this.kua.downSlopeEndProbAccumulator >= 1) {
+              this.downSlopeModeStart = null;
+              this.kua.downSlopeEndProbAccumulator -= 1;
             }
           }
-        } else {
-          this.downSlopeModeStart = null;
+        } else if (frameContainsRoundSecond) {
+          if (this.downSlopeModeStart == null) {
+            if (Math.random() < enterDownSlopeModeProbability) {
+              this.downSlopeModeStart = this.frameElapsed;
+            }
+          } else {
+            if (Math.random() < 0.2) {
+              this.downSlopeModeStart = null;
+            }
+          }
         }
 
         // 掛かり処理
@@ -930,7 +964,7 @@ export default {
       for (const i in candidates) {
         candidates[i].order = parseInt(i) + 1;
         const c = candidates[i];
-        if (this.fixRandom) {
+        if (this.fixRandom || this.useExpectedValue) {
           return c;
         }
         if (Math.random() * 100 < 15 + 0.05 * this.modifiedWisdom) {
@@ -1146,7 +1180,7 @@ export default {
       }
     },
     loadUmaFromObject(u) {
-      if (u.version == null || u.version < UMA_OBJ_VERSION) {
+      if (u == null || u.version == null || u.version < UMA_OBJ_VERSION) {
         return false;
       }
       this.umaStatus = u.status;
@@ -1290,7 +1324,6 @@ export default {
     },
     resetUma() {
       this.resetStatus();
-      this.resetTrack();
       this.resetHasSkills();
       this.umaToLoad = "";
     },
@@ -1308,9 +1341,6 @@ export default {
         styleFit: "A",
       };
     },
-    resetTrack() {
-      // Do nothing
-    },
     initSectionTargetSpeedRandoms() {
       const ret = [];
       for (let i = 0; i < 24; i++) {
@@ -1318,7 +1348,7 @@ export default {
           (this.modifiedWisdom / 5500.0) *
           Math.log10(this.modifiedWisdom * 0.1) *
           0.01;
-        if (this.fixRandom) {
+        if (this.fixRandom || this.useExpectedValue) {
           ret.push(max - 0.00325);
         } else {
           ret.push(max + Math.random() * -0.0065);

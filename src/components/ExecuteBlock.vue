@@ -28,6 +28,7 @@
           :label="$t('message.skillActivateAdjustment2')"
           value="2"
         ></el-option>
+        <el-option label="期望值" value="expected"></el-option>
       </el-select>
     </el-form-item>
 
