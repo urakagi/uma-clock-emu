@@ -649,7 +649,7 @@ export default {
       this.weather = -1;
       this.oonige = false;
       this.leadCompetitionUsage = 0;
-      this.kua.downSlopeProbAccumulator = 0;
+      this.kua.downSlopeProbAccumulator = 0.5;
       this.kua.downSlopeEndProbAccumulator = 0;
     },
     initCondition() {
@@ -704,23 +704,26 @@ export default {
         const frameContainsRoundSecond =
           Math.floor(this.frameElapsed * this.frameLength) !==
           Math.floor((this.frameElapsed + 1) * this.frameLength);
+        // 誤差を減らすため、期待値は5フレームごとにチェック
+        const frameCheckForExpectedValue = this.frameElapsed % 8 === 0;
+
         if (this.fixRandom || !this.isInSlope("down")) {
           this.downSlopeModeStart = null;
-        } else if (this.useExpectedValue && frameContainsRoundSecond) {
+        } else if (this.useExpectedValue && frameCheckForExpectedValue) {
           if (this.downSlopeModeStart == null) {
             this.kua.downSlopeProbAccumulator += enterDownSlopeModeProbability;
-            if (this.kua.downSlopeProbAccumulator >= 1) {
+            if (this.kua.downSlopeProbAccumulator >= 0.5) {
               this.downSlopeModeStart = this.frameElapsed;
-              this.kua.downSlopeProbAccumulator -= 1;
+              this.kua.downSlopeProbAccumulator -= 0.5;
             }
           } else {
             this.kua.downSlopeEndProbAccumulator += 0.2;
-            if (this.kua.downSlopeEndProbAccumulator >= 1) {
+            if (this.kua.downSlopeEndProbAccumulator >= 0.5) {
               this.downSlopeModeStart = null;
-              this.kua.downSlopeEndProbAccumulator -= 1;
+              this.kua.downSlopeEndProbAccumulator -= 0.5;
             }
           }
-        } else if (frameContainsRoundSecond) {
+        } else if (!this.useExpectedValue && frameContainsRoundSecond) {
           if (this.downSlopeModeStart == null) {
             if (Math.random() < enterDownSlopeModeProbability) {
               this.downSlopeModeStart = this.frameElapsed;
