@@ -273,8 +273,8 @@ export default {
         baseTargetSpeed +=
           this.baseSpeed * this.sectionTargetSpeedRandoms[this.currentSection];
       }
-      // 根性補正
-      let ret = baseTargetSpeed;
+
+      let ret = baseTargetSpeed * this.progressPositionKeeping();
 
       // 坂
       const upSlope = this.isInSlope("up");
@@ -658,6 +658,7 @@ export default {
       this.weather = -1;
       this.oonige = false;
       this.leadCompetitionUsage = 0;
+      this.resetPositionKeeping();
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {

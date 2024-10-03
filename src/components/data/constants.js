@@ -17,3 +17,5 @@ export const SURFACE = {
   TURF: 1,
   DIRT: 2,
 };
+
+export const FRAME_PER_SECOND = 15;

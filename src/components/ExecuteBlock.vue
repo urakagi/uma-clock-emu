@@ -58,6 +58,7 @@
           :label="$t('message.positionKeeping.none')"
           value="none"
         ></el-option>
+        <el-option label="1.04" value="1.04"></el-option>
         <!--        <el-option-->
         <!--          :label="$t('message.positionKeeping.nige')"-->
         <!--          value="nige"-->
