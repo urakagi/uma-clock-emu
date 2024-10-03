@@ -284,7 +284,14 @@ export default {
       const downSlope = this.isInSlope("down");
       if (downSlope) {
         if (this.downSlopeModeStart != null) {
-          ret += Math.abs(this.currentSlope) / 10.0 + 0.3;
+          if (this.useExpectedValue) {
+            ret +=
+              (Math.abs(this.currentSlope) / 10.0 + 0.3) *
+              this.modifiedWisdom *
+              0.0004;
+          } else {
+            ret += Math.abs(this.currentSlope) / 10.0 + 0.3;
+          }
         }
       }
 
@@ -649,8 +656,6 @@ export default {
       this.weather = -1;
       this.oonige = false;
       this.leadCompetitionUsage = 0;
-      this.kua.downSlopeProbAccumulator = 0.5;
-      this.kua.downSlopeEndProbAccumulator = 0;
     },
     initCondition() {
       if (this.umaStatus.condition <= 4) {
@@ -704,23 +709,18 @@ export default {
         const frameContainsRoundSecond =
           Math.floor(this.frameElapsed * this.frameLength) !==
           Math.floor((this.frameElapsed + 1) * this.frameLength);
-        // 誤差を減らすため、期待値は5フレームごとにチェック
-        const frameCheckForExpectedValue = this.frameElapsed % 8 === 0;
 
         if (this.fixRandom || !this.isInSlope("down")) {
           this.downSlopeModeStart = null;
-        } else if (this.useExpectedValue && frameCheckForExpectedValue) {
+        } else if (this.useExpectedValue) {
           if (this.downSlopeModeStart == null) {
-            this.kua.downSlopeProbAccumulator += enterDownSlopeModeProbability;
-            if (this.kua.downSlopeProbAccumulator >= 0.5) {
-              this.downSlopeModeStart = this.frameElapsed;
-              this.kua.downSlopeProbAccumulator -= 0.5;
-            }
+            // Always enter down slope mode, modify the speed increase instead
+            this.downSlopeModeStart = this.frameElapsed;
           } else {
             this.kua.downSlopeEndProbAccumulator += 0.2;
-            if (this.kua.downSlopeEndProbAccumulator >= 0.5) {
+            if (this.kua.downSlopeEndProbAccumulator >= 1) {
               this.downSlopeModeStart = null;
-              this.kua.downSlopeEndProbAccumulator -= 0.5;
+              this.kua.downSlopeEndProbAccumulator -= 1;
             }
           }
         } else if (!this.useExpectedValue && frameContainsRoundSecond) {
