@@ -287,8 +287,7 @@ export default {
           if (this.useExpectedValue) {
             ret +=
               (Math.abs(this.currentSlope) / 10.0 + 0.3) *
-              this.modifiedWisdom *
-              0.0004;
+              this.expectedDownSlopeCoef;
           } else {
             ret += Math.abs(this.currentSlope) / 10.0 + 0.3;
           }
@@ -543,6 +542,9 @@ export default {
     chartMiddle() {
       return this.courseLength * 0.45;
     },
+    expectedDownSlopeCoef() {
+      return 4 / (4 + 1 / (this.modifiedWisdom * 0.0004));
+    },
   },
   methods: {
     calcExceedStatus(status) {
@@ -716,12 +718,6 @@ export default {
           if (this.downSlopeModeStart == null) {
             // Always enter down slope mode, modify the speed increase instead
             this.downSlopeModeStart = this.frameElapsed;
-          } else {
-            this.kua.downSlopeEndProbAccumulator += 0.2;
-            if (this.kua.downSlopeEndProbAccumulator >= 1) {
-              this.downSlopeModeStart = null;
-              this.kua.downSlopeEndProbAccumulator -= 1;
-            }
           }
         } else if (!this.useExpectedValue && frameContainsRoundSecond) {
           if (this.downSlopeModeStart == null) {
@@ -828,7 +824,11 @@ export default {
             this.currentPhase
           ) * elapsedTime;
         if (this.downSlopeModeStart != null) {
-          consume *= 0.4;
+          if (this.useExpectedValue) {
+            consume *= 0.4 / this.expectedDownSlopeCoef;
+          } else {
+            consume *= 0.4;
+          }
         }
         const inLeadCompetition = this.operatingSkills.some(
           (s) => s.data.id === "leadCompetition"
