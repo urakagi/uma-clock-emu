@@ -548,7 +548,7 @@ export default {
   },
   methods: {
     calcExceedStatus(status) {
-      return status > 1200 ? 1200 + (status - 1200) / 2 : status;
+      return +status > 1200 ? 1200 + (+status - 1200) / 2 : +status;
     },
     locationChanged(location) {
       this.courseList = this.trackData[location].courses;
