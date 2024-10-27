@@ -8077,7 +8077,7 @@ const uniqueSkillData = (thiz) => [
   {
     id: 100871,
     holder: 108701,
-    name: "silent letter",
+    name: "Silent letter",
     targetSpeed: 0.25,
     acceleration: 0.3,
     duration: 5,
