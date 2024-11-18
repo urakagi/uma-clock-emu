@@ -181,6 +181,7 @@
           >
           </el-option>
         </el-select>
+        <span style="color: white">{{ track.course }}</span>
       </el-form-item>
       <el-form-item :label="$t('message.surfaceCondition')">
         <el-select v-model="track.surfaceCondition" style="width: 90px">
