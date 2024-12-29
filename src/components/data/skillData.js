@@ -8667,7 +8667,6 @@ const uniqueSkillData = (thiz) => [
     conditions: {
       distance_rate: ">=50",
       corner: 1,
-      track_id: 10005,
     },
     tooltip: "加速度なし扱い",
   },
