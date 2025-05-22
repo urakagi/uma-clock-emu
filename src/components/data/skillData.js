@@ -303,6 +303,31 @@ function normalSkillData(thiz) {
     {
       variants: [
         {
+          rarity: "rare",
+          id: 202734,
+          name: "ロンシャンの申し子",
+          passiveSpeed: 60,
+          passiveStamina: 60,
+          passiveWisdom: 60,
+        },
+        {
+          rarity: "double",
+          id: 202731,
+          name: "ロンシャンレース場◎",
+          passiveStamina: 60,
+        },
+        {
+          rarity: "normal",
+          id: 202732,
+          name: "ロンシャンレース場○",
+          passiveStamina: 40,
+        },
+      ],
+      conditions: { track_id: 10201 },
+    },
+    {
+      variants: [
+        {
           rarity: "double",
           id: 200051,
           name: "阪神レース場◎",

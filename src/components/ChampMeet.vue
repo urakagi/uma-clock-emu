@@ -205,9 +205,14 @@
       </el-form-item>
       <br />
       <el-form-item :label="$t('message.uniqueSkill')">
-        <el-select v-model="selectedUnique">
+        <el-select
+          v-model="selectedUnique"
+          filterable
+          :filter-method="filterUniqueSkills"
+          @change="clearUniqueSkillFilter"
+        >
           <el-option
-            v-for="skill in this.uniqueSkillData"
+            v-for="skill in this.filteredUniqueSkillData"
             :label="skill.name"
             :value="skill.id"
             :key="skill.id"

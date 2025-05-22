@@ -130,6 +130,7 @@ export default {
       coolDownMap: {},
       hasSkills: {},
       selectedUnique: this.$t("skills.selectedUnique"),
+      uniqueSkillFilterQuery: "",
       hasEvoSkills: [],
       uniqueLevel: 4,
       skillTriggerCount: {},
@@ -193,6 +194,16 @@ export default {
         if (a.name < b.name) return -1;
         if (a.name > b.name) return 1;
         return 0;
+      });
+    },
+    filteredUniqueSkillData() {
+      if (this.uniqueSkillFilterQuery === "") {
+        return this.uniqueSkillData;
+      }
+      return this.uniqueSkillData.filter((skill) => {
+        return skill.name
+          .toLowerCase()
+          .includes(this.uniqueSkillFilterQuery.toLowerCase());
       });
     },
     systematicSkills() {
@@ -352,6 +363,12 @@ export default {
     this.resetHasSkills();
   },
   methods: {
+    filterUniqueSkills(query) {
+      this.uniqueSkillFilterQuery = query;
+    },
+    clearUniqueSkillFilter() {
+      this.uniqueSkillFilterQuery = "";
+    },
     invokeSkills(skillActivateAdjustment) {
       this.invokedSkills = [];
       this.coolDownMap = {};
@@ -453,7 +470,11 @@ export default {
           return () => thiz.healTriggerCount >= value;
         case "activate_count_all":
           return () =>
-            thiz.skillTriggerCount.reduce((pre, cur) => pre + cur, 0) >= value;
+            thiz.skillTriggerCount[0] +
+              thiz.skillTriggerCount[1] +
+              thiz.skillTriggerCount[2] +
+              thiz.skillTriggerCount[3] >=
+            value;
         case "activate_count_start":
           return () => thiz.skillTriggerCount[0] >= value;
         case "activate_count_later_half":
