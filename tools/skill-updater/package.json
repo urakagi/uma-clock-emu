@@ -1,0 +1,14 @@
+{
+  "name": "skill-updater",
+  "version": "1.0.0",
+  "description": "Downloads skill data from uma-skill-tools and enriches it with JP/EN/ZH names from GameTora",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^22.6.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}
