@@ -1,0 +1,94 @@
+{
+  "alternatives": [
+    {
+      "baseDuration": -1,
+      "condition": "rotation==1",
+      "effects": [
+        {
+          "modifier": 600000,
+          "target": 1,
+          "type": 1
+        }
+      ],
+      "precondition": ""
+    }
+  ],
+  "rarity": 1,
+  "wisdomCheck": 0,
+  "name_ja": "右回り◎",
+  "name_en": "Right-Handed ◎",
+  "name_zh": "順時針◎"
+}
+{
+  "alternatives": [
+    {
+      "baseDuration": -1,
+      "condition": "rotation==1",
+      "effects": [
+        {
+          "modifier": 400000,
+          "target": 1,
+          "type": 1
+        }
+      ],
+      "precondition": ""
+    }
+  ],
+  "rarity": 1,
+  "wisdomCheck": 0,
+  "name_ja": "右回り○",
+  "name_en": "Right-Handed ○",
+  "name_zh": "順時針○"
+}
+{
+  "alternatives": [
+    {
+      "baseDuration": -1,
+      "condition": "rotation==1",
+      "effects": [
+        {
+          "modifier": 600000,
+          "target": 1,
+          "type": 1
+        },
+        {
+          "modifier": 600000,
+          "target": 1,
+          "type": 3
+        }
+      ],
+      "precondition": ""
+    }
+  ],
+  "rarity": 2,
+  "wisdomCheck": 0,
+  "name_ja": "右回りの鬼",
+  "name_en": "Right-Handed Demon",
+  "name_zh": "順時針之鬼"
+}
+{
+  "alternatives": [
+    {
+      "baseDuration": -1,
+      "condition": "rotation==1",
+      "effects": [
+        {
+          "modifier": 800000,
+          "target": 1,
+          "type": 1
+        },
+        {
+          "modifier": 800000,
+          "target": 1,
+          "type": 3
+        }
+      ],
+      "precondition": ""
+    }
+  ],
+  "rarity": 6,
+  "wisdomCheck": 0,
+  "name_ja": "右回りの輪舞曲",
+  "name_en": "",
+  "name_zh": "順時針的輪舞曲"
+}

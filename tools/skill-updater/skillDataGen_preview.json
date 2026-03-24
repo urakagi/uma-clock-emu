@@ -1,0 +1,1182 @@
+[
+  {
+    "conditionStr": "is_last_straight==1",
+    "variants": [
+      {
+        "id": 110031,
+        "rarity": 5,
+        "name_ja": "絶対は、ボクだ",
+        "name_en": "Certain Victory",
+        "name_zh": "絕對是我",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&is_finalcorner==1&order<=4&overtake_target_time>=1",
+    "variants": [
+      {
+        "id": 110131,
+        "rarity": 5,
+        "name_ja": "最強の名を懸けて",
+        "name_en": "Legacy of the Strong",
+        "name_zh": "賭上最強之名",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 60000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&distance_rate<=60&order_rate>50",
+    "variants": [
+      {
+        "id": 10071,
+        "rarity": 3,
+        "name_ja": "波乱注意砲！",
+        "name_en": "Warning Shot!",
+        "name_zh": "波瀾注意砲！",
+        "effects": [
+          {
+            "modifier": 1500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 60000
+      }
+    ]
+  },
+  {
+    "conditionStr": "order>=3&order_rate<=50&remain_distance<=200&bashin_diff_infront<=1@order>=3&order_rate<=50&remain_distance<=200&bashin_diff_behind<=1",
+    "variants": [
+      {
+        "id": 10081,
+        "rarity": 3,
+        "name_ja": "アクセルX",
+        "name_en": "Xceleration",
+        "name_zh": "加速X",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&order==1&bashin_diff_behind<=1@distance_rate>=50&order==2&is_overtake==1",
+    "variants": [
+      {
+        "id": 10091,
+        "rarity": 3,
+        "name_ja": "レッドエース",
+        "name_en": "Red Ace",
+        "name_zh": "赤色王牌",
+        "effects": [
+          {
+            "modifier": 1500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 2000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&change_order_onetime<0&order>=3",
+    "variants": [
+      {
+        "id": 10111,
+        "rarity": 3,
+        "name_ja": "精神一到",
+        "name_en": "Focused Mind",
+        "name_zh": "精誠所至",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&hp_per>=30&order<=2",
+    "variants": [
+      {
+        "id": 10141,
+        "rarity": 3,
+        "name_ja": "熱血☆アミーゴ",
+        "name_en": "Corazón ☆ Ardiente",
+        "name_zh": "熱血☆AMIGO",
+        "effects": [
+          {
+            "modifier": 1500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 2000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&corner!=0&order>=3&change_order_onetime<0",
+    "variants": [
+      {
+        "id": 10181,
+        "rarity": 3,
+        "name_ja": "エンプレス・プライド",
+        "name_en": "Empress's Pride",
+        "name_zh": "女帝的自尊",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&blocked_side_continuetime>=2&order<=3",
+    "variants": [
+      {
+        "id": 10241,
+        "rarity": 3,
+        "name_ja": "勝利のキッス☆",
+        "name_en": "1st Place Kiss☆",
+        "name_zh": "勝利之吻☆",
+        "effects": [
+          {
+            "modifier": 1500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 2000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&corner!=0&order_rate>=65&order_rate<=70",
+    "variants": [
+      {
+        "id": 10271,
+        "rarity": 3,
+        "name_ja": "燃えろ筋肉！",
+        "name_en": "Feel the Burn!",
+        "name_zh": "燃燒吧肌肉！",
+        "effects": [
+          {
+            "modifier": 3000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 40000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&corner!=0&order>=3&order_rate<=40",
+    "variants": [
+      {
+        "id": 10321,
+        "rarity": 3,
+        "name_ja": "introduction：My body",
+        "name_en": "Introduction to Physiology",
+        "name_zh": "introduction：My body",
+        "effects": [
+          {
+            "modifier": 350,
+            "target": 1,
+            "type": 9
+          },
+          {
+            "modifier": 1500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 40000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&order<=5",
+    "variants": [
+      {
+        "id": 10351,
+        "rarity": 3,
+        "name_ja": "全力Vサインッ！",
+        "name_en": "V Is for Victory!",
+        "name_zh": "全力V字手勢！",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&order<=3&blocked_side_continuetime>=2",
+    "variants": [
+      {
+        "id": 10411,
+        "rarity": 3,
+        "name_ja": "学級委員長+速さ＝バクシン",
+        "name_en": "Class Rep + Speed = Bakushin",
+        "name_zh": "班長＋快速＝驀進",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase_random==1&order>=2&order_rate<=40",
+    "variants": [
+      {
+        "id": 10451,
+        "rarity": 3,
+        "name_ja": "クリアハート",
+        "name_en": "Clear Heart",
+        "name_zh": "清澈之心",
+        "effects": [
+          {
+            "modifier": 550,
+            "target": 1,
+            "type": 9
+          }
+        ],
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&corner!=0&order_rate>50&near_count>=1",
+    "variants": [
+      {
+        "id": 10521,
+        "rarity": 3,
+        "name_ja": "ワクワクよーいドン",
+        "name_en": "Super-Duper Stoked",
+        "name_zh": "雀躍不已預備～跑！",
+        "effects": [
+          {
+            "modifier": 350,
+            "target": 1,
+            "type": 9
+          }
+        ],
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&order>=3&blocked_front==1",
+    "variants": [
+      {
+        "id": 10561,
+        "rarity": 3,
+        "name_ja": "来てください来てください！",
+        "name_en": "Luck Be with Me!",
+        "name_zh": "請顯靈吧請顯靈吧！",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 1000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&order==3&bashin_diff_behind<=1",
+    "variants": [
+      {
+        "id": 10601,
+        "rarity": 3,
+        "name_ja": "アタシもたまには、ね？",
+        "name_en": "I Can Win Sometimes, Right?",
+        "name_zh": "我偶爾也能辦到的對吧？",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "temptation_count==0&remain_distance<=201&remain_distance>=199&order>=4&order_rate<=70",
+    "variants": [
+      {
+        "id": 10611,
+        "rarity": 3,
+        "name_ja": "Call me KING",
+        "name_en": "Call Me King",
+        "name_zh": "Call me KING",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&order>=1&order_rate<=50&change_order_onetime<0",
+    "variants": [
+      {
+        "id": 100011,
+        "rarity": 5,
+        "name_ja": "シューティングスター",
+        "name_en": "Shooting Star",
+        "name_zh": "逐夢之星",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 22
+          },
+          {
+            "modifier": 1000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&order==1&bashin_diff_behind>=1",
+    "variants": [
+      {
+        "id": 100021,
+        "rarity": 5,
+        "name_ja": "先頭の景色は譲らない…！",
+        "name_en": "The View from the Lead Is Mine!",
+        "name_zh": "不會讓出領先的景色……！",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1",
+    "variants": [
+      {
+        "id": 100031,
+        "rarity": 5,
+        "name_ja": "究極テイオーステップ",
+        "name_en": "Sky-High Teio Step",
+        "name_zh": "終極帝皇舞步",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&order<=5&order_rate<=50",
+    "variants": [
+      {
+        "id": 100041,
+        "rarity": 5,
+        "name_ja": "紅焔ギア/LP1211-M",
+        "name_en": "Red Shift/LP1211-M",
+        "name_zh": "紅焰檔位/LP1211-M",
+        "effects": [
+          {
+            "modifier": 4000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 40000
+      }
+    ]
+  },
+  {
+    "conditionStr": "order>=2&order<=5&order_rate<=50&remain_distance<=201&remain_distance>=199",
+    "variants": [
+      {
+        "id": 100061,
+        "rarity": 5,
+        "name_ja": "勝利の鼓動",
+        "name_en": "Triumphant Pulse",
+        "name_zh": "勝利的躍動",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&distance_rate<=60&order_rate>50",
+    "variants": [
+      {
+        "id": 100071,
+        "rarity": 4,
+        "name_ja": "不沈艦、抜錨ォッ！",
+        "name_en": "Anchors Aweigh!",
+        "name_zh": "不沉戰艦起錨！",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 60000
+      }
+    ]
+  },
+  {
+    "conditionStr": "order>=3&order_rate<=50&remain_distance<=200&bashin_diff_infront<=1@order>=3&order_rate<=50&remain_distance<=200&bashin_diff_behind<=1",
+    "variants": [
+      {
+        "id": 100081,
+        "rarity": 4,
+        "name_ja": "カッティング×DRIVE！",
+        "name_en": "Cut and Drive!",
+        "name_zh": "CUTTING×DRIVE！",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&order==1&bashin_diff_behind<=1@distance_rate>=50&order==2&is_overtake==1",
+    "variants": [
+      {
+        "id": 100091,
+        "rarity": 4,
+        "name_ja": "ブリリアント・レッドエース",
+        "name_en": "Resplendent Red Ace",
+        "name_zh": "燦爛．赤色王牌",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 3000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner_laterhalf==1&corner!=0&order>=3&order_rate<=40",
+    "variants": [
+      {
+        "id": 100101,
+        "rarity": 5,
+        "name_ja": "ヴィクトリーショット！",
+        "name_en": "Shooting for Victory!",
+        "name_zh": "VICTORY SHOT！",
+        "effects": [
+          {
+            "modifier": 4000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&change_order_onetime<0&order>=3",
+    "variants": [
+      {
+        "id": 100111,
+        "rarity": 4,
+        "name_ja": "精神一到何事か成らざらん",
+        "name_en": "Where There's a Will, There's a Way",
+        "name_zh": "精誠所至金石為開",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&corner!=0&distance_diff_rate<=30&distance_type==4&lastspurt==2",
+    "variants": [
+      {
+        "id": 100131,
+        "rarity": 5,
+        "name_ja": "貴顕の使命を果たすべく",
+        "name_en": "The Duty of Dignity Calls",
+        "name_zh": "必須貫徹高貴的使命",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&hp_per>=30&order<=2",
+    "variants": [
+      {
+        "id": 100141,
+        "rarity": 4,
+        "name_ja": "プランチャ☆ガナドール",
+        "name_en": "Victoria por plancha ☆",
+        "name_zh": "勝利者☆飛身撲",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 3000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&bashin_diff_behind<=1&order<=4@is_finalcorner==1&bashin_diff_infront<=1&order<=4",
+    "variants": [
+      {
+        "id": 100151,
+        "rarity": 5,
+        "name_ja": "ヴィットーリアに捧ぐ舞踏",
+        "name_en": "This Dance Is for Vittoria!",
+        "name_zh": "獻給勝利女神的舞蹈",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&change_order_up_end_after>=3",
+    "variants": [
+      {
+        "id": 100171,
+        "rarity": 5,
+        "name_ja": "汝、皇帝の神威を見よ",
+        "name_en": "Behold Thine Emperor's Divine Might",
+        "name_zh": "讓你見識皇帝的威勢吧",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&corner!=0&order>=3&change_order_onetime<0",
+    "variants": [
+      {
+        "id": 100181,
+        "rarity": 4,
+        "name_ja": "ブレイズ・オブ・プライド",
+        "name_en": "Blazing Pride",
+        "name_zh": "自尊之炎",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&is_finalcorner==1&order<=4&temptation_count==0",
+    "variants": [
+      {
+        "id": 100231,
+        "rarity": 5,
+        "name_ja": "∴win Q.E.D.",
+        "name_en": "∴win Q.E.D.",
+        "name_zh": "∴win Q.E.D.",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&blocked_side_continuetime>=2&order<=3",
+    "variants": [
+      {
+        "id": 100241,
+        "rarity": 4,
+        "name_ja": "ひらめき☆ランディング",
+        "name_en": "Flashy☆Landing",
+        "name_zh": "閃耀☆著陸",
+        "effects": [
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 3000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_badstart==0&order<=3&is_last_straight==1&order_rate_in20_continue==1",
+    "variants": [
+      {
+        "id": 100261,
+        "rarity": 5,
+        "name_ja": "G00 1st.F∞;",
+        "name_en": "G00 1st. F∞;",
+        "name_zh": "G00 1st.F∞;",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&corner!=0&order_rate>=65&order_rate<=70",
+    "variants": [
+      {
+        "id": 100271,
+        "rarity": 4,
+        "name_ja": "レッツ・アナボリック！",
+        "name_en": "Let's Pump Some Iron!",
+        "name_zh": "合成代謝開始！",
+        "effects": [
+          {
+            "modifier": 4000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 40000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1",
+    "variants": [
+      {
+        "id": 100301,
+        "rarity": 5,
+        "name_ja": "ブルーローズチェイサー",
+        "name_en": "Blue Rose Closer",
+        "name_zh": "藍薔薇追擊者",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&corner!=0&order>=3&order_rate<=40",
+    "variants": [
+      {
+        "id": 100321,
+        "rarity": 4,
+        "name_ja": "U=ma2",
+        "name_en": "U=ma2",
+        "name_zh": "U=ma2",
+        "effects": [
+          {
+            "modifier": 550,
+            "target": 1,
+            "type": 9
+          },
+          {
+            "modifier": 2500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 40000
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_last_straight==1&order<=5",
+    "variants": [
+      {
+        "id": 100351,
+        "rarity": 4,
+        "name_ja": "勝利のチケットを、君にッ！",
+        "name_en": "Our Ticket to Win!",
+        "name_zh": "將勝利的獎券獻給你！",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "distance_rate>=50&order<=3&blocked_side_continuetime>=2",
+    "variants": [
+      {
+        "id": 100411,
+        "rarity": 4,
+        "name_ja": "優等生×バクシン＝大勝利ッ",
+        "name_en": "Genius x Bakushin = Victory",
+        "name_zh": "模範生×驀進＝大獲全勝",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase_random==1&order>=2&order_rate<=40",
+    "variants": [
+      {
+        "id": 100451,
+        "rarity": 4,
+        "name_ja": "ピュリティオブハート",
+        "name_en": "Pure Heart",
+        "name_zh": "純潔之心",
+        "effects": [
+          {
+            "modifier": 750,
+            "target": 1,
+            "type": 9
+          }
+        ],
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "conditionStr": "is_finalcorner==1&corner!=0&order_rate>50&near_count>=1",
+    "variants": [
+      {
+        "id": 100521,
+        "rarity": 4,
+        "name_ja": "ワクワククライマックス",
+        "name_en": "Super-Duper Climax",
+        "name_zh": "雀躍不已的精彩時刻",
+        "effects": [
+          {
+            "modifier": 550,
+            "target": 1,
+            "type": 9
+          }
+        ],
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&order>=3&blocked_front==1",
+    "variants": [
+      {
+        "id": 100561,
+        "rarity": 4,
+        "name_ja": "来ます来てます来させます！",
+        "name_en": "I See Victory in My Future!",
+        "name_zh": "顯靈了要顯靈了請顯靈吧！",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          },
+          {
+            "modifier": 1000,
+            "target": 1,
+            "type": 31
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "phase>=2&order==3&bashin_diff_behind<=1",
+    "variants": [
+      {
+        "id": 100601,
+        "rarity": 4,
+        "name_ja": "きっとその先へ…！",
+        "name_en": "Just a Little Farther!",
+        "name_zh": "一定能抵達前方……！",
+        "effects": [
+          {
+            "modifier": 3500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "temptation_count==0&remain_distance<=201&remain_distance>=199&order>=4&order_rate<=70",
+    "variants": [
+      {
+        "id": 100611,
+        "rarity": 4,
+        "name_ja": "Pride of KING",
+        "name_en": "Prideful King",
+        "name_zh": "Pride of KING",
+        "effects": [
+          {
+            "modifier": 4500,
+            "target": 1,
+            "type": 27
+          }
+        ],
+        "duration": 50000
+      }
+    ]
+  },
+  {
+    "conditionStr": "rotation==1",
+    "variants": [
+      {
+        "id": 200012,
+        "rarity": 1,
+        "name_ja": "右回り○",
+        "name_en": "Right-Handed ○",
+        "name_zh": "順時針○",
+        "effects": [
+          {
+            "modifier": 400000,
+            "target": 1,
+            "type": 1
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200013,
+        "rarity": 1,
+        "name_ja": "右回り×",
+        "name_en": "Right-Handed ×",
+        "name_zh": "順時針×",
+        "effects": [
+          {
+            "modifier": -400000,
+            "target": 1,
+            "type": 1
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200014,
+        "rarity": 2,
+        "name_ja": "右回りの鬼",
+        "name_en": "Right-Handed Demon",
+        "name_zh": "順時針之鬼",
+        "effects": [
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 1
+          },
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 3
+          }
+        ],
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "conditionStr": "rotation==2",
+    "variants": [
+      {
+        "id": 200022,
+        "rarity": 1,
+        "name_ja": "左回り○",
+        "name_en": "Left-Handed ○",
+        "name_zh": "逆時針○",
+        "effects": [
+          {
+            "modifier": 400000,
+            "target": 1,
+            "type": 1
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200023,
+        "rarity": 1,
+        "name_ja": "左回り×",
+        "name_en": "Left-Handed ×",
+        "name_zh": "逆時針×",
+        "effects": [
+          {
+            "modifier": -400000,
+            "target": 1,
+            "type": 1
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200024,
+        "rarity": 2,
+        "name_ja": "左回りの鬼",
+        "name_en": "",
+        "name_zh": "",
+        "effects": [
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 1
+          },
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 3
+          }
+        ],
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "conditionStr": "track_id==10006",
+    "variants": [
+      {
+        "id": 200032,
+        "rarity": 1,
+        "name_ja": "東京レース場○",
+        "name_en": "Tokyo Racecourse ○",
+        "name_zh": "東京賽場○",
+        "effects": [
+          {
+            "modifier": 400000,
+            "target": 1,
+            "type": 2
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200033,
+        "rarity": 1,
+        "name_ja": "東京レース場×",
+        "name_en": "Tokyo Racecourse ×",
+        "name_zh": "東京賽場×",
+        "effects": [
+          {
+            "modifier": -400000,
+            "target": 1,
+            "type": 2
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200034,
+        "rarity": 2,
+        "name_ja": "府中の申し子",
+        "name_en": "",
+        "name_zh": "府中奇才",
+        "effects": [
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 2
+          },
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 5
+          },
+          {
+            "modifier": 600000,
+            "target": 1,
+            "type": 1
+          }
+        ],
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "conditionStr": "track_id==10005",
+    "variants": [
+      {
+        "id": 200042,
+        "rarity": 1,
+        "name_ja": "中山レース場○",
+        "name_en": "Nakayama Racecourse ○",
+        "name_zh": "中山賽場○",
+        "effects": [
+          {
+            "modifier": 400000,
+            "target": 1,
+            "type": 2
+          }
+        ],
+        "duration": -1
+      },
+      {
+        "id": 200043,
+        "rarity": 1,
+        "name_ja": "中山レース場×",
+        "name_en": "Nakayama Racecourse ×",
+        "name_zh": "中山賽場×",
+        "effects": [
+          {
+            "modifier": -400000,
+            "target": 1,
+            "type": 2
+          }
+        ],
+        "duration": -1
+      }
+    ]
+  }
+]

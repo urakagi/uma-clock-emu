@@ -1,7 +1,7 @@
 <script>
 import * as RCP from "@/components/data/release_conserve_power_constants";
 
-const SkillData = require("./skillData");
+const SkillData = require("./skillDataGen");
 
 const effects = [
   "heal",
@@ -159,37 +159,29 @@ export default {
   },
   computed: {
     normalSkillData() {
-      const newSkillNames = {};
-      const origin = SkillData.normalSkillData(this);
-      if (this.$i18n.locale === "ja") {
-        return origin;
-      }
+      // Deep clone to avoid mutating module cache
+      const origin = JSON.parse(JSON.stringify(SkillData.normalSkillData));
+      
+      const locale = this.$i18n.locale;
       for (const skillWrapper of origin) {
         for (const variant of skillWrapper.variants) {
-          this.localizeSkill(variant, skillWrapper, newSkillNames);
+          if (locale === "zh" && variant.name_zh) variant.name = variant.name_zh;
+          else if (locale === "en" && variant.name_en) variant.name = variant.name_en;
+          else variant.name = variant.name_ja || variant.name;
         }
-      }
-      if (Object.keys(newSkillNames).length > 0) {
-        console.log(JSON.stringify(newSkillNames));
       }
       return origin;
     },
     uniqueSkillData() {
-      const newSkillNames = {};
-      const origin = SkillData.uniqueSkillData(this);
-      if (this.$i18n.locale === "ja") {
-        return origin.sort((a, b) => {
-          if (a.name < b.name) return -1;
-          if (a.name > b.name) return 1;
-          return 0;
-        });
-      }
+      const origin = JSON.parse(JSON.stringify(SkillData.uniqueSkillData));
+      const locale = this.$i18n.locale;
+      
       for (const skill of origin) {
-        this.localizeSkill(skill, undefined, newSkillNames);
+        if (locale === "zh" && skill.name_zh) skill.name = skill.name_zh;
+        else if (locale === "en" && skill.name_en) skill.name = skill.name_en;
+        else skill.name = skill.name_ja || skill.name;
       }
-      if (Object.keys(newSkillNames).length > 0) {
-        console.log(JSON.stringify(newSkillNames));
-      }
+      
       return origin.sort((a, b) => {
         if (a.name < b.name) return -1;
         if (a.name > b.name) return 1;
